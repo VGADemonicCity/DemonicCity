@@ -7,35 +7,44 @@ namespace DemonicCity.HomeScene
     public class TouchManager : MonoBehaviour
     {
 
-        GameObject effectObj=null;
-        GameObject newObj = null;
         
+        ParticleSystem effect;
+
+        //UnityEngine.ParticleSystem.MainModule psMain;
+
         // Use this for initialization
         void Start()
         {
-            effectObj = ResourcesLoad.Load<GameObject>("Effects/TouchEffect");
-            
-            Debug.Log(effectObj.name);
-            if (effectObj)
-            {
-                newObj = Instantiate(effectObj, transform);
-            }
-            
+            GameObject effectObj= ResourcesLoad.Load<GameObject>("Effects/TouchEffect");
+            //GetComponent<ParticleSystem>();
+            GameObject newObj = Instantiate(effectObj.gameObject, transform);
+            effect = newObj.GetComponent<ParticleSystem>();
         }
+
+
 
         // Update is called once per frame
         void Update()
         {
-            if (Input.GetMouseButtonDown(0))
+
+
+            
+            if (Input.touchCount > 0)
             {
-                Debug.Log("Down");
-                newObj.GetComponent<ParticleSystem>().loop=true;
+                Vector3 pos = TouchPosition.TouchToCanvas();
+
+                transform.localPosition = pos;
+
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began
+                    || touch.phase == TouchPhase.Moved)
+                {
+                    effect.Emit(1);
+                }
+                
             }
-            if (Input.GetMouseButtonUp(0))
-            {
-                Debug.Log("Up");
-                newObj.GetComponent<ParticleSystem>().loop = false;
-            }
+            
+
         }
 
     }

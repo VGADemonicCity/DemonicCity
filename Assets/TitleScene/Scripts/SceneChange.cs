@@ -4,26 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace DemonicCity
+namespace DemonicCity.HomeScene
 {
-    public class SceneChange : MonoBehaviour
+    enum SceneName
     {
-
-        // Use this for initialization
-        void Start()
-        {
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
-        public void SceneChanger(string s)
+        Home, Growth, Story, Battle, Last
+    }
+    public static class SceneChange
+    {
+        static SceneName scenes;
+        public static void SceneChanger(string s)
         {
             SceneManager.LoadScene(s);
         }
+        
     }
 
 }

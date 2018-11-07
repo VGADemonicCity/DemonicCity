@@ -12,16 +12,48 @@ namespace DemonicCity.HomeScene
         {
 
         }
-
+        GameObject beganObj = null;
+        GameObject hitObj = null;
         // Update is called once per frame
         void Update()
         {
 
+            if (Input.touchCount > 0)
+            {
+                if (Input.GetTouch(0).phase != TouchPhase.Canceled
+                    || Input.GetTouch(0).phase != TouchPhase.Stationary
+                    || true)
+                {
+
+
+                    if (Input.GetTouch(0).phase == TouchPhase.Began)
+                    {
+                        //Debug.Log(TouchPosition.TouchToCanvas());
+                        //beganObj = RaycastDetection.DetectHitGameObject(TouchPosition.TouchToRay());
+                        beganObj = HitRay();
+
+                        Debug.Log(beganObj.name);
+                    }
+                    //else if (beganObj == RaycastDetection.DetectHitGameObject(TouchPosition.TouchToRay()))
+                    else if (beganObj == HitRay())
+                    {
+                        hitObj = beganObj;
+                    }
+                    else
+                    {
+                        hitObj = null;
+                    }
+                    Judge.JudgeObj(hitObj);
+                }
+            }
+
         }
-        public GameObject HitRay(Vector3 rayPos)
+        public GameObject HitRay()
         {
-            Ray ray = Camera.main.ScreenPointToRay(rayPos)  ;
-            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction);
+
+            RaycastHit2D hit = Physics2D.Raycast(TouchPosition.TouchToRay(),Vector2.zero );
+            //Debug.DrawRay(TouchPosition.TouchToRay() ,Vector2.zero);
+            
             return hit.collider.gameObject;
         }
     }

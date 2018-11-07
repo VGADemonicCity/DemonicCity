@@ -8,18 +8,19 @@ namespace DemonicCity.HomeScene
     public class TouchEffect : MonoBehaviour
     {
         Vector3 position;
-
+        ParticleSystem.MainModule pMain;
         private void Update()
         {
 
-
-            position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            position = new Vector3(position.x,position.y,-10);
-
-            transform.position = position;
-
-            Debug.Log(position);
+            pMain= GetComponent<ParticleSystem>().main;
+            if (Input.GetMouseButton(0))
+            {
+                pMain.loop = true;
+            }
+            else
+            {
+                pMain.loop = false;
+            }
         }
 
         

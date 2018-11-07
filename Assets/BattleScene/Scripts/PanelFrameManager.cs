@@ -45,7 +45,6 @@ namespace DemonicCity.BattleScene
             {
                 m_touch = Input.GetTouch(0); //タッチ情報の取得 : Acquire touch information.
                 m_go = m_raycastDetection.DetectHitGameObject(m_touch.position); //指定レイヤーのオブジェクトのみレイキャストしてくる
-                    if (m_go != null) Debug.Log("panelFM : " + m_go);
                 if (m_go != null && m_go.tag == "PanelFrame" && m_wait)
                 {
                     StartCoroutine(Moving());

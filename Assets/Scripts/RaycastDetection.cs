@@ -25,7 +25,7 @@ namespace DemonicCity
 
             if (m_raycastHit2d && m_raycastHit2d.collider.gameObject != null) //Physics2D.Raycastがtrue且つゲームオブジェクトがnullじゃなければ
             {
-                Debug.Log(m_raycastHit2d.collider.gameObject);
+
                 return m_raycastHit2d.collider.gameObject; //Hitしたゲームオブジェクトを返す
             }
             else
