@@ -13,7 +13,6 @@ namespace DemonicCity.BattleScene
 
         Image image = null;
         int maxHP = 1;
-        //int damage=0;
         float currentHP = 0;
         float drawHP = 0;
 
@@ -57,20 +56,34 @@ namespace DemonicCity.BattleScene
             {
                 changeValue = maxHP/1000;
             }
+            if (currentHP <0)
+            {
+                currentHP =0;
+                Deth();
+            }
         }
         public void Heal(int heal)
-        {
+        {            
             currentHP += heal;
             changeValue = heal / 70;
             if (changeValue == 0)
             {
                 changeValue = maxHP / 1000;
             }
+            if (currentHP>maxHP)
+            {
+                currentHP = maxHP;
+            }
         }
         public void Reflect(int val)
         {
             currentHP += val;
             changeValue = val / 70;
+
+        }
+
+        public void Deth()
+        {
 
         }
         //public void Reflect(int max, int val)
