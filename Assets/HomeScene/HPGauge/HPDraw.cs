@@ -13,11 +13,21 @@ namespace DemonicCity.BattleScene
 
         Image image = null;
         int maxHP = 1;
+        /// <summary>
+        /// ステータス上のHP
+        /// </summary>
         float currentHP = 0;
+        /// <summary>
+        /// 描画されているHP
+        /// </summary>
         float drawHP = 0;
-
+        /// <summary>
+        /// 1フレーム辺りに変化するHP量
+        /// </summary>
         float changeValue = 0;
-
+        /// <summary>
+        /// HP判定用の遊び
+        /// </summary>
         float play = 0.1f;
 
         void Start()
@@ -35,6 +45,10 @@ namespace DemonicCity.BattleScene
         {
             image = GetComponent<Image>();
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="max"></param>
         public void Initialize(int max)
         {
             //image = GetComponent<Image>();
@@ -42,9 +56,9 @@ namespace DemonicCity.BattleScene
             currentHP = maxHP;
         }
         /// <summary>
-        /// 
+        /// HPゲージの値を減らす
         /// </summary>
-        /// <param name="damage"></param>
+        /// <param name="damage">ダメージ量</param>
         public void Damage(int damage)
         {
             currentHP -= damage;
@@ -62,6 +76,10 @@ namespace DemonicCity.BattleScene
             StartCoroutine( HP());
             
         }
+        /// <summary>
+        /// HPゲージの値を増やす
+        /// </summary>
+        /// <param name="heal">回復量</param>
         public void Heal(int heal)
         {
             currentHP += heal;
@@ -82,6 +100,8 @@ namespace DemonicCity.BattleScene
         {
             currentHP += val;
             changeValue = val / 70;
+
+            StartCoroutine(HP());
 
         }
 
