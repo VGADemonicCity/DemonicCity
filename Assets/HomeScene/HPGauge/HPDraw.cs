@@ -18,6 +18,8 @@ namespace DemonicCity.BattleScene
 
         float changeValue = 0;
 
+        float play = 0.1f;
+
         void Start()
         {
             Initialize();
@@ -26,14 +28,6 @@ namespace DemonicCity.BattleScene
         void Update()
         {
             drawHP = image.fillAmount * maxHP;
-            if (currentHP + 0.1 < drawHP)
-            {
-                image.fillAmount -= changeValue / maxHP;
-            }
-            else if(drawHP < currentHP - 0.1)
-            {
-                image.fillAmount += changeValue / maxHP;
-            }
         }
 
 
@@ -47,33 +41,42 @@ namespace DemonicCity.BattleScene
             maxHP = max;
             currentHP = maxHP;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="damage"></param>
         public void Damage(int damage)
         {
             currentHP -= damage;
             changeValue = damage / 70;
             if (changeValue == 0)
             {
-                changeValue = maxHP/1000;
+                changeValue = maxHP / 1000;
             }
-            if (currentHP <0)
+            if (currentHP < 0)
             {
-                currentHP =0;
+                currentHP = 0;
                 Deth();
             }
+
+            StartCoroutine( HP());
+            
         }
         public void Heal(int heal)
-        {            
+        {
             currentHP += heal;
             changeValue = heal / 70;
             if (changeValue == 0)
             {
                 changeValue = maxHP / 1000;
             }
-            if (currentHP>maxHP)
+            if (currentHP > maxHP)
             {
                 currentHP = maxHP;
             }
+
+            StartCoroutine(HP());
+            
         }
         public void Reflect(int val)
         {
@@ -86,10 +89,25 @@ namespace DemonicCity.BattleScene
         {
 
         }
-        //public void Reflect(int max, int val)
-        //{
 
-        //    image.fillAmount = val / max;
-        //}
+        IEnumerator HP()
+        {
+
+            while (currentHP + play < image.fillAmount * maxHP)
+            {
+
+                image.fillAmount -= changeValue / maxHP;
+
+                yield return null;
+            }
+            while (image.fillAmount * maxHP < currentHP - play)
+            {
+                
+                image.fillAmount += changeValue / maxHP;
+
+                yield return null;
+            }
+        }
+
     }
 }

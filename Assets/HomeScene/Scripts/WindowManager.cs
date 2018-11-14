@@ -7,7 +7,7 @@ namespace DemonicCity.HomeScene
 {
     public class WindowManager : MonoBehaviour
     {
-
+        
         public enum Window
         {
             Growth, Config, Calender, PresentBox
@@ -19,7 +19,8 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-
+            
+            
         }
 
         // Update is called once per frame
@@ -32,7 +33,7 @@ namespace DemonicCity.HomeScene
         {
             int i = (int)window;
             GameObject newPanel = Instantiate(windowObjects[i], parents[i].transform);
-            newPanel.GetComponent<WindowState>().ChangeState("IsOpen", true);
+            
         }
 
     }
