@@ -42,17 +42,17 @@ public class TouchGestureDetector : MonoBehaviour
     }
 
     /// <summary>メインカメラ</summary>
-    [SerializeField] Camera shootingCamera;
+    public Camera shootingCamera;
     /// <summary>isHitを使うか使わないかを切り替えられるフラグ。On状態の時は使う</summary>
-    [SerializeField] bool hitCheck = true;
+    public bool hitCheck = true;
     /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
-    [SerializeField] bool detectFlick = true;
+    public bool detectFlick = true;
     /// <summary>UnityEventクラスを引数を持てる様に継承したクラス</summary>
-    [SerializeField] GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
+    public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
     /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
     List<TouchInfo> touchInfos = new List<TouchInfo>();
     /// <summary>割る数</summary>
-    [SerializeField] float m_divisor = 10f;
+    public float m_divisor = 10f;
 
 
     void Awake()
