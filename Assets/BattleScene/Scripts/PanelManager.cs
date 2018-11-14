@@ -14,6 +14,7 @@ namespace DemonicCity.BattleScene
         isWorking = 1,
         Dummy = 2,
         Dummy2 = 4,
+        PanelSelectPhase = 8,
         All = (isWorking | Dummy | Dummy2) // 要素全て
     }
 
@@ -22,32 +23,29 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PanelManager : MonoBehaviour
     {
+        [SerializeField] float m_waitTime = 3f;
 
         /// <summary>ファクトリークラス。Touch情報をもとに適切な処理を行ってくれる</summary>
         private TouchInfoFactory m_touchInfoFactory;
-        /// <summary>
-        /// 
-        /// </summary>
         private GameObject m_go;
         /// <summary>RaycastDetection</summary>
         private RaycastDetection m_raycastDetection;
-        private TouchInfo m_touchInfo;
+        private TouchInfomation m_touchInfo;
         private Touch m_touch;
-        [SerializeField] private float m_waitTime = 3f;
         private Flags m_flag = Flags.isWorking;
 
         private void Start()
         {
             m_raycastDetection = GetComponent<RaycastDetection>();
             InstantiatePanels ip = GetComponent<InstantiatePanels>();
-            m_touchInfo = GetComponent<TouchInfo>();
+            m_touchInfo = GetComponent<TouchInfomation>();
             ip.GeneratePanels(); //Panel生成処理
         }
 
         /// <summary>アップデートメソッド : Update method</summary>
         public void Update()
         {
-            if (Input.touchCount > 0) //タッチされている＆パネルの処理を行っていない場合タッチ処理を行う
+            if (Input.touchCount > 0 && ((m_flag & Flags.PanelSelectPhase) == Flags.PanelSelectPhase)) //タッチカウント > 0 且つパネルセレクトフェーズのフラグが立っている時
             {
                 m_touch = Input.GetTouch(0);
                 m_go = m_touchInfo.GetTouchedGameObject(TouchPhase.Ended); // Ended時のゲームオブジェクトを取得する
@@ -60,6 +58,10 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        /// <summary>
+        /// Waits the selecting panel.
+        /// </summary>
+        /// <returns>The selecting panel.</returns>
         IEnumerator WaitSelectingPanel()
         {
             m_flag = m_flag ^ Flags.isWorking; //isWorkingをoffにする

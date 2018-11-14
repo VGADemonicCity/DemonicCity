@@ -14,39 +14,55 @@ using System.Linq;
 /// <license>MIT License</license>
 public class TouchGestureDetector : MonoBehaviour
 {
-    private const float FLICK_TIME_LIMIT = 0.3f;
+    const float FLICK_TIME_LIMIT = 0.3f;
 
     /// <summary>
     /// Gesture.
     /// </summary>
     public enum Gesture
     {
+        /// <summary>The touch begin.</summary>
         TouchBegin,
+        /// <summary>The touch move.</summary>
         TouchMove,
+        /// <summary>The touch stationary.</summary>
         TouchStationary,
+        /// <summary>The touch end.</summary>
         TouchEnd,
+        /// <summary>The click.</summary>
         Click,
+        /// <summary>The flick top to bottom.</summary>
         FlickTopToBottom,
+        /// <summary>The flick bottom to top.</summary>
         FlickBottomToTop,
+        /// <summary>The flick left to right.</summary>
         FlickLeftToRight,
+        /// <summary> flick right to left.</summary>
         FlickRightToLeft,
     }
 
-    public Camera shootingCamera; // MainCamera
-    public bool hitCheck = true;
-    public bool detectFlick = true;
-    public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
-    private List<TouchInfo> touchInfos = new List<TouchInfo>();
+    [SerializeField] Camera shootingCamera; // MainCamera
+    /// <summary>isHitを使うか使わないかを切り替えられるフラグ。On状態の時は</summary>
+    [SerializeField] bool hitCheck = true;
+    /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
+    [SerializeField] bool detectFlick = true;
+    /// <summary>UnityEventクラスを引数を持てる様に継承したクラス</summary>
+    [SerializeField] GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
+    /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
+    List<TouchInfo> touchInfos = new List<TouchInfo>();
+    /// <summary>割る数</summary>
+    [SerializeField] float m_divisor = 10f;
 
-    private void Awake()
+
+    void Awake()
     {
-        if (null == shootingCamera)
+        if (null == shootingCamera) // カメラオブジェクトがnullの場合メインカメラを代入する
         {
             shootingCamera = Camera.main;
         }
     }
 
-    private void Update()
+    void Update()
     {
         foreach (var touch in Input.touches) // 毎フレームタッチされた本数分判定する
         {
@@ -89,13 +105,13 @@ public class TouchGestureDetector : MonoBehaviour
     /// </summary>
     /// <param name="fingerId">Finger identifier.</param>
     /// <param name="position">Position.</param>
-    private void OnTouchBegin(int fingerId, Vector2 position)
+    void OnTouchBegin(int fingerId, Vector2 position)
     {
-        var touchInfo = new TouchInfo(fingerId, position);
+        var touchInfo = new TouchInfo(fingerId, position); // touch情報が入っている変数
         if (!hitCheck || touchInfo.IsHit(gameObject, shootingCamera))
         {
             touchInfos.Add(touchInfo);
-            OnGestureDetected(Gesture.TouchBegin, touchInfo);
+            OnGestureDetected(Gesture.TouchBegin, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
         }
     }
 
@@ -104,29 +120,29 @@ public class TouchGestureDetector : MonoBehaviour
     /// </summary>
     /// <param name="fingerId">Finger identifier.</param>
     /// <param name="position">Position.</param>
-    private void OnTouchMove(int fingerId, Vector2 position)
+    void OnTouchMove(int fingerId, Vector2 position)
     {
-        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId);
-        if (null == touchInfo)
+        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+        if (null == touchInfo) // touchInfoがnullならmethod終了
         {
             return;
         }
-        touchInfo.AddPosition(position);
-        OnGestureDetected(Gesture.TouchMove, touchInfo);
+        touchInfo.AddPosition(position); // touchInfoをリストに追加する
+        OnGestureDetected(Gesture.TouchMove, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
     }
 
     /// <summary>
     /// Ons the touch stationary.
     /// </summary>
     /// <param name="fingerId">Finger identifier.</param>
-    private void OnTouchStationary(int fingerId)
+    void OnTouchStationary(int fingerId)
     {
-        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId);
-        if (null == touchInfo)
+        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+        if (null == touchInfo) // touchInfoがnullならmethod終了
         {
             return;
         }
-        OnGestureDetected(Gesture.TouchStationary, touchInfo);
+        OnGestureDetected(Gesture.TouchStationary, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
     }
 
     /// <summary>
@@ -134,49 +150,51 @@ public class TouchGestureDetector : MonoBehaviour
     /// </summary>
     /// <param name="fingerId">Finger identifier.</param>
     /// <param name="position">Position.</param>
-    private void OnTouchEnd(int fingerId, Vector2 position)
+    void OnTouchEnd(int fingerId, Vector2 position)
     {
-        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId);
-        if (null == touchInfo)
+        var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+        if (null == touchInfo) // touchInfoがnullならmethod終了
         {
             return;
         }
-        touchInfo.AddPosition(position);
-        OnGestureDetected(Gesture.TouchEnd, touchInfo);
+        touchInfo.AddPosition(position); // touchInfoをリストに追加する
+        OnGestureDetected(Gesture.TouchEnd, touchInfo);  // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
 
-        var diff = touchInfo.Diff;
-        var flickDistanceLimit = (float)Math.Min(Screen.width, Screen.height) / 10;
+        var diff = touchInfo.Diff; // タッチ始めのフレームと離す瞬間のフレーム時の差分ベクトルを代入する
+        var flickDistanceLimit = (float)Math.Min(Screen.width, Screen.height) / m_divisor; //画面の縦横で短い方を任意の値で割った数値を代入する
+
+        // フリック検知フラグがON,且つタッチを始めてからの経過時刻がタイムリミット以内,且つxかyのタッチ差分が任意の閾値を超えた時
         if (detectFlick && touchInfo.ElapsedTime < FLICK_TIME_LIMIT && (Mathf.Abs(diff.x) > flickDistanceLimit || Mathf.Abs(diff.y) > flickDistanceLimit))
         {
-            if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y))
+            if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y)) // タッチ差分がy軸よりx軸方が大きい時
             {
-                if (diff.x < 0f)
+                if (diff.x < 0f) // x軸がマイナス方向だったら
                 {
-                    OnGestureDetected(Gesture.FlickRightToLeft, touchInfo);
+                    OnGestureDetected(Gesture.FlickRightToLeft, touchInfo); // 引数を左フリックにする
                 }
                 else
                 {
-                    OnGestureDetected(Gesture.FlickLeftToRight, touchInfo);
+                    OnGestureDetected(Gesture.FlickLeftToRight, touchInfo);// でなければ引数を右フリックにする
                 }
             }
-            else
+            else // y軸の方が大きい時
             {
-                if (diff.y < 0f)
+                if (diff.y < 0f) // y軸がマイナス方向だったら
                 {
-                    OnGestureDetected(Gesture.FlickTopToBottom, touchInfo);
+                    OnGestureDetected(Gesture.FlickTopToBottom, touchInfo); // 引数を下フリックにする
                 }
-                else
+                else 
                 {
-                    OnGestureDetected(Gesture.FlickBottomToTop, touchInfo);
+                    OnGestureDetected(Gesture.FlickBottomToTop, touchInfo); // でなければ引数を上フリックにする
                 }
             }
         }
-        else if (hitCheck && touchInfo.IsHit(gameObject, shootingCamera))
+        else if (hitCheck && touchInfo.IsHit(gameObject, shootingCamera)) // フラグがOn,且つゲームオブジェクトをタッチしたら
         {
-            OnGestureDetected(Gesture.Click, touchInfo);
+            OnGestureDetected(Gesture.Click, touchInfo); // 引数をクリックにする
         }
 
-        touchInfos.RemoveAll(x => x.fingerId == fingerId);
+        touchInfos.RemoveAll(x => x.fingerId == fingerId); // 引数のfingerIdと同値だったらリストから削除する
     }
 
     /// <summary>
@@ -184,7 +202,7 @@ public class TouchGestureDetector : MonoBehaviour
     /// </summary>
     /// <param name="gesture">Gesture.</param>
     /// <param name="touchInfo">Touch info.</param>
-    private void OnGestureDetected(Gesture gesture, TouchInfo touchInfo)
+    void OnGestureDetected(Gesture gesture, TouchInfo touchInfo)
     {
         onGestureDetected.Invoke(gesture, touchInfo);
     }
@@ -198,7 +216,7 @@ public class TouchGestureDetector : MonoBehaviour
         /// <summary>
         /// Gets the difference.
         /// 二次元座標の差分
-        /// </summary>
+        ///  </summary>
         /// <value>The diff.</value>
         public Vector2 Diff
         {
@@ -217,29 +235,32 @@ public class TouchGestureDetector : MonoBehaviour
         {
             get
             {
-                return Time.time - startTime; // 
+                return Time.time - startTime;
             }
         }
 
-
-        public readonly int fingerId;
-        private float startTime;
-        private List<Vector2> positions = new List<Vector2>();
+        /// <summary>The finger identifier.</summary>
+        public readonly int fingerId; // どのタッチかを識別するユニーク値
+        /// <summary>The start time.</summary>
+        float startTime; // インスタンス生成した瞬間のゲーム経過時刻
+        /// <summary>The positions.</summary>
+        List<Vector2> positions = new List<Vector2>();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:TouchGestureDetector.TouchInfo"/> class.
-        /// </summary>
+        ///Touch情報を入れておくクラス
+        ///  </summary>
         /// <param name="fingerId">Finger identifier.</param>
-        /// <param name="position">Position.</param>
+        /// <param name="position">Touch position.</param>
         public TouchInfo(int fingerId, Vector2 position)
         {
-            this.fingerId = fingerId;
-            startTime = Time.time;
-            AddPosition(position);
+            this.fingerId = fingerId; // 
+            startTime = Time.time; // タッチ開始時間を記録する
+            AddPosition(position); //TouchInfoリストに追加する
         }
 
         /// <summary>
-        /// Adds the position.
+        /// Adds the position to List.
+        /// positionsリストにタッチ座標を追加する
         /// </summary>
         /// <param name="position">Position.</param>
         public void AddPosition(Vector2 position)
@@ -255,35 +276,37 @@ public class TouchGestureDetector : MonoBehaviour
         /// <param name="camera">Camera.</param>
         public bool IsHit(GameObject targetGameObject, Camera camera = null)
         {
-            if (null == camera)
+            if (null == camera) // 引数のカメラがnullなら
             {
-                camera = Camera.main;
+                camera = Camera.main; // 最初に検出したメインカメラタグがついているカメラオブジェクトを代入する
             }
-            var lastTouchPosition = positions.Last();
-            if (null == targetGameObject.GetComponent<RectTransform>())
+            var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
+            if (null == targetGameObject.GetComponent<RectTransform>()) // 引数のゲームオブジェクトにRectTransformがなければ。つまりUIじゃなければ？
             {
-                var ray = camera.ScreenPointToRay(lastTouchPosition);
-                var hit = new RaycastHit();
-                return Physics.Raycast(ray, out hit) && hit.collider.gameObject == targetGameObject;
+                var ray = camera.ScreenPointToRay(lastTouchPosition); // 最後にタッチした座標をRay型に変換する
+                var hit = new RaycastHit(); 
+                return Physics.Raycast(ray, out hit) && hit.collider.gameObject == targetGameObject; // Raycastにオブジェクトが検出される、且つそのオブジェクトが引数のオブジェクトと一緒ならtrueを返す
             }
-            else
+            else // 引数のゲームオブジェクトにRectTransformがあったら。つまりUIならば？
             {
-                var pointerEventData = new PointerEventData(EventSystem.current);
-                pointerEventData.position = lastTouchPosition;
-                var raycastResults = new List<RaycastResult>();
-                EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-                if (raycastResults.Count == 0)
+                var pointerEventData = new PointerEventData(EventSystem.current) 
+                {
+                    position = lastTouchPosition // 指を離す瞬間のフレーム時の座標を代入する
+                };
+                var raycastResults = new List<RaycastResult>(); // UI用レイキャストの結果をリストで保持する変数
+                EventSystem.current.RaycastAll(pointerEventData, raycastResults); // ここでレイキャストを飛ばして当たったオブジェクトをリストに格納する
+                if (raycastResults.Count == 0) // UIを1個も検出出来なかったらfalseを返す
                 {
                     return false;
                 }
-                var resultGameObject = raycastResults.First().gameObject;
-                while (null != resultGameObject)
+                var resultGameObject = raycastResults.First().gameObject; // 最初に検出したオブジェクトを代入する
+                while (null != resultGameObject) // 検出したオブジェクトがあれば
                 {
-                    if (resultGameObject == targetGameObject)
+                    if (resultGameObject == targetGameObject) // 検出したオブジェクトが引数と一緒ならばtrueを返す
                     {
                         return true;
                     }
-                    var parent = resultGameObject.transform.parent;
+                    var parent = resultGameObject.transform.parent; // 検出したオブジェクトの親が存在するならば、代入
                     resultGameObject = null != parent ? parent.gameObject : null;
                 }
                 return false;
@@ -293,6 +316,7 @@ public class TouchGestureDetector : MonoBehaviour
 
     /// <summary>
     /// Gesture detector event.
+    /// methodを登録するクラス
     /// </summary>
     public class GestureDetectorEvent : UnityEvent<Gesture, TouchInfo>
     {
