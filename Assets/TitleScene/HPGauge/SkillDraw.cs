@@ -26,6 +26,13 @@ namespace DemonicCity.BattleScene
             if (ratio > 0)
             {
                 flames[(int)SkillStatus.Half].color = new Color(1, 1, 1, (float)ratio * 2);
+                flames[(int)SkillStatus.Full].color = Color.clear;
+            }
+            else
+            {
+                flames[(int)SkillStatus.None].color = Color.white;
+                flames[(int)SkillStatus.Half].color = Color.clear;
+                flames[(int)SkillStatus.Full].color = Color.clear;
             }
             if (ratio > 0.5)
             {
@@ -37,6 +44,7 @@ namespace DemonicCity.BattleScene
                 flames[(int)SkillStatus.Full].color = Color.white;
                 flames[(int)SkillStatus.Half].color = Color.clear;
             }
+            
         }
 
         public void SkillReset()
