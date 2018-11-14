@@ -6,9 +6,9 @@ using UnityEngine.SceneManagement;
 
 namespace DemonicCity.HomeScene
 {
-    enum SceneName
+    public enum SceneName
     {
-        Home, Growth, Story, Battle, Last
+        Home,  Story, Battle, Last
     }
     public static class SceneChange
     {
@@ -17,7 +17,12 @@ namespace DemonicCity.HomeScene
         {
             SceneManager.LoadScene(s);
         }
-        
+        public static void SceneChanger(SceneName name)
+        {
+            SceneManager.LoadScene(name.ToString());
+        }
+
+
     }
 
 }

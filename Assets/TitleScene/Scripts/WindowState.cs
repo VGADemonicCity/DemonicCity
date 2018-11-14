@@ -12,15 +12,25 @@ public class WindowState : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))
-        {
-            ChangeState("IsOpen");
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    if (true)
+        //    {
+
+        //    }
+        //    ChangeState("IsOpen");
+        //}
 	}
     
     public void ChangeState(string s)
     {
         GetComponent<Animator>().SetBool(s, !GetComponent<Animator>().GetBool(s));
+        Debug.Log(GetComponent<Animator>().GetBool(s));
+        Debug.Log("aaa");
+    }
+    public void ChangeState(string s,bool state)
+    {
+        GetComponent<Animator>().SetBool(s, state);
         Debug.Log(GetComponent<Animator>().GetBool(s));
         Debug.Log("aaa");
     }
