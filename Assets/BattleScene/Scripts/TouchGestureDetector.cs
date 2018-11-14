@@ -41,8 +41,9 @@ public class TouchGestureDetector : MonoBehaviour
         FlickRightToLeft,
     }
 
-    [SerializeField] Camera shootingCamera; // MainCamera
-    /// <summary>isHitを使うか使わないかを切り替えられるフラグ。On状態の時は</summary>
+    /// <summary>メインカメラ</summary>
+    [SerializeField] Camera shootingCamera;
+    /// <summary>isHitを使うか使わないかを切り替えられるフラグ。On状態の時は使う</summary>
     [SerializeField] bool hitCheck = true;
     /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
     [SerializeField] bool detectFlick = true;
