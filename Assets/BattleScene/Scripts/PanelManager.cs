@@ -5,18 +5,7 @@ using UnityEngine;
 
 namespace DemonicCity.BattleScene
 {
-    /// <summary>
-    /// 各種フラグ用のenumビットフィールド表現
-    /// </summary>
-    [Flags]
-    enum Flags
-    {
-        isWorking = 1,
-        Dummy = 2,
-        Dummy2 = 4,
-        PanelSelectPhase = 8,
-        All = (isWorking | Dummy | Dummy2) // 要素全て
-    }
+
 
     /// <summary>
     /// Panelの全体管理クラス
