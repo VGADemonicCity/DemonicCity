@@ -40,7 +40,6 @@ namespace DemonicCity.BattleScene
         public void Update()
         {
 
-
             if (Input.touchCount > 0) //タッチされている＆パネルの処理を行っていない場合タッチ処理を行う
             {
                 m_touch = Input.GetTouch(0); //タッチ情報の取得 : Acquire touch information.
