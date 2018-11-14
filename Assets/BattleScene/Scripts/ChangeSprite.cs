@@ -7,7 +7,7 @@ namespace DemonicCity.BattleScene
     /// <summary>Spriteをランダムで切り替えるクラス</summary>
     public class ChangeSprite : MonoBehaviour
     {
-        [SerializeField] private Sprite[] m_panels;
+        [SerializeField] Sprite[] m_panels;
         private SpriteRenderer m_spriteRender;
         private Panel m_panel;
 
