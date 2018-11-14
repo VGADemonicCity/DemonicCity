@@ -29,16 +29,16 @@ namespace DemonicCity.BattleScene
             Init();
         }
 
-        //回転させる
-        private IEnumerator Processing()
-        {
-            if (m_flag)
-            {
-                ITweenRotator.Rotate(gameObject, 'y', 5f);
-                yield return new WaitForSeconds(3f);
-                m_changeSprite.ChangingSprite();
-                m_flag = false;
-            }
-        }
+        ////回転させる
+        //private IEnumerator Processing()
+        //{
+        //    if (m_flag)
+        //    {
+        //        ITweenRotator.Rotate(gameObject, 'y', 5f);
+        //        yield return new WaitForSeconds(3f);
+        //        m_changeSprite.ChangingSprite();
+        //        m_flag = false;
+        //    }
+        //}
     }
 }
