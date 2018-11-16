@@ -44,6 +44,18 @@ namespace DemonicCity.BattleScene
                     case TouchGestureDetector.Gesture.FlickRightToLeft:
                         Debug.Log("左フリックで呼ばれたよ");
                         break;
+                    case TouchGestureDetector.Gesture.Click:
+                        var go = touchInfo.m_hitResult;
+                        if (go != null)
+                        {
+                            Debug.Log(go.tag);
+                        }
+                        else
+                        {
+                            Debug.Log("nullだお");
+                        }
+                        break;
+
                     default:
                         break;
                 }

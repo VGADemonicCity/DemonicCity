@@ -167,6 +167,7 @@ namespace DemonicCity
             var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
             if (null == touchInfo) // touchInfoがnullならmethod終了
             {
+                Debug.Log("touchInfo = nullだよ");
                 return;
             }
             touchInfo.AddPosition(position); // そのフレームでタッチしている座標touchInfoのpositionリストに追加する
@@ -252,7 +253,7 @@ namespace DemonicCity
 
             /// <summary>The start time.</summary>
             float startTime; // インスタンス生成した瞬間のゲーム経過時刻
-                             /// <summary>The positions.</summary>
+            /// <summary>The positions.</summary>
             List<Vector2> positions = new List<Vector2>();
             /// <summary>IsHitメソッドで検出したゲームオブジェクト</summary>
             public GameObject m_hitResult;
@@ -264,7 +265,7 @@ namespace DemonicCity
             /// <param name="position">Touch position.</param>
             public TouchInfo(int fingerId, Vector2 position)
             {
-                this.fingerId = fingerId; // 
+                this.fingerId = fingerId; // touch.fingerIdを代入して初期化
                 startTime = Time.time; // タッチ開始時間を記録する
                 AddPosition(position); //TouchInfoリストに追加する
             }
@@ -294,9 +295,10 @@ namespace DemonicCity
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
                 if (null == targetGameObject.GetComponent<RectTransform>()) // 引数のゲームオブジェクトにRectTransformがなければ。つまりUIじゃなければ
                 {
-                    var ray = camera.ScreenPointToRay(lastTouchPosition); // 最後にタッチした座標をRay型に変換する
-                    var hit = new RaycastHit();
-                   if(Physics.Raycast(ray, out hit) && hit.collider.gameObject == targetGameObject) // Raycastにオブジェクトが検出される、且つそのオブジェクトが引数のオブジェクトと一緒ならば
+                    var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
+                    RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);
+
+                    if (hit.collider != null && hit.collider.gameObject == targetGameObject) // Raycastにオブジェクトが検出される、且つそのオブジェクトが引数のオブジェクトと一緒ならば
                     {
                         m_hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
                         return true; // trueを返す
