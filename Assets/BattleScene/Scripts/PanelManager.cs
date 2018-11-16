@@ -5,61 +5,62 @@ using UnityEngine;
 
 namespace DemonicCity.BattleScene
 {
-
-
     /// <summary>
-    /// Panelの全体管理クラス
+    /// Panel manager.
     /// </summary>
     public class PanelManager : MonoBehaviour
     {
-        [SerializeField] float m_waitTime = 3f;
+        /// <summary>タップ,フリック,Raycast管理クラス</summary>
+        private TouchGestureDetector m_touchGestureDetector;
 
-        /// <summary>ファクトリークラス。Touch情報をもとに適切な処理を行ってくれる</summary>
-        private TouchInfoFactory m_touchInfoFactory;
-        private GameObject m_go;
-        /// <summary>RaycastDetection</summary>
-        private RaycastDetection m_raycastDetection;
-        private TouchInfomation m_touchInfo;
-        private Touch m_touch;
-        private Flags m_flag = Flags.isWorking;
+        /// <summary>同オブジェクトにアタッチされている[パネルを生成して同時にパネル種類の振り分けもしてくれるクラス]の参照</summary>
+        InstantiatePanels m_instantiatePanels;
+        /// <summary>パネルが処理中かどうか表すフラグ</summary>
+        bool m_isPanelProcessing;
+        /// <summary>パネルプレハブ</summary>
+        GameObject m_panel;
 
-        private void Start()
+        void Awake()
         {
-            m_raycastDetection = GetComponent<RaycastDetection>();
-            InstantiatePanels ip = GetComponent<InstantiatePanels>();
-            m_touchInfo = GetComponent<TouchInfomation>();
-            ip.GeneratePanels(); //Panel生成処理
+            // 同オブジェクトにアタッチされているコンポーネントの取得
+            m_touchGestureDetector = GetComponent<TouchGestureDetector>();
+            m_instantiatePanels = GetComponent<InstantiatePanels>();
         }
 
-        /// <summary>アップデートメソッド : Update method</summary>
-        public void Update()
+        void Start()
         {
-            if (Input.touchCount > 0 && ((m_flag & Flags.PanelSelectPhase) == Flags.PanelSelectPhase)) //タッチカウント > 0 且つパネルセレクトフェーズのフラグが立っている時
+            m_instantiatePanels.GeneratePanels(); // パネル生成処理
+            m_panel = Resources.Load<GameObject>("Battle_Panel"); // Battle_PanelをResourcesフォルダに入れてシーン外から取得
+
+            // タッチによる任意の処理をイベントに登録する
+            m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                m_touch = Input.GetTouch(0);
-                m_go = m_touchInfo.GetTouchedGameObject(TouchPhase.Ended); // Ended時のゲームオブジェクトを取得する
-                if (m_touch.phase == TouchPhase.Ended && m_go != null && m_go.tag == "Panel" &&  (m_flag & Flags.isWorking) == Flags.isWorking)
-                {
-                    var tpbp = m_go.GetComponent<TouchPhaseBeganProcess>();
-                    tpbp.Rotation();
-                    StartCoroutine(WaitSelectingPanel());
-                }
-            }
-        }
 
-        /// <summary>
-        /// Waits the selecting panel.
-        /// </summary>
-        /// <returns>The selecting panel.</returns>
-        IEnumerator WaitSelectingPanel()
-        {
-            m_flag = m_flag ^ Flags.isWorking; //isWorkingをoffにする
-            Debug.Log("オフに戻した後 :" + m_flag);
-            yield return new WaitForSeconds(m_waitTime);
-            Debug.Log("オンにする前 :" + m_flag);
-            m_flag = m_flag | Flags.isWorking; //isWorkingをonにする
-            Debug.Log("オンにした後 :" + m_flag);
+                switch (gesture)
+                {
+                    case TouchGestureDetector.Gesture.FlickLeftToRight:
+                        Debug.Log("右フリックで呼ばれたよ");
+                        break;
+                    case TouchGestureDetector.Gesture.FlickRightToLeft:
+                        Debug.Log("左フリックで呼ばれたよ");
+                        break;
+                    case TouchGestureDetector.Gesture.Click:
+                        var go = touchInfo.m_hitResult;
+                        if (go != null)
+                        {
+                            Debug.Log(go.tag);
+                        }
+                        else
+                        {
+                            Debug.Log("nullだお");
+                        }
+                        break;
+
+                    default:
+                        break;
+                }
+            
+            });
         }
     }
 }
-

@@ -28,6 +28,5 @@ namespace DemonicCity.BattleScene
         {
             m_spriteRender.sprite = m_panels[(int)m_panel.m_panelType]; //パネルタイプのenum値をキャストで渡す
         }
-
     }
 }
