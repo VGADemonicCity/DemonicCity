@@ -63,6 +63,13 @@ namespace DemonicCity
             {
                 shootingCamera = Camera.main;
             }
+
+            if(onGestureDetected == null)
+            {
+                Debug.Log("nullだったよ");
+                onGestureDetected = GetComponent<GestureDetectorEvent>();
+            }
+
         }
 
         void Update()
@@ -229,10 +236,7 @@ namespace DemonicCity
                 }
             }
 
-            /// <summary>
-            /// Gets the elapsed time.
-            /// 経過時間
-            /// </summary>
+            /// <summary>経過時間</summary>
             /// <value>The elapsed time.</value>
             public float ElapsedTime
             {
@@ -241,10 +245,10 @@ namespace DemonicCity
                     return Time.time - startTime;
                 }
             }
-
             /// <summary>The finger identifier.</summary>
             public readonly int fingerId; // どのタッチかを識別するユニーク値
-                                          /// <summary>The start time.</summary>
+
+            /// <summary>The start time.</summary>
             float startTime; // インスタンス生成した瞬間のゲーム経過時刻
                              /// <summary>The positions.</summary>
             List<Vector2> positions = new List<Vector2>();
@@ -277,7 +281,7 @@ namespace DemonicCity
             /// <returns><c>true</c>, if hit was ised, <c>false</c> otherwise.</returns>
             /// <param name="targetGameObject">Target game object.</param>
             /// <param name="camera">Camera.</param>
-            public bool IsHit(GameObject targetGameObject, Camera camera = null)
+            public bool IsHit(GameObject targetGameObject, Camera camera = null )
             {
                 if (null == camera) // 引数のカメラがnullなら
                 {

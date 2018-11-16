@@ -19,58 +19,65 @@ namespace DemonicCity.BattleScene
 
     public class PanelFrameManager : MonoBehaviour
     {
-        /// <summary>タッチ情報格納オブジェクト : Touch information strorage object</summary>
-        private Touch m_touch;
-        /// <summary>raycastで取ってきたgameObject</summary>
-        private GameObject m_go;
+        /// <summary>The touch gesture detector.</summary>
+        [HideInInspector] public TouchGestureDetector m_touchGestureDetector;
         /// <summary>フリック時のbit論理演算用</summary>
-        private int m_flag = 2;
-        private bool m_wait = true;
-        private RaycastDetection m_raycastDetection;
-        /// <summary>フリック反応感度</summary>
-        [SerializeField] private float m_flickSensitivity = 100f;
+        int m_flag = 2;
+        bool m_wait = true;
 
+        void Awake()
+        {
+            m_touchGestureDetector = GetComponent<TouchGestureDetector>();
+        }
 
         public void Start()
         {
-            m_raycastDetection = GetComponent<RaycastDetection>();
-        }
-
-        /// <summary>アップデートメソッド : Update method</summary>
-        public void Update()
-        {
-
-            if (Input.touchCount > 0) //タッチされている＆パネルの処理を行っていない場合タッチ処理を行う
+            //m_touchGestureDetector.hitCheck = false; // isHitを不使用にしてどこでも検知できる様にする
+           
+            // UnityEvent機能を使ってメソッドを登録する
+            m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                m_touch = Input.GetTouch(0); //タッチ情報の取得 : Acquire touch information.
-                m_go = m_raycastDetection.DetectHitGameObject(m_touch.position); //指定レイヤーのオブジェクトのみレイキャストしてくる
-                if (m_go != null && m_go.tag == "PanelFrame" && m_wait)
+                switch (gesture) // タッチ情報が左右のフリックだったら
                 {
-                    StartCoroutine(Moving());
+                    case TouchGestureDetector.Gesture.FlickLeftToRight: // 右フリックの時
+                        if ((m_flag & (int)Flag.Left) == 0 && m_wait) // 右にスワイプされた時左側にいなければ
+                        {
+                            StartCoroutine(Moving(Flag.Right)); // デフォルト引数を使い左にシフトさせる
+                        }
+                        break;
+                    case TouchGestureDetector.Gesture.FlickRightToLeft: // 左フリックの時
+                        if((m_flag & (int)Flag.Right) == 0 && m_wait) // 左にスワイプされた時右側にいなければ
+                        {
+                            StartCoroutine(Moving(Flag.Left)); // マイナス1を渡して右にシフトさせる
+                        }
+                        break;
+                            default:
+                        break;
                 }
-            }
+            });
         }
 
-        IEnumerator Moving()
+        /// <summary>
+        /// パネル枠をフリックに応じて移動させる
+        /// </summary>
+        /// <returns>The moving.</returns>
+        /// <param name="flag">Flag.</param>
+        IEnumerator Moving(Flag flag)
         {
-            if (m_touch.deltaPosition.x > m_flickSensitivity && (m_flag & (int)Flag.Left) == 0) //右にスワイプされた時左側にいなければ
+            m_wait = false; //処理が終わるまで呼ばれない様にする
+            switch (flag)
             {
-                iTween.MoveBy(m_go, iTween.Hash(("x"), 3.65f));
-                m_flag = m_flag << 1;
-                Debug.Log("m_flag is :" + m_flag);
-                m_wait = false;
-                yield return new WaitForSeconds(2f);
-                m_wait = true;
+                case Flag.Right: // もし右にフリックされたら
+                    iTween.MoveBy(gameObject, iTween.Hash(("x"), 3.65f)); // 枠を右に移動
+                    m_flag = m_flag << 1; // フラグを左にシフト
+                    break;
+                case Flag.Left: // もし左にフリックされたら
+                    iTween.MoveBy(gameObject, iTween.Hash(("x"), -3.65f)); // 枠を左に移動
+                    m_flag = m_flag >> 1; // フラグを右にシフト
+                    break;
             }
-            else if (m_touch.deltaPosition.x < -m_flickSensitivity && (m_flag & (int)Flag.Right) == 0)//左にスワイプされた時右側にいなければ
-            {
-                iTween.MoveBy(m_go, iTween.Hash(("x"), -3.65f));
-                m_flag = m_flag >> 1;
-                Debug.Log("m_flag is :" + m_flag);
-                m_wait = false;
-                yield return new WaitForSeconds(2f);
-                m_wait = true;
-            }
+            yield return new WaitForSeconds(2f); //2秒待つ
+            m_wait = true; // 処理終了。またこのメソッドを呼べる様になる
         }
     }
 }

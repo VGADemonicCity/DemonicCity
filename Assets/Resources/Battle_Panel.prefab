@@ -21,11 +21,7 @@ GameObject:
   - component: {fileID: 4141247409243594}
   - component: {fileID: 212466524483284848}
   - component: {fileID: 58288899582291186}
-  - component: {fileID: 50287031479528572}
   - component: {fileID: 114076971656575822}
-  - component: {fileID: 114698655584578584}
-  - component: {fileID: 114073437086323354}
-  - component: {fileID: 114948383955858180}
   m_Layer: 8
   m_Name: Battle_Panel
   m_TagString: Panel
@@ -46,26 +42,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50287031479528572
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494285668666228}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!58 &58288899582291186
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -81,22 +57,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 7.684999
---- !u!114 &114073437086323354
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494285668666228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0bf0f67881dfbe1438664a96196a5ea8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_panels:
-  - {fileID: 21300000, guid: c76269d1fa4e5ff45865a8277145b68c, type: 3}
-  - {fileID: 21300000, guid: 0e756e43480a30342b01f553878007cb, type: 3}
-  - {fileID: 21300000, guid: 41dc11f5b1a24964c996ec8ec6005abb, type: 3}
-  - {fileID: 21300000, guid: 56089166f74d87b4fa75d0f7f04a175e, type: 3}
 --- !u!114 &114076971656575822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -108,28 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012332e80f5ecda4c9b21bb82049456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114698655584578584
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494285668666228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02fd88a2ae184714897ea97ee69ff437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114948383955858180
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1494285668666228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2d925e99bb83a5f44a5f1a3b1370faa5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_panelTextures: []
 --- !u!212 &212466524483284848
 SpriteRenderer:
   m_ObjectHideFlags: 1

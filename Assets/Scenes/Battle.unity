@@ -216,7 +216,14 @@ Prefab:
       propertyPath: m_waitTime
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114227830940531418, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_panelFrame
+      value: 
+      objectReference: {fileID: 1892036566}
+    m_RemovedComponents:
+    - {fileID: 114690455532549456, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
+    - {fileID: 114890068285372390, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &735394536
@@ -556,6 +563,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1459972557 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 20977403101316326, guid: df829b678ddfbce4980180758400ac84,
+    type: 2}
+  m_PrefabInternal: {fileID: 735394536}
 --- !u!1 &1770365132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1291335245634264, guid: a07f1697570ccc44a9fd394ba7915bba,
@@ -569,10 +581,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1770365132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd4adcef1476869489c545802cc33c29, type: 3}
+  m_Script: {fileID: 11500000, guid: 05328eb25b0304a798940a7481cd4c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1770365137
+  m_touchGestureDetector: {fileID: 0}
+--- !u!114 &1770365134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -580,21 +593,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1770365132}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abeedf0664f194a4ebea1da44fa92633, type: 3}
+  m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_flickSensitivity: 100
---- !u!114 &1770365138
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1770365132}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc5299a36e026c44094cf8e89382833a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  shootingCamera: {fileID: 1459972557}
+  hitCheck: 1
+  detectFlick: 1
+  m_divisor: 10
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0
@@ -681,3 +686,30 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 191.76, y: 10}
   m_EdgeRadius: 0
+--- !u!114 &1892036570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892036566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abeedf0664f194a4ebea1da44fa92633, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_touchGestureDetector: {fileID: 1892036571}
+--- !u!114 &1892036571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1892036566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootingCamera: {fileID: 0}
+  hitCheck: 0
+  detectFlick: 1
+  m_divisor: 10
