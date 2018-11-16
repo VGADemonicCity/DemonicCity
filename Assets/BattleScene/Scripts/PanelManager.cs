@@ -11,7 +11,7 @@ namespace DemonicCity.BattleScene
     public class PanelManager : MonoBehaviour
     {
         /// <summary>タップ,フリック,Raycast管理クラス</summary>
-        [HideInInspector] public TouchGestureDetector m_touchGestureDetector;
+        private TouchGestureDetector m_touchGestureDetector;
 
         /// <summary>同オブジェクトにアタッチされている[パネルを生成して同時にパネル種類の振り分けもしてくれるクラス]の参照</summary>
         InstantiatePanels m_instantiatePanels;
@@ -35,15 +35,19 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if(touchInfo.IsHit(m_panel, Camera.main)) //Panelをタッチしたら
+
+                switch (gesture)
                 {
-                    Debug.Log("これはm_panelと認識されたよ");
+                    case TouchGestureDetector.Gesture.FlickLeftToRight:
+                        Debug.Log("右フリックで呼ばれたよ");
+                        break;
+                    case TouchGestureDetector.Gesture.FlickRightToLeft:
+                        Debug.Log("左フリックで呼ばれたよ");
+                        break;
+                    default:
+                        break;
                 }
-               
-                if(!touchInfo.IsHit(m_panel, Camera.main))
-                {
-                    Debug.Log("これはm_panelと認識されなかったよ");
-                }
+            
             });
         }
     }

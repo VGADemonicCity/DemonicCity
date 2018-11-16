@@ -53,9 +53,11 @@ namespace DemonicCity
         public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
         /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
         List<TouchInfo> touchInfos = new List<TouchInfo>();
-        /// <summary>割る数</summary>
+        /// <summary>割る数。画面フリックのsensitivity(感度)を決める値</summary>
         public float m_divisor = 10f;
 
+        /// <summary>ターゲットオブジェクト。このオブジェクトをTouchGestureDetectorの機能を使うゲームオブジェクトに指定する</summary>
+        [SerializeField] GameObject m_targetGameObject;
 
         void Awake()
         {
@@ -64,7 +66,7 @@ namespace DemonicCity
                 shootingCamera = Camera.main;
             }
 
-            if(onGestureDetected == null)
+            if(onGestureDetected == null) //呼ばれていない気がする
             {
                 Debug.Log("nullだったよ");
                 onGestureDetected = GetComponent<GestureDetectorEvent>();
@@ -118,7 +120,7 @@ namespace DemonicCity
         void OnTouchBegin(int fingerId, Vector2 position)
         {
             var touchInfo = new TouchInfo(fingerId, position); // touch情報が入っている変数
-            if (!hitCheck || touchInfo.IsHit(gameObject, shootingCamera))
+            if (!hitCheck || touchInfo.IsHit(m_targetGameObject, shootingCamera)) // フラグがOff,又はターゲットオブジェクトをタッチしたら。
             {
                 touchInfos.Add(touchInfo);
                 OnGestureDetected(Gesture.TouchBegin, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
@@ -167,7 +169,7 @@ namespace DemonicCity
             {
                 return;
             }
-            touchInfo.AddPosition(position); // touchInfoをリストに追加する
+            touchInfo.AddPosition(position); // そのフレームでタッチしている座標touchInfoのpositionリストに追加する
             OnGestureDetected(Gesture.TouchEnd, touchInfo);  // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
 
             var diff = touchInfo.Diff; // タッチ始めのフレームと離す瞬間のフレーム時の差分ベクトルを代入する
@@ -199,7 +201,7 @@ namespace DemonicCity
                     }
                 }
             }
-            else if (hitCheck && touchInfo.IsHit(gameObject, shootingCamera)) // フラグがOn,且つゲームオブジェクトをタッチしたら
+            else if (hitCheck && touchInfo.IsHit(m_targetGameObject, shootingCamera)) // フラグがOn,且つターゲットオブジェクトをタッチしたら
             {
                 OnGestureDetected(Gesture.Click, touchInfo); // 引数をクリックにする
             }
@@ -232,7 +234,7 @@ namespace DemonicCity
             {
                 get
                 {
-                    return new Vector2(positions.Last().x - positions.First().x, positions.Last().y - positions.First().y); // 最初にタップした位置から最後にタップしていた位置の差分ベクトルをとる
+                    return new Vector2(positions.Last().x - positions.First().x, positions.Last().y - positions.First().y); // 最初にタップした位置から最後にタップしていた位置の差分ベクトルを返す
                 }
             }
 
@@ -252,6 +254,8 @@ namespace DemonicCity
             float startTime; // インスタンス生成した瞬間のゲーム経過時刻
                              /// <summary>The positions.</summary>
             List<Vector2> positions = new List<Vector2>();
+            /// <summary>IsHitメソッドで検出したゲームオブジェクト</summary>
+            public GameObject m_hitResult;
 
             /// <summary>
             ///Touch情報を入れておくクラス
@@ -288,15 +292,20 @@ namespace DemonicCity
                     camera = Camera.main; // 最初に検出したメインカメラタグがついているカメラオブジェクトを代入する
                 }
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
-                if (null == targetGameObject.GetComponent<RectTransform>()) // 引数のゲームオブジェクトにRectTransformがなければ。つまりUIじゃなければ？
+                if (null == targetGameObject.GetComponent<RectTransform>()) // 引数のゲームオブジェクトにRectTransformがなければ。つまりUIじゃなければ
                 {
                     var ray = camera.ScreenPointToRay(lastTouchPosition); // 最後にタッチした座標をRay型に変換する
                     var hit = new RaycastHit();
-                    return Physics.Raycast(ray, out hit) && hit.collider.gameObject == targetGameObject; // Raycastにオブジェクトが検出される、且つそのオブジェクトが引数のオブジェクトと一緒ならtrueを返す
+                   if(Physics.Raycast(ray, out hit) && hit.collider.gameObject == targetGameObject) // Raycastにオブジェクトが検出される、且つそのオブジェクトが引数のオブジェクトと一緒ならば
+                    {
+                        m_hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
+                        return true; // trueを返す
+                    }
+                        return false; // 然もなくばfalseを返す
                 }
                 else // 引数のゲームオブジェクトにRectTransformがあったら。つまりUIならば？
                 {
-                    var pointerEventData = new PointerEventData(EventSystem.current)
+                    var pointerEventData = new PointerEventData(EventSystem.current) // RaycastAll用の変数
                     {
                         position = lastTouchPosition // 指を離す瞬間のフレーム時の座標を代入する
                     };
@@ -311,10 +320,12 @@ namespace DemonicCity
                     {
                         if (resultGameObject == targetGameObject) // 検出したオブジェクトが引数と一緒ならばtrueを返す
                         {
+                            m_hitResult = resultGameObject; // 検出したゲームオブジェクトの参照を代入
                             return true;
                         }
                         var parent = resultGameObject.transform.parent; // 検出したオブジェクトの親が存在するならば、代入
-                        resultGameObject = null != parent ? parent.gameObject : null;
+                        // もし検出したオブジェクトに親がいるなら、親を代入してwhile文の最初からやり直し。これを行う事により、特定のCanvas等UIの親に存在するゲームオブジェクトも検出可能
+                        resultGameObject = null != parent ? parent.gameObject : null; 
                     }
                     return false;
                 }

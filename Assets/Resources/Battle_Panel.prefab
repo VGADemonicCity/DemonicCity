@@ -68,7 +68,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 012332e80f5ecda4c9b21bb82049456c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_panelTextures: []
+  m_panelTextures:
+  - {fileID: 21300000, guid: c76269d1fa4e5ff45865a8277145b68c, type: 3}
+  - {fileID: 21300000, guid: 0e756e43480a30342b01f553878007cb, type: 3}
+  - {fileID: 21300000, guid: 41dc11f5b1a24964c996ec8ec6005abb, type: 3}
+  - {fileID: 21300000, guid: 56089166f74d87b4fa75d0f7f04a175e, type: 3}
 --- !u!212 &212466524483284848
 SpriteRenderer:
   m_ObjectHideFlags: 1

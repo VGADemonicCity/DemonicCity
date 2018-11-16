@@ -20,7 +20,7 @@ namespace DemonicCity.BattleScene
     public class PanelFrameManager : MonoBehaviour
     {
         /// <summary>The touch gesture detector.</summary>
-        [HideInInspector] public TouchGestureDetector m_touchGestureDetector;
+        private TouchGestureDetector m_touchGestureDetector;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
         bool m_wait = true;

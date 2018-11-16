@@ -584,7 +584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05328eb25b0304a798940a7481cd4c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_touchGestureDetector: {fileID: 0}
 --- !u!114 &1770365134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -597,9 +596,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingCamera: {fileID: 1459972557}
-  hitCheck: 1
+  hitCheck: 0
   detectFlick: 1
   m_divisor: 10
+  m_targetGameObject: {fileID: 0}
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0
@@ -697,7 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeedf0664f194a4ebea1da44fa92633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_touchGestureDetector: {fileID: 1892036571}
 --- !u!114 &1892036571
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,3 +712,4 @@ MonoBehaviour:
   hitCheck: 0
   detectFlick: 1
   m_divisor: 10
+  m_targetGameObject: {fileID: 1892036566}
