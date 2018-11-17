@@ -108,7 +108,6 @@ namespace DemonicCity
                 }
                 else if(Input.GetMouseButton(0))//左クリックを押している間
                 {
-                    Debug.Log("呼ばれてるよ");
                     OnTouchMove(Int32.MaxValue, Input.mousePosition);
                 }
             }
