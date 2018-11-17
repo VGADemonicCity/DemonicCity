@@ -99,14 +99,16 @@ namespace DemonicCity
             {
                 if (Input.GetMouseButtonDown(0)) //左クリック押したら
                 {
+                    Debug.Break();
                     OnTouchBegin(Int32.MaxValue, Input.mousePosition);
                 }
                 else if (Input.GetMouseButtonUp(0)) // 左クリックを離したら
                 {
                     OnTouchEnd(Int32.MaxValue, Input.mousePosition);
                 }
-                else //左クリックを押している間
+                else if(Input.GetMouseButton(0))//左クリックを押している間
                 {
+                    Debug.Log("呼ばれてるよ");
                     OnTouchMove(Int32.MaxValue, Input.mousePosition);
                 }
             }

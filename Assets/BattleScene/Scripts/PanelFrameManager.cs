@@ -51,21 +51,6 @@ namespace DemonicCity.BattleScene
                             StartCoroutine(Moving(Flag.Left)); // マイナス1を渡して右にシフトさせる
                         }
                         break;
-                    case TouchGestureDetector.Gesture.Click:
-                        Debug.Log("click呼ばれたよ");
-                        break;
-                    case TouchGestureDetector.Gesture.TouchBegin:
-                        Debug.Log("begin呼ばれたよ");
-                        break;
-                    case TouchGestureDetector.Gesture.TouchEnd:
-                        Debug.Log("end呼ばれたよ");
-                        break;
-                    case TouchGestureDetector.Gesture.TouchMove:
-                        Debug.Log("move呼ばれたよ");
-                        break;
-                    case TouchGestureDetector.Gesture.TouchStationary:
-                        Debug.Log("stationary呼ばれたよ");
-                        break;
                     default:
                         break;
                 }

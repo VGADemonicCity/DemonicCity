@@ -13,50 +13,57 @@ namespace DemonicCity.BattleScene
         Enemy
     }
 
+    /// <summary>
+    /// Panel.
+    /// </summary>
     public class Panel : MonoBehaviour
     {
         /// <summary>パネルが持つパネルの種類情報</summary>
         public PanelType m_panelType { get; set; }
-        /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
-        bool m_processed = true;
-        /// <summary>同オブジェクトの ChangeSprite への参照</summary>
-        ChangeSprite m_changeSprite;
+
         /// <summary>パネルのテクスチャ</summary>
         [SerializeField] Sprite[] m_panelTextures;
+        /// <summary>時点から何度回転するか</summary>
+        [SerializeField] float m_rotationDegrees = 1440f;
+
+        /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
+        bool m_alreadyProcessed = false;
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
+
 
         /// <summary>
         /// フラグを初期値に戻してまた呼べる様にする
         /// </summary>
         public void ResetFlag()
         {
-            m_processed = true; //フラグリセット
+            m_alreadyProcessed = false; //フラグリセット
         }
 
         /// <summary>
         /// 回転してパネルの中身を見せる
         /// </summary>
-        public void Working()
+        public void Open()
         {
-            if (m_processed) //フラグがオフならメソッド終了
+            if (m_alreadyProcessed) //フラグがオフならメソッド終了
             {
                 return;
+                
             }
             StartCoroutine(Processing());
         }
 
         //選択されたら一回だけ演出を出してパネルの中身を表示する
-        IEnumerator Processing()
+        IEnumerator  Processing()
         {
             Rotate(gameObject, 'y', 5f); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(3f); 
-            ChangingSprite();
-            m_processed = false; // 一回呼ばれたらtrueにする迄呼ばれない様にする
+            ChangingTexture(); // PanelTypeに合わせてtextureを変える
+            m_alreadyProcessed = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>
-        void ChangingSprite()
+        void ChangingTexture()
         {
             m_spriteRender.sprite = m_panelTextures[(int)m_panelType]; //パネルタイプのenum値をキャストで渡す
         }

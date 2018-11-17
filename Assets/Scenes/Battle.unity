@@ -590,7 +590,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1770365132}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
@@ -709,7 +709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootingCamera: {fileID: 0}
-  hitCheck: 1
+  hitCheck: 0
   detectFlick: 1
   m_divisor: 10
   m_targetGameObject: {fileID: 1892036566}
