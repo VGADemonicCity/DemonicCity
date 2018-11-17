@@ -99,7 +99,6 @@ namespace DemonicCity
             {
                 if (Input.GetMouseButtonDown(0)) //左クリック押したら
                 {
-                    Debug.Break();
                     OnTouchBegin(Int32.MaxValue, Input.mousePosition);
                 }
                 else if (Input.GetMouseButtonUp(0)) // 左クリックを離したら
