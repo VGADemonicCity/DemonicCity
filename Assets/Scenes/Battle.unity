@@ -563,11 +563,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!20 &1459972557 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 20977403101316326, guid: df829b678ddfbce4980180758400ac84,
-    type: 2}
-  m_PrefabInternal: {fileID: 735394536}
 --- !u!1 &1770365132 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1291335245634264, guid: a07f1697570ccc44a9fd394ba7915bba,
@@ -595,11 +590,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCamera: {fileID: 1459972557}
-  hitCheck: 1
-  detectFlick: 1
-  m_divisor: 10
-  m_targetGameObject: {fileID: 0}
+  ShootingCamera: {fileID: 0}
+  HitCheck: 1
+  DetectFlick: 1
+  Divisor: 10
+  TargetGameObject: {fileID: 0}
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0
@@ -708,8 +703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCamera: {fileID: 0}
-  hitCheck: 0
-  detectFlick: 1
-  m_divisor: 10
-  m_targetGameObject: {fileID: 1892036566}
+  ShootingCamera: {fileID: 0}
+  HitCheck: 1
+  DetectFlick: 1
+  Divisor: 10
+  TargetGameObject: {fileID: 0}

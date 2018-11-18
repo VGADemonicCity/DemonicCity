@@ -31,6 +31,11 @@ namespace DemonicCity.BattleScene
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
 
+        private void Start()
+        {
+            m_spriteRender = GetComponent<SpriteRenderer>();
+        }
+
 
         /// <summary>
         /// フラグを初期値に戻してまた呼べる様にする
@@ -69,14 +74,14 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
-        /// goをaxisを軸に1440f度time掛けて回す
+        /// パネルをaxis軸で1440度time秒掛けて回転させる
         /// </summary>
         /// <param name="go">Go.</param>
         /// <param name="axis">Axis.</param>
         /// <param name="time">Time.</param>
         public void Rotate(GameObject go, char axis, float time)
         {
-            iTween.RotateTo(go, iTween.Hash(axis, 1440f, "time", time));
+            iTween.RotateTo(go, iTween.Hash(axis, m_rotationDegrees, "time", time));
         }
     }
 }

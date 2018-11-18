@@ -11,7 +11,7 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class InstantiatePanels : MonoBehaviour
     {
-        /// <summary>パネル枠。全てのパネルの親に値する。</summary>
+        /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
 
         /// <summary>各パネルの生成座標</summary>
@@ -28,7 +28,8 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
             m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
             m_panelPositions = new List<Vector3>(); 
-            m_panelFrame = GameObject.Find("PanelFrame"); // パネルの枠
+
+
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) //列のfor文。行×列=27個のパネル座標を追加する
             {

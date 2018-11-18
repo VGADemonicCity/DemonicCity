@@ -33,7 +33,7 @@ namespace DemonicCity.BattleScene
         public void Start()
         {
             //m_touchGestureDetector.hitCheck = false; // isHitを不使用にしてどこでも検知できる様にする
-           
+
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -46,10 +46,13 @@ namespace DemonicCity.BattleScene
                         }
                         break;
                     case TouchGestureDetector.Gesture.FlickRightToLeft: // 左フリックの時
-                        if((m_flag & (int)Flag.Right) == 0 && m_wait) // 左にスワイプされた時右側にいなければ
+                        if ((m_flag & (int)Flag.Right) == 0 && m_wait) // 左にスワイプされた時右側にいなければ
                         {
                             StartCoroutine(Moving(Flag.Left)); // マイナス1を渡して右にシフトさせる
                         }
+                        break;
+                    case TouchGestureDetector.Gesture.Click:
+                        Debug.Log("Called in the PanelFrameManager");
                         break;
                     default:
                         break;

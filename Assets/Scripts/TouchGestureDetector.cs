@@ -14,7 +14,7 @@ namespace DemonicCity
     /// <author>KAKO Akihito</author>
     /// <email>kako@qnote.co.jp</email>
     /// <license>MIT License</license>
-    public class TouchGestureDetector : MonoBehaviour
+    public class TouchGestureDetector : MonoSingleton<TouchGestureDetector>
     {
         const float FLICK_TIME_LIMIT = 0.3f;
 
@@ -44,34 +44,50 @@ namespace DemonicCity
         }
 
         /// <summary>メインカメラ</summary>
-        public Camera shootingCamera;
+        public Camera ShootingCamera;
         /// <summary>isHitを使うか使わないかを切り替えられるフラグ。On状態の時は使う</summary>
-        public bool hitCheck = true;
+        public bool HitCheck = true;
         /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
-        public bool detectFlick = true;
+        public bool DetectFlick = true;
         /// <summary>UnityEventクラスを引数を持てる様に継承したクラス</summary>
         public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
         /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
-        List<TouchInfo> touchInfos = new List<TouchInfo>();
+        List<TouchInfo> TouchInfos = new List<TouchInfo>();
         /// <summary>割る数。画面フリックのsensitivity(感度)を決める値</summary>
-        public float m_divisor = 10f;
+        public float Divisor = 10f;
 
         /// <summary>ターゲットオブジェクト。このオブジェクトをTouchGestureDetectorの機能を使うゲームオブジェクトに指定する</summary>
-        [SerializeField] GameObject m_targetGameObject;
+        GameObject TargetGameObject{
+            get
+            {
+                //if (TargetGameObject == null)
+                //{
+                //    Debug.Break();
+                //}
+                return GameObject.FindWithTag("PanelFrame");
+            }
+            set {
+                //if(value == null)
+                //{
+                //    Debug.Break();
+                //}
+                TargetGameObject = value;
+            }
+        }
 
         void Awake()
         {
-            if (null == shootingCamera) // カメラオブジェクトがnullの場合メインカメラを代入する
+            
+            if (null == ShootingCamera) // カメラオブジェクトがnullの場合メインカメラを代入する
             {
-                shootingCamera = Camera.main;
+                ShootingCamera = Camera.main;
             }
 
-            if(onGestureDetected == null) //呼ばれていない気がする
+            if (onGestureDetected == null) // newで呼ばれなかった時用？現状呼ばれていないっぽい
             {
-                Debug.Log("nullだったよ");
+                Debug.Log("onGesureDetected is Null.");
                 onGestureDetected = GetComponent<GestureDetectorEvent>();
             }
-
         }
 
         void Update()
@@ -105,7 +121,7 @@ namespace DemonicCity
                 {
                     OnTouchEnd(Int32.MaxValue, Input.mousePosition);
                 }
-                else if(Input.GetMouseButton(0))//左クリックを押している間
+                else if (Input.GetMouseButton(0))//左クリックを押している間
                 {
                     OnTouchMove(Int32.MaxValue, Input.mousePosition);
                 }
@@ -120,9 +136,9 @@ namespace DemonicCity
         void OnTouchBegin(int fingerId, Vector2 position)
         {
             var touchInfo = new TouchInfo(fingerId, position); // touch情報が入っている変数
-            if (!hitCheck || touchInfo.IsHit(m_targetGameObject, shootingCamera)) // フラグがOff,又はターゲットオブジェクトをタッチしたら。
+            if (!HitCheck || touchInfo.IsHit(TargetGameObject, ShootingCamera)) // フラグがOff,又はターゲットオブジェクトをタッチしたら。
             {
-                touchInfos.Add(touchInfo);
+                TouchInfos.Add(touchInfo);
                 OnGestureDetected(Gesture.TouchBegin, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
             }
         }
@@ -134,7 +150,7 @@ namespace DemonicCity
         /// <param name="position">Position.</param>
         void OnTouchMove(int fingerId, Vector2 position)
         {
-            var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+            var touchInfo = TouchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
             if (null == touchInfo) // touchInfoがnullならmethod終了
             {
                 return;
@@ -149,7 +165,7 @@ namespace DemonicCity
         /// <param name="fingerId">Finger identifier.</param>
         void OnTouchStationary(int fingerId)
         {
-            var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+            var touchInfo = TouchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
             if (null == touchInfo) // touchInfoがnullならmethod終了
             {
                 return;
@@ -164,7 +180,7 @@ namespace DemonicCity
         /// <param name="position">Position.</param>
         void OnTouchEnd(int fingerId, Vector2 position)
         {
-            var touchInfo = touchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
+            var touchInfo = TouchInfos.FirstOrDefault(x => x.fingerId == fingerId); // touchInfosリストの先頭要素が引数のtouchInfoのfingerIdと同値だった場合その要素を返す,でなければnullを返す。
             if (null == touchInfo) // touchInfoがnullならmethod終了
             {
                 Debug.Log("touchInfo = nullだよ");
@@ -174,10 +190,10 @@ namespace DemonicCity
             OnGestureDetected(Gesture.TouchEnd, touchInfo);  // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
 
             var diff = touchInfo.Diff; // タッチ始めのフレームと離す瞬間のフレーム時の差分ベクトルを代入する
-            var flickDistanceLimit = (float)Math.Min(Screen.width, Screen.height) / m_divisor; //画面の縦横で短い方を任意の値で割った数値を代入する
+            var flickDistanceLimit = (float)Math.Min(Screen.width, Screen.height) / Divisor; //画面の縦横で短い方を任意の値で割った数値を代入する
 
             // フリック検知フラグがON,且つタッチを始めてからの経過時刻がタイムリミット以内,且つxかyのタッチ差分が任意の閾値を超えた時
-            if (detectFlick && touchInfo.ElapsedTime < FLICK_TIME_LIMIT && (Mathf.Abs(diff.x) > flickDistanceLimit || Mathf.Abs(diff.y) > flickDistanceLimit))
+            if (DetectFlick && touchInfo.ElapsedTime < FLICK_TIME_LIMIT && (Mathf.Abs(diff.x) > flickDistanceLimit || Mathf.Abs(diff.y) > flickDistanceLimit))
             {
                 if (Mathf.Abs(diff.x) > Mathf.Abs(diff.y)) // タッチ差分がy軸よりx軸方が大きい時
                 {
@@ -202,12 +218,12 @@ namespace DemonicCity
                     }
                 }
             }
-            else if (hitCheck && touchInfo.IsHit(m_targetGameObject, shootingCamera)) // フラグがOn,且つターゲットオブジェクトをタッチしたら
+            else if (HitCheck && touchInfo.IsHit(TargetGameObject, ShootingCamera)) // フラグがOn,且つターゲットオブジェクトをタッチしたら
             {
                 OnGestureDetected(Gesture.Click, touchInfo); // 引数をクリックにする
             }
 
-            touchInfos.RemoveAll(x => x.fingerId == fingerId); // 引数のfingerIdと同値だったらリストから削除する
+            TouchInfos.RemoveAll(x => x.fingerId == fingerId); // 引数のfingerIdと同値だったらリストから削除する
         }
 
         /// <summary>
@@ -286,7 +302,7 @@ namespace DemonicCity
             /// <returns><c>true</c>, if hit was ised, <c>false</c> otherwise.</returns>
             /// <param name="targetGameObject">Target game object.</param>
             /// <param name="camera">Camera.</param>
-            public bool IsHit(GameObject targetGameObject, Camera camera = null )
+            public bool IsHit(GameObject targetGameObject, Camera camera = null)
             {
                 if (null == camera) // 引数のカメラがnullなら
                 {
@@ -303,7 +319,7 @@ namespace DemonicCity
                         m_hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
                         return true; // trueを返す
                     }
-                        return false; // 然もなくばfalseを返す
+                    return false; // 然もなくばfalseを返す
                 }
                 else // 引数のゲームオブジェクトにRectTransformがあったら。つまりUIならば？
                 {
@@ -327,11 +343,16 @@ namespace DemonicCity
                         }
                         var parent = resultGameObject.transform.parent; // 検出したオブジェクトの親が存在するならば、代入
                         // もし検出したオブジェクトに親がいるなら、親を代入してwhile文の最初からやり直し。これを行う事により、特定のCanvas等UIの親に存在するゲームオブジェクトも検出可能
-                        resultGameObject = null != parent ? parent.gameObject : null; 
+                        resultGameObject = null != parent ? parent.gameObject : null;
                     }
                     return false;
                 }
             }
+        }
+
+        public override void OnInitialize()
+        {
+            DontDestroyOnLoad(Instance); // Sceneを跨いで生き残る様にする
         }
 
         /// <summary>

@@ -21,8 +21,11 @@ namespace DemonicCity.BattleScene
 
         void Awake()
         {
+            // shingleton,TouchGestureDetectorインスタンスの取得
+            m_touchGestureDetector = TouchGestureDetector.Instance;
+
+            
             // 同オブジェクトにアタッチされているコンポーネントの取得
-            m_touchGestureDetector = GetComponent<TouchGestureDetector>();
             m_instantiatePanels = GetComponent<InstantiatePanels>();
         }
 
@@ -32,7 +35,7 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_isPanelProcessing)
+                if (m_isPanelProcessing) //パネルが処理中なら処理終了
                 {
                     return;
                 }
@@ -41,13 +44,13 @@ namespace DemonicCity.BattleScene
                     case TouchGestureDetector.Gesture.Click: // クリックジェスチャをした時
                         if (touchInfo.m_hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
                         {
-                            var panel = touchInfo.m_hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
-                            panel.Open(); // panelを開く
-
+                            Debug.Log("ぱねる！");
+                            //var panel = touchInfo.m_hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
+                            //panel.Open(); // panelを開く
                         }
+                        Debug.Log("Called in the PanelManager");
                         break;
                 }
-
             });
         }
     }
