@@ -15,10 +15,10 @@ namespace DemonicCity.HomeScene
         {
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (touchInfo.IsHit(exitButton))
-                {
-                    ChangeState(key, false);
-                }
+                //if (touchInfo.IsHit(exitButton))
+                //{
+                //    ChangeState(key, false);
+                //}
             });
             ChangeState(key, true);
         }

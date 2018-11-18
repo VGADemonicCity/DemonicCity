@@ -19,20 +19,15 @@ namespace DemonicCity.BattleScene
 
     public class PanelFrameManager : MonoBehaviour
     {
-        /// <summary>The touch gesture detector.</summary>
+        /// <summary>TouchGestureDetectorの参照</summary>
         private TouchGestureDetector m_touchGestureDetector;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
         bool m_wait = true;
 
-        void Awake()
-        {
-            m_touchGestureDetector = GetComponent<TouchGestureDetector>();
-        }
-
         public void Start()
         {
-            //m_touchGestureDetector.hitCheck = false; // isHitを不使用にしてどこでも検知できる様にする
+            m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
 
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -52,7 +47,6 @@ namespace DemonicCity.BattleScene
                         }
                         break;
                     case TouchGestureDetector.Gesture.Click:
-                        Debug.Log("Called in the PanelFrameManager");
                         break;
                     default:
                         break;
