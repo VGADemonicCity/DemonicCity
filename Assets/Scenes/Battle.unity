@@ -224,6 +224,7 @@ Prefab:
     m_RemovedComponents:
     - {fileID: 114690455532549456, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
     - {fileID: 114890068285372390, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
+    - {fileID: 114227830940531418, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &603809471
@@ -625,6 +626,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05328eb25b0304a798940a7481cd4c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_panelFrame: {fileID: 1892036566}
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0
@@ -697,6 +699,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeedf0664f194a4ebea1da44fa92633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_touchGestureDetector: {fileID: 0}
-  m_flag: 2
-  m_wait: 1

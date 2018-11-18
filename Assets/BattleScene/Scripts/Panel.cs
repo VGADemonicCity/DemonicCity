@@ -8,9 +8,10 @@ namespace DemonicCity.BattleScene
     public enum PanelType
     {
         City,
-        CityDouble,
-        CityTriple,
-        Enemy
+        DoubleCity,
+        TripleCity,
+        Enemy,
+        Default
     }
 
     /// <summary>
