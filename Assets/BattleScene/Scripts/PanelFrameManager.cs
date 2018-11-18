@@ -17,7 +17,7 @@ namespace DemonicCity.BattleScene
         Left = 4
     }
 
-    public class PanelFrameManager : MonoBehaviour
+    public class PanelFrameManager: MonoBehaviour
     {
         /// <summary>TouchGestureDetectorの参照</summary>
         private TouchGestureDetector m_touchGestureDetector;

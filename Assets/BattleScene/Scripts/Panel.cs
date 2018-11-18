@@ -53,7 +53,6 @@ namespace DemonicCity.BattleScene
             if (m_alreadyProcessed) //フラグがオフならメソッド終了
             {
                 return;
-                
             }
             StartCoroutine(Processing());
         }

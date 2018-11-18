@@ -686,31 +686,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1106095958835816, guid: ed8045c25825c2d46b9155066645d3cb,
     type: 2}
   m_PrefabInternal: {fileID: 37631615}
---- !u!61 &1892036569
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1892036566}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 28.5}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 47.94, y: 47.85}
-    newSize: {x: 143.82, y: 47.85}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 2
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 191.76, y: 10}
-  m_EdgeRadius: 0
 --- !u!114 &1892036570
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -722,3 +697,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abeedf0664f194a4ebea1da44fa92633, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_touchGestureDetector: {fileID: 0}
+  m_flag: 2
+  m_wait: 1
