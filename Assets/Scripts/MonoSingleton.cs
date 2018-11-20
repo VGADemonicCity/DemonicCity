@@ -27,7 +27,7 @@ namespace DemonicCity
 
                 System.Type type = typeof(T); // Tのタイプ型
 
-                T instance = FindObjectOfType(type) as T; // typeの型と一致するオブジェクトを検索してTに型変換して代入.(これ GameObject.FindObjectOfTypeの間違いかも)
+                T instance = FindObjectOfType(type) as T; // typeの型と一致するオブジェクトを検索してTに型変換して代入
 
                 if (instance == null) // instanceがnullなら
                 {

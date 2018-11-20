@@ -9,26 +9,31 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Panel manager.
     /// </summary>
-    public class PanelManager : MonoBehaviour
+    public class PanelManager : MonoSingleton<PanelManager>
     {
+        /// <summary>
+        /// Flag.
+        /// </summary>
         [Flags]
         enum Flag
         {
             IsPanelProcessing = 1,
-            dummy1 = 2,
+            TimeCounter = 2, // never used
             dummy2 = 4,
             dummy3 = 8
         }
 
         /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
+        /// <summary>パネルを回転させる時間</summary>
+        [SerializeField] float m_waitTime = 3f;
 
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
-        /// <summary>パネル</summary>
-        List<GameObject> m_panel;
+        /// <summary>BattleManagerの参照</summary>
+        BattleManager m_battleManager;
         /// <summary>オープン前のパネル</summary>
-        List<GameObject> m_panelsBforeOpening;
+        List<GameObject> m_panelsBforeOpen;
         /// <summary>オープン後のパネル</summary>
         List<GameObject> m_panelsAfterOpened;
         /// <summary>各パネルの生成座標</summary>
@@ -37,45 +42,64 @@ namespace DemonicCity.BattleScene
         GameObject m_panelPrefab;
         /// <summary>パネル座標の行列</summary>
         float[][] m_panelPosMatlix;
-        /// <summary>パネルが処理中かどうか表すフラグ</summary>
-        bool m_isPanelProcessing;
+        /// <summary>Flag</summary>
+        Flag m_flag = 0;
+
 
         void Awake()
         {
-            Initialize();
-            // shingleton,TouchGestureDetectorインスタンスの取得
-            m_touchGestureDetector = TouchGestureDetector.Instance;
+            Initialize(); // 各要素の初期化
+            m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
         }
 
+        /// <summary>
+        /// Start this instance.
+        /// </summary>
         void Start()
         {
             SetPanels(); // パネルをセットする
 
+            
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_isPanelProcessing) //パネルが処理中なら処理終了
+                if(m_battleManager.m_states != BattleManager.States.PlayerTurn) // プレイヤーのターンじゃなかったら処理終了
                 {
                     return;
                 }
+
+                if ((m_flag & Flag.IsPanelProcessing) == Flag.IsPanelProcessing) //パネルが処理中なら処理終了
+                {
+                    return;
+                }
+                //m_flag = m_flag | Flag.IsPanelProcessing; // 論理和
                 switch (gesture)
                 {
-                    case TouchGestureDetector.Gesture.Click: // クリックジェスチャをした時
 
-                        GameObject hitResult;
-                        touchInfo.HitDetection(out hitResult);
+                    case TouchGestureDetector.Gesture.Click: // クリックジェスチャをした時
+                        GameObject hitResult; // Raycastの結果を入れる変数
+                        touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
                         if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
                         {
+                            m_flag = m_flag | Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
                             var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
-                            panel.Open(); // panelを開く
+                            panel.Open(m_waitTime); // panelを開く
                             m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
+                            StartCoroutine(PanelWait()); // 
                             //m_panelsBforeOpening.RemoveAll((obj) => obj == hitResult); //生成時に登録したリストに開けたパネルがあればリストから削除(現状使わないけどひとまずコメントアウトで退避
                         }
+                        break;
+                    case TouchGestureDetector.Gesture.FlickBottomToTop: // test case.
+                        SetPanels();
                         break;
                 }
             });
         }
 
+        /// <summary>
+        /// Initialize this instance.
+        /// </summary>
         void Initialize()
         {
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
@@ -83,6 +107,8 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
             m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
             m_panelPositions = new List<Vector3>();
+            m_panelsAfterOpened = new List<GameObject>();
+
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) //列のfor文。行×列=27個のパネル座標を追加する
             {
@@ -93,12 +119,27 @@ namespace DemonicCity.BattleScene
             }
         }
 
-        public List<GameObject> Shuffle()
+        /// <summary>
+        /// パネルをセットする
+        /// </summary>
+        public void SetPanels()
         {
-            if (m_panel == null) // パネルリストが生成されていなかったら
+            if (m_panelsBforeOpen != null) // パネルリストが既に存在していたら
             {
+                PanelType[] panelAllocations = GetRandomPanels(); // 新たにGuidインスタンスを使ってランダム配列生成。
+                int count = 0; // panelTypeの要素を順に充てていく為のカウント
+                m_panelsBforeOpen.ForEach((obj) => // パネルを全てリセット。
+                {
+                    Panel panel = obj.GetComponent<Panel>(); // 各パネルのPanelコンポーネントの参照
+                    panel.ResetPanel(); // パネルをオープン前の状態に戻す
+                    panel.m_panelType = panelAllocations[count]; // ランダムにソートしたpanelTypeを充てていく。
+                    count++; // count up.
+                });
+            }
+            else // パネルリストが生成されていなかったら
+            {
+                m_panelsBforeOpen = new List<GameObject>(); // パネルを開く前のリスト
                 PanelType[] panelAllocations = GetRandomPanels(); // パネルの数分PanelTypeのenum値を適切にランダム配分させたリスト
-                m_panel = new List<GameObject>();
                 //パネルを生成後PanelTypeを適切に割り振る
                 //m_panelAllocationsとm_panelPositionsの要素数は一緒になっていなければおかしいので同時に条件分岐をとる
                 for (int i = 0; i < panelAllocations.Length && i < m_panelPositions.Count; i++)
@@ -107,62 +148,65 @@ namespace DemonicCity.BattleScene
                     GameObject panelObject = Instantiate(m_panelPrefab, m_panelPositions[i], Quaternion.identity, m_panelFrame.transform);
                     Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
                     panel.m_panelType = panelAllocations[i]; // パネルの種類をここで決めてもらう
-                    m_panel.Add(panelObject); // パネルをリストに入れる
+                    m_panelsBforeOpen.Add(panelObject); // パネルをリストに入れる
                 }
             }
-            return m_panel; // PanelTypeをランダム分配したリストを返す
         }
 
-        /// <summary>バトルシーンの全てのパネル種類の配列</summary>
+        /// <summary>
+        /// Gets the random panels.
+        /// </summary>
+        /// <returns>The random panels.</returns>
         public PanelType[] GetRandomPanels()
         {
-            PanelType[] panelTypes = new PanelType[27];
+            PanelType[] panelsType = new PanelType[27];
 
             //Debug.Log("elements.ToArray().Length is : " + m_panelTypes.Length);
-            for (int i = 0; i < panelTypes.ToArray().Length; i++)
+            for (int i = 0; i < panelsType.ToArray().Length; i++)
             {
-                if (i <= 1)
+                if (i <= 1) // 2個type Enemyにする
                 {
-                    panelTypes[i] = PanelType.Enemy;
+                    panelsType[i] = PanelType.Enemy;
                 }
-                else if (i <= 4)
+                else if (i <= 4) // 3個type TripleCityにする
                 {
-                    panelTypes[i] = PanelType.TripleCity;
-                }
-                else if (i <= 10)
-                {
-                    panelTypes[i] = PanelType.DoubleCity;
-                }
-                else
-                {
-                    panelTypes[i] = PanelType.City;
+                    panelsType[i] = PanelType.City;
                 }
             }
-            PanelType[] array = panelTypes;
-            PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray();//ラムダ式。配列を変換して？シャッフルして配列に戻し代入
-            panelTypes = resultArray;
-            return panelTypes;
+            PanelType[] array = panelsType; // 変換用配列を定義
+            PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray();//ラムダ式でGuid配列に変換、OrderByでアルファベット順に並び替える
+            panelsType = resultArray; // paneslTypeに代入
+            return panelsType; // ソート結果を返す
         }
 
         /// <summary>
-        /// Sets the panels.
+        /// Panels the wait.
         /// </summary>
-        public void SetPanels()
+        /// <returns>The wait.</returns>
+        IEnumerator PanelWait()
         {
-            m_panelsBforeOpening = Shuffle(); // パネル生成処理
+            yield return new WaitForSeconds(m_waitTime); // 指定時間遅延させる。
+            m_flag = m_flag ^ Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
         }
 
         /// <summary>
-        /// Resets the opened panels.
+        /// Adds the effect of panels.
         /// </summary>
-        public void ResetOpenedPanels()
+        void AddsEffectOfPanels()
         {
-            m_panelsAfterOpened.ForEach((obj) => // 開いたパネルをシャッフルして開く前に戻す
-            {
-                Panel panel = obj.GetComponent<Panel>(); // パネルコンポーネント参照取得
-                panel.ResetFlag(); // パネルをリセット
-            });
+            // パネルを開いた時、開いたパネルの種類に応じて効果を発動させる処理を書く
         }
 
+        ///// <summary>
+        ///// Resets the opened panels.
+        ///// </summary>
+        //public void ResetOpenedPanels()
+        //{
+        //    m_panelsAfterOpened.ForEach((obj) => // 開いたパネルをシャッフルして開く前に戻す
+        //    {
+        //        Panel panel = obj.GetComponent<Panel>(); // パネルコンポーネント参照取得
+        //        panel.ResetPanel(); // パネルをリセット
+        //    });
+        //}
     }
 }

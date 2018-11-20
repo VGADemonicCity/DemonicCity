@@ -34,35 +34,38 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
-            m_spriteRender = GetComponent<SpriteRenderer>();
+            m_spriteRender = GetComponent<SpriteRenderer>(); // SpriteREndererコンポーネントの参照
+
         }
 
 
         /// <summary>
         /// フラグを初期値に戻してまた呼べる様にする
         /// </summary>
-        public void ResetFlag()
+        public void ResetPanel()
         {
+            m_spriteRender.sprite = m_panelTextures[(int)PanelType.Default]; // パネルのtextureをDefaultに戻す
             m_alreadyProcessed = false; //フラグリセット
         }
 
         /// <summary>
         /// 回転してパネルの中身を見せる
         /// </summary>
-        public void Open()
+        /// <param name="waitTime">Wait time.</param>
+        public void Open(float waitTime)
         {
             if (m_alreadyProcessed) //フラグがオフならメソッド終了
             {
                 return;
             }
-            StartCoroutine(Processing());
+            StartCoroutine(Processing(waitTime));
         }
 
         //選択されたら一回だけ演出を出してパネルの中身を表示する
-        IEnumerator  Processing()
+        public IEnumerator Processing(float waitTime)
         {
-            Rotate(gameObject, 'y', 5f); // 回転させて3秒間立ったら止めて中身表示
-            yield return new WaitForSeconds(3f); 
+            Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
+            yield return new WaitForSeconds(waitTime); 
             ChangingTexture(); // PanelTypeに合わせてtextureを変える
             m_alreadyProcessed = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
         }

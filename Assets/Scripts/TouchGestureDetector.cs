@@ -63,8 +63,6 @@ namespace DemonicCity
             // Sceneをロードした時onGestureDetectedのlistenerを全て消去する
             SceneManager.sceneLoaded += (scene, sceneMode) =>
             {
-                Debug.Log("OnSceneLoaded: " + scene.name);
-                Debug.Log(sceneMode);
                 onGestureDetected.RemoveAllListeners(); //listenerをリセット
             };
                
