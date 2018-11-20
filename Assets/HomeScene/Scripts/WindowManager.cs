@@ -22,7 +22,7 @@ namespace DemonicCity.HomeScene
         void Start()
         {
             Debug.Log("Start");
-            touchGestureDetector.hitCheck = false;
+            
             
             //touchGestureDetector = GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -30,10 +30,10 @@ namespace DemonicCity.HomeScene
                 Debug.Log("sss");
                 if (true)
                 {
-                    Debug.Log(touchInfo.m_hitResult);
+                    
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
-                        if (touchInfo.m_hitResult==buttonObjects[i])
+                        if (/*touchInfo.m_hitResult==buttonObjects[i]*/true)
                         {
                             Debug.Log("aa");
                             WindowOpen(i);
