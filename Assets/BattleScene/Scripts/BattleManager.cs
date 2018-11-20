@@ -46,7 +46,8 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Awake()
         {
-            m_states = States.Init;
+            //m_states = States.Init; // 
+            m_states = States.PlayerTurn; // debug用
         }
 
         /// <summary>
