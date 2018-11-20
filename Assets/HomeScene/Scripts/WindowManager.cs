@@ -7,20 +7,43 @@ namespace DemonicCity.HomeScene
 {
     public class WindowManager : MonoBehaviour
     {
+        public TouchGestureDetector touchGestureDetector;
         
         public enum Window
         {
-            Growth, Config, Calender, PresentBox
+            Growth, Config, Calender, PresentBox, Last
         }
 
         public GameObject[] parents;
         public GameObject[] windowObjects;
+        public GameObject[] buttonObjects;
 
         // Use this for initialization
         void Start()
         {
+            Debug.Log("Start");
+            touchGestureDetector.hitCheck = false;
             
-            
+            //touchGestureDetector = GetComponent<TouchGestureDetector>();
+            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
+            {
+                Debug.Log("sss");
+                if (true)
+                {
+                    Debug.Log(touchInfo.m_hitResult);
+                    for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
+                    {
+                        if (touchInfo.m_hitResult==buttonObjects[i])
+                        {
+                            Debug.Log("aa");
+                            WindowOpen(i);
+                        }
+                    }
+                }
+
+
+            });
+            //WindowOpen(0);
         }
 
         // Update is called once per frame
@@ -29,11 +52,10 @@ namespace DemonicCity.HomeScene
 
         }
 
-        public void WindowOpen(Window window)
+        public void WindowOpen(int i)
         {
-            int i = (int)window;
             GameObject newPanel = Instantiate(windowObjects[i], parents[i].transform);
-            
+            newPanel.GetComponent<WindowState>().touchGestureDetector = touchGestureDetector;
         }
 
     }

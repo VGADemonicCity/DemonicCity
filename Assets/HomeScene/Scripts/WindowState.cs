@@ -13,12 +13,22 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
+            touchGestureDetector= GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
+<<<<<<< Updated upstream
                 //if (touchInfo.IsHit(exitButton))
                 //{
                 //    ChangeState(key, false);
                 //}
+=======
+                //gesture == TouchGestureDetector.Gesture.Click || touchInfo.IsHit(exitButton)
+                if (gesture == TouchGestureDetector.Gesture.Click)
+                {
+                    Debug.Log("flase");
+                    ChangeState(key, false);
+                }
+>>>>>>> Stashed changes
             });
             ChangeState(key, true);
         }

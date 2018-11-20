@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 222306989805470774}
   - component: {fileID: 114254789807230654}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ExitButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -99,7 +99,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1610205462409408}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 268407fb4b6813e4298302ca4e224cf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  exitButton: {fileID: 1610205462409408}
 --- !u!212 &212186707689149070
 SpriteRenderer:
   m_ObjectHideFlags: 1
