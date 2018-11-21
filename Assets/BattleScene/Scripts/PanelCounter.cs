@@ -17,16 +17,24 @@ namespace DemonicCity.BattleScene
         /// <summary>トリプルパネルのカウント変数</summary>
         [SerializeField] int m_tripleCount;
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
-        BattleManager m_battleManager = BattleManager.Instance;
+        BattleManager m_battleManager;
 
 
         /// <summary>
-        /// Gets the total count.
+        /// Awake this instance.
+        /// </summary>
+        void Awake()
+        {
+            m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+        }
+
+        /// <summary>
+        /// return the total count.
         /// </summary>
         /// <returns>The total count.</returns>
         public int GetTotalCount()
         {
-            return m_CityCount + m_doubleCount + m_tripleCount;
+            return m_CityCount + m_doubleCount + m_tripleCount; // パネルを引いた枚数を返す. 固有スキル用
         }
 
         /// <summary>
@@ -35,7 +43,17 @@ namespace DemonicCity.BattleScene
         /// <returns>The passive count.</returns>
         public int GetPassiveCount()
         {
-            return m_CityCount + (m_doubleCount * 2) + (m_tripleCount * 3);
+            return m_CityCount + (m_doubleCount * 2) + (m_tripleCount * 3); // トータル街破壊数を返す. パッシブスキル判定用
+        }
+
+        /// <summary>
+        /// Inits the counts.
+        /// </summary>
+        public void InitCounts()
+        {
+            m_CityCount = 0;
+            m_doubleCount = 0;
+            m_tripleCount = 0;
         }
 
         /// <summary>
@@ -46,17 +64,18 @@ namespace DemonicCity.BattleScene
         {
                 switch (panel.m_panelType)
             {
-                case PanelType.City:
+                case PanelType.City: // cityパネルを引いた時
                     m_CityCount++; // シティパネルカウントアップ
                     break;
-                case PanelType.DoubleCity:
+                case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
                     break;
-                case PanelType.TripleCity:
+                case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
                     break;
-                case PanelType.Enemy:
+                case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_states = BattleManager.States.PlayerAttack; // ステートマシンをPlayerAttackへ
+                    m_battleManager.m_behaviourByState.Invoke(BattleManager.States.PlayerAttack); // m_behaviourByStateイベントを起動する
                     break;
             }
         }

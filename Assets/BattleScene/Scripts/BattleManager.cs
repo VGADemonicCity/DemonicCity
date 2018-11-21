@@ -78,15 +78,6 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
-        /// Changes the state.
-        /// </summary>
-        /// <param name="state">Request state.</param>
-        public void ChangeState(States state)
-        {
-            m_states = state; // 引数のstateに状態遷移
-        }
-
-        /// <summary>
         /// Update this instance.
         /// </summary>
         void Update()
