@@ -30,7 +30,7 @@ namespace DemonicCity.BattleScene
             Pause,
             /// <summary>勝利時</summary>
             Win,
-            /// <summary>失敗時</summary>
+            /// <summary>敗北時</summary>
             Lose,
         }
 

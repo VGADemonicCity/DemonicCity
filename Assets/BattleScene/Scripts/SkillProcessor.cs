@@ -10,9 +10,14 @@ namespace DemonicCity.BattleScene
     public class SkillProcessor : MonoBehaviour
     {
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
-        BattleManager m_battleManager = BattleManager.Instance;
+        BattleManager m_battleManager;
         PanelCounter m_panelCounter;
 
+
+        void Awake()
+        {
+            m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+        }
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -24,8 +29,25 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
+                Debug.Log("invoked");
+                StartCoroutine(AttackProcess()); // 攻撃プロセス
+            });
+        }
 
+        /// <summary>
+        /// Attacks the process.
+        /// </summary>
+        /// <returns>The process.</returns>
+        IEnumerator AttackProcess()
+        {
+            Debug.Log("アタックプロセス呼ばれた");
+            yield return new WaitForSeconds(3f);
 
+            yield return new WaitWhile(() => // falseが変えるまで待つ
+            {
+                Debug.Log("State change to EnemyChoice");
+                m_battleManager.m_states = BattleManager.States.EnemyChoice; // 敵の攻撃ステートに遷移する
+                return false;
             });
         }
     }

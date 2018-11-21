@@ -737,7 +737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelFrame: {fileID: 1892036566}
-  m_waitTime: 3
+  m_waitTime: 0.1
 --- !u!114 &1770365134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -764,6 +764,17 @@ MonoBehaviour:
   m_CityCount: 0
   m_doubleCount: 0
   m_tripleCount: 0
+--- !u!114 &1770365137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770365132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13f99659dc1054e669b8ecef813a67ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0
