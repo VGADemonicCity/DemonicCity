@@ -43,10 +43,61 @@ namespace DemonicCity
         [Serializable]
         public class Statistics
         {
+            /// <summary>属性</summary>
+            //[Serializable]
+            public enum Attribute
+            {
+                /// <summary>初期形態</summary>
+                Standard,
+                /// <summary>男近接形態</summary>
+                MaleWarrior,
+                /// <summary>女近接形態</summary>
+                FemaleWarrior,
+                /// <summary>男魔法使い形態</summary>
+                MaleWizard,
+                /// <summary>女魔法使い形態</summary>
+                FemaleWitch,
+                /// <summary>女超越形態</summary>
+                FemaleTrancendental,
+            }
+
+            /// <summary>
+            /// レベルアップ獲得スキル。
+            /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
+            /// </summary>
+            [Flags]
+            public enum PassiveSkill
+            {
+                DevilsFist = 1,
+                SpellAbsorption = 2,
+                Heal = 4,
+                CrimsonMagicSquare = 8,
+
+            }
+
+            ///// <summary>
+            ///// 固有スキル。
+            ///// プレイアブルキャラクターの形態に応じて使用可能スキルが変わる
+            ///// </summary>
+            //[Flags]
+            //public enum UniqueSkill
+            //{
+            //    EvilEye = 1,
+            //    AppearanceOfDestruction = 2,
+            //    QueensBreath = 4,
+            //    KillersSword = 8,
+            //    DarkVibration = 16,
+            //    OmniscientAbility = 32,
+            //    OmniscentAndOmnipotent = 64
+            //}
+
+
             /// <summary>レベル : Character's level</summary>
             public int m_level;
+            /// <summary>属性</summary>
+            public Attribute m_attribute;
             /// <summary>耐久力</summary>
-            public int m_durability = 10;
+            public int m_durability;
             /// <summary>筋力</summary>
             public int m_muscularStrength;
             /// <summary>知識</summary>
@@ -64,8 +115,8 @@ namespace DemonicCity
             public float m_attack;
             /// <summary>防御力</summary>
             public float m_defense;
-            /// <summary>スキルゲージポイント</summary>
-            public float m_skillPoint;
+            /// <summary>レベルアップ時に得れるステータスポイント</summary>
+            public float m_statusPoint;
         }
         public Statistics m_statistics;
 
@@ -94,6 +145,10 @@ namespace DemonicCity
             //    //m_statistics = Deserialize<Dictionary<string, int>>(m_dictJon);
             //}
         }
+
+        // ---------------------------------------------
+        // 以下二つのメソッドはdictionaryを保存する場合のみ使用
+        // ---------------------------------------------
 
         //引数のオブジェクトをシリアライズして返す
         private static string Serialize<T>(T obj)
