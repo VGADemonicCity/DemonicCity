@@ -84,7 +84,7 @@ namespace DemonicCity.BattleScene
                         var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
                         panel.Open(m_waitTime); // panelを開く
                         m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
-                        StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterに渡す様にパネルを引数に入れる
+                        StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
                     }
                 }
                 if(gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
