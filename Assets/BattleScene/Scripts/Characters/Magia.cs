@@ -7,45 +7,69 @@ namespace DemonicCity
 {
     public class Magia : CharacterObject
     {
+        /// <summary>属性</summary>
+        public enum Attribute
+        {
+            /// <summary>初期形態</summary>
+            Standard,
+            /// <summary>男戦士</summary>
+            MaleWarrior,
+            /// <summary>女戦士</summary>
+            FemaleWarrior,
+            /// <summary>男魔法使い</summary>
+            MaleWizard,
+            /// <summary>女魔法使い</summary>
+            FemaleWitch
+        }
 
+        static Magia m_instance;
+        public static Magia Instance
+        {
+            get
+            {
+                return m_instance;
+            }
+        }
+
+
+        /// <summary>マギアの属性</summary>
+        public Attribute m_attribute { get; private set; }
+        /// <summary>クラスのメンバ情報をJsonファイルに書き出すクラス</summary>
+        SaveData m_saveData = SaveData.Instance; // セーブデータの参照
+
+
+        /// <summary>
+        /// Awake this instance.
+        /// </summary>
         void Awake()
         {
-            SceneManager.sceneLoaded += (scene, sceneMode) =>
+            if (m_instance == null) // instanceがnullなら自分自身をインスタンスにする
             {
-                PlayerPrefs.GetInt(m_myStatus.m_level.ToString(), m_myStatus.m_level); // レベル
-                PlayerPrefs.GetInt(m_myStatus.m_durability.ToString(), m_myStatus.m_durability); // 耐久力
-                PlayerPrefs.GetInt(m_myStatus.m_muscularStrength.ToString(), m_myStatus.m_muscularStrength); // 筋力
-                PlayerPrefs.GetInt(m_myStatus.m_knowledge.ToString(), m_myStatus.m_knowledge); // 知識
-                PlayerPrefs.GetInt(m_myStatus.m_sense.ToString(), m_myStatus.m_sense); // センス
-                PlayerPrefs.GetInt(m_myStatus.m_charm.ToString(), m_myStatus.m_charm); // 魅力
-                PlayerPrefs.GetInt(m_myStatus.m_dignity.ToString(), m_myStatus.m_dignity); // 威厳           
+                m_instance = this;
+                DontDestroyOnLoad(this);
+            }
+            else // 既に存在していた場合は自分自身を破壊する
+            {
+                Destroy(m_instance);
+            }
+
+            //m_myStatus.m_attack = 200;
+
+
+            SceneManager.sceneLoaded += (scene, loadSceneMode) => // sceneロード時,データを再読み込みする
+            {
+                //m_saveData.Reload(); // reload
+                Debug.Log("loaded");
+
+                m_saveData.Save(); // save
+                //m_instance = m_saveData
             };
         }
-
-        /// <summary>
-        /// Instance生成時の初期化method
-        /// </summary>
-        public override void OnInitialize()
+        private void Start()
         {
-            DontDestroyOnLoad(Instance); // オブジェクトをscene遷移で破壊させない様にする
+            Debug.Log(m_instance.m_myStatus.m_attack);
+            Debug.Log(m_saveData.m_magia.m_myStatus.m_attack);
         }
-
-        /// <summary>
-        /// キャラクター情報を保存する
-        /// </summary>
-        public void Save()
-        {
-            PlayerPrefs.SetInt(m_myStatus.m_level.ToString(), m_myStatus.m_level); // レベル
-            PlayerPrefs.SetInt(m_myStatus.m_durability.ToString(), m_myStatus.m_durability); // 耐久力
-            PlayerPrefs.SetInt(m_myStatus.m_muscularStrength.ToString(), m_myStatus.m_muscularStrength); // 筋力
-            PlayerPrefs.SetInt(m_myStatus.m_knowledge.ToString(), m_myStatus.m_knowledge); // 知識
-            PlayerPrefs.SetInt(m_myStatus.m_sense.ToString(), m_myStatus.m_sense); // センス
-            PlayerPrefs.SetInt(m_myStatus.m_charm.ToString(), m_myStatus.m_charm); // 魅力
-            PlayerPrefs.SetInt(m_myStatus.m_dignity.ToString(), m_myStatus.m_dignity); // 威厳
-
-            PlayerPrefs.Save(); // setした情報を全て保存する
-        }
-
 
         /// <summary>
         /// Levels up.
@@ -62,5 +86,7 @@ namespace DemonicCity
         {
 
         }
+
+
     }
 }

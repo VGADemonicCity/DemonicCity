@@ -50,7 +50,6 @@ namespace DemonicCity.BattleScene
         {
             Initialize(); // 各要素の初期化
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
-            m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
         }
 
         /// <summary>
@@ -58,8 +57,8 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
+            m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             SetPanels(); // パネルをセットする
-
             
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>

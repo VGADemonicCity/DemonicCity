@@ -187,6 +187,17 @@ MonoBehaviour:
   m_minute: 0
   m_seconds: 0
   m_timeScale: 1
+--- !u!114 &43885768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43885764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1793b98378f458e9354dc9bff9e3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &576440007
 Prefab:
   m_ObjectHideFlags: 0
@@ -508,6 +519,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 865920089b679f94ba2dce2204b07ad8,
         type: 3}
+    - target: {fileID: 1293079937244952, guid: d31f08f5d46fa5b4c964e0b07ec8f40a, type: 2}
+      propertyPath: m_Name
+      value: Magia
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d31f08f5d46fa5b4c964e0b07ec8f40a, type: 2}
   m_IsPrefabAsset: 0
@@ -647,6 +662,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelFrame: {fileID: 1892036566}
+  m_waitTime: 3
+--- !u!114 &1770365134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1770365132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0

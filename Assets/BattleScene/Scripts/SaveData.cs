@@ -21,16 +21,16 @@ namespace DemonicCity
     {
 
         //シングルトンを実装するための実体、初アクセス時にLoadする。
-        private static SaveData _instance = null;
+        static SaveData m_instance;
         public static SaveData Instance
         {
             get
             {
-                if (_instance == null)
+                if (m_instance == null)
                 {
                     Load();
                 }
-                return _instance;
+                return m_instance;
             }
         }
 
@@ -42,29 +42,11 @@ namespace DemonicCity
         //保存されるデータ(public or SerializeFieldを付ける)
         //=================================================================================
 
-        public int SampleInt = 10;
-        public string SampleString = "Sample";
-        public bool SampleBool = false;
+        /// <summary>マギアのステータス : Magia's statistics.</summary>
+        public Magia m_magia;
+        public int num1 = 1;
+        public int nu31 = 12;
 
-        public List<int> SampleIntList = new List<int>() { 2, 3, 5, 7, 11, 13, 17, 19 };
-
-        [SerializeField]
-        private string m_dictJon = "";
-        /// <summary>プレイヤーのステータス : Player's Statistics.</summary>
-        public Dictionary<string, int> m_statistics = new Dictionary<string, int>()
-        {
-            {"level", 0},
-            {"durability", 0},
-            {"muscularStrength", 0},
-            {"knowledge", 0},
-            {"sense", 0},
-            {"charm", 0},
-            {"dignity", 0},
-            {"hitPoint", 0},
-            {"attack", 0},
-            {"defense", 0},
-            {"skillPoint", 0}
-        };
 
         //=================================================================================
         //シリアライズ,デシリアライズ時のコールバック
@@ -76,7 +58,7 @@ namespace DemonicCity
         public void OnBeforeSerialize()
         {
             //Dictionaryはそのままで保存されないので、シリアライズしてテキストで保存。
-            m_dictJon = Serialize(m_statistics);
+            //m_dictJon = Serialize(m_statistics);
         }
 
         /// <summary>
@@ -84,11 +66,11 @@ namespace DemonicCity
         /// </summary>
         public void OnAfterDeserialize()
         {
-            //保存されているテキストがあれば、Dictionaryにデシリアライズする。
-            if (!string.IsNullOrEmpty(m_dictJon))
-            {
-                m_statistics = Deserialize<Dictionary<string, int>>(m_dictJon);
-            }
+            ////保存されているテキストがあれば、Dictionaryにデシリアライズする。
+            //if (!string.IsNullOrEmpty(m_dictJon))
+            //{
+            //    //m_statistics = Deserialize<Dictionary<string, int>>(m_dictJon);
+            //}
         }
 
         //引数のオブジェクトをシリアライズして返す
@@ -121,13 +103,13 @@ namespace DemonicCity
         }
 
         //データを読み込む。
-        private static void Load()
+        static void Load()
         {
-            _instance = JsonUtility.FromJson<SaveData>(GetJson());
+            m_instance = JsonUtility.FromJson<SaveData>(GetJson());
         }
 
         //保存しているJsonを取得する
-        private static string GetJson()
+        static string GetJson()
         {
             //既にJsonを取得している場合はそれを返す。
             if (!string.IsNullOrEmpty(_jsonText))
@@ -182,7 +164,7 @@ namespace DemonicCity
         //=================================================================================
 
         //保存する場所のパスを取得。
-        private static string GetSaveFilePath()
+        static string GetSaveFilePath()
         {
 
             string filePath = "SaveData";
