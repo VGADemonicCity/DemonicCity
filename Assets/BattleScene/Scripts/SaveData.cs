@@ -2,9 +2,7 @@
 //  http://kan-kikuchi.hatenablog.com/entry/Json_SaveData
 //
 //  Created by kan.kikuchi on 2016.11.21.
-
 using UnityEngine;
-
 using System;
 using System.IO;
 using System.Collections.Generic;
@@ -16,7 +14,6 @@ namespace DemonicCity
     /// <summary>
     /// クラスを丸ごとJsonで保存するデータクラス
     /// </summary>
-    [Serializable]
     public class SaveData : ISerializationCallbackReceiver
     {
 
@@ -43,9 +40,34 @@ namespace DemonicCity
         //=================================================================================
 
         /// <summary>マギアのステータス : Magia's statistics.</summary>
-        public Magia m_magia;
-        public int num1 = 1;
-        public int nu31 = 12;
+        [Serializable]
+        public class Statistics
+        {
+            /// <summary>レベル : Character's level</summary>
+            public int m_level;
+            /// <summary>耐久力</summary>
+            public int m_durability = 10;
+            /// <summary>筋力</summary>
+            public int m_muscularStrength;
+            /// <summary>知識</summary>
+            public int m_knowledge;
+            /// <summary>センス</summary>
+            public int m_sense;
+            /// <summary>魅力</summary>
+            public int m_charm;
+            /// <summary>威厳</summary>
+            public int m_dignity;
+
+            /// <summary>ヒットポイント</summary>
+            public float m_hitPoint;
+            /// <summary>攻撃力</summary>
+            public float m_attack;
+            /// <summary>防御力</summary>
+            public float m_defense;
+            /// <summary>スキルゲージポイント</summary>
+            public float m_skillPoint;
+        }
+        public Statistics m_statistics;
 
 
         //=================================================================================
@@ -140,8 +162,9 @@ namespace DemonicCity
         /// <summary>
         /// データをJsonにして保存する。
         /// </summary>
-        public void Save()
+        public void Save(Statistics stats)
         {
+            m_statistics = stats;
             _jsonText = JsonUtility.ToJson(this);
             File.WriteAllText(GetSaveFilePath(), _jsonText);
         }

@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace DemonicCity
 {
-    public class Magia : CharacterObject
+    [Serializable]
+    public class Magia : MonoBehaviour
     {
         /// <summary>属性</summary>
         public enum Attribute
@@ -22,20 +24,13 @@ namespace DemonicCity
             FemaleWitch
         }
 
-        static Magia m_instance;
-        public static Magia Instance
-        {
-            get
-            {
-                return m_instance;
-            }
-        }
 
-
+        public int Aa = 1;
         /// <summary>マギアの属性</summary>
-        public Attribute m_attribute { get; private set; }
+        public Attribute m_attribute;
         /// <summary>クラスのメンバ情報をJsonファイルに書き出すクラス</summary>
         SaveData m_saveData = SaveData.Instance; // セーブデータの参照
+        SaveData.Statistics m_stats;
 
 
         /// <summary>
@@ -43,32 +38,23 @@ namespace DemonicCity
         /// </summary>
         void Awake()
         {
-            if (m_instance == null) // instanceがnullなら自分自身をインスタンスにする
-            {
-                m_instance = this;
-                DontDestroyOnLoad(this);
-            }
-            else // 既に存在していた場合は自分自身を破壊する
-            {
-                Destroy(m_instance);
-            }
 
-            //m_myStatus.m_attack = 200;
-
+            //m_attribute = Attribute.FemaleWarrior;
+            m_stats = m_saveData.m_statistics;
+            m_stats.m_attack += 100;
 
             SceneManager.sceneLoaded += (scene, loadSceneMode) => // sceneロード時,データを再読み込みする
             {
                 //m_saveData.Reload(); // reload
                 Debug.Log("loaded");
 
-                m_saveData.Save(); // save
+                m_saveData.Save(m_stats); // save
                 //m_instance = m_saveData
             };
         }
         private void Start()
         {
-            Debug.Log(m_instance.m_myStatus.m_attack);
-            Debug.Log(m_saveData.m_magia.m_myStatus.m_attack);
+            Debug.Log(m_stats.m_attack);
         }
 
         /// <summary>
