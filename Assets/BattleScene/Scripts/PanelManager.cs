@@ -52,46 +52,38 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
         }
 
+
+
         /// <summary>
-        /// Start this instance.
+        /// --------------------------
+        /// パネルのメインの処理を登録する
+        /// --------------------------
         /// </summary>
         void Start()
         {
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             SetPanels(); // パネルをセットする
-            
+
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if(m_battleManager.m_states != BattleManager.States.PlayerTurn) // プレイヤーのターンじゃなかったら処理終了
+                if (m_battleManager.m_states != BattleManager.States.PlayerChoice || (m_flag & Flag.IsPanelProcessing) == Flag.IsPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
                 {
                     return;
                 }
 
-                if ((m_flag & Flag.IsPanelProcessing) == Flag.IsPanelProcessing) //パネルが処理中なら処理終了
+                if(gesture == TouchGestureDetector.Gesture.Click) // タップ時
                 {
-                    return;
-                }
-                //m_flag = m_flag | Flag.IsPanelProcessing; // 論理和
-                switch (gesture)
-                {
-
-                    case TouchGestureDetector.Gesture.Click: // クリックジェスチャをした時
-                        GameObject hitResult; // Raycastの結果を入れる変数
-                        touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
-                        if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
-                        {
-                            m_flag = m_flag | Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
-                            var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
-                            panel.Open(m_waitTime); // panelを開く
-                            m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
-                            StartCoroutine(PanelWait()); // 
-                            //m_panelsBforeOpening.RemoveAll((obj) => obj == hitResult); //生成時に登録したリストに開けたパネルがあればリストから削除(現状使わないけどひとまずコメントアウトで退避
-                        }
-                        break;
-                    case TouchGestureDetector.Gesture.FlickBottomToTop: // test case.
-                        SetPanels();
-                        break;
+                    GameObject hitResult; // Raycastの結果を入れる変数
+                    touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
+                    if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
+                    {
+                        m_flag = m_flag | Flag.IsPanelProcessing; // 論理和,XORしてフラグを消す
+                        var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
+                        panel.Open(m_waitTime); // panelを開く
+                        m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
+                        StartCoroutine(PanelWait()); // パネル処理時止める
+                    }
                 }
             });
         }
@@ -169,8 +161,17 @@ namespace DemonicCity.BattleScene
                 }
                 else if (i <= 4) // 3個type TripleCityにする
                 {
+                    panelsType[i] = PanelType.TripleCity;
+                }
+                else if(i<= 11) // 7個type Dounbleにする
+                {
+                    panelsType[i] = PanelType.DoubleCity;
+                }
+                else // 残り全てtype Cityにする
+                {
                     panelsType[i] = PanelType.City;
                 }
+
             }
             PanelType[] array = panelsType; // 変換用配列を定義
             PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray();//ラムダ式でGuid配列に変換、OrderByでアルファベット順に並び替える
@@ -186,14 +187,6 @@ namespace DemonicCity.BattleScene
         {
             yield return new WaitForSeconds(m_waitTime); // 指定時間遅延させる。
             m_flag = m_flag ^ Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
-        }
-
-        /// <summary>
-        /// Adds the effect of panels.
-        /// </summary>
-        void AddsEffectOfPanels()
-        {
-            // パネルを開いた時、開いたパネルの種類に応じて効果を発動させる処理を書く
         }
 
         ///// <summary>
