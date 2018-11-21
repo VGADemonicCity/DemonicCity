@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 namespace DemonicCity.StoryScene
 {
     public class PutSentence : MonoBehaviour
     {
-
+        
         /// <summary>/// 文字送り速度/// </summary>
         float charFeedSpeed = 0.1f;
         /// <summary>/// 表示用のTextComponent/// </summary>
-        [SerializeField] Text text;
+        [SerializeField]TMP_Text text;
         /// <summary>/// /// </summary>
         TextStorage textContena = new TextStorage();
         /// <summary>/// 現在表示している文字列/// </summary>
@@ -22,26 +23,8 @@ namespace DemonicCity.StoryScene
         bool end;
         public bool onoff;
         /// <summary>/// /// </summary>
-        //public bool A()
-        //{
-        //    StartCoroutine(SentenceFeed());
-        //    return end;
-        //}
-        //public IEnumerator SentenceFeed()
-        //{
-        //    end = false;
-        //    text.text = "";
-        //    for (charCount = 0; charCount < sentence.Length; charCount++)
-        //    {
-        //        if (end)
-        //        {
-        //            text.text = sentence;
-        //            yield break;
-        //        }
-        //        text.text += sentence[charCount];
-        //        yield return new WaitForSeconds(charFeedSpeed);
-        //    }
-        //}
+        
+
 
 
         public void Totrue()
