@@ -32,6 +32,8 @@ namespace DemonicCity.BattleScene
         TouchGestureDetector m_touchGestureDetector;
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
+        /// <summary>PanelCounterの参照</summary>
+        PanelCounter m_panelCounter;
         /// <summary>オープン前のパネル</summary>
         List<GameObject> m_panelsBforeOpen;
         /// <summary>オープン後のパネル</summary>
@@ -82,8 +84,12 @@ namespace DemonicCity.BattleScene
                         var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
                         panel.Open(m_waitTime); // panelを開く
                         m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
-                        StartCoroutine(PanelWait()); // パネル処理時止める
+                        StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterに渡す様にパネルを引数に入れる
                     }
+                }
+                if(gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
+                {
+                    SetPanels(); // Debug用
                 }
             });
         }
@@ -99,13 +105,14 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<GameObject>();
+            m_panelCounter = GetComponent<PanelCounter>();
 
 
-            for (int i = 0; i < m_panelPosMatlix[0].Length; i++) //列のfor文。行×列=27個のパネル座標を追加する
+            for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
             {
                 for (int j = 0; j < m_panelPosMatlix[1].Length; j++) // 行のfor文
                 {
-                    m_panelPositions.Add(new Vector3(m_panelPosMatlix[1][j], m_panelPosMatlix[0][i], 0f)); //リストに追加
+                    m_panelPositions.Add(new Vector3(m_panelPosMatlix[1][j], m_panelPosMatlix[0][i], 0f)); // リストに追加
                 }
             }
         }
@@ -183,9 +190,10 @@ namespace DemonicCity.BattleScene
         /// Panels the wait.
         /// </summary>
         /// <returns>The wait.</returns>
-        IEnumerator PanelWait()
+        IEnumerator PanelWait(Panel panel)
         {
             yield return new WaitForSeconds(m_waitTime); // 指定時間遅延させる。
+            m_panelCounter.PanelJudger(panel); // パネルタイプを判定して対応した処理に導く
             m_flag = m_flag ^ Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
         }
 

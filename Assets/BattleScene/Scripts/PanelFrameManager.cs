@@ -23,6 +23,7 @@ namespace DemonicCity.BattleScene
         private TouchGestureDetector m_touchGestureDetector;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
+        /// <summary></summary>
         bool m_wait = true;
 
         public void Start()

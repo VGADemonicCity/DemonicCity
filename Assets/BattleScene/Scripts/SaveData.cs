@@ -66,13 +66,17 @@ namespace DemonicCity
             /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
             /// </summary>
             [Flags]
+
             public enum PassiveSkill
             {
+                /// <summary>魔拳</summary>
                 DevilsFist = 1,
+                /// <summary>魔力吸収</summary>
                 SpellAbsorption = 2,
+                /// <summary>回復</summary>
                 Heal = 4,
+                /// <summary>紅蓮魔法陣</summary>
                 CrimsonMagicSquare = 8,
-
             }
 
             ///// <summary>
@@ -94,8 +98,10 @@ namespace DemonicCity
 
             /// <summary>レベル : Character's level</summary>
             public int m_level;
-            /// <summary>属性</summary>
+            /// <summary>属性フラグ</summary>
             public Attribute m_attribute;
+            /// <summary>パッシブスキルフラグ</summary>
+            public PassiveSkill m_passiveSkill;
             /// <summary>耐久力</summary>
             public int m_durability;
             /// <summary>筋力</summary>

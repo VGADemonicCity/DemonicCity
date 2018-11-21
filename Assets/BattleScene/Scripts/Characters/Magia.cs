@@ -10,7 +10,7 @@ namespace DemonicCity
     {
         /// <summary>クラスのメンバ情報をJsonファイルに書き出すクラス</summary>
         SaveData m_saveData = SaveData.Instance; // セーブデータの参照
-        /// <summary>stats</summary>
+        /// <summary>ステータスクラス</summary>
         SaveData.Statistics m_stats;
 
         /// <summary>
