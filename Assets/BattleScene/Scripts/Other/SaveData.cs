@@ -66,17 +66,32 @@ namespace DemonicCity
             /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
             /// </summary>
             [Flags]
-
             public enum PassiveSkill
             {
                 /// <summary>魔拳</summary>
                 DevilsFist = 1,
-                /// <summary>魔力吸収</summary>
-                SpellAbsorption = 2,
-                /// <summary>回復</summary>
-                Heal = 4,
-                /// <summary>紅蓮魔法陣</summary>
-                CrimsonMagicSquare = 8,
+                /// <summary>高濃度魔力吸収,High concentration magical absorption</summary>
+                HighConcentrationMagicalAbsorption = 2,
+                /// <summary>自己再生</summary>
+                SelfRegeneration = 4,
+                /// <summary>爆炎熱風柱</summary>
+                ExplosiveFlamePillar = 8,
+                /// <summary>紅蓮障壁</summary>
+                CrimsonBarrier = 16,
+                /// <summary>魔拳烈火ノ型</summary>
+                DevilsFistInfernoType = 32,
+                /// <summary>心焔権現</summary>
+                BraveHeartsIncarnation = 64,
+                /// <summary>大紅蓮障壁</summary>
+                GreatCrimsonBarrier = 128,
+                /// <summary>豪炎爆砕掌</summary>
+                InfernosFist = 256,
+                /// <summary>魔王ノ細胞</summary>
+                SatansCell = 512,
+                /// <summary>天照-爆炎-</summary>
+                AmaterasuInferno = 1024,
+                /// <summary>天照-焔壁-</summary>
+                AmaterasuFlameWall = 2048
             }
 
             ///// <summary>

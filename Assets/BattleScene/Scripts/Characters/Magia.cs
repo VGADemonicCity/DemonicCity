@@ -6,12 +6,15 @@ using System;
 
 namespace DemonicCity
 {
-    public class Magia : MonoBehaviour
+    /// <summary>
+    /// Magia.
+    /// </summary>
+    public class Magia : MonoSingleton<Magia>
     {
         /// <summary>クラスのメンバ情報をJsonファイルに書き出すクラス</summary>
         SaveData m_saveData = SaveData.Instance; // セーブデータの参照
         /// <summary>ステータスクラス</summary>
-        SaveData.Statistics m_stats;
+        public SaveData.Statistics m_stats;
 
         /// <summary>
         /// Awake this instance.
@@ -38,7 +41,7 @@ namespace DemonicCity
         /// </summary>
         public void SetStatuses()
         {
-
+            
         }
     }
 }
