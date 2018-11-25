@@ -25,6 +25,7 @@ namespace DemonicCity
             SceneManager.sceneLoaded += (scene, loadSceneMode) => // sceneロード時,データを再読み込みする
             {
                 m_stats.m_attack += 1000;
+                m_stats.m_hitPoint += 100;
                 m_saveData.Save(); // save
             };
         }

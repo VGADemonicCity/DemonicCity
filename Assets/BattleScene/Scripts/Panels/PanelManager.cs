@@ -45,14 +45,29 @@ namespace DemonicCity.BattleScene
         /// <summary>パネル座標の行列</summary>
         float[][] m_panelPosMatlix;
         /// <summary>Flag</summary>
-        Flag m_flag = 0;
+        bool m_isPanelProcessing;
 
-
+        /// <summary>
+        /// Awake this instance.
+        /// </summary>
         void Awake()
         {
-            Initialize(); // 各要素の初期化
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
+            m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
+            m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
+            m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
+            m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
+            m_panelPositions = new List<Vector3>();
+            m_panelsAfterOpened = new List<GameObject>();
+
+            for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
+            {
+                for (int j = 0; j < m_panelPosMatlix[1].Length; j++) // 行のfor文
+                {
+                    m_panelPositions.Add(new Vector3(m_panelPosMatlix[1][j], m_panelPosMatlix[0][i], 0f)); // リストに追加
+                }
+            }
         }
 
 
@@ -70,52 +85,29 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_battleManager.m_state != BattleManager.StateMachine.PlayerChoice || (m_flag & Flag.IsPanelProcessing) == Flag.IsPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
+                if (m_battleManager.m_state != BattleManager.StateMachine.PlayerChoice || (m_isPanelProcessing)) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
                 {
                     return;
                 }
 
-                if(gesture == TouchGestureDetector.Gesture.Click) // タップ時
+                if (gesture == TouchGestureDetector.Gesture.Click) // タップ時
                 {
                     GameObject hitResult; // Raycastの結果を入れる変数
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
                     if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
                     {
-                        m_flag = m_flag | Flag.IsPanelProcessing; // 論理和,XORしてフラグを消す
+                        m_isPanelProcessing = true; // フラグを建てる
                         var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
                         panel.Open(m_waitTime); // panelを開く
                         m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
                         StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
                     }
                 }
-                if(gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
+                if (gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
                 {
                     InitPanels(); // Debug用
                 }
             });
-        }
-
-        /// <summary>
-        /// Initialize this instance.
-        /// </summary>
-        void Initialize()
-        {
-
-            m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
-            m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
-            m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
-            m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
-            m_panelPositions = new List<Vector3>();
-            m_panelsAfterOpened = new List<GameObject>();
-
-
-            for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
-            {
-                for (int j = 0; j < m_panelPosMatlix[1].Length; j++) // 行のfor文
-                {
-                    m_panelPositions.Add(new Vector3(m_panelPosMatlix[1][j], m_panelPosMatlix[0][i], 0f)); // リストに追加
-                }
-            }
         }
 
         /// <summary>
@@ -170,7 +162,7 @@ namespace DemonicCity.BattleScene
                 {
                     panelType[i] = PanelType.TripleCity;
                 }
-                else if(i<= 11) // 7個type Dounbleにする
+                else if (i <= 11) // 7個type Dounbleにする
                 {
                     panelType[i] = PanelType.DoubleCity;
                 }
@@ -193,7 +185,7 @@ namespace DemonicCity.BattleScene
         {
             yield return new WaitForSeconds(m_waitTime); // 指定時間遅延させる。
             m_panelCounter.PanelJudger(panel); // パネルタイプを判定して対応した処理に導く
-            m_flag = m_flag ^ Flag.IsPanelProcessing; // 排他的論理和,XORしてフラグを消す
+            m_isPanelProcessing = false; // フラグを消す
         }
 
         ///// <summary>

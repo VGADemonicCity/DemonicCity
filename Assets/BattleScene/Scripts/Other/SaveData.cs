@@ -39,7 +39,7 @@ namespace DemonicCity
         //保存されるデータ(public or SerializeFieldを付ける)
         //=================================================================================
 
-        /// <summary>マギアのステータス : Magia's statistics.</summary>
+        /// <summary>ステータス : statistics.</summary>
         [Serializable]
         public class Statistics
         {

@@ -6,13 +6,10 @@ using UnityEngine;
 namespace DemonicCity.BattleScene.Skill
 {
     /// <summary>
-    /// Skill.
+    /// Passive skill.
     /// </summary>
-    public abstract class Skill : MonoBehaviour
+    public abstract class PassiveSkill : MonoBehaviour
     {
-        /// <summary>level conditions</summary>
-        [SerializeField] protected int m_levelCondition = 1;
-        [SerializeField] SaveData.Statistics.PassiveSkill m_passiveSkill;
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_CountCondition = 1;
         /// <summary>レベルとパネルカウントが上限に達していたらtrueが入る</summary>
@@ -50,6 +47,7 @@ namespace DemonicCity.BattleScene.Skill
             if ((m_magia.m_stats.m_passiveSkill & passiveSkill) == passiveSkill && CityDestructionCount >= m_CountCondition)
             {
                 SkillActivate();
+                Debug.Log("parent");
             }
         }
 

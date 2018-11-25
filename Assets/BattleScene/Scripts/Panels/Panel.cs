@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.BattleScene   
+namespace DemonicCity.BattleScene
 {
     /// <summary>Panelの種類を生成時に保持する為の列挙子</summary>
     public enum PanelType
@@ -28,11 +28,11 @@ namespace DemonicCity.BattleScene
         [SerializeField] float m_rotationDegrees = 1440f;
 
         /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
-        bool m_alreadyProcessed = false;
+        bool m_alreadyProcessed;
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
 
-        private void Start()
+        void Awake()
         {
             m_spriteRender = GetComponent<SpriteRenderer>(); // SpriteREndererコンポーネントの参照
 
@@ -65,7 +65,7 @@ namespace DemonicCity.BattleScene
         public IEnumerator Processing(float waitTime)
         {
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
-            yield return new WaitForSeconds(waitTime); 
+            yield return new WaitForSeconds(waitTime);
             ChangingTexture(); // PanelTypeに合わせてtextureを変える
             m_alreadyProcessed = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
         }

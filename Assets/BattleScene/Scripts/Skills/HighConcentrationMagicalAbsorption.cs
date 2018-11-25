@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene.Skill
     /// High concentration magical absorption.
     /// スキル : 高濃度魔力吸収
     /// </summary>
-    public class HighConcentrationMagicalAbsorption : Skill
+    public class HighConcentrationMagicalAbsorption : PassiveSkill
     {
                 /// <summary>任意の増加割合(%)</summary>
         [SerializeField] float m_increase = 0.005f;
@@ -28,6 +28,7 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillActivate()
         {
+            Debug.Log("high.....");
             m_magia.m_stats.m_attack += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_attack * m_increase; // 攻撃力 += 街破壊数 * (攻撃力 * 任意の%)
             m_magia.m_stats.m_defense += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_defense * m_increase; // 防御力 += 街破壊数 * (防御力 * 任意の%)
         }

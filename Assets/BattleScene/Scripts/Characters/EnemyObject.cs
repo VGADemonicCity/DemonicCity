@@ -8,9 +8,9 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Enemy character.
     /// </summary>
-    public class EnemyCharacter : MonoBehaviour
+    public class EnemyObject : MonoBehaviour
     {
         /// <summary>ステータス</summary>
-        public SaveData.Statistics m_statistics;
+        public SaveData.Statistics m_statistics = new SaveData.Statistics();
     }
 }

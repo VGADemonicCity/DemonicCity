@@ -37,22 +37,6 @@ namespace DemonicCity.BattleScene
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
         }
 
-        /// <summary>
-        /// Start this instance.
-        /// </summary>
-        void Start()
-        {
-            m_battleManager.m_behaviourByState.AddListener((state) => // m_behaciourByStateにメソッドを登録する
-            {
-                switch (state)
-                {
-                    case BattleManager.StateMachine.Init: // ゲーム開始時の処理
-                    case BattleManager.StateMachine.NextTurn: // 次のターンに進む時の処理
-                        InitCounts(); // カウント初期化
-                        break;
-                }
-            });
-        }
 
         /// <summary>
         /// return the total count.
@@ -121,9 +105,9 @@ namespace DemonicCity.BattleScene
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_state = BattleManager.StateMachine.PlayerAttack; // ステートマシンをPlayerAttackへ
-                    // ==============================
-                    // イベント呼び出し
-                    // ==============================
+                    // =========================================
+                    // イベント呼び出し : StateMachine.PlayerAttack
+                    // =========================================
                     m_battleManager.m_behaviourByState.Invoke(BattleManager.StateMachine.PlayerAttack); // m_behaviourByStateイベントを起動する
                     break;
             }

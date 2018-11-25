@@ -6,31 +6,11 @@ using UnityEngine;
 namespace DemonicCity.BattleScene
 {
     /// <summary>
-    /// Attackl processor.
+    /// Player attack state.
     /// 攻撃処理を行うクラス
     /// </summary>
-    public class AttacklProcessor : MonoSingleton<AttacklProcessor>
+    public class PlayerAttackState : StateMachineBehaviour
     {
-        /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
-        BattleManager m_battleManager;
-        /// <summary>PanelCounterの参照</summary>
-        PanelCounter m_panelCounter;
-        /// <summary>SkillManagerの参照</summary>
-        protected SkillManager m_skillManager;
-        /// <summary>Magiaの参照</summary>
-        Magia m_magia;
-
-        /// <summary>
-        /// Awake this instance.
-        /// </summary>
-        void Awake()
-        {
-            m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
-            m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
-            m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
-            m_magia = Magia.Instance; // Magiaの参照取得
-        }
-
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -38,12 +18,12 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if(state != BattleManager.StateMachine.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
                 }
                 // ==============================
-                // イベント呼び出し
+                // イベント呼び出し : SkillJudger
                 // ==============================
                 m_skillManager.m_skillJudger.Invoke(m_magia.m_stats.m_passiveSkill, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(AttackProcess()); // 攻撃プロセスを開始する
@@ -59,13 +39,31 @@ namespace DemonicCity.BattleScene
             // ==============================
             // ここに攻撃の演出処理を入れる予定かな？
             // ==============================
-            Debug.Log("アタックプロセス呼ばれた");
+            Debug.Log("attack process called.");
             yield return new WaitForSeconds(3f);
 
             yield return new WaitWhile(() => // falseになるまで待つ
             {
-                Debug.Log("State change to EnemyChoice");
-                m_battleManager.m_state = BattleManager.StateMachine.Judge; // 敵が残存しているかどうかの判定ステートに遷移する
+                Debug.Log("PlayerAttack state called.");
+                // ==================================
+                // イベント呼び出し : StateMachine.
+                // ==================================
+                bool enemyIsAlive = true; // 敵がまだ生きていたら敵の攻撃ターン。死んでいればWinステートへ遷移
+                if (enemyIsAlive)
+                {
+                    // ==================================
+                    // イベント呼び出し : StateMachine.EnemyAttack
+                    // ==================================
+                    SetStateMachine(BattleManager.StateMachine.EnemyAttack);
+                }
+                else
+                {
+                    // ==================================
+                    // イベント呼び出し : StateMachine.Win
+                    // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
+                    // ==================================
+                    SetStateMachine(BattleManager.StateMachine.Win);
+                }
                 return false;
             });
         }

@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene.Skill
     /// Devils fist.
     /// スキル : 魔拳
     /// </summary>
-    public class DevilsFist : Skill
+    public class DevilsFist : PassiveSkill
     {
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] float m_increase = 0.01f;
