@@ -10,7 +10,7 @@ namespace DemonicCity.BattleScene
     /// パネルの種類に応じてカウントをとる
     /// 敵パネルを引いた際はStateMachineを遷移させる
     /// </summary>
-    public class PanelCounter : MonoBehaviour
+    public class PanelCounter : MonoSingleton<PanelCounter>
     {
         /// <summary>シャッフルスキル専用カウンター</summary>
         public int m_CounterForShuffleSkill { get; private set; }

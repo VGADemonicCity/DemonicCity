@@ -10,15 +10,13 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class DevilsFist : Skill
     {
-        /// <summary>PanelCounterの参照</summary>
-        PanelCounter m_panelCounter;
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] float m_increase = 0.01f;
 
         /// <summary>
         /// Start this instance.
         /// </summary>
-        public override void Start()
+        protected override void Start()
         {
             base.Start();
         }
@@ -28,13 +26,13 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         /// <param name="level">Level.</param>
         /// <param name="CityDestructionCount">City destruction count.</param>
-        public override void TryProcess(int level, int CityDestructionCount)
+        public override void TryProcess(SaveData.Statistics.PassiveSkill passiveSkill, int CityDestructionCount)
         {
-            base.TryProcess(level, CityDestructionCount); // 親クラスのメソッドを呼ぶ
+            base.TryProcess(m_magia.m_stats.m_passiveSkill, CityDestructionCount); // 親クラスのメソッドを呼ぶ
 
             if (m_trialResult) // スキル発動の条件を満たしていたら
             {
-                m_magia.m_stats.m_passiveSkill = m_magia.m_stats.m_passiveSkill | SaveData.Statistics.PassiveSkill.DevilsFist; // 論理和でフラグを加える
+                SkillActivate();
             }
         }
 
@@ -45,6 +43,7 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillActivate()
         {
+            Debug.Log("DFよばれた");
             if ((m_magia.m_stats.m_passiveSkill & SaveData.Statistics.PassiveSkill.DevilsFist) == SaveData.Statistics.PassiveSkill.DevilsFist) // フラグが建っていたら
             {
                 // スキルの中身

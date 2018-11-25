@@ -9,7 +9,7 @@ namespace DemonicCity.BattleScene
     /// Attackl processor.
     /// 攻撃処理を行うクラス
     /// </summary>
-    public class AttacklProcessor : MonoBehaviour
+    public class AttacklProcessor : MonoSingleton<AttacklProcessor>
     {
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
         BattleManager m_battleManager;
@@ -27,7 +27,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
-            m_panelCounter = GetComponent<PanelCounter>(); // PanelCounterの参照取得
+            m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得
         }
 
@@ -45,7 +45,7 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.m_stats.m_level, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.m_stats.m_passiveSkill, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(AttackProcess()); // 攻撃プロセスを開始する
             });
         }

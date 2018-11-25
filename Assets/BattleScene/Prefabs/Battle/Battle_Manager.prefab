@@ -19,9 +19,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4691038718456576}
-  - component: {fileID: 114890068285372390}
-  - component: {fileID: 114227830940531418}
-  - component: {fileID: 114690455532549456}
+  - component: {fileID: 114637994177244260}
+  - component: {fileID: 114575073671987240}
+  - component: {fileID: 114756295829251116}
+  - component: {fileID: 114327642074800822}
   m_Layer: 0
   m_Name: Battle_Manager
   m_TagString: Untagged
@@ -42,7 +43,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114227830940531418
+--- !u!114 &114327642074800822
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -50,10 +51,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291335245634264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fbb77f1a234d7f047b06e5c5efa6541d, type: 3}
+  m_Script: {fileID: 11500000, guid: 13f99659dc1054e669b8ecef813a67ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114690455532549456
+--- !u!114 &114575073671987240
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,10 +62,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291335245634264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e0fa49044dcc854dabaefc3dc9f42dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114890068285372390
+  m_state: 0
+  m_wave: 0
+--- !u!114 &114637994177244260
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,6 +75,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291335245634264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d0de2ef1a4554b4995c101f83262afa, type: 3}
+  m_Script: {fileID: 11500000, guid: 05328eb25b0304a798940a7481cd4c44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_panelFrame: {fileID: 0}
+  m_waitTime: 0.1
+--- !u!114 &114756295829251116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291335245634264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ea15084361f4420baf49619b28bed28, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CityCount: 0
+  m_doubleCount: 0
+  m_tripleCount: 0
+  m_totalPanelCount: 0

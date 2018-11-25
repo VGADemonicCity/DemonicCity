@@ -12,6 +12,7 @@ namespace DemonicCity.BattleScene.Skill
     {
         /// <summary>level conditions</summary>
         [SerializeField] protected int m_levelCondition = 1;
+        [SerializeField] SaveData.Statistics.PassiveSkill m_passiveSkill;
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_CountCondition = 1;
         /// <summary>レベルとパネルカウントが上限に達していたらtrueが入る</summary>
@@ -21,19 +22,19 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>SkillManagerの参照</summary>
         protected SkillManager m_skillManager;
         /// <summary>PanelCounterの参照</summary>
-        PanelCounter m_panelCounter;
+        protected PanelCounter m_panelCounter;
 
-        void Awake()
+        protected virtual void Awake()
         {
             m_magia = Magia.Instance; //  Magiaのシングルトンインスタンス取得
             m_skillManager = SkillManager.Instance; // SkillManagerシングルトンインスタンス取得
-            m_panelCounter = GetComponent<PanelCounter>(); // PanelCounterの参照取得
+            m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
         }
 
         /// <summary>
         /// Start this instance.
         /// </summary>
-        public virtual void Start()
+        protected virtual void Start()
         {
             m_skillManager.m_skillJudger.AddListener(TryProcess); // キャラのレベルと街破壊数を引数に渡して条件を満たせばスキルフラグを建てて効果を反映させる
         }
@@ -41,17 +42,14 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>
         /// Tries the process.
         /// </summary>
-        /// <returns><c>true</c>, if process was tryed, <c>false</c> otherwise.</returns>
-        /// <param name="level">Level.</param>
+        /// <param name="passiveSkill">Passive skill.</param>
         /// <param name="CityDestructionCount">City destruction count.</param>
-        public virtual void TryProcess(int level, int CityDestructionCount)
+        public virtual void TryProcess(SaveData.Statistics.PassiveSkill passiveSkill, int CityDestructionCount)
         {
-            // レベルと街破壊カウントが条件を満たしていたらtrue満たなかったらfalseにする
-            m_trialResult = true; // 初期値はtrue
-
-            if (level < m_levelCondition || CityDestructionCount < m_CountCondition) // 条件を満たしていなかったらfalseに変える
+            // パッシブスキルフラグが建っている & 街破壊カウントが条件を満たしていたらSkillActivateを呼ぶ
+            if ((m_magia.m_stats.m_passiveSkill & passiveSkill) == passiveSkill && CityDestructionCount >= m_CountCondition)
             {
-                m_trialResult = false;
+                SkillActivate();
             }
         }
 

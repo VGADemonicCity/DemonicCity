@@ -30,7 +30,7 @@ namespace DemonicCity
                 return m_instance;
             }
         }
-
+        
         //SaveDataをJsonに変換したテキスト(リロード時に何度も読み込まなくていいように保持)
         [SerializeField]
         static string _jsonText = "";
@@ -238,9 +238,8 @@ namespace DemonicCity
         /// <summary>
         /// データをJsonにして保存する。
         /// </summary>
-        public void Save(Statistics stats)
+        public void Save()
         {
-            m_statistics = stats;
             _jsonText = JsonUtility.ToJson(this);
             File.WriteAllText(GetSaveFilePath(), _jsonText);
         }

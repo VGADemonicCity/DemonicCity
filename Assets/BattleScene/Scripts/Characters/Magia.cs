@@ -24,8 +24,15 @@ namespace DemonicCity
             m_stats = m_saveData.m_statistics; // セーブしておいたステータスを代入
             SceneManager.sceneLoaded += (scene, loadSceneMode) => // sceneロード時,データを再読み込みする
             {
-                m_saveData.Save(m_stats); // save
+                m_stats.m_attack += 1000;
+                m_saveData.Save(); // save
             };
+        }
+
+        private void Start()
+        {
+            m_saveData.Save();
+
         }
 
         /// <summary>

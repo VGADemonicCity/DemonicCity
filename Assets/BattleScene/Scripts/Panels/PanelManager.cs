@@ -52,6 +52,7 @@ namespace DemonicCity.BattleScene
         {
             Initialize(); // 各要素の初期化
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
         }
 
 
@@ -99,13 +100,13 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Initialize()
         {
+
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
-            m_panelPosMatlix[0] = new[] { -1.93f, -3.13f, -4.33f }; //列
+            m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
             m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<GameObject>();
-            m_panelCounter = GetComponent<PanelCounter>();
 
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する

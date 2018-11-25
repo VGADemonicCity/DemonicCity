@@ -68,7 +68,7 @@ namespace DemonicCity.BattleScene
         /// int arg0 = Level.
         /// int arg1 = City destruction count.
         /// </summary>
-        public class SkillJudger : UnityEvent<int, int>
+        public class SkillJudger : UnityEvent<SaveData.Statistics.PassiveSkill, int>
         {
             public SkillJudger() { }
         }
