@@ -19,8 +19,10 @@ namespace DemonicCity.BattleScene
 
     public class PanelFrameManager : MonoBehaviour
     {
+        /// <summary>パネル枠を動かす量</summary>
+        [SerializeField] float m_distance = 3.835f;
         /// <summary>TouchGestureDetectorの参照</summary>
-        private TouchGestureDetector m_touchGestureDetector;
+        TouchGestureDetector m_touchGestureDetector;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
         /// <summary></summary>
@@ -66,11 +68,11 @@ namespace DemonicCity.BattleScene
             switch (flag)
             {
                 case Flag.Right: // もし右にフリックされたら
-                    iTween.MoveBy(gameObject, iTween.Hash(("x"), 3.65f)); // 枠を右に移動
+                    iTween.MoveBy(gameObject, iTween.Hash(("x"), m_distance)); // 枠を右に移動
                     m_flag = m_flag << 1; // フラグを左にシフト
                     break;
                 case Flag.Left: // もし左にフリックされたら
-                    iTween.MoveBy(gameObject, iTween.Hash(("x"), -3.65f)); // 枠を左に移動
+                    iTween.MoveBy(gameObject, iTween.Hash(("x"), -m_distance)); // 枠を左に移動
                     m_flag = m_flag >> 1; // フラグを右にシフト
                     break;
             }

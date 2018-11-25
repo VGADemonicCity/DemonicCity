@@ -57,7 +57,7 @@ namespace DemonicCity.BattleScene
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
-            m_panelPosMatlix[1] = new[] { -5f, -3.8f, -2.6f, -1.2f, 0f, 1.2f, 2.6f, 3.8f, 5f }; //行
+            m_panelPosMatlix[1] = new[] { -4.155f, -2.955f, -1.755f, -0.355f, .845f, 2.045f, 3.445f, 4.645f, 5.845f }; //行
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<GameObject>();
 
