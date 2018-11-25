@@ -13,7 +13,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-            touchGestureDetector= GetComponent<TouchGestureDetector>();
+            //touchGestureDetector= GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
 

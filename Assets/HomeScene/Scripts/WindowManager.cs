@@ -17,27 +17,31 @@ namespace DemonicCity.HomeScene
         public GameObject[] parents;
         public GameObject[] windowObjects;
         public GameObject[] buttonObjects;
+        GameObject outObject;
 
         // Use this for initialization
         void Start()
         {
-            Debug.Log("Start");
+            //Debug.Log("Start");
             
             
             //touchGestureDetector = GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                Debug.Log("sss");
-                if (true)
+                
+                if (gesture==TouchGestureDetector.Gesture.Click)
                 {
-                    
+                    Debug.Log("click");
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
-                        if (/*touchInfo.m_hitResult==buttonObjects[i]*/true)
+                        if (false)
                         {
                             Debug.Log("aa");
                             WindowOpen(i);
                         }
+                        Debug.Log(touchInfo.HitDetection(out outObject, buttonObjects[i]));
+                        touchInfo.HitDetection(out outObject, buttonObjects[i]);
+                        Debug.Log(outObject.name);
                     }
                 }
 

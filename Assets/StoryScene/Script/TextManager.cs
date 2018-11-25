@@ -75,7 +75,7 @@ namespace DemonicCity.StoryScene
             }
             string textsJson = File.ReadAllText(filePath);
             Debug.Log(textsJson);
-            string[] spritKey = { ",><" };
+            string[] spritKey = { "><" };
 
             string[] tmpTexts = textsJson.Split(spritKey,StringSplitOptions.None);
             Debug.Log(tmpTexts);
