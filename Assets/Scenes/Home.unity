@@ -139,11 +139,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 49731708}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1, y: -38.6, z: 90}
-  m_LocalScale: {x: 7, y: 7, z: 7}
+  m_LocalPosition: {x: 1.6627687, y: -641.82874, z: 0}
+  m_LocalScale: {x: 116.393814, y: 116.393814, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 891811368}
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &49731710
 SpriteRenderer:
@@ -1410,11 +1410,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCamera: {fileID: 0}
-  hitCheck: 1
-  detectFlick: 1
-  m_divisor: 10
-  m_targetGameObject: {fileID: 0}
+  ShootingCamera: {fileID: 0}
+  DetectFlick: 1
+  Divisor: 10
 --- !u!20 &519420031
 Camera:
   m_ObjectHideFlags: 0
@@ -1861,8 +1859,9 @@ RectTransform:
   - {fileID: 328133019}
   - {fileID: 133760026}
   - {fileID: 491825841}
+  - {fileID: 49731709}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1897,7 +1896,7 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1942,11 +1941,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a728f19118bbf7d44babdcafdae8e821, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootingCamera: {fileID: 0}
-  hitCheck: 1
-  detectFlick: 1
-  m_divisor: 10
-  m_targetGameObject: {fileID: 107513083}
+  ShootingCamera: {fileID: 0}
+  DetectFlick: 1
+  Divisor: 10
 --- !u!1 &1092372054
 GameObject:
   m_ObjectHideFlags: 0
