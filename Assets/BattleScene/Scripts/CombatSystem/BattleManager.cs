@@ -49,7 +49,7 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>ステートマシンの状態 : State of State Machine.</summary>
-        public StateMachine m_state;
+        public StateMachine m_state = StateMachine.Init;
         /// <summary>Wave.バトルシーンのウェーブフラグ</summary>
         public Wave m_wave;
         /// <summary>ステート毎に呼び出すメソッドを変える : Change method calling each state.</summary>
@@ -57,12 +57,20 @@ namespace DemonicCity.BattleScene
 
         void Start()
         {
-
+            Debug.Log("called.");
             // ==============================
             // イベント呼び出し : StateMachine.Init
             // ==============================
-            m_behaviourByState.Invoke(m_state);
+            StartCoroutine(StartWait());
         }
+
+        IEnumerator StartWait()
+        {
+            yield return new WaitForSeconds(1f); // 遅延させる時間(waitWhileかWait)
+            m_behaviourByState.Invoke(StateMachine.Init);
+        }
+
+
 
         /// <summary>
         /// State machine event.

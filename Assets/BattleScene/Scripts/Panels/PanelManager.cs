@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using DemonicCity.BattleScene.Skill;
 
 namespace DemonicCity.BattleScene
 {
@@ -28,12 +29,15 @@ namespace DemonicCity.BattleScene
         /// <summary>パネルを回転させる時間</summary>
         [SerializeField] float m_waitTime = 3f;
 
+
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter m_panelCounter;
+        /// <summary>shufflePanelsの参照</summary>
+        ShufflePanels m_shufflePanels;
         /// <summary>オープン前のパネル</summary>
         List<GameObject> m_panelsBforeOpen;
         /// <summary>オープン後のパネル</summary>
@@ -54,6 +58,7 @@ namespace DemonicCity.BattleScene
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
+            m_shufflePanels = GetComponent<ShufflePanels>(); // ShufflePanelsの参照取得
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
@@ -107,6 +112,11 @@ namespace DemonicCity.BattleScene
                 {
                     InitPanels(); // Debug用
                 }
+                if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
+                {
+                    m_shufflePanels.PanelShuffle();
+                }
+
             });
         }
 
@@ -172,9 +182,8 @@ namespace DemonicCity.BattleScene
                 }
             }
             PanelType[] array = panelType; // 変換用配列を定義
-            PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray();//ラムダ式でGuid配列に変換、OrderByでアルファベット順に並び替える
-            panelType = resultArray; // panelTypeに代入
-            return panelType; // ソート結果を返す
+            PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
+            return resultArray; // ソート結果を返す
         }
 
         /// <summary>
@@ -188,16 +197,29 @@ namespace DemonicCity.BattleScene
             m_isPanelProcessing = false; // フラグを消す
         }
 
-        ///// <summary>
-        ///// Resets the opened panels.
-        ///// </summary>
-        //public void ResetOpenedPanels()
-        //{
-        //    m_panelsAfterOpened.ForEach((obj) => // 開いたパネルをシャッフルして開く前に戻す
-        //    {
-        //        Panel panel = obj.GetComponent<Panel>(); // パネルコンポーネント参照取得
-        //        panel.ResetPanel(); // パネルをリセット
-        //    });
-        //}
+        /// <summary>
+        /// 
+        /// </summary>
+        public void ResetOpenedPanels(Collider2D[] panels)
+        {
+            var panelList = new List<Panel>(); // colliderに検出されたオブジェクトのPanelの参照リスト
+            var panelTypes = new List<PanelType>(); // colliderに検出されたパネルのPanelTypeをリストで格納
+
+            foreach (var panel in panels) // colliderに検出されたパネルとそのPanelTypeを全てリストに格納する
+            {
+                var panelObject = panel.gameObject.GetComponent<Panel>(); // Panelの参照取得
+                panelList.Add(panelObject); // Panelをリストに追加
+                panelTypes.Add(panelObject.m_panelType); // PanelTypeをリストに追加
+            }
+            var result = panelTypes.OrderBy((arg1) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
+            var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
+
+            panelList.ForEach((panel) => // リストに格納した各パネルにGuidでランダム化したPanelTypeを順番に代入の後パネルを引いていない状態に戻す
+            {
+                panel.m_panelType = result[count]; // PanelTypeの代入
+                panel.ResetPanel(); // パネルを引いていない状態に戻す
+                count++; // カウントアップ
+            });
+        }
     }
 }
