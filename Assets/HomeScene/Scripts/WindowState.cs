@@ -7,7 +7,7 @@ namespace DemonicCity.HomeScene
 {
     public class WindowState : MonoBehaviour
     {
-        [SerializeField] GameObject exitButton=null;
+        [SerializeField] GameObject exitButton = null;
         public TouchGestureDetector touchGestureDetector;
         string key = "IsOpen";
         // Use this for initialization
@@ -19,8 +19,13 @@ namespace DemonicCity.HomeScene
 
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log("flase");
-                    ChangeState(key, false);
+                    GameObject outObject;
+                    if (touchInfo.HitDetection(out outObject, exitButton)
+                    || exitButton == null)
+                    {
+                        ChangeState(key, false);
+                    }
+                    Debug.Log(outObject.name);
                 }
 
             });
