@@ -1,17 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 
 namespace DemonicCity.HomeScene
 {
-    public class WindowManager : MonoBehaviour
+    public class WindowManager : MonoBehaviour,IPointerClickHandler
     {
         public TouchGestureDetector touchGestureDetector;
-        
+
         public enum Window
         {
-            Growth, Config, Calender, PresentBox, Last
+            Growth, Story, Magia, Config, Calender, PresentBox, Last
         }
 
         public GameObject[] parents;
@@ -23,25 +24,34 @@ namespace DemonicCity.HomeScene
         void Start()
         {
             //Debug.Log("Start");
-            
-            
+            touchGestureDetector = TouchGestureDetector.Instance;
+            touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
+
+
             //touchGestureDetector = GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                
-                if (gesture==TouchGestureDetector.Gesture.Click)
+
+                if (gesture == TouchGestureDetector.Gesture.Click)
                 {
                     Debug.Log("click");
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
-                        if (false)
+                        if (touchInfo.HitDetection(out outObject, buttonObjects[i])
+                        && buttonObjects[i])
                         {
-                            Debug.Log("aa");
-                            WindowOpen(i);
+                            if (windowObjects[i])
+                            {
+                                WindowOpen(i);
+                            }
+                            else if (i == (int)Window.Story)
+                            {
+                                SceneChange.SceneChanger(SceneName.Battle);
+                            }
                         }
-                        Debug.Log(touchInfo.HitDetection(out outObject, buttonObjects[i]));
-                        touchInfo.HitDetection(out outObject, buttonObjects[i]);
-                        Debug.Log(outObject.name);
+                        //Debug.Log(touchInfo.HitDetection(out outObject, buttonObjects[i]));
+                        //touchInfo.HitDetection(out outObject, buttonObjects[i]);
+                        //Debug.Log(outObject.name);
                     }
                 }
 
@@ -62,5 +72,9 @@ namespace DemonicCity.HomeScene
             newPanel.GetComponent<WindowState>().touchGestureDetector = touchGestureDetector;
         }
 
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            
+        }
     }
 }

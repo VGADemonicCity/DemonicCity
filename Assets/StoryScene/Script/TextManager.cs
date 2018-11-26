@@ -23,7 +23,7 @@ namespace DemonicCity.StoryScene
         }
         void Start()
         {
-            TouchGestureDetector t = TouchGestureDetector.Instance;
+            touchGestureDetector= TouchGestureDetector.Instance;
             touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
