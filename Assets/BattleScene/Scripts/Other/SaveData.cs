@@ -68,6 +68,8 @@ namespace DemonicCity
             [Flags]
             public enum PassiveSkill
             {
+                /// <summary>無効値</summary>
+                Invalid = 0,
                 /// <summary>魔拳</summary>
                 DevilsFist = 1,
                 /// <summary>高濃度魔力吸収,High concentration magical absorption</summary>

@@ -22,18 +22,21 @@ namespace DemonicCity
         void Awake()
         {
             m_stats = m_saveData.m_statistics; // セーブしておいたステータスを代入
+            // ============================
+            // DEBUG 用
+            m_stats.m_passiveSkill = (SaveData.Statistics.PassiveSkill)2047; // フラグ全部建て
+            // ============================
+            Debug.Log(m_stats.m_passiveSkill);
+            Debug.Log((int)m_stats.m_passiveSkill);
+            Debug.Log(m_stats.m_passiveSkill.GetType());
+            Debug.Log(m_stats.m_passiveSkill.ToString());
+
             SceneManager.sceneLoaded += (scene, loadSceneMode) => // sceneロード時,データを再読み込みする
             {
                 m_stats.m_attack += 1000;
                 m_stats.m_hitPoint += 100;
                 m_saveData.Save(); // save
             };
-        }
-
-        private void Start()
-        {
-            m_saveData.Save();
-
         }
 
         /// <summary>

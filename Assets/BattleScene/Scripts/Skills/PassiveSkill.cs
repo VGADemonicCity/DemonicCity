@@ -14,6 +14,7 @@ namespace DemonicCity.BattleScene.Skill
         [SerializeField] protected int m_CountCondition = 1;
         /// <summary>レベルとパネルカウントが上限に達していたらtrueが入る</summary>
         [SerializeField] protected bool m_trialResult = false;
+        [SerializeField] protected SaveData.Statistics.PassiveSkill m_passiveSkill;
         /// <summary>Magia</summary>
         protected Magia m_magia;
         /// <summary>SkillManagerの参照</summary>
@@ -44,10 +45,9 @@ namespace DemonicCity.BattleScene.Skill
         public virtual void TryProcess(SaveData.Statistics.PassiveSkill passiveSkill, int CityDestructionCount)
         {
             // パッシブスキルフラグが建っている & 街破壊カウントが条件を満たしていたらSkillActivateを呼ぶ
-            if ((m_magia.m_stats.m_passiveSkill & passiveSkill) == passiveSkill && CityDestructionCount >= m_CountCondition)
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill && CityDestructionCount >= m_CountCondition)
             {
                 SkillActivate();
-                Debug.Log("parent");
             }
         }
 
