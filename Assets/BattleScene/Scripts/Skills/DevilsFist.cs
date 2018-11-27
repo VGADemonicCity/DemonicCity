@@ -6,8 +6,8 @@ namespace DemonicCity.BattleScene.Skill
 {
     /// <summary>
     /// Devils fist.
-    /// スキル : 魔拳
-    /// Inspector上でPassiveSkillを指定する必要ありにするか悩む
+    /// １レベル：魔拳　
+    /// 街破壊数1以上で発動　街破壊数×攻撃力の1％を加算して攻撃
     /// </summary>
     public class DevilsFist : PassiveSkill
     {

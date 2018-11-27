@@ -6,7 +6,8 @@ namespace DemonicCity.BattleScene.Skill
 {
     /// <summary>
     /// High concentration magical absorption.
-    /// スキル : 高濃度魔力吸収
+    /// １１レベル：高濃度魔力吸収
+    /// 　街破壊数７以上で発動　街破壊数×０．５％攻撃力　防御力を上昇
     /// </summary>
     public class HighConcentrationMagicalAbsorption : PassiveSkill
     {
