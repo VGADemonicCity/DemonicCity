@@ -33,7 +33,7 @@ namespace DemonicCity
         /// レベルアップ獲得スキル。
         /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
         /// </summary>
-        [Flags,Serializable]
+        [Flags, Serializable]
         public enum PassiveSkill
         {
             /// <summary>無効値</summary>
@@ -66,43 +66,42 @@ namespace DemonicCity
             AllSkills = 4095
         }
 
-        /// <summary>実際にセーブするステータスクラス</summary>
-        [SerializeField] Statistics m_stats = new Statistics();
-        /// <summary>ステータスクラスのプロパティ</summary>
-        public Statistics Stats{
-            get { return m_stats; }
-            set { m_stats = value; }
-        }
-
         /// <summary>経験値</summary>
-        public int m_TotalExperience;
+        public int m_totalExperience;
         /// <summary>属性フラグ</summary>
         public Attribute m_attribute = Attribute.Standard;
         /// <summary>パッシブスキルフラグ</summary>
         public PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
-        /// <summary>レベルアップに必要な経験値</summary>
-        [SerializeField]
-        int[] requiredExps ={
-            5,10,15,20,25,30,35,40,45,50,60,70,80,90,100,150,200,250,300,400,500
-        };
-
-
-        /// <summary>
-        /// Levels up.
-        /// </summary>
-        public void LevelUp()
-        {
-        }
-
-
-
         /// <summary>
         /// 初期レベルを1としたときの最大レベルを返します
         /// </summary>
         /// <value>The max level.</value>
-        public int MaxLevel
+        public int MaxLevel { get { return requiredExps.Length + 1; } }
+        /// <summary>レベルアップに必要な経験値</summary>
+        [SerializeField]
+        int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
+        /// <summary>実際にセーブするステータスクラス</summary>
+        [SerializeField] Statistics m_stats = new Statistics();
+        /// <summary>ステータスクラスのプロパティ</summary>
+        public Statistics Stats
         {
-            get { return requiredExps.Length + 1; }
+            get { return m_stats; }
+            set { m_stats = value; }
+        }
+
+        /// <summary>
+        /// レベル上限に達していない、且つ次のレベルに上がるのに必要な経験値を超えていたら
+        /// 1レベルアップする.
+        /// </summary>
+        public void LevelUp()
+        {
+            var requiredExp = GetRequiredExpToNextLevel(Stats.m_level);
+
+            if (MaxLevel >= Stats.m_level && requiredExp <= Stats.m_level)
+            {
+                return;
+            }
+            Stats.m_level++;
         }
 
         /// <summary>
