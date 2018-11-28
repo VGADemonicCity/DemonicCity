@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace DemonicCity.StoryScene
+namespace DemonicCity
 {
     public class TextManager : MonoBehaviour
     {
@@ -27,9 +27,9 @@ namespace DemonicCity.StoryScene
             touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
+                if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log("begin");
+                    //Debug.Log("begin");
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
                     if (true)
@@ -37,7 +37,15 @@ namespace DemonicCity.StoryScene
                         flag = putSentence.onoff;
                         if (flag)
                         {
-                            textIndex += 1;
+                            if (texts[textIndex+1].sentence=="End"
+                            || texts[textIndex + 1]==null)
+                            {
+                                
+                            }
+                            else
+                            {
+                                textIndex += 1;
+                            }
                         }
                         else
                         {

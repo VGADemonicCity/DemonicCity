@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.StoryScene
+namespace DemonicCity
 {
     [System.Serializable]
     public class TextStorage

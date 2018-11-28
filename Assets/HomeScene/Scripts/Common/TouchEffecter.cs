@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DemonicCity.HomeScene
 {
-    public class TouchManager : MonoBehaviour
+    public class TouchEffecter : MonoBehaviour
     {
 
         
