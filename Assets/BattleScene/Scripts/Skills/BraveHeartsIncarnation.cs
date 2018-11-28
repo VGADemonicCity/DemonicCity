@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene.Skill
             base.Awake();
             if (m_passiveSkill == 0) // 
             {
-                m_passiveSkill = SaveData.Statistics.PassiveSkill.DevilsFist; // フラグを設定
+                m_passiveSkill = Magia.PassiveSkill.DevilsFist; // フラグを設定
             }
         }
 
@@ -40,7 +40,7 @@ namespace DemonicCity.BattleScene.Skill
         {
             Debug.Log("Activated the 魔拳");
             var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-            m_magia.m_stats.m_attack += count * m_magia.m_stats.m_attack * m_increase; // 攻撃力の任意の%分加算
+            m_magia.Stats.m_attack += count * m_magia.Stats.m_attack * m_increase; // 攻撃力の任意の%分加算
 
         }
     }

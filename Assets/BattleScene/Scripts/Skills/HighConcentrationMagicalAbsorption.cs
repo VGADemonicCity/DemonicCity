@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene.Skill
             base.Awake();
             if (m_passiveSkill == 0) // 
             {
-                m_passiveSkill = SaveData.Statistics.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
+                m_passiveSkill = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
             }
         }
 
@@ -40,8 +40,8 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 高濃度魔力吸収");
-            m_magia.m_stats.m_attack += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_attack * m_increase; // 攻撃力 += 街破壊数 * (攻撃力 * 任意の%)
-            m_magia.m_stats.m_defense += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_defense * m_increase; // 防御力 += 街破壊数 * (防御力 * 任意の%)
+            m_magia.Stats.m_attack += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_attack * m_increase; // 攻撃力 += 街破壊数 * (攻撃力 * 任意の%)
+            m_magia.Stats.m_defense += m_panelCounter.GetCityDestructionCount() * m_magia.m_stats.m_defense * m_increase; // 防御力 += 街破壊数 * (防御力 * 任意の%)
         }
     }
 }
