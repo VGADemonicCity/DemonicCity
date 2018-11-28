@@ -11,6 +11,6 @@ namespace DemonicCity.BattleScene
     public class EnemyObject : MonoBehaviour
     {
         /// <summary>ステータス</summary>
-        public SaveData.Statistics m_statistics = new SaveData.Statistics();
+         public SaveData.Statistics m_statistics = new SaveData.Statistics();
     }
 }

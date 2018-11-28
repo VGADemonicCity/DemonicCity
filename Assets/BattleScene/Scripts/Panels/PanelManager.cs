@@ -116,8 +116,9 @@ namespace DemonicCity.BattleScene
                 {
                     m_shufflePanels.PanelShuffle();
                 }
-
             });
+
+
         }
 
         /// <summary>

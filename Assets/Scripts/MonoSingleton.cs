@@ -10,7 +10,7 @@ namespace DemonicCity
         /// <summary>
         /// The instance.
         /// </summary>
-        static T m_instance;
+        protected static T m_instance;
 
         /// <summary>
         /// Gets the instance.

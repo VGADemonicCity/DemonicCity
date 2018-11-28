@@ -6,12 +6,22 @@ namespace DemonicCity.BattleScene.Skill
 {
     /// <summary>
     /// Devils fist.
-    /// スキル : 魔拳
+    /// １レベル：魔拳　
+    /// 街破壊数1以上で発動　街破壊数×攻撃力の1％を加算して攻撃
     /// </summary>
     public class DevilsFist : PassiveSkill
     {
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] float m_increase = 0.01f;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            if(m_passiveSkill == 0) // 
+            {
+                m_passiveSkill = SaveData.Statistics.PassiveSkill.DevilsFist; // フラグを設定
+            }
+        }
 
         /// <summary>
         /// Start this instance.
@@ -22,34 +32,16 @@ namespace DemonicCity.BattleScene.Skill
         }
 
         /// <summary>
-        /// Tries the process.
-        /// </summary>
-        /// <param name="level">Level.</param>
-        /// <param name="CityDestructionCount">City destruction count.</param>
-        public override void TryProcess(SaveData.Statistics.PassiveSkill passiveSkill, int CityDestructionCount)
-        {
-            base.TryProcess(m_magia.m_stats.m_passiveSkill, CityDestructionCount); // 親クラスのメソッドを呼ぶ
-
-            if (m_trialResult) // スキル発動の条件を満たしていたら
-            {
-                SkillActivate();
-            }
-        }
-
-        /// <summary>
         /// 魔拳
         /// 街破壊数1以上で発動.
-        /// 街は回数*攻撃力の1%を加算して攻撃
+        /// 街破壊数 * 攻撃力の1% を加算して攻撃
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("DFよばれた");
-            if ((m_magia.m_stats.m_passiveSkill & SaveData.Statistics.PassiveSkill.DevilsFist) == SaveData.Statistics.PassiveSkill.DevilsFist) // フラグが建っていたら
-            {
-                // スキルの中身
-                var Count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-                m_magia.m_stats.m_attack += m_magia.m_stats.m_attack * m_increase; // 攻撃力の任意の%分加算
-            }
+            Debug.Log("Activated the 魔拳");
+            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
+            m_magia.m_stats.m_attack += count * m_magia.m_stats.m_attack * m_increase; // 攻撃力の任意の%分加算
+
         }
     }
 }
