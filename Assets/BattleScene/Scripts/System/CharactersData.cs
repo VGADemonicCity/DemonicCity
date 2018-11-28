@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DemonicCity.CharacterSystemm
 {
     [Serializable]
-    public class CharactersData : SavableSingletonBase<CharactersData>
+    public class CharactersData : SSB<CharactersData>
     {
         public enum CharacterId { chara1, chara2, chara3 }
 
@@ -44,7 +44,7 @@ namespace DemonicCity.CharacterSystemm
         /// <param name="id">Identifier.</param>
         static CharacterData GetCharacterData(string id)
         {
-            return instance.items.First(x => x.Id == id);
+            return m_instance.items.First(x => x.Id == id);
         }
         
         /// <summary>

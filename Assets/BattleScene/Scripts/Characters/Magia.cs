@@ -15,6 +15,16 @@ namespace DemonicCity
         SaveData m_saveData = SaveData.Instance; // セーブデータの参照
         /// <summary>ステータスクラス</summary>
         public SaveData.Statistics m_stats;
+        [SerializeField]
+        string id;
+
+        [SerializeField]
+        int[] requiredExps;
+
+        public string Id
+        {
+            get { return id; }
+        }
 
         /// <summary>
         /// Awake this instance.
@@ -53,6 +63,25 @@ namespace DemonicCity
         public void SetStatuses()
         {
             
+        }
+
+        /// <summary>
+        /// 初期レベルを1としたときの最大レベルを返します
+        /// </summary>
+        /// <value>The max level.</value>
+        public int MaxLevel
+        {
+            get { return requiredExps.Length + 1; }
+        }
+
+        /// <summary>
+        /// 次のレベルに上がるために必要な経験値を返します
+        /// </summary>
+        /// <returns>The required exp to next level.</returns>
+        /// <param name="currentLevel">Current level.</param>
+        public int GetRequiredExpToNextLevel(int currentLevel)
+        {
+            return currentLevel >= MaxLevel ? 0 : requiredExps[currentLevel - 1];
         }
     }
 }

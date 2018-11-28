@@ -160,6 +160,26 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1240809691848496, guid: 4a0441b3537514d9da44cf423458b792,
     type: 2}
   m_PrefabInternal: {fileID: 603809471}
+--- !u!114 &43885765
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 43885764}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78a61766309554d19a6ff9b19513b247, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isLoaded: 0
+  isSaving: 0
+  items:
+  - id: magia
+    requiredExps: 050000000a0000000f0000001400000019000000
+  - id: 
+    requiredExps: 
+  - id: 
+    requiredExps: 
 --- !u!114 &43885767
 MonoBehaviour:
   m_ObjectHideFlags: 0
