@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene.Skill
             base.Awake();
             if (m_passiveSkill == 0) // 
             {
-                m_passiveSkill = Statistics.PassiveSkill.DevilsFist; // フラグを設定
+                m_passiveSkill = Magia.PassiveSkill.DevilsFist; // フラグを設定
             }
         }
 

@@ -69,15 +69,17 @@ namespace DemonicCity
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] Statistics m_stats = new Statistics();
         /// <summary>ステータスクラスのプロパティ</summary>
-        public Statistics Stats{ get; set;}
+        public Statistics Stats{
+            get { return m_stats; }
+            set { m_stats = value; }
+        }
 
         /// <summary>経験値</summary>
-        public int m_totalExperience;
+        public int m_TotalExperience;
         /// <summary>属性フラグ</summary>
         public Attribute m_attribute = Attribute.Standard;
         /// <summary>パッシブスキルフラグ</summary>
         public PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
-
         /// <summary>レベルアップに必要な経験値</summary>
         [SerializeField]
         int[] requiredExps ={
