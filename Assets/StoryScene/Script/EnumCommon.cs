@@ -3,7 +3,7 @@
 /// <summary>
 /// 列挙型の汎用関数を管理するクラス
 /// </summary>
-namespace DemonicCity.StoryScene
+namespace DemonicCity
 {
     public static partial class EnumCommon
     {
