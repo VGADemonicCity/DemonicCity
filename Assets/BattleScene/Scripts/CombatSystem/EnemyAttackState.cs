@@ -21,7 +21,7 @@ namespace DemonicCity.BattleScene
                 }
 
                 Debug.Log("EnemyAttack state called.");
-                if (m_magia.m_stats.m_hitPoint <= 0) // PlayerのHPが0以下になったらLoseステートに遷移する
+                if (m_magia.Stats.m_hitPoint <= 0) // PlayerのHPが0以下になったらLoseステートに遷移する
                 {
                     // ==============================
                     // イベント呼び出し : StateMachine.Lose

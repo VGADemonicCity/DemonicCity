@@ -11,6 +11,8 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerAttackState : StateMachineBehaviour
     {
+   
+
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -25,7 +27,7 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し : SkillJudger
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.m_stats.m_passiveSkill, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.m_passiveSkill , m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(AttackProcess()); // 攻撃プロセスを開始する
             });
         }

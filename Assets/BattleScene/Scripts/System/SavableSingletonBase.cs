@@ -5,16 +5,17 @@ using System;
 
 namespace DemonicCity
 {
+    [Serializable]
     public abstract class SavableSingletonBase<T> : ISerializationCallbackReceiver where T : new()
     {
         /// <summary>SaveDataをJsonに変換したテキスト(Reload時になんども読み込まなくて良い様に保持)</summary>
         [SerializeField] static string m_jsonText = "";
 
         /// <summary>singletonの実体</summary>
-        static SavableSingletonBase<T> m_instance;
+        static T m_instance;
         /// <summary>singletonインスタンスを取得</summary>
         /// <value>インスタンス</value>
-        public static SavableSingletonBase<T> Instance
+        public static T Instance
         {
             get
             {
@@ -64,7 +65,7 @@ namespace DemonicCity
         /// </summary>
         protected static void Load()
         {
-            m_instance = JsonUtility.FromJson<SavableSingletonBase<T>>(GetJason());
+            m_instance = JsonUtility.FromJson<T>(GetJason());
         }
 
         /// <summary>
@@ -132,7 +133,7 @@ namespace DemonicCity
 
         /// <summary>
         /// Object->Jsonに変換される前に実行される
-        /// 継承先で任意の処理を書く
+        /// 必要に応じて任意の処理を書く
         /// </summary>
         public virtual void OnBeforeSerialize()
         {
@@ -140,7 +141,7 @@ namespace DemonicCity
 
         /// <summary>
         /// Json->Objectに変換された後に実行される
-        /// 継承先で任意の処理を書く
+        /// 必要に応じて任意の処理を書く
         /// </summary>
         public virtual void OnAfterDeserialize()
         {
