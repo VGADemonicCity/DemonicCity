@@ -5,6 +5,10 @@ using UnityEngine;
 
 namespace DemonicCity
 {
+    public enum FaceIndex
+    {
+        Nomal, Happy, Mad, Sad, Fun, Last
+    }
     [System.Serializable]
     public class TextStorage
     {
@@ -18,20 +22,44 @@ namespace DemonicCity
         {
             Nomal,Happy, Mad, Sad, Fun,Last
         }
-        /// <summary>/// /// </summary>
+        /// <summary></summary>
         public string charName;
-        /// <summary>/// /// </summary>
+        public CharName cName;
+        /// <summary></summary>
         public string sentence;
-        /// <summary>/// /// </summary>
+        /// <summary></summary>
         public string face;
-        /// <summary>/// /// </summary>
+        /// <summary></summary>
         public int faceIndex;
-        /// <summary>/// /// </summary>
+        /// <summary></summary>
+        public string unknown;
+        public bool isUnknown;
+
+
+        /// <summary>コンストラクタ</summary>
         public TextStorage(TextStorage storage)
         {
             charName = storage.charName;
             sentence = storage.sentence;
             FaceIndex tmpIndex;
+            CharName tmpName;
+            if (storage.unknown == "")
+            {
+                isUnknown = false;
+            }
+            else
+            {
+                isUnknown = true;
+            }
+            if (EnumCommon.TryParse<CharName>(storage.charName, out tmpName))
+            {
+                cName = tmpName;
+            }
+            else
+            {
+                cName = CharName.None;
+            }
+
             if (EnumCommon.TryParse<FaceIndex>(storage.face, out tmpIndex))
             {
                 faceIndex = (int)tmpIndex;

@@ -18,6 +18,8 @@ namespace DemonicCity.HomeScene
         RectTransform windowRect;
         IEnumerator[] WindowAnimation = new IEnumerator[2];
 
+        GameObject beginObject;
+        GameObject endObject;
         void Awake()
         {
             windowRect = GetComponent<RectTransform>();
@@ -28,14 +30,22 @@ namespace DemonicCity.HomeScene
             //touchGestureDetector= GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-
+                if (gesture==TouchGestureDetector.Gesture.TouchBegin)
+                {
+                    touchInfo.HitDetection(out beginObject);
+                }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    GameObject outObject;
-                    if (touchInfo.HitDetection(out outObject, exitButton)
+                    
+                    if (touchInfo.HitDetection(out endObject, exitButton)
                     || exitButton == null)
                     {
-                        WindowScaling(false);
+                        if (beginObject==endObject
+                        &&windowEnabled)
+                        {
+                            WindowScaling(false);
+
+                        }
                         //ChangeState(key, false);
                     }
                     //Debug.Log(outObject.name);

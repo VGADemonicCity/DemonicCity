@@ -8,11 +8,11 @@ namespace DemonicCity
 {
     public class PutSentence : MonoBehaviour
     {
-        
+
         /// <summary>/// 文字送り速度/// </summary>
         float charFeedSpeed = 0.1f;
         /// <summary>/// 表示用のTextComponent/// </summary>
-        [SerializeField]TMP_Text text;
+        [SerializeField] TMP_Text text;
         /// <summary>/// /// </summary>
         TextStorage textContena = new TextStorage();
         /// <summary>/// 現在表示している文字列/// </summary>
@@ -22,21 +22,27 @@ namespace DemonicCity
         /// <summary>/// /// </summary>
         bool end;
         public bool onoff;
-        /// <summary>/// /// </summary>
-        
+
+        void Awake()
+        {
+            text.text = "";
+        }
 
 
-
+        /// <summary>/// コルーチンを終了のフラグを立て、全文表示する/// </summary>
         public void Totrue()
         {
             //charCount = sentence.Length;
             end = true;
             text.text = sentence;
-            Debug.Log("true");
+            //Debug.Log("true");
         }
+        /// <summary>フラグに応じて文字送りを始めるか、文字送りの終了を通知する</summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public bool A(string s)
         {
-            Debug.Log("A");
+            //Debug.Log("A");
             if (end)
             {
                 onoff = true;
@@ -49,7 +55,7 @@ namespace DemonicCity
         }
         public IEnumerator SentenceFeed(string s)
         {
-            Debug.Log("col");
+            //Debug.Log("col");
             sentence = s;
             onoff = false;
             text.text = "";

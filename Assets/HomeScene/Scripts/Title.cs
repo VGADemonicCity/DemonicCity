@@ -6,20 +6,30 @@ namespace DemonicCity.HomeScene
 {
     public class Title : MonoBehaviour
     {
+        TouchGestureDetector touchGestureDetector;
 
-        public void ToHome()
+        private void Awake()
         {
-            SceneChange.SceneChanger(SceneName.Home);
+            
+            touchGestureDetector = TouchGestureDetector.Instance;
         }
 
-
-
-        private void Update()
+        void Start()
         {
-            if (Input.GetMouseButtonUp(0))
+            //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
+
+            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                ToHome();
-            }
+                if (gesture == TouchGestureDetector.Gesture.Click)
+                {
+                Debug.Log(gesture);
+                    ToHome();
+                }
+            });
+        }
+        public void ToHome()
+        {
+            SceneChanger.SceneChange(SceneName.Home);
         }
     }
 }

@@ -15,13 +15,10 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Awake()
         {
-            //touchGestureDetector = GetComponent<TouchGestureDetector>();
+            touchGestureDetector = TouchGestureDetector.Instance;
         }
         void Start()
         {
-            touchGestureDetector = TouchGestureDetector.Instance;
-            touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
-
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 switch (gesture)

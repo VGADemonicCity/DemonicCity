@@ -8,6 +8,7 @@ using UnityEngine.UI;
 
 namespace DemonicCity
 {
+    
     public class TextManager : MonoBehaviour
     {
 
@@ -19,12 +20,12 @@ namespace DemonicCity
         [SerializeField] PutSentence putSentence;
         void Awake()
         {
-
+            touchGestureDetector = TouchGestureDetector.Instance;
         }
         void Start()
         {
-            touchGestureDetector= TouchGestureDetector.Instance;
-            touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
+            
+            //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
@@ -32,7 +33,7 @@ namespace DemonicCity
                     //Debug.Log("begin");
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
-                    if (true)
+                    if (hit.tag!=buttonTag)
                     {
                         flag = putSentence.onoff;
                         if (flag)
