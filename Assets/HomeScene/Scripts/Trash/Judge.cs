@@ -29,7 +29,7 @@ namespace DemonicCity.HomeScene
         {
             if (Button.GetComponent<Button>())
             {
-                SceneChange.SceneChanger(Button.name.Substring(2));
+                SceneChanger.SceneChange(Button.name.Substring(2));
             }
         }
         

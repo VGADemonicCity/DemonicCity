@@ -4,20 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-namespace DemonicCity.HomeScene
+namespace DemonicCity
 {
     public enum SceneName
     {
         Home,  Story, Battle, Last
     }
-    public static class SceneChange
+    public static class SceneChanger
     {
         static SceneName scenes;
-        public static void SceneChanger(string s)
+        public static void SceneChange(string s)
         {
             SceneManager.LoadScene(s);
         }
-        public static void SceneChanger(SceneName name)
+        public static void SceneChange(SceneName name)
         {
             SceneManager.LoadScene(name.ToString());
         }
