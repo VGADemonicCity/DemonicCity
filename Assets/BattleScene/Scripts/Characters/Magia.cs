@@ -67,17 +67,21 @@ namespace DemonicCity
         }
 
         /// <summary>経験値</summary>
-        public int m_totalExperience;
+        [SerializeField] int m_totalExperience;
+        /// <summary>振り分けポイント</summary>
+        [SerializeField] float m_statsPoint;
         /// <summary>属性フラグ</summary>
-        public Attribute m_attribute = Attribute.Standard;
+        [SerializeField] Attribute m_attribute = Attribute.Standard;
         /// <summary>パッシブスキルフラグ</summary>
-        public PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
-        /// <summary>
-        /// 初期レベルを1としたときの最大レベルを返します
-        /// </summary>
-        /// <value>The max level.</value>
+        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
+        /// <summary>パッシブスキルフラグのプロパティ</summary>
+        public PassiveSkill MyPassiveSkill{
+            get { return m_passiveSkill; }
+        }
+        /// <summary>初期レベルを1としたときの最大レベルを返します</summary>
+        /// <value>レベル最大値</value>
         public int MaxLevel { get { return requiredExps.Length + 1; } }
-        /// <summary>レベルアップに必要な経験値</summary>
+        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField]
         int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>実際にセーブするステータスクラス</summary>
@@ -89,20 +93,12 @@ namespace DemonicCity
             set { m_stats = value; }
         }
 
-        /// <summary>
-        /// レベル上限に達していない、且つ次のレベルに上がるのに必要な経験値を超えていたら
-        /// 1レベルアップする.
-        /// </summary>
-        public void LevelUp()
-        {
-            var requiredExp = GetRequiredExpToNextLevel(Stats.m_level);
-
-            if (MaxLevel >= Stats.m_level && requiredExp <= Stats.m_level)
-            {
-                return;
-            }
-            Stats.m_level++;
-        }
+        /// <summary>固有ステータス用振り分けポイント</summary>
+        int m_addStatsPoint = 3;
+        /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
+        int m_additionalPoint = 5;     
+        /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
+        int m_additionalPointAttribute = 5;
 
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
@@ -112,6 +108,55 @@ namespace DemonicCity
         public int GetRequiredExpToNextLevel(int currentLevel)
         {
             return currentLevel >= MaxLevel ? 0 : requiredExps[currentLevel - 1];
+        }
+
+        /// <summary>
+        /// レベル上限に達していない、且つ次のレベルに上がるのに必要な経験値を超えていたら
+        /// 1レベルアップする.
+        /// </summary>
+        public void LevelUp()
+        {
+            var requiredExp = GetRequiredExpToNextLevel(Stats.m_level); // 現在のレベルに必要な経験値(総パネル破壊枚数)
+
+            if (MaxLevel >= Stats.m_level && requiredExp <= Stats.m_level) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
+            {
+                return;
+            }
+            Stats.m_level++; // levelを1上げる
+            m_statsPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
+            Save();
+        }
+
+        /// <summary>
+        /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
+        /// </summary>
+        public void SetStats(Statistics stats = null)
+        {
+            if(stats != null)
+            {
+                Stats = stats;
+            }   
+            Stats.m_attack = Stats.m_attack + (Stats.m_muscularStrength * m_additionalPoint); // 筋力を攻撃力に変換
+            Stats.m_attack = Stats.m_attack + (Stats.m_sense * m_additionalPoint); // センスを攻撃力に変換
+            Stats.m_defense = Stats.m_defense + (Stats.m_durability * m_additionalPoint); // 耐久力を防御力に変換
+            Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_additionalPoint); // 知識を防御力に変換
+
+            if(m_attribute == Attribute.FemaleWitch || m_attribute == Attribute.FemaleWarrior || m_attribute == Attribute.FemaleTrancendental) // 女型派生の場合魅力をHPに変換
+            {
+                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_additionalPointAttribute);
+            }
+            else if (m_attribute != Attribute.Standard)
+            {
+                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_additionalPointAttribute); // 男型派生の場合威厳をHPに変換
+            }
+        }
+
+        /// <summary>
+        /// Object->Jsonに変換される前に実行されるコールバック関数
+        /// </summary>
+        public override void OnBeforeSerialize()
+        {
+
         }
     }
 }
