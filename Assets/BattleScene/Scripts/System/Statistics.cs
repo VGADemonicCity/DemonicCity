@@ -51,9 +51,5 @@ namespace DemonicCity
         public float m_attack;
         /// <summary>防御力</summary>
         public float m_defense;
-
-        /// <summary>レベルアップ時に得れるステータスポイント</summary>
-        public float m_statusPoint;
-
     }
 }

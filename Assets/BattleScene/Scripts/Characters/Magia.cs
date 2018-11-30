@@ -72,7 +72,8 @@ namespace DemonicCity
         [SerializeField] float m_statsPoint;
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
-        /// <summary>パッシブスキルフラグ</summary>
+        /// <summary>パッシブスキルフラグ</summary>        [SerializeField]
+        int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
         /// <summary>パッシブスキルフラグのプロパティ</summary>
         public PassiveSkill MyPassiveSkill{
@@ -82,8 +83,6 @@ namespace DemonicCity
         /// <value>レベル最大値</value>
         public int MaxLevel { get { return requiredExps.Length + 1; } }
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
-        [SerializeField]
-        int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] Statistics m_stats = new Statistics();
         /// <summary>ステータスクラスのプロパティ</summary>
@@ -92,13 +91,15 @@ namespace DemonicCity
             get { return m_stats; }
             set { m_stats = value; }
         }
+        /// <summary>レベルアップ時に得れるステータスポイント</summary>
+        public float m_statusPoint;
 
         /// <summary>固有ステータス用振り分けポイント</summary>
         int m_addStatsPoint = 3;
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
-        int m_additionalPoint = 5;     
-        /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
-        int m_additionalPointAttribute = 5;
+        int m_magnificationByStats = 5;     
+        /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
+        int m_magnificationByAttribute = 5;
 
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
@@ -136,18 +137,18 @@ namespace DemonicCity
             {
                 Stats = stats;
             }   
-            Stats.m_attack = Stats.m_attack + (Stats.m_muscularStrength * m_additionalPoint); // 筋力を攻撃力に変換
-            Stats.m_attack = Stats.m_attack + (Stats.m_sense * m_additionalPoint); // センスを攻撃力に変換
-            Stats.m_defense = Stats.m_defense + (Stats.m_durability * m_additionalPoint); // 耐久力を防御力に変換
-            Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_additionalPoint); // 知識を防御力に変換
+            Stats.m_attack = Stats.m_attack + (Stats.m_muscularStrength * m_magnificationByStats); // 筋力を攻撃力に変換
+            Stats.m_attack = Stats.m_attack + (Stats.m_sense * m_magnificationByStats); // センスを攻撃力に変換
+            Stats.m_defense = Stats.m_defense + (Stats.m_durability * m_magnificationByStats); // 耐久力を防御力に変換
+            Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_magnificationByStats); // 知識を防御力に変換
 
             if(m_attribute == Attribute.FemaleWitch || m_attribute == Attribute.FemaleWarrior || m_attribute == Attribute.FemaleTrancendental) // 女型派生の場合魅力をHPに変換
             {
-                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_additionalPointAttribute);
+                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute);
             }
             else if (m_attribute != Attribute.Standard)
             {
-                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_additionalPointAttribute); // 男型派生の場合威厳をHPに変換
+                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 男型派生の場合威厳をHPに変換
             }
         }
 
