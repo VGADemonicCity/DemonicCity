@@ -58,12 +58,13 @@ namespace DemonicCity
             InfernosFist = 256,
             /// <summary>魔王ノ細胞</summary>
             SatansCell = 512,
+            AmaterasuIncanation = 1024,
             /// <summary>天照-爆炎-</summary>
-            AmaterasuInferno = 1024,
+            AmaterasuInferno = 2048,
             /// <summary>天照-焔壁-</summary>
-            AmaterasuFlameWall = 2048,
+            AmaterasuFlameWall = 4096,
             /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
-            AllSkills = 4095
+            AllSkills = 8191
         }
 
         /// <summary>経験値</summary>
@@ -152,6 +153,13 @@ namespace DemonicCity
         public override void OnBeforeSerialize()
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void OnAfterDeserialize()
+        {
         }
     }
 }

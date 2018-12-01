@@ -11,6 +11,8 @@ namespace DemonicCity.BattleScene
     public class EnemyObject : MonoBehaviour
     {
         /// <summary>ステータス</summary>
-         public Statistics m_statistics = new Statistics();
+        public Statistics m_statistics = new Statistics();
+        /// <summary>Magiaの参照</summary>
+        protected Magia m_magia;
     }
 }
