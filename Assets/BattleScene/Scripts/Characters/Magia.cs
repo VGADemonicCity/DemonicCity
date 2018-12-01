@@ -58,12 +58,13 @@ namespace DemonicCity
             InfernosFist = 256,
             /// <summary>魔王ノ細胞</summary>
             SatansCell = 512,
+            AmaterasuIncanation = 1024,
             /// <summary>天照-爆炎-</summary>
-            AmaterasuInferno = 1024,
+            AmaterasuInferno = 2048,
             /// <summary>天照-焔壁-</summary>
-            AmaterasuFlameWall = 2048,
+            AmaterasuFlameWall = 4096,
             /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
-            AllSkills = 4095
+            AllSkills = 8191
         }
 
         /// <summary>経験値</summary>
@@ -76,7 +77,8 @@ namespace DemonicCity
         int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
         /// <summary>パッシブスキルフラグのプロパティ</summary>
-        public PassiveSkill MyPassiveSkill{
+        public PassiveSkill MyPassiveSkill
+        {
             get { return m_passiveSkill; }
         }
         /// <summary>初期レベルを1としたときの最大レベルを返します</summary>
@@ -97,7 +99,7 @@ namespace DemonicCity
         /// <summary>固有ステータス用振り分けポイント</summary>
         int m_addStatsPoint = 3;
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
-        int m_magnificationByStats = 5;     
+        int m_magnificationByStats = 5;
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
 
@@ -133,23 +135,16 @@ namespace DemonicCity
         /// </summary>
         public void SetStats(Statistics stats = null)
         {
-            if(stats != null)
+            if (stats != null)
             {
                 Stats = stats;
-            }   
+            }
             Stats.m_attack = Stats.m_attack + (Stats.m_muscularStrength * m_magnificationByStats); // 筋力を攻撃力に変換
             Stats.m_attack = Stats.m_attack + (Stats.m_sense * m_magnificationByStats); // センスを攻撃力に変換
             Stats.m_defense = Stats.m_defense + (Stats.m_durability * m_magnificationByStats); // 耐久力を防御力に変換
             Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_magnificationByStats); // 知識を防御力に変換
-
-            if(m_attribute == Attribute.FemaleWitch || m_attribute == Attribute.FemaleWarrior || m_attribute == Attribute.FemaleTrancendental) // 女型派生の場合魅力をHPに変換
-            {
-                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute);
-            }
-            else if (m_attribute != Attribute.Standard)
-            {
-                Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 男型派生の場合威厳をHPに変換
-            }
+            Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
+            Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
 
         /// <summary>
@@ -158,6 +153,13 @@ namespace DemonicCity
         public override void OnBeforeSerialize()
         {
 
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public override void OnAfterDeserialize()
+        {
         }
     }
 }
