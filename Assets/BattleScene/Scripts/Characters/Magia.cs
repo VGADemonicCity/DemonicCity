@@ -99,7 +99,7 @@ namespace DemonicCity
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByStats = 5;     
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
-        int m_magnificationByAttribute = 5;
+        int m_magnificationByAttribute = 50;
 
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
