@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// State machine behaviour.
     /// </summary>
-    public class StateMachineBehaviour : MonoBehaviour
+    public class StateMachineBehaviour : SavableMonoSingleton<StateMachineBehaviour>
     {
         /// <summary>BattleManagerの参照</summary>
         protected BattleManager m_battleManager;

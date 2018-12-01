@@ -10,7 +10,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Panel manager.
     /// </summary>
-    public class PanelManager : MonoSingleton<PanelManager>
+    public class PanelManager : SavableMonoSingleton<PanelManager>
     {
         /// <summary>
         /// Flag.

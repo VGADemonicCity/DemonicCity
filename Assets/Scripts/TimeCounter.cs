@@ -7,7 +7,7 @@ namespace DemonicCity
     /// <summary>
     /// Time counter.
     /// </summary>
-    public class TimeCounter : MonoSingleton<TimeCounter>
+    public class TimeCounter : SavableMonoSingleton<TimeCounter>
     {
         /// <summary>hour</summary>
         [SerializeField] int m_hour;

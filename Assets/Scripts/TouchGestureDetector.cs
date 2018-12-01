@@ -15,7 +15,7 @@ namespace DemonicCity
     /// <author>KAKO Akihito</author>
     /// <email>kako@qnote.co.jp</email>
     /// <license>MIT License</license>
-    public class TouchGestureDetector : MonoSingleton<TouchGestureDetector>
+    public class TouchGestureDetector : SavableMonoSingleton<TouchGestureDetector>
     {
         const float FLICK_TIME_LIMIT = 0.3f;
 

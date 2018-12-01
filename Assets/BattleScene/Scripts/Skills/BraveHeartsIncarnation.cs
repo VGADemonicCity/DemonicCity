@@ -14,8 +14,9 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] float m_increase = 0.01f;
 
-        void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             m_passiveSkill = Magia.PassiveSkill.BraveHeartsIncarnation; // フラグを設定
         }
 

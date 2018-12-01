@@ -17,10 +17,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void Awake()
         {
             base.Awake();
-            if (m_passiveSkill == 0) // 
-            {
-                m_passiveSkill = Magia.PassiveSkill.DevilsFist; // フラグを設定
-            }
+            m_passiveSkill = Magia.PassiveSkill.SelfRegeneration; // フラグを設定
         }
 
         /// <summary>

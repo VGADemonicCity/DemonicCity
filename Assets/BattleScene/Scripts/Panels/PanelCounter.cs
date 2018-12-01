@@ -10,7 +10,7 @@ namespace DemonicCity.BattleScene
     /// パネルの種類に応じてカウントをとる
     /// 敵パネルを引いた際はStateMachineを遷移させる
     /// </summary>
-    public class PanelCounter : MonoSingleton<PanelCounter>
+    public class PanelCounter : SavableMonoSingleton<PanelCounter>
     {
         /// <summary>シャッフルスキル専用カウンター</summary>
         public int m_CounterForShuffleSkill { get; private set; }
@@ -92,19 +92,23 @@ namespace DemonicCity.BattleScene
                     m_CityCount++; // シティパネルカウントアップ
                     m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
                     m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
+                    Save();
                     break;
                 case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
                     m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
                     m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
+                    Save(); // データセーブ
                     break;
                 case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
                     m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
                     m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
+                    Save(); // データセーブ
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_state = BattleManager.StateMachine.PlayerAttack; // ステートマシンをPlayerAttackへ
+                    Save(); // データセーブ
                     // =========================================
                     // イベント呼び出し : StateMachine.PlayerAttack
                     // =========================================

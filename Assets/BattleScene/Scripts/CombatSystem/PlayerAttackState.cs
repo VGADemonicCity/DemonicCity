@@ -39,7 +39,7 @@ namespace DemonicCity.BattleScene
         IEnumerator AttackProcess()
         {
             // ==============================
-            // ここに攻撃の演出処理を入れる予定かな？
+            // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("attack process called.");
             yield return new WaitForSeconds(3f);

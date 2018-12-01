@@ -11,12 +11,14 @@ namespace DemonicCity.BattleScene
     /// Battle manager.
     /// Singleton pattern
     /// </summary>
-    public class BattleManager : MonoSingleton<BattleManager>
+    [Serializable]
+    public class BattleManager : SavableMonoSingleton<BattleManager>
     {
         /// <summary>
         /// State machine : ステートマシン.
         /// 状態遷移を管理する
         /// </summary>
+        [Serializable]
         public enum StateMachine
         {
             /// <summary>ゲーム開始時</summary>
@@ -38,6 +40,7 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// Wave.
         /// </summary>
+        [Serializable]
         public enum Wave
         {
             /// <summary>第1ウェーブ.</summary>
