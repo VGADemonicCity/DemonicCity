@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
     /// Singleton pattern
     /// </summary>
     [Serializable]
-    public class BattleManager : SavableMonoSingleton<BattleManager>
+    public class BattleManager : MonoSingleton<BattleManager>
     {
         /// <summary>
         /// State machine : ステートマシン.
@@ -58,6 +58,8 @@ namespace DemonicCity.BattleScene
         /// <summary>ステート毎に呼び出すメソッドを変える : Change method calling each state.</summary>
         public StateMachineEvent m_behaviourByState = new StateMachineEvent();
 
+
+
         void Start()
         {
             Debug.Log("called.");
@@ -72,8 +74,6 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(1f); // 遅延させる時間(waitWhileかWait)
             m_behaviourByState.Invoke(StateMachine.Init);
         }
-
-
 
         /// <summary>
         /// State machine event.

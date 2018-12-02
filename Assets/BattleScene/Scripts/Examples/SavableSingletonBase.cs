@@ -10,7 +10,7 @@ namespace DemonicCity.CharacterSystemm
     /// 前名「SavableSingletonBase」
     /// ローカルストレージにファイルとして、シリアライズしたデータを保存できるシングルトンです（iOSの場合、該当ファイルはiCloudバックアップ対象から除外します）
     /// </summary>
-    abstract public class SSB<T> where T : SSB<T>, new()
+    abstract public class SavableSingletonBase<T> where T : SavableSingletonBase<T>, new()
     {
         protected static T m_instance;
         bool m_isLoaded;

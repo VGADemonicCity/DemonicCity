@@ -19,12 +19,13 @@ namespace DemonicCity.BattleScene.Skill
         protected SkillManager m_skillManager;
         /// <summary>PanelCounterの参照</summary>
         protected PanelCounter m_panelCounter;
-        protected Magia m_magia = Magia.Instance;
+        protected Magia m_magia;
 
         protected virtual void Awake()
         {
             m_skillManager = SkillManager.Instance; // SkillManagerシングルトンインスタンス取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
+            m_magia = Magia.Instance; // Magiaの参照取得
         }
 
         /// <summary>

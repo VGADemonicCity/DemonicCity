@@ -844,6 +844,64 @@ MonoBehaviour:
   m_doubleCount: 0
   m_tripleCount: 0
   m_totalPanelCount: 0
+--- !u!114 &1806308994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806308989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0b636f73ad74470aac14a8d551a65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_magia:
+    m_totalExperience: 0
+    m_statsPoint: 0
+    m_attribute: 0
+    requiredExps: 050000000a0000000f00000014000000190000001e00000023000000280000002d000000320000003c00000046000000500000005a0000006400000096000000c8000000fa0000002c01000090010000f4010000
+    m_passiveSkill: 8191
+    m_stats:
+      m_level: 0
+      m_durability: 0
+      m_muscularStrength: 0
+      m_knowledge: 0
+      m_sense: 0
+      m_charm: 0
+      m_dignity: 0
+      m_hitPoint: 0
+      m_attack: 0
+      m_defense: 0
+    m_statusPoint: 0
+--- !u!114 &1806308995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1806308989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c0b636f73ad74470aac14a8d551a65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_magia:
+    m_totalExperience: 0
+    m_statsPoint: 0
+    m_attribute: 0
+    requiredExps: 050000000a0000000f00000014000000190000001e00000023000000280000002d000000320000003c00000046000000500000005a0000006400000096000000c8000000fa0000002c01000090010000f4010000
+    m_passiveSkill: 8191
+    m_stats:
+      m_level: 0
+      m_durability: 0
+      m_muscularStrength: 0
+      m_knowledge: 0
+      m_sense: 0
+      m_charm: 0
+      m_dignity: 0
+      m_hitPoint: 0
+      m_attack: 0
+      m_defense: 0
+    m_statusPoint: 0
 --- !u!1001 &1886294268
 Prefab:
   m_ObjectHideFlags: 0

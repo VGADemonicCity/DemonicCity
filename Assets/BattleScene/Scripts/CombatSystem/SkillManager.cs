@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// バトル中のスキル関係の制御を行うクラス
     /// </summary>
-    public class SkillManager : SavableMonoSingleton<SkillManager>
+    public class SkillManager : MonoSingleton<SkillManager>
     {
         /// <summary>SkillProcessor</summary>
         public SkillJudger m_skillJudger = new SkillJudger();

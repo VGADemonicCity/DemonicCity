@@ -23,6 +23,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] float m_distance = 3.835f;
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
+        /// <summary>パネルフレームの初期座標</summary>
+        Vector2 m_panelFlamePosition;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
         /// <summary></summary>
@@ -31,6 +33,7 @@ namespace DemonicCity.BattleScene
         public void Start()
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            m_panelFlamePosition = transform.position; // パネル枠の初期位置を保存する
 
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -55,6 +58,14 @@ namespace DemonicCity.BattleScene
                         break;
                 }
             });
+        }
+
+        /// <summary>
+        /// パネル枠を初期位置に戻す
+        /// </summary>
+        public void ResetPanelFlame()
+        {
+            transform.position = m_panelFlamePosition;
         }
 
         /// <summary>

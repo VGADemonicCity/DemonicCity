@@ -8,7 +8,7 @@ namespace DemonicCity
     /// <summary>
     /// Mono singleton.
     /// </summary>
-    public abstract class SavableMonoSingleton<T> : MonoBehaviour,ISerializationCallbackReceiver where T : SavableMonoSingleton<T>,new()
+    public abstract class SavableMonoSingleton<T> : MonoBehaviour, ISerializationCallbackReceiver where T : SavableMonoSingleton<T>, new()
     {
         /// <summary>
         /// The instance.
@@ -90,7 +90,10 @@ namespace DemonicCity
         /// 継承先で任意の処理を書く
         /// Called when the instantiated.
         /// </summary>
-        public virtual void OnInitialize() { }
+        public virtual void OnInitialize()
+        {
+            Load();
+        }
 
         /// <summary>
         /// destroyした時に呼ばれる
@@ -154,7 +157,7 @@ namespace DemonicCity
         /// </summary>
         protected void ReLoad()
         {
-            JsonUtility.FromJsonOverwrite(GetJason(), this);
+            JsonUtility.FromJsonOverwrite(GetJson(), this);
         }
 
         /// <summary>
@@ -162,14 +165,14 @@ namespace DemonicCity
         /// </summary>
         protected static void Load()
         {
-            m_instance = JsonUtility.FromJson<T>(GetJason());
+            m_instance = JsonUtility.FromJson<T>(GetJson());
         }
 
         /// <summary>
         /// 保存しているJsonを取得する
         /// </summary>
         /// <returns>Jsonファイル</returns>
-        static string GetJason()
+        static string GetJson()
         {
             // 既にJsonを取得している場合はそれを返す
             if (!string.IsNullOrEmpty(m_jsonText))
@@ -180,14 +183,14 @@ namespace DemonicCity
             // Jsonを保存している場所のパスを取得
             string filePath = GetSaveFilePath();
 
-            // Jsonが存在するか調べてから取得し変換する。存在しなければ新たなクラスを作成し、それをJsonに変換する
+            // Jsonが存在するか調べてから取得し変換する。存在しなければemptyを返す
             if (File.Exists(filePath))
             {
                 m_jsonText = File.ReadAllText(filePath);
             }
             else
             {
-                m_jsonText = JsonUtility.ToJson(new T());
+                m_jsonText = "";
             }
 
             return m_jsonText;
@@ -207,7 +210,7 @@ namespace DemonicCity
         /// </summary>
         public void Delete()
         {
-            m_jsonText = JsonUtility.ToJson(new T());
+            m_jsonText = "";
             ReLoad();
         }
 

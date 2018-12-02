@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Security.Cryptography;
 
 namespace DemonicCity
 {
@@ -73,8 +74,9 @@ namespace DemonicCity
         [SerializeField] float m_statsPoint;
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
-        /// <summary>パッシブスキルフラグ</summary>        [SerializeField]
-        int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
+        /// <summary>レベル毎の必要経験値数</summary>
+        [SerializeField] int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
+        /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
         /// <summary>パッシブスキルフラグのプロパティ</summary>
         public PassiveSkill MyPassiveSkill
@@ -103,6 +105,29 @@ namespace DemonicCity
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
 
+        ///// <summary>
+        ///// Awake this instance.
+        ///// </summary>
+        //void Start()
+        //{
+        //    if (m_instance == null) // Load時データが存在しなかったら
+        //    {
+        //        Debug.Log("m_instance = null");
+        //        // magiaをレベル1のステータスにする
+        //        m_stats.m_level = 1;
+        //        m_stats.m_hitPoint = 1000;
+        //        m_stats.m_attack = 100;
+        //        m_stats.m_defense = 100;
+        //        m_stats.m_durability = 0;
+        //        m_stats.m_charm = 0;
+        //        m_stats.m_sense = 0;
+        //        m_stats.m_dignity = 0;
+        //        m_stats.m_knowledge = 0;
+        //        m_stats.m_muscularStrength = 0;
+
+        //    }
+        //}
+
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
         /// </summary>
@@ -127,7 +152,6 @@ namespace DemonicCity
             }
             Stats.m_level++; // levelを1上げる
             m_statsPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
-            Save();
         }
 
         /// <summary>
@@ -145,21 +169,6 @@ namespace DemonicCity
             Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_magnificationByStats); // 知識を防御力に変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
-        }
-
-        /// <summary>
-        /// Object->Jsonに変換される前に実行されるコールバック関数
-        /// </summary>
-        public override void OnBeforeSerialize()
-        {
-
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public override void OnAfterDeserialize()
-        {
         }
     }
 }
