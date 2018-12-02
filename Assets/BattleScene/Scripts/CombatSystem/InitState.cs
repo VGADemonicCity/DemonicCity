@@ -7,7 +7,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Init.
     /// </summary>
-    public class InitState : StateMachineBehaviour
+    public class InitState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.
@@ -22,6 +22,7 @@ namespace DemonicCity.BattleScene
                 }
                 Debug.Log("Init state called.");
 
+                m_magia.StatsBuffer = m_magia.Stats;　// 一番最初のターンだけバッファ変数にStatsを代入
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化
                 // ==============================

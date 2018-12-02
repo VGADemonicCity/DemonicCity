@@ -14,13 +14,18 @@ namespace DemonicCity.BattleScene.Skill
         [SerializeField] protected int m_CountCondition = 1;
         /// <summary>レベルとパネルカウントが上限に達していたらtrueが入る</summary>
         [SerializeField] protected bool m_trialResult = false;
+        /// <summary>パッシブスキルフラグ用変数</summary>
         [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
         /// <summary>SkillManagerの参照</summary>
         protected SkillManager m_skillManager;
         /// <summary>PanelCounterの参照</summary>
         protected PanelCounter m_panelCounter;
+        /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
 
+        /// <summary>
+        /// Awake this instance.
+        /// </summary>
         protected virtual void Awake()
         {
             m_skillManager = SkillManager.Instance; // SkillManagerシングルトンインスタンス取得

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace DemonicCity.BattleScene
 {
-    public class LoseState : StateMachineBehaviour
+    public class LoseState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.

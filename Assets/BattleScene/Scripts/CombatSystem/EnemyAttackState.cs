@@ -6,7 +6,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Enemy attack state.
     /// </summary>
-    public class EnemyAttackState : StateMachineBehaviour
+    public class EnemyAttackState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.

@@ -16,6 +16,7 @@ namespace DemonicCity.BattleScene
     {
 
         public StateMachine m_stateMachine;
+        [SerializeField] Magia m_magia;
 
         ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
         //public State m_state = State.Init;
@@ -25,9 +26,13 @@ namespace DemonicCity.BattleScene
         /// <summary>ステート毎に呼び出すメソッドを変える : Change method calling each state.</summary>
         public StateMachineEvent m_behaviourByState = new StateMachineEvent();
 
+        /// <summary>
+        /// Awake this instance.
+        /// </summary>
         void Awake()
         {
             m_stateMachine = StateMachine.Instance;
+            m_magia = Magia.Instance;
         }
 
         /// <summary>

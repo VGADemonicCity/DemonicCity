@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// Player choice.
     /// </summary>
-    public class PlayerChoiceState : StateMachineBehaviour
+    public class PlayerChoiceState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.
@@ -21,15 +21,15 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-
-                m_magia = Magia.Instance;
-                m_magia.Save();
                 Debug.Log("PlayerChoice state called.");
+
+                // 毎ターン前ターンのスキル情報をさせる為、スキル適応前のStats情報をbufferに保存してプレイヤーターン開始時毎に初期化する様にする
+                if (m_magia.StatsBuffer != null) { m_magia.Stats = m_magia.StatsBuffer; }
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化
                 // ==============================
                 // ここにプレイヤーターンが始まった時の処理を書く
-                // PlayerCoiceStateから遷移する処理はPanelCounterが敵パネルを認識して処理させている
+                // PlayerCoiceStateから遷移する処理はPanelCounterが敵パネルを認識してState遷移処理をさせている
                 // ==============================
             });
         }

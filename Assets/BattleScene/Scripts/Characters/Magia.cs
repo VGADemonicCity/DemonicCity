@@ -88,7 +88,8 @@ namespace DemonicCity
         public int MaxLevel { get { return requiredExps.Length + 1; } }
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         /// <summary>実際にセーブするステータスクラス</summary>
-        [SerializeField] Statistics m_stats = new Statistics()
+        [SerializeField]
+        Statistics m_stats = new Statistics()
         {
             m_level = 1,
             m_hitPoint = 1000,
@@ -109,6 +110,15 @@ namespace DemonicCity
         }
         /// <summary>レベルアップ時に得れるステータスポイント</summary>
         public float m_statusPoint;
+
+        /// <summary>マギアのステータスを一時保存しておく変数</summary>
+        [SerializeField] Statistics m_StatsBuffer;
+        /// <summary>m_statsBufferのプロパティ</summary>
+        public Statistics StatsBuffer
+        {
+            get { return m_StatsBuffer; }
+            set { m_StatsBuffer = value; }
+        }
 
         /// <summary>固有ステータス用振り分けポイント</summary>
         int m_addStatsPoint = 3;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DemonicCity.BattleScene
 {
-    public class WinState : StateMachineBehaviour
+    public class WinState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.

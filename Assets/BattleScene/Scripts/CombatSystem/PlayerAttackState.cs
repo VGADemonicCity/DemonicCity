@@ -9,7 +9,7 @@ namespace DemonicCity.BattleScene
     /// Player attack state.
     /// 攻撃処理を行うクラス
     /// </summary>
-    public class PlayerAttackState : StateMachineBehaviour
+    public class PlayerAttackState : StatesBehaviour
     {
    
 
@@ -24,7 +24,6 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-                Debug.Log("PAよばれた");
                 m_battleManager.m_stateMachine.Save();
                 // ==============================
                 // イベント呼び出し : SkillJudger
