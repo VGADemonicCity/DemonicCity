@@ -114,7 +114,8 @@ namespace DemonicCity.BattleScene
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
-                    m_shufflePanels.PanelShuffle();
+                    var a = Magia.Instance;
+                    a.LevelUp();
                 }
             });
 

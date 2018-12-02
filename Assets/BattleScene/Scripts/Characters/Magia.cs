@@ -134,7 +134,7 @@ namespace DemonicCity
         int m_magnificationByAttribute = 50;
 
         /// <summary>
-        /// 基礎ステータスを基礎値に戻す
+        /// 基礎ステータスをバトル開始時のスキル適応前の状態に戻す
         /// </summary>
         public void ResetStats()
         {
@@ -165,6 +165,33 @@ namespace DemonicCity
             {
                 return;
             }
+
+            // レベルアップする直前のレベルに合わせてステータスを上昇させる
+            if(Stats.m_level < 50) // レベル50以下なら
+            {
+                Stats.m_hitPoint += 50;
+                Stats.m_attack += 15;
+                Stats.m_defense += 15;
+            }
+            else if(Stats.m_level >= 50 && Stats.m_level < 100) // レベル50~99なら
+            {
+                Stats.m_hitPoint += 25;
+                Stats.m_attack += 10;
+                Stats.m_defense += 10;
+            }
+            else if (Stats.m_level >= 100 && Stats.m_level < 150) // レベル100~149なら
+            {
+                Stats.m_hitPoint += 10;
+                Stats.m_attack += 5;
+                Stats.m_defense += 5;
+            }
+            else if (Stats.m_level >= 150 && Stats.m_level < 200) // レベル150~199なら
+            {
+                Stats.m_hitPoint += 5;
+                Stats.m_attack += 1;
+                Stats.m_defense += 1;
+            }
+
             Stats.m_level++; // levelを1上げる
             m_statsPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
