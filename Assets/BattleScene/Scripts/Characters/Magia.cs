@@ -112,12 +112,18 @@ namespace DemonicCity
         public float m_statusPoint;
 
         /// <summary>マギアのステータスを一時保存しておく変数</summary>
-        [SerializeField] Statistics m_StatsBuffer;
+        [SerializeField] Statistics m_StatsBuffer = new Statistics();
         /// <summary>m_statsBufferのプロパティ</summary>
         public Statistics StatsBuffer
         {
             get { return m_StatsBuffer; }
-            set { m_StatsBuffer = value; }
+            set
+            {
+                var stats = value;
+                StatsBuffer.m_hitPoint = stats.m_hitPoint;
+                StatsBuffer.m_attack = stats.m_attack;
+                StatsBuffer.m_defense = stats.m_defense;
+            }
         }
 
         /// <summary>固有ステータス用振り分けポイント</summary>
@@ -126,6 +132,16 @@ namespace DemonicCity
         int m_magnificationByStats = 5;
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
+
+        /// <summary>
+        /// 基礎ステータスを基礎値に戻す
+        /// </summary>
+        public void ResetStats()
+        {
+            Stats.m_hitPoint = StatsBuffer.m_hitPoint;
+            Stats.m_attack = StatsBuffer.m_attack;
+            Stats.m_defense = StatsBuffer.m_defense;
+        }
 
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
@@ -156,7 +172,7 @@ namespace DemonicCity
         /// <summary>
         /// 初期形態のレベル1のステータスにセットする
         /// </summary>
-        public void ResetStats()
+        public void InitStats()
         {
             Stats = new Statistics()
             {

@@ -29,14 +29,14 @@ namespace DemonicCity
         }
 
         /// <summary>敵キャラクターのリスト</summary>
-        [SerializeField] List<EnemyObject> m_items;
+        [SerializeField] List<Enemy> m_items;
 
         /// <summary>
         ///　Idと照合出来た敵キャラクターを返す
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        static EnemyObject GetEnemyData(string id)
+        static Enemy GetEnemyData(string id)
         {
             return m_instance.m_items.First(x => x.Id == id);
         }
@@ -45,7 +45,7 @@ namespace DemonicCity
         /// Enemy character.
         /// </summary>
         [Serializable]
-        class EnemyObject
+        class Enemy
         {
             /// <summary>敵キャラのID</summary>
             [SerializeField] string m_id;

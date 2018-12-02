@@ -85,7 +85,6 @@ namespace DemonicCity
 
         static string GetSavePath()
         {
-            Debug.Log("complete");
             //Debug.Log("セーブ先のパス : " + string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey()));
             return string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey());
         }
