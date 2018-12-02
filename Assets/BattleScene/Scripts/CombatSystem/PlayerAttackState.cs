@@ -20,10 +20,12 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
                 }
+                Debug.Log("PAよばれた");
+                m_battleManager.m_stateMachine.Save();
                 // ==============================
                 // イベント呼び出し : SkillJudger
                 // ==============================
@@ -56,7 +58,7 @@ namespace DemonicCity.BattleScene
                     // ==================================
                     // イベント呼び出し : StateMachine.EnemyAttack
                     // ==================================
-                    SetStateMachine(BattleManager.StateMachine.EnemyAttack);
+                    SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                 }
                 else
                 {
@@ -64,7 +66,7 @@ namespace DemonicCity.BattleScene
                     // イベント呼び出し : StateMachine.Win
                     // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
                     // ==================================
-                    SetStateMachine(BattleManager.StateMachine.Win);
+                    SetStateMachine(BattleManager.StateMachine.State.Win);
                 }
                 return false;
             });

@@ -33,13 +33,14 @@ namespace DemonicCity.BattleScene
             m_magia = Magia.Instance; // Magiaの参照取得
         }
 
+
         /// <summary>
         /// 指定したステートに遷移させてBattleManagerのイベントを呼び出す
         /// </summary>
         /// <param name="state">State machine.</param>
-        protected void SetStateMachine(BattleManager.StateMachine state)
+        protected void SetStateMachine(BattleManager.StateMachine.State state)
         {
-            m_battleManager.m_state = state; // stateをセット
+            m_battleManager.m_stateMachine.m_state = state; // stateをセット
             // ==================================
             // イベント呼び出し
             // ==================================

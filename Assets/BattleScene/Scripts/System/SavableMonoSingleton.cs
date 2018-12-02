@@ -16,6 +16,7 @@ namespace DemonicCity
         protected static T m_instance;
         /// <summary>SaveDataをJsonに変換したテキスト(Reload時になんども読み込まなくて良い様に保持)</summary>
         [SerializeField] static string m_jsonText = "";
+        [SerializeField] protected string m_filePath = "SaveData";
 
         /// <summary>
         /// Gets the instance.
@@ -92,6 +93,7 @@ namespace DemonicCity
         /// </summary>
         public virtual void OnInitialize()
         {
+
             Load();
         }
 
@@ -163,16 +165,16 @@ namespace DemonicCity
         /// <summary>
         /// データを読み込む
         /// </summary>
-        protected static void Load()
+        protected void Load()
         {
-            m_instance = JsonUtility.FromJson<T>(GetJson());
+            m_instance = JsonUtility.FromJson<T>(GetJson()) as T;
         }
 
         /// <summary>
         /// 保存しているJsonを取得する
         /// </summary>
         /// <returns>Jsonファイル</returns>
-        static string GetJson()
+        string GetJson()
         {
             // 既にJsonを取得している場合はそれを返す
             if (!string.IsNullOrEmpty(m_jsonText))
@@ -218,13 +220,11 @@ namespace DemonicCity
         /// 保存する場所のパスを取得する
         /// </summary>
         /// <returns>The save file path.</returns>
-        static string GetSaveFilePath()
+        string GetSaveFilePath()
         {
-            string filePath = "SaveData";
-
             //確認しやすい様にエディタではAssetsと同じ階層に保存し、それ以外ではApplication.persistentDataPath以下に保存する様にする
 #if UNITY_EDITOR
-            filePath += ".json";
+            var filePath = m_filePath + ".json";
 #else
             filePath = Application.persistentDataPath + "/" + filePath;
 #endif

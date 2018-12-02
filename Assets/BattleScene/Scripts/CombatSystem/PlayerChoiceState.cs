@@ -17,10 +17,13 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.PlayerChoice) // StateがPlayerChoice以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerChoice) // StateがPlayerChoice以外の時は処理終了
                 {
                     return;
                 }
+
+                m_magia = Magia.Instance;
+                m_magia.Save();
                 Debug.Log("PlayerChoice state called.");
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化

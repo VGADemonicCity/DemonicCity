@@ -15,7 +15,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.EnemyAttack) // StateがEnemyAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.EnemyAttack) // StateがEnemyAttack以外の時は処理終了
                 {
                     return;
                 }
@@ -26,14 +26,14 @@ namespace DemonicCity.BattleScene
                     // ==============================
                     // イベント呼び出し : StateMachine.Lose
                     // ==============================
-                    SetStateMachine(BattleManager.StateMachine.Lose);
+                    SetStateMachine(BattleManager.StateMachine.State.Lose);
                 }
                 else
                 {
                     // ==============================
                     // イベント呼び出し : StateMachine.PlayerChoice
                     // ==============================
-                    SetStateMachine(BattleManager.StateMachine.PlayerChoice);
+                    SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
                 }
             });
         }

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace DemonicCity.CharacterSystemm
 {
     [Serializable]
-    public class CharactersData : SavableSingletonBase<CharactersData>
+    public class CharactersData : SSB<CharactersData>
     {
         public enum CharacterId { chara1, chara2, chara3 }
 

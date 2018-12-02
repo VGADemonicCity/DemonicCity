@@ -10,7 +10,7 @@ namespace DemonicCity
     /// Magia.
     /// </summary>
     [Serializable]
-    public class Magia : SavableSingletonBase<Magia>
+    public class Magia : SSB<Magia>
     {
         /// <summary>属性</summary>
         [Serializable]
@@ -88,7 +88,19 @@ namespace DemonicCity
         public int MaxLevel { get { return requiredExps.Length + 1; } }
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         /// <summary>実際にセーブするステータスクラス</summary>
-        [SerializeField] Statistics m_stats = new Statistics();
+        [SerializeField] Statistics m_stats = new Statistics()
+        {
+            m_level = 1,
+            m_hitPoint = 1000,
+            m_attack = 100,
+            m_defense = 100,
+            m_charm = 0,
+            m_sense = 0,
+            m_dignity = 0,
+            m_knowledge = 0,
+            m_durability = 0,
+            m_muscularStrength = 0
+        };
         /// <summary>ステータスクラスのプロパティ</summary>
         public Statistics Stats
         {
@@ -104,29 +116,6 @@ namespace DemonicCity
         int m_magnificationByStats = 5;
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
-
-        ///// <summary>
-        ///// Awake this instance.
-        ///// </summary>
-        //void Start()
-        //{
-        //    if (m_instance == null) // Load時データが存在しなかったら
-        //    {
-        //        Debug.Log("m_instance = null");
-        //        // magiaをレベル1のステータスにする
-        //        m_stats.m_level = 1;
-        //        m_stats.m_hitPoint = 1000;
-        //        m_stats.m_attack = 100;
-        //        m_stats.m_defense = 100;
-        //        m_stats.m_durability = 0;
-        //        m_stats.m_charm = 0;
-        //        m_stats.m_sense = 0;
-        //        m_stats.m_dignity = 0;
-        //        m_stats.m_knowledge = 0;
-        //        m_stats.m_muscularStrength = 0;
-
-        //    }
-        //}
 
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
@@ -152,6 +141,26 @@ namespace DemonicCity
             }
             Stats.m_level++; // levelを1上げる
             m_statsPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
+        }
+
+        /// <summary>
+        /// 初期形態のレベル1のステータスにセットする
+        /// </summary>
+        public void ResetStats()
+        {
+            Stats = new Statistics()
+            {
+                m_level = 1,
+                m_hitPoint = 1000,
+                m_attack = 100,
+                m_defense = 100,
+                m_charm = 0,
+                m_sense = 0,
+                m_dignity = 0,
+                m_knowledge = 0,
+                m_durability = 0,
+                m_muscularStrength = 0
+            };
         }
 
         /// <summary>

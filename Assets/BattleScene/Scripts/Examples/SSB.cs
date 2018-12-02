@@ -4,13 +4,13 @@ using System.IO;
 using System.Security.Cryptography;
 
 
-namespace DemonicCity.CharacterSystemm
+namespace DemonicCity
 {
     /// <summary>
     /// 前名「SavableSingletonBase」
     /// ローカルストレージにファイルとして、シリアライズしたデータを保存できるシングルトンです（iOSの場合、該当ファイルはiCloudバックアップ対象から除外します）
     /// </summary>
-    abstract public class SavableSingletonBase<T> where T : SavableSingletonBase<T>, new()
+    abstract public class SSB<T> where T : SSB<T>, new()
     {
         protected static T m_instance;
         bool m_isLoaded;
@@ -39,8 +39,11 @@ namespace DemonicCity.CharacterSystemm
 
         public void Save()
         {
+            Debug.Log("saveよばれた");
             if (m_isLoaded)
             {
+                Debug.Log("saveよばれた2");
+
                 m_isSaving = true;
                 var path = GetSavePath();
                 File.WriteAllText(path, JsonUtility.ToJson(this));
@@ -70,6 +73,7 @@ namespace DemonicCity.CharacterSystemm
         {
             try
             {
+                m_instance = new T();
                 m_instance = JsonUtility.FromJson<T>(json);
                 m_instance.m_isLoaded = true;
             }
@@ -81,6 +85,7 @@ namespace DemonicCity.CharacterSystemm
 
         static string GetSavePath()
         {
+            Debug.Log(string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey()));
             return string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey());
         }
 

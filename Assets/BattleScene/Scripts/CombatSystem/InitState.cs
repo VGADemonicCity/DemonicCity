@@ -16,7 +16,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.Init) // StateがInit以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.Init) // StateがInit以外の時は処理終了
                 {
                     return;
                 }
@@ -27,8 +27,20 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し : StateMachine.PlayerChoice
                 // ==============================
-                SetStateMachine(BattleManager.StateMachine.PlayerChoice);
+                SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             });
+
+            StartCoroutine(StartWait());
+        }
+
+        IEnumerator StartWait()
+        {
+            yield return new WaitForSeconds(1f);
+            // ==============================
+            // イベント呼び出し : StateMachine.Init
+            // ==============================
+            Debug.Log(m_battleManager.m_stateMachine.m_state);
+            m_battleManager.m_behaviourByState.Invoke(BattleManager.StateMachine.State.Init);
         }
     }
 }
