@@ -45,6 +45,8 @@ namespace DemonicCity.BattleScene
             Debug.Log("attack process called.");
             yield return new WaitForSeconds(3f);
 
+
+
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
