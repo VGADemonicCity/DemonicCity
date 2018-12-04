@@ -17,7 +17,8 @@ namespace DemonicCity
                     return m_instance;
                 }
 
-                return new T();
+                m_instance = new T();
+                return m_instance;
             }
         }
     }

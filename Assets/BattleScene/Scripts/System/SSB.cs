@@ -12,10 +12,14 @@ namespace DemonicCity
     /// </summary>
     abstract public class SSB<T> where T : SSB<T>, new()
     {
+        /// <summary>シングルトンインスタンス</summary>
         protected static T m_instance;
+        /// <summary>ロードしたかどうかのフラグ</summary>
         bool m_isLoaded;
+        /// <summary>セーブ中かどうかのフラグ</summary>
         protected bool m_isSaving;
 
+        /// <summary>m_instanceのプロパティ</summary>
         public static T Instance
         {
             get
@@ -55,11 +59,17 @@ namespace DemonicCity
             }
         }
 
+        /// <summary>
+        /// Reset this instance.
+        /// </summary>
         public void Reset()
         {
             m_instance = null;
         }
 
+        /// <summary>
+        /// Clear this instance.
+        /// </summary>
         public void Clear()
         {
             if (File.Exists(GetSavePath()))
@@ -69,6 +79,10 @@ namespace DemonicCity
             m_instance = null;
         }
 
+        /// <summary>
+        /// Loads from json.
+        /// </summary>
+        /// <param name="json">Json.</param>
         public static void LoadFromJSON(string json)
         {
             try
@@ -83,12 +97,20 @@ namespace DemonicCity
             }
         }
 
+        /// <summary>
+        /// Gets the save path.
+        /// </summary>
+        /// <returns>The save path.</returns>
         static string GetSavePath()
         {
             //Debug.Log("セーブ先のパス : " + string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey()));
             return string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey());
         }
 
+        /// <summary>
+        /// Gets the save key.
+        /// </summary>
+        /// <returns>The save key.</returns>
         static string GetSaveKey()
         {
             var provider = new SHA1CryptoServiceProvider();

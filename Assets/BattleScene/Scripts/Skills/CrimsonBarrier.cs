@@ -38,7 +38,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             Debug.Log("Activated the 魔拳");
             var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-            m_magia.Stats.m_attack += count * m_magia.Stats.m_attack * m_increase; // 攻撃力の任意の%分加算
 
         }
     }

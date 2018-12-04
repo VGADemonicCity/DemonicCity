@@ -22,9 +22,8 @@ namespace DemonicCity.BattleScene
                     return;
                 }
                 Debug.Log("PlayerChoice state called.");
-                // 毎ターン前ターンのスキル情報をさせる為、スキル適応前のStats情報をbufferに保存してプレイヤーターン開始時毎に初期化する様にする
+                // 毎ターン前ターンのスキル情報をさせる為プレイヤーターン開始時毎に初期化する
                 m_magia.ResetStats();
-                Debug.Log(m_magia.StatsBuffer.m_attack + "ばっふぁつー");
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化
                 // ==============================

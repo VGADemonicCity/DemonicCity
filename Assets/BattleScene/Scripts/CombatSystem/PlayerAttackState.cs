@@ -24,7 +24,6 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-                m_battleManager.m_stateMachine.Save();
                 // ==============================
                 // イベント呼び出し : SkillJudger
                 // ==============================
@@ -43,6 +42,9 @@ namespace DemonicCity.BattleScene
             // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("attack process called.");
+
+
+            Debug.Log("攻撃する前の[" + m_battleManager.m_enemy.Id.ToString() + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
             yield return new WaitForSeconds(3f);
 
 
@@ -50,27 +52,33 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                // ==================================
-                // イベント呼び出し : StateMachine.
-                // ==================================
-                bool enemyIsAlive = true; // 敵がまだ生きていたら敵の攻撃ターン。死んでいればWinステートへ遷移
-                if (enemyIsAlive)
-                {
-                    // ==================================
-                    // イベント呼び出し : StateMachine.EnemyAttack
-                    // ==================================
-                    SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
-                }
-                else
-                {
-                    // ==================================
-                    // イベント呼び出し : StateMachine.Win
-                    // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
-                    // ==================================
-                    SetStateMachine(BattleManager.StateMachine.State.Win);
-                }
+
+                m_battleManager.m_enemy.Stats.m_hitPoint -= m_magia.Stats.m_attack - m_battleManager.m_enemy.Stats.m_defense; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
+                Debug.Log("攻撃した後の[" + m_battleManager.m_enemy.Id.ToString() + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
+
+
                 return false;
             });
+
+
+            // ==================================
+            // イベント呼び出し : StateMachine.
+            // ==================================
+            if (m_battleManager.m_enemy.Stats.m_hitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
+            {
+                // ==================================
+                // イベント呼び出し : StateMachine.EnemyAttack
+                // ==================================
+                SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
+            }
+            else // 敵のHPが0以下だったら
+            {
+                // ==================================
+                // イベント呼び出し : StateMachine.Win
+                // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
+                // ==================================
+                SetStateMachine(BattleManager.StateMachine.State.Win);
+            }
         }
     }
 }

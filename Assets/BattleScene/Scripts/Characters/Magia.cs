@@ -138,7 +138,6 @@ namespace DemonicCity
         /// </summary>
         public void ResetStats()
         {
-            Stats.m_hitPoint = StatsBuffer.m_hitPoint;
             Stats.m_attack = StatsBuffer.m_attack;
             Stats.m_defense = StatsBuffer.m_defense;
         }

@@ -554,7 +554,7 @@ Prefab:
     - target: {fileID: 212736145580593304, guid: 4a4c87496f9936a4d94a905a13f55f96,
         type: 2}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 212736145580593304, guid: 4a4c87496f9936a4d94a905a13f55f96,
         type: 2}
@@ -563,7 +563,21 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1500791861130020, guid: 4a4c87496f9936a4d94a905a13f55f96, type: 2}
       propertyPath: m_Name
-      value: Nafura
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 1500791861130020, guid: 4a4c87496f9936a4d94a905a13f55f96, type: 2}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 212736145580593304, guid: 4a4c87496f9936a4d94a905a13f55f96,
+        type: 2}
+      propertyPath: m_FlipX
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212736145580593304, guid: 4a4c87496f9936a4d94a905a13f55f96,
+        type: 2}
+      propertyPath: m_FlipY
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a4c87496f9936a4d94a905a13f55f96, type: 2}
@@ -785,33 +799,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 1106095958835816, guid: ed8045c25825c2d46b9155066645d3cb,
     type: 2}
   m_PrefabInternal: {fileID: 37631615}
---- !u!1 &1980200589 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1500791861130020, guid: 4a4c87496f9936a4d94a905a13f55f96,
-    type: 2}
-  m_PrefabInternal: {fileID: 1383842098}
---- !u!114 &1980200590
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1980200589}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8566f5378b7a4523ba1049a37036c22, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_statistics:
-    m_level: 0
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 0
-    m_attack: 0
-    m_defense: 0
 --- !u!1001 &2060429740
 Prefab:
   m_ObjectHideFlags: 0

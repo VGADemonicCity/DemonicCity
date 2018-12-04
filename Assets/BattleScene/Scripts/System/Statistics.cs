@@ -48,8 +48,8 @@ namespace DemonicCity
         /// <summary>ヒットポイント</summary>
         public int m_hitPoint;
         /// <summary>攻撃力</summary>
-        public float m_attack;
+        public int m_attack;
         /// <summary>防御力</summary>
-        public float m_defense;
+        public int m_defense;
     }
 }
