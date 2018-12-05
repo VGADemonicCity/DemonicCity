@@ -100,7 +100,7 @@ namespace DemonicCity
             m_dignity = 0,
             m_knowledge = 0,
             m_durability = 0,
-            m_muscularStrength = 0
+            m_muscularStrength = 0,
         };
         /// <summary>ステータスクラスのプロパティ</summary>
         public Statistics Stats
