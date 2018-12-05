@@ -22,7 +22,6 @@ namespace DemonicCity.BattleScene
 
                 Debug.Log("EnemyAttack state called.");
                 StartCoroutine(AttackProcess());
-
             });
         }
 
@@ -46,7 +45,6 @@ namespace DemonicCity.BattleScene
                 m_magia.Stats.m_hitPoint -= m_battleManager.m_enemy.Stats.m_attack - m_magia.Stats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値分ダメージ
                 Debug.Log("敵から攻撃された後の[" + m_magia + "]の体力 : " + m_magia.Stats.m_hitPoint);
 
-
                 return false;
             });
 
@@ -64,7 +62,6 @@ namespace DemonicCity.BattleScene
                 // イベント呼び出し : StateMachine.Lose
                 // ==============================
                 SetStateMachine(BattleManager.StateMachine.State.Lose);
-
             }
         }
     }
