@@ -19,20 +19,19 @@ namespace DemonicCity
         string sentence;
         /// <summary>/// /// </summary>
         int charCount = 0;
-        /// <summary>/// /// </summary>
+        /// <summary>コルーチンが終了しているか </summary>
         bool end;
+        /// <summary>全文表示しているか</summary>
         public bool onoff;
+
 
         void Awake()
         {
             text.text = "";
         }
-
-
         /// <summary>/// コルーチンを終了のフラグを立て、全文表示する/// </summary>
         public void Totrue()
         {
-            //charCount = sentence.Length;
             end = true;
             text.text = sentence;
             //Debug.Log("true");

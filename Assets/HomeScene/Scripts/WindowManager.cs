@@ -59,7 +59,7 @@ namespace DemonicCity.HomeScene
                                 parents[i].SetActive(true);
                                 if (i == (int)Window.Story)
                                 {
-                                    SceneChanger.SceneChange(SceneName.Battle);
+                                    SceneChanger.SceneChange(SceneName.StorySelect);
                                 }
                                 else if (windowObjects[i])
                                 {
