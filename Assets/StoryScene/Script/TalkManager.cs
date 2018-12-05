@@ -48,19 +48,17 @@ namespace DemonicCity
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    if (isStaging)
-                    {
-                        Debug.Log("おわりだよー(*∂ｖ∂)");
-                        DivideTexts();
-                        return;
-                    }
-                    //Debug.Log("begin");
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
                     if (hit.tag != buttonTag)
                     {
-                        //DivideTexts();
-                        flag = putSentence[talkPosition].onoff;
+                        if (isStaging)
+                        {
+                            Debug.Log("おわりだよー(*∂ｖ∂)");
+                            DivideTexts();
+                            return;
+                        }
+                        flag = putSentence[talkPosition].end;
                         if (flag)
                         {
                             if (texts.Count <= textIndex ||
@@ -76,23 +74,71 @@ namespace DemonicCity
                         }
                         else
                         {
-                            putSentence[talkPosition].Totrue();
+                            putSentence[talkPosition].FullTexts();
                         }
                         DivideTexts();
-                        if (talkPosition<putSentence.Length)
+                        if (talkPosition < putSentence.Length)
                         {
-                            flag = putSentence[talkPosition].A(texts[textIndex].sentence);
+                            flag = putSentence[talkPosition].CallSentence(texts[textIndex].sentence);
                         }
-
-
                     }
                 }
+
+
+
+
+
+
+
+
+
+            //    if (gesture == TouchGestureDetector.Gesture.Click)
+            //    {
+            //        if (isStaging)
+            //        {
+            //            Debug.Log("おわりだよー(*∂ｖ∂)");
+            //            DivideTexts();
+            //            return;
+            //        }
+            //        //Debug.Log("begin");
+            //        GameObject hit;
+            //        touchInfo.HitDetection(out hit);
+            //        if (hit.tag != buttonTag)
+            //        {
+            //            //DivideTexts();
+            //            flag = putSentence[talkPosition].onoff;
+            //            if (flag)
+            //            {
+            //                if (texts.Count <= textIndex ||
+            //                texts[textIndex].cName == CharName.System)
+            //                {
+            //                    isStaging = true;
+            //                    //return;
+            //                }
+            //                else
+            //                {
+            //                    textIndex += 1;
+            //                }
+            //            }
+            //            else
+            //            {
+            //                putSentence[talkPosition].Totrue();
+            //            }
+            //            DivideTexts();
+            //            if (talkPosition<putSentence.Length)
+            //            {
+            //                flag = putSentence[talkPosition].A(texts[textIndex].sentence);
+            //            }
+
+
+            //        }
+            //    }
             });
 
             TextReset();
             SetText();
             DivideTexts();
-            flag = putSentence[talkPosition].A(texts[textIndex].sentence);
+            flag = putSentence[talkPosition].CallSentence(texts[textIndex].sentence);
         }
 
         void Update()
