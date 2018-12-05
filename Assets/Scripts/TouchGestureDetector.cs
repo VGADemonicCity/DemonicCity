@@ -17,6 +17,7 @@ namespace DemonicCity
     /// <license>MIT License</license>
     public class TouchGestureDetector : MonoSingleton<TouchGestureDetector>
     {
+
         const float FLICK_TIME_LIMIT = 0.3f;
 
         /// <summary>

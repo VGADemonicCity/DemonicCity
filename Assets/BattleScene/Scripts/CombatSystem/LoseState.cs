@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace DemonicCity.BattleScene
 {
-    public class LoseState : StateMachineBehaviour
+    public class LoseState : StatesBehaviour
     {
         /// <summary>
         /// Start this instance.
@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.Lose) // StateがLose以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.Lose) // StateがLose以外の時は処理終了
                 {
                     return;
                 }

@@ -9,7 +9,7 @@ namespace DemonicCity.BattleScene
     /// Player attack state.
     /// 攻撃処理を行うクラス
     /// </summary>
-    public class PlayerAttackState : StateMachineBehaviour
+    public class PlayerAttackState : StatesBehaviour
     {
    
 
@@ -20,14 +20,15 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
                 }
+                m_battleManager.m_stateMachine.Save();
                 // ==============================
                 // イベント呼び出し : SkillJudger
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.m_passiveSkill , m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill , m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(AttackProcess()); // 攻撃プロセスを開始する
             });
         }
@@ -39,10 +40,12 @@ namespace DemonicCity.BattleScene
         IEnumerator AttackProcess()
         {
             // ==============================
-            // ここに攻撃の演出処理を入れる予定かな？
+            // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("attack process called.");
             yield return new WaitForSeconds(3f);
+
+
 
             yield return new WaitWhile(() => // falseになるまで待つ
             {
@@ -56,7 +59,7 @@ namespace DemonicCity.BattleScene
                     // ==================================
                     // イベント呼び出し : StateMachine.EnemyAttack
                     // ==================================
-                    SetStateMachine(BattleManager.StateMachine.EnemyAttack);
+                    SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                 }
                 else
                 {
@@ -64,7 +67,7 @@ namespace DemonicCity.BattleScene
                     // イベント呼び出し : StateMachine.Win
                     // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
                     // ==================================
-                    SetStateMachine(BattleManager.StateMachine.Win);
+                    SetStateMachine(BattleManager.StateMachine.State.Win);
                 }
                 return false;
             });

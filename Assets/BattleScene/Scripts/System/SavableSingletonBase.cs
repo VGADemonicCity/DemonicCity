@@ -132,7 +132,7 @@ namespace DemonicCity
         }
 
         /// <summary>
-        /// Object->Jsonに変換される前に実行される
+        /// Object->Jsonに変換される前に実行されるコールバック関数
         /// 必要に応じて任意の処理を書く
         /// </summary>
         public virtual void OnBeforeSerialize()
@@ -140,7 +140,7 @@ namespace DemonicCity
         }
 
         /// <summary>
-        /// Json->Objectに変換された後に実行される
+        /// Json->Objectに変換された後に実行されるコールバック関数
         /// 必要に応じて任意の処理を書く
         /// </summary>
         public virtual void OnAfterDeserialize()

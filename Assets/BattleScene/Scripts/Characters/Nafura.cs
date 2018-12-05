@@ -8,10 +8,14 @@ namespace DemonicCity.BattleScene
     /// Nafura.
     /// ナフラのキャラクター情報
     /// </summary>
-    public class Nafura : EnemyObject
+    public class Nafura 
     {
+        /// <summary>
+        /// Awake this instance.
+        /// </summary>
+        void Awake()
+        {
 
-
-
+        }
     }
 }

@@ -35,6 +35,7 @@ namespace DemonicCity.BattleScene
         void Awake()
         {
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+            if (m_battleManager == null) Debug.Log("bm is null.");
         }
 
 
@@ -64,7 +65,8 @@ namespace DemonicCity.BattleScene
             m_CityCount = 0;
             m_doubleCount = 0;
             m_tripleCount = 0;
-            if (m_battleManager.m_state == BattleManager.StateMachine.Init) // ゲーム開始時のみトータルパネルカウントとスキル用カウンターを初期化する
+            if (m_battleManager == null) Debug.Log("bm is null.");
+            if (m_battleManager.m_stateMachine.m_state == BattleManager.StateMachine.State.Init) // ゲーム開始時のみトータルパネルカウントとスキル用カウンターを初期化する
             {
                 m_totalPanelCount = 0;
                 m_CounterForShuffleSkill = 0;
@@ -104,11 +106,11 @@ namespace DemonicCity.BattleScene
                     m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
-                    m_battleManager.m_state = BattleManager.StateMachine.PlayerAttack; // ステートマシンをPlayerAttackへ
+                    m_battleManager.m_stateMachine.m_state = BattleManager.StateMachine.State.PlayerAttack; // ステートマシンをPlayerAttackへ
                     // =========================================
                     // イベント呼び出し : StateMachine.PlayerAttack
                     // =========================================
-                    m_battleManager.m_behaviourByState.Invoke(BattleManager.StateMachine.PlayerAttack); // m_behaviourByStateイベントを起動する
+                    m_battleManager.m_behaviourByState.Invoke(BattleManager.StateMachine.State.PlayerAttack); // m_behaviourByStateイベントを起動する
                     break;
             }
         }

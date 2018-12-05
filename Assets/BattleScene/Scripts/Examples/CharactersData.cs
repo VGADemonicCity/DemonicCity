@@ -23,6 +23,7 @@ namespace DemonicCity.CharacterSystemm
         /// <param name="id">Identifier.</param>
         public static int GetMaxLevel(string id)
         {
+            ;
             return GetCharacterData(id).MaxLevel;
         }
         

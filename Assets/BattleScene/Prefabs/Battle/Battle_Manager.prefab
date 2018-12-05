@@ -58,29 +58,13 @@ GameObject:
   m_Component:
   - component: {fileID: 4691038718456576}
   - component: {fileID: 114637994177244260}
-  - component: {fileID: 114575073671987240}
-  - component: {fileID: 114756295829251116}
   - component: {fileID: 114395287615114370}
-  - component: {fileID: 114127419596651094}
   - component: {fileID: 61020726325893518}
+  - component: {fileID: 114706097535228408}
+  - component: {fileID: 114294880535250120}
+  - component: {fileID: 114024525100392670}
   m_Layer: 0
   m_Name: Battle_Manager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1722016392385758
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4468377612096808}
-  - component: {fileID: 61541553224263110}
-  m_Layer: 0
-  m_Name: PanelShuffler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -98,19 +82,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4691038718456576}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4468377612096808
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722016392385758}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.8558, y: -3.6201, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4691038718456576}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4678241758042684
 Transform:
@@ -137,7 +108,6 @@ Transform:
   m_Children:
   - {fileID: 4678241758042684}
   - {fileID: 4293241256990584}
-  - {fileID: 4468377612096808}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -166,31 +136,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.8, y: 3.8}
   m_EdgeRadius: 0
---- !u!61 &61541553224263110
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1722016392385758}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 3.8, y: 3.8}
-  m_EdgeRadius: 0
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -202,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530093bf42a464b46957df756fe65bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114127419596651094
+--- !u!114 &114024525100392670
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -210,23 +155,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291335245634264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8566f5378b7a4523ba1049a37036c22, type: 3}
+  m_Script: {fileID: 11500000, guid: 5ea15084361f4420baf49619b28bed28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_statistics:
-    m_level: 0
-    m_attribute: 0
-    m_passiveSkill: 0
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 300
-    m_attack: 160
-    m_defense: 40
-    m_statusPoint: 0
+  m_CityCount: 0
+  m_doubleCount: 0
+  m_tripleCount: 0
+  m_totalPanelCount: 0
+--- !u!114 &114294880535250120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291335245634264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_stateMachine:
+    m_state: 0
+    m_wave: 0
 --- !u!114 &114306332384846622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +198,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7500c8a19f740b8a47a3e5b7c2f094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_shuffleSkillConditions: 30
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -274,6 +222,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CountCondition: 1
   m_trialResult: 0
+  m_passiveSkill: 1
   m_increase: 0.01
 --- !u!114 &114574456638883488
 MonoBehaviour:
@@ -286,19 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1862b4cbb19b24479915824c34b786cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114575073671987240
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291335245634264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_state: 0
-  m_wave: 0
 --- !u!114 &114637994177244260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,8 +261,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CountCondition: 1
   m_trialResult: 0
+  m_passiveSkill: 2
   m_increase: 0.005
---- !u!114 &114756295829251116
+--- !u!114 &114706097535228408
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -334,13 +271,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1291335245634264}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5ea15084361f4420baf49619b28bed28, type: 3}
+  m_Script: {fileID: 11500000, guid: 43764d8e86cf0458384d16c25b92a476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CityCount: 0
-  m_doubleCount: 0
-  m_tripleCount: 0
-  m_totalPanelCount: 0
+  m_sensor: {fileID: 61020726325893518}
+  m_shuffleSkillConditions: 0
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1

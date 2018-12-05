@@ -4,7 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 
 
-namespace DemonicCity.CharacterSystemm
+namespace DemonicCity
 {
     /// <summary>
     /// 前名「SavableSingletonBase」
@@ -37,6 +37,9 @@ namespace DemonicCity.CharacterSystemm
             }
         }
 
+        /// <summary>
+        /// serializableなクラスをJsonに書き出す
+        /// </summary>
         public void Save()
         {
             if (m_isLoaded)
@@ -70,6 +73,7 @@ namespace DemonicCity.CharacterSystemm
         {
             try
             {
+                m_instance = new T();
                 m_instance = JsonUtility.FromJson<T>(json);
                 m_instance.m_isLoaded = true;
             }
@@ -81,6 +85,7 @@ namespace DemonicCity.CharacterSystemm
 
         static string GetSavePath()
         {
+            //Debug.Log("セーブ先のパス : " + string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey()));
             return string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey());
         }
 
