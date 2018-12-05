@@ -47,8 +47,6 @@ namespace DemonicCity.BattleScene
             Debug.Log("攻撃する前の[" + m_battleManager.m_enemy.Id.ToString() + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
             yield return new WaitForSeconds(3f);
 
-
-
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");

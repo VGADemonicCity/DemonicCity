@@ -23,12 +23,14 @@ namespace DemonicCity.BattleScene
                 }
                 Debug.Log("PlayerChoice state called.");
                 // 毎ターン前ターンのスキル情報をさせる為プレイヤーターン開始時毎に初期化する
-                m_magia.ResetStats();
-                m_panelCounter.InitCounts(); // カウント初期化
-                m_panelManager.InitPanels(); // パネル初期化
+                m_magia.ResetStats(); 
+                m_panelCounter.InitCounts();
+                m_panelManager.InitPanels();
+
                 // ==============================
                 // ここにプレイヤーターンが始まった時の処理を書く
                 // PlayerCoiceStateから遷移する処理はPanelCounterが敵パネルを認識してState遷移処理をさせている
+                // PlayerChoiceの時のinvokeはPanelCounter.PanelJudgerが行っている
                 // ==============================
             });
         }
