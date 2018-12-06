@@ -74,7 +74,7 @@ namespace DemonicCity
         [SerializeField] float m_statsPoint;
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
-        /// <summary>レベル毎の必要経験値数</summary>
+        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
@@ -86,7 +86,6 @@ namespace DemonicCity
         /// <summary>初期レベルを1としたときの最大レベルを返します</summary>
         /// <value>レベル最大値</value>
         public int MaxLevel { get { return requiredExps.Length + 1; } }
-        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField]
         Statistics m_stats = new Statistics()
