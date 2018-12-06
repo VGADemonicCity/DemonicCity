@@ -8,64 +8,47 @@ using UnityEditor;
 
 namespace DemonicCity.BattleScene
 {
+    /// <summary>HPゲージを描画する</summary>
     public class HPDraw : MonoBehaviour
     {
-
+        /// <summary>HP描画用のImageComponent</summary>
         Image image = null;
+        /// <summary>HPの最大値</summary>
         int maxHP = 1;
-        /// <summary>
-        /// ステータス上のHP
-        /// </summary>
+        /// <summary>ステータス上のHP</summary>
         float currentHP = 0;
-        /// <summary>
-        /// 描画されているHP
-        /// </summary>
-        float drawHP = 0;
-        /// <summary>
-        /// 1フレーム辺りに変化するHP量
-        /// </summary>
+        /// <summary>1フレーム辺りに変化するHP量</summary>
         float changeValue = 0;
-        /// <summary>
-        /// HP判定用の遊び
-        /// </summary>
+        /// <summary>HP判定用の遊び</summary>
         float play = 0.1f;
+        /// <summary>HPの変化にかけるフレーム数</summary>
+        int frame = 70;
+        /// <summary>変化するHP量が少なすぎてchangeValueが0になるようなことがあった場合は最大HPの1/1000をchangeValueとする</summary>
+        int divideNumber = 1000;
+
 
         void Start()
         {
-            Initialize();
-        }
-
-        void Update()
-        {
-            drawHP = image.fillAmount * maxHP;
-        }
-
-
-        void Initialize()
-        {
             image = GetComponent<Image>();
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="max"></param>
+        
+        /// <summary>引数の値を最大HPと現在のHPに割り当てる</summary>
+        /// <param name="max">HPの最大値</param>
         public void Initialize(int max)
         {
             //image = GetComponent<Image>();
             maxHP = max;
             currentHP = maxHP;
         }
-        /// <summary>
-        /// HPゲージの値を減らす
-        /// </summary>
+        /// <summary>HPゲージの値を減らす</summary>
         /// <param name="damage">ダメージ量</param>
         public void Damage(int damage)
         {
             currentHP -= damage;
-            changeValue = damage / 70;
+            changeValue = damage / frame;
             if (changeValue == 0)
             {
-                changeValue = maxHP / 1000;
+                changeValue = maxHP / divideNumber;
             }
             if (currentHP < 0)
             {
@@ -76,17 +59,15 @@ namespace DemonicCity.BattleScene
             StartCoroutine( HP());
             
         }
-        /// <summary>
-        /// HPゲージの値を増やす
-        /// </summary>
+        /// <summary>HPゲージの値を増やす</summary>
         /// <param name="heal">回復量</param>
         public void Heal(int heal)
         {
             currentHP += heal;
-            changeValue = heal / 70;
+            changeValue = heal / frame;
             if (changeValue == 0)
             {
-                changeValue = maxHP / 1000;
+                changeValue = maxHP / divideNumber;
             }
             if (currentHP > maxHP)
             {
@@ -96,20 +77,26 @@ namespace DemonicCity.BattleScene
             StartCoroutine(HP());
             
         }
+
+        /// <summary>HPゲージの値を増減させる</summary>
+        /// <param name="val">+なら回復、-ならダメージ</param>
         public void Reflect(int val)
         {
             currentHP += val;
-            changeValue = val / 70;
+            changeValue = val / frame;
 
             StartCoroutine(HP());
 
         }
 
+        /// <summary>ゲージが0になるときに何か処理を入れるのならここに</summary>
         public void Deth()
         {
 
         }
 
+        /// <summary>現在のHPとゲージに差異がある場合にゲージの値を現在のHPに近づける</summary>
+        /// <returns></returns>
         IEnumerator HP()
         {
 
