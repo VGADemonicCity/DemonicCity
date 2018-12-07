@@ -8,6 +8,19 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class EnemyAttackState : StatesBehaviour
     {
+        /// <summary>MagiaのHPDrawの参照</summary>
+        [SerializeField] protected HPDraw m_magiaHpDraw;
+        /// <summary>EnemyのHPDrawの参照</summary>
+        [SerializeField] protected HPDraw m_enemyHpDraw;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            m_magiaHpDraw = m_magiaHpDraw.GetComponent<HPDraw>(); // magiaのHPDrawコンポーネント取得
+            m_enemyHpDraw = m_enemyHpDraw.GetComponent<HPDraw>(); // enemyのHPDrawコンポーネント取得
+        }
+
+
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -41,8 +54,9 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-
-                m_magia.Stats.m_hitPoint -= m_battleManager.m_enemy.Stats.m_attack - m_magia.Stats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値分ダメージ
+                var damage = m_battleManager.m_enemy.Stats.m_attack - m_magia.Stats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
+                m_magia.Stats.m_hitPoint -= damage; // ダメージ
+                m_magiaHpDraw.Damage(damage); // HPGaugeに描画
                 Debug.Log("敵から攻撃された後の[" + m_magia + "]の体力 : " + m_magia.Stats.m_hitPoint);
 
                 return false;

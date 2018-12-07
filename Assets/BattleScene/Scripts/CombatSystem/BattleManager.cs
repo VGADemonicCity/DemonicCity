@@ -57,7 +57,7 @@ namespace DemonicCity.BattleScene
         /// 状態遷移を管理する
         /// </summary>
         [Serializable]
-        public class StateMachine : SSB<StateMachine>
+        public class StateMachine : SavableSingletonBase<StateMachine>
         {
             /// <summary>
             /// State.

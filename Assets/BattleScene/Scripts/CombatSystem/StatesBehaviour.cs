@@ -21,6 +21,7 @@ namespace DemonicCity.BattleScene
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
 
+
         /// <summary>
         /// Awake this instance.
         /// </summary>
@@ -31,6 +32,7 @@ namespace DemonicCity.BattleScene
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得
+
         }
 
 

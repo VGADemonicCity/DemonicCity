@@ -27,7 +27,7 @@ namespace DemonicCity.BattleScene
         Vector2 m_panelFlamePosition;
         /// <summary>フリック時のbit論理演算用</summary>
         int m_flag = 2;
-        /// <summary></summary>
+        /// <summary>パネル枠が動いている最中はフラグ</summary>
         bool m_wait = true;
 
         public void Start()
