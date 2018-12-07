@@ -8,7 +8,6 @@ using UnityEditor;
 
 namespace DemonicCity.BattleScene
 {
-    /// <summary>HPゲージを描画する</summary>
     public class HPDraw : MonoBehaviour
     {
         /// <summary>HP描画用のImageComponent</summary>
@@ -31,7 +30,7 @@ namespace DemonicCity.BattleScene
         {
             image = GetComponent<Image>();
         }
-        
+
         /// <summary>引数の値を最大HPと現在のHPに割り当てる</summary>
         /// <param name="max">HPの最大値</param>
         public void Initialize(int max)
@@ -56,8 +55,8 @@ namespace DemonicCity.BattleScene
                 Deth();
             }
 
-            StartCoroutine( HP());
-            
+            StartCoroutine(HP());
+
         }
         /// <summary>HPゲージの値を増やす</summary>
         /// <param name="heal">回復量</param>
@@ -75,9 +74,8 @@ namespace DemonicCity.BattleScene
             }
 
             StartCoroutine(HP());
-            
-        }
 
+        }
         /// <summary>HPゲージの値を増減させる</summary>
         /// <param name="val">+なら回復、-ならダメージ</param>
         public void Reflect(int val)
@@ -88,7 +86,6 @@ namespace DemonicCity.BattleScene
             StartCoroutine(HP());
 
         }
-
         /// <summary>ゲージが0になるときに何か処理を入れるのならここに</summary>
         public void Deth()
         {
@@ -109,7 +106,7 @@ namespace DemonicCity.BattleScene
             }
             while (image.fillAmount * maxHP < currentHP - play)
             {
-                
+
                 image.fillAmount += changeValue / maxHP;
 
                 yield return null;
