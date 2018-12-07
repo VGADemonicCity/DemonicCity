@@ -9,7 +9,7 @@ public class ScreenStageManager : MonoBehaviour {
 
     IEnumerator ScreenFade()
     {
-        GameObject newPanel=Instantiate()
+        //GameObject newPanel=Instantiate()
         return null;
     }
 }
