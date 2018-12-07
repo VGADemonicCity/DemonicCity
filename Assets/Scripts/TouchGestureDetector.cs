@@ -79,6 +79,9 @@ namespace DemonicCity
             }
         }
 
+        /// <summary>
+        /// Update this instance.
+        /// </summary>
         void Update()
         {
             foreach (var touch in Input.touches) // 毎フレームタッチされた本数分判定する

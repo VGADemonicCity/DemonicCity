@@ -51,6 +51,8 @@ namespace DemonicCity.BattleScene
         /// <summary>Flag</summary>
         bool m_isPanelProcessing;
 
+
+
         /// <summary>
         /// Awake this instance.
         /// </summary>
@@ -84,6 +86,9 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
+
+
+
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             InitPanels(); // パネルをセットする
 
@@ -114,12 +119,10 @@ namespace DemonicCity.BattleScene
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
-                    var a = Magia.Instance;
-                    a.LevelUp();
+                    var a = Magia.Instance; // Debug用
+                    a.LevelUp(); // Debug用
                 }
             });
-
-
         }
 
         /// <summary>

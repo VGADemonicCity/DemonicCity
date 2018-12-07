@@ -10,7 +10,7 @@ namespace DemonicCity
     /// Magia.
     /// </summary>
     [Serializable]
-    public class Magia : SSB<Magia>
+    public class Magia : SavableSingletonBase<Magia>
     {
         /// <summary>属性</summary>
         [Serializable]
@@ -65,8 +65,29 @@ namespace DemonicCity
             /// <summary>天照-焔壁-</summary>
             AmaterasuFlameWall = 4096,
             /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
-            AllSkills = 8191
+            AllSkills = 8191,
+
         }
+
+        /// <summary>レベルアップ時に得れるステータスポイント</summary>
+        public float m_statusPoint;
+        /// <summary>パッシブスキルフラグのプロパティ</summary>
+        public PassiveSkill MyPassiveSkill
+        {
+            get { return m_passiveSkill; }
+        }
+        /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
+        /// <value>レベル最大値</value>
+        public int MaxLevel
+        {
+            get
+            {
+                return requiredExps.Length + 1;
+            }
+        }
+        /// <summary>マギアのHP最大値</summary>
+        /// <value>HP最大値</value>
+        public int MaxHP { get; private set; }
 
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
@@ -74,25 +95,17 @@ namespace DemonicCity
         [SerializeField] float m_statsPoint;
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
-        /// <summary>レベル毎の必要経験値数</summary>
+        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkills;
-        /// <summary>パッシブスキルフラグのプロパティ</summary>
-        public PassiveSkill MyPassiveSkill
-        {
-            get { return m_passiveSkill; }
-        }
-        /// <summary>初期レベルを1としたときの最大レベルを返します</summary>
-        /// <value>レベル最大値</value>
-        public int MaxLevel { get { return requiredExps.Length + 1; } }
-        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
+
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField]
         Statistics m_stats = new Statistics()
         {
             m_level = 1,
-            m_hitPoint = 1000,
+            m_hitPoint = 500,
             m_attack = 100,
             m_defense = 100,
             m_charm = 0,
@@ -100,7 +113,7 @@ namespace DemonicCity
             m_dignity = 0,
             m_knowledge = 0,
             m_durability = 0,
-            m_muscularStrength = 0
+            m_muscularStrength = 0,
         };
         /// <summary>ステータスクラスのプロパティ</summary>
         public Statistics Stats
@@ -108,8 +121,6 @@ namespace DemonicCity
             get { return m_stats; }
             set { m_stats = value; }
         }
-        /// <summary>レベルアップ時に得れるステータスポイント</summary>
-        public float m_statusPoint;
 
         /// <summary>マギアのステータスを一時保存しておく変数</summary>
         [SerializeField] Statistics m_StatsBuffer = new Statistics();
@@ -119,7 +130,7 @@ namespace DemonicCity
             get { return m_StatsBuffer; }
             set
             {
-                var stats = value;
+                var stats = value; // 
                 StatsBuffer.m_hitPoint = stats.m_hitPoint;
                 StatsBuffer.m_attack = stats.m_attack;
                 StatsBuffer.m_defense = stats.m_defense;
@@ -132,6 +143,15 @@ namespace DemonicCity
         int m_magnificationByStats = 5;
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
+
+        /// <summary>
+        /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する
+        /// </summary>
+        /// <param name="maxHP">Max hp.</param>
+        public void InitMaxHP(int maxHP)
+        {
+            MaxHP = maxHP;
+        }
 
         /// <summary>
         /// 基礎ステータスをバトル開始時のスキル適応前の状態に戻す
@@ -166,13 +186,13 @@ namespace DemonicCity
             }
 
             // レベルアップする直前のレベルに合わせてステータスを上昇させる
-            if(Stats.m_level < 50) // レベル50以下なら
+            if (Stats.m_level < 50) // レベル50以下なら
             {
                 Stats.m_hitPoint += 50;
                 Stats.m_attack += 15;
                 Stats.m_defense += 15;
             }
-            else if(Stats.m_level >= 50 && Stats.m_level < 100) // レベル50~99なら
+            else if (Stats.m_level >= 50 && Stats.m_level < 100) // レベル50~99なら
             {
                 Stats.m_hitPoint += 25;
                 Stats.m_attack += 10;
@@ -213,6 +233,29 @@ namespace DemonicCity
                 m_durability = 0,
                 m_muscularStrength = 0
             };
+        }
+
+        /// <summary>
+        /// 現在のマギアのステータスを取得する
+        /// 参照渡しにならない様に各値を代入して新しいインスタンスを生成して返す
+        /// </summary>
+        /// <returns>現在のマギアのステータス</returns>
+        public Statistics GetStats()
+        {
+            Statistics result = new Statistics()
+            {
+                m_level = Stats.m_level,
+                m_hitPoint = Stats.m_hitPoint,
+                m_attack = Stats.m_attack,
+                m_defense = Stats.m_defense,
+                m_durability = Stats.m_durability,
+                m_muscularStrength = Stats.m_muscularStrength,
+                m_knowledge = Stats.m_knowledge,
+                m_sense = Stats.m_sense,
+                m_charm = Stats.m_charm,
+                m_dignity = Stats.m_dignity,
+            };
+            return result;
         }
 
         /// <summary>

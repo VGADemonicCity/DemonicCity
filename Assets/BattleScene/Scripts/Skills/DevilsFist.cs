@@ -21,9 +21,7 @@ namespace DemonicCity.BattleScene.Skill
         }
 
         /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
