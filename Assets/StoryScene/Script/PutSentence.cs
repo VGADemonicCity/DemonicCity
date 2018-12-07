@@ -98,7 +98,6 @@ namespace DemonicCity
             }
             end = true;
         }
-<<<<<<< HEAD
 
         /// <summary>テキストをすべて表示する。</summary>
         public void FullTexts()
@@ -123,34 +122,7 @@ namespace DemonicCity
             
             return end;
         }
-=======
 
-        /// <summary>テキストをすべて表示する。</summary>
-        public void FullTexts()
-        {
-            text.text = sentence;
-            StopCoroutine(feedCoroutine);
-            end = true;
-        }
-        /// <summary>コルーチンを開始</summary>
-        public bool CallSentence(string s)
-        {
-            if (end)
-            {
-                onoff = true;
-            }
-            else
-            {
-                StartCoroutine(SentenceFeed(s));
-            }
-            
-            feedCoroutine = SentenceFeed(s);
-            StartCoroutine(feedCoroutine);
-            end = false;
-
-            return end;
-        }
->>>>>>> bac7a418ace0a7887914bd9811bc75e974e2e1b7
 
     }
 }
