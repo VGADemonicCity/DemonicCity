@@ -8,17 +8,16 @@ namespace DemonicCity.HomeScene
 {
     public enum Window
     {
-        Growth, Story, Magia, SoundConfig, Config, Calender, PresentBox, Last
+        Growth, Story, Summon, Magia, Config, PresentBox, Last
     }
     public class WindowManager : MonoBehaviour
     {
         public TouchGestureDetector touchGestureDetector;
-
-
+        
         //Color windowColor = new Color(1, 1, 1, 0.9f);
-        public GameObject[] parents;
-        public GameObject[] windowObjects;
-        public GameObject[] buttonObjects;
+        [SerializeField] GameObject[] parents = new GameObject[(int)Window.Last];
+        [SerializeField] GameObject[] windowObjects = new GameObject[(int)Window.Last];
+        [SerializeField] GameObject[] buttonObjects = new GameObject[(int)Window.Last];
         GameObject beginObject;
         GameObject endObject;
         GameObject newPanel;
@@ -31,7 +30,7 @@ namespace DemonicCity.HomeScene
         void Start()
         {
             //Debug.Log("Start");
-            
+
             //touchGestureDetector = GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -57,33 +56,38 @@ namespace DemonicCity.HomeScene
                             if (beginObject == endObject)
                             {
                                 parents[i].SetActive(true);
-                                if (i == (int)Window.Growth)
+                                switch ((Window)i)
                                 {
-                                    SceneChanger.SceneChange(SceneName.Strengthen);
+                                    case Window.Growth:
+                                        SceneChanger.SceneChange(SceneName.Strengthen);
+                                        break;
+                                    case Window.Story:
+                                        SceneChanger.SceneChange(SceneName.StorySelect);
+                                        break;
+                                    case Window.Summon:
+                                        if (true)//一部クリアフラグ
+                                        {
+                                            SceneChanger.SceneChange(SceneName.Home);
+                                        }
+                                        break;
+                                    case Window.Config:
+                                    case Window.PresentBox:
+                                    case Window.Magia:
+                                        WindowOpen(i);
+                                        break;
+                                    default:
+                                        Debug.Log("Error");
+                                        break;
                                 }
-                                if (i == (int)Window.Story)
-                                {
-                                    SceneChanger.SceneChange(SceneName.StorySelect);
-                                }
-                                else if (windowObjects[i])
-                                {
-                                    WindowOpen(i);
-                                    if (i != (int)Window.Magia)
-                                    {
-                                        newPanel = null;
-                                    }
-                                }
+
                             }
                         }
-                        //Debug.Log(touchInfo.HitDetection(out outObject, buttonObjects[i]));
-                        //touchInfo.HitDetection(out outObject, buttonObjects[i]);
-                        //Debug.Log(outObject.name);
                     }
                 }
 
 
             });
-            //WindowOpen(0);
+
         }
 
         // Update is called once per frame
@@ -96,50 +100,12 @@ namespace DemonicCity.HomeScene
         {
             newPanel = Instantiate(windowObjects[i], parents[i].transform);
             newPanel.GetComponent<WindowState>().touchGestureDetector = touchGestureDetector;
-            //newPanel.GetComponent<WindowState>().closeAnimation = WindowScaling;
-            //nowWindow = newPanel;
-            //WindowScaling(true);
+            if (i != (int)Window.Magia)
+            {
+                newPanel = null;
+            }
         }
 
-        //public void OnPointerClick(PointerEventData eventData)
-        //{
-
-        //}
-        //public void WindowScaling(bool isOpen)
-        //{
-        //    if (isOpen)
-        //    {
-        //        StartCoroutine(ChangeScale(Vector3.one));
-        //        StartCoroutine(ChangeColor(windowColor));
-        //    }
-        //    else
-        //    {
-        //        StartCoroutine(ChangeScale(Vector3.zero));
-        //        StartCoroutine(ChangeColor(Color.clear));
-        //    }
-        //}
-
-        //IEnumerator ChangeScale(Vector3 targetScale)
-        //{
-        //    while (nowWindow.transform.localScale != targetScale)
-        //    {
-        //        nowWindow.transform.localScale = Vector3.Lerp(nowWindow.transform.localScale, targetScale, 0.02f * 10f);
-
-
-        //        yield return new WaitForSecondsRealtime(0.01f);
-        //    }
-
-        //}
-        //IEnumerator ChangeColor(Color targetColor)
-        //{
-        //    while (nowWindow.GetComponent<SpriteRenderer>().color != targetColor)
-        //    {
-        //        nowWindow.GetComponent<SpriteRenderer>().color = Color.Lerp(nowWindow.GetComponent<SpriteRenderer>().color, targetColor, 0.02f * 10f);
-
-
-        //        yield return new WaitForSecondsRealtime(0.01f);
-        //    }
-        //}
 
     }
 }
