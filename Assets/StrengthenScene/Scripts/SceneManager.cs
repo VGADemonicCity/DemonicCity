@@ -8,15 +8,11 @@ namespace DemonicCity.StrengthenScene
     {
         public GameObject ShikiryoWindow;
         public GameObject SkillWindow;
-        Animation animation;
-
+ 
         void Start()
         {
             ShikiryoWindow.SetActive(false);
             SkillWindow.SetActive(false);
-
-            animation = ShikiryoWindow.GetComponent<Animation>();
-            animation = SkillWindow.GetComponent<Animation>();
         }
 
         void Update()
@@ -26,18 +22,15 @@ namespace DemonicCity.StrengthenScene
 
         public void OpenShikiryoWindow()
         {
-            animation.Play("OpenShikiryoWindow");
             ShikiryoWindow.SetActive(true);
         }
         public void CloseShiryoWindow()
         {
-            //animation.Play("CloseShiryoWindow");
             ShikiryoWindow.SetActive(false);
             
         }
         public void OpenSkillWindow()
         {
-            animation.Play("OpenSkillWindow");
             SkillWindow.SetActive(true);
         }
         public void CloseSkillWindow()
