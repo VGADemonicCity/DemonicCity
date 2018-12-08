@@ -10,15 +10,16 @@ namespace DemonicCity.BattleScene
     public class InitState : StatesBehaviour
     {
         /// <summary>MagiaのHPDrawの参照</summary>
-        [SerializeField] protected HPDraw m_magiaHpDraw;
+        [SerializeField] ExampleHpDraw m_magiaHpDraw;
         /// <summary>EnemyのHPDrawの参照</summary>
-        [SerializeField] protected HPDraw m_enemyHpDraw;
+        [SerializeField] ExampleHpDraw m_enemyHpDraw; 
 
         protected override void Awake()
         {
             base.Awake();
-            m_magiaHpDraw = m_magiaHpDraw.GetComponent<HPDraw>(); // magiaのHPDrawコンポーネント取得
-            m_enemyHpDraw = m_enemyHpDraw.GetComponent<HPDraw>(); // enemyのHPDrawコンポーネント取得
+            m_magiaHpDraw = m_magiaHpDraw.GetComponent<ExampleHpDraw>(); // magiaのHPDrawコンポーネント取得
+            m_enemyHpDraw = m_enemyHpDraw.GetComponent<ExampleHpDraw>(); // enemyのHPDrawコンポーネント取得
+
         }
 
         /// <summary>
