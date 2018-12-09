@@ -35,7 +35,7 @@ namespace DemonicCity.BattleScene
         void Awake()
         {
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
-            if (m_battleManager == null) Debug.Log("bm is null.");
+            if (m_battleManager == null) Debug.LogError("BattleManager is null.");
         }
 
 
@@ -92,18 +92,12 @@ namespace DemonicCity.BattleScene
             {
                 case PanelType.City: // cityパネルを引いた時
                     m_CityCount++; // シティパネルカウントアップ
-                    m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
-                    m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
                     break;
                 case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
-                    m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
-                    m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
                     break;
                 case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
-                    m_totalPanelCount++; // 敵を除いた全てのパネルカウントアップ
-                    m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_stateMachine.m_state = BattleManager.StateMachine.State.PlayerAttack; // ステートマシンをPlayerAttackへ
@@ -113,6 +107,8 @@ namespace DemonicCity.BattleScene
                     m_battleManager.m_behaviourByState.Invoke(BattleManager.StateMachine.State.PlayerAttack); // m_behaviourByStateイベントを起動する
                     break;
             }
+            m_totalPanelCount++; // 全てのパネルカウントアップ
+            m_CounterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
         }
     }
 }

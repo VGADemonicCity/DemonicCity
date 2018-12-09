@@ -47,6 +47,7 @@ namespace DemonicCity.BattleScene.Skill
                     panelList.Add(panelObject); // Panelをリストに追加
                     panelTypes.Add(panelObject.m_panelType); // PanelTypeをリストに追加
                 }
+                
                 var result = panelTypes.OrderBy((arg1) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
                 var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
 
