@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DemonicCity.BattleScene.Skill;
+using DemonicCity.Debugger;
 
 namespace DemonicCity.BattleScene
 {
@@ -36,8 +37,11 @@ namespace DemonicCity.BattleScene
         BattleManager m_battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter m_panelCounter;
-        /// <summary>shufflePanelsの参照</summary>
+        /// <summary>ShufflePanelsの参照</summary>
         ShufflePanels m_shufflePanels;
+        /// <summary>BattleDebuggerの参照</summary>
+        BattleDebugger m_battleDebugger;
+
         /// <summary>オープン前のパネル</summary>
         List<GameObject> m_panelsBforeOpen;
         /// <summary>オープン後のパネル</summary>
@@ -60,6 +64,7 @@ namespace DemonicCity.BattleScene
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
+            m_battleDebugger = BattleDebugger.Instance; // BattleDebuggerの参照取得
             m_shufflePanels = GetComponent<ShufflePanels>(); // ShufflePanelsの参照取得
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
@@ -86,9 +91,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
-
-
-
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             InitPanels(); // パネルをセットする
 
