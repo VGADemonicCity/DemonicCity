@@ -57,6 +57,10 @@ namespace DemonicCity.HomeScene
                             if (beginObject == endObject)
                             {
                                 parents[i].SetActive(true);
+                                if (i == (int)Window.Growth)
+                                {
+                                    SceneChanger.SceneChange(SceneName.Strengthen);
+                                }
                                 if (i == (int)Window.Story)
                                 {
                                     SceneChanger.SceneChange(SceneName.StorySelect);

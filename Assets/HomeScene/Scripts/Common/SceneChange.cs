@@ -8,7 +8,7 @@ namespace DemonicCity
 {
     public enum SceneName
     {
-        Title,Home, StorySelect, Story, Battle, Last
+        Title,Home,Strengthen, StorySelect, Story, Battle, Last
     }
     public static class SceneChanger
     {
