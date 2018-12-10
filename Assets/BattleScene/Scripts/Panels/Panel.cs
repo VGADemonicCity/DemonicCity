@@ -28,7 +28,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] float m_rotationDegrees = 1440f;
 
         /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
-        bool m_alreadyProcessed;
+        public bool m_alreadyProcessed { get; private set; }
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
 

@@ -32,7 +32,7 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         public void PanelShuffle()
         {
-            var shuffleCounter = m_panelCounter.m_CounterForShuffleSkill; // シャッフルスキル用のカウント数取得
+            var shuffleCounter = m_panelCounter.CounterForShuffleSkill; // シャッフルスキル用のカウント数取得
             if (shuffleCounter >= m_shuffleSkillConditions) // 指定した回数以上パネルが引かれていたら
             {
                 m_sensor.enabled = true; // colliderをactiveにする
@@ -47,6 +47,7 @@ namespace DemonicCity.BattleScene.Skill
                     panelList.Add(panelObject); // Panelをリストに追加
                     panelTypes.Add(panelObject.m_panelType); // PanelTypeをリストに追加
                 }
+                
                 var result = panelTypes.OrderBy((arg1) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
                 var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
 
