@@ -47,7 +47,7 @@ namespace DemonicCity.BattleScene
 
 
             Debug.Log("敵から攻撃される前の[" + m_magia + "]の体力 : " + m_magia.Stats.m_hitPoint);
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
 
 
 
