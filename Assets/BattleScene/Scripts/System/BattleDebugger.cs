@@ -58,8 +58,8 @@ namespace DemonicCity.Debugger
             foreach (var target in panels)
             {
                 m_panelManager.PanelProcessing(target);
-                yield return new WaitUntil(() => m_panelManager.m_isPanelProcessing); // パネルが処理中の間は此方の処理を一時停止させる
                 var panel = target.GetComponent<Panel>();
+                yield return new WaitUntil(() => panel.m_alreadyProcessed); // パネルが処理中の間は此方の処理を一時停止させる
                 if (panel.m_panelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
                 {
                     break;
