@@ -29,9 +29,8 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-
+            Debug.Log("Activated the 紅蓮障壁");
+            
         }
     }
 }
