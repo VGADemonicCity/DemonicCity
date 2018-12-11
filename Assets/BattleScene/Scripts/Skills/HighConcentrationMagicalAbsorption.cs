@@ -26,8 +26,10 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 高濃度魔力吸収");
-            m_magia.Stats.m_attack += (int)(m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_attack * m_increase); // 攻撃力 += 街破壊数 * (攻撃力 * 任意の%)
-            m_magia.Stats.m_defense += (int)(m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_defense * m_increase); // 防御力 += 街破壊数 * (防御力 * 任意の%)
+            var attackBuffer = m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_attack * m_increase; // 街破壊数 * (攻撃力 * 任意の%)
+            var defenseBuffer = m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_defense * m_increase; // 街破壊数 * (防御力 * 任意の%)
+            m_magia.Stats.m_attack += (int)attackBuffer; // intに変換
+            m_magia.Stats.m_defense += (int)defenseBuffer; // intに変換
         }
     }
 }

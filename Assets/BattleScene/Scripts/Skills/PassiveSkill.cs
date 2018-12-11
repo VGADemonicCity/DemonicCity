@@ -12,10 +12,10 @@ namespace DemonicCity.BattleScene.Skill
     {
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_CountCondition = 1;
-        /// <summary>レベルとパネルカウントが上限に達していたらtrueが入る</summary>
-        [SerializeField] protected bool m_trialResult = false;
         /// <summary>パッシブスキルフラグ用変数</summary>
         [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
+        /// <summary>BattleManagerの参照</summary>
+        protected BattleManager m_battleManager;
         /// <summary>SkillManagerの参照</summary>
         protected SkillManager m_skillManager;
         /// <summary>PanelCounterの参照</summary>
@@ -23,11 +23,13 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
 
+
         /// <summary>
         /// Awake this instance.
         /// </summary>
         protected virtual void Awake()
         {
+            m_battleManager = BattleManager.Instance; // PanelCounterの参照取得
             m_skillManager = SkillManager.Instance; // SkillManagerシングルトンインスタンス取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得

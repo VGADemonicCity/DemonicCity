@@ -12,62 +12,6 @@ namespace DemonicCity
     [Serializable]
     public class Magia : SavableSingletonBase<Magia>
     {
-        /// <summary>属性</summary>
-        [Serializable]
-        public enum Attribute
-        {
-            /// <summary>初期形態</summary>
-            Standard,
-            /// <summary>男近接形態</summary>
-            MaleWarrior,
-            /// <summary>女近接形態</summary>
-            FemaleWarrior,
-            /// <summary>男魔法使い形態</summary>
-            MaleWizard,
-            /// <summary>女魔法使い形態</summary>
-            FemaleWitch,
-            /// <summary>女超越形態</summary>
-            FemaleTrancendental,
-        }
-
-        /// <summary>
-        /// レベルアップ獲得スキル。
-        /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
-        /// </summary>
-        [Flags, Serializable]
-        public enum PassiveSkill
-        {
-            /// <summary>無効値</summary>
-            Invalid = 0,
-            /// <summary>魔拳</summary>
-            DevilsFist = 1,
-            /// <summary>高濃度魔力吸収,High concentration magical absorption</summary>
-            HighConcentrationMagicalAbsorption = 2,
-            /// <summary>自己再生</summary>
-            SelfRegeneration = 4,
-            /// <summary>爆炎熱風柱</summary>
-            ExplosiveFlamePillar = 8,
-            /// <summary>紅蓮障壁</summary>
-            CrimsonBarrier = 16,
-            /// <summary>魔拳烈火ノ型</summary>
-            DevilsFistInfernoType = 32,
-            /// <summary>心焔権現</summary>
-            BraveHeartsIncarnation = 64,
-            /// <summary>大紅蓮障壁</summary>
-            GreatCrimsonBarrier = 128,
-            /// <summary>豪炎爆砕掌</summary>
-            InfernosFist = 256,
-            /// <summary>魔王ノ細胞</summary>
-            SatansCell = 512,
-            AmaterasuIncanation = 1024,
-            /// <summary>天照-爆炎-</summary>
-            AmaterasuInferno = 2048,
-            /// <summary>天照-焔壁-</summary>
-            AmaterasuFlameWall = 4096,
-            /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
-            AllSkills = 8191,
-
-        }
 
         /// <summary>レベルアップ時に得れるステータスポイント</summary>
         public float m_statusPoint;
@@ -88,6 +32,24 @@ namespace DemonicCity
         /// <summary>マギアのHP最大値</summary>
         /// <value>HP最大値</value>
         public int MaxHP { get; private set; }
+        /// <summary>ステータスクラスのプロパティ</summary>
+        public Statistics Stats
+        {
+            get { return m_stats; }
+            set { m_stats = value; }
+        }
+        /// <summary>m_statsBufferのプロパティ</summary>
+        public Statistics StatsBuffer
+        {
+            get { return m_StatsBuffer; }
+            set
+            {
+                var stats = value; // 
+                StatsBuffer.m_hitPoint = stats.m_hitPoint;
+                StatsBuffer.m_attack = stats.m_attack;
+                StatsBuffer.m_defense = stats.m_defense;
+            }
+        }
 
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
@@ -115,27 +77,9 @@ namespace DemonicCity
             m_durability = 0,
             m_muscularStrength = 0,
         };
-        /// <summary>ステータスクラスのプロパティ</summary>
-        public Statistics Stats
-        {
-            get { return m_stats; }
-            set { m_stats = value; }
-        }
 
         /// <summary>マギアのステータスを一時保存しておく変数</summary>
         [SerializeField] Statistics m_StatsBuffer = new Statistics();
-        /// <summary>m_statsBufferのプロパティ</summary>
-        public Statistics StatsBuffer
-        {
-            get { return m_StatsBuffer; }
-            set
-            {
-                var stats = value; // 
-                StatsBuffer.m_hitPoint = stats.m_hitPoint;
-                StatsBuffer.m_attack = stats.m_attack;
-                StatsBuffer.m_defense = stats.m_defense;
-            }
-        }
 
         /// <summary>固有ステータス用振り分けポイント</summary>
         int m_addStatsPoint = 3;
@@ -273,6 +217,62 @@ namespace DemonicCity
             Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_magnificationByStats); // 知識を防御力に変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
+        }
+
+        /// <summary>属性</summary>
+        [Serializable]
+        public enum Attribute
+        {
+            /// <summary>初期形態</summary>
+            Standard,
+            /// <summary>男近接形態</summary>
+            MaleWarrior,
+            /// <summary>女近接形態</summary>
+            FemaleWarrior,
+            /// <summary>男魔法使い形態</summary>
+            MaleWizard,
+            /// <summary>女魔法使い形態</summary>
+            FemaleWitch,
+            /// <summary>女超越形態</summary>
+            FemaleTrancendental,
+        }
+
+        /// <summary>
+        /// レベルアップ獲得スキル。
+        /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
+        /// </summary>
+        [Flags, Serializable]
+        public enum PassiveSkill
+        {
+            /// <summary>無効値</summary>
+            Invalid = 0,
+            /// <summary>魔拳</summary>
+            DevilsFist = 1,
+            /// <summary>高濃度魔力吸収,High concentration magical absorption</summary>
+            HighConcentrationMagicalAbsorption = 2,
+            /// <summary>自己再生</summary>
+            SelfRegeneration = 4,
+            /// <summary>爆炎熱風柱</summary>
+            ExplosiveFlamePillar = 8,
+            /// <summary>紅蓮障壁</summary>
+            CrimsonBarrier = 16,
+            /// <summary>魔拳烈火ノ型</summary>
+            DevilsFistInfernoType = 32,
+            /// <summary>心焔権現</summary>
+            BraveHeartsIncarnation = 64,
+            /// <summary>大紅蓮障壁</summary>
+            GreatCrimsonBarrier = 128,
+            /// <summary>豪炎爆砕掌</summary>
+            InfernosFist = 256,
+            /// <summary>魔王ノ細胞</summary>
+            SatansCell = 512,
+            AmaterasuIncanation = 1024,
+            /// <summary>天照-爆炎-</summary>
+            AmaterasuInferno = 2048,
+            /// <summary>天照-焔壁-</summary>
+            AmaterasuFlameWall = 4096,
+            /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
+            AllSkills = 8191,
         }
     }
 }
