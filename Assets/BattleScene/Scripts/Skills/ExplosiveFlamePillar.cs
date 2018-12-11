@@ -28,7 +28,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 爆炎熱風柱");
-
+            
         }
     }
 }
