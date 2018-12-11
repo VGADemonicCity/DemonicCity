@@ -38,6 +38,18 @@ namespace DemonicCity
             get { return m_stats; }
             set { m_stats = value; }
         }
+        /// <summary>m_statsBufferのプロパティ</summary>
+        public Statistics StatsBuffer
+        {
+            get { return m_StatsBuffer; }
+            set
+            {
+                var stats = value; // 
+                StatsBuffer.m_hitPoint = stats.m_hitPoint;
+                StatsBuffer.m_attack = stats.m_attack;
+                StatsBuffer.m_defense = stats.m_defense;
+            }
+        }
 
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
@@ -66,6 +78,9 @@ namespace DemonicCity
             m_muscularStrength = 0,
         };
 
+        /// <summary>マギアのステータスを一時保存しておく変数</summary>
+        [SerializeField] Statistics m_StatsBuffer = new Statistics();
+
         /// <summary>固有ステータス用振り分けポイント</summary>
         int m_addStatsPoint = 3;
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
@@ -80,6 +95,15 @@ namespace DemonicCity
         public void InitMaxHP(int maxHP)
         {
             MaxHP = maxHP;
+        }
+
+        /// <summary>
+        /// 基礎ステータスをバトル開始時のスキル適応前の状態に戻す
+        /// </summary>
+        public void ResetStats()
+        {
+            Stats.m_attack = StatsBuffer.m_attack;
+            Stats.m_defense = StatsBuffer.m_defense;
         }
 
         /// <summary>

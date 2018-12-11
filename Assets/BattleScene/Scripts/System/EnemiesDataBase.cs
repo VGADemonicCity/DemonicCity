@@ -56,7 +56,7 @@ namespace DemonicCity
         }
 
         /// <summary>
-        /// 敵データのマスターデータクラス
+        /// Enemy character.
         /// </summary>
         [Serializable]
         public class Enemy

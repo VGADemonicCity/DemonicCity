@@ -51,35 +51,5 @@ namespace DemonicCity
         public int m_attack;
         /// <summary>防御力</summary>
         public int m_defense;
-
-        [SerializeField] private Statistics m_temp = new Statistics();
-        /// <summary>Tempにhp,atk,defを保存しておく</summary>
-        public Statistics Temp
-        {
-            get
-            {
-                return m_temp;
-            }
-            set
-            {
-                m_temp = value;
-            }
-        }
-        /// <summary>
-        /// 基礎ステータスをTempに保存した時の状態に戻す
-        /// </summary>
-        public void Reset()
-        {
-            m_attack = Temp.m_attack;
-            m_defense = Temp.m_defense;
-        }
-
-        public void Init(Statistics stats)
-        {
-            Temp.m_attack = stats.m_attack;
-            Temp.m_defense = stats.m_defense;
-        }
-
-
     }
 }
