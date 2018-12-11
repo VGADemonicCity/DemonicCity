@@ -34,7 +34,9 @@ namespace DemonicCity.BattleScene
                     return;
                 }
                 Debug.Log("Init state called.");
-                m_magia.StatsBuffer = m_magia.Stats; // 一番最初のターンだけバッファ変数にStatsを代入
+                //m_magia.StatsBuffer = m_magia.Stats; // 一番最初のターンだけバッファ変数にStatsを代入
+                m_magia.Stats.Init(m_magia.Stats);
+                m_battleManager.m_enemy.Stats.Init(m_battleManager.m_enemy.Stats);
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化
                 m_magia.InitMaxHP(m_magia.Stats.m_hitPoint);

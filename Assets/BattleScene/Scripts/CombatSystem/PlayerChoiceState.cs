@@ -23,7 +23,7 @@ namespace DemonicCity.BattleScene
                 }
                 Debug.Log("PlayerChoice state called.");
                 // 毎ターン前ターンのスキル情報をさせる為プレイヤーターン開始時毎に初期化する
-                //m_magia.Stats.Reset(); 
+                m_magia.Stats.Reset();
                 m_panelCounter.InitCounts();
                 m_panelManager.InitPanels();
 

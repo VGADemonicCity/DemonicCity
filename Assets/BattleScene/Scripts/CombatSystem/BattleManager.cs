@@ -21,7 +21,7 @@ namespace DemonicCity.BattleScene
         /// <summary>敵キャラのデータベース</summary>
         public EnemiesDataBase m_enemiesData { get; set; }
         /// <summary>バトルシーンで使用する敵オブジェクト</summary>
-        public EnemiesDataBase.Enemy m_enemy { get; set; }
+        [SerializeField] public EnemiesDataBase.Enemy m_enemy;
         /// <summary>マギアの参照</summary>
         [SerializeField] Magia m_magia;
 
