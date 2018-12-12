@@ -39,8 +39,8 @@ namespace DemonicCity
         {
             m_items = new List<Enemy>
             {
-            new Enemy(EnemiesId.Phoenix,700,300,190), // フィニクス
-                new Enemy(EnemiesId.Nahura,300,160,40) // ナフラ
+                new Enemy(EnemiesId.Phoenix,700,300,190), // フィニクス
+                new Enemy(EnemiesId.Nahura,300,160,40), // ナフラ
             };
         }
 
@@ -80,6 +80,13 @@ namespace DemonicCity
                 set { m_stats = value; }
             }
 
+            /// <summary>
+            /// Initializes a new instance of the <see cref="T:DemonicCity.EnemiesDataBase.Enemy"/> class.
+            /// </summary>
+            /// <param name="id">Identifier.</param>
+            /// <param name="hitPoint">Hit point.</param>
+            /// <param name="attack">Attack.</param>
+            /// <param name="defense">Defense.</param>
             public Enemy(EnemiesId id, int hitPoint, int attack, int defense)
             {
                 Id = id.ToString();

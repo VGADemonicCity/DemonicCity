@@ -21,23 +21,13 @@ namespace DemonicCity.BattleScene.Skill
         }
 
         /// <summary>
-        /// Start this instance.
-        /// </summary>
-        protected override void Start()
-        {
-            base.Start();
-        }
-
-        /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-
+            Debug.Log("Activated the 自己再生");
+            var buffer = m_panelCounter.GetCityDestructionCount() * m_magia.MaxHP * m_increase; // 丸め込み対策の為に一度変数に保存
+            m_magia.Stats.m_hitPoint += (int)buffer; // ここでintに変換
         }
     }
 }

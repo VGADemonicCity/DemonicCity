@@ -20,25 +20,16 @@ namespace DemonicCity.BattleScene.Skill
             m_passiveSkill = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
         }
 
-
         /// <summary>
-        /// Start this instance.
-        /// </summary>
-        protected override void Start()
-        {
-            base.Start();
-        }
-
-        /// <summary>
-        /// 高濃度魔力吸収
-        /// 街は回数7以上で発動
-        /// 街破壊数*攻撃力or防御力の0.5%をそれぞれ加算
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 高濃度魔力吸収");
-            m_magia.Stats.m_attack += (int)(m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_attack * m_increase); // 攻撃力 += 街破壊数 * (攻撃力 * 任意の%)
-            m_magia.Stats.m_defense += (int)(m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_defense * m_increase); // 防御力 += 街破壊数 * (防御力 * 任意の%)
+            var attackBuffer = m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_attack * m_increase; // 街破壊数 * (攻撃力 * 任意の%)
+            var defenseBuffer = m_panelCounter.GetCityDestructionCount() * m_magia.Stats.m_defense * m_increase; // 街破壊数 * (防御力 * 任意の%)
+            m_magia.Stats.m_attack += (int)attackBuffer; // intに変換
+            m_magia.Stats.m_defense += (int)defenseBuffer; // intに変換
         }
     }
 }

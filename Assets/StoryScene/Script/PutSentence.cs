@@ -8,7 +8,6 @@ namespace DemonicCity
 {
     public class PutSentence : MonoBehaviour
     {
-
         /// <summary>/// 文字送り速度/// </summary>
         float charFeedSpeed = 0.1f;
         /// <summary>/// 表示用のTextComponent/// </summary>
@@ -20,9 +19,11 @@ namespace DemonicCity
         /// <summary>/// /// </summary>
         int charCount = 0;
         /// <summary>コルーチンが終了しているか </summary>
-        bool end;
+        public bool end=false;
         /// <summary>全文表示しているか</summary>
         public bool onoff;
+        /// <summary>コルーチンを保存する</summary>
+        IEnumerator feedCoroutine;
 
 
         void Awake()
@@ -52,28 +53,77 @@ namespace DemonicCity
             }
             return onoff;
         }
+        //public IEnumerator aSentenceFeed(string s)
+        //{
+        //    //Debug.Log("col");
+        //    sentence = s;
+        //    onoff = false;
+        //    text.text = "";
+        //    for (charCount = 0; charCount < sentence.Length; charCount++)
+        //    {
+        //        text.text += sentence[charCount];
+        //        //end = false;
+        //        if (end)
+        //        {
+        //            text.text = sentence;
+        //            end = false;
+        //            break;
+        //        }
+        //        yield return new WaitForSeconds(charFeedSpeed);
+        //    }
+        //    onoff = true;
+        //    //end = false;
+
+        //}
+
+
+
+
+
+
+
+
+
+
+        /// <summary>引数のStringを一文字ずつ表示する。endがtrueならコルーチンが終了</summary>
         public IEnumerator SentenceFeed(string s)
         {
-            //Debug.Log("col");
             sentence = s;
-            onoff = false;
             text.text = "";
-            for (charCount = 0; charCount < sentence.Length; charCount++)
+            for (charCount=0;charCount<sentence.Length;charCount++)
             {
                 text.text += sentence[charCount];
-                //end = false;
-                if (end)
-                {
-                    text.text = sentence;
-                    end = false;
-                    break;
-                }
+
                 yield return new WaitForSeconds(charFeedSpeed);
             }
-            onoff = true;
-            //end = false;
-
+            end = true;
         }
+
+        /// <summary>テキストをすべて表示する。</summary>
+        public void FullTexts()
+        {
+            StopCoroutine(feedCoroutine);
+            text.text = sentence;
+            end = true;
+        }
+        /// <summary>コルーチンを開始</summary>
+        public bool CallSentence(string s)
+        {
+            if (end)
+            {
+                
+            }
+            else
+            {
+                feedCoroutine = SentenceFeed(s);
+                StartCoroutine(feedCoroutine);
+                end = false;
+            }
+            
+            return end;
+        }
+
+
     }
 }
 

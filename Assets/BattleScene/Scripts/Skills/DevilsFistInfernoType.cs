@@ -20,14 +20,7 @@ namespace DemonicCity.BattleScene.Skill
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
         }
-
-        /// <summary>
-        /// Start this instance.
-        /// </summary>
-        protected override void Start()
-        {
-            base.Start();
-        }
+       
 
         /// <summary>
         /// 魔拳
