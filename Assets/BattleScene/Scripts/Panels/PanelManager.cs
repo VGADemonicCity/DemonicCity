@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using DemonicCity.BattleScene.Skill;
+using DemonicCity.Debugger;
 
 namespace DemonicCity.BattleScene
 {
@@ -24,6 +25,11 @@ namespace DemonicCity.BattleScene
             dummy3 = 8
         }
 
+        /// <summary>Flag</summary>
+        public bool m_isPanelProcessing { get; private set; }
+        /// <summary>オープン前のパネル</summary>
+        public List<GameObject> m_panelsBforeOpen { get; set; }
+
         /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
         /// <summary>パネルを回転させる時間</summary>
@@ -36,10 +42,11 @@ namespace DemonicCity.BattleScene
         BattleManager m_battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter m_panelCounter;
-        /// <summary>shufflePanelsの参照</summary>
+        /// <summary>ShufflePanelsの参照</summary>
         ShufflePanels m_shufflePanels;
-        /// <summary>オープン前のパネル</summary>
-        List<GameObject> m_panelsBforeOpen;
+        /// <summary>BattleDebuggerの参照</summary>
+        BattleDebugger m_battleDebugger;
+
         /// <summary>オープン後のパネル</summary>
         List<GameObject> m_panelsAfterOpened;
         /// <summary>各パネルの生成座標</summary>
@@ -48,8 +55,6 @@ namespace DemonicCity.BattleScene
         GameObject m_panelPrefab;
         /// <summary>パネル座標の行列</summary>
         float[][] m_panelPosMatlix;
-        /// <summary>Flag</summary>
-        bool m_isPanelProcessing;
 
         /// <summary>
         /// Awake this instance.
@@ -58,6 +63,7 @@ namespace DemonicCity.BattleScene
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
+            m_battleDebugger = BattleDebugger.Instance; // BattleDebuggerの参照取得
             m_shufflePanels = GetComponent<ShufflePanels>(); // ShufflePanelsの参照取得
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
@@ -90,7 +96,7 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || (m_isPanelProcessing)) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
+                if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing || m_battleDebugger.DebugFlag) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
                 {
                     return;
                 }
@@ -101,11 +107,7 @@ namespace DemonicCity.BattleScene
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
                     if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
                     {
-                        m_isPanelProcessing = true; // フラグを建てる
-                        var panel = hitResult.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
-                        panel.Open(m_waitTime); // panelを開く
-                        m_panelsAfterOpened.Add(hitResult); // 開いたオブジェクトを登録
-                        StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
+                        PanelProcessing(hitResult);
                     }
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
@@ -114,11 +116,20 @@ namespace DemonicCity.BattleScene
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
-                    var a = Magia.Instance;
-                    a.LevelUp();
+                    var a = Magia.Instance; // Debug用
+                    a.LevelUp(); // Debug用
+
                 }
             });
+        }
 
+        public void PanelProcessing(GameObject target)
+        {
+            m_isPanelProcessing = true; // フラグを建てる
+            var panel = target.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
+            panel.Open(m_waitTime); // panelを開く
+            m_panelsAfterOpened.Add(target); // 開いたオブジェクトを登録
+            StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
 
         }
 
@@ -183,8 +194,7 @@ namespace DemonicCity.BattleScene
                     panelType[i] = PanelType.City;
                 }
             }
-            PanelType[] array = panelType; // 変換用配列を定義
-            PanelType[] resultArray = array.OrderBy(i => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
+            PanelType[] resultArray = panelType.OrderBy(i => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
             return resultArray; // ソート結果を返す
         }
 
