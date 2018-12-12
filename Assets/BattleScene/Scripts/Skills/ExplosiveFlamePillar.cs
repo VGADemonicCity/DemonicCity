@@ -12,14 +12,11 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class ExplosiveFlamePillar : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
-        
-
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.ExplosiveFlamePillar; // フラグを設定
+            m_timing = SkillManager.Timing.SpecialAttack; // フラグを設定
         }
 
         /// <summary>
@@ -28,7 +25,12 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 爆炎熱風柱");
+            m_attackBuffer = m_battleManager.BattleMagia.Temp.m_attack * m_incease; // 攻撃力の1/2
+            m_battleManager.m_enemy.Stats.m_hitPoint -= (int)m_attackBuffer; // hpに直接ダメージを与える
+        }
 
+        protected override void SkillDeactivate()
+        {
         }
     }
 }

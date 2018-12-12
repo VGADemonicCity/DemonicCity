@@ -51,19 +51,19 @@ namespace DemonicCity
         public int m_attack;
         /// <summary>防御力</summary>
         public int m_defense;
+        /// <summary>マギアのHP最大値</summary>
+        public int MaxHP
+        {
+            get { return Temp.m_hitPoint; }
+            private set { MaxHP = value; }
+        }
 
         [SerializeField] private Statistics m_temp;
         /// <summary>Tempにhp,atk,defを保存しておく</summary>
         public Statistics Temp
         {
-            get
-            {
-                return m_temp;
-            }
-            set
-            {
-                m_temp = value;
-            }
+            get { return m_temp; }
+            set { m_temp = value; }
         }
         /// <summary>
         /// 基礎ステータスをTempに保存した時の状態に戻す
@@ -74,13 +74,18 @@ namespace DemonicCity
             m_defense = Temp.m_defense;
         }
 
+        /// <summary>
+        /// バトル開始時のステータスの初期値を保存
+        /// </summary>
+        /// <param name="stats">Stats.</param>
         public void Init(Statistics stats)
         {
-            Temp = new Statistics();
-            Temp.m_attack = stats.m_attack;
-            Temp.m_defense = stats.m_defense;
+            Temp = new Statistics
+            {
+                m_hitPoint = stats.m_hitPoint,
+                m_attack = stats.m_attack,
+                m_defense = stats.m_defense
+            };
         }
-
-
     }
 }

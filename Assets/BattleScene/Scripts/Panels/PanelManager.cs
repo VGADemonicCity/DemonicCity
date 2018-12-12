@@ -28,7 +28,7 @@ namespace DemonicCity.BattleScene
         /// <summary>Flag</summary>
         public bool m_isPanelProcessing { get; private set; }
         /// <summary>オープン前のパネル</summary>
-        public List<GameObject> m_panelsBforeOpen { get; set; }
+        public List<Panel> m_panelsBforeOpen { get; set; }
 
         /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
@@ -48,7 +48,7 @@ namespace DemonicCity.BattleScene
         BattleDebugger m_battleDebugger;
 
         /// <summary>オープン後のパネル</summary>
-        List<GameObject> m_panelsAfterOpened;
+        List<Panel> m_panelsAfterOpened;
         /// <summary>各パネルの生成座標</summary>
         List<Vector3> m_panelPositions;
         /// <summary>パネルのゲームオブジェクト</summary>
@@ -72,7 +72,7 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
             m_panelPosMatlix[1] = new[] { -4.155f, -2.955f, -1.755f, -0.355f, .845f, 2.045f, 3.445f, 4.645f, 5.845f }; //行
             m_panelPositions = new List<Vector3>();
-            m_panelsAfterOpened = new List<GameObject>();
+            m_panelsAfterOpened = new List<Panel>();
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
             {
@@ -109,12 +109,13 @@ namespace DemonicCity.BattleScene
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
                     if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
                     {
-                        PanelProcessing(hitResult);
+                        var panel = hitResult.GetComponent<Panel>();
+                        PanelProcessing(panel);
                     }
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
                 {
-                    InitPanels(); // Debug用
+                    m_shufflePanels.PanelShuffle(); // Debug用
                 }
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
@@ -124,12 +125,11 @@ namespace DemonicCity.BattleScene
             });
         }
 
-        public void PanelProcessing(GameObject target)
+        public void PanelProcessing(Panel panel)
         {
             m_isPanelProcessing = true; // フラグを建てる
-            var panel = target.GetComponent<Panel>(); // タッチされたパネルのPanelクラスの参照
             panel.Open(m_waitTime); // panelを開く
-            m_panelsAfterOpened.Add(target); // 開いたオブジェクトを登録
+            m_panelsAfterOpened.Add(panel); // 開いたオブジェクトを登録
             StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
 
         }
@@ -153,7 +153,7 @@ namespace DemonicCity.BattleScene
             }
             else // パネルリストが生成されていなかったら
             {
-                m_panelsBforeOpen = new List<GameObject>(); // パネルを開く前のリスト
+                m_panelsBforeOpen = new List<Panel>(); // パネルを開く前のリスト
                 PanelType[] panelAllocations = GetRandomPanels(); // パネルの数分PanelTypeのenum値を適切にランダム配分させたリスト
                 // パネルを生成後PanelTypeを適切に割り振る. m_panelAllocationsとm_panelPositionsの要素数は一緒になっていなければおかしいので同時に条件分岐をとる
                 for (int i = 0; i < panelAllocations.Length && i < m_panelPositions.Count; i++)
@@ -162,7 +162,7 @@ namespace DemonicCity.BattleScene
                     GameObject panelObject = Instantiate(m_panelPrefab, m_panelPositions[i], Quaternion.identity, m_panelFrame.transform);
                     Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
                     panel.m_panelType = panelAllocations[i]; // パネルの種類をここで決めてもらう
-                    m_panelsBforeOpen.Add(panelObject); // パネルをリストに入れる
+                    m_panelsBforeOpen.Add(panel); // パネルをリストに入れる
                 }
             }
         }

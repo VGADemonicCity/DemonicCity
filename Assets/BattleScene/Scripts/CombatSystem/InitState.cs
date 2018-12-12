@@ -34,14 +34,15 @@ namespace DemonicCity.BattleScene
                     return;
                 }
                 Debug.Log("Init state called.");
-                //m_magia.StatsBuffer = m_magia.Stats; // 一番最初のターンだけバッファ変数にStatsを代入
-                m_magia.Stats.Init(m_magia.Stats);
+                m_battleManager.BattleMagia = m_magia.GetStats(); // 現在のマギアのステータスをバトル用Statisticsのインスタンスを作る
+                m_battleManager.BattleMagia.Init(m_battleManager.BattleMagia);
                 m_battleManager.m_enemy.Stats.Init(m_battleManager.m_enemy.Stats);
                 m_panelCounter.InitCounts(); // カウント初期化
                 m_panelManager.InitPanels(); // パネル初期化
-                m_magia.InitMaxHP(m_magia.Stats.m_hitPoint);
+                m_magia.InitMaxHP(m_battleManager.BattleMagia.m_hitPoint); // MaxHPを代入
                 m_magiaHpDraw.Initialize(m_magia.MaxHP); // マギアのHP最大値を引数に初期化する
                 m_enemyHpDraw.Initialize(m_battleManager.m_enemy.Stats.m_hitPoint); // 敵のHP最大値を引数に初期化する
+
 
                 // ==============================
                 // イベント呼び出し : StateMachine.PlayerChoice
