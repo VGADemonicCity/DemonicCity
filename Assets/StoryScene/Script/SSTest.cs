@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.StoryScene
+namespace DemonicCity.StorySelectScene
 {
     public class SSTest : MonoBehaviour
     {
