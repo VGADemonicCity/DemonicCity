@@ -4,25 +4,23 @@ using UnityEngine;
 
 namespace DemonicCity.StorySelectScene
 {
-    public class SSTest : MonoBehaviour
+    public class StorySelecter : MonoBehaviour
     {
-
-        Progress progress = null;
+        Progress progress;
+        Progress.StoryProgress MyStory;
 
         void Awake()
         {
             progress = Progress.Instance;
         }
-        // Use this for initialization
         void Start()
         {
-            progress.Test();
+            MyStory = progress.MyStoryProgress;
+            foreach (var item in a )
+            {
+                
+            }
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 }

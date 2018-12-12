@@ -14,13 +14,17 @@ namespace DemonicCity
         {
             Prologue = 1 << 0,
             Phoenix = 1 << 1,
-            Aamon = 1 << 2,
-            Naphula = 1 << 3,
-            Ashmedai = 1 << 4,
-            Foras = 1 << 5,
-            Baal = 1 << 6,
-            ExMagia = 1 << 7,
-            All = (1 << 8) - 1
+            Naphula = 1 << 2,
+            ZAKO1 = 1 << 3,
+            Aamon = 1 << 4,
+            ZAKO2 = 1 << 5,
+            Ashmedai = 1 << 6,
+            ZAKO3 = 1 << 7,
+            Foras = 1 << 8,
+            ZAKO4 = 1 << 9,
+            Baal = 1 << 10,
+            ExMagia = 1 << 12,
+            All = (1 << 13) - 1
         }
 
         [Flags]
@@ -32,25 +36,33 @@ namespace DemonicCity
             All = (1 << 3) - 1,
         }
 
-        StoryProgress storyProgress = StoryProgress.Prologue;
+        [SerializeField] StoryProgress storyProgress = StoryProgress.Prologue;
 
-        StoryProgress thisStoryProgress = StoryProgress.Prologue;
-        QuestProgress questProgress = QuestProgress.Prologue;
+        [SerializeField] StoryProgress thisStoryProgress = StoryProgress.Prologue;
+        [SerializeField] QuestProgress questProgress = QuestProgress.Prologue;
 
-        public StoryProgress MyStoryProgress {
+        public StoryProgress MyStoryProgress
+        {
             get { return storyProgress; }
-            set { storyProgress = value; }
+            set { storyProgress = value; Save(); }
         }
 
         public StoryProgress ThisStoryProgress
         {
             get { return thisStoryProgress; }
-            set { thisStoryProgress = value; }
+            set { thisStoryProgress = value; Save(); }
         }
-        public QuestProgress MyQuestProgress {
+
+        public QuestProgress MyQuestProgress
+        {
             get { return questProgress; }
-            set { questProgress = value; }
+            set { questProgress = value; Save(); }
         }
+
+
+
+
+
 
         public void Test()
         {
@@ -60,7 +72,7 @@ namespace DemonicCity
                 Debug.Log((int)StoryProgress.All);
             }
         }
-         
+
 
 
     }
