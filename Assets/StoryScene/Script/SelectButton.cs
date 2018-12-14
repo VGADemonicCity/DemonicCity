@@ -40,7 +40,7 @@ namespace DemonicCity.StorySelectScene
                 switch (gesture)
                 {
                     case TouchGestureDetector.Gesture.TouchBegin:
-                        touchInfo.HitDetection(out beginObject);
+                        touchInfo.HitDetection(out beginObject,gameObject);
                         break;
 
                     case TouchGestureDetector.Gesture.Click:
