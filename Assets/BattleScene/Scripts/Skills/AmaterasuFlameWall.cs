@@ -13,26 +13,28 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class AmaterasuFlameWall : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
 
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.AmaterasuFlameWall; // フラグを設定
+            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
-        
+
         /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-            //m_magia.Stats.m_attack += count * m_magia.Stats.m_attack * m_increase; // 攻撃力の任意の%分加算
+            Debug.Log("Activated the 天照ー焔壁ー");
+            m_defenseBuffer = m_battleManager.m_enemy.Stats.m_attack; // 敵の攻撃力をそのまま自分の防御力に加算
+            m_battleManager.BattleMagia.m_defense += (int)m_defenseBuffer;
+        }
 
+        protected override void SkillDeactivate()
+        {
+            Debug.Log("Deactivated the 天照ー焔壁ー");
+            m_battleManager.BattleMagia.m_defense -= (int)m_defenseBuffer;
         }
     }
 }

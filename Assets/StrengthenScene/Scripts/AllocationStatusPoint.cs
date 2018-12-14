@@ -1,29 +1,44 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 namespace DemonicCity.StrengthenScene
 {
     public class AllocationStatusPoint : MonoBehaviour
     {
-        Magia referenceMagia;
-        Magia editMagia;
-
+        Magia magia;
         //Statistics result = new Statistics();
         TouchGestureDetector m_touchGestureDetector;
+        private int level, hitPoint, attack, defense;
+        public TextMeshProUGUI levelText, hitPointText, attackText, defenseText;
 
         void Awake()
         {
-            referenceMagia = Magia.Instance;
-            editMagia = new Magia();
+            magia = Magia.Instance;
             m_touchGestureDetector = TouchGestureDetector.Instance;
         }
 
         void Start()
         {
-            referenceMagia.GetStats();
-            Debug.Log(referenceMagia.GetStats());
+            Debug.Log(magia.GetStats().m_hitPoint);
 
+            //マギアの現在のステータスを取得
+            level = magia.GetStats().m_level;
+            hitPoint = magia.GetStats().m_hitPoint;
+            attack = magia.GetStats().m_attack;
+            defense = magia.GetStats().m_defense;
+            
+            //画面上に表示
+            levelText.GetComponent<TextMeshProUGUI>().text = "" + level.ToString();
+            hitPointText.GetComponent<TextMeshProUGUI>().text = "" + hitPoint.ToString();
+            attackText.GetComponent<TextMeshProUGUI>().text = "" + attack.ToString();
+            defenseText.GetComponent<TextMeshProUGUI>().text = "" + defense.ToString();
+
+            
+
+            /*
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 switch (gesture)
@@ -33,10 +48,13 @@ namespace DemonicCity.StrengthenScene
                         break;
                 }
             });
+            */
         }
 
+
+        //ユーザーによるボタン押下時の処理
         /// <summary>
-        /// 確定ボタンを押すと反映された割り振りポイントを確定
+        /// 確定ボタンを押すと反映された割り振りポイントを確定し保存
         /// </summary>
         public void PressedConfirm()
         {
@@ -44,7 +62,7 @@ namespace DemonicCity.StrengthenScene
         }
 
         /// <summary>
-        /// 中止ボタンを押すと反映されたポイントを初期化
+        /// 中止ボタンを押すと反映されたポイントを編集前に初期化
         /// </summary>
         public void PressedReset()
         {

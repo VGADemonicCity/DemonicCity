@@ -12,26 +12,29 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class DevilsFistInfernoType : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
 
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
+            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
-       
 
         /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
+        /// 魔拳の代わりに発動
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
+            Debug.Log("Activated the 魔拳烈火ノ型");
+            m_attackBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_attack * m_incease; // 攻撃力の任意の%分加算
+            m_battleManager.BattleMagia.m_attack += (int)m_attackBuffer; // intに変換
+        }
 
+        protected override void SkillDeactivate()
+        {
+            Debug.Log("Deactivated the 魔拳烈火ノ型");
+            m_battleManager.BattleMagia.m_attack -= (int)m_attackBuffer; // 変動値を元に戻す
         }
     }
 }

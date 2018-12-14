@@ -40,7 +40,7 @@ namespace DemonicCity
             m_items = new List<Enemy>
             {
                 new Enemy(EnemiesId.Phoenix,700,300,190), // フィニクス
-                new Enemy(EnemiesId.Nahura,300,160,40), // ナフラ
+                new Enemy(EnemiesId.Nahura,100000,160,40), // ナフラ
             };
         }
 
@@ -61,8 +61,13 @@ namespace DemonicCity
         [Serializable]
         public class Enemy
         {
-            /// <summary>敵キャラのID</summary>
-            [SerializeField] public string m_id;
+            /// <summary>m_statsのプロパティ</summary>
+            public Statistics Stats
+            {
+                get { return m_stats; }
+                set { m_stats = value; }
+            }
+
             /// <summary>敵キャラID取得プロパティ</summary>
             public string Id
             {
@@ -70,15 +75,12 @@ namespace DemonicCity
                 set { m_id = value; }
             }
 
+            /// <summary>敵キャラのID</summary>
+            [SerializeField] public string m_id;
             /// <summary>ステータス</summary>
             [SerializeField] Statistics m_stats = new Statistics();
-
-            /// <summary>m_statsのプロパティ</summary>
-            public Statistics Stats
-            {
-                get { return m_stats; }
-                set { m_stats = value; }
-            }
+            /// <summary>経験値</summary>
+            private int Experience { get; set; }
 
             /// <summary>
             /// Initializes a new instance of the <see cref="T:DemonicCity.EnemiesDataBase.Enemy"/> class.
