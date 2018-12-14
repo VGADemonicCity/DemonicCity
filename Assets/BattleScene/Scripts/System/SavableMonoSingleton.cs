@@ -223,10 +223,11 @@ namespace DemonicCity
         string GetSaveFilePath()
         {
             //確認しやすい様にエディタではAssetsと同じ階層に保存し、それ以外ではApplication.persistentDataPath以下に保存する様にする
+            string filePath;
 #if UNITY_EDITOR
-            var filePath = m_filePath + ".json";
+            filePath = m_filePath + ".json";
 #else
-            filePath = Application.persistentDataPath + "/" + filePath;
+            filePath = Application.persistentDataPath + "/" + m_filePath;
 #endif
             return filePath;
         }

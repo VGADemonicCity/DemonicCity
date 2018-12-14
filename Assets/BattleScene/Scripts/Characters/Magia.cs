@@ -30,10 +30,10 @@ namespace DemonicCity
             set { m_stats = value; }
         }
         /// <summary>振り分けポイントのプロパティ</summary>
-        public int StatsPoint
+        public int AllocationPoint
         {
-            get { return m_statsPoint; }
-            set { m_statsPoint = value; }
+            get { return m_allocationPoint; }
+            set { m_allocationPoint = value; }
         }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
@@ -41,7 +41,7 @@ namespace DemonicCity
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
         /// <summary>振り分けポイント</summary>
-        [SerializeField] int m_statsPoint;
+        [SerializeField] int m_allocationPoint;
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
@@ -54,9 +54,9 @@ namespace DemonicCity
         Statistics m_stats = new Statistics()
         {
             m_level = 1,
-            m_hitPoint = 10000,
-            m_attack = 100,
-            m_defense = 100,
+            m_hitPoint = 24250,
+            m_attack = 3635,
+            m_defense = 3635,
             m_charm = 0,
             m_sense = 0,
             m_dignity = 0,
@@ -121,7 +121,7 @@ namespace DemonicCity
             }
 
             Stats.m_level++; // levelを1上げる
-            m_statsPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
+            m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 
 
@@ -152,7 +152,7 @@ namespace DemonicCity
         /// <summary>
         /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
         /// </summary>
-        public void Reinforce(Statistics stats = null)
+        public void Update(Statistics stats = null)
         {
             if (stats != null)
             {

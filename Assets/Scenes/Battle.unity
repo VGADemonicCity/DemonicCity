@@ -275,6 +275,11 @@ Prefab:
       propertyPath: m_panelFrame
       value: 
       objectReference: {fileID: 1892036566}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_debugFlag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
