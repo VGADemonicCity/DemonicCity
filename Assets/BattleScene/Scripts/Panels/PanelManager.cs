@@ -96,7 +96,7 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing || m_battleDebugger.DebugFlag) // プレイヤーのターンじゃない or パネルが処理中なら処理終了
+                if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了  || m_battleDebugger.DebugFlag
                 {
                     return;
                 }

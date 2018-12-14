@@ -301,7 +301,7 @@ namespace DemonicCity
                 }
 
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
-                if (targetGameObject == null || null == targetGameObject.GetComponent<RectTransform>()) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
+                if (targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
                 {
                     var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
                     RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);

@@ -40,7 +40,7 @@ namespace DemonicCity
             m_items = new List<Enemy>
             {
                 new Enemy(EnemiesId.Phoenix,700,300,190), // フィニクス
-                new Enemy(EnemiesId.Nahura,100000,160,40), // ナフラ
+                new Enemy(EnemiesId.Nahura,1000000,7000,5000), // ナフラ
             };
         }
 
