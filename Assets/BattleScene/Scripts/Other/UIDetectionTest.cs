@@ -20,7 +20,7 @@ namespace DemonicCity.Debugger
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
                     GameObject go;
-                    touchInfo.HitDetection();
+                    //touchInfo.HitDetection();
                 }
             });
         }
