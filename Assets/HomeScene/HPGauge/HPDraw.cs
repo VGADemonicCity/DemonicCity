@@ -21,7 +21,9 @@ namespace DemonicCity.BattleScene
         /// <summary>HP判定用の遊び</summary>
         float play = 0.1f;
         /// <summary>HPの変化にかけるフレーム数</summary>
-        int frame = 70;
+        //int frame = 70;
+        /// <summary>HPゲージの移動速度</summary>
+        float drawSpeed = 1f;
         /// <summary>変化するHP量が少なすぎてchangeValueが0になるようなことがあった場合は最大HPの1/1000をchangeValueとする</summary>
         int divideNumber = 1000;
 
@@ -44,7 +46,7 @@ namespace DemonicCity.BattleScene
         public void Damage(int damage)
         {
             currentHP -= damage;
-            changeValue = damage / frame;
+            changeValue = damage * drawSpeed / Time.deltaTime;
             if (changeValue == 0)
             {
                 changeValue = maxHP / divideNumber;
@@ -63,7 +65,7 @@ namespace DemonicCity.BattleScene
         public void Heal(int heal)
         {
             currentHP += heal;
-            changeValue = heal / frame;
+            changeValue = heal * drawSpeed / Time.deltaTime;
             if (changeValue == 0)
             {
                 changeValue = maxHP / divideNumber;
@@ -81,7 +83,7 @@ namespace DemonicCity.BattleScene
         public void Reflect(int val)
         {
             currentHP += val;
-            changeValue = val / frame;
+            changeValue = val * drawSpeed / Time.deltaTime;
 
             StartCoroutine(HP());
 
