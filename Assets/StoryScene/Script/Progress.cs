@@ -53,7 +53,7 @@ namespace DemonicCity
             All = (1 << 3) - 1,
         }
 
-        [SerializeField] StoryProgress storyProgress = StoryProgress.ZAKO1;
+        [SerializeField] StoryProgress storyProgress = StoryProgress.ExMagia;
 
         [SerializeField] StoryProgress thisStoryProgress = StoryProgress.Prologue;
         [SerializeField] QuestProgress questProgress = QuestProgress.Prologue;

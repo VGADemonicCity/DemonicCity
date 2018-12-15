@@ -48,6 +48,7 @@ namespace DemonicCity
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
+                    
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
                     if (hit.tag != buttonTag)
