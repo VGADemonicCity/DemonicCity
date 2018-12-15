@@ -20,32 +20,36 @@ namespace DemonicCity
         {
             get
             {
-                if (m_instance != null) // m_instanceが存在するならそれを返す.
+                lock(m_instance) // lockブロックに入れて処理中はこのブロックに入れない様にする
                 {
+
+                    if (m_instance != null) // m_instanceが存在するならそれを返す.
+                    {
+                        return m_instance;
+                    }
+
+                    System.Type type = typeof(T); // Tのタイプ型
+
+                    T instance = FindObjectOfType(type) as T; // typeの型と一致するオブジェクトを検索してTに型変換して代入
+
+                    if (instance == null) // instanceがnullなら
+                    {
+                        string typeName = type.ToString(); // typeの文字列
+
+                        GameObject gameObject = new GameObject(typeName, type); // typeNameという名のゲームオブジェクトを生成してtypeという名のComponentをアタッチする
+                        instance = gameObject.GetComponent<T>(); // 先程作ったオブジェクトのコンポーネントを参照
+
+                        if (instance == null) // 生成に失敗したらエラーを返す
+                        {
+                            Debug.LogError("Problem during the creation of " + typeName, gameObject);
+                        }
+                    }
+                    else // instanceが見つけられたらInitializeを呼ぶ
+                    {
+                        Initialize(instance);
+                    }
                     return m_instance;
                 }
-
-                System.Type type = typeof(T); // Tのタイプ型
-
-                T instance = FindObjectOfType(type) as T; // typeの型と一致するオブジェクトを検索してTに型変換して代入
-
-                if (instance == null) // instanceがnullなら
-                {
-                    string typeName = type.ToString(); // typeの文字列
-
-                    GameObject gameObject = new GameObject(typeName, type); // typeNameという名のゲームオブジェクトを生成してtypeという名のComponentをアタッチする
-                    instance = gameObject.GetComponent<T>(); // 先程作ったオブジェクトのコンポーネントを参照
-
-                    if (instance == null) // 生成に失敗したらエラーを返す
-                    {
-                        Debug.LogError("Problem during the creation of " + typeName, gameObject);
-                    }
-                }
-                else // instanceが見つけられたらInitializeを呼ぶ
-                {
-                    Initialize(instance);
-                }
-                return m_instance;
             }
         }
 
