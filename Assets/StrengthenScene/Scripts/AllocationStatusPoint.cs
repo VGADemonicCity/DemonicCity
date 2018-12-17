@@ -22,19 +22,19 @@ namespace DemonicCity.StrengthenScene
             durabilityText, muscularStrengthText, knowledgeText, senseText,
             charmText, dignityText, allocationPointText, updatedHitPointText, updatedAttackText, updatedDefenseText,
             addCharmPointText;
-        
+
         //画面表示用変数
-        private int displayAllocationPoint, displayAddCharmPoint;
+        private int displayUpdatedHitPoint, displayAllocationPoint, displayAddCharmPoint;
 
         public GameObject ConfirmAndResetButtons;
 
-        void Awake()
+        private void Awake()
         {
             magia = Magia.Instance;
             m_touchGestureDetector = TouchGestureDetector.Instance;
         }
 
-        void Start()
+        private void Start()
         {
             ConfirmAndResetButtons.SetActive(false);//確定ボタンと中止ボタンを無効にしておく
 
@@ -49,7 +49,7 @@ namespace DemonicCity.StrengthenScene
             sense = magia.GetStats().m_sense;//感覚
             charm = magia.GetStats().m_charm;//魅力
             dignity = magia.GetStats().m_dignity;//威厳
-            //allocationPoint = magia.AllocationPoint;    
+
             allocationPoint = 5;//デバッグ用
             displayAllocationPoint = allocationPoint;
 
@@ -64,7 +64,7 @@ namespace DemonicCity.StrengthenScene
             charmText.GetComponent<TextMeshProUGUI>().text = "" + charm.ToString();
             dignityText.GetComponent<TextMeshProUGUI>().text = "" + dignity.ToString();
 
-            
+
             //編集中のステータスを表示
             updatedHitPoint = hitPoint;
             updatedAttack = attack;
@@ -74,34 +74,52 @@ namespace DemonicCity.StrengthenScene
             updatedAttackText.GetComponent<TextMeshProUGUI>().text = "" + updatedAttack.ToString();
             updatedDefenseText.GetComponent<TextMeshProUGUI>().text = "" + updatedDefense.ToString();
 
-            /*
+
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                switch (gesture)
+                if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    case TouchGestureDetector.Gesture.TouchBegin:
-                        //PressedConfirm();
-                        break;
+                    GameObject hitResult;
+                    touchInfo.HitDetection(out hitResult);
+                    if (hitResult != null)
+                    {
+                        Debug.Log(hitResult.name);
+                    }
+                    else
+                    {
+                        Debug.Log("ぬるだお");
+                    }
                 }
+
             });
-            */
         }
 
-        private void Update()
+        private void Update()//テキストを常に更新する
         {
-            if(displayAllocationPoint != allocationPoint)
+            if (displayAllocationPoint != allocationPoint)
+            {
                 displayAllocationPoint = allocationPoint;
-            
+            }
             allocationPointText.text = displayAllocationPoint.ToString();
 
             if (displayAddCharmPoint != addCharmPoint)
+            {
                 displayAddCharmPoint = addCharmPoint;
+            }
 
             addCharmPointText.text = displayAddCharmPoint.ToString();
 
+            updatedHitPoint = hitPoint + (addCharmPoint * 5); // 魅力と威厳を体力に変換
+
+            if (displayUpdatedHitPoint != updatedHitPoint)
+            {
+                displayUpdatedHitPoint = updatedHitPoint;
+            }
+
+            updatedHitPointText.text = displayUpdatedHitPoint.ToString();
         }
 
-        //ユーザーによるボタン押下時の処理
+        //ボタン押下時の処理
         /// <summary>
         /// 確定ボタンを押すと反映された割り振りポイントを確定し保存
         /// </summary>
@@ -118,30 +136,35 @@ namespace DemonicCity.StrengthenScene
             Debug.Log("bbbb");
         }
 
-        //+ボタンを押すと割り振りポイントが1減り、指定の固有ステータスポイントが追加される
-        public void AddCharmPoint()
+        /// <summary>
+        /// ＋ボタンを押すと割り振りポイントが1減り、指定の固有ステータスポイントが追加される
+        /// </summary>
+        /// <param name="statusPoint"></param>
+        public void AddStatusPoint(int statusPoint)
         {
             if (allocationPoint > 0)
             {
                 allocationPoint -= 1;
-                addCharmPoint += 3;
-                addCharmPointText.GetComponent<TextMeshProUGUI>().text = "+" + addCharmPoint.ToString();
+                statusPoint += 3;
 
                 ConfirmAndResetButtons.SetActive(true);//割り振られた際に確定ボタンと中止ボタンを有効にする
-            }   
+            }
         }
-        //-ボタンを押すと指定の固有ステータスポイントが減り、割り振りポイントが1増える
-        public void ReductionCharmPoint()
-        {
-            if (addCharmPoint > 0)
-            {
-                addCharmPoint -= 3;
-                allocationPoint += 1;
-                
-                if (addCharmPoint <= 0)
-                {
-                    addCharmPoint = 0;
 
+        /// <summary>
+        /// －ボタンを押すと指定の固有ステータスポイントが減り、割り振りポイントが1増える
+        /// </summary>
+        /// <param name="statusPoint"></param>
+        public void ReductionStatusPoint(int statusPoint)
+        {
+            if (statusPoint > 0)
+            {
+                statusPoint -= 3;
+                allocationPoint += 1;
+
+                if (statusPoint <= 0)
+                {
+                    statusPoint = 0;
                 }
             }
         }

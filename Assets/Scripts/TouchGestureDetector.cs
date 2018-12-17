@@ -283,7 +283,7 @@ namespace DemonicCity
                 positions.Add(position);
             }
 
-         
+
             /// <summary>
             /// タッチ情報を元にレイキャストを飛ばしてGameObjectもUIも当たったオブジェクトを返す
             /// camera引数には指定カメラを引数にする事が可能.何も渡さなかった場合MainCameraタグが付いているカメラを代入する
@@ -293,7 +293,7 @@ namespace DemonicCity
             /// <param name="targetGameObject">Target game object.</param>
             /// <param name="hitResult">Hit result.</param>
             /// <param name="camera">Camera.</param>
-            public bool HitDetection( out GameObject hitResult, GameObject targetGameObject = null, Camera camera = null)
+            public bool HitDetection(out GameObject hitResult, GameObject targetGameObject = null, Camera camera = null)
             {
                 if (null == camera) // 引数のカメラがnullなら
                 {
@@ -301,7 +301,7 @@ namespace DemonicCity
                 }
 
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
-                if (targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
+                if (targetGameObject == null || targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
                 {
                     var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
                     RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);
