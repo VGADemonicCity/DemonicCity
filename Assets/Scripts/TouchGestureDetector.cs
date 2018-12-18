@@ -66,7 +66,7 @@ namespace DemonicCity
             {
                 onGestureDetected.RemoveAllListeners(); //listenerをリセット
             };
-               
+
             if (null == ShootingCamera) // カメラオブジェクトがnullの場合メインカメラを代入する
             {
                 ShootingCamera = Camera.main;
@@ -128,8 +128,8 @@ namespace DemonicCity
         void OnTouchBegin(int fingerId, Vector2 position)
         {
             var touchInfo = new TouchInfo(fingerId, position); // touch情報が入っている変数
-                TouchInfos.Add(touchInfo); //touchInfoをリストに追加
-                OnGestureDetected(Gesture.TouchBegin, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
+            TouchInfos.Add(touchInfo); //touchInfoをリストに追加
+            OnGestureDetected(Gesture.TouchBegin, touchInfo); // 呼び出し元でAddListenerで登録されたmethodに引数を渡してInvokeで呼び出す
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace DemonicCity
                     if (hit.collider != null) // Raycastにオブジェクトが検出されたら
                     {
                         hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
-                     if (hit.collider.gameObject == targetGameObject) // そのオブジェクトが引数のオブジェクトと一緒なら
+                        if (hit.collider.gameObject == targetGameObject) // そのオブジェクトが引数のオブジェクトと一緒なら
                         {
                             return true; // trueを返す
                         }
