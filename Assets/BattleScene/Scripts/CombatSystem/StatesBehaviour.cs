@@ -35,7 +35,6 @@ namespace DemonicCity.BattleScene
 
         }
 
-
         /// <summary>
         /// 指定したステートに遷移させてBattleManagerのイベントを呼び出す
         /// </summary>

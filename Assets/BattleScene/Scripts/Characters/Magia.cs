@@ -205,7 +205,8 @@ namespace DemonicCity
         /// レベルアップ獲得スキル。
         /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
         /// </summary>
-        [Flags, Serializable]
+        [Flags]
+        [Serializable]
         public enum PassiveSkill
         {
             /// <summary>無効値</summary>

@@ -20,7 +20,6 @@ namespace DemonicCity
         {
             get
             {
-
                 if (m_instance != null) // m_instanceが存在するならそれを返す.
                 {
                     return m_instance;
