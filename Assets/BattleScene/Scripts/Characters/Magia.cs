@@ -35,6 +35,13 @@ namespace DemonicCity
             get { return m_allocationPoint; }
             set { m_allocationPoint = value; }
         }
+
+        /// <summary>m_attributeのプロパティ</summary>
+        public Attribute MyAttribute
+        {
+            get { return m_attribute; }
+            set { m_attribute = value; }
+        }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
 
@@ -165,6 +172,7 @@ namespace DemonicCity
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
+
 
         /// <summary>
         /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する
