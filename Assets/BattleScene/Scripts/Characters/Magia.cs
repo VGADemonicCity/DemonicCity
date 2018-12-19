@@ -35,6 +35,12 @@ namespace DemonicCity
             get { return m_allocationPoint; }
             set { m_allocationPoint = value; }
         }
+        /// <summary>m_attributeのプロパティ</summary>
+        public Attribute MyAttribute
+        {
+            get { return m_attribute; }
+            set { m_attribute = value; }
+        }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
 
