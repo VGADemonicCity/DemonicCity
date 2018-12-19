@@ -14,21 +14,68 @@ namespace DemonicCity.StrengthenScene
         TouchGestureDetector m_touchGestureDetector;
         //現在の色霊
 
-        //現在のステータス
-        private int level, hitPoint, attack, defense, durability, muscularStrength,
-            knowledge, sense, charm, dignity;
-        //変動後の基礎ステータス
-        private int updatedHitPoint, updatedAttack, updatedDefense;
+        /// <summary>レベル</summary>
+        private int level;
 
-        //割り振りポイント(残り魔力値)
+        /// <summary>現在の体力</summary>
+        private int hitPoint;
+
+        /// <summary>現在の攻撃力</summary>
+        private int attack;
+
+        /// <summary>現在の防御力</summary>
+        private int defense;
+
+        /// <summary>変動後の体力</summary>
+        private int updatedHitPoint;
+
+        /// <summary>変動後の攻撃力</summary>
+        private int updatedAttack;
+
+        /// <summary>変動後の防御力</summary>
+        private int updatedDefense;
+
+        /// <summary>現在の耐久値</summary>
+        private int durability;
+
+        /// <summary>現在の筋力値</summary>
+        private int muscularStrength;
+
+        /// <summary>現在の知識値</summary>
+        private int knowledge;
+
+        /// <summary>現在の感覚値</summary>
+        private int sense;
+
+        /// <summary>現在の魅力値</summary>
+        private int charm;
+
+        /// <summary>現在の威厳値</summary>
+        private int dignity;
+
+        /// <summary>割り振りポイント(魔力値)</summary>
         private int MP;
 
-        //割り振られたポイントの合計値
+        /// <summary>割り振られたポイントの合計値</summary>
         private int totalAddPoint;
 
-        //割り振られた分の固有ステータス
-        private int addCharm, addDurability, addMuscularStrength,
-            addKnowledge, addSense, addDignity;
+        /// <summary>割り振られた魅力値</summary>
+        private int addCharm;
+
+        /// <summary>割り振られた耐久値</summary>
+        private int addDurability;
+
+        /// <summary>割り振られた筋力値</summary>
+        private int addMuscularStrength;
+
+        /// <summary>割り振られた知識値</summary>
+        private int addKnowledge;
+
+        /// <summary>割り振られた感覚値</summary>
+        private int addSense;
+
+        /// <summary>割り振られた威厳値</summary>
+        private int addDignity;
 
         //各ステータスのパラメーターテキスト
         public TextMeshProUGUI levelText, hitPointText, attackText, defenseText,
@@ -37,11 +84,7 @@ namespace DemonicCity.StrengthenScene
             addCharmText, addDignityText, addDurabilityText,
             addMuscularStrengthText, addSenseText, addKnowledgeText;
 
-        ////各固有ステータスの＋ボタンと－ボタン
-        //private GameObject AddCharmButton, ReductionCharmButton, AddDignityButton, ReductionDignityButton, AddMuscularStrengthButton, ReductionMuscularStrengthButton,
-        //    AddDurabilityButton, ReductionDurabilityButton, AddKnowledgeButton, ReductionKnowlegdeButton, AddSenseButton, ReductionSenseButton;
-
-        //固有ステータスを基礎ステータスに変換する際の倍率
+        /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
         private int magnification;
 
         //確定ボタンと中止ボタン
@@ -157,26 +200,23 @@ namespace DemonicCity.StrengthenScene
         /// </summary>
         public void LoadCurrentStatus()
         {
-            // Attribute attribute = GetComponent<Attribute>();
-
             //確定ボタンと中止ボタンを無効にする
             ConfirmAndResetButtons.SetActive(false);
 
-            //マギアの現在のステータスを参照し表示
-            hitPoint = magia.GetStats().m_hitPoint;//体力
-            attack = magia.GetStats().m_attack;//攻撃力
-            defense = magia.GetStats().m_defense;//防御力
+            hitPoint = magia.GetStats().m_hitPoint;
+            attack = magia.GetStats().m_attack;
+            defense = magia.GetStats().m_defense;
 
             updatedHitPoint = hitPoint;
             updatedAttack = attack;
             updatedDefense = defense;
 
-            durability = magia.GetStats().m_durability;//耐久
-            muscularStrength = magia.GetStats().m_muscularStrength;//筋力
-            knowledge = magia.GetStats().m_knowledge;//知識
-            sense = magia.GetStats().m_sense;//感覚
-            charm = magia.GetStats().m_charm;//魅力
-            dignity = magia.GetStats().m_dignity;//威厳
+            durability = magia.GetStats().m_durability;
+            muscularStrength = magia.GetStats().m_muscularStrength;
+            knowledge = magia.GetStats().m_knowledge;
+            sense = magia.GetStats().m_sense;
+            charm = magia.GetStats().m_charm;
+            dignity = magia.GetStats().m_dignity;
             //MP = magia.AllocationPoint;
             MP = 10;
 
@@ -198,11 +238,9 @@ namespace DemonicCity.StrengthenScene
             MPText.GetComponent<TextMeshProUGUI>().text = MP.ToString();
         }
 
-        /// <summary>
-        /// ＋ボタンを押すと割り振りポイントが1減り、指定の固有ステータスポイントが割り振られる
-        /// </summary>
+        /// <summary> ＋ボタンを押すと割り振りポイントが1減り、指定の固有ステータスポイントが割り振られる</summary>
         /// <param name="statusPoint"></param>
-        public void AddStatusPoint(int addStatusPoint, TextMeshProUGUI addStatusPointText)
+        public int AddStatusPoint(int addStatusPoint, TextMeshProUGUI addStatusPointText)
         {
             if (MP > 0)
             {
@@ -212,15 +250,17 @@ namespace DemonicCity.StrengthenScene
                 addStatusPointText.text = addStatusPoint.ToString();
 
                 totalAddPoint += 3;
-                Debug.Log(totalAddPoint);
-                //魔力値が割り振られた際に確定ボタンと中止ボタンを有効にする
                 ConfirmAndResetButtons.SetActive(true);
             }
+            return addStatusPoint;
         }
 
-        /// <summary>
-        /// －ボタンを押すと指定の固有ステータスポイントが減り、割り振りポイントが1増える
-        /// </summary>
+        public int GetAddCharm()
+        {
+            return addCharm;
+        }
+
+        /// <summary> －ボタンを押すと指定の固有ステータスポイントが減り、割り振りポイントが1増える</summary>
         /// <param name="addStatusPoint"></param>
         public void ReductionStatusPoint(int addStatusPoint, TextMeshProUGUI addStatusPointText)
         {
@@ -232,7 +272,7 @@ namespace DemonicCity.StrengthenScene
                 MPText.text = MP.ToString();
 
                 totalAddPoint -= 3;
-                Debug.Log(totalAddPoint);
+
                 if (totalAddPoint <= 0)
                 {
                     totalAddPoint = 0;
