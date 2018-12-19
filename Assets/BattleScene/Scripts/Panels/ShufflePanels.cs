@@ -13,7 +13,8 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class ShufflePanels : MonoBehaviour
     {
-        [SerializeField] BoxCollider2D m_sensor; // colliderを検出する為のcollider
+        /// <summary>colliderを検出する為のcollider</summary>
+        [SerializeField] BoxCollider2D m_sensor;
         /// <summary>シャッフルスキル発動条件値</summary>
         [SerializeField] int m_shuffleSkillConditions = 30;
         /// <summary>PanelCounterの参照</summary>
