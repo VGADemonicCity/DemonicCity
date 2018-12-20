@@ -109,8 +109,11 @@ namespace DemonicCity.BattleScene
                 {
                     GameObject hitResult; // Raycastの結果を入れる変数
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
+
+                    if(hitResult != null)Debug.Log(hitResult.name);
                     if (hitResult != null && hitResult.tag == "Panel" && IsWithinRange(hitResult.transform.position,m_VecMin,m_VecMax)) // タッチしたオブジェクトのタグがパネルなら
                     {
+
                         var panel = hitResult.GetComponent<Panel>();
                         PanelProcessing(panel);
                     }
