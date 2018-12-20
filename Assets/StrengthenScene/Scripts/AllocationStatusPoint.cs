@@ -173,6 +173,20 @@ namespace DemonicCity.StrengthenScene
                 }
             });
         }
+
+        private void Update()
+        {
+            if (totalAddPoint > 0)
+            {
+                ConfirmAndResetButtons.SetActive(true);
+            }
+            else
+            {
+                totalAddPoint = 0;
+                ConfirmAndResetButtons.SetActive(false);
+            }
+        }
+
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
         /// <param name="uniqueStatus"></param>
         /// <param name="uniqueStatusText"></param>
@@ -198,20 +212,7 @@ namespace DemonicCity.StrengthenScene
             updatedAttackText.text = updatedAttack.ToString();
             updatedDefenseText.text = updatedDefense.ToString();
         }
-
-        private void Update()
-        {
-            if (totalAddPoint > 0)
-            {
-                ConfirmAndResetButtons.SetActive(true);
-            }
-            else
-            {
-                totalAddPoint = 0;
-                ConfirmAndResetButtons.SetActive(false);
-            }
-        }
-
+        
         /// <summary>ステータスの変動値を初期化する</summary>
         public void LoadCurrentStatus()
         {
