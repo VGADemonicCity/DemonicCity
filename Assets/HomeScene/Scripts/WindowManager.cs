@@ -46,8 +46,6 @@ namespace DemonicCity.HomeScene
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-
-                    //Debug.Log("click");
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
                         if (touchInfo.HitDetection(out endObject, buttonObjects[i])
