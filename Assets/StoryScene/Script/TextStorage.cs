@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity
+namespace DemonicCity.StoryScene
 {
     public enum FaceIndex
     {
-        Nomal, Happy, Mad, Sad, Fun, Last
+        Normal, Fun, Angry,Surprise,Suffer,Shout,Last
     }
     [System.Serializable]
     public class TextStorage
@@ -17,32 +17,34 @@ namespace DemonicCity
         {
             Magia
         }
-        /// <summary>/// /// </summary>
-        public enum FaceIndex
-        {
-            Nomal,Happy, Mad, Sad, Fun,Last
-        }
-        /// <summary></summary>
+        /// <summary>キャラ名</summary>
         public string charName;
         public CharName cName;
-        /// <summary></summary>
+        /// <summary>内容</summary>
         public string sentence;
-        /// <summary></summary>
+        /// <summary>表情</summary>
         public string face;
-        /// <summary></summary>
+        /// <summary>表情</summary>
         public int faceIndex;
-        /// <summary></summary>
+        /// <summary>正体が判明しているか</summary>
         public string unknown;
         public bool isUnknown;
-
+        /// <summary>演出内容</summary>
+        public string stage;
+        /// <summary>演出の種類</summary>
+        public StageType stageTag;
 
         /// <summary>コンストラクタ</summary>
         public TextStorage(TextStorage storage)
         {
             charName = storage.charName;
             sentence = storage.sentence;
+            stage = storage.stage;
             FaceIndex tmpIndex;
             CharName tmpName;
+            StageType tmpStage;
+
+
             if (storage.unknown == "")
             {
                 isUnknown = false;
