@@ -11,13 +11,11 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class SelfRegeneration : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
-
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.SelfRegeneration; // フラグを設定
+            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -25,11 +23,13 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-            //m_magia.Stats.
-            //m_magia.Stats.m_attack += (int)(count * m_magia.Stats.m_attack * m_increase); // 攻撃力の任意の%分加算
+            Debug.Log("Activated the 自己再生");
+            m_hitPointBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_hitPoint * m_incease; // 丸め込み対策の為に一度変数に保存
+            m_battleManager.BattleMagia.m_hitPoint += (int)m_hitPointBuffer; // ここでintに変換
+        }
 
+        protected override void SkillDeactivate()
+        {
         }
     }
 }

@@ -12,25 +12,25 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class ExplosiveFlamePillar : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
-
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.ExplosiveFlamePillar; // フラグを設定
+            m_timing = SkillManager.Timing.SpecialAttack; // フラグを設定
         }
 
         /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
+            Debug.Log("Activated the 爆炎熱風柱");
+            m_attackBuffer = m_battleManager.BattleMagia.Temp.m_attack * m_incease; // 攻撃力の1/2
+            m_battleManager.m_enemy.Stats.m_hitPoint -= (int)m_attackBuffer; // hpに直接ダメージを与える
+        }
 
+        protected override void SkillDeactivate()
+        {
         }
     }
 }

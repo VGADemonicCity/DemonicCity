@@ -14,16 +14,16 @@ namespace DemonicCity.BattleScene
     [Serializable]
     public class BattleManager : MonoSingleton<BattleManager>
     {
-        /// <summary>ステートマシン</summary>
-        public StateMachine m_stateMachine;
-        /// <summary>敵キャラのデータベース</summary>
-        public EnemiesDataBase m_enemiesData;
-        /// <summary>バトルシーンで使用する敵オブジェクト</summary>
-        public EnemiesDataBase.Enemy m_enemy;
         /// <summary>敵のID</summary>
-        public EnemiesDataBase.EnemiesId m_id = EnemiesDataBase.EnemiesId.Nahura;
-        /// <summary>マギアの参照</summary>
-        [SerializeField] Magia m_magia;
+        public EnemiesDataBase.EnemiesId EnemyId { get; set; }
+        /// <summary>ステートマシン</summary>
+        public StateMachine m_stateMachine { get; set; }
+        /// <summary>敵キャラのデータベース</summary>
+        public EnemiesDataBase m_enemiesData { get; set; }
+        /// <summary>バトルシーンで使用する敵オブジェクト</summary>
+        [SerializeField] public EnemiesDataBase.Enemy m_enemy;
+        /// <summary>バトル用のマギアのステータス</summary>
+        [SerializeField] public Statistics BattleMagia;
 
         ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
         //public State m_state = State.Init;
@@ -38,10 +38,10 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Awake()
         {
+            EnemyId = EnemiesDataBase.EnemiesId.Nahura; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
             m_stateMachine = StateMachine.Instance; // StateMachineの参照取得
-            m_magia = Magia.Instance; // Magiaの参照取得
             m_enemiesData = EnemiesDataBase.Instance; // EnemiesDataBaseの参照取得
-            m_enemy = m_enemiesData.GetEnemyData(m_id); // ステージに登場する敵をデータベースから取得し代入
+            m_enemy = m_enemiesData.GetEnemyData(EnemyId); // ステージに登場する敵をデータベースから取得し代入
         }
 
         /// <summary>
@@ -95,7 +95,9 @@ namespace DemonicCity.BattleScene
                 ThirdWave
             }
 
+            /// <summary>ステート</summary>
             public State m_state;
+            /// <summary>ウェーブ</summary>
             public Wave m_wave;
         }
     }

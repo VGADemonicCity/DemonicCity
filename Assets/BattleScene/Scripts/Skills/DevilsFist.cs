@@ -11,24 +11,47 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class DevilsFist : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
-
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.DevilsFist; // フラグを設定
+            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
-        /// スキル発動
+        /// スキル発動条件の審査を行う
+        /// 魔拳烈火ノ型の発動条件が正の場合発動させない
+        /// </summary>
+        /// <param name="passiveSkill">Passive skill.</param>
+        /// <param name="cityDestructionCount">City destruction count.</param>
+        protected override void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
+        {
+            // パッシブスキルフラグが建っている && パッシブスキルフラグに魔拳烈火ノ型 && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill && (passiveSkill & Magia.PassiveSkill.DevilsFistInfernoType) != Magia.PassiveSkill.DevilsFistInfernoType && cityDestructionCount >= m_CountCondition && timing == m_timing)
+            {
+                m_skillActivated = true; // フラグを立てる
+                SkillActivate();
+            }
+        }
+
+        /// <summary>
+        /// スキルアクティブ
         /// </summary>
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
-            m_magia.Stats.m_attack += (int)(count * m_magia.Stats.m_attack * m_increase); // 攻撃力の任意の%分加算
+            m_attackBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_attack * m_incease; // 攻撃力の任意の%分加算
+            m_battleManager.BattleMagia.m_attack += (int)m_attackBuffer; // intに変換
         }
+
+        /// <summary>
+        /// スキル非アクティブ
+        /// </summary>
+        protected override void SkillDeactivate()
+        {
+            Debug.Log("Deactivated the 魔拳");
+            m_battleManager.BattleMagia.m_attack -= (int)m_attackBuffer; // intに変換
+        } 
     }
 }
 

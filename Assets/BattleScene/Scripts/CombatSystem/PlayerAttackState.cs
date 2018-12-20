@@ -35,12 +35,28 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
+
                 // ==============================
-                // イベント呼び出し : SkillJudger
+                // イベント呼び出し : SkillJudger,強化
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill , m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
-                StartCoroutine(AttackProcess()); // 攻撃プロセスを開始する
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                StartCoroutine(Enhancement()); // 強化の演出開始
+                StartCoroutine(AttackProcess()); // 攻撃の演出開始
+
+                // ==============================
+                // イベント呼び出し : SkillJudger,特殊攻撃
+                // ==============================
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.SpecialAttack, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
             });
+        }
+
+        /// <summary>
+        /// 強化時の演出
+        /// </summary>
+        /// <returns>The enhancement.</returns>
+        IEnumerator Enhancement()
+        {
+            yield return new WaitForSeconds(1f);
         }
 
         /// <summary>
@@ -53,18 +69,18 @@ namespace DemonicCity.BattleScene
             // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("attack process called.");
-
-
-            Debug.Log("攻撃する前の[" + m_battleManager.m_enemy.Id.ToString() + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
-            yield return new WaitForSeconds(3f);
+            Debug.Log("攻撃する前の[" + m_battleManager.m_enemy.Id + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
 
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_magia.Stats.m_attack - m_battleManager.m_enemy.Stats.m_defense;
-                m_battleManager.m_enemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
-                m_enemyHpDraw.Damage(damage); // HPGaugeと同期
-                Debug.Log("攻撃した後の[" + m_battleManager.m_enemy.Id.ToString() + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
+                var damage = m_battleManager.BattleMagia.m_attack - m_battleManager.m_enemy.Stats.m_defense;
+                if (damage > 0)
+                {
+                    m_battleManager.m_enemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
+                    m_enemyHpDraw.Damage(damage); // HPGaugeと同期
+                }
+                Debug.Log("攻撃した後の[" + m_battleManager.m_enemy.Id + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
 
 
                 return false;

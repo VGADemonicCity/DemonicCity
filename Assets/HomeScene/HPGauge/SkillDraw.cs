@@ -85,11 +85,7 @@ namespace DemonicCity.BattleScene
                     currentSkill += 1;
                     Reflect(currentSkill);
                 }
-
             }
         }
-
-
     }
-
 }

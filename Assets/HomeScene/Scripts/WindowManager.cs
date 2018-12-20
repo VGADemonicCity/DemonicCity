@@ -37,7 +37,7 @@ namespace DemonicCity.HomeScene
 
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    touchInfo.HitDetection(out beginObject);
+                    touchInfo.HitDetection(out beginObject,gameObject);
 
                     if (newPanel)
                     {

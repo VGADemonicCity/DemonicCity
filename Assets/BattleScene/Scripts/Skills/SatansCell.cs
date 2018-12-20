@@ -12,25 +12,25 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class SatansCell : PassiveSkill
     {
-        /// <summary>任意の増加割合(%)</summary>
-        [SerializeField] float m_increase = 0.01f;
-
         protected override void Awake()
         {
             base.Awake();
             m_passiveSkill = Magia.PassiveSkill.SatansCell; // フラグを設定
+            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
-        /// 魔拳
-        /// 街破壊数1以上で発動.
-        /// 街破壊数 * 攻撃力の1% を加算して攻撃
+        /// スキル発動
         /// </summary>
         protected override void SkillActivate()
         {
-            Debug.Log("Activated the 魔拳");
-            var count = m_panelCounter.GetCityDestructionCount(); // 街破壊数
+            Debug.Log("Activated the 魔王ノ細胞");
+            m_hitPointBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.MaxHP * m_incease; // 街破壊数 * 最大HP * 割合
+            m_battleManager.BattleMagia.m_hitPoint += (int)m_hitPointBuffer;
+        }
 
+        protected override void SkillDeactivate()
+        {
         }
     }
 }

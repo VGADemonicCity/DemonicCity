@@ -55,10 +55,9 @@ namespace DemonicCity.Debugger
         {
             var panels = m_panelManager.m_panelsBforeOpen.OrderBy(i => Guid.NewGuid()); // パネルをランダムにソートする
 
-            foreach (var target in panels)
+            foreach (var panel in panels)
             {
-                m_panelManager.PanelProcessing(target);
-                var panel = target.GetComponent<Panel>();
+                m_panelManager.PanelProcessing(panel);
                 yield return new WaitUntil(() => panel.m_alreadyProcessed); // パネルが処理中の間は此方の処理を一時停止させる
                 if (panel.m_panelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
                 {
