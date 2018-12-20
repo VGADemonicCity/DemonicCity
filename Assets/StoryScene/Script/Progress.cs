@@ -6,7 +6,9 @@ using UnityEngine;
 namespace DemonicCity
 {
     [Serializable]
-    /// <summary>ストーリーの進行度、進捗</summary>
+    /// <summary>
+    ///ストーリーの進行度、進捗
+    ///</summary>
     public class Progress : SavableSingletonBase<Progress>
     {
 
@@ -27,71 +29,77 @@ namespace DemonicCity
         //    ExMagia = 1 << 12,
         //    All = (1 << 13) - 1
         //}
+
+        /// <summary>ストーリーの進行度</summary>
         public enum StoryProgress
         {
+            /// <summary>序章</summary>
             Prologue = 1,
-            Phoenix = 2,
-            Naphula = 3,
-            ZAKO1 = 4,
-            Aamon = 5,
-            ZAKO2 = 6,
-            Ashmedai = 7,
-            ZAKO3 = 8,
-            Foras = 9,
-            ZAKO4 = 10,
-            Baal = 11,
-            ExMagia = 12,
-            All = 13
+            /// <summary>1章</summary>
+            Phoenix,
+            /// <summary>2章</summary>
+            Nafla,
+            /// <summary>3章</summary>
+            ZAKO1,
+            /// <summary>4章</summary>
+            Amon,
+            /// <summary>5章</summary>
+            ZAKO2,
+            /// <summary>6章</summary>
+            Ashmedy,
+            /// <summary>7章</summary>
+            ZAKO3,
+            /// <summary>8章</summary>
+            Faulus,
+            /// <summary>9章</summary>
+            ZAKO4,
+            /// <summary>10章</summary>
+            Barl,
+            /// <summary>11章</summary>
+            Ixmagina,
+            All,
         }
-
+        /// <summary>1クエスト内での進行度</summary>
         [Flags]
         public enum QuestProgress
         {
-            Prologue = 1 << 0,
-            Battle = 1 << 1,
-            Epilogue = 1 << 2,
-            All = (1 << 3) - 1,
+            /// <summary>戦闘前のストーリー</summary>
+            Prologue = 1,
+            /// <summary>戦闘</summary>
+            Battle = 2,
+            /// <summary>戦闘後のストーリー</summary>
+            Epilogue = 4,
+            All = 7,
         }
 
-        [SerializeField] StoryProgress storyProgress = StoryProgress.ExMagia;
+        /// <summary>ストーリーの進行度</summary>
+        [SerializeField] StoryProgress storyProgress = StoryProgress.Ixmagina;
 
+        /// <summary>現在進行しているクエスト</summary>
         [SerializeField] StoryProgress thisStoryProgress = StoryProgress.Prologue;
+        /// <summary>現在進行しているクエストの進行度</summary>
         [SerializeField] QuestProgress questProgress = QuestProgress.Prologue;
 
+        /// <summary>ストーリーの進行度のプロパティ</summary>
         public StoryProgress MyStoryProgress
         {
             get { return storyProgress; }
             set { storyProgress = value; Save(); }
         }
 
+        /// <summary>現在進行しているクエストのプロパティ</summary>
         public StoryProgress ThisStoryProgress
         {
             get { return thisStoryProgress; }
             set { thisStoryProgress = value; Save(); }
         }
 
+        /// <summary>現在進行しているクエストの進行度のプロパティ</summary>
         public QuestProgress MyQuestProgress
         {
             get { return questProgress; }
             set { questProgress = value; Save(); }
         }
-
-
-
-
-
-
-        public void Test()
-        {
-            for (int i = 1; i <= (int)StoryProgress.Naphula; i++)
-            {
-                Debug.Log((StoryProgress)i);
-                Debug.Log((int)StoryProgress.All);
-            }
-        }
-
-
-
 
     }
 
