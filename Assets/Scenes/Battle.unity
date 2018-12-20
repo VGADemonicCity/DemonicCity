@@ -310,6 +310,16 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 735394537}
+    - target: {fileID: 114368700491867846, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_halflyGaugeIcon
+      value: 
+      objectReference: {fileID: 1338653917}
+    - target: {fileID: 114368700491867846, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_fullyGaugeIcon
+      value: 
+      objectReference: {fileID: 914655243}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
   m_IsPrefabAsset: 0
@@ -626,6 +636,12 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 336883236}
   m_Script: {fileID: 11500000, guid: a82a1b18bc7f44107947c14a3156e549, type: 3}
+--- !u!114 &914655243 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114400866293903470, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    type: 2}
+  m_PrefabInternal: {fileID: 336883236}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1323076298
 Prefab:
   m_ObjectHideFlags: 0
@@ -697,6 +713,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d31f08f5d46fa5b4c964e0b07ec8f40a, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1338653917 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114339975144598904, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    type: 2}
+  m_PrefabInternal: {fileID: 336883236}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
 --- !u!1001 &1383842098
 Prefab:
   m_ObjectHideFlags: 0
