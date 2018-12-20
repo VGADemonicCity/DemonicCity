@@ -51,6 +51,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] int m_totalPanelCount;
         /// <summary>総街破壊数</summary>
         [SerializeField] int m_totalDestructionCount;
+        /// <summary>固有スキルゲージ</summary>
+        [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
 
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
         BattleManager m_battleManager;
@@ -132,8 +134,8 @@ namespace DemonicCity.BattleScene
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ
             m_counterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
-            m_totalDestructionCount += m_destructionCount;
-
+            m_totalDestructionCount += m_destructionCount; // 総計に加算
+            m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
 
 
         }
