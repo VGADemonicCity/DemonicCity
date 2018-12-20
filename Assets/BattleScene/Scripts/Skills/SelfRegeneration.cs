@@ -11,6 +11,9 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class SelfRegeneration : PassiveSkill
     {
+        /// <summary>MagiaのHPDrawの参照</summary>
+        [SerializeField] HitPointGauge m_magiaHPGauge;
+
         protected override void Awake()
         {
             base.Awake();
@@ -24,8 +27,14 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 自己再生");
-            m_hitPointBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_hitPoint * m_incease; // 丸め込み対策の為に一度変数に保存
-            m_battleManager.BattleMagia.m_hitPoint += (int)m_hitPointBuffer; // ここでintに変換
+            m_hitPointBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magia.Temp.m_hitPoint * m_incease; // 丸め込み対策の為に一度変数に保存
+            m_battleManager.m_magia.m_hitPoint += (int)m_hitPointBuffer; // ここでintに変換
+
+            if (m_battleManager.m_magia.m_hitPoint > m_battleManager.m_magia.MaxHP) // もしMaxHPを越したら
+            {
+                m_battleManager.m_magia.m_hitPoint = m_battleManager.m_magia.MaxHP; // hpをmaxに戻す
+            }
+            m_magiaHPGauge.Sync(m_battleManager.m_magia.m_hitPoint); // HPGaugeと同期
         }
 
         protected override void SkillDeactivate()

@@ -12,6 +12,9 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class SatansCell : PassiveSkill
     {
+        /// <summary>MagiaのHPDrawの参照</summary>
+        [SerializeField] HitPointGauge m_magiaHPGauge;
+
         protected override void Awake()
         {
             base.Awake();
@@ -25,8 +28,14 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 魔王ノ細胞");
-            m_hitPointBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.MaxHP * m_incease; // 街破壊数 * 最大HP * 割合
-            m_battleManager.BattleMagia.m_hitPoint += (int)m_hitPointBuffer;
+            m_hitPointBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magia.MaxHP * m_incease; // 街破壊数 * 最大HP * 割合
+            m_battleManager.m_magia.m_hitPoint += (int)m_hitPointBuffer;
+
+            if (m_battleManager.m_magia.m_hitPoint > m_battleManager.m_magia.MaxHP) // もしMaxHPを越したら
+            {
+                m_battleManager.m_magia.m_hitPoint = m_battleManager.m_magia.MaxHP; // hpをmaxに戻す
+            }
+            m_magiaHPGauge.Sync(m_battleManager.m_magia.m_hitPoint); // HPGaugeと同期
         }
 
         protected override void SkillDeactivate()

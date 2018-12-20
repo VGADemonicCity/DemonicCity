@@ -23,7 +23,7 @@ namespace DemonicCity.BattleScene
         /// <summary>バトルシーンで使用する敵オブジェクト</summary>
         [SerializeField] public EnemiesDataBase.Enemy m_enemy;
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Statistics BattleMagia;
+        [SerializeField] public Statistics m_magia;
 
         ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
         //public State m_state = State.Init;

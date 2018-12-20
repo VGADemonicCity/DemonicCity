@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace DemonicCity
@@ -43,6 +44,8 @@ namespace DemonicCity
                 new Enemy(EnemiesId.Nafla,1000000,7000,5000), // ナフラ
             };
         }
+
+
 
 
         /// <summary>
