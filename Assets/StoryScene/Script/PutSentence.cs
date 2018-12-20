@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-namespace DemonicCity
+namespace DemonicCity.StoryScene
 {
     public class PutSentence : MonoBehaviour
     {

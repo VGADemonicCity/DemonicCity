@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 114776526329203216}
   - component: {fileID: 212856898554047658}
   - component: {fileID: 61561200026750050}
-  - component: {fileID: 50729301666280368}
   m_Layer: 5
   m_Name: SoundConfig
   m_TagString: Untagged
@@ -59,26 +58,6 @@ Rigidbody2D:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1880436194662740}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!50 &50729301666280368
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1638760604819166}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0

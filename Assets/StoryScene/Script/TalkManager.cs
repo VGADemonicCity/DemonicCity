@@ -6,12 +6,12 @@ using UnityEngine;
 using UnityEngine.UI;
 
 
-namespace DemonicCity
+namespace DemonicCity.StoryScene
 {
-    public enum CharName
-    {
-        Magia, Phoenix, Naphula, Aamon, Ashmedai, Foras, Baal, ExMagia, Maoh, Unknown, None, System
-    }
+    //public enum CharName
+    //{
+    //    Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, Ixmagina, Maou,  Unknown, None, System
+    //}
     public class TalkManager : MonoBehaviour
     {
         string[] CHARNAME = {
@@ -48,6 +48,7 @@ namespace DemonicCity
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
+
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
                     if (hit.tag != buttonTag)
@@ -93,47 +94,47 @@ namespace DemonicCity
 
 
 
-            //    if (gesture == TouchGestureDetector.Gesture.Click)
-            //    {
-            //        if (isStaging)
-            //        {
-            //            Debug.Log("おわりだよー(*∂ｖ∂)");
-            //            DivideTexts();
-            //            return;
-            //        }
-            //        //Debug.Log("begin");
-            //        GameObject hit;
-            //        touchInfo.HitDetection(out hit);
-            //        if (hit.tag != buttonTag)
-            //        {
-            //            //DivideTexts();
-            //            flag = putSentence[talkPosition].onoff;
-            //            if (flag)
-            //            {
-            //                if (texts.Count <= textIndex ||
-            //                texts[textIndex].cName == CharName.System)
-            //                {
-            //                    isStaging = true;
-            //                    //return;
-            //                }
-            //                else
-            //                {
-            //                    textIndex += 1;
-            //                }
-            //            }
-            //            else
-            //            {
-            //                putSentence[talkPosition].Totrue();
-            //            }
-            //            DivideTexts();
-            //            if (talkPosition<putSentence.Length)
-            //            {
-            //                flag = putSentence[talkPosition].A(texts[textIndex].sentence);
-            //            }
+                //    if (gesture == TouchGestureDetector.Gesture.Click)
+                //    {
+                //        if (isStaging)
+                //        {
+                //            Debug.Log("おわりだよー(*∂ｖ∂)");
+                //            DivideTexts();
+                //            return;
+                //        }
+                //        //Debug.Log("begin");
+                //        GameObject hit;
+                //        touchInfo.HitDetection(out hit);
+                //        if (hit.tag != buttonTag)
+                //        {
+                //            //DivideTexts();
+                //            flag = putSentence[talkPosition].onoff;
+                //            if (flag)
+                //            {
+                //                if (texts.Count <= textIndex ||
+                //                texts[textIndex].cName == CharName.System)
+                //                {
+                //                    isStaging = true;
+                //                    //return;
+                //                }
+                //                else
+                //                {
+                //                    textIndex += 1;
+                //                }
+                //            }
+                //            else
+                //            {
+                //                putSentence[talkPosition].Totrue();
+                //            }
+                //            DivideTexts();
+                //            if (talkPosition<putSentence.Length)
+                //            {
+                //                flag = putSentence[talkPosition].A(texts[textIndex].sentence);
+                //            }
 
 
-            //        }
-            //    }
+                //        }
+                //    }
             });
 
             TextReset();
@@ -163,7 +164,7 @@ namespace DemonicCity
                 talkPosition = 3;
             }
             else if (talker == CharName.Magia
-                || talker == CharName.Maoh)
+                || talker == CharName.Maou)
             {
                 talkPosition = 0;
             }
@@ -172,7 +173,7 @@ namespace DemonicCity
                 talkPosition = 1;
             }
 
-            if (talkPosition<nameObj.Length)
+            if (talkPosition < nameObj.Length)
             {
                 if (texts[textIndex].isUnknown)
                 {
