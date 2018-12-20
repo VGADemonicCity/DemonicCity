@@ -352,6 +352,7 @@ namespace DemonicCity
         /// </summary>
         public override void OnInitialize()
         {
+            base.OnInitialize();
             DontDestroyOnLoad(Instance);
         }
 

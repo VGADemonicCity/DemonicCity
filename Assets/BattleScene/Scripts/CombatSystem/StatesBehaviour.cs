@@ -21,7 +21,6 @@ namespace DemonicCity.BattleScene
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
 
-
         /// <summary>
         /// Awake this instance.
         /// </summary>

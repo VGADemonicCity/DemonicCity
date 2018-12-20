@@ -202,6 +202,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fa738a77ad284e948f574c8f5f77b36, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &235250964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114104841850178614, guid: 36d5c1771f3a726469619cf2967867b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 978366132}
+  m_Script: {fileID: 11500000, guid: a82a1b18bc7f44107947c14a3156e549, type: 3}
 --- !u!1001 &536470353
 Prefab:
   m_ObjectHideFlags: 0
@@ -334,35 +340,90 @@ Prefab:
         type: 2}
       propertyPath: m_magiaHpDraw
       value: 
-      objectReference: {fileID: 1628152919}
+      objectReference: {fileID: 235250964}
     - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemyHpDraw
       value: 
-      objectReference: {fileID: 1275380383}
+      objectReference: {fileID: 782920230}
     - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_magiaHpDraw
       value: 
-      objectReference: {fileID: 1628152919}
+      objectReference: {fileID: 235250964}
     - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemyHpDraw
       value: 
-      objectReference: {fileID: 1275380383}
+      objectReference: {fileID: 782920230}
     - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_magiaHpDraw
       value: 
-      objectReference: {fileID: 1628152919}
+      objectReference: {fileID: 235250964}
     - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemyHpDraw
       value: 
-      objectReference: {fileID: 1275380383}
+      objectReference: {fileID: 782920230}
     - target: {fileID: 1291335245634264, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
       propertyPath: m_Name
       value: BattleManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_enemyHPGauge
+      value: 
+      objectReference: {fileID: 782920230}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_enemyHPGauge
+      value: 
+      objectReference: {fileID: 782920230}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_debugFlag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_enemy.m_stats.m_attack
+      value: 30000
+      objectReference: {fileID: 0}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
@@ -419,6 +480,12 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 20977403101316326, guid: df829b678ddfbce4980180758400ac84,
     type: 2}
   m_PrefabInternal: {fileID: 735394536}
+--- !u!114 &782920230 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114753493861805378, guid: 36d5c1771f3a726469619cf2967867b2,
+    type: 2}
+  m_PrefabInternal: {fileID: 978366132}
+  m_Script: {fileID: 11500000, guid: a82a1b18bc7f44107947c14a3156e549, type: 3}
 --- !u!1001 &978366132
 Prefab:
   m_ObjectHideFlags: 0
@@ -516,59 +583,18 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1844728646973702, guid: 36d5c1771f3a726469619cf2967867b2, type: 2}
-      propertyPath: m_Name
-      value: CanvasHPGauges
-      objectReference: {fileID: 0}
-    - target: {fileID: 223692547219321508, guid: 36d5c1771f3a726469619cf2967867b2,
-        type: 2}
-      propertyPath: m_RenderMode
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 223692547219321508, guid: 36d5c1771f3a726469619cf2967867b2,
         type: 2}
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 735394537}
+    - target: {fileID: 1844728646973702, guid: 36d5c1771f3a726469619cf2967867b2, type: 2}
+      propertyPath: m_Name
+      value: CanvasHPGauges
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36d5c1771f3a726469619cf2967867b2, type: 2}
   m_IsPrefabAsset: 0
---- !u!1 &978366133 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1740788588116920, guid: 36d5c1771f3a726469619cf2967867b2,
-    type: 2}
-  m_PrefabInternal: {fileID: 978366132}
---- !u!61 &978366134
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 978366133}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 31.34, y: 9.18}
-  m_EdgeRadius: 0
---- !u!114 &1275380383 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114082798581547428, guid: 36d5c1771f3a726469619cf2967867b2,
-    type: 2}
-  m_PrefabInternal: {fileID: 978366132}
-  m_Script: {fileID: 11500000, guid: 4019265ca35cd4f2993e9cd115629436, type: 3}
 --- !u!1001 &1323076298
 Prefab:
   m_ObjectHideFlags: 0
@@ -807,12 +833,6 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d1b2916a70836e64385f00386895335f, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &1628152919 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114522239134336878, guid: 36d5c1771f3a726469619cf2967867b2,
-    type: 2}
-  m_PrefabInternal: {fileID: 978366132}
-  m_Script: {fileID: 11500000, guid: 4019265ca35cd4f2993e9cd115629436, type: 3}
 --- !u!1 &1790326386
 GameObject:
   m_ObjectHideFlags: 0

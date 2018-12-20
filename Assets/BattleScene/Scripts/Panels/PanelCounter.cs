@@ -25,12 +25,26 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        /// <summary>
+        /// Gets the destruction count.
+        /// </summary>
+        /// <value>The destruction count.</value>
+        public int DestructionCount
+        {
+            get
+            {
+                return m_destructionCount;
+            }
+        }
+
         /// <summary>シャッフルスキル専用カウンター : inspectorに表示させる為アクセサーと使用変数を分けている</summary>
         [SerializeField] int m_counterForShuffleSkill;
         /// <summary>ターン毎のパネルカウントのカウント変数</summary>
         [SerializeField] int m_CityCount;
         /// <summary>ターン毎のダブルパネルのカウント変数</summary>
         [SerializeField] int m_doubleCount;
+        /// <summary>街破壊数</summary>
+        [SerializeField] int m_destructionCount;
         /// <summary>ターン毎のトリプルパネルのカウント変数</summary>
         [SerializeField] int m_tripleCount;
         /// <summary>パネルの総カウント数</summary>
@@ -63,15 +77,6 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
-        /// そのターンの街破壊数を返す
-        /// </summary>
-        /// <returns>The city destruction count.</returns>
-        public int GetCityDestructionCount()
-        {
-            return m_CityCount + (m_doubleCount * 2) + (m_tripleCount * 3); // そのターンの街破壊数を返す. パッシブスキル判定用
-        }
-
-        /// <summary>
         /// Inits the counts.
         /// </summary>
         public void InitCounts()
@@ -79,6 +84,7 @@ namespace DemonicCity.BattleScene
             m_CityCount = 0;
             m_doubleCount = 0;
             m_tripleCount = 0;
+            m_destructionCount = 0;
             if (m_battleManager.m_stateMachine.m_state == BattleManager.StateMachine.State.Init) // ゲーム開始時のみトータルパネルカウントとスキル用カウンターを初期化する
             {
                 m_totalPanelCount = 0;
@@ -106,15 +112,15 @@ namespace DemonicCity.BattleScene
             {
                 case PanelType.City: // cityパネルを引いた時
                     m_CityCount++; // シティパネルカウントアップ
-                    m_totalDestructionCount++; // 街破壊数カウントアップ
+                    m_destructionCount++;
                     break;
                 case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
-                    m_totalDestructionCount += 2; // 街破壊数カウントアップ
+                    m_destructionCount += 2;
                     break;
                 case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
-                    m_totalDestructionCount += 3; // 街破壊数カウントアップ
+                    m_destructionCount += 3;
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_stateMachine.m_state = BattleManager.StateMachine.State.PlayerAttack; // ステートマシンをPlayerAttackへ
@@ -126,7 +132,10 @@ namespace DemonicCity.BattleScene
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ
             m_counterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
-            
+            m_totalDestructionCount += m_destructionCount;
+
+
+
         }
     }
 }

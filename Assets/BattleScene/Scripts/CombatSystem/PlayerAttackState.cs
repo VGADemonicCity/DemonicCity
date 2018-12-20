@@ -11,18 +11,8 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerAttackState : StatesBehaviour
     {
-        /// <summary>MagiaのHPDrawの参照</summary>
-        [SerializeField] ExampleHpDraw m_magiaHpDraw;
         /// <summary>EnemyのHPDrawの参照</summary>
-        [SerializeField] ExampleHpDraw m_enemyHpDraw;
-
-        protected override void Awake()
-        {
-            base.Awake();
-            m_magiaHpDraw = m_magiaHpDraw.GetComponent<ExampleHpDraw>(); // magiaのHPDrawコンポーネント取得
-            m_enemyHpDraw = m_enemyHpDraw.GetComponent<ExampleHpDraw>(); // enemyのHPDrawコンポーネント取得
-        }
-
+        [SerializeField] HitPointGauge m_enemyHPGauge;
 
         /// <summary>
         /// Start this instance.
@@ -39,14 +29,14 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し : SkillJudger,強化
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(Enhancement()); // 強化の演出開始
                 StartCoroutine(AttackProcess()); // 攻撃の演出開始
 
                 // ==============================
                 // イベント呼び出し : SkillJudger,特殊攻撃
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.SpecialAttack, m_panelCounter.GetCityDestructionCount()); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.SpecialAttack, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
             });
         }
 
@@ -74,11 +64,11 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_battleManager.BattleMagia.m_attack - m_battleManager.m_enemy.Stats.m_defense;
+                var damage = m_battleManager.m_magia.m_attack - m_battleManager.m_enemy.Stats.m_defense;
                 if (damage > 0)
                 {
                     m_battleManager.m_enemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
-                    m_enemyHpDraw.Damage(damage); // HPGaugeと同期
+                    m_enemyHPGauge.Sync(m_battleManager.m_enemy.Stats.m_hitPoint); // HPGaugeと同期
                 }
                 Debug.Log("攻撃した後の[" + m_battleManager.m_enemy.Id + "]の体力 : " + m_battleManager.m_enemy.Stats.m_hitPoint);
 
