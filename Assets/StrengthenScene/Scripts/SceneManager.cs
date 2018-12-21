@@ -1,41 +1,80 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DemonicCity.StrengthenScene
 {
     public class SceneManager : MonoBehaviour
     {
-        public GameObject ShikiryoWindow;
-        public GameObject SkillWindow;
- 
-        void Start()
-        {
-            ShikiryoWindow.SetActive(false);
-            SkillWindow.SetActive(false);
-        }
+        Magia magia;
+        TouchGestureDetector touchGestureDetector;
 
-        void Update()
-        {
+        /// <summary>ポップアップウィンドウ</summary>
+        [SerializeField]
+        GameObject[] popUpWindows = new GameObject[2];
 
-        }
+        public enum BUTTON
+        {
+            ATTRIBITE_BUTTON,
+            SKILL_BUTTON,
+            BACK_BUTTON,
+        };
 
-        public void OpenShikiryoWindow()
+        private BUTTON button = BUTTON.ATTRIBITE_BUTTON;
+
+        private void Awake()
         {
-            ShikiryoWindow.SetActive(true);
-        }
-        public void CloseShiryoWindow()
-        {
-            ShikiryoWindow.SetActive(false);
+            magia = Magia.Instance;
+            touchGestureDetector = TouchGestureDetector.Instance;
             
         }
-        public void OpenSkillWindow()
+
+        void Start()
         {
-            SkillWindow.SetActive(true);
+            popUpWindows[0].SetActive(false);
+            popUpWindows[1].SetActive(false);
+
+            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
+            {
+                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
+                {
+                    GameObject popUpButton;
+                    touchInfo.HitDetection(out popUpButton);
+
+                    if(popUpButton != null)
+                    {
+                        switch (popUpButton.name)
+                        {
+                            case ("AttributeButton"):
+                                popUpWindows[0].SetActive(true);
+                                break;
+                            case ("MasterdSkillButton"):
+                                popUpWindows[1].SetActive(true);
+                                break;
+                            case ("BackButton"):
+                                popUpWindows[0].SetActive(false);
+                                popUpWindows[1].SetActive(false);
+                                break;
+                        }
+                        //switch (button)
+                        //{
+                        //    case BUTTON.ATTRIBITE_BUTTON:
+                        //        popUpWindows[0].SetActive(true);
+                        //        break;
+                        //    case BUTTON.SKILL_BUTTON:
+                        //        popUpWindows[1].SetActive(true);
+                        //        break;
+                        //    case BUTTON.BACK_BUTTON:
+                        //        popUpWindows[0].SetActive(false);
+                        //        popUpWindows[1].SetActive(false);
+                        //        break;
+
+                        //}
+                    }
+
+                }
+            });
         }
-        public void CloseSkillWindow()
-        {
-            SkillWindow.SetActive(false);
-        }
+
+
+       
     }
 }

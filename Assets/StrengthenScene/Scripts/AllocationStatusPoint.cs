@@ -10,17 +10,35 @@ namespace DemonicCity.StrengthenScene
 {
     public class AllocationStatusPoint : MonoBehaviour
     {
+        /// <summary>現在の基礎ステータステキスト</summary>
         [SerializeField]
-        TMP_Text[] statusText = new TMP_Text[12];
+        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
 
-        public TextMeshProUGUI hitPointText, attackText, defenseText,
-           durabilityText, muscularStrengthText, knowledgeText, senseText,
-           charmText, dignityText, MPText, updatedHitPointText, updatedAttackText, updatedDefenseText,
-           addCharmText, addDignityText, addDurabilityText,
-           addMuscularStrengthText, addSenseText, addKnowledgeText;
+        /// <summary>変動後の基礎ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
 
+        /// <summary>現在の固有ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
+
+        /// <summary>割り振った固有ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
+
+        /// <summary>属性テキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI attributeText;
+        
+        /// <summary>割り振りポイントテキスト(魔力値)</summary>
+        [SerializeField]
+        TextMeshProUGUI MPText;
+
+        /// <summary>Magiaクラスのインスタンス</summary>
         Magia magia;
-        TouchGestureDetector m_touchGestureDetector;
+
+        /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
+        TouchGestureDetector touchGestureDetector;
 
         /// <summary>現在の属性</summary>
         private Magia.Attribute attribute;
@@ -36,10 +54,10 @@ namespace DemonicCity.StrengthenScene
 
         /// <summary>現在の防御力</summary>
         private int defense;
-        
+
         /// <summary>変動後の体力</summary>
         private int updatedHitPoint;
-        
+
         /// <summary>変動後の攻撃力</summary>
         private int updatedAttack;
 
@@ -87,83 +105,69 @@ namespace DemonicCity.StrengthenScene
 
         /// <summary>割り振られた威厳値</summary>
         private int addDignity;
-       
-        public TextMeshProUGUI attributeText;
-
 
         /// <summary>確定ボタンと中止ボタン</summary>
         public GameObject ConfirmAndResetButtons;
 
-        public enum ButtonName
-        {
-            AddCharm,
-            ReductionCharm,
-
-            AddDignity,
-            ReductionDignity,
-
-
-        }
-
         private void Awake()
         {
             magia = Magia.Instance;
-            m_touchGestureDetector = TouchGestureDetector.Instance;
+            touchGestureDetector = TouchGestureDetector.Instance;
         }
 
         private void Start()
         {
             LoadCurrentStatus();
 
-            m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
+            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    GameObject go;
-                    touchInfo.HitDetection(out go);
+                    GameObject button;
+                    touchInfo.HitDetection(out button);
 
-                    if (go != null)
+                    if (button != null)
                     {
-                        switch (go.name)
+                        switch (button.name)
                         {
                             case ("AddCharmButton"):
-                                ChangeUniqueStatus(ref addCharm, ref addCharmText, true);
+                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], true);
                                 break;
                             case ("ReductionCharmButton"):
-                                ChangeUniqueStatus(ref addCharm, ref addCharmText, false);
+                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], false);
                                 break;
                             case ("AddDignityButton"):
-                                ChangeUniqueStatus(ref addDignity, ref addDignityText, true);
+                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], true);
                                 break;
                             case ("ReductionDignityButton"):
-                                ChangeUniqueStatus(ref addDignity, ref addDignityText, false);
-                                break;
-                            case ("AddDurabilityButton"):
-                                ChangeUniqueStatus(ref addDurability, ref addDurabilityText, true);
-                                break;
-                            case ("ReductionDurabilityButton"):
-                                ChangeUniqueStatus(ref addDurability, ref addDurabilityText, false);
+                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], false);
                                 break;
                             case ("AddMuscularStrengthButton"):
-                                ChangeUniqueStatus(ref addMuscularStrength, ref addMuscularStrengthText, true);
+                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], true);
                                 break;
                             case ("ReductionMuscularStrengthButton"):
-                                ChangeUniqueStatus(ref addMuscularStrength, ref addMuscularStrengthText, false);
-                                break;
-                            case ("AddKnowledgeButton"):
-                                ChangeUniqueStatus(ref addKnowledge, ref addKnowledgeText, true);
-                                break;
-                            case ("ReductionKnowledgeButton"):
-                                ChangeUniqueStatus(ref addKnowledge, ref addKnowledgeText, false);
+                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], false);
                                 break;
                             case ("AddSenseButton"):
-                                ChangeUniqueStatus(ref addSense, ref addSenseText, true);
+                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], true);
                                 break;
                             case ("ReductionSenseButton"):
-                                ChangeUniqueStatus(ref addSense, ref addSenseText, false);
+                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], false);
+                                break;
+                            case ("AddDurabilityButton"):
+                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], true);
+                                break;
+                            case ("ReductionDurabilityButton"):
+                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], false);
+                                break;
+                            case ("AddKnowledgeButton"):
+                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], true);
+                                break;
+                            case ("ReductionKnowledgeButton"):
+                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], false);
                                 break;
                             case ("ConfirmButton"):
-                                magia.Update();
+                                ConfirmStatus();
                                 break;
                             case ("ResetButton"):
                                 LoadCurrentStatus();
@@ -174,23 +178,10 @@ namespace DemonicCity.StrengthenScene
             });
         }
 
-        private void Update()
-        {
-            if (totalAddPoint > 0)
-            {
-                ConfirmAndResetButtons.SetActive(true);
-            }
-            else
-            {
-                totalAddPoint = 0;
-                ConfirmAndResetButtons.SetActive(false);
-            }
-        }
-
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
-        /// <param name="uniqueStatus"></param>
-        /// <param name="uniqueStatusText"></param>
-        /// <param name="addStatus"></param>
+        /// <param name="uniqueStatus">固有ステータス</param>
+        /// <param name="uniqueStatusText">固有ステータスのテキスト</param>
+        /// <param name="addStatus">ステータスを増加させるか減少させるか判定</param>
         public void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText, bool addStatus)
         {
             if (addStatus)
@@ -208,12 +199,12 @@ namespace DemonicCity.StrengthenScene
             updatedAttack = attack + (addSense * 5) + (addMuscularStrength * 5);
             updatedDefense = defense + (addDurability * 5) + (addKnowledge * 5);
 
-            updatedHitPointText.text = updatedHitPoint.ToString();
-            updatedAttackText.text = updatedAttack.ToString();
-            updatedDefenseText.text = updatedDefense.ToString();
+            updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
+            updatedBasicStatusTexts[1].text = updatedAttack.ToString();
+            updatedBasicStatusTexts[2].text = updatedDefense.ToString();
         }
-        
-        /// <summary>ステータスの変動値を初期化する</summary>
+
+        /// <summary>ステータスの変動値を初期化</summary>
         public void LoadCurrentStatus()
         {
             ConfirmAndResetButtons.SetActive(false);
@@ -228,42 +219,86 @@ namespace DemonicCity.StrengthenScene
                 case Magia.Attribute.MaleWizard:
                 case Magia.Attribute.FemaleWitch:
                 case Magia.Attribute.FemaleTrancendental:
-                    attributeText.GetComponent<TextMeshProUGUI>().text = attribute.ToString();
+                    attributeText.text = attribute.ToString();
                     break;
             }
 
             hitPoint = magia.GetStats().m_hitPoint;
             attack = magia.GetStats().m_attack;
             defense = magia.GetStats().m_defense;
-            durability = magia.GetStats().m_durability;
-            muscularStrength = magia.GetStats().m_muscularStrength;
-            knowledge = magia.GetStats().m_knowledge;
-            sense = magia.GetStats().m_sense;
+
             charm = magia.GetStats().m_charm;
             dignity = magia.GetStats().m_dignity;
-            //MP = magia.AllocationPoint;
-            MP = 10;
+            muscularStrength = magia.GetStats().m_muscularStrength;
+            sense = magia.GetStats().m_sense;
+            durability = magia.GetStats().m_durability;
+            knowledge = magia.GetStats().m_knowledge;
 
-            hitPointText.GetComponent<TMP_Text>().text = hitPoint.ToString();
-            attackText.GetComponent<TextMeshProUGUI>().text = attack.ToString();
-            defenseText.GetComponent<TextMeshProUGUI>().text = defense.ToString();
-
-            updatedHitPointText.GetComponent<TextMeshProUGUI>().text = hitPoint.ToString();
-            updatedAttackText.GetComponent<TextMeshProUGUI>().text = attack.ToString();
-            updatedDefenseText.GetComponent<TextMeshProUGUI>().text = defense.ToString();
-
-            durabilityText.GetComponent<TextMeshProUGUI>().text = durability.ToString();
-            muscularStrengthText.GetComponent<TextMeshProUGUI>().text = muscularStrength.ToString();
-            knowledgeText.GetComponent<TextMeshProUGUI>().text = knowledge.ToString();
-            senseText.GetComponent<TextMeshProUGUI>().text = sense.ToString();
-            charmText.GetComponent<TextMeshProUGUI>().text = charm.ToString();
-            dignityText.GetComponent<TextMeshProUGUI>().text = dignity.ToString();
-
-            MPText.GetComponent<TextMeshProUGUI>().text = MP.ToString();
+            addCharm = 0;
+            addDignity = 0;
+            addMuscularStrength = 0;
+            addSense = 0;
+            addDurability = 0;
+            addKnowledge = 0;
+            MP = magia.AllocationPoint;
+            //MP = 10;
+            UpdateText();
         }
 
-        /// <summary>割り振りポイントが1減り、指定の固有ステータスポイントが1割り振られる</summary>
-        /// <param name="uniqueStatus"></param>
+        /// <summary>変更したステータスを確定する</summary>
+        public void ConfirmStatus()
+        {
+            hitPoint = updatedHitPoint;
+            attack = updatedAttack;
+            defense = updatedDefense;
+
+            charm += addCharm;
+            dignity += addDignity;
+            muscularStrength += addMuscularStrength;
+            sense += addSense;
+            durability += addDurability;
+            knowledge += addKnowledge;
+
+            addCharm = 0;
+            addDignity = 0;
+            addMuscularStrength = 0;
+            addSense = 0;
+            addDurability = 0;
+            addKnowledge = 0;
+
+            UpdateText();
+            magia.Update();
+        }
+        /// <summary>テキストを更新する</summary>
+        public void UpdateText()
+        {
+            currentBasicStatusTexts[0].text = hitPoint.ToString();
+            currentBasicStatusTexts[1].text = attack.ToString();
+            currentBasicStatusTexts[2].text = defense.ToString();
+
+            updatedBasicStatusTexts[0].text = hitPoint.ToString();
+            updatedBasicStatusTexts[1].text = attack.ToString();
+            updatedBasicStatusTexts[2].text = defense.ToString();
+
+            currentUniqueStatusTexts[0].text = charm.ToString();
+            currentUniqueStatusTexts[1].text = dignity.ToString();
+            currentUniqueStatusTexts[2].text = muscularStrength.ToString();
+            currentUniqueStatusTexts[3].text = sense.ToString();
+            currentUniqueStatusTexts[4].text = durability.ToString();
+            currentUniqueStatusTexts[5].text = knowledge.ToString();
+
+            addUniqueStatusTexts[0].text = addCharm.ToString();
+            addUniqueStatusTexts[1].text = addDignity.ToString();
+            addUniqueStatusTexts[2].text = addMuscularStrength.ToString();
+            addUniqueStatusTexts[3].text = addSense.ToString();
+            addUniqueStatusTexts[4].text = addDurability.ToString();
+            addUniqueStatusTexts[5].text = addKnowledge.ToString();
+
+            MPText.text = MP.ToString();
+        }
+
+        /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
+        /// <param name="uniqueStatus">固有ステータス</param>
         public int AddStatusPoint(int uniqueStatus)
         {
             if (MP > 0)
@@ -273,16 +308,21 @@ namespace DemonicCity.StrengthenScene
                 uniqueStatus = 1;
 
                 totalAddPoint += 1;
+                if (totalAddPoint > 0)
+                {
+                    ConfirmAndResetButtons.SetActive(true);
+                }
             }
             else
             {
                 uniqueStatus = 0;
+                MP = 0;
             }
             return uniqueStatus;
         }
 
-        /// <summary>指定の固有ステータスポイントが1減り、割り振りポイントが1増える</summary>
-        /// <param name="uniqueStatus"></param>
+        /// <summary>固有ステータスポイント-1、割り振りポイント+1</summary>
+        /// <param name="uniqueStatus">固有ステータス</param>
         public int ReductionStatusPoint(int uniqueStatus)
         {
             if (uniqueStatus > 0)
@@ -292,19 +332,17 @@ namespace DemonicCity.StrengthenScene
                 MPText.text = MP.ToString();
 
                 totalAddPoint -= 1;
+                if (totalAddPoint <= 0)
+                {
+                    totalAddPoint = 0;
+                    ConfirmAndResetButtons.SetActive(false);
+                }
             }
             else
             {
                 uniqueStatus = 0;
             }
             return uniqueStatus;
-        }
-
-        public void ConfirmStatus()
-        {
-            hitPoint = updatedHitPoint;
-            attack = updatedAttack;
-            defense = updatedDefense;
         }
     }
 }
