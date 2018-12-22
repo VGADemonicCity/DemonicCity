@@ -34,6 +34,12 @@ namespace DemonicCity.BattleScene
         [SerializeField] GameObject m_panelFrame;
         /// <summary>パネルを回転させる時間</summary>
         [SerializeField] float m_waitTime = 3f;
+        /// <summary>colliderを検出する為のcollider</summary>
+        [SerializeField] BoxCollider2D m_sensor;
+        /// <summary>範囲指定をする最小値のvector</summary>
+        [SerializeField] Vector2 m_VecMin;
+        /// <summary>範囲指定をする最大値のvector</summary>
+        [SerializeField] Vector2 m_VecMax;
 
 
         /// <summary>TouchGestureDetectorの参照</summary>
@@ -46,7 +52,6 @@ namespace DemonicCity.BattleScene
         ShufflePanels m_shufflePanels;
         /// <summary>BattleDebuggerの参照</summary>
         BattleDebugger m_battleDebugger;
-
         /// <summary>オープン後のパネル</summary>
         List<Panel> m_panelsAfterOpened;
         /// <summary>各パネルの生成座標</summary>
@@ -82,7 +87,6 @@ namespace DemonicCity.BattleScene
         }
 
 
-
         /// <summary>
         /// --------------------------
         /// パネルのメインの処理を登録する
@@ -105,8 +109,11 @@ namespace DemonicCity.BattleScene
                 {
                     GameObject hitResult; // Raycastの結果を入れる変数
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
-                    if (hitResult != null && hitResult.tag == "Panel") // タッチしたオブジェクトのタグがパネルなら
+
+                    if(hitResult != null)Debug.Log(hitResult.name);
+                    if (hitResult != null && hitResult.tag == "Panel" && IsWithinRange(hitResult.transform.position,m_VecMin,m_VecMax)) // タッチしたオブジェクトのタグがパネルなら
                     {
+
                         var panel = hitResult.GetComponent<Panel>();
                         PanelProcessing(panel);
                     }
@@ -232,6 +239,23 @@ namespace DemonicCity.BattleScene
                 panel.ResetPanel(); // パネルを引いていない状態に戻す
                 count++; // カウントアップ
             });
+        }
+
+        /// <summary>
+        /// <param name="targetVec">Target vec.</param>
+        /// が指定した範囲内にいる時<returns><c>true</c>
+        /// そうでない時<c>false</c></returns>
+        /// </summary>
+        /// <param name="min">最小値のvector</param>
+        /// <param name="max">最大値のvector</param>
+        private bool IsWithinRange(Vector2 targetVec, Vector2 min, Vector2 max)
+        {
+            if (targetVec.x >= min.x && targetVec.x < max.x
+            && targetVec.y >= min.y && targetVec.y < max.y)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

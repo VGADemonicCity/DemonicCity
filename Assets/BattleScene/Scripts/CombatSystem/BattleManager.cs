@@ -23,7 +23,7 @@ namespace DemonicCity.BattleScene
         /// <summary>バトルシーンで使用する敵オブジェクト</summary>
         [SerializeField] public EnemiesDataBase.Enemy m_enemy;
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Statistics BattleMagia;
+        [SerializeField] public Statistics m_magia;
 
         ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
         //public State m_state = State.Init;
@@ -38,7 +38,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Awake()
         {
-            EnemyId = EnemiesDataBase.EnemiesId.Nahura; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
+            EnemyId = EnemiesDataBase.EnemiesId.Nafla; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
             m_stateMachine = StateMachine.Instance; // StateMachineの参照取得
             m_enemiesData = EnemiesDataBase.Instance; // EnemiesDataBaseの参照取得
             m_enemy = m_enemiesData.GetEnemyData(EnemyId); // ステージに登場する敵をデータベースから取得し代入

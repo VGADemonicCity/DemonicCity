@@ -34,6 +34,7 @@ namespace DemonicCity.BattleScene.Skill
         protected float m_attackBuffer;
         /// <summary>defenseの変動値を一時保存</summary>
         protected float m_defenseBuffer;
+        /// <summary>スキル呼びたしイベントを区別するフラグ</summary>
         protected SkillManager.Timing m_timing;
 
 

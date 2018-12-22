@@ -172,6 +172,8 @@ namespace DemonicCity
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
 
+
+
         /// <summary>
         /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する
         /// </summary>
@@ -203,7 +205,8 @@ namespace DemonicCity
         /// レベルアップ獲得スキル。
         /// レベルが一定値上がったら対応したスキルが解放されて、以降永続的に使用可能となる。
         /// </summary>
-        [Flags, Serializable]
+        [Flags]
+        [Serializable]
         public enum PassiveSkill
         {
             /// <summary>無効値</summary>

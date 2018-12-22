@@ -11,15 +11,6 @@ namespace DemonicCity.StrengthenScene
         [SerializeField]
         GameObject[] popUpWindows = new GameObject[2];
 
-        public enum BUTTON
-        {
-            ATTRIBITE_BUTTON,
-            SKILL_BUTTON,
-            BACK_BUTTON,
-        };
-
-        private BUTTON button = BUTTON.ATTRIBITE_BUTTON;
-
         private void Awake()
         {
             magia = Magia.Instance;
@@ -32,6 +23,9 @@ namespace DemonicCity.StrengthenScene
             popUpWindows[0].SetActive(false);
             popUpWindows[1].SetActive(false);
 
+//            int mainLayer = LayerMask.NameToLayer("MainLayer");
+
+           
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -43,31 +37,19 @@ namespace DemonicCity.StrengthenScene
                     {
                         switch (popUpButton.name)
                         {
-                            case ("AttributeButton"):
+                            case ("SelectAttributeButton"):
+                                
                                 popUpWindows[0].SetActive(true);
                                 break;
-                            case ("MasterdSkillButton"):
+                            case ("SelectSkillButton"):
                                 popUpWindows[1].SetActive(true);
                                 break;
                             case ("BackButton"):
+                                popUpButton.gameObject.SetActive(false);
                                 popUpWindows[0].SetActive(false);
                                 popUpWindows[1].SetActive(false);
                                 break;
                         }
-                        //switch (button)
-                        //{
-                        //    case BUTTON.ATTRIBITE_BUTTON:
-                        //        popUpWindows[0].SetActive(true);
-                        //        break;
-                        //    case BUTTON.SKILL_BUTTON:
-                        //        popUpWindows[1].SetActive(true);
-                        //        break;
-                        //    case BUTTON.BACK_BUTTON:
-                        //        popUpWindows[0].SetActive(false);
-                        //        popUpWindows[1].SetActive(false);
-                        //        break;
-
-                        //}
                     }
 
                 }

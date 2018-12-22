@@ -1,38 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using TMPro;
 using System;
-using DemonicCity;
+using DemonicCity.BattleScene;
 
 namespace DemonicCity.StrengthenScene
 {
     public class AllocationStatusPoint : MonoBehaviour
     {
-        /// <summary>現在の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
-
-        /// <summary>変動後の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
-
-        /// <summary>現在の固有ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
-
-        /// <summary>割り振った固有ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
-
-        /// <summary>属性テキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI attributeText;
-        
-        /// <summary>割り振りポイントテキスト(魔力値)</summary>
-        [SerializeField]
-        TextMeshProUGUI MPText;
 
         /// <summary>Magiaクラスのインスタンス</summary>
         Magia magia;
@@ -43,8 +17,8 @@ namespace DemonicCity.StrengthenScene
         /// <summary>現在の属性</summary>
         private Magia.Attribute attribute;
 
-        /// <summary>レベル</summary>
-        private int level;
+        /// <summary>装備中のスキル</summary>
+        private Magia.PassiveSkill passiveSkill;
 
         /// <summary>現在の体力</summary>
         private int hitPoint;
@@ -83,7 +57,7 @@ namespace DemonicCity.StrengthenScene
         private int dignity;
 
         /// <summary>割り振りポイント(魔力値)</summary>
-        private int MP;
+        private int statusPoint;
 
         /// <summary>割り振られたポイントの合計値</summary>
         private int totalAddPoint;
@@ -107,7 +81,36 @@ namespace DemonicCity.StrengthenScene
         private int addDignity;
 
         /// <summary>確定ボタンと中止ボタン</summary>
-        public GameObject ConfirmAndResetButtons;
+        [SerializeField]
+        private GameObject ConfirmAndResetButtons;
+
+        /// <summary>属性テキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI attributeText;
+
+        /// <summary>スキルテキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI passiveSkillText;
+
+        /// <summary>現在の基礎ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
+
+        /// <summary>変動後の基礎ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
+
+        /// <summary>現在の固有ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
+
+        /// <summary>割り振った固有ステータステキスト</summary>
+        [SerializeField]
+        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
+
+        /// <summary>割り振りポイントテキスト(魔力値)</summary>
+        [SerializeField]
+        TextMeshProUGUI statusPointText;
 
         private void Awake()
         {
@@ -172,10 +175,50 @@ namespace DemonicCity.StrengthenScene
                             case ("ResetButton"):
                                 LoadCurrentStatus();
                                 break;
+                            case ("Youji"):
+                                attribute = Magia.Attribute.Standard;
+                                attributeText.text = attribute.ToString();
+                                break;
+                            case ("Kenki"):
+                                attribute = Magia.Attribute.FemaleWarrior;
+                                attributeText.text = attribute.ToString();
+                                break;
+                            case ("Jinou"):
+                                attribute = Magia.Attribute.MaleWarrior;
+                                attributeText.text = attribute.ToString();
+                                break;
+                            case ("Jotei"):
+                                attribute = Magia.Attribute.FemaleWitch;
+                                attributeText.text = attribute.ToString();
+                                break;
+                            case ("Kokuou"):
+                                attribute = Magia.Attribute.MaleWizard;
+                                attributeText.text = attribute.ToString();
+                                break;
+                            case ("Majin"):
+                                attribute = Magia.Attribute.FemaleTrancendental;
+                                attributeText.text = attribute.ToString();
+                                break;
                         }
                     }
                 }
             });
+        }
+
+        private void Update()
+        {
+            if(hitPoint != updatedHitPoint)
+            {
+                updatedBasicStatusTexts[0].color = Color.blue;
+            }
+            if (attack != updatedAttack)
+            {
+                updatedBasicStatusTexts[1].color = Color.blue;
+            }
+            if (defense != updatedDefense)
+            {
+                updatedBasicStatusTexts[2].color = Color.blue;
+            }
         }
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
@@ -210,38 +253,24 @@ namespace DemonicCity.StrengthenScene
             ConfirmAndResetButtons.SetActive(false);
 
             attribute = magia.MyAttribute;
-
-            switch (attribute)
-            {
-                case Magia.Attribute.Standard:
-                case Magia.Attribute.MaleWarrior:
-                case Magia.Attribute.FemaleWarrior:
-                case Magia.Attribute.MaleWizard:
-                case Magia.Attribute.FemaleWitch:
-                case Magia.Attribute.FemaleTrancendental:
-                    attributeText.text = attribute.ToString();
-                    break;
-            }
-
+            passiveSkill = magia.MyPassiveSkill;
             hitPoint = magia.GetStats().m_hitPoint;
             attack = magia.GetStats().m_attack;
             defense = magia.GetStats().m_defense;
-
             charm = magia.GetStats().m_charm;
             dignity = magia.GetStats().m_dignity;
             muscularStrength = magia.GetStats().m_muscularStrength;
             sense = magia.GetStats().m_sense;
             durability = magia.GetStats().m_durability;
             knowledge = magia.GetStats().m_knowledge;
-
             addCharm = 0;
             addDignity = 0;
             addMuscularStrength = 0;
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            MP = magia.AllocationPoint;
-            //MP = 10;
+            //StatusPoint = magia.AllocationPoint;
+            statusPoint = 10;
             UpdateText();
         }
 
@@ -269,9 +298,69 @@ namespace DemonicCity.StrengthenScene
             UpdateText();
             magia.Update();
         }
+
         /// <summary>テキストを更新する</summary>
         public void UpdateText()
         {
+            switch (attribute)
+            {
+                case Magia.Attribute.Standard:
+                    attributeText.text = "Yojo".ToString();
+                    break;
+                case Magia.Attribute.MaleWarrior:
+                    attributeText.text = "Touou".ToString();
+                    break;
+                case Magia.Attribute.FemaleWarrior:
+                    attributeText.text = "Kenki".ToString();
+                    break;
+                case Magia.Attribute.MaleWizard:
+                    attributeText.text = "Kokuou".ToString();
+                    break;
+                case Magia.Attribute.FemaleWitch:
+                    attributeText.text = "Jotei".ToString();
+                    break;
+                case Magia.Attribute.FemaleTrancendental:
+                    attributeText.text = "Majin".ToString();
+                    break;
+            }
+
+            switch (passiveSkill)
+            {
+                case Magia.PassiveSkill.Invalid:
+                    passiveSkillText.text = "Maken".ToString();
+                    break;
+                case Magia.PassiveSkill.DevilsFist:
+                    break;
+                case Magia.PassiveSkill.HighConcentrationMagicalAbsorption:
+                    break;
+                case Magia.PassiveSkill.SelfRegeneration:
+                    break;
+                case Magia.PassiveSkill.ExplosiveFlamePillar:
+                    break;
+                case Magia.PassiveSkill.CrimsonBarrier:
+                    break;
+                case Magia.PassiveSkill.DevilsFistInfernoType:
+                    break;
+                case Magia.PassiveSkill.BraveHeartsIncarnation:
+                    break;
+                case Magia.PassiveSkill.GreatCrimsonBarrier:
+                    break;
+                case Magia.PassiveSkill.InfernosFist:
+                    break;
+                case Magia.PassiveSkill.SatansCell:
+                    break;
+                case Magia.PassiveSkill.AmaterasuIncanation:
+                    break;
+                case Magia.PassiveSkill.AmaterasuInferno:
+                    break;
+                case Magia.PassiveSkill.AmaterasuFlameWall:
+                    break;
+                case Magia.PassiveSkill.AllSkill:
+                    break;
+                default:
+                    break;
+            }
+
             currentBasicStatusTexts[0].text = hitPoint.ToString();
             currentBasicStatusTexts[1].text = attack.ToString();
             currentBasicStatusTexts[2].text = defense.ToString();
@@ -294,17 +383,17 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[4].text = addDurability.ToString();
             addUniqueStatusTexts[5].text = addKnowledge.ToString();
 
-            MPText.text = MP.ToString();
+            statusPointText.text = statusPoint.ToString();
         }
 
         /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
         /// <param name="uniqueStatus">固有ステータス</param>
         public int AddStatusPoint(int uniqueStatus)
         {
-            if (MP > 0)
+            if (statusPoint > 0)
             {
-                MP -= 1;
-                MPText.text = MP.ToString();
+                statusPoint -= 1;
+                statusPointText.text = statusPoint.ToString();
                 uniqueStatus = 1;
 
                 totalAddPoint += 1;
@@ -316,7 +405,7 @@ namespace DemonicCity.StrengthenScene
             else
             {
                 uniqueStatus = 0;
-                MP = 0;
+                statusPoint = 0;
             }
             return uniqueStatus;
         }
@@ -328,8 +417,8 @@ namespace DemonicCity.StrengthenScene
             if (uniqueStatus > 0)
             {
                 uniqueStatus = 1;
-                MP += 1;
-                MPText.text = MP.ToString();
+                statusPoint += 1;
+                statusPointText.text = statusPoint.ToString();
 
                 totalAddPoint -= 1;
                 if (totalAddPoint <= 0)

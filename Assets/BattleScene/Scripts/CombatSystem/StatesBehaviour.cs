@@ -21,7 +21,6 @@ namespace DemonicCity.BattleScene
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
 
-
         /// <summary>
         /// Awake this instance.
         /// </summary>
@@ -34,7 +33,6 @@ namespace DemonicCity.BattleScene
             m_magia = Magia.Instance; // Magiaの参照取得
 
         }
-
 
         /// <summary>
         /// 指定したステートに遷移させてBattleManagerのイベントを呼び出す

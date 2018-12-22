@@ -16,7 +16,7 @@ namespace DemonicCity.StorySelectScene
         // Use this for initialization
         void Start()
         {
-           // progress.Test();
+
         }
 
         // Update is called once per frame

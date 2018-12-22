@@ -26,17 +26,17 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 天照権現");
-            m_attackBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_attack * m_incease; // 街破壊数 * (攻撃力 * 任意の%)
-            m_defenseBuffer = m_panelCounter.GetCityDestructionCount() * m_battleManager.BattleMagia.Temp.m_defense * m_incease; // 街破壊数 * (防御力 * 任意の%)
-            m_battleManager.BattleMagia.m_attack += (int)m_attackBuffer; // intに変換
-            m_battleManager.BattleMagia.m_defense += (int)m_defenseBuffer; // intに変換
+            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magia.Temp.m_attack * m_incease; // 街破壊数 * (攻撃力 * 任意の%)
+            m_defenseBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magia.Temp.m_defense * m_incease; // 街破壊数 * (防御力 * 任意の%)
+            m_battleManager.m_magia.m_attack += (int)m_attackBuffer; // intに変換
+            m_battleManager.m_magia.m_defense += (int)m_defenseBuffer; // intに変換
         }
 
         protected override void SkillDeactivate()
         {
             Debug.Log("Deactivated the 天照権現");
-            m_battleManager.BattleMagia.m_attack -= (int)m_attackBuffer; // 変動値を元に戻す
-            m_battleManager.BattleMagia.m_defense -= (int)m_defenseBuffer; // 変動値を元に戻す
+            m_battleManager.m_magia.m_attack -= (int)m_attackBuffer; // 変動値を元に戻す
+            m_battleManager.m_magia.m_defense -= (int)m_defenseBuffer; // 変動値を元に戻す
         }
     }
 }
