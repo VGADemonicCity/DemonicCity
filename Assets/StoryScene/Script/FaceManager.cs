@@ -7,7 +7,7 @@ namespace DemonicCity.StoryScene
 {
     public class FaceManager : MonoBehaviour
     {
-
+        [SerializeField] FaceIndex facer;
         public Sprite[] faceSprites = new Sprite[6];
         Image myFace;
         void Awake()
@@ -25,6 +25,9 @@ namespace DemonicCity.StoryScene
         {
             myFace.sprite = faceSprites[(int)faceIndex];
         }
-        
+        public void ChangeFace(int faceIndex)
+        {
+            myFace.sprite = faceSprites[faceIndex];
+        }
     }
 }
