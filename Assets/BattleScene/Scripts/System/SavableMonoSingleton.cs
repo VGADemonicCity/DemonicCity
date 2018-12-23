@@ -93,7 +93,6 @@ namespace DemonicCity
         /// </summary>
         public virtual void OnInitialize()
         {
-
             Load();
         }
 

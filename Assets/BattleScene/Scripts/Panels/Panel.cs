@@ -26,7 +26,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] Sprite[] m_panelTextures;
         /// <summary>時点から何度回転するか</summary>
         [SerializeField] float m_rotationDegrees = 1440f;
-
+        /// <summary>パネルのコライダー</summary>
+        public CircleCollider2D m_collider2d;
         /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
         public bool m_alreadyProcessed { get; private set; }
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
@@ -35,9 +36,9 @@ namespace DemonicCity.BattleScene
         void Awake()
         {
             m_spriteRender = GetComponent<SpriteRenderer>(); // SpriteREndererコンポーネントの参照
+            m_collider2d = GetComponent<CircleCollider2D>(); //  Collier2Dコンポーネントの参照
 
         }
-
 
         /// <summary>
         /// フラグを初期値に戻してまた呼べる様にする

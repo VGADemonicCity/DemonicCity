@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 namespace DemonicCity
@@ -16,7 +17,7 @@ namespace DemonicCity
         public enum EnemiesId
         {
             /// <summary>ナフラ</summary>
-            Nahura,
+            Nafla,
             /// <summary>フィニクス</summary>
             Phoenix,
             /// <summary>アーモン</summary>
@@ -40,9 +41,11 @@ namespace DemonicCity
             m_items = new List<Enemy>
             {
                 new Enemy(EnemiesId.Phoenix,700,300,190), // フィニクス
-                new Enemy(EnemiesId.Nahura,1000000,7000,5000), // ナフラ
+                new Enemy(EnemiesId.Nafla,1000000,7000,5000), // ナフラ
             };
         }
+
+
 
 
         /// <summary>

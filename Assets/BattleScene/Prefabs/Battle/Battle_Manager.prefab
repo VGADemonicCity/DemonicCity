@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 114294880535250120}
   - component: {fileID: 114024525100392670}
   - component: {fileID: 114195271979354084}
+  - component: {fileID: 114826503555782880}
   m_Layer: 0
   m_Name: Battle_Manager
   m_TagString: Untagged
@@ -201,7 +202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debugFlag: 1
+  m_debugFlag: 0
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,6 +384,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_panelFrame: {fileID: 0}
   m_waitTime: 0
+  m_sensor: {fileID: 61020726325893518}
+  m_VecMin: {x: -1.1, y: -5.5}
+  m_VecMax: {x: 2.7, y: -1.7}
 --- !u!114 &114658799238253382
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -452,6 +456,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sensor: {fileID: 61020726325893518}
   m_shuffleSkillConditions: 0
+--- !u!114 &114826503555782880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291335245634264}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bdf496b7ba62f403a8634964da37736a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1

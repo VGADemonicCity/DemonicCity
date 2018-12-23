@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DemonicCity
 {
-    public class SingletonBase<T> where T : SingletonBase<T> ,new()
+    public class SingletonBase<T> where T : SingletonBase<T>, new()
     {
         // singleton pattern
         protected static T m_instance;
@@ -12,12 +12,19 @@ namespace DemonicCity
         {
             get
             {
-                if(m_instance != null)
+                if (m_instance != null)
                 {
                     return m_instance;
                 }
-
-                m_instance = new T();
+                var temp = new object();
+                lock(temp)
+                {
+                    m_instance = new T();
+                }
+                if(m_instance == null)
+                {
+                    throw new System.NullReferenceException();
+                }
                 return m_instance;
             }
         }
