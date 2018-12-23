@@ -42,7 +42,7 @@ namespace DemonicCity.BattleScene
                     value = 0;
                 }
 
-                if (value < 1f)
+                if (value < 1f) // 条件に対する現在の割合を透明度に反映する
                 {
                     m_halflyGaugeIcon.color = new Color(1, 1, 1, value);
                     m_alphaChannel = value;
@@ -52,8 +52,8 @@ namespace DemonicCity.BattleScene
                     // halfゲージを透明にして満タン状態の画像に切り替える
                     m_halflyGaugeIcon.color = Color.clear;
                     m_fullyGaugeIcon.color = Color.white;
+                    m_alphaChannel = value;
                     m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
-                    m_alphaChannel = 1f;
                     OnConditionCompleted();
                 }
             }
@@ -75,6 +75,9 @@ namespace DemonicCity.BattleScene
                     Sync();
                 }
             });
+
+            m_alphaChannel = 1.5f;
+            Debug.Log(m_alphaChannel);
         }
 
         /// <summary>

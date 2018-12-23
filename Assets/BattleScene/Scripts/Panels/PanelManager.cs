@@ -136,7 +136,6 @@ namespace DemonicCity.BattleScene
             panel.Open(m_waitTime); // panelを開く
             m_panelsAfterOpened.Add(panel); // 開いたオブジェクトを登録
             StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
-
         }
 
         /// <summary>
