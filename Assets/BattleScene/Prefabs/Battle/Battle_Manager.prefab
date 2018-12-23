@@ -75,9 +75,26 @@ GameObject:
   - component: {fileID: 114294880535250120}
   - component: {fileID: 114024525100392670}
   - component: {fileID: 114195271979354084}
-  - component: {fileID: 114826503555782880}
+  - component: {fileID: 114177336636838174}
+  - component: {fileID: 114212980024678998}
   m_Layer: 0
   m_Name: Battle_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1384064767142864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4883720955422510}
+  - component: {fileID: 114542386805354352}
+  m_Layer: 0
+  m_Name: UniqueSkills
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,8 +138,22 @@ Transform:
   m_Children:
   - {fileID: 4678241758042684}
   - {fileID: 4293241256990584}
+  - {fileID: 4883720955422510}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4883720955422510
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384064767142864}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61020726325893518
 BoxCollider2D:
@@ -188,9 +219,27 @@ MonoBehaviour:
   m_counterForShuffleSkill: 0
   m_CityCount: 0
   m_doubleCount: 0
+  m_destructionCount: 0
   m_tripleCount: 0
   m_totalPanelCount: 0
   m_totalDestructionCount: 0
+  m_uniqueSkillGauge: {fileID: 0}
+--- !u!114 &114177336636838174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291335245634264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1947101f5d825954585b59f9e0cce558, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_filePath: UniqueSkillManager
+  m_circlrCollider2d: {fileID: 0}
+  m_uniqueSkillGauge: {fileID: 0}
+  m_condition: 0
+  m_flag: 0
 --- !u!114 &114195271979354084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,6 +266,18 @@ MonoBehaviour:
   m_CountCondition: 21
   m_passiveSkill: 0
   m_incease: 0.02
+  m_magiaHPGauge: {fileID: 0}
+--- !u!114 &114212980024678998
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1291335245634264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474093afe83e4e248a4747232fad0772, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114267313029801558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -253,19 +314,19 @@ MonoBehaviour:
       m_charm: 0
       m_dignity: 0
       m_hitPoint: 40000
-      m_attack: 6000
+      m_attack: 7000
       m_defense: 5000
-  BattleMagia:
-    m_level: 1
+  m_magiaStats:
+    m_level: 0
     m_durability: 0
     m_muscularStrength: 0
     m_knowledge: 0
     m_sense: 0
     m_charm: 0
     m_dignity: 0
-    m_hitPoint: 25450
-    m_attack: 3635
-    m_defense: 3635
+    m_hitPoint: 0
+    m_attack: 0
+    m_defense: 0
 --- !u!114 &114306332384846622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,8 +375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c358759b966a4e6e82ec6acd2137326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaHpDraw: {fileID: 0}
-  m_enemyHpDraw: {fileID: 0}
+  m_enemyHPGauge: {fileID: 0}
 --- !u!114 &114452556554156664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -358,6 +418,19 @@ MonoBehaviour:
   m_CountCondition: 12
   m_passiveSkill: 4
   m_incease: 0.1
+  m_magiaHPGauge: {fileID: 0}
+--- !u!114 &114542386805354352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1384064767142864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00a030ab5a33b1441b91929fcf8679fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_processingTime: 3
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -369,8 +442,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1862b4cbb19b24479915824c34b786cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaHpDraw: {fileID: 0}
-  m_enemyHpDraw: {fileID: 0}
+  m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114637994177244260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -455,18 +527,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sensor: {fileID: 61020726325893518}
-  m_shuffleSkillConditions: 0
---- !u!114 &114826503555782880
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291335245634264}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bdf496b7ba62f403a8634964da37736a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_shuffleSkillConditions: 30
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,8 +539,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46f318e26830449398369d6fdfcd6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaHpDraw: {fileID: 0}
-  m_enemyHpDraw: {fileID: 0}
+  m_magiaHPGauge: {fileID: 0}
+  m_enemyHPGauge: {fileID: 0}
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1

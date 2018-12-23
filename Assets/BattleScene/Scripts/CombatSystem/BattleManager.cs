@@ -23,14 +23,14 @@ namespace DemonicCity.BattleScene
         /// <summary>バトルシーンで使用する敵オブジェクト</summary>
         [SerializeField] public EnemiesDataBase.Enemy m_enemy;
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Statistics m_magia;
+        [SerializeField] public Statistics m_magiaStats;
 
         ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
         //public State m_state = State.Init;
         ///// <summary>Wave.バトルシーンのウェーブフラグ</summary>
         //public Wave m_wave;
 
-        /// <summary>ステート毎に呼び出すメソッドを変える : Change method calling each state.</summary>
+        /// <summary>StateMacineのイベントシステム</summary>
         public StateMachineEvent m_behaviourByState = new StateMachineEvent();
 
         /// <summary>

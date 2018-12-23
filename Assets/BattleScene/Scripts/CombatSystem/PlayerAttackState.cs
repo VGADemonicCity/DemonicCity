@@ -64,7 +64,7 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_battleManager.m_magia.m_attack - m_battleManager.m_enemy.Stats.m_defense;
+                var damage = m_battleManager.m_magiaStats.m_attack - m_battleManager.m_enemy.Stats.m_defense;
                 if (damage > 0)
                 {
                     m_battleManager.m_enemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ

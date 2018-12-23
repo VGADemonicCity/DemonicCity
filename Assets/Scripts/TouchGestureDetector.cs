@@ -49,7 +49,7 @@ namespace DemonicCity
         public Camera ShootingCamera;
         /// <summary>フリック検知を有効にするかどうかを切り替えるフラグ</summary>
         public bool DetectFlick = true;
-        /// <summary>UnityEventクラスを引数を持てる様に継承したクラス</summary>
+        /// <summary>タッチジェスチャーのイベントシステム</summary>
         public GestureDetectorEvent onGestureDetected = new GestureDetectorEvent();
         /// <summary>TouchInfo:タッチの情報を格納するリスト</summary>
         List<TouchInfo> TouchInfos = new List<TouchInfo>();

@@ -55,23 +55,14 @@ namespace DemonicCity
         public int MaxHP
         {
             get { return Temp.m_hitPoint; }
-            private set { MaxHP = value; }
         }
 
         [SerializeField] private Statistics m_temp;
-        /// <summary>Tempにhp,atk,defを保存しておく</summary>
+        /// <summary>Tempにバトル開始時のhp,atk,defの初期値を一時保存しておく</summary>
         public Statistics Temp
         {
             get { return m_temp; }
             set { m_temp = value; }
-        }
-        /// <summary>
-        /// 基礎ステータスをTempに保存した時の状態に戻す
-        /// </summary>
-        public void Reset()
-        {
-            m_attack = Temp.m_attack;
-            m_defense = Temp.m_defense;
         }
 
         /// <summary>

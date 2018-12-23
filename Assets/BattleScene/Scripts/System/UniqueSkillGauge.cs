@@ -16,14 +16,14 @@ namespace DemonicCity.BattleScene
         /// <summary>スキルゲージ100%時の画像</summary>
         [SerializeField] Image m_fullyGaugeIcon;
         /// <summary>UniqueSkillGaugeのアルファカラーチャンネル(不透明度)</summary>
-        [SerializeField,Range(0, 1)] float m_alphaChannel;
-        /// <summary>固有スキル発動条件(開いたパネル枚数)</summary>
-        [SerializeField] int m_uniqueSkillCondition;
+        [SerializeField, Range(0, 1)] float m_alphaChannel;
         /// <summary>開いたパネル枚数</summary>
         [SerializeField] float m_panelCount;
 
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
+        /// <summary>UniqueSkillManagerの参照</summary>
+        UniqueSkillManager m_uniqueSkillManager;
         /// <summary>ゲージ満タン時のエフェクトアニメーターコントローラー</summary>
         Animator m_effectAnimator;
 
@@ -53,7 +53,6 @@ namespace DemonicCity.BattleScene
                     m_halflyGaugeIcon.color = Color.clear;
                     m_fullyGaugeIcon.color = Color.white;
                     m_alphaChannel = value;
-                    m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
                     OnConditionCompleted();
                 }
             }
@@ -62,6 +61,7 @@ namespace DemonicCity.BattleScene
         private void Awake()
         {
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得;
+            m_uniqueSkillManager = UniqueSkillManager.Instance; // 参照取得
             m_effectAnimator = GetComponentInChildren<Animator>();
         }
 
@@ -69,25 +69,22 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_behaviourByState.AddListener((state) =>
             {
-                if (state == BattleManager.StateMachine.State.Init)
+                if (state == BattleManager.StateMachine.State.Init) // init時に初期化する
                 {
                     Initialize();
-                    Sync();
                 }
             });
-
-            m_alphaChannel = 1.5f;
-            Debug.Log(m_alphaChannel);
         }
 
         /// <summary>
         /// 初期化
         /// </summary>
-        public void Initialize()
+        private void Initialize()
         {
-            m_halflyGaugeIcon.color = Color.clear;
             m_fullyGaugeIcon.color = Color.clear;
+            AlphaChannel = 0f;
             m_panelCount = 0;
+            m_uniqueSkillManager.SkillFlag = false;
         }
 
         /// <summary>
@@ -98,7 +95,7 @@ namespace DemonicCity.BattleScene
             m_panelCount++;
             if (AlphaChannel < 1f) // AlphaChannelが最大値以外の時だけ
             {
-                AlphaChannel = m_panelCount / m_uniqueSkillCondition; // AlphaChannelに反映
+                AlphaChannel = m_panelCount / m_uniqueSkillManager.Condition; // AlphaChannelに反映
             }
         }
 
@@ -107,17 +104,19 @@ namespace DemonicCity.BattleScene
         /// </summary>
         private void OnConditionCompleted()
         {
-            // 条件を満たした時の任意の処理や演出を実装する
+            // =============条件を満たした時の任意の処理や演出を実装する=============
+            m_uniqueSkillManager.SkillFlag= true;
+            m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
         }
 
         /// <summary>
         /// 固有スキルを使用した時
         /// </summary>
-        private void OnSkillUsed()
+        public void SkillActivated()
         {
             Initialize();
         }
-    
+
         /// <summary>
         /// AnimatorControllerのパラメータ
         /// </summary>

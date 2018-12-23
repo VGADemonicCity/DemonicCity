@@ -26,13 +26,13 @@ namespace DemonicCity.BattleScene.Skill
         {
             Debug.Log("Activated the 紅蓮障壁");
             m_defenseBuffer = m_battleManager.m_enemy.Stats.m_attack * m_incease; // enemyの攻撃力 * 乗算値
-            m_battleManager.m_magia.m_defense += (int)m_defenseBuffer;
+            m_battleManager.m_magiaStats.m_defense += (int)m_defenseBuffer;
         }
 
         protected override void SkillDeactivate()
         {
             Debug.Log("Deactivated the 紅蓮障壁");
-            m_battleManager.m_magia.m_defense -= (int)m_defenseBuffer; // 変動値を元に戻す
+            m_battleManager.m_magiaStats.m_defense -= (int)m_defenseBuffer; // 変動値を元に戻す
         }
     }
 }

@@ -70,7 +70,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224164052364739814}
-  - component: {fileID: 61488267663259286}
   m_Layer: 5
   m_Name: MagiaHPGauge
   m_TagString: Untagged
@@ -242,9 +241,10 @@ GameObject:
   - component: {fileID: 224749996878299834}
   - component: {fileID: 222752696725053324}
   - component: {fileID: 114368700491867846}
+  - component: {fileID: 58254673970850118}
   m_Layer: 5
   m_Name: SkillGauge
-  m_TagString: Untagged
+  m_TagString: PlayerSkillGauge
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -333,31 +333,21 @@ Transform:
   m_Father: {fileID: 224749996878299834}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &61488267663259286
-BoxCollider2D:
+--- !u!58 &58254673970850118
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1116972153654466}
+  m_GameObject: {fileID: 1843819638551282}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: -12.05, y: -0.35}
   serializedVersion: 2
-  m_Size: {x: 31.34, y: 9.18}
-  m_EdgeRadius: 0
+  m_Radius: 3.4
 --- !u!95 &95968592173747034
 Animator:
   serializedVersion: 3
@@ -643,8 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_halflyGaugeIcon: {fileID: 114339975144598904}
   m_fullyGaugeIcon: {fileID: 114400866293903470}
-  m_alphaChannel: 0
-  m_uniqueSkillCondition: 30
+  m_alphaChannel: 1
   m_panelCount: 0
 --- !u!114 &114376447748296498
 MonoBehaviour:
@@ -685,7 +674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:

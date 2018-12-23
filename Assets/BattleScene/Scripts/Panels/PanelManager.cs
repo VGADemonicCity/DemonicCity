@@ -13,18 +13,6 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PanelManager : MonoSingleton<PanelManager>
     {
-        /// <summary>
-        /// Flag.
-        /// </summary>
-        [Flags]
-        enum Flag
-        {
-            IsPanelProcessing = 1,
-            TimeCounter = 2, // never used
-            dummy2 = 4,
-            dummy3 = 8
-        }
-
         /// <summary>Flag</summary>
         public bool m_isPanelProcessing { get; private set; }
         /// <summary>オープン前のパネル</summary>
@@ -67,6 +55,7 @@ namespace DemonicCity.BattleScene
         void Awake()
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_battleDebugger = BattleDebugger.Instance; // BattleDebuggerの参照取得
             m_shufflePanels = GetComponent<ShufflePanels>(); // ShufflePanelsの参照取得
@@ -94,7 +83,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
-            m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             InitPanels(); // パネルをセットする
 
             // タッチによる任意の処理をイベントに登録する
@@ -110,7 +98,6 @@ namespace DemonicCity.BattleScene
                     GameObject hitResult; // Raycastの結果を入れる変数
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
 
-                    if(hitResult != null)Debug.Log(hitResult.name);
                     if (hitResult != null && hitResult.tag == "Panel" && IsWithinRange(hitResult.transform.position,m_VecMin,m_VecMax)) // タッチしたオブジェクトのタグがパネルなら
                     {
 
