@@ -44,7 +44,7 @@ namespace DemonicCity.BattleScene
 
                 if (value < 1f) // 条件に対する現在の割合を透明度に反映する
                 {
-                    m_halflyGaugeIcon.color = new Color(1, 1, 1, value);
+                    m_halflyGaugeIcon.color = new Color(1, 1, 1, value); // alphaChannelに現在のパネル枚数/条件値の割合値を代入
                     m_alphaChannel = value;
                 }
                 else
