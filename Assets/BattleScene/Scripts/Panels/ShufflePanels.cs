@@ -29,7 +29,7 @@ namespace DemonicCity.BattleScene.Skill
         }
 
         /// <summary>
-        /// シャッフルスキルを発動したら、現在画面に表示されている3*3のパネルを全て非表示の状態に戻して、その3*3のパネル内でまたシャッフルさせる
+        /// 現在画面に表示されている3*3のパネルを全て非表示の状態に戻して、その3*3のパネル内でまたシャッフルさせる
         /// </summary>
         public void PanelShuffle()
         {
@@ -46,15 +46,15 @@ namespace DemonicCity.BattleScene.Skill
                 {
                     var panelObject = panel.gameObject.GetComponent<Panel>(); // Panelの参照取得
                     panelList.Add(panelObject); // Panelをリストに追加
-                    panelTypes.Add(panelObject.m_panelType); // PanelTypeをリストに追加
+                    panelTypes.Add(panelObject.MyPanelType); // PanelTypeをリストに追加
                 }
-                
+
                 var result = panelTypes.OrderBy((arg1) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
                 var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
 
                 panelList.ForEach((panel) => // リストに格納した各パネルにGuidでランダム化したPanelTypeを順番に代入の後パネルを引いていない状態に戻す
                 {
-                    panel.m_panelType = result[count]; // PanelTypeの代入
+                    panel.MyPanelType = result[count]; // PanelTypeの代入
                     panel.ResetPanel(); // パネルを引いていない状態に戻す
                     count++; // カウントアップ
                 });

@@ -88,35 +88,58 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了  || m_battleDebugger.DebugFlag
-                {
-                    return;
-                }
+            if (m_battleManager.m_stateMachine.m_state != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了  || m_battleDebugger.DebugFlag
+            {
+                return;
+            }
 
                 if (gesture == TouchGestureDetector.Gesture.Click) // タップ時
                 {
                     GameObject hitResult; // Raycastの結果を入れる変数
                     touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
 
-                    if (hitResult != null && hitResult.tag == "Panel" && IsWithinRange(hitResult.transform.position,m_VecMin,m_VecMax)) // タッチしたオブジェクトのタグがパネルなら
+                    if (hitResult != null) // タッチしたオブジェクトのタグがnullじゃないなら
                     {
-
-                        var panel = hitResult.GetComponent<Panel>();
-                        PanelProcessing(panel);
+                        ProcessingFactory(hitResult); // 結果内容を判別し結果に応じて処理を自動的に行わせる
                     }
-                }
-                if (gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
-                {
-                    m_shufflePanels.PanelShuffle(); // Debug用
-                }
-                if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
-                {
-                    var a = Magia.Instance; // Debug用
-                    a.LevelUp(); // Debug用
                 }
             });
         }
 
+        /// <summary>
+        /// タッチしたゲームオブジェクトのタグに応じて処理を行う
+        /// </summary>
+        /// <param name="hitResult"></param>
+        public void ProcessingFactory(GameObject hitResult)
+        {
+            switch (hitResult.tag)
+            {
+                case "Panel":
+                    if (!IsWithinRange(hitResult.transform.position, m_VecMin, m_VecMax)) // 画面に表示されているパネル枠以外の座標だった場合終了
+                    {
+                        return;
+                    }
+                    var panel = hitResult.GetComponent<Panel>();
+                    if (panel.IsOpened == true) // 既に開かれているパネルなら終了
+                    {
+                        return;
+                    }
+                    PanelProcessing(panel);
+                    break;
+                case "ShufflePanels":
+                    {
+                        m_shufflePanels.PanelShuffle();
+                        break;
+                    }
+            }
+        }
+
+
+
+        /// <summary>
+        /// Panelをタッチした時の処理
+        /// </summary>
+        /// <param name="panel"></param>
         public void PanelProcessing(Panel panel)
         {
             m_isPanelProcessing = true; // フラグを建てる
@@ -138,7 +161,7 @@ namespace DemonicCity.BattleScene
                 {
                     Panel panel = obj.GetComponent<Panel>(); // 各パネルのPanelコンポーネントの参照
                     panel.ResetPanel(); // パネルをオープン前の状態に戻す
-                    panel.m_panelType = panelAllocations[count]; // ランダムにソートしたpanelTypeを充てていく。
+                    panel.MyPanelType = panelAllocations[count]; // ランダムにソートしたpanelTypeを充てていく。
                     count++; // count up.
                 });
             }
@@ -152,9 +175,31 @@ namespace DemonicCity.BattleScene
                     //PanelPrefabのインスタンスを生成して、そのゲームオブジェクトの参照を代入する
                     GameObject panelObject = Instantiate(m_panelPrefab, m_panelPositions[i], Quaternion.identity, m_panelFrame.transform);
                     Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
-                    panel.m_panelType = panelAllocations[i]; // パネルの種類をここで決めてもらう
+                    panel.MyPanelType = panelAllocations[i]; // パネルタイプを割り当てる
+                    panel.MyFramePosition = DetectFramePosition(i); // パネルの位置を特定して代入
                     m_panelsBforeOpen.Add(panel); // パネルをリストに入れる
                 }
+            }
+        }
+
+        /// <summary>
+        /// 配列のindex値からパネルの位置を特定して位置に応じたenumを返す
+        /// </summary>
+        /// <param name="index">パネルの配列要素位置</param>
+        /// <returns>パネルの位置</returns>
+        private FramePosition DetectFramePosition(int index)
+        {
+            if ((index >= 0 && index <= 2) || (index > 8 && index <= 11) || (index > 17 && index <= 20)) // EnemyPanelの位置が左の枠の時
+            {
+                return FramePosition.Left;
+            }
+            else if ((index > 2 && index <= 5) || (index > 11 && index <= 14) || (index > 20 && index <= 23)) // EnemyPanelの位置が真ん中の枠の時
+            {
+                return FramePosition.Center;
+            }
+            else // EnemyPanelの位置が右の枠の時 , (index > 5 && index <= 8) || (index > 14 && index <= 17) || (index > 23 && index <= 26))
+            {
+                return FramePosition.Right;
             }
         }
 
@@ -213,14 +258,14 @@ namespace DemonicCity.BattleScene
             {
                 var panelObject = panel.gameObject.GetComponent<Panel>(); // Panelの参照取得
                 panelList.Add(panelObject); // Panelをリストに追加
-                panelTypes.Add(panelObject.m_panelType); // PanelTypeをリストに追加
+                panelTypes.Add(panelObject.MyPanelType); // PanelTypeをリストに追加
             }
             var result = panelTypes.OrderBy((arg1) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
             var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
 
             panelList.ForEach((panel) => // リストに格納した各パネルにGuidでランダム化したPanelTypeを順番に代入の後パネルを引いていない状態に戻す
             {
-                panel.m_panelType = result[count]; // PanelTypeの代入
+                panel.MyPanelType = result[count]; // PanelTypeの代入
                 panel.ResetPanel(); // パネルを引いていない状態に戻す
                 count++; // カウントアップ
             });

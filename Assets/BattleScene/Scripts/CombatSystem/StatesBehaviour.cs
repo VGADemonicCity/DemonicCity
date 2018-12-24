@@ -10,6 +10,8 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class StatesBehaviour : MonoSingleton<StatesBehaviour>
     {
+        /// <summary>PanelFrameManagerの参照</summary>
+        protected PanelFrameManager m_panelFrameManager;
         /// <summary>BattleManagerの参照</summary>
         protected BattleManager m_battleManager;
         /// <summary>PanelManagerの参照</summary>
@@ -26,6 +28,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         protected virtual void Awake()
         {
+            m_panelFrameManager = PanelFrameManager.Instance; // PanelFrameManagerの参照取得
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得

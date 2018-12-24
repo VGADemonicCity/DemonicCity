@@ -6,29 +6,41 @@ using UnityEngine;
 namespace DemonicCity.BattleScene
 {
 
-    [Flags]
-    public enum Flag
+    /// <summary>
+    /// パネル枠の位置
+    /// </summary>
+    public enum FramePosition
     {
-        /// <summary>右にいる時,0001</summary>
+        /// <summary>右にいる時</summary>
         Right = 1,
-        /// <summary>真ん中にいる時,0010</summary>
-        Middle = 2,
-        /// <summary>左にいる時,0100</summary>
-        Left = 4
+        /// <summary>真ん中にいる時</summary>
+        Center = 2,
+        /// <summary>左にいる時</summary>
+        Left = 4,
     }
 
-    public class PanelFrameManager : MonoBehaviour
+    /// <summary>
+    /// PanelFrameManager
+    /// </summary>
+    public class PanelFrameManager : MonoSingleton<PanelFrameManager>
     {
-        /// <summary>パネル枠を動かす量</summary>
-        [SerializeField] float m_distance = 3.835f;
+        /// <summary>枠移動の待ち時間</summary>
+        [SerializeField] float m_waitTime = 1f;
+        /// <summary>フレームの位置を表すenum</summary>
+        [SerializeField] FramePosition m_framePosition = FramePosition.Center;
+        /// <summary>PanelFrameがフリックで動ける座標</summary>
+        Vector2[] m_framePositions = new Vector2[]
+        {
+            new Vector2(-2.986255f,-3.62f), // 左
+            new Vector2(0.8450003f,-3.62f), // 真ん中
+            new Vector2(4.676255f,-3.62f), // 右
+        };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
         /// <summary>パネルフレームの初期座標</summary>
         Vector2 m_panelFlamePosition;
-        /// <summary>フリック時のbit論理演算用</summary>
-        int m_flag = 2;
         /// <summary>パネル枠が動いている最中はフラグ</summary>
-        bool m_wait = true;
+        bool m_wait;
 
         public void Start()
         {
@@ -38,57 +50,90 @@ namespace DemonicCity.BattleScene
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
+                if (m_wait) // 枠移動中の時は終了
+                {
+                    return;
+                }
                 switch (gesture) // タッチ情報が左右のフリックだったら
                 {
-                    case TouchGestureDetector.Gesture.FlickLeftToRight: // 右フリックの時
-                        if ((m_flag & (int)Flag.Left) == 0 && m_wait) // 右にスワイプされた時左側にいなければ
+                    case TouchGestureDetector.Gesture.FlickLeftToRight: // 右フリックの時,枠が左にいないときはひとつ左に動かす
+                        switch (m_framePosition)
                         {
-                            StartCoroutine(Moving(Flag.Right)); // デフォルト引数を使い左にシフトさせる
+                            case FramePosition.Center:
+                                StartCoroutine(MovingFrame(FramePosition.Left));
+                                break;
+                            case FramePosition.Right:
+                                StartCoroutine(MovingFrame(FramePosition.Center));
+                                break;
                         }
                         break;
-                    case TouchGestureDetector.Gesture.FlickRightToLeft: // 左フリックの時
-                        if ((m_flag & (int)Flag.Right) == 0 && m_wait) // 左にスワイプされた時右側にいなければ
+                    case TouchGestureDetector.Gesture.FlickRightToLeft: // 左フリックの時,枠が右にいないときはひとつ右に動かす
+                        switch (m_framePosition)
                         {
-                            StartCoroutine(Moving(Flag.Left)); // マイナス1を渡して右にシフトさせる
+                            case FramePosition.Center:
+                                StartCoroutine(MovingFrame(FramePosition.Right));
+                                break;
+                            case FramePosition.Left:
+                                StartCoroutine(MovingFrame(FramePosition.Center));
+                                break;
                         }
-                        break;
-                    case TouchGestureDetector.Gesture.Click:
-                        break;
-                    default:
                         break;
                 }
             });
         }
 
         /// <summary>
-        /// パネル枠を初期位置に戻す
+        /// PanelFrameを左へ動かす
         /// </summary>
-        public void ResetPanelFlame()
+        public void MovingLeft()
         {
-            transform.position = m_panelFlamePosition;
+            StartCoroutine(MovingFrame(FramePosition.Left));
         }
 
         /// <summary>
-        /// パネル枠をフリックに応じて移動させる
-        /// </summary>
-        /// <returns>The moving.</returns>
-        /// <param name="flag">Flag.</param>
-        IEnumerator Moving(Flag flag)
+        /// PanelFrameを真ん中へ動かす
+        /// </summary> 
+        public void MovingCenter()
         {
-            m_wait = false; //処理が終わるまで呼ばれない様にする
-            switch (flag)
+            StartCoroutine(MovingFrame(FramePosition.Center));
+        }
+
+        /// <summary>
+        /// PanelFrameを右へ動かす
+        /// </summary>
+        public void MovingRight()
+        {
+            StartCoroutine(MovingFrame(FramePosition.Right));
+        }
+
+        /// <summary>
+        /// パネルフレームを引数に応じたフレームポジションへなめらかに移動させる
+        /// </summary>
+        /// <param name="framePosition">移動したい先のポジション</param>
+        /// <returns></returns>
+        public IEnumerator MovingFrame(FramePosition framePosition)
+        {
+            if(m_wait)
             {
-                case Flag.Right: // もし右にフリックされたら
-                    iTween.MoveBy(gameObject, iTween.Hash(("x"), m_distance)); // 枠を右に移動
-                    m_flag = m_flag << 1; // フラグを左にシフト
+                yield break;
+            }
+
+            m_wait = true;
+            switch (framePosition)
+            {
+                case FramePosition.Right:
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[0].x));
                     break;
-                case Flag.Left: // もし左にフリックされたら
-                    iTween.MoveBy(gameObject, iTween.Hash(("x"), -m_distance)); // 枠を左に移動
-                    m_flag = m_flag >> 1; // フラグを右にシフト
+                case FramePosition.Center:
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[1].x));
+                    break;
+                case FramePosition.Left:
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[2].x));
                     break;
             }
-            yield return new WaitForSeconds(2f); //2秒待つ
-            m_wait = true; // 処理終了。またこのメソッドを呼べる様になる
+            yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
+            m_framePosition = framePosition; // panelFrameの位置情報を更新する
+            m_wait = false;
         }
     }
 }
