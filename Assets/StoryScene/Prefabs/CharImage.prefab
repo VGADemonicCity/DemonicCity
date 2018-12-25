@@ -40,13 +40,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f01ed214f5fc04ea6739c0116ce285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  facer: 0
   faceSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 21300000, guid: c312df736df620c4aa9190220afc8b8e, type: 3}
+  - {fileID: 21300000, guid: f702782333b47fa42b88ffdd3664ad4b, type: 3}
+  - {fileID: 21300000, guid: b342f7d3bf4df47429e6abd119ce581c, type: 3}
+  - {fileID: 21300000, guid: 10b090dc206b4c545ad336ac2912177e, type: 3}
+  - {fileID: 21300000, guid: 548686063ab17cb4d880cc28b84e5b6e, type: 3}
+  - {fileID: 21300000, guid: 1e6f24cfb895e534e8489ab8b9458c69, type: 3}
 --- !u!114 &114876191533832138
 MonoBehaviour:
   m_ObjectHideFlags: 1

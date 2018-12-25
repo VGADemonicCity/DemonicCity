@@ -9,7 +9,7 @@ namespace DemonicCity.StoryScene
 {
     public enum StageType
     {
-        SceneTrans, Appear, Coloring, Clear, SwitchBack
+        SceneTrans, Appear, Leave, Coloring, Clear, SwitchBack
     }
     public class TextDirector : MonoBehaviour
     {
@@ -18,6 +18,7 @@ namespace DemonicCity.StoryScene
             Type, content
         }
 
+        delegate void Stagings() ;
         string[] contents;
 
         //public void Staging(StageType type, string content)
@@ -50,19 +51,23 @@ namespace DemonicCity.StoryScene
             StageType type;
             if (!EnumCommon.TryParse<StageType>(contents[(int)StageTag.Type], out type))
             {
+
                 return;
             }
-
+            Debug.Log(type);
             switch (type)
             {
                 case StageType.SceneTrans:
-                    SceneTrans(storage.sentence);
+                    SceneTrans(contents[(int)StageTag.content]);
                     break;
                 case StageType.Appear:
-                    Appear(storage.sentence);
+                    Appear(contents[(int)StageTag.content]);
+                    break;
+                case StageType.Leave:
+                    Leave(contents[(int)StageTag.content]);
                     break;
                 case StageType.Coloring:
-                    Coloring(storage.sentence);
+                    Coloring(contents[(int)StageTag.content]);
                     break;
                 case StageType.Clear:
                     Clear();
@@ -85,6 +90,11 @@ namespace DemonicCity.StoryScene
 
         }
 
+        void Leave(string content)
+        {
+
+        }
+
         void Coloring(string content)
         {
 
@@ -103,9 +113,9 @@ namespace DemonicCity.StoryScene
 
         void DivideContent(string content)
         {
-            string[] tmpTexts = content.Split(':');
+            //string[] tmpTexts = content.Split(':');
             contents = content.Split(':');
-            
+            Debug.Log(contents);
         }
     }
 }

@@ -9,8 +9,9 @@ namespace DemonicCity.StorySelectScene
         Progress progress;
         Progress.StoryProgress MyStory;
 
+        [SerializeField] ChapterManager chapterManager;
         [SerializeField] RectTransform parent;
-        [SerializeField]GameObject SelectButton;
+        [SerializeField] GameObject SelectButton;
 
         void Awake()
         {
@@ -25,11 +26,12 @@ namespace DemonicCity.StorySelectScene
             //    GameObject newSelectButton = Instantiate(SelectButton,parent);
             //    newSelectButton.GetComponent<SelectButton>().Initialize(i);
             //}
-            for (int i = (int)MyStory ; i >= 1; i--
+            for (int i = (int)MyStory; i >= 1; i--
                 /*int i=1;i<=(int)MyStory;i+=i*/)
             {
                 GameObject newSelectButton = Instantiate(SelectButton, parent);
-                newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)i,this);
+                //newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)i, this);
+                newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)i, chapterManager.GetTitle((Progress.StoryProgress)i), this);
             }
 
         }
