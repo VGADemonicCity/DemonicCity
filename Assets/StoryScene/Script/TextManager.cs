@@ -94,6 +94,7 @@ namespace DemonicCity.StoryScene
 
 
             SetText();
+            DivideTexts();
             flag = putSentence.A(texts[textIndex].sentence);
         }
 
@@ -101,6 +102,7 @@ namespace DemonicCity.StoryScene
         /// <summary>ListのCharNameに応じた名前を出力するが、演出がある場合はその演出を再生する</summary>
         void DivideTexts()
         {
+            Debug.Log(texts[textIndex].cName);
             if (texts[textIndex].cName == CharName.System)
             {
                 director.Staging(texts[textIndex]);
@@ -108,12 +110,17 @@ namespace DemonicCity.StoryScene
             }
             else
             {
+                Debug.Log(texts[textIndex].faceIndex);
                 faceManagers[0].ChangeFace(texts[textIndex].faceIndex);
             }
 
             if (texts[textIndex].isUnknown)
             {
                 nameObj.text = CHARNAME[(int)CharName.Unknown];
+            }
+            else if (texts[textIndex].cName == CharName.None)
+            {
+                nameObj.text = "";
             }
             else
             {
@@ -157,24 +164,19 @@ namespace DemonicCity.StoryScene
             foreach (string s in tmpTexts)
             {
 
-                Debug.Log(s);
+                //Debug.Log(s);
                 var sss = JsonUtility.FromJson<TextStorage>(s);
-                Debug.Log(sss);
+                //Debug.Log(sss);
                 if (sss.face == null || sss.face == "")
                 {
                     sss.face = FaceIndex.Last.ToString();
                 }
                 var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
-                Debug.Log(tmpStorage);
+                //Debug.Log(tmpStorage);
                 texts.Add(tmpStorage);
 
 
             }
-            /*for (int i = 0; i < 10; i++)
-            {
-                texts.Add(new TextStorage(i.ToString() + "123abc456def789ghi"));
-                //Debug.Log(i.ToString() + "abcdEfgkfdajitoevaejko");
-            }*/
 
         }
 
@@ -183,8 +185,4 @@ namespace DemonicCity.StoryScene
 
 
 
-    //touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
-    //{
-
-    //});
 }

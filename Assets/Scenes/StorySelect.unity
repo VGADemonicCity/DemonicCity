@@ -1252,7 +1252,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1903273764}
   - component: {fileID: 1903273765}
-  - component: {fileID: 1903273766}
   m_Layer: 5
   m_Name: StorySelecter
   m_TagString: Untagged
@@ -1284,21 +1283,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9941ad344de7d634eaa1a2623838a209, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chapterManager: {fileID: 1903273766}
+  chapterManager:
+    chapters:
+    - enemiesIds: 
+      storyProgress: 1
+      chapterTitle: "\u30D7\u30ED\u30ED\u30FC\u30B0"
+      isBattle: 0
+    - enemiesIds: 010000000100000001000000
+      storyProgress: 2
+      chapterTitle: "\u306F\u3058\u307E\u308A\u306E\u9082\u9005"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
+    - enemiesIds: 000000000000000000000000
+      storyProgress: 3
+      chapterTitle: "\u9053\u306A\u304D\u9053\u3078"
+      isBattle: 0
   parent: {fileID: 754834362}
   SelectButton: {fileID: 1425596356560198, guid: ded0785ec82e8f243a6d03b0ca78b700,
     type: 2}
---- !u!114 &1903273766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1903273763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88a146f65acf9c44781b7a473076e822, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1949569174
 GameObject:
   m_ObjectHideFlags: 0

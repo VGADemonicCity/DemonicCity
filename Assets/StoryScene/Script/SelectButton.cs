@@ -17,9 +17,9 @@ namespace DemonicCity.StorySelectScene
         Progress.StoryProgress chapterTag;
 
         Progress progress;
-        
 
-        public void Initialize(Progress.StoryProgress chapter,StorySelecter selecter)
+
+        public void Initialize(Progress.StoryProgress chapter, StorySelecter selecter)
         {
             storySelecter = selecter;
             chapterTag = chapter;
@@ -28,7 +28,7 @@ namespace DemonicCity.StorySelectScene
         public void Initialize(string title, StorySelecter selecter)
         {
             storySelecter = selecter;
-            chapterName =title;
+            chapterName = title;
         }
         public void Initialize(Progress.StoryProgress chapter, string title, StorySelecter selecter)
         {
@@ -51,7 +51,7 @@ namespace DemonicCity.StorySelectScene
                 switch (gesture)
                 {
                     case TouchGestureDetector.Gesture.TouchBegin:
-                        touchInfo.HitDetection(out beginObject,gameObject);
+                        touchInfo.HitDetection(out beginObject, gameObject);
                         break;
 
                     case TouchGestureDetector.Gesture.Click:
