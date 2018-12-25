@@ -56,6 +56,8 @@ namespace DemonicCity
             /// <summary>10章</summary>
             Barl,
             /// <summary>11章</summary>
+            InvigoratedPhoenix,
+            /// <summary>12章</summary>
             Ixmagina,
             All,
         }
