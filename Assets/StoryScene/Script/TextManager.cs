@@ -59,6 +59,7 @@ namespace DemonicCity.StoryScene
                         {
                             Debug.Log("おわりだよー(*∂ｖ∂)");
                             DivideTexts();
+                            textIndex += 1;
                             return;
                         }
                         flag = putSentence.end;
@@ -68,7 +69,7 @@ namespace DemonicCity.StoryScene
                             texts[textIndex].cName == CharName.System)
                             {
                                 isStaging = true;
-                                //return;
+                                return;
                             }
                             else
                             {
@@ -81,8 +82,11 @@ namespace DemonicCity.StoryScene
                             putSentence.FullTexts();
                         }
                         DivideTexts();
+                        if (texts[textIndex].cName != CharName.System)
+                        {
+                            flag = putSentence.CallSentence(texts[textIndex].sentence);
 
-                        flag = putSentence.CallSentence(texts[textIndex].sentence);
+                        }
 
                     }
                 }
@@ -100,6 +104,11 @@ namespace DemonicCity.StoryScene
             if (texts[textIndex].cName == CharName.System)
             {
                 director.Staging(texts[textIndex]);
+                return;
+            }
+            else
+            {
+                faceManagers[0].ChangeFace(texts[textIndex].faceIndex);
             }
 
             if (texts[textIndex].isUnknown)

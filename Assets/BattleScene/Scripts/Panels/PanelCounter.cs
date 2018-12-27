@@ -110,19 +110,20 @@ namespace DemonicCity.BattleScene
         /// <param name="panel">Panel.</param>
         public void PanelJudger(Panel panel)
         {
-            switch (panel.m_panelType)
+            var destructionCount = 0; // 街破壊数の一時保存変数
+            switch (panel.MyPanelType)
             {
                 case PanelType.City: // cityパネルを引いた時
                     m_CityCount++; // シティパネルカウントアップ
-                    m_destructionCount++;
+                    destructionCount++;
                     break;
                 case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
-                    m_destructionCount += 2;
+                    destructionCount += 2;
                     break;
                 case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
-                    m_destructionCount += 3;
+                    destructionCount += 3;
                     break;
                 case PanelType.Enemy: // enemyパネルを引いた時
                     m_battleManager.m_stateMachine.m_state = BattleManager.StateMachine.State.PlayerAttack; // ステートマシンをPlayerAttackへ
@@ -134,7 +135,8 @@ namespace DemonicCity.BattleScene
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ
             m_counterForShuffleSkill++; // シャッフルスキル専用カウンターアップ
-            m_totalDestructionCount += m_destructionCount; // 総計に加算
+            m_totalDestructionCount += destructionCount; // 総計に加算
+            m_destructionCount += destructionCount;
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
 
 

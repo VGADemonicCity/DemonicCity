@@ -93,7 +93,10 @@ namespace DemonicCity
         /// </summary>
         public virtual void OnInitialize()
         {
-            Load();
+            if (File.Exists(GetSaveFilePath())) // もしセーブファイルが存在するなら
+            {
+                Load();
+            }
         }
 
         /// <summary>
@@ -192,6 +195,8 @@ namespace DemonicCity
             else
             {
                 m_jsonText = "";
+                Debug.Log("SaveDataがなかったよ");
+                Save(); // もしセーブデータが存在しないならここで作成する
             }
 
             return m_jsonText;

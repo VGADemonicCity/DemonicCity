@@ -40,8 +40,8 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 魔拳");
-            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magia.Temp.m_attack * m_incease; // 攻撃力の任意の%分加算
-            m_battleManager.m_magia.m_attack += (int)m_attackBuffer; // intに変換
+            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magiaStats.Temp.m_attack * m_incease; // 攻撃力の任意の%分加算
+            m_battleManager.m_magiaStats.m_attack += (int)m_attackBuffer; // intに変換
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillDeactivate()
         {
             Debug.Log("Deactivated the 魔拳");
-            m_battleManager.m_magia.m_attack -= (int)m_attackBuffer; // intに変換
+            m_battleManager.m_magiaStats.m_attack -= (int)m_attackBuffer; // intに変換
         } 
     }
 }

@@ -24,6 +24,7 @@ namespace DemonicCity.BattleScene
                 Debug.Log("PlayerChoice state called.");
                 m_panelCounter.InitCounts();
                 m_panelManager.InitPanels();
+                m_panelFrameManager.MovingCenter();
 
                 // ==============================
                 // ここにプレイヤーターンが始まった時の処理を書く

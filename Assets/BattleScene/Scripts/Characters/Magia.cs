@@ -21,7 +21,7 @@ namespace DemonicCity
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
         public int MaxLevel
         {
-            get { return requiredExps.Length + 1; }
+            get { return m_requiredExps.Length + 1; }
         }
         /// <summary>ステータスクラスのプロパティ</summary>
         public Statistics Stats
@@ -41,8 +41,52 @@ namespace DemonicCity
             get { return m_attribute; }
             set { m_attribute = value; }
         }
+
+        /// <summary>m_totalExperienceのプロパティ</summary>
+        public int TotalExperience
+        {
+            get { return m_totalExperience; }
+            set { m_totalExperience = value; }
+        }
+
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
+
+        /// <summary>属性別ユニークスキルの条件値を返す</summary>
+        public int UniqueSkillConditionByAttribute
+        {
+            get
+            {
+                int condition;
+                switch (MyAttribute)
+                {
+                    case Attribute.Standard:
+                        condition = 30;
+                        break;
+                    case Attribute.MaleWarrior:
+                        condition = 30;
+                        break;
+                    case Attribute.FemaleWarrior:
+                        condition = 30;
+                        break;
+                    case Attribute.MaleWizard:
+                        condition = 30;
+                        break;
+                    case Attribute.FemaleWitch:
+                        condition = 30;
+                        break;
+                    case Attribute.FemaleTrancendental:
+                        condition = 30;
+                        break;
+                    default:
+                        condition = 30;
+                        Debug.LogError("属性が設定されていません。");
+                        break;
+                }
+                return condition;
+            }
+        }
+
 
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
@@ -51,7 +95,7 @@ namespace DemonicCity
         /// <summary>属性フラグ</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
-        [SerializeField] int[] requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
+        [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkill;
 
@@ -84,7 +128,7 @@ namespace DemonicCity
         /// <param name="currentLevel">Current level.</param>
         public int GetRequiredExpToNextLevel(int currentLevel)
         {
-            return currentLevel >= MaxLevel ? 0 : requiredExps[currentLevel - 1];
+            return currentLevel >= MaxLevel ? 0 : m_requiredExps[currentLevel - 1];
         }
 
         /// <summary>

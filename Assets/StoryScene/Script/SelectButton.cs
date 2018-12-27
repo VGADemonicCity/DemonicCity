@@ -17,6 +17,7 @@ namespace DemonicCity.StorySelectScene
         Progress.StoryProgress chapterTag;
 
         Progress progress;
+        
 
         public void Initialize(Progress.StoryProgress chapter,StorySelecter selecter)
         {
@@ -24,7 +25,17 @@ namespace DemonicCity.StorySelectScene
             chapterTag = chapter;
             chapterName = chapterTag.ToString();
         }
-
+        public void Initialize(string title, StorySelecter selecter)
+        {
+            storySelecter = selecter;
+            chapterName =title;
+        }
+        public void Initialize(Progress.StoryProgress chapter, string title, StorySelecter selecter)
+        {
+            chapterTag = chapter;
+            storySelecter = selecter;
+            chapterName = title;
+        }
 
         void Awake()
         {

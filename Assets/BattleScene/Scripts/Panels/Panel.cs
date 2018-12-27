@@ -19,17 +19,39 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class Panel : MonoBehaviour
     {
-        /// <summary>パネルが持つパネルの種類情報</summary>
-        public PanelType m_panelType { get; set; }
+        /// <summary>パネルが既に開かれているかどうか</summary>
+        public bool IsOpened
+        {
+            get { return m_isOpened; }
+            set { m_isOpened = value; }
+        }
 
+        /// <summary>パネルの種類</summary>
+        public PanelType MyPanelType
+        {
+            get { return m_panelType; }
+            set { m_panelType = value; }
+        }
+
+        /// <summary>パネルがいる枠の場所</summary>
+        public FramePosition MyFramePosition
+        {
+            get { return m_framePosition; }
+            set { m_framePosition = value; }
+        }
+
+        /// <summary>パネルがいる枠の場所</summary>
+        [SerializeField] FramePosition m_framePosition;
+        /// <summary>パネルが持つパネルの種類情報</summary>
+        [SerializeField] PanelType m_panelType;
+        /// <summary>既に開かれたかどうか判断するフラグ</summary>
+        [SerializeField] bool m_isOpened;
         /// <summary>パネルのテクスチャ</summary>
         [SerializeField] Sprite[] m_panelTextures;
         /// <summary>時点から何度回転するか</summary>
         [SerializeField] float m_rotationDegrees = 1440f;
         /// <summary>パネルのコライダー</summary>
         public CircleCollider2D m_collider2d;
-        /// <summary>既に呼ばれたかどうか判断するフラグ</summary>
-        public bool m_alreadyProcessed { get; private set; }
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
 
@@ -46,7 +68,7 @@ namespace DemonicCity.BattleScene
         public void ResetPanel()
         {
             m_spriteRender.sprite = m_panelTextures[(int)PanelType.Default]; // パネルのtextureをDefaultに戻す
-            m_alreadyProcessed = false; //フラグリセット
+            IsOpened = false; //フラグリセット
         }
 
         /// <summary>
@@ -55,7 +77,7 @@ namespace DemonicCity.BattleScene
         /// <param name="waitTime">Wait time.</param>
         public void Open(float waitTime)
         {
-            if (m_alreadyProcessed) //フラグがオフならメソッド終了
+            if (IsOpened) // パネルが既に開かれているならメソッド終了
             {
                 return;
             }
@@ -68,13 +90,13 @@ namespace DemonicCity.BattleScene
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(); // PanelTypeに合わせてtextureを変える
-            m_alreadyProcessed = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
+            IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>
         void ChangingTexture()
         {
-            m_spriteRender.sprite = m_panelTextures[(int)m_panelType]; //パネルタイプのenum値をキャストで渡す
+            m_spriteRender.sprite = m_panelTextures[(int)MyPanelType]; //パネルタイプのenum値をキャストで渡す
         }
 
         /// <summary>

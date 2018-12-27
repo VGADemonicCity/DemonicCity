@@ -17,7 +17,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>現在の属性</summary>
         private Magia.Attribute attribute;
 
-        /// <summary>装備中のスキル</summary>
+        /// <summary>習得済みスキル</summary>
         private Magia.PassiveSkill passiveSkill;
 
         /// <summary>現在の体力</summary>
@@ -177,27 +177,27 @@ namespace DemonicCity.StrengthenScene
                                 break;
                             case ("Youji"):
                                 attribute = Magia.Attribute.Standard;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Youji".ToString();
                                 break;
                             case ("Kenki"):
                                 attribute = Magia.Attribute.FemaleWarrior;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Kenki".ToString();
                                 break;
                             case ("Jinou"):
                                 attribute = Magia.Attribute.MaleWarrior;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Jinou".ToString();
                                 break;
                             case ("Jotei"):
                                 attribute = Magia.Attribute.FemaleWitch;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Jotei".ToString();
                                 break;
                             case ("Kokuou"):
                                 attribute = Magia.Attribute.MaleWizard;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Kokuou".ToString();
                                 break;
                             case ("Majin"):
                                 attribute = Magia.Attribute.FemaleTrancendental;
-                                attributeText.text = attribute.ToString();
+                                attributeText.text = "Majin".ToString();
                                 break;
                         }
                     }
@@ -205,26 +205,10 @@ namespace DemonicCity.StrengthenScene
             });
         }
 
-        private void Update()
-        {
-            if(hitPoint != updatedHitPoint)
-            {
-                updatedBasicStatusTexts[0].color = Color.blue;
-            }
-            if (attack != updatedAttack)
-            {
-                updatedBasicStatusTexts[1].color = Color.blue;
-            }
-            if (defense != updatedDefense)
-            {
-                updatedBasicStatusTexts[2].color = Color.blue;
-            }
-        }
-
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
         /// <param name="uniqueStatus">固有ステータス</param>
         /// <param name="uniqueStatusText">固有ステータスのテキスト</param>
-        /// <param name="addStatus">ステータスを増加させるか減少させるか判定</param>
+        /// <param name="addStatus">ステータスの増減判定</param>
         public void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText, bool addStatus)
         {
             if (addStatus)
@@ -299,7 +283,7 @@ namespace DemonicCity.StrengthenScene
             magia.Update();
         }
 
-        /// <summary>テキストを更新する</summary>
+        /// <summary>テキストを更新</summary>
         public void UpdateText()
         {
             switch (attribute)
@@ -324,50 +308,13 @@ namespace DemonicCity.StrengthenScene
                     break;
             }
 
-            switch (passiveSkill)
-            {
-                case Magia.PassiveSkill.Invalid:
-                    passiveSkillText.text = "Maken".ToString();
-                    break;
-                case Magia.PassiveSkill.DevilsFist:
-                    break;
-                case Magia.PassiveSkill.HighConcentrationMagicalAbsorption:
-                    break;
-                case Magia.PassiveSkill.SelfRegeneration:
-                    break;
-                case Magia.PassiveSkill.ExplosiveFlamePillar:
-                    break;
-                case Magia.PassiveSkill.CrimsonBarrier:
-                    break;
-                case Magia.PassiveSkill.DevilsFistInfernoType:
-                    break;
-                case Magia.PassiveSkill.BraveHeartsIncarnation:
-                    break;
-                case Magia.PassiveSkill.GreatCrimsonBarrier:
-                    break;
-                case Magia.PassiveSkill.InfernosFist:
-                    break;
-                case Magia.PassiveSkill.SatansCell:
-                    break;
-                case Magia.PassiveSkill.AmaterasuIncanation:
-                    break;
-                case Magia.PassiveSkill.AmaterasuInferno:
-                    break;
-                case Magia.PassiveSkill.AmaterasuFlameWall:
-                    break;
-                case Magia.PassiveSkill.AllSkill:
-                    break;
-                default:
-                    break;
-            }
-
             currentBasicStatusTexts[0].text = hitPoint.ToString();
             currentBasicStatusTexts[1].text = attack.ToString();
             currentBasicStatusTexts[2].text = defense.ToString();
 
-            updatedBasicStatusTexts[0].text = hitPoint.ToString();
-            updatedBasicStatusTexts[1].text = attack.ToString();
-            updatedBasicStatusTexts[2].text = defense.ToString();
+            updatedBasicStatusTexts[0].text = "";
+            updatedBasicStatusTexts[1].text = "";
+            updatedBasicStatusTexts[2].text = "";
 
             currentUniqueStatusTexts[0].text = charm.ToString();
             currentUniqueStatusTexts[1].text = dignity.ToString();
@@ -376,12 +323,12 @@ namespace DemonicCity.StrengthenScene
             currentUniqueStatusTexts[4].text = durability.ToString();
             currentUniqueStatusTexts[5].text = knowledge.ToString();
 
-            addUniqueStatusTexts[0].text = addCharm.ToString();
-            addUniqueStatusTexts[1].text = addDignity.ToString();
-            addUniqueStatusTexts[2].text = addMuscularStrength.ToString();
-            addUniqueStatusTexts[3].text = addSense.ToString();
-            addUniqueStatusTexts[4].text = addDurability.ToString();
-            addUniqueStatusTexts[5].text = addKnowledge.ToString();
+            addUniqueStatusTexts[0].text = "+ " + addCharm.ToString();
+            addUniqueStatusTexts[1].text = "+ " + addDignity.ToString();
+            addUniqueStatusTexts[2].text = "+ " + addMuscularStrength.ToString();
+            addUniqueStatusTexts[3].text = "+ " + addSense.ToString();
+            addUniqueStatusTexts[4].text = "+ " + addDurability.ToString();
+            addUniqueStatusTexts[5].text = "+ " + addKnowledge.ToString();
 
             statusPointText.text = statusPoint.ToString();
         }

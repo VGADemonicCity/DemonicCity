@@ -39,7 +39,7 @@ namespace DemonicCity.Debugger
         {
             m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if(state != BattleManager.StateMachine.State.PlayerChoice || !m_debugFlag) // PlayerChoice以外,debugフラグがオフの時は何もしない
+                if(state != BattleManager.StateMachine.State.PlayerChoice || !DebugFlag) // PlayerChoice以外,debugフラグがオフの時は何もしない
                 {
                     return;
                 }
@@ -58,8 +58,8 @@ namespace DemonicCity.Debugger
             foreach (var panel in panels)
             {
                 m_panelManager.PanelProcessing(panel);
-                yield return new WaitUntil(() => panel.m_alreadyProcessed); // パネルが処理中の間は此方の処理を一時停止させる
-                if (panel.m_panelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
+                yield return new WaitUntil(() => panel.IsOpened); // パネルが処理中の間は此方の処理を一時停止させる
+                if (panel.MyPanelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
                 {
                     break;
                 }
