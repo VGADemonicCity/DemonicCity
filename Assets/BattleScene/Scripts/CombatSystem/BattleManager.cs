@@ -38,6 +38,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Awake()
         {
+
             EnemyId = EnemiesDataBase.EnemiesId.Nafla; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
             m_stateMachine = StateMachine.Instance; // StateMachineの参照取得
             m_enemiesData = EnemiesDataBase.Instance; // EnemiesDataBaseの参照取得
