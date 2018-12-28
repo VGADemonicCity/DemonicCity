@@ -11,23 +11,25 @@ namespace DemonicCity
     [Serializable]
     public class ChapterManager : SingletonBase<ChapterManager>
     {
+        /// <summary>ストーリー進行度のインスタンスの参照</summary>
+        Progress progress = Progress.Instance;
 
         /// <summary>進行度と敵のIDを登録するList</summary>
         public List<Chapter> chapters = new List<Chapter>()
         {
-            new Chapter("プロローグ",Progress.StoryProgress.Prologue),
-            new Chapter("はじまりと出逢い",Progress.StoryProgress.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix),
-            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla),
-            new Chapter("迫る鎮圧部隊",Progress.StoryProgress.ZAKO1),
-            new Chapter("消えぬ炎",Progress.StoryProgress.Amon),
-            new Chapter("怒り狂う軍隊",Progress.StoryProgress.ZAKO2),
-            new Chapter("理の誘い",Progress.StoryProgress.Ashmedy),
-            new Chapter("立ちふさがる防衛隊",Progress.StoryProgress.ZAKO3),
-            new Chapter("恐怖への扉",Progress.StoryProgress.Faulus),
-            new Chapter("魔王親衛隊",Progress.StoryProgress.ZAKO4),
-            new Chapter("決戦の覚悟",Progress.StoryProgress.Barl),
-            new Chapter("偽りの仮面",Progress.StoryProgress.InvigoratedPhoenix),
-            new Chapter("終末の王",Progress.StoryProgress.Ixmagina),
+            new Chapter("プロローグ",Progress.StoryProgress.Prologue,sourceFolderPath+"1/"),
+            new Chapter("はじまりと出逢い",Progress.StoryProgress.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix,sourceFolderPath+"2/"),
+            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla,sourceFolderPath+"3/"),
+            new Chapter("迫る鎮圧部隊",Progress.StoryProgress.ZAKO1,sourceFolderPath+"4/"),
+            new Chapter("消えぬ炎",Progress.StoryProgress.Amon,sourceFolderPath+"5/"),
+            new Chapter("怒り狂う軍隊",Progress.StoryProgress.ZAKO2,sourceFolderPath+"6/"),
+            new Chapter("理の誘い",Progress.StoryProgress.Ashmedy,sourceFolderPath+"7/"),
+            new Chapter("立ちふさがる防衛隊",Progress.StoryProgress.ZAKO3,sourceFolderPath+"8/"),
+            new Chapter("恐怖への扉",Progress.StoryProgress.Faulus,sourceFolderPath+"9/"),
+            new Chapter("魔王親衛隊",Progress.StoryProgress.ZAKO4,sourceFolderPath+"10/"),
+            new Chapter("決戦の覚悟",Progress.StoryProgress.Barl,sourceFolderPath+"11/"),
+            new Chapter("偽りの仮面",Progress.StoryProgress.InvigoratedPhoenix,sourceFolderPath+"12/"),
+            new Chapter("終末の王",Progress.StoryProgress.Ixmagina,sourceFolderPath+"13/"),
         };
 
 
@@ -47,7 +49,7 @@ namespace DemonicCity
         /// </summary>
         public List<EnemiesDataBase.EnemiesId> GetEnemies()
         {
-            Chapter chapter = chapters.Find(item => item.storyProgress == Progress.Instance.ThisStoryProgress);
+            Chapter chapter = chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
             return chapter.enemiesIds;
         }
 
@@ -67,7 +69,7 @@ namespace DemonicCity
         /// </summary>
         public string GetTitle()
         {
-            Chapter chapter = chapters.Find(item => item.storyProgress == Progress.Instance.ThisStoryProgress);
+            Chapter chapter = chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
             return chapter.chapterTitle;
         }
         /// <summary>
@@ -84,9 +86,16 @@ namespace DemonicCity
         /// <returns></returns>
         public Chapter GetChapter()
         {
-            return chapters.Find(item => item.storyProgress == Progress.Instance.ThisStoryProgress);
+            return chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
         }
 
 
+
+
+
+
+
+
+        const string sourceFolderPath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/";
     }
 }

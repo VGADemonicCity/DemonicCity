@@ -5,8 +5,9 @@ using UnityEngine.UI;
 
 namespace DemonicCity.StoryScene
 {
-    public class FaceManager : MonoBehaviour
+    public class FaceChanger : MonoBehaviour
     {
+        public CharName charName;
         [SerializeField] FaceIndex facer;
         public Sprite[] faceSprites = new Sprite[6];
         Image myFace;

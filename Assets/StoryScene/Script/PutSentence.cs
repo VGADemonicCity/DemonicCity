@@ -19,7 +19,7 @@ namespace DemonicCity.StoryScene
         /// <summary>/// /// </summary>
         int charCount = 0;
         /// <summary>コルーチンが終了しているか </summary>
-        public bool end=false;
+        public bool end = false;
         /// <summary>全文表示しているか</summary>
         public bool onoff;
         /// <summary>コルーチンを保存する</summary>
@@ -90,7 +90,7 @@ namespace DemonicCity.StoryScene
         {
             sentence = s;
             text.text = "";
-            for (charCount=0;charCount<sentence.Length;charCount++)
+            for (charCount = 0; charCount < sentence.Length; charCount++)
             {
                 text.text += sentence[charCount];
 
@@ -102,7 +102,7 @@ namespace DemonicCity.StoryScene
         /// <summary>テキストをすべて表示する。</summary>
         public void FullTexts()
         {
-            StopCoroutine(feedCoroutine);
+            if (feedCoroutine != null) { StopCoroutine(feedCoroutine); }
             text.text = sentence;
             end = true;
         }
@@ -111,7 +111,7 @@ namespace DemonicCity.StoryScene
         {
             if (end)
             {
-                
+
             }
             else
             {
@@ -119,7 +119,7 @@ namespace DemonicCity.StoryScene
                 StartCoroutine(feedCoroutine);
                 end = false;
             }
-            
+
             return end;
         }
 
