@@ -7,7 +7,7 @@ namespace DemonicCity
     /// <summary>
     /// Game manager.
     /// </summary>
-    public class GameManager : SavableMonoSingleton<GameManager>
+    public class GameManager : MonoSingleton<GameManager>
     {
 
 
