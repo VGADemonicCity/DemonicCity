@@ -12,66 +12,49 @@ namespace DemonicCity
     public class Progress : SavableSingletonBase<Progress>
     {
 
-        //[Flags]
-        //public enum StoryProgress
-        //{
-        //    Prologue = 1 << 0,
-        //    Phoenix = 1 << 1,
-        //    Naphula = 1 << 2,
-        //    ZAKO1 = 1 << 3,
-        //    Aamon = 1 << 4,
-        //    ZAKO2 = 1 << 5,
-        //    Ashmedai = 1 << 6,
-        //    ZAKO3 = 1 << 7,
-        //    Foras = 1 << 8,
-        //    ZAKO4 = 1 << 9,
-        //    Baal = 1 << 10,
-        //    ExMagia = 1 << 12,
-        //    All = (1 << 13) - 1
-        //}
-
         /// <summary>ストーリーの進行度</summary>
+        [Flags]
         public enum StoryProgress
         {
             /// <summary>序章</summary>
             Prologue = 1,
             /// <summary>1章</summary>
-            Phoenix,
+            Phoenix = 2,
             /// <summary>2章</summary>
-            Nafla,
+            Nafla = 4,
             /// <summary>3章</summary>
-            ZAKO1,
+            ZAKO1 = 8,
             /// <summary>4章</summary>
-            Amon,
+            Amon = 16,
             /// <summary>5章</summary>
-            ZAKO2,
+            ZAKO2 = 32,
             /// <summary>6章</summary>
-            Ashmedy,
+            Ashmedy = 64,
             /// <summary>7章</summary>
-            ZAKO3,
+            ZAKO3 = 128,
             /// <summary>8章</summary>
-            Faulus,
+            Faulus = 256,
             /// <summary>9章</summary>
-            ZAKO4,
+            ZAKO4 = 512,
             /// <summary>10章</summary>
-            Barl,
+            Barl = 1024,
             /// <summary>11章</summary>
-            InvigoratedPhoenix,
+            InvigoratedPhoenix = 2048,
             /// <summary>12章</summary>
-            Ixmagina,
-            All,
+            Ixmagina = 4096,
+            All = 8191,
         }
         /// <summary>1クエスト内での進行度</summary>
-        [Flags]
+
         public enum QuestProgress
         {
             /// <summary>戦闘前のストーリー</summary>
-            Prologue = 1,
+            Prologue = 0,
             /// <summary>戦闘</summary>
-            Battle = 2,
+            Battle,
             /// <summary>戦闘後のストーリー</summary>
-            Epilogue = 4,
-            All = 7,
+            Epilogue,
+            All,
         }
 
         /// <summary>ストーリーの進行度</summary>

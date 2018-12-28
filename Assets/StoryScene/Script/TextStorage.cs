@@ -7,8 +7,13 @@ namespace DemonicCity.StoryScene
 {
     public enum FaceIndex
     {
-        Normal, Fun, Angry,Surprise,Suffer,Shout,Last
+        Normal, Fun, Angry, Surprise, Suffer, Shout, Last
     }
+    public enum PositionTag
+    {
+        Ally, Enemy, Center, None,
+    }
+
     [System.Serializable]
     public class TextStorage
     {
@@ -68,7 +73,7 @@ namespace DemonicCity.StoryScene
             }
             else
             {
-                faceIndex = (int)FaceIndex.Last;
+                faceIndex = (int)FaceIndex.Normal;
             }
         }
         public TextStorage(string s)

@@ -9,16 +9,30 @@ namespace DemonicCity.StoryScene
 {
     public enum StageType
     {
-        SceneTrans, Appear, Leave, Coloring, Clear, SwitchBack
+        /// <summary>シーン遷移</summary>
+        SceneTrans,
+        /// <summary>登場</summary>
+        Appear,
+        /// <summary>退場</summary>
+        Leave,
+        /// <summary>画面の色変更</summary>
+        Coloring,
+        /// <summary>画面の色変更解除</summary>
+        Clear,
+        /// <summary>背景変更</summary>
+        SwitchBack,
+        /// <summary>アイテム出現</summary>
+        Item,
     }
+
     public class TextDirector : MonoBehaviour
     {
         enum StageTag
         {
-            Type, content
+            Type, Content
         }
 
-        delegate void Stagings() ;
+        delegate void Stagings();
         string[] contents;
 
         //public void Staging(StageType type, string content)
@@ -58,22 +72,25 @@ namespace DemonicCity.StoryScene
             switch (type)
             {
                 case StageType.SceneTrans:
-                    SceneTrans(contents[(int)StageTag.content]);
+                    SceneTrans(contents[(int)StageTag.Content]);
                     break;
                 case StageType.Appear:
-                    Appear(contents[(int)StageTag.content]);
+                    Appear(contents[(int)StageTag.Content]);
                     break;
                 case StageType.Leave:
-                    Leave(contents[(int)StageTag.content]);
+                    Leave(contents[(int)StageTag.Content]);
                     break;
                 case StageType.Coloring:
-                    Coloring(contents[(int)StageTag.content]);
+                    Coloring(contents[(int)StageTag.Content]);
                     break;
                 case StageType.Clear:
                     Clear();
                     break;
                 case StageType.SwitchBack:
                     SwitchBack();
+                    break;
+                case StageType.Item:
+                    Item(contents[(int)StageTag.Content]);
                     break;
                 default:
                     break;
@@ -106,6 +123,11 @@ namespace DemonicCity.StoryScene
         }
 
         void SwitchBack()
+        {
+
+        }
+
+        void Item(string content)
         {
 
         }
