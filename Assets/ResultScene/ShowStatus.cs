@@ -67,7 +67,7 @@ namespace DemonicCity.ResultScene
 
         /// <summary>レベルアップしたときに表示するテキスト</summary>
         [SerializeField]
-        private GameObject levelUpText; 
+        TextMeshProUGUI levelUpText; 
 
         /// <summary>勝利したぞーー！テキスト</summary>
         [SerializeField]
@@ -104,7 +104,7 @@ namespace DemonicCity.ResultScene
         /// <summary>リザルト画面に遷移したとき最初に行う処理</summary>
         public void  LoadResultScene()
         {
-            levelUpText.SetActive(false);
+            levelUpText.enabled = false;
 
             level = magia.GetStats().m_level;
             hitPoint = magia.GetStats().m_hitPoint;
