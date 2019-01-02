@@ -348,15 +348,6 @@ namespace DemonicCity
         }
 
         /// <summary>
-        /// 作ったゲームオブジェクトをシーン遷移しても壊されない様にする
-        /// </summary>
-        public override void OnInitialize()
-        {
-            base.OnInitialize();
-            DontDestroyOnLoad(Instance);
-        }
-
-        /// <summary>
         /// Gesture detector event.
         /// methodを登録するクラス
         /// </summary>

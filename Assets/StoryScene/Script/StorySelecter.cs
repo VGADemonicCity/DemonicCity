@@ -16,21 +16,15 @@ namespace DemonicCity.StorySelectScene
         void Awake()
         {
             progress = Progress.Instance;
+            chapterManager = ChapterManager.Instance;
         }
         void Start()
         {
             MyStory = progress.MyStoryProgress;
 
-            //for (Progress.StoryProgress i = Progress.StoryProgress.Prologue; i <= MyStory + 1; i++ )
-            //{
-            //    GameObject newSelectButton = Instantiate(SelectButton,parent);
-            //    newSelectButton.GetComponent<SelectButton>().Initialize(i);
-            //}
-            for (int i = (int)MyStory; i >= 1; i--
-                /*int i=1;i<=(int)MyStory;i+=i*/)
+            for (int i = (int)MyStory; i >= 1; i /= 2)
             {
                 GameObject newSelectButton = Instantiate(SelectButton, parent);
-                //newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)i, this);
                 newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)i, chapterManager.GetTitle((Progress.StoryProgress)i), this);
             }
 
@@ -40,6 +34,8 @@ namespace DemonicCity.StorySelectScene
         public void ToStory(Progress.StoryProgress chapter)
         {
             Debug.Log(chapter.ToString());
+            progress.ThisStoryProgress = chapter;
+            progress.MyQuestProgress = Progress.QuestProgress.Prologue;
             SceneChanger.SceneChange(SceneName.Story);
         }
 
