@@ -10,14 +10,12 @@ namespace DemonicCity
     /// </summary>
     public class GameManager : MonoSingleton<GameManager>
     {
-        [SerializeField] private float m_fadeTime = 3f;
+        [SerializeField] private float m_fadeTime = 1f;
 
         SceneFader fader;
         private void Start()
         {
             fader = SceneFader.Instance;
-            fader.FadeOut(SceneFader.SceneTitle.Battle, m_fadeTime);
-
             SceneManager.sceneLoaded += ((scene, mode) =>
             {
                 fader.FadeIn(m_fadeTime);

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -30,8 +29,7 @@ namespace DemonicCity
             // fade用のCanvas生成  ※(gameObjectとSceneFader.cs自体はMonoSingletonのInstanceプロパティ呼び出し時に生成,アタッチしている)
             m_fadeCanvas = gameObject.AddComponent<Canvas>();
             gameObject.AddComponent<GraphicRaycaster>();
-            m_fadeCanvas.renderMode = RenderMode.ScreenSpaceCamera;
-            m_fadeCanvas.worldCamera = Camera.main;
+            m_fadeCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
             // 最前面になるようLayer設定
             m_fadeCanvas.sortingLayerName = "UI";
