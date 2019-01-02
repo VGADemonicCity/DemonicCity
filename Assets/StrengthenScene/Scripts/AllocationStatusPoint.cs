@@ -17,9 +17,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>現在の属性</summary>
         private Magia.Attribute attribute;
 
-        /// <summary>習得済みスキル</summary>
-        private Magia.PassiveSkill passiveSkill;
-
         /// <summary>現在の体力</summary>
         private int hitPoint;
 
@@ -87,10 +84,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>属性テキスト</summary>
         [SerializeField]
         TextMeshProUGUI attributeText;
-
-        /// <summary>スキルテキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI passiveSkillText;
 
         /// <summary>現在の基礎ステータステキスト</summary>
         [SerializeField]
@@ -237,7 +230,6 @@ namespace DemonicCity.StrengthenScene
             ConfirmAndResetButtons.SetActive(false);
 
             attribute = magia.MyAttribute;
-            passiveSkill = magia.MyPassiveSkill;
             hitPoint = magia.GetStats().m_hitPoint;
             attack = magia.GetStats().m_attack;
             defense = magia.GetStats().m_defense;
