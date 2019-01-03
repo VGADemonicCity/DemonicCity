@@ -16,11 +16,11 @@ namespace DemonicCity
         private void Start()
         {
             fader = SceneFader.Instance;
-            fader.FadeOut(SceneFader.SceneTitle.Battle, m_fadeTime);
+            fader.FadeOut(SceneFader.SceneTitle.Battle);
 
             SceneManager.sceneLoaded += ((scene, mode) =>
             {
-                fader.FadeIn(m_fadeTime);
+                fader.FadeIn();
             });
         }
 
