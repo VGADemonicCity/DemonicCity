@@ -16,9 +16,10 @@ namespace DemonicCity
         private void Start()
         {
             fader = SceneFader.Instance;
+
             SceneManager.sceneLoaded += ((scene, mode) =>
             {
-                fader.FadeIn(m_fadeTime);
+                fader.FadeIn();
             });
         }
 

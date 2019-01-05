@@ -17,7 +17,7 @@ namespace DemonicCity
         /// <summary>m_fadeImadeのアルファ値</summary>
         private float m_alpha;
         /// <summary>フェーディング演出に掛ける時間</summary>
-        private float m_fadeTime = 1.0f;
+        private float m_fadeTime = 3f;
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
 
@@ -48,9 +48,13 @@ namespace DemonicCity
         /// <summary>
         /// フェードイン
         /// </summary>
-        public void FadeIn(float fadeTime)
+        public void FadeIn(float fadeTime = 0f)
         {
-            m_fadeTime = fadeTime;
+            if (fadeTime != 0f)
+            {
+                m_fadeTime = fadeTime;
+            }
+
             StartCoroutine(FadingIn());
         }
 
@@ -59,10 +63,14 @@ namespace DemonicCity
         /// </summary>
         /// <param name="sceneTitle">遷移先のシーンタイトル</param>
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
-        public void FadeOut(SceneTitle sceneTitle, float fadeTime)
+        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 0f)
         {
+            if (fadeTime != 0f)
+            {
+                m_fadeTime = fadeTime;
+            }
+
             m_nextSceneTitle = sceneTitle.ToString();
-            m_fadeTime = fadeTime;
             StartCoroutine(FadingOut());
         }
 
@@ -73,13 +81,13 @@ namespace DemonicCity
         /// </summary>
         IEnumerator FadingIn()
         {
-            if(m_fadeImage == null)
+            if (m_fadeImage == null)
             {
                 Init();
             }
             m_fadeImage.color = Color.black;
             m_alpha = 1f;
-            while (m_alpha  <= 1f)
+            while (m_alpha <= 1f)
             {
                 m_alpha -= Time.deltaTime / m_fadeTime;
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
