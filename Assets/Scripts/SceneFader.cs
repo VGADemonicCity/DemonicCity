@@ -17,7 +17,7 @@ namespace DemonicCity
         /// <summary>m_fadeImadeのアルファ値</summary>
         private float m_alpha;
         /// <summary>フェーディング演出に掛ける時間</summary>
-        private float m_fadeTime = 3f;
+        private float m_fadeTime = 1f;
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
 
