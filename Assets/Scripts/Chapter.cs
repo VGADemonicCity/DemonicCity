@@ -18,31 +18,27 @@ namespace DemonicCity
         public string chapterTitle;
         /// <summary>その章に戦闘があるか</summary>
         public bool isBattle;
+        /// <summary>その章のソースフォルダのパス</summary>
+        public string sourceFolderPath;
 
 
-        /// <summary>ストーリーの進行度と敵のIDを3Wave分登録する</summary>
-        public Chapter(Progress.StoryProgress progress, EnemiesDataBase.EnemiesId enemy1, EnemiesDataBase.EnemiesId enemy2, EnemiesDataBase.EnemiesId enemy3)
-        {
-            storyProgress = progress;
-            enemiesIds.Add(enemy1);
-            enemiesIds.Add(enemy2);
-            enemiesIds.Add(enemy3);
-        }
         /// <summary>ストーリーの進行度とタイトル、敵のIDを3Wave分登録する</summary>
-        public Chapter(string title, Progress.StoryProgress progress, EnemiesDataBase.EnemiesId enemy1, EnemiesDataBase.EnemiesId enemy2, EnemiesDataBase.EnemiesId enemy3)
+        public Chapter(string title, Progress.StoryProgress progress, EnemiesDataBase.EnemiesId enemy1, EnemiesDataBase.EnemiesId enemy2, EnemiesDataBase.EnemiesId enemy3, string folderPath)
         {
             chapterTitle = title;
             storyProgress = progress;
+            sourceFolderPath = folderPath;
             enemiesIds.Add(enemy1);
             enemiesIds.Add(enemy2);
             enemiesIds.Add(enemy3);
             isBattle = true;
         }
         /// <summary>ストーリーの進行度とタイトルを登録する</summary>
-        public Chapter(string title, Progress.StoryProgress progress)
+        public Chapter(string title, Progress.StoryProgress progress,string folderPath)
         {
             chapterTitle = title;
             storyProgress = progress;
+            sourceFolderPath = folderPath;
             isBattle = false;
         }
     }

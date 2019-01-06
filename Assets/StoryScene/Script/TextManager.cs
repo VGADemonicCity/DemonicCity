@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.IO;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,7 +11,7 @@ namespace DemonicCity.StoryScene
 {
     public enum CharName
     {
-        Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, Ixmagina, Maou, Unknown, None, System
+        Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, Maou, Ixmagina, Unknown, None, System
     }
     public class TextManager : MonoBehaviour
     {
@@ -30,7 +31,11 @@ namespace DemonicCity.StoryScene
 
 
         [SerializeField] TextDirector director;
-        [SerializeField] FaceManager[] faceManagers = new FaceManager[2];
+        [SerializeField] Transform parentTransform;
+        [SerializeField] List<GameObject> characterObjects = new List<GameObject>();
+        List<FaceChanger> faceChangers = new List<FaceChanger>();
+        List<int> characters = new List<int>();
+
 
         bool isStaging = false;
         string buttonTag = "Button";
@@ -111,7 +116,7 @@ namespace DemonicCity.StoryScene
             else
             {
                 Debug.Log(texts[textIndex].faceIndex);
-                faceManagers[0].ChangeFace(texts[textIndex].faceIndex);
+                faceChangers[0].ChangeFace(texts[textIndex].faceIndex);
             }
 
             if (texts[textIndex].isUnknown)
@@ -143,6 +148,17 @@ namespace DemonicCity.StoryScene
 
         }
 
+        void SetCharacter(List<int> names)
+        {
+            foreach (var item in names)
+            {
+                GameObject charObj = Instantiate(characterObjects[item], parentTransform);
+                director.characters.Add(charObj);
+                faceChangers.Add(charObj.GetComponent<FaceChanger>());
+            }
+        }
+
+
         void Update()
         {
         }
@@ -166,18 +182,19 @@ namespace DemonicCity.StoryScene
 
                 //Debug.Log(s);
                 var sss = JsonUtility.FromJson<TextStorage>(s);
-                //Debug.Log(sss);
+                //Debug.Log(sss);   
                 if (sss.face == null || sss.face == "")
                 {
                     sss.face = FaceIndex.Last.ToString();
                 }
                 var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
+                characters.Add((int)tmpStorage.cName);
                 //Debug.Log(tmpStorage);
                 texts.Add(tmpStorage);
 
-
             }
-
+            characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
+            SetCharacter(characters);
         }
 
     }
