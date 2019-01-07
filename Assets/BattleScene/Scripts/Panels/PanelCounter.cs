@@ -47,9 +47,9 @@ namespace DemonicCity.BattleScene
         [SerializeField] int m_destructionCount;
         /// <summary>ターン毎のトリプルパネルのカウント変数</summary>
         [SerializeField] int m_tripleCount;
-        /// <summary>パネルの総カウント数</summary>
+        /// <summary>そのバトルにおけるパネルの総カウント数</summary>
         [SerializeField] int m_totalPanelCount;
-        /// <summary>総街破壊数</summary>
+        /// <summary>そのバトルにおける総街破壊数</summary>
         [SerializeField] int m_totalDestructionCount;
         /// <summary>固有スキルゲージ</summary>
         [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
@@ -138,8 +138,6 @@ namespace DemonicCity.BattleScene
             m_totalDestructionCount += destructionCount; // 総計に加算
             m_destructionCount += destructionCount;
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
-
-
         }
     }
 }

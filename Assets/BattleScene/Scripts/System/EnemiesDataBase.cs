@@ -62,7 +62,7 @@ namespace DemonicCity
         /// Enemy character.
         /// </summary>
         [Serializable]
-        public class Enemy
+        public class Enemy : MonoBehaviour
         {
             /// <summary>m_statsのプロパティ</summary>
             public Statistics Stats
@@ -79,11 +79,12 @@ namespace DemonicCity
             }
 
             /// <summary>敵キャラのID</summary>
-            [SerializeField] public string m_id;
+            [SerializeField] private string m_id;
             /// <summary>ステータス</summary>
             [SerializeField] Statistics m_stats = new Statistics();
             /// <summary>経験値</summary>
             private int Experience { get; set; }
+            private Animator m_animator;
 
             /// <summary>
             /// Initializes a new instance of the <see cref="T:DemonicCity.EnemiesDataBase.Enemy"/> class.

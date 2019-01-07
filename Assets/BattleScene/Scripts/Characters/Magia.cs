@@ -49,6 +49,13 @@ namespace DemonicCity
             set { m_totalExperience = value; }
         }
 
+        /// <summary>m_totalDestructionCountのプロパティ</summary>
+        public int TotalDestructionCount
+        {
+            get { return m_totalDestructionCount; }
+            set { m_totalDestructionCount = value; }
+        }
+
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
 
@@ -90,6 +97,8 @@ namespace DemonicCity
 
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
+        /// <summary>総街破壊数</summary>
+        [SerializeField] int m_totalDestructionCount;
         /// <summary>振り分けポイント</summary>
         [SerializeField] int m_allocationPoint;
         /// <summary>属性フラグ</summary>
