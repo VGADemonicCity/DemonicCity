@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4719488656977434}
-  - component: {fileID: 114667898036168570}
   - component: {fileID: 114841022406977756}
   m_Layer: 0
   m_Name: StrengthenSceneManger
@@ -41,24 +40,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114667898036168570
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1145090376717732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6383f0c28fd6ba0438decebc7173dcad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popUpWindows:
-  - {fileID: 0}
-  - {fileID: 0}
-  content: {fileID: 0}
-  skillDetailPrefab: {fileID: 1524544117648916, guid: 2bd8271a36e87f143885477a520403e9,
-    type: 2}
-  scrollRect: {fileID: 0}
 --- !u!114 &114841022406977756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,8 +51,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8ebe379c2fef44cba7445a90f74860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConfirmAndResetButtons: {fileID: 0}
-  attributeText: {fileID: 0}
+  ConfirmAndResetButtons: {fileID: 1674951563613998, guid: c32613f7e2ee5214c91d2978afb02b7e,
+    type: 2}
+  currentAttributeText: {fileID: 0}
   currentBasicStatusTexts:
   - {fileID: 0}
   - {fileID: 0}
@@ -95,3 +77,22 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   statusPointText: {fileID: 0}
+  attributeImage: {fileID: 0}
+  attributeSprite:
+  - {fileID: 21300000, guid: 32264cf99eda09a48894956470081716, type: 3}
+  - {fileID: 21300000, guid: 713147786932a70459eac0903580018f, type: 3}
+  - {fileID: 21300000, guid: 25b4b24f5d4dd69459eab4a9391467aa, type: 3}
+  - {fileID: 21300000, guid: f9a12500d8351984ca3c8cd5d61165e6, type: 3}
+  - {fileID: 21300000, guid: c76269d1fa4e5ff45865a8277145b68c, type: 3}
+  - {fileID: 21300000, guid: b33453e668c7bc541b71b2782f8fe0a0, type: 3}
+  confirm_WarningMessage: {fileID: 1175646310583934, guid: 7735d38aea0c7524088f8537552f1ef9,
+    type: 2}
+  reset_WarningMessage: {fileID: 1492548459945150, guid: c9bb00ad76218e241836656874fc882b,
+    type: 2}
+  parent: {fileID: 0}
+  selectAttributeWindow: {fileID: 1615712432687040, guid: 3a30d7c817f6d9b4889e9dc0cd1a5985,
+    type: 2}
+  skillDetailWindow: {fileID: 1643743676037524, guid: 835454e91309bf74fab5dc65235e622d,
+    type: 2}
+  skillDetailText: {fileID: 1524544117648916, guid: 2bd8271a36e87f143885477a520403e9,
+    type: 2}

@@ -2,12 +2,13 @@
 using TMPro;
 using System;
 using DemonicCity.BattleScene;
+using UnityEngine.UI;
+using System.Collections.Generic;
 
 namespace DemonicCity.StrengthenScene
 {
     public class AllocationStatusPoint : MonoBehaviour
     {
-
         /// <summary>Magiaクラスのインスタンス</summary>
         Magia magia;
 
@@ -83,7 +84,7 @@ namespace DemonicCity.StrengthenScene
 
         /// <summary>属性テキスト</summary>
         [SerializeField]
-        TextMeshProUGUI attributeText;
+        private Text currentAttributeText;
 
         /// <summary>現在の基礎ステータステキスト</summary>
         [SerializeField]
@@ -105,15 +106,67 @@ namespace DemonicCity.StrengthenScene
         [SerializeField]
         TextMeshProUGUI statusPointText;
 
+        /// <summary>現在の属性</summary>
+        [SerializeField]
+        private Image attributeImage;
+
+        /// <summary>6種類の属性スプライト</summary>
+        [SerializeField]
+        private Sprite[] attributeSprite;
+
+        /// <summary>ステータス確定前のメッセージ</summary>
+        [SerializeField]
+        private GameObject confirm_WarningMessage;
+
+        /// <summary>ステータス初期化前のメッセージ</summary>
+        [SerializeField]
+        private GameObject reset_WarningMessage;
+
+        /// <summary>ポップアップウィンドウの生成先</summary>
+        [SerializeField]
+        private Transform parent;
+
+        /// <summary>ポップアップウィンドウを一時的に保持する変数</summary>
+        private GameObject popUpWindow = null;
+
+        /// <summary>確定ボタンとリセットボタンを一時的に保持する変数</summary>
+        private GameObject confirmResetButtons = null;
+
+        [SerializeField]
+        private GameObject selectAttributeWindow;
+
+        [SerializeField]
+        private GameObject skillDetailWindow;
+
+        /// <summary>習得済みスキル</summary>
+        private Magia.PassiveSkill passiveSkill;
+
+        /// <summary>習得済みスキルの表示先</summary>
+        private GameObject content;
+
+        [SerializeField]
+        private GameObject skillDetailText;
+
+        /// <summary>スキルの説明テキスト</summary>
+        private List<string> skillDetailList = new List<string>();
+
+        private GameObject skillDetail;
+        
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+            passiveSkill = magia.MyPassiveSkill;
+
+            //      scrollRect.verticalNormalizedPosition = 1f;
+            skillDetailList.Add("街破壊数1以上で発動\n街破壊数×攻撃力の1%\nを加算して攻撃");
+            skillDetailList.Add("街破壊数７以上で発動\n街破壊数×0.5%\n攻撃力防御力を上昇");
+
         }
 
         private void Start()
         {
-            LoadCurrentStatus();
+            ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -126,76 +179,169 @@ namespace DemonicCity.StrengthenScene
                     {
                         switch (button.name)
                         {
-                            case ("AddCharmButton"):
+                            case "SelectAttributeButton":
+                                if (popUpWindow == null)
+                                {
+                                    popUpWindow = Instantiate(selectAttributeWindow, parent);
+                                }
+                                break;
+                            case "ShowSkillButton":
+                                if (popUpWindow == null)
+                                {
+                                    popUpWindow = Instantiate(skillDetailWindow, parent);
+                                    //        content = GameObject.Find("Content");
+                                    content = GameObject.FindGameObjectWithTag("Content");
+                               //     scrollRect = popUpWindow.GetComponentInChildren<ScrollRect>();
+                                }
+                                break;
+                            case "BackButton":
+                                if (popUpWindow != null)
+                                {
+                                    Destroy(popUpWindow);
+                                }
+                                break;
+                            case "DevilsFist":
+                                PopUpSkillDetailWindow(0);
+                                break;
+                            case ("HighConcentrationMagicalAbsorption"):
+                                PopUpSkillDetailWindow(1);
+                                break;
+
+                            case "AddCharmButton":
                                 ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], true);
                                 break;
-                            case ("ReductionCharmButton"):
+                            case "ReductionCharmButton":
                                 ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], false);
                                 break;
-                            case ("AddDignityButton"):
+                            case "AddDignityButton":
                                 ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], true);
                                 break;
-                            case ("ReductionDignityButton"):
+                            case "ReductionDignityButton":
                                 ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], false);
                                 break;
-                            case ("AddMuscularStrengthButton"):
+                            case "AddMuscularStrengthButton":
                                 ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], true);
                                 break;
-                            case ("ReductionMuscularStrengthButton"):
+                            case "ReductionMuscularStrengthButton":
                                 ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], false);
                                 break;
-                            case ("AddSenseButton"):
+                            case "AddSenseButton":
                                 ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], true);
                                 break;
-                            case ("ReductionSenseButton"):
+                            case "ReductionSenseButton":
                                 ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], false);
                                 break;
-                            case ("AddDurabilityButton"):
+                            case "AddDurabilityButton":
                                 ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], true);
                                 break;
-                            case ("ReductionDurabilityButton"):
+                            case "ReductionDurabilityButton":
                                 ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], false);
                                 break;
-                            case ("AddKnowledgeButton"):
+                            case "AddKnowledgeButton":
                                 ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], true);
                                 break;
-                            case ("ReductionKnowledgeButton"):
+                            case "ReductionKnowledgeButton":
                                 ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], false);
                                 break;
-                            case ("ConfirmButton"):
-                                ConfirmStatus();
-                                break;
-                            case ("ResetButton"):
-                                LoadCurrentStatus();
-                                break;
-                            case ("Youji"):
+                            case "Mado":
                                 attribute = Magia.Attribute.Standard;
-                                attributeText.text = "Youji".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
                                 break;
-                            case ("Kenki"):
+                            case "Kenki":
                                 attribute = Magia.Attribute.FemaleWarrior;
-                                attributeText.text = "Kenki".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
                                 break;
-                            case ("Jinou"):
+                            case "Jinou":
                                 attribute = Magia.Attribute.MaleWarrior;
-                                attributeText.text = "Jinou".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
                                 break;
-                            case ("Jotei"):
+                            case "Jotei":
                                 attribute = Magia.Attribute.FemaleWitch;
-                                attributeText.text = "Jotei".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
                                 break;
-                            case ("Kokuou"):
+                            case "Kokuo":
                                 attribute = Magia.Attribute.MaleWizard;
-                                attributeText.text = "Kokuou".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
                                 break;
-                            case ("Majin"):
+                            case "Majin":
                                 attribute = Magia.Attribute.FemaleTrancendental;
-                                attributeText.text = "Majin".ToString();
+                                UpdateText();
+                                if (confirmResetButtons == null)
+                                {
+                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                }
+                                break;
+                            case "ConfirmButton":
+                                if (popUpWindow == null)
+                                {
+                                    popUpWindow = Instantiate(confirm_WarningMessage, parent);
+                                }
+                                break;
+                            case "YesConfirm":
+                                ConfirmStatus();
+                                if (popUpWindow != null)
+                                {
+                                    Destroy(popUpWindow);
+                                }
+                                break;
+                            case "NoConfirm":
+                                if (popUpWindow != null)
+                                {
+                                    Destroy(popUpWindow);
+                                }
+                                break;
+                            case "ResetButton":
+                                if (popUpWindow == null)
+                                {
+                                    popUpWindow = Instantiate(reset_WarningMessage, parent);
+                                }
+                                break;
+                            case "YesReset":
+                                ResetStatus();
+                                if (popUpWindow != null)
+                                {
+                                    Destroy(popUpWindow);
+                                }
+                                break;
+                            case "NoReset":
+                                if (popUpWindow != null)
+                                {
+                                    Destroy(popUpWindow);
+                                }
                                 break;
                         }
                     }
                 }
             });
+        }
+
+        /// <summary>スキルの説明を表示</summary>
+        /// <param name="index">スキル名に対応した説明を指定</param>
+        public void PopUpSkillDetailWindow(int index)
+        {
+            content.GetComponent<ContentSizeFitter>().SetLayoutVertical();
+            skillDetail = Instantiate(skillDetailText, content.transform);
+            skillDetail.GetComponentInChildren<Text>().text = skillDetailList[index];
         }
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
@@ -225,10 +371,8 @@ namespace DemonicCity.StrengthenScene
         }
 
         /// <summary>ステータスの変動値を初期化</summary>
-        public void LoadCurrentStatus()
+        public void ResetStatus()
         {
-            ConfirmAndResetButtons.SetActive(false);
-
             attribute = magia.MyAttribute;
             hitPoint = magia.GetStats().m_hitPoint;
             attack = magia.GetStats().m_attack;
@@ -253,6 +397,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>変更したステータスを確定する</summary>
         public void ConfirmStatus()
         {
+
             hitPoint = updatedHitPoint;
             attack = updatedAttack;
             defense = updatedDefense;
@@ -281,22 +426,28 @@ namespace DemonicCity.StrengthenScene
             switch (attribute)
             {
                 case Magia.Attribute.Standard:
-                    attributeText.text = "Yojo".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[0];
+                    currentAttributeText.GetComponent<Text>().text = "魔童";
                     break;
                 case Magia.Attribute.MaleWarrior:
-                    attributeText.text = "Touou".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[1];
+                    currentAttributeText.GetComponent<Text>().text = "刀皇";
                     break;
                 case Magia.Attribute.FemaleWarrior:
-                    attributeText.text = "Kenki".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[2];
+                    currentAttributeText.GetComponent<Text>().text = "剣姫";
                     break;
                 case Magia.Attribute.MaleWizard:
-                    attributeText.text = "Kokuou".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[3];
+                    currentAttributeText.GetComponent<Text>().text = "黒王";
                     break;
                 case Magia.Attribute.FemaleWitch:
-                    attributeText.text = "Jotei".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[4];
+                    currentAttributeText.GetComponent<Text>().text = "女帝";
                     break;
                 case Magia.Attribute.FemaleTrancendental:
-                    attributeText.text = "Majin".ToString();
+                    attributeImage.GetComponent<Image>().sprite = attributeSprite[5];
+                    currentAttributeText.GetComponent<Text>().text = "魔神";
                     break;
             }
 
@@ -336,9 +487,9 @@ namespace DemonicCity.StrengthenScene
                 uniqueStatus = 1;
 
                 totalAddPoint += 1;
-                if (totalAddPoint > 0)
+                if (totalAddPoint > 0 && confirmResetButtons == null)
                 {
-                    ConfirmAndResetButtons.SetActive(true);
+                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
                 }
             }
             else
@@ -360,10 +511,10 @@ namespace DemonicCity.StrengthenScene
                 statusPointText.text = statusPoint.ToString();
 
                 totalAddPoint -= 1;
-                if (totalAddPoint <= 0)
+                if (totalAddPoint <= 0 && confirmResetButtons != null)
                 {
                     totalAddPoint = 0;
-                    ConfirmAndResetButtons.SetActive(false);
+                    Destroy(confirmResetButtons);
                 }
             }
             else
