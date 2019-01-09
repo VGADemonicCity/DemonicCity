@@ -95,8 +95,11 @@ namespace DemonicCity
         {
             if (File.Exists(GetSaveFilePath())) // もしセーブファイルが存在するなら
             {
+                Debug.Log("存在した");
                 Load();
             }
+            Debug.Log("存在しなかった");
+            Save();
         }
 
         /// <summary>
