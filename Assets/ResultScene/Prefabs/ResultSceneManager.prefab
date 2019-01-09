@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   expGauge: {fileID: 0}
-  resultText: {fileID: 0}
   levelText: {fileID: 0}
   currentBasicStatusTexts:
   - {fileID: 0}
@@ -63,7 +62,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   getStatusPointText: {fileID: 0}
-  levelUpText: {fileID: 0}
-  winText: {fileID: 0}
+  levelUpImage: {fileID: 1030274846050666, guid: 55fd74fa132428a438be600521349fc2,
+    type: 2}
   destructionCountText: {fileID: 0}
   needExpText: {fileID: 0}
+  parent: {fileID: 0}

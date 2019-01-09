@@ -51,71 +51,59 @@ namespace DemonicCity.ResultScene
         private int destructionCount;
 
         /// <summary>次のレベルアップに必要な総経験値</summary>
-        private int requiredExp;
+        private float requiredExp;
 
-        /// <summary>あといくつでレベルアップするか</summary>
-        private int needExp;
+        /// <summary>レベルアップに必要な残り経験値</summary>
+        private float needExp;
 
         /// <summary>現在の経験値(累計街破壊数)</summary>
-        private int currentExp;
+        private float currentExp;
 
-        /// <summary>ゲージに表示するための経験値</summary>
-        private int showExp;
+        /// <summary>変動後の経験値</summary>
+        private float updatedExp;
+
+        /// <summary>ゲージが変動する際の増加量</summary>
+        private float addAmount = 0.02f;
 
         /// <summary>経験値ゲージ</summary>
-        [SerializeField]
-        private GameObject expGauge;
-
-        /// <summary>勝敗テキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI resultText;
+        [SerializeField] private Image expGauge;
 
         /// <summary>現在のレベルテキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI levelText;
+        [SerializeField] TextMeshProUGUI levelText;
 
         /// <summary>現在の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
 
         /// <summary>変動後の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
 
         /// <summary>獲得した割り振りポイントテキスト(魔力値)</summary>
-        [SerializeField]
-        TextMeshProUGUI getStatusPointText;
+        [SerializeField] TextMeshProUGUI getStatusPointText;
 
-        /// <summary>レベルアップしたときに表示するテキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI levelUpText;
-
-        /// <summary>勝利したぞーー！テキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI winText;
+        /// <summary>レベルアップしたときに表示する</summary>
+        [SerializeField] private GameObject levelUpImage;
 
         /// <summary>バトルでの街破壊数テキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI destructionCountText;
+        [SerializeField] TextMeshProUGUI destructionCountText;
 
         /// <summary>次のレベルアップに必要な街破壊数テキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI needExpText;
-        
-        /// <summary>累計街破壊数</summary>
-        private int totalDestruction;
+        [SerializeField] TextMeshProUGUI needExpText;
+
+        [SerializeField] private Transform parent;
+
+        private GameObject popUpObject;
 
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
             panelCounter = new PanelCounter();
+
         }
 
         private void Start()
         {
-            levelUpText.enabled = false;
-            ShowResult();
+            LoadBeforeStatus();
             UpdateText();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -125,70 +113,85 @@ namespace DemonicCity.ResultScene
                     //アニメーションをスキップする処理
                     //タップでバトル後のステータスを表示
                     //次の章へ進むかホーム画面へ戻るかのウィンドウをポップアップ
+                    StartCoroutine("AnimationExpGauge");
                 }
             });
         }
 
-        /// <summary>結果を表示</summary>
-        public void ShowResult()
+        /// <summary>経験値ゲージのアニメーション演出</summary>
+        /// <returns></returns>
+        private IEnumerator AnimationExpGauge()
         {
-            currentlevel = magia.GetStats().m_level;
-            currentHitPoint = magia.GetStats().m_hitPoint;
-            currentAttack = magia.GetStats().m_attack;
-            currentDefense = magia.GetStats().m_defense;
+            while (currentExp < updatedExp)
+            {
+                currentExp += addAmount;
+                expGauge.fillAmount = currentExp / requiredExp;
+
+                if (expGauge.fillAmount >= 1)
+                {
+                    popUpObject = Instantiate(levelUpImage, parent);
+                    Destroy(popUpObject, 2);
+
+                    updatedExp -= requiredExp;
+                    currentExp -= requiredExp;
+                    requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
+                    currentlevel += 1;
+                    needExp = requiredExp - currentExp;
+                    if (needExp < 0)
+                    {
+                        needExp = -needExp;
+                    }
+                    magia.LevelUp();
+                    var getStats = magia.GetStats();
+                    currentlevel = getStats.m_level;
+                    updatedHitPoint = getStats.m_hitPoint;
+                    updatedAttack = getStats.m_attack;
+                    updatedDefense = getStats.m_defense;
+
+                    for (int a = 0; a < updatedBasicStatusTexts.Length; a++)
+                    {
+                        updatedBasicStatusTexts[a].enabled = true;
+                    }
+                    addAmount *= 1.2f;
+                    UpdateText();
+                    expGauge.fillAmount = 0;
+
+                }
+                yield return new WaitForSeconds(0.01f);
+            }
+        }
+
+
+        /// <summary>バトル前のステータスを表示</summary>
+        public void LoadBeforeStatus()
+        {
+            var getStats = magia.GetStats();
+            currentlevel = getStats.m_level;
+            currentHitPoint = getStats.m_hitPoint;
+            currentAttack = getStats.m_attack;
+            currentDefense = getStats.m_defense;
 
             for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
             {
                 updatedBasicStatusTexts[i].enabled = false;
             }
 
-            //destructionCount = panelCounter.TotalDestructionCount;
-            currentExp = 8;
             //currentExp = magia.TotalExperience;
-            destructionCount = 400;
-            totalDestruction = 125 + destructionCount;
+            //destructionCount = panelCounter.TotalDestructionCount;
+            currentExp = 4;
+            destructionCount = 50;
+
+            needExp = requiredExp - currentExp;
+            if (needExp < 0)
+            {
+                needExp = -needExp;
+            }
+            updatedExp = currentExp + destructionCount;
             requiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
-            showExp = currentExp - requiredExp;
-            if(showExp < 0)
-            {
-                showExp = -showExp;
-            }
-            
 
-            expGauge.GetComponent<Image>().fillAmount = (float)showExp / requiredExp;
-            Debug.Log(showExp);
+            expGauge.fillAmount = currentExp / requiredExp;
 
-            if (requiredExp <= destructionCount)//レベルアップした場合
-            {
-                levelUpText.enabled = true;
-                int i = 1;
-
-                while (true)
-                {
-                    magia.LevelUp();
-                    requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + i);
-                    i += 1;
-                    if (requiredExp >= destructionCount)
-                    {
-                        needExp = requiredExp - (-1 * needExp);
-                        break;
-                    }
-                }
-
-
-                currentlevel = magia.GetStats().m_level;
-                updatedHitPoint = magia.GetStats().m_hitPoint;
-                updatedAttack = magia.GetStats().m_attack;
-                updatedDefense = magia.GetStats().m_defense;
-
-                for (int a = 0; a < updatedBasicStatusTexts.Length; a++)
-                {
-                    updatedBasicStatusTexts[a].enabled = true;
-                }
-                UpdateText();
-                expGauge.GetComponent<Image>().fillAmount = (float)currentExp / requiredExp;
-            }
-
+            getStatusPoint = magia.AllocationPoint;
         }
 
         /// <summary>テキスト更新</summary>
@@ -204,9 +207,9 @@ namespace DemonicCity.ResultScene
             updatedBasicStatusTexts[2].text = updatedDefense.ToString();
 
             destructionCountText.text = destructionCount.ToString();
+            needExp = Mathf.CeilToInt(needExp);
             needExpText.text = needExp.ToString();
             getStatusPointText.text = getStatusPoint.ToString();
         }
-
     }
 }
