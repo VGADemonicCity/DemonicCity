@@ -18,8 +18,8 @@ namespace DemonicCity
         public List<Chapter> chapters = new List<Chapter>()
         {
             new Chapter("プロローグ",Progress.StoryProgress.Prologue,sourceFolderPath+"1/"),
-            new Chapter("はじまりと出逢い",Progress.StoryProgress.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix, EnemiesDataBase.EnemiesId.Phoenix,sourceFolderPath+"2/"),
-            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla, EnemiesDataBase.EnemiesId.Nafla,sourceFolderPath+"3/"),
+            new Chapter("はじまりと出逢い",Progress.StoryProgress.Phoenix, EnemiesFactory.EnemiesId.Phoenix, EnemiesFactory.EnemiesId.Phoenix, EnemiesFactory.EnemiesId.Phoenix,sourceFolderPath+"2/"),
+            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesFactory.EnemiesId.Nafla, EnemiesFactory.EnemiesId.Nafla, EnemiesFactory.EnemiesId.Nafla,sourceFolderPath+"3/"),
             new Chapter("迫る鎮圧部隊",Progress.StoryProgress.ZAKO1,sourceFolderPath+"4/"),
             new Chapter("消えぬ炎",Progress.StoryProgress.Amon,sourceFolderPath+"5/"),
             new Chapter("怒り狂う軍隊",Progress.StoryProgress.ZAKO2,sourceFolderPath+"6/"),
@@ -39,7 +39,7 @@ namespace DemonicCity
         /// </summary>
         /// <param name="progress">敵のIDを知りたいストーリーの進行度</param>
         /// <returns>敵のIDのList</returns>
-        public List<EnemiesDataBase.EnemiesId> GetEnemies(Progress.StoryProgress progress)
+        public List<EnemiesFactory.EnemiesId> GetEnemies(Progress.StoryProgress progress)
         {
             Chapter chapter = chapters.Find(item => item.storyProgress == progress);
             return chapter.enemiesIds;
@@ -47,7 +47,7 @@ namespace DemonicCity
         /// <summary>
         /// 現在進行している章に対応した敵のIDを取得する
         /// </summary>
-        public List<EnemiesDataBase.EnemiesId> GetEnemies()
+        public List<EnemiesFactory.EnemiesId> GetEnemies()
         {
             Chapter chapter = chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
             return chapter.enemiesIds;

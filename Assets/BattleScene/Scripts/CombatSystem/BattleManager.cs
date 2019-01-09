@@ -15,13 +15,19 @@ namespace DemonicCity.BattleScene
     public class BattleManager : MonoSingleton<BattleManager>
     {
         /// <summary>敵のID</summary>
-        public EnemiesDataBase.EnemiesId EnemyId { get; set; }
+        public EnemiesFactory.EnemiesId EnemyId { get; set; }
         /// <summary>ステートマシン</summary>
         public StateMachine m_stateMachine { get; set; }
         /// <summary>敵キャラのデータベース</summary>
-        public EnemiesDataBase m_enemiesData { get; set; }
+        public EnemiesFactory m_enemiesData { get; set; }
         /// <summary>バトルシーンで使用する敵オブジェクト</summary>
-        [SerializeField] public EnemiesDataBase.Enemy m_enemy;
+        [SerializeField] public List<GameObject> m_enemyObjects;
+        /// <summary>バトルシーンで使用する敵オブジェクト</summary>
+        [SerializeField] public GameObject m_enemyObject;
+        /// <summary>そのバトルに出てくる敵のリスト</summary>
+        [SerializeField] public List<Enemy> m_enemies;
+        /// <summary>敵オブジェクトのEnemyクラス</summary>
+        [SerializeField] public Enemy m_currentEnemy;
         /// <summary>バトル用のマギアのステータス</summary>
         [SerializeField] public Statistics m_magiaStats;
 
@@ -39,11 +45,13 @@ namespace DemonicCity.BattleScene
         void Awake()
         {
 
-            EnemyId = EnemiesDataBase.EnemiesId.Nafla; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
+            EnemyId = EnemiesFactory.EnemiesId.Nafla; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
             m_stateMachine = StateMachine.Instance; // StateMachineの参照取得
-            m_enemiesData = EnemiesDataBase.Instance; // EnemiesDataBaseの参照取得
-            m_enemy = m_enemiesData.GetEnemyData(EnemyId); // ステージに登場する敵をデータベースから取得し代入
+            m_enemiesData = EnemiesFactory.Instance; // EnemiesDataBaseの参照取得
+
+
         }
+
 
         /// <summary>
         /// State machine event.
@@ -80,6 +88,8 @@ namespace DemonicCity.BattleScene
                 Win,
                 /// <summary>敗北時</summary>
                 Lose,
+                /// <summary>次のWaveに遷移する時</summary>
+                NextWave,
             }
 
             /// <summary>

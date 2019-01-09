@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 
 namespace DemonicCity
 {
@@ -11,6 +12,7 @@ namespace DemonicCity
     /// </summary>
     [Serializable]
     public class Magia : SavableSingletonBase<Magia>
+    public class Magia : SavableMonoSingleton<Magia>
     {
 
         /// <summary>パッシブスキルフラグのプロパティ</summary>
@@ -110,6 +112,7 @@ namespace DemonicCity
 
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField]
+        [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
         Statistics m_stats = new Statistics()
         {
             m_level = 1,
@@ -123,6 +126,11 @@ namespace DemonicCity
             m_durability = 0,
             m_muscularStrength = 0,
         };
+
+        /// <summary>マギアの画像</summary>
+        SpriteRenderer m_spriteRenderer;
+        /// <summary>アニメーター</summary>
+        Animator m_animator;
         /// <summary>1levelUP毎の固有ステータス用振り分けポイント追加量</summary>
         int m_addStatsPoint = 3;
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
@@ -212,6 +220,7 @@ namespace DemonicCity
         /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
         /// </summary>
         public void Update(Statistics stats = null)
+        public void Sync(Statistics stats = null)
         {
             if (stats != null)
             {
@@ -234,6 +243,23 @@ namespace DemonicCity
         public void InitMaxHP(int maxHP)
         {
             MaxHP = maxHP;
+        }
+
+        private void Awake()
+        {
+            SceneManager.sceneLoaded += ((scene, loadSceneMode) =>
+            { 
+
+            });
+        }
+
+        /// <summary>
+        /// シーン遷移で破壊されないオブジェクトにする
+        /// </summary>
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            DontDestroyOnLoad(Instance);
         }
 
         /// <summary>属性</summary>
