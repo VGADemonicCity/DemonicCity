@@ -35,7 +35,7 @@ namespace DemonicCity.StoryScene
         [SerializeField] List<GameObject> characterObjects = new List<GameObject>();
         List<FaceChanger> faceChangers = new List<FaceChanger>();
         List<int> characters = new List<int>();
-
+        Progress progress;
 
         public bool isStaging = false;
         string buttonTag = "Button";
@@ -48,9 +48,18 @@ namespace DemonicCity.StoryScene
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
+            progress = Progress.Instance;
         }
         void Start()
         {
+            //test用
+            //progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
+            //progress.ThisStoryProgress = Progress.StoryProgress.Nafla;
+            if (progress.ThisQuestProgress!=Progress.QuestProgress.Prologue)
+            {
+                progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
+            }
+            //
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -67,12 +76,12 @@ namespace DemonicCity.StoryScene
             });
 
 
-            SetText();
+            SetText(progress.ThisQuestProgress.ToString()+".json");
             DivideTexts();
             flag = putSentence.A(texts[textIndex].sentence);
         }
 
-        void TextsDraw()
+        public void TextsDraw()
         {
             if (putSentence.end)
             {
@@ -108,10 +117,11 @@ namespace DemonicCity.StoryScene
             {
                 return false;
             }
-            else
+            else if (texts[textIndex].cName != CharName.None)
             {
                 Debug.Log(texts[textIndex].faceIndex);
-                faceChangers[0].ChangeFace(texts[textIndex].faceIndex);
+                faceChangers.Find(x => x.charName == texts[textIndex].cName).ChangeFace(texts[textIndex].faceIndex);
+                //faceChangers[0].ChangeFace(texts[textIndex].faceIndex);
             }
 
             if (texts[textIndex].isUnknown)
@@ -128,7 +138,6 @@ namespace DemonicCity.StoryScene
             }
             return true;
         }
-
         void Staging(TextStorage storage)
         {
             SceneName outName;
@@ -192,7 +201,42 @@ namespace DemonicCity.StoryScene
             characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
             SetCharacter(characters);
         }
+        string folderPath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/";
+        public void SetText(string fileName)
+        {
+            folderPath += progress.ThisStoryProgress.ToString() + "/";
+            filePath = folderPath + fileName;
+            Debug.Log(filePath);
+            if (null == File.ReadAllText(filePath))
+            {
+                Debug.LogError("error");
+                return;
+            }
+            string textsJson = File.ReadAllText(filePath);
+            Debug.Log(textsJson);
+            string[] spritKey = { "><" };
 
+            string[] tmpTexts = textsJson.Split(spritKey, StringSplitOptions.None);
+            //Debug.Log(tmpTexts);
+            foreach (string s in tmpTexts)
+            {
+
+                //Debug.Log(s);
+                var sss = JsonUtility.FromJson<TextStorage>(s);
+                //Debug.Log(sss);   
+                if (sss.face == null || sss.face == "")
+                {
+                    sss.face = FaceIndex.Last.ToString();
+                }
+                var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
+                characters.Add((int)tmpStorage.cName);
+                //Debug.Log(tmpStorage);
+                texts.Add(tmpStorage);
+
+            }
+            characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
+            SetCharacter(characters);
+        }
     }
 
 

@@ -40,6 +40,8 @@ namespace DemonicCity.StoryScene
         public List<GameObject> characters = new List<GameObject>();
         [SerializeField] TextManager textManager;
         [SerializeField] GameObject blackOut;
+        SceneFader fader;
+        float moveTime = 0.5f;
 
         List<Vector3> targetPositions = new List<Vector3>()
         {
@@ -81,11 +83,13 @@ namespace DemonicCity.StoryScene
 
         public void Staging(TextStorage storage)
         {
+            fader = SceneFader.Instance;
             textManager.isStaging = true;
             DivideContent(storage.sentence);
             StageType type;
             if (!EnumCommon.TryParse(contents[(int)StageTag.Type], out type))
             {
+                Debug.Log("Error : " + contents[(int)StageTag.Type]);
 
                 return;
             }
@@ -111,7 +115,7 @@ namespace DemonicCity.StoryScene
                     SwitchBack();
                     break;
                 case StageType.Item:
-                    Item(contents[(int)StageTag.Target]);
+                    Item(contents);
                     break;
                 default:
                     break;
@@ -120,7 +124,13 @@ namespace DemonicCity.StoryScene
 
         void SceneTrans(string content)
         {
-
+            SceneFader.SceneTitle toScene;
+            if (EnumCommon.TryParse(content, out toScene))
+            {
+                Progress.Instance.ThisQuestProgress += 1;
+                fader.FadeOut(toScene, 0.5f);
+            }
+            //EndStaging();
         }
 
         void Appear(string[] content)
@@ -137,7 +147,7 @@ namespace DemonicCity.StoryScene
                 Debug.Log(charName + ":" + posTag + ":" + appearCharObj.name);
 
 
-                StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)posTag]));
+                StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)posTag], moveTime));
             }
         }
 
@@ -149,7 +159,7 @@ namespace DemonicCity.StoryScene
             {
                 posTag = casts.Find(item => item.name == charName).posTag;
                 GameObject leaveCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == charName);
-                StartCoroutine(MoveObject(leaveCharObj, startPositions[(int)posTag]));
+                StartCoroutine(MoveObject(leaveCharObj, startPositions[(int)posTag], moveTime));
             }
         }
 
@@ -172,8 +182,23 @@ namespace DemonicCity.StoryScene
             EndStaging();
         }
 
-        void Item(string content)
+        void Item(string[] content)
         {
+            StageType itemType;
+            if (EnumCommon.TryParse(content[(int)StageTag.Target], out itemType))
+            {
+                switch (itemType)
+                {
+                    case StageType.Appear:
+                        break;
+                    case StageType.Leave:
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+            EndStaging();
 
         }
 
@@ -188,16 +213,19 @@ namespace DemonicCity.StoryScene
 
 
 
-        IEnumerator MoveObject(GameObject targetObj, Vector3 targetPos)
+        IEnumerator MoveObject(GameObject targetObj, Vector3 targetPos, float time)
         {
-            Vector3 dif = targetPos - targetObj.transform.localPosition;
-            while ((0 < dif.x
+            float start = Time.time;
+            Vector3 diff = targetPos - targetObj.transform.localPosition;
+            while ((0 < diff.x
                 && 0 < (targetPos - targetObj.transform.localPosition).x)
-                || (dif.x < 0
-                && (targetPos - targetObj.transform.localPosition).x < 0))
+                || (diff.x < 0
+                && (targetPos - targetObj.transform.localPosition).x < 0)
+                && Time.time < start + time)
             {
-                targetObj.transform.localPosition += dif / 100;
-                yield return new WaitForSeconds(0.01f);
+                // ContinueStaging();
+                targetObj.transform.localPosition += diff * Time.deltaTime / time;
+                yield return null;
             }
             EndStaging();
             //while (dif.x < 0
@@ -232,6 +260,7 @@ namespace DemonicCity.StoryScene
 
             while (Time.time < start + time)
             {
+                //ContinueStaging();
                 fromColor.r += diffR * Time.deltaTime / time;
                 fromColor.g += diffG * Time.deltaTime / time;
                 fromColor.b += diffB * Time.deltaTime / time;
@@ -239,6 +268,7 @@ namespace DemonicCity.StoryScene
                 targetObject.GetComponent<SpriteRenderer>().color = fromColor;
                 yield return null;
             }
+            Debug.Log("end");
             targetObject.GetComponent<SpriteRenderer>().color = toColor;
             EndStaging();
         }
@@ -247,7 +277,13 @@ namespace DemonicCity.StoryScene
         void EndStaging()
         {
             textManager.isStaging = false;
+            textManager.TextsDraw();
         }
+        void ContinueStaging()
+        {
+            textManager.isStaging = true;
+        }
+
     }
 
 

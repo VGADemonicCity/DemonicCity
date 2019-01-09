@@ -51,7 +51,7 @@ namespace DemonicCity.StorySelectScene
                 switch (gesture)
                 {
                     case TouchGestureDetector.Gesture.TouchBegin:
-                        touchInfo.HitDetection(out beginObject, gameObject);
+                        touchInfo.HitDetection(out beginObject);
                         break;
 
                     case TouchGestureDetector.Gesture.Click:
@@ -69,6 +69,7 @@ namespace DemonicCity.StorySelectScene
                     default:
                         break;
                 }
+                Debug.Log(beginObject+"" +endObject);
             });
         }
 

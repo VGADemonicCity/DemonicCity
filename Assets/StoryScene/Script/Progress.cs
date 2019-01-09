@@ -80,7 +80,7 @@ namespace DemonicCity
         }
 
         /// <summary>現在進行しているクエストの進行度のプロパティ</summary>
-        public QuestProgress MyQuestProgress
+        public QuestProgress ThisQuestProgress
         {
             get { return questProgress; }
             set { questProgress = value; Save(); }
