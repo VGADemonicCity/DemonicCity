@@ -51,13 +51,16 @@ namespace DemonicCity.ResultScene
         private int destructionCount;
 
         /// <summary>次のレベルアップに必要な総経験値</summary>
-        private int getRequiredExp;
+        private int requiredExp;
 
         /// <summary>あといくつでレベルアップするか</summary>
         private int needExp;
 
         /// <summary>現在の経験値(累計街破壊数)</summary>
         private int currentExp;
+
+        /// <summary>ゲージに表示するための経験値</summary>
+        private int showExp;
 
         /// <summary>経験値ゲージ</summary>
         [SerializeField]
@@ -139,27 +142,35 @@ namespace DemonicCity.ResultScene
                 updatedBasicStatusTexts[i].enabled = false;
             }
 
-            //destructionCount = panelCounter.DestructionCount;
+            //destructionCount = panelCounter.TotalDestructionCount;
+            currentExp = 8;
+            //currentExp = magia.TotalExperience;
             destructionCount = 400;
             totalDestruction = 125 + destructionCount;
-            getRequiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
-            needExp = getRequiredExp - destructionCount;
-            expGauge.GetComponent<Image>().fillAmount = (float)needExp / getRequiredExp;
-
-            if (getRequiredExp <= destructionCount)//レベルアップした場合
+            requiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
+            showExp = currentExp - requiredExp;
+            if(showExp < 0)
             {
+                showExp = -showExp;
+            }
+            
 
+            expGauge.GetComponent<Image>().fillAmount = (float)showExp / requiredExp;
+            Debug.Log(showExp);
+
+            if (requiredExp <= destructionCount)//レベルアップした場合
+            {
                 levelUpText.enabled = true;
                 int i = 1;
 
                 while (true)
                 {
                     magia.LevelUp();
-                    getRequiredExp = magia.GetRequiredExpToNextLevel(currentlevel + i);
+                    requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + i);
                     i += 1;
-                    if (getRequiredExp >= destructionCount)
+                    if (requiredExp >= destructionCount)
                     {
-                        needExp = getRequiredExp - (-1 * needExp);
+                        needExp = requiredExp - (-1 * needExp);
                         break;
                     }
                 }
@@ -175,7 +186,7 @@ namespace DemonicCity.ResultScene
                     updatedBasicStatusTexts[a].enabled = true;
                 }
                 UpdateText();
-                expGauge.GetComponent<Image>().fillAmount = (float)needExp / getRequiredExp;
+                expGauge.GetComponent<Image>().fillAmount = (float)currentExp / requiredExp;
             }
 
         }

@@ -136,7 +136,7 @@ namespace DemonicCity.StrengthenScene
         private GameObject selectAttributeWindow;
 
         [SerializeField]
-        private GameObject skillDetailWindow;
+        private GameObject showDetailWindow;
 
         /// <summary>習得済みスキル</summary>
         private Magia.PassiveSkill passiveSkill;
@@ -151,7 +151,7 @@ namespace DemonicCity.StrengthenScene
         private List<string> skillDetailList = new List<string>();
 
         private GameObject skillDetail;
-        
+
         private void Awake()
         {
             magia = Magia.Instance;
@@ -188,10 +188,10 @@ namespace DemonicCity.StrengthenScene
                             case "ShowSkillButton":
                                 if (popUpWindow == null)
                                 {
-                                    popUpWindow = Instantiate(skillDetailWindow, parent);
+                                    popUpWindow = Instantiate(showDetailWindow, parent);
                                     //        content = GameObject.Find("Content");
                                     content = GameObject.FindGameObjectWithTag("Content");
-                               //     scrollRect = popUpWindow.GetComponentInChildren<ScrollRect>();
+                                    //     scrollRect = popUpWindow.GetComponentInChildren<ScrollRect>();
                                 }
                                 break;
                             case "BackButton":
@@ -339,7 +339,7 @@ namespace DemonicCity.StrengthenScene
         /// <param name="index">スキル名に対応した説明を指定</param>
         public void PopUpSkillDetailWindow(int index)
         {
-            content.GetComponent<ContentSizeFitter>().SetLayoutVertical();
+            //            content.GetComponent<ContentSizeFitter>().SetLayoutVertical();
             skillDetail = Instantiate(skillDetailText, content.transform);
             skillDetail.GetComponentInChildren<Text>().text = skillDetailList[index];
         }
