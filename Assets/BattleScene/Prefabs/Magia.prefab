@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4279791964626406}
   - component: {fileID: 212500557230291682}
   - component: {fileID: 95542251052286168}
+  - component: {fileID: 114336381541017238}
   m_Layer: 0
   m_Name: Magia
   m_TagString: Player
@@ -35,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758138740521478}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.63, y: 0.6, z: 0}
+  m_LocalPosition: {x: 1.7, y: 1, z: 0}
   m_LocalScale: {x: 1.0982974, y: 1.0982974, z: 1.0982974}
   m_Children: []
   m_Father: {fileID: 0}
@@ -59,6 +60,35 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &114336381541017238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1758138740521478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f1793b98378f458e9354dc9bff9e3b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_filePath: Magia
+  m_totalExperience: 0
+  m_totalDestructionCount: 0
+  m_allocationPoint: 0
+  m_attribute: 0
+  m_requiredExps: 050000000a0000000f00000014000000190000001e00000023000000280000002d000000320000003c00000046000000500000005a0000006400000096000000c8000000fa0000002c01000090010000f4010000
+  m_passiveSkill: 8191
+  m_stats:
+    m_level: 1
+    m_durability: 0
+    m_muscularStrength: 0
+    m_knowledge: 0
+    m_sense: 0
+    m_charm: 0
+    m_dignity: 0
+    m_hitPoint: 24250
+    m_attack: 3635
+    m_defense: 3635
 --- !u!212 &212500557230291682
 SpriteRenderer:
   m_ObjectHideFlags: 1

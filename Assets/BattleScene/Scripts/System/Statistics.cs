@@ -66,6 +66,25 @@ namespace DemonicCity
         }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="T:DemonicCity.Statistics"/> class.
+        /// </summary>
+        public Statistics() { }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="T:DemonicCity.Statistics"/> class.
+        /// </summary>
+        /// <param name="hitPoint">Hit point.</param>
+        /// <param name="attack">Attack.</param>
+        /// <param name="defense">Defense.</param>
+        public Statistics(int hitPoint, int attack, int defense)
+        {
+            m_hitPoint = hitPoint;
+            m_attack = attack;
+            m_defense = defense;
+        }
+
+
+        /// <summary>
         /// バトル開始時のステータスの初期値を保存
         /// </summary>
         /// <param name="stats">Stats.</param>

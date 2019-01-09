@@ -74,8 +74,6 @@ namespace DemonicCity
             StartCoroutine(FadingOut());
         }
 
-
-
         /// <summary>
         /// フェードインのコルーチン
         /// </summary>
