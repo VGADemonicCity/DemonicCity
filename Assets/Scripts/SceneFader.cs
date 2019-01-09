@@ -33,7 +33,7 @@ namespace DemonicCity
 
             // 最前面になるようLayer設定
             m_fadeCanvas.sortingLayerName = "UI";
-            m_fadeCanvas.sortingOrder = 10000; // 適当な値(最前面,つまりこの値がSceneにあるどのUIレイヤーのsortingOrderよりも高ければなんでもよい)
+            m_fadeCanvas.sortingOrder = 1000; // 適当な値(最前面,つまりこの値がSceneにあるどのUIレイヤーのsortingOrderよりも高ければなんでもよい)
 
             // fade用のImage生成
             m_fadeImage = new GameObject("ImageFade").AddComponent<Image>();
