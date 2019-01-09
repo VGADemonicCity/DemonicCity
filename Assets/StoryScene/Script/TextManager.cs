@@ -37,7 +37,7 @@ namespace DemonicCity.StoryScene
         List<int> characters = new List<int>();
 
 
-        bool isStaging = false;
+        public bool isStaging = false;
         string buttonTag = "Button";
         bool flag;
         int textIndex = 0;
@@ -58,41 +58,10 @@ namespace DemonicCity.StoryScene
                 {
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
-                    if (hit.tag != buttonTag)
+                    if (hit.tag != buttonTag
+                        && !isStaging)
                     {
-                        if (isStaging)
-                        {
-                            Debug.Log("おわりだよー(*∂ｖ∂)");
-                            DivideTexts();
-                            textIndex += 1;
-                            return;
-                        }
-                        flag = putSentence.end;
-                        if (flag)
-                        {
-                            if (texts.Count <= textIndex ||
-                            texts[textIndex].cName == CharName.System)
-                            {
-                                isStaging = true;
-                                return;
-                            }
-                            else
-                            {
-                                textIndex += 1;
-                            }
-                            putSentence.end = false;
-                        }
-                        else
-                        {
-                            putSentence.FullTexts();
-                        }
-                        DivideTexts();
-                        if (texts[textIndex].cName != CharName.System)
-                        {
-                            flag = putSentence.CallSentence(texts[textIndex].sentence);
-
-                        }
-
+                        TextsDraw();
                     }
                 }
             });
@@ -103,15 +72,41 @@ namespace DemonicCity.StoryScene
             flag = putSentence.A(texts[textIndex].sentence);
         }
 
+        void TextsDraw()
+        {
+            if (putSentence.end)
+            {
+                textIndex += 1;
+                if (DivideTexts())
+                {
+                    flag = putSentence.CallSentence(texts[textIndex].sentence);
+
+                }
+                else
+                {
+                    director.Staging(texts[textIndex]);
+
+                }
+            }
+            else
+            {
+                putSentence.FullTexts();
+            }
+
+        }
+
+
+
+
+
 
         /// <summary>ListのCharNameに応じた名前を出力するが、演出がある場合はその演出を再生する</summary>
-        void DivideTexts()
+        bool DivideTexts()
         {
             Debug.Log(texts[textIndex].cName);
             if (texts[textIndex].cName == CharName.System)
             {
-                director.Staging(texts[textIndex]);
-                return;
+                return false;
             }
             else
             {
@@ -131,6 +126,7 @@ namespace DemonicCity.StoryScene
             {
                 nameObj.text = CHARNAME[(int)texts[textIndex].cName];
             }
+            return true;
         }
 
         void Staging(TextStorage storage)

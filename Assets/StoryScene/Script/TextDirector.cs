@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -37,6 +38,8 @@ namespace DemonicCity.StoryScene
         delegate void Stagings();
         string[] contents;
         public List<GameObject> characters = new List<GameObject>();
+        [SerializeField] TextManager textManager;
+        [SerializeField] GameObject blackOut;
 
         List<Vector3> targetPositions = new List<Vector3>()
         {
@@ -78,6 +81,7 @@ namespace DemonicCity.StoryScene
 
         public void Staging(TextStorage storage)
         {
+            textManager.isStaging = true;
             DivideContent(storage.sentence);
             StageType type;
             if (!EnumCommon.TryParse(contents[(int)StageTag.Type], out type))
@@ -129,6 +133,10 @@ namespace DemonicCity.StoryScene
                 casts.Add(new Cast(charName, posTag));
                 GameObject appearCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == charName);
                 appearCharObj.transform.localPosition = startPositions[(int)posTag];
+
+                Debug.Log(charName + ":" + posTag + ":" + appearCharObj.name);
+
+
                 StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)posTag]));
             }
         }
@@ -147,17 +155,21 @@ namespace DemonicCity.StoryScene
 
         void Coloring(string content)
         {
-
+            Color color;
+            if (ColorUtility.TryParseHtmlString(content, out color))
+            {
+                StartCoroutine(ChangeColor(blackOut, color, 0.5f));
+            }
         }
 
         void Clear()
         {
-
+            StartCoroutine(ChangeColor(blackOut, Color.clear, 0.5f));
         }
 
         void SwitchBack()
         {
-
+            EndStaging();
         }
 
         void Item(string content)
@@ -170,7 +182,7 @@ namespace DemonicCity.StoryScene
         {
             //string[] tmpTexts = content.Split(':');
             contents = content.Split(':');
-            Debug.Log(contents);
+            //Debug.Log(contents);
         }
 
 
@@ -187,6 +199,7 @@ namespace DemonicCity.StoryScene
                 targetObj.transform.localPosition += dif / 100;
                 yield return new WaitForSeconds(0.01f);
             }
+            EndStaging();
             //while (dif.x < 0
             //    && (targetPos - targetObj.transform.localPosition).x < 0)
             //{
@@ -195,7 +208,49 @@ namespace DemonicCity.StoryScene
             //}
         }
 
+        IEnumerator ChangeColor(GameObject targetObject, Color toColor, float time)
+        {
+            Color fromColor;
+            float start = Time.time;
+            //if (targetObject.GetComponent<SpriteRenderer>())
+            //{
+            //    fromColor = targetObject.GetComponent<SpriteRenderer>().color;
+            //}
+            //else 
+            if (targetObject.GetComponent<Image>())
+            {
+                fromColor = targetObject.GetComponent<Image>().color;
+            }
+            else
+            {
+                yield break;
+            }
+            float diffR = toColor.r - fromColor.r;
+            float diffG = toColor.g - fromColor.g;
+            float diffB = toColor.b - fromColor.b;
+            float diffA = toColor.a - fromColor.a;
+
+            while (Time.time < start + time)
+            {
+                fromColor.r += diffR * Time.deltaTime / time;
+                fromColor.g += diffG * Time.deltaTime / time;
+                fromColor.b += diffB * Time.deltaTime / time;
+                fromColor.a += diffA * Time.deltaTime / time;
+                targetObject.GetComponent<SpriteRenderer>().color = fromColor;
+                yield return null;
+            }
+            targetObject.GetComponent<SpriteRenderer>().color = toColor;
+            EndStaging();
+        }
+
+
+        void EndStaging()
+        {
+            textManager.isStaging = false;
+        }
     }
+
+
 
     public class Cast
     {
