@@ -37,7 +37,7 @@ namespace DemonicCity.Debugger
 
         private void Start()
         {
-            m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
+            m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
                 if(state != BattleManager.StateMachine.State.PlayerChoice || !DebugFlag) // PlayerChoice以外,debugフラグがオフの時は何もしない
                 {

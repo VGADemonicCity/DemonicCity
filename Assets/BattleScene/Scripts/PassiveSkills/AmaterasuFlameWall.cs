@@ -27,7 +27,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 天照ー焔壁ー");
-            m_defenseBuffer = m_battleManager.m_currentEnemy.Stats.m_attack; // 敵の攻撃力をそのまま自分の防御力に加算
+            m_defenseBuffer = m_battleManager.CurrentEnemy.Stats.m_attack; // 敵の攻撃力をそのまま自分の防御力に加算
             m_battleManager.m_magiaStats.m_defense += (int)m_defenseBuffer;
         }
 

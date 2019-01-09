@@ -14,44 +14,139 @@ namespace DemonicCity.BattleScene
     [Serializable]
     public class BattleManager : MonoSingleton<BattleManager>
     {
-        /// <summary>敵のID</summary>
-        public EnemiesFactory.EnemiesId EnemyId { get; set; }
-        /// <summary>ステートマシン</summary>
-        public StateMachine m_stateMachine { get; set; }
-        /// <summary>敵キャラのデータベース</summary>
-        public EnemiesFactory m_enemiesData { get; set; }
-        /// <summary>バトルシーンで使用する敵オブジェクト</summary>
-        [SerializeField] public List<GameObject> m_enemyObjects;
-        /// <summary>バトルシーンで使用する敵オブジェクト</summary>
-        [SerializeField] public GameObject m_enemyObject;
-        /// <summary>そのバトルに出てくる敵のリスト</summary>
-        [SerializeField] public List<Enemy> m_enemies;
-        /// <summary>敵オブジェクトのEnemyクラス</summary>
-        [SerializeField] public Enemy m_currentEnemy;
+    #region Property
+        /// <summary>そのバトルに登場する敵オブジェクトのリスト</summary>
+        public List<GameObject> EnemyObjects
+        {
+            get { return m_enemyObjects; }
+            set
+            {
+                m_enemyObjects = value;
+                OnSetted();
+            }
+        }
+
+        /// <summary>現在の敵オブジェクト</summary>
+        public GameObject CurrentEnemyObject
+        {
+            get
+            {
+                if (m_enemyObjects == null)
+                {
+                    Debug.Log("m_enemyObjectsが設定されていません");
+                }
+
+                switch (m_StateMachine.m_wave)
+                {
+                    case StateMachine.Wave.FirstWave:
+                        return m_enemyObjects[0];
+                    case StateMachine.Wave.SecondWave:
+                        return m_enemyObjects[1];
+                    case StateMachine.Wave.LastWave:
+                        return m_enemyObjects[2];
+                    default:
+                        Debug.Log("CurrentEnemyObject取得に失敗しました。");
+                        return null;
+                }
+            }
+        }
+
+        /// <summary>現在の敵オブジェクトのEnemyクラス</summary>
+        public Enemy CurrentEnemy
+        {
+            get
+            {
+                if (m_enemies == null)
+                {
+                    Debug.Log("m_enemiesが設定されていません");
+                }
+
+                switch (m_StateMachine.m_wave)
+                {
+                    case StateMachine.Wave.FirstWave:
+                        return m_enemies[0];
+                    case StateMachine.Wave.SecondWave:
+                        return m_enemies[1];
+                    case StateMachine.Wave.LastWave:
+                        return m_enemies[2];
+                    default:
+                        Debug.Log("CurrentEnemy取得に失敗しました。");
+                        return null;
+                }
+            }
+        }
+        #endregion
+
+        #region Field
+        /// <summary>StateMacineのUnityEvent</summary>
+        public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
+
         /// <summary>バトル用のマギアのステータス</summary>
         [SerializeField] public Statistics m_magiaStats;
+        /// <summary>ステートマシン</summary>
+        public StateMachine m_StateMachine { get; set; }
+        /// <summary>敵キャラのデータベース</summary>
+        public EnemiesFactory m_EnemiesFactory { get; set; }
 
-        ///// <summary>ステートマシンの状態 : State of State Machine.</summary>
-        //public State m_state = State.Init;
-        ///// <summary>Wave.バトルシーンのウェーブフラグ</summary>
-        //public Wave m_wave;
+        /// <summary>そのバトルに出てくる敵のオブジェクトのリスト</summary>
+        [SerializeField] private List<GameObject> m_enemyObjects;
+        /// <summary>そのバトルに出てくる敵のクラスのリスト</summary>
+        [SerializeField] private List<Enemy> m_enemies;
+        #endregion
 
-        /// <summary>StateMacineのイベントシステム</summary>
-        public StateMachineEvent m_behaviourByState = new StateMachineEvent();
+        #region Method
+        /// <summary>
+        /// 敵オブジェクト群を設定した時同時にそのEnemyクラスも取得する
+        /// </summary>
+        private void OnSetted()
+        {
+            foreach (var enemy in m_enemyObjects)
+            {
+                m_enemies.Add(enemy.GetComponent<Enemy>());
+            }
+        }
+
+        /// <summary>
+        /// Setting wave to StateMachine
+        /// ステートマシンに<param name="wave">wave</param>を設定する
+        /// </summary>
+        public void InitWave()
+        {
+            m_StateMachine.m_wave = StateMachine.Wave.FirstWave;
+        }
+
+        /// <summary>
+        /// 次のウェーブがあるか判断し、あれば次のウェーブへ。なければバトル終了へ。
+        /// </summary>
+        public void TryNextWave()
+        {
+            if (m_StateMachine.m_wave != StateMachine.Wave.LastWave)
+            {
+                m_StateMachine.m_wave++;
+                Debug.Log(m_StateMachine.m_wave); 
+                // ==============================
+                // イベント呼び出し : StateMachine.NextWave
+                // ==============================
+                m_BehaviourByState.Invoke(StateMachine.State.NextWave);
+                return;
+            }
+            // ==============================
+            // イベント呼び出し : StateMachine.End
+            // ==============================
+            m_BehaviourByState.Invoke(StateMachine.State.End);
+        }
 
         /// <summary>
         /// Awake this instance.
         /// </summary>
-        void Awake()
+        private void Awake()
         {
-
-            EnemyId = EnemiesFactory.EnemiesId.Nafla; // =========実際はこのenumをステージに応じて登場するキャラクターに変える==========
-            m_stateMachine = StateMachine.Instance; // StateMachineの参照取得
-            m_enemiesData = EnemiesFactory.Instance; // EnemiesDataBaseの参照取得
-
-
+            m_StateMachine = StateMachine.Instance; // StateMachineの参照取得
+            m_EnemiesFactory = EnemiesFactory.Instance; // EnemiesDataBaseの参照取得
         }
+        #endregion
 
+        #region StateMachineAndItUnityEvent
 
         /// <summary>
         /// State machine event.
@@ -90,6 +185,8 @@ namespace DemonicCity.BattleScene
                 Lose,
                 /// <summary>次のWaveに遷移する時</summary>
                 NextWave,
+                /// <summary>Battle終了時</summary>
+                End,
             }
 
             /// <summary>
@@ -102,8 +199,8 @@ namespace DemonicCity.BattleScene
                 FirstWave,
                 /// <summary>第2ウェーブ</summary>
                 SecondWave,
-                /// <summary>第3ウェーブ</summary>
-                ThirdWave
+                /// <summary>ラストウェーブ</summary>
+                LastWave,
             }
 
             /// <summary>ステート</summary>
@@ -111,5 +208,6 @@ namespace DemonicCity.BattleScene
             /// <summary>ウェーブ</summary>
             public Wave m_wave;
         }
+        #endregion
     }
 }
