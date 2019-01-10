@@ -79,52 +79,40 @@ namespace DemonicCity.StrengthenScene
         private int addDignity;
 
         /// <summary>確定ボタンと中止ボタン</summary>
-        [SerializeField]
-        private GameObject ConfirmAndResetButtons;
+        [SerializeField] private GameObject ConfirmAndResetButtons;
 
         /// <summary>属性テキスト</summary>
-        [SerializeField]
-        private Text currentAttributeText;
+        [SerializeField] private Text currentAttributeText;
 
         /// <summary>現在の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
 
         /// <summary>変動後の基礎ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
 
         /// <summary>現在の固有ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
+        [SerializeField] TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
 
         /// <summary>割り振った固有ステータステキスト</summary>
-        [SerializeField]
-        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
+        [SerializeField] TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
 
         /// <summary>割り振りポイントテキスト(魔力値)</summary>
-        [SerializeField]
-        TextMeshProUGUI statusPointText;
+        [SerializeField] TextMeshProUGUI statusPointText;
 
         /// <summary>現在の属性</summary>
-        [SerializeField]
-        private Image attributeImage;
+        [SerializeField] private Image attributeImage;
 
         /// <summary>6種類の属性スプライト</summary>
-        [SerializeField]
-        private Sprite[] attributeSprite;
+        [SerializeField] private Sprite[] attributeSprite;
 
         /// <summary>ステータス確定前のメッセージ</summary>
-        [SerializeField]
-        private GameObject confirm_WarningMessage;
+        [SerializeField] private GameObject confirm_WarningMessage;
 
         /// <summary>ステータス初期化前のメッセージ</summary>
-        [SerializeField]
-        private GameObject reset_WarningMessage;
+        [SerializeField] private GameObject reset_WarningMessage;
 
         /// <summary>ポップアップウィンドウの生成先</summary>
-        [SerializeField]
-        private Transform parent;
+        [SerializeField] private Transform parent;
 
         /// <summary>ポップアップウィンドウを一時的に保持する変数</summary>
         private GameObject popUpWindow = null;
@@ -132,11 +120,9 @@ namespace DemonicCity.StrengthenScene
         /// <summary>確定ボタンとリセットボタンを一時的に保持する変数</summary>
         private GameObject confirmResetButtons = null;
 
-        [SerializeField]
-        private GameObject selectAttributeWindow;
+        [SerializeField] private GameObject selectAttributeWindow;
 
-        [SerializeField]
-        private GameObject showDetailWindow;
+        [SerializeField] private GameObject showDetailWindow;
 
         /// <summary>習得済みスキル</summary>
         private Magia.PassiveSkill passiveSkill;
@@ -144,8 +130,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>習得済みスキルの表示先</summary>
         private GameObject content;
 
-        [SerializeField]
-        private GameObject skillDetailText;
+        [SerializeField] private GameObject skillDetailText;
 
         /// <summary>スキルの説明テキスト</summary>
         private List<string> skillDetailList = new List<string>();
@@ -156,16 +141,15 @@ namespace DemonicCity.StrengthenScene
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
-            passiveSkill = magia.MyPassiveSkill;
-
-            //      scrollRect.verticalNormalizedPosition = 1f;
-            skillDetailList.Add("街破壊数1以上で発動\n街破壊数×攻撃力の1%\nを加算して攻撃");
-            skillDetailList.Add("街破壊数７以上で発動\n街破壊数×0.5%\n攻撃力防御力を上昇");
-
         }
 
         private void Start()
         {
+            passiveSkill = magia.MyPassiveSkill;
+
+            skillDetailList.Add("街破壊数1以上で発動\n街破壊数×攻撃力の1%\nを加算して攻撃");
+            skillDetailList.Add("街破壊数７以上で発動\n街破壊数×0.5%\n攻撃力防御力を上昇");
+
             ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -189,9 +173,7 @@ namespace DemonicCity.StrengthenScene
                                 if (popUpWindow == null)
                                 {
                                     popUpWindow = Instantiate(showDetailWindow, parent);
-                                    //        content = GameObject.Find("Content");
                                     content = GameObject.FindGameObjectWithTag("Content");
-                                    //     scrollRect = popUpWindow.GetComponentInChildren<ScrollRect>();
                                 }
                                 break;
                             case "BackButton":
@@ -329,8 +311,16 @@ namespace DemonicCity.StrengthenScene
                                     Destroy(popUpWindow);
                                 }
                                 break;
+                            case "ScrollView":
+                                Debug.Log("ghvjv");
+                                break;
                         }
                     }
+                }
+                if (gesture == TouchGestureDetector.Gesture.TouchMove)
+                {
+                    //touchGestureDetector.TouchInfo.Diff();
+
                 }
             });
         }
@@ -339,7 +329,6 @@ namespace DemonicCity.StrengthenScene
         /// <param name="index">スキル名に対応した説明を指定</param>
         public void PopUpSkillDetailWindow(int index)
         {
-            //            content.GetComponent<ContentSizeFitter>().SetLayoutVertical();
             skillDetail = Instantiate(skillDetailText, content.transform);
             skillDetail.GetComponentInChildren<Text>().text = skillDetailList[index];
         }
@@ -417,7 +406,7 @@ namespace DemonicCity.StrengthenScene
             addKnowledge = 0;
 
             UpdateText();
-            magia.Update();
+            magia.Sync();
         }
 
         /// <summary>テキストを更新</summary>
@@ -426,28 +415,28 @@ namespace DemonicCity.StrengthenScene
             switch (attribute)
             {
                 case Magia.Attribute.Standard:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[0];
-                    currentAttributeText.GetComponent<Text>().text = "魔童";
+                    attributeImage.sprite = attributeSprite[0];
+                    currentAttributeText.text = "魔童";
                     break;
                 case Magia.Attribute.MaleWarrior:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[1];
-                    currentAttributeText.GetComponent<Text>().text = "刀皇";
+                    attributeImage.sprite = attributeSprite[1];
+                    currentAttributeText.text = "刀皇";
                     break;
                 case Magia.Attribute.FemaleWarrior:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[2];
-                    currentAttributeText.GetComponent<Text>().text = "剣姫";
+                    attributeImage.sprite = attributeSprite[2];
+                    currentAttributeText.text = "剣姫";
                     break;
                 case Magia.Attribute.MaleWizard:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[3];
-                    currentAttributeText.GetComponent<Text>().text = "黒王";
+                    attributeImage.sprite = attributeSprite[3];
+                    currentAttributeText.text = "黒王";
                     break;
                 case Magia.Attribute.FemaleWitch:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[4];
-                    currentAttributeText.GetComponent<Text>().text = "女帝";
+                    attributeImage.sprite = attributeSprite[4];
+                    currentAttributeText.text = "女帝";
                     break;
                 case Magia.Attribute.FemaleTrancendental:
-                    attributeImage.GetComponent<Image>().sprite = attributeSprite[5];
-                    currentAttributeText.GetComponent<Text>().text = "魔神";
+                    attributeImage.sprite = attributeSprite[5];
+                    currentAttributeText.text = "魔神";
                     break;
             }
 

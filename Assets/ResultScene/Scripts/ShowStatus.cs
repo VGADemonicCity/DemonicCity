@@ -1,11 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using System;
-using DemonicCity;
 using DemonicCity.BattleScene;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace DemonicCity.ResultScene
 {
@@ -91,14 +89,23 @@ namespace DemonicCity.ResultScene
 
         [SerializeField] private Transform parent;
 
-        private GameObject popUpObject;
+        /// <summary>次の章へ進むかホームへ戻るかを選択するウィンドウ</summary>
+        [SerializeField] private GameObject selectSceneWindow;
+
+        private GameObject popUpWindow;
+
+        /// <summary>画面をタップした回数</summary>
+        private int touchCount = 0;
+
+        /// <summary>次の章</summary>
+        Progress.StoryProgress storyProgress;
 
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
             panelCounter = new PanelCounter();
-
+            storyProgress = new Progress.StoryProgress();
         }
 
         private void Start()
@@ -110,10 +117,42 @@ namespace DemonicCity.ResultScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    //アニメーションをスキップする処理
-                    //タップでバトル後のステータスを表示
-                    //次の章へ進むかホーム画面へ戻るかのウィンドウをポップアップ
-                    StartCoroutine("AnimationExpGauge");
+                    switch (touchCount)
+                    {
+                        case 0:
+                            StartCoroutine("AnimationExpGauge");
+                            touchCount = 1;
+                            break;
+                        case 1:
+                            //アニメーションをスキップ
+                            touchCount = 2;
+                            break;
+                        case 2:
+                            //次の章へ進むかホーム画面へ戻るかのウィンドウをポップアップ
+                            popUpWindow = Instantiate(selectSceneWindow, parent);
+                            break;
+                    }
+
+                    GameObject button;
+                    touchInfo.HitDetection(out button);
+
+                    if (button != null)
+                    {
+                        switch (button.name)
+                        {
+                            case "LoadHomeScene":
+                                SceneManager.LoadScene("HomeScene");
+                                break;
+                            case "LoadNextChapter":
+
+                                break;
+                        }
+
+                    }
+                    else
+                    {
+                        Destroy(popUpWindow);
+                    }
                 }
             });
         }
@@ -129,8 +168,8 @@ namespace DemonicCity.ResultScene
 
                 if (expGauge.fillAmount >= 1)
                 {
-                    popUpObject = Instantiate(levelUpImage, parent);
-                    Destroy(popUpObject, 2);
+                    popUpWindow = Instantiate(levelUpImage, parent);
+                    Destroy(popUpWindow, 2);
 
                     updatedExp -= requiredExp;
                     currentExp -= requiredExp;
@@ -179,7 +218,7 @@ namespace DemonicCity.ResultScene
             //currentExp = magia.TotalExperience;
             //destructionCount = panelCounter.TotalDestructionCount;
             currentExp = 4;
-            destructionCount = 50;
+            destructionCount = 10;
 
             needExp = requiredExp - currentExp;
             if (needExp < 0)

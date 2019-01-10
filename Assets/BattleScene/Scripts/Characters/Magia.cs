@@ -12,7 +12,6 @@ namespace DemonicCity
     /// </summary>
     [Serializable]
     public class Magia : SavableSingletonBase<Magia>
-    public class Magia : SavableMonoSingleton<Magia>
     {
 
         /// <summary>パッシブスキルフラグのプロパティ</summary>
@@ -111,7 +110,6 @@ namespace DemonicCity
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkill;
 
         /// <summary>実際にセーブするステータスクラス</summary>
-        [SerializeField]
         [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
         Statistics m_stats = new Statistics()
         {
@@ -219,7 +217,6 @@ namespace DemonicCity
         /// <summary>
         /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
         /// </summary>
-        public void Update(Statistics stats = null)
         public void Sync(Statistics stats = null)
         {
             if (stats != null)
@@ -251,15 +248,6 @@ namespace DemonicCity
             { 
 
             });
-        }
-
-        /// <summary>
-        /// シーン遷移で破壊されないオブジェクトにする
-        /// </summary>
-        public override void OnInitialize()
-        {
-            base.OnInitialize();
-            DontDestroyOnLoad(Instance);
         }
 
         /// <summary>属性</summary>
