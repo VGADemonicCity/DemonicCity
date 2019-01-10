@@ -37,7 +37,6 @@ namespace DemonicCity.BattleScene
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
             m_gameManager = GameManager.Instance; // Magiaの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得
-
         }
 
         /// <summary>

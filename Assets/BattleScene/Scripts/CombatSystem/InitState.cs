@@ -73,8 +73,6 @@ namespace DemonicCity.BattleScene
             m_panelManager.InitPanels(); // パネル初期化
             m_magiaHPGauge.Initialize(m_battleManager.m_magiaStats.m_hitPoint); // マギアのHP最大値を引数に初期化する
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // 敵のHP最大値を引数に初期化する
-
-
         }
     }
 }
