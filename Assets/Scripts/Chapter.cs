@@ -11,7 +11,7 @@ namespace DemonicCity
     public class Chapter
     {
         /// <summary>その章で使うEnemiesId</summary>
-        public List<EnemiesDataBase.EnemiesId> enemiesIds = new List<EnemiesDataBase.EnemiesId>();
+        public List<EnemiesFactory.EnemiesId> enemiesIds = new List<EnemiesFactory.EnemiesId>();
         /// <summary>その章で使うストーリー進行度</summary>
         public Progress.StoryProgress storyProgress;
         /// <summary>その章のタイトル</summary>
@@ -23,7 +23,7 @@ namespace DemonicCity
 
 
         /// <summary>ストーリーの進行度とタイトル、敵のIDを3Wave分登録する</summary>
-        public Chapter(string title, Progress.StoryProgress progress, EnemiesDataBase.EnemiesId enemy1, EnemiesDataBase.EnemiesId enemy2, EnemiesDataBase.EnemiesId enemy3, string folderPath)
+        public Chapter(string title, Progress.StoryProgress progress, EnemiesFactory.EnemiesId enemy1, EnemiesFactory.EnemiesId enemy2, EnemiesFactory.EnemiesId enemy3, string folderPath)
         {
             chapterTitle = title;
             storyProgress = progress;

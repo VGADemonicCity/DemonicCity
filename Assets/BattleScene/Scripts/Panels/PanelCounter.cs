@@ -37,13 +37,25 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        /// <summary>
+        /// Gets the total destruction count.
+        /// </summary>
+        /// <value>The total destruction count.</value>
+        public int TotalDestructionCount
+        {
+            get
+            {
+                return m_totalDestructionCount;
+            }
+        }
+
         /// <summary>シャッフルスキル専用カウンター : inspectorに表示させる為アクセサーと使用変数を分けている</summary>
         [SerializeField] int m_counterForShuffleSkill;
         /// <summary>ターン毎のパネルカウントのカウント変数</summary>
         [SerializeField] int m_CityCount;
         /// <summary>ターン毎のダブルパネルのカウント変数</summary>
         [SerializeField] int m_doubleCount;
-        /// <summary>街破壊数</summary>
+        /// <summary>そのターンの街破壊数</summary>
         [SerializeField] int m_destructionCount;
         /// <summary>ターン毎のトリプルパネルのカウント変数</summary>
         [SerializeField] int m_tripleCount;

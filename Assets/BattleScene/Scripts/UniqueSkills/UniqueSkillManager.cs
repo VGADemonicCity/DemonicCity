@@ -7,7 +7,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// 
     /// </summary>
-    public class UniqueSkillManager : SavableMonoSingleton<UniqueSkillManager>
+    public class UniqueSkillManager : MonoSingleton<UniqueSkillManager>
     {
         /// <summary>ユニークスキルが使用可能かどうか判断するフラグ</summary>
         public bool SkillFlag
