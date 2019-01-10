@@ -128,8 +128,11 @@ namespace DemonicCity.ResultScene
                             touchCount = 2;
                             break;
                         case 2:
-                            //次の章へ進むかホーム画面へ戻るかのウィンドウをポップアップ
-                            popUpWindow = Instantiate(selectSceneWindow, parent);
+                            if (popUpWindow == null)
+                            {
+                                popUpWindow = Instantiate(selectSceneWindow, parent);
+
+                            }
                             break;
                     }
 
@@ -151,7 +154,11 @@ namespace DemonicCity.ResultScene
                     }
                     else
                     {
-                        Destroy(popUpWindow);
+                        if (popUpWindow != null)
+                        {
+                            Destroy(popUpWindow);
+
+                        }
                     }
                 }
             });
