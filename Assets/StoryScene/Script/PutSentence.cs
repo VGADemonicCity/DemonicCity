@@ -111,13 +111,13 @@ namespace DemonicCity.StoryScene
         {
             if (end)
             {
+                feedCoroutine = SentenceFeed(s);
+                StartCoroutine(feedCoroutine);
+                end = false;
 
             }
             else
             {
-                feedCoroutine = SentenceFeed(s);
-                StartCoroutine(feedCoroutine);
-                end = false;
             }
 
             return end;

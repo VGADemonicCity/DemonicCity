@@ -35,7 +35,7 @@ namespace DemonicCity.StorySelectScene
         {
             Debug.Log(chapter.ToString());
             progress.ThisStoryProgress = chapter;
-            progress.MyQuestProgress = Progress.QuestProgress.Prologue;
+            progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
             SceneChanger.SceneChange(SceneName.Story);
         }
 

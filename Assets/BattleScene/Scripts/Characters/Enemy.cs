@@ -36,6 +36,8 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
+            m_animator = GetComponent<Animator>();
+
             m_battleManager = BattleManager.Instance;
             m_battleManager.m_behaviourByState.AddListener((state) =>
             {
@@ -48,8 +50,7 @@ namespace DemonicCity.BattleScene
             });
         }
 
-
-        public virtual void OnAttack()
+        public void OnAttack()
         {
             Debug.Log("OnAttackが呼ばれたよ");
             m_animator.SetTrigger("Attack");

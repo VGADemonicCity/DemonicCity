@@ -12,8 +12,8 @@ namespace DemonicCity
     public class ChapterManager : SingletonBase<ChapterManager>
     {
         /// <summary>ストーリー進行度のインスタンスの参照</summary>
-        Progress progress = Progress.Instance;
-
+        Progress progress;
+        
         /// <summary>進行度と敵のIDを登録するList</summary>
         public List<Chapter> chapters = new List<Chapter>()
         {
@@ -49,6 +49,7 @@ namespace DemonicCity
         /// </summary>
         public List<EnemiesFactory.EnemiesId> GetEnemies()
         {
+            CheckProgress();
             Chapter chapter = chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
             return chapter.enemiesIds;
         }
@@ -69,6 +70,7 @@ namespace DemonicCity
         /// </summary>
         public string GetTitle()
         {
+            CheckProgress();
             Chapter chapter = chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
             return chapter.chapterTitle;
         }
@@ -86,6 +88,7 @@ namespace DemonicCity
         /// <returns></returns>
         public Chapter GetChapter()
         {
+            CheckProgress();
             return chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
         }
 
@@ -93,7 +96,13 @@ namespace DemonicCity
 
 
 
-
+        void CheckProgress()
+        {
+            if (progress==null)
+            {
+                progress = Progress.Instance;
+            }
+        }
 
 
         const string sourceFolderPath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/";
