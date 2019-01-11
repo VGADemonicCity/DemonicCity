@@ -37,7 +37,7 @@ namespace DemonicCity.BattleScene
                 // Debug用
                 // =================
                 m_gameManager.CurrentChapter = m_chapterManager.GetChapter(Progress.StoryProgress.Nafla);
-                //m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_gameManager.CurrentChapter);
+                m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_gameManager.CurrentChapter);
             });
         }
 
