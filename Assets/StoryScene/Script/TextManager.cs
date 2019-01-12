@@ -55,7 +55,7 @@ namespace DemonicCity.StoryScene
             //test用
             //progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
             //progress.ThisStoryProgress = Progress.StoryProgress.Nafla;
-            if (progress.ThisQuestProgress!=Progress.QuestProgress.Prologue)
+            if (progress.ThisQuestProgress != Progress.QuestProgress.Prologue)
             {
                 progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
             }
@@ -76,16 +76,21 @@ namespace DemonicCity.StoryScene
             });
 
 
-            SetText(progress.ThisQuestProgress.ToString()+".json");
+            SetText(progress.ThisQuestProgress.ToString() + ".json");
             DivideTexts();
             flag = putSentence.A(texts[textIndex].sentence);
         }
-
+        /// <summary>
+        /// 次の行を再生する。
+        /// </summary>
         public void TextsDraw()
         {
             if (putSentence.end)
             {
-                textIndex += 1;
+                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
+                {
+                    textIndex += 1;
+                }
                 if (DivideTexts())
                 {
                     flag = putSentence.CallSentence(texts[textIndex].sentence);
@@ -163,11 +168,14 @@ namespace DemonicCity.StoryScene
             }
         }
 
-
-        void Update()
+        /// <summary>
+        /// 現在のシナリオの最終行(シーン遷移などのはず)に飛ぶ
+        /// </summary>
+        public void TextSkip()
         {
+            textIndex = texts.FindLastIndex(text => text == texts.Last());
+            TextsDraw();
         }
-
 
         string filePath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Texts.json";
         public void SetText()
