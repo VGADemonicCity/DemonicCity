@@ -57,7 +57,7 @@ namespace DemonicCity.BattleScene.Skill
         protected virtual void Start()
         {
             m_skillManager.m_skillJudger.AddListener(TryProcess); // キャラのレベルと街破壊数を引数に渡して条件を満たせばスキルフラグを建てて効果を反映させる
-            m_battleManager.m_behaviourByState.AddListener((state) =>
+            m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if(state == BattleManager.StateMachine.State.PlayerChoice && m_skillActivated) // playerChoice時 && スキルが呼ばれていない時
                 {

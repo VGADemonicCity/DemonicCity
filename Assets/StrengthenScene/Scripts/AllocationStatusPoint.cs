@@ -4,6 +4,7 @@ using System;
 using DemonicCity.BattleScene;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 namespace DemonicCity.StrengthenScene
 {
@@ -136,11 +137,16 @@ namespace DemonicCity.StrengthenScene
         private List<string> skillDetailList = new List<string>();
 
         private GameObject skillDetail;
-
+        GameObject button;
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+        }
+
+        public enum BUTTONNAME
+        {
+            BACK,
         }
 
         private void Start()
@@ -156,13 +162,17 @@ namespace DemonicCity.StrengthenScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    GameObject button;
+                    //GameObject button;
                     touchInfo.HitDetection(out button);
 
                     if (button != null)
                     {
                         switch (button.name)
                         {
+                            case "BackToHome":
+                                SceneChanger.SceneChange("Home");
+                                break;
+
                             case "SelectAttributeButton":
                                 if (popUpWindow == null)
                                 {

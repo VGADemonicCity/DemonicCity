@@ -26,7 +26,7 @@ namespace DemonicCity.BattleScene.Skill
         {
             Debug.Log("Activated the 爆炎熱風柱");
             m_attackBuffer = m_battleManager.m_magiaStats.Temp.m_attack * m_incease; // 攻撃力の1/2
-            m_battleManager.m_currentEnemy.Stats.m_hitPoint -= (int)m_attackBuffer; // hpに直接ダメージを与える
+            m_battleManager.CurrentEnemy.Stats.m_hitPoint -= (int)m_attackBuffer; // hpに直接ダメージを与える
         }
 
         protected override void SkillDeactivate()

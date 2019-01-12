@@ -53,7 +53,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 224426694691368936}
-  - component: {fileID: 95347822829930952}
   m_Layer: 5
   m_Name: SelectSceneWindow
   m_TagString: Untagged
@@ -164,24 +163,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 400, y: 200}
   m_EdgeRadius: 0
---- !u!95 &95347822829930952
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1405225728356308}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 5f153fe3f1a1544479f2385fd4462e0e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114115266933477150
 MonoBehaviour:
   m_ObjectHideFlags: 1

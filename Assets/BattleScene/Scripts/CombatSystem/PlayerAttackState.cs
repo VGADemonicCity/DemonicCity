@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
-            m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
+            m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
                 if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
@@ -59,18 +59,18 @@ namespace DemonicCity.BattleScene
             // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("attack process called.");
-            Debug.Log("攻撃する前の[" + m_battleManager.m_currentEnemy.Id + "]の体力 : " + m_battleManager.m_currentEnemy.Stats.m_hitPoint);
+            Debug.Log("攻撃する前の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.m_hitPoint);
 
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_battleManager.m_magiaStats.m_attack - m_battleManager.m_currentEnemy.Stats.m_defense;
+                var damage = m_battleManager.m_magiaStats.m_attack - m_battleManager.CurrentEnemy.Stats.m_defense;
                 if (damage > 0)
                 {
-                    m_battleManager.m_currentEnemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
-                    m_enemyHPGauge.Sync(m_battleManager.m_currentEnemy.Stats.m_hitPoint); // HPGaugeと同期
+                    m_battleManager.CurrentEnemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
+                    m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // HPGaugeと同期
                 }
-                Debug.Log("攻撃した後の[" + m_battleManager.m_currentEnemy.Id + "]の体力 : " + m_battleManager.m_currentEnemy.Stats.m_hitPoint);
+                Debug.Log("攻撃した後の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.m_hitPoint);
 
 
                 return false;
@@ -80,7 +80,7 @@ namespace DemonicCity.BattleScene
             // ==================================
             // イベント呼び出し : StateMachine.
             // ==================================
-            if (m_battleManager.m_currentEnemy.Stats.m_hitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
+            if (m_battleManager.CurrentEnemy.Stats.m_hitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
             {
                 // ==================================
                 // イベント呼び出し : StateMachine.EnemyAttack

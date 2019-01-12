@@ -62,10 +62,7 @@ namespace DemonicCity.ResultScene
 
         /// <summary>ゲージが変動する際の増加量</summary>
         private float addAmount = 0.02f;
-
-        /// <summary>経験値ゲージ</summary>
-        [SerializeField] private Image expGauge;
-
+        
         /// <summary>現在のレベルテキスト</summary>
         [SerializeField] TextMeshProUGUI levelText;
 
@@ -87,25 +84,33 @@ namespace DemonicCity.ResultScene
         /// <summary>次のレベルアップに必要な街破壊数テキスト</summary>
         [SerializeField] TextMeshProUGUI needExpText;
 
+        /// <summary>オブジェクトの生成先</summary>
         [SerializeField] private Transform parent;
 
         /// <summary>次の章へ進むかホームへ戻るかを選択するウィンドウ</summary>
         [SerializeField] private GameObject selectSceneWindow;
 
+        /// <summary>経験値ゲージ</summary>
+        [SerializeField] private Slider expSlider;
+
+        /// <summary>ポップアップウィンドウを一時的に保持する変数</summary>
         private GameObject popUpWindow;
 
         /// <summary>画面をタップした回数</summary>
         private int touchCount = 0;
 
-        /// <summary>次の章</summary>
-        Progress.StoryProgress storyProgress;
+        ///// <summary>次の章</summary>
+        //Progress.StoryProgress storyProgress;
+
+        /// <summary>アニメーションコルーチン</summary>
+        private IEnumerator coroutine;
 
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
             panelCounter = new PanelCounter();
-            storyProgress = new Progress.StoryProgress();
+            //       storyProgress = new Progress.StoryProgress();
         }
 
         private void Start()
@@ -120,60 +125,41 @@ namespace DemonicCity.ResultScene
                     switch (touchCount)
                     {
                         case 0:
-                            StartCoroutine("AnimationExpGauge");
+                            coroutine = AnimationExpGauge(1.2f);
+                            StartCoroutine(coroutine);
                             touchCount = 1;
                             break;
                         case 1:
-                            //アニメーションをスキップ
+                            StopCoroutine(coroutine);
+                            //アニメーション演出を高速再生
+                            coroutine = AnimationExpGauge(5.0f);
+                            StartCoroutine(coroutine);
                             touchCount = 2;
                             break;
                         case 2:
-                            if (popUpWindow == null)
-                            {
-                                popUpWindow = Instantiate(selectSceneWindow, parent);
-
-                            }
+                            //シナリオへ
+                            SceneChanger.SceneChange(SceneName.Story);
                             break;
-                    }
-
-                    GameObject button;
-                    touchInfo.HitDetection(out button);
-
-                    if (button != null)
-                    {
-                        switch (button.name)
-                        {
-                            case "LoadHomeScene":
-                                SceneManager.LoadScene("HomeScene");
-                                break;
-                            case "LoadNextChapter":
-
-                                break;
-                        }
-
-                    }
-                    else
-                    {
-                        if (popUpWindow != null)
-                        {
-                            Destroy(popUpWindow);
-
-                        }
                     }
                 }
             });
         }
 
+        private void Update()
+        {
+            needExpText.text = (expSlider.maxValue - expSlider.value).ToString("f0");
+        }
+
         /// <summary>経験値ゲージのアニメーション演出</summary>
         /// <returns></returns>
-        private IEnumerator AnimationExpGauge()
+        private IEnumerator AnimationExpGauge(float magnification)
         {
             while (currentExp < updatedExp)
             {
                 currentExp += addAmount;
-                expGauge.fillAmount = currentExp / requiredExp;
-
-                if (expGauge.fillAmount >= 1)
+                expSlider.maxValue = requiredExp;
+                expSlider.value = currentExp;
+                if(expSlider.value >= expSlider.maxValue)
                 {
                     popUpWindow = Instantiate(levelUpImage, parent);
                     Destroy(popUpWindow, 2);
@@ -181,8 +167,9 @@ namespace DemonicCity.ResultScene
                     updatedExp -= requiredExp;
                     currentExp -= requiredExp;
                     requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
+                    expSlider.maxValue = requiredExp;
                     currentlevel += 1;
-                    needExp = requiredExp - currentExp;
+                    needExp = expSlider.maxValue - expSlider.value;
                     if (needExp < 0)
                     {
                         needExp = -needExp;
@@ -198,15 +185,13 @@ namespace DemonicCity.ResultScene
                     {
                         updatedBasicStatusTexts[a].enabled = true;
                     }
-                    addAmount *= 1.2f;
+                    addAmount *= magnification;
                     UpdateText();
-                    expGauge.fillAmount = 0;
-
+                    expSlider.value = 0;
                 }
                 yield return new WaitForSeconds(0.01f);
             }
         }
-
 
         /// <summary>バトル前のステータスを表示</summary>
         public void LoadBeforeStatus()
@@ -225,7 +210,7 @@ namespace DemonicCity.ResultScene
             //currentExp = magia.TotalExperience;
             //destructionCount = panelCounter.TotalDestructionCount;
             currentExp = 4;
-            destructionCount = 10;
+            destructionCount = 20;
 
             needExp = requiredExp - currentExp;
             if (needExp < 0)
@@ -235,7 +220,8 @@ namespace DemonicCity.ResultScene
             updatedExp = currentExp + destructionCount;
             requiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
 
-            expGauge.fillAmount = currentExp / requiredExp;
+            expSlider.maxValue = requiredExp;
+            expSlider.value = currentExp;
 
             getStatusPoint = magia.AllocationPoint;
         }
@@ -253,7 +239,7 @@ namespace DemonicCity.ResultScene
             updatedBasicStatusTexts[2].text = updatedDefense.ToString();
 
             destructionCountText.text = destructionCount.ToString();
-            needExp = Mathf.CeilToInt(needExp);
+            //needExp = Mathf.CeilToInt(needExp);
             needExpText.text = needExp.ToString();
             getStatusPointText.text = getStatusPoint.ToString();
         }
