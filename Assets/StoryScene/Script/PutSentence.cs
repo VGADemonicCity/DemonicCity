@@ -19,12 +19,12 @@ namespace DemonicCity.StoryScene
         /// <summary>/// /// </summary>
         int charCount = 0;
         /// <summary>コルーチンが終了しているか </summary>
-        public bool end = false;
+        bool end = true;
         /// <summary>全文表示しているか</summary>
         public bool onoff;
         /// <summary>コルーチンを保存する</summary>
         IEnumerator feedCoroutine;
-
+        public bool End { get { return end; } set { end = value; } }
 
         void Awake()
         {
@@ -33,7 +33,7 @@ namespace DemonicCity.StoryScene
         /// <summary>/// コルーチンを終了のフラグを立て、全文表示する/// </summary>
         public void Totrue()
         {
-            end = true;
+            End = true;
             text.text = sentence;
             //Debug.Log("true");
         }
@@ -43,7 +43,7 @@ namespace DemonicCity.StoryScene
         public bool A(string s)
         {
             //Debug.Log("A");
-            if (end)
+            if (End)
             {
                 onoff = true;
             }
@@ -96,7 +96,7 @@ namespace DemonicCity.StoryScene
 
                 yield return new WaitForSeconds(charFeedSpeed);
             }
-            end = true;
+            End = true;
         }
 
         /// <summary>テキストをすべて表示する。</summary>
@@ -104,23 +104,23 @@ namespace DemonicCity.StoryScene
         {
             if (feedCoroutine != null) { StopCoroutine(feedCoroutine); }
             text.text = sentence;
-            end = true;
+            End = true;
         }
         /// <summary>コルーチンを開始</summary>
         public bool CallSentence(string s)
         {
-            if (end)
+            if (End)
             {
                 feedCoroutine = SentenceFeed(s);
                 StartCoroutine(feedCoroutine);
-                end = false;
+                End = false;
 
             }
             else
             {
             }
 
-            return end;
+            return End;
         }
 
 

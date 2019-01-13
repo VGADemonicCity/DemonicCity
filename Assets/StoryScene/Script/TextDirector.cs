@@ -127,8 +127,13 @@ namespace DemonicCity.StoryScene
             SceneFader.SceneTitle toScene;
             if (EnumCommon.TryParse(content, out toScene))
             {
+                Debug.Log(toScene);
                 Progress.Instance.ThisQuestProgress += 1;
                 fader.FadeOut(toScene, 0.5f);
+            }
+            else
+            {
+                Debug.Log(toScene);
             }
             //EndStaging();
         }
