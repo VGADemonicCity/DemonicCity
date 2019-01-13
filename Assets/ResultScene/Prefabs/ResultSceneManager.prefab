@@ -51,7 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40017a99a7eba5c4789a018327e90640, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expGauge: {fileID: 0}
   levelText: {fileID: 0}
   currentBasicStatusTexts:
   - {fileID: 0}
@@ -70,3 +69,5 @@ MonoBehaviour:
   selectSceneWindow: {fileID: 1405225728356308, guid: 06e83515bf9d3154582387b5ef2dd049,
     type: 2}
   expSlider: {fileID: 0}
+  twoChoicesWindow: {fileID: 1865458201381436, guid: 3a55633e52c5fd6479aab55b0d22f523,
+    type: 2}

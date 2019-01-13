@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4279791964626406}
   - component: {fileID: 212500557230291682}
   - component: {fileID: 95542251052286168}
+  - component: {fileID: 114336381541017238}
   m_Layer: 0
   m_Name: Magia
   m_TagString: Player
@@ -61,7 +62,7 @@ Animator:
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114336381541017238
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758138740521478}

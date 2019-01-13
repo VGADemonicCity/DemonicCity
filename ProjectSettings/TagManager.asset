@@ -20,9 +20,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Panel
+  - PanelFrame
+  - Character
   - 
   - 
   - 
@@ -47,4 +47,22 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 187450691
+    locked: 0
+  - name: Character
+    uniqueID: 113775455
+    locked: 0
+  - name: PanelFrame
+    uniqueID: 2882982539
+    locked: 0
+  - name: Panel
+    uniqueID: 2146741605
+    locked: 0
+  - name: Effect
+    uniqueID: 3050110061
+    locked: 0
+  - name: UI
+    uniqueID: 2985162997
     locked: 0
