@@ -11,7 +11,7 @@ namespace DemonicCity
     /// Magia.
     /// </summary>
     [Serializable]
-    public class Magia : MonoSingleton<Magia>
+    public class Magia : SavableSingletonBase<Magia>
     {
 
         /// <summary>パッシブスキルフラグのプロパティ</summary>
@@ -36,7 +36,6 @@ namespace DemonicCity
             get { return m_allocationPoint; }
             set { m_allocationPoint = value; }
         }
-
         /// <summary>m_attributeのプロパティ</summary>
         public Attribute MyAttribute
         {
@@ -232,6 +231,8 @@ namespace DemonicCity
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
 
+
+
         /// <summary>
         /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する
         /// </summary>
@@ -247,15 +248,6 @@ namespace DemonicCity
             { 
 
             });
-        }
-
-        /// <summary>
-        /// シーン遷移で破壊されないオブジェクトにする
-        /// </summary>
-        public override void OnInitialize()
-        {
-            base.OnInitialize();
-            DontDestroyOnLoad(Instance);
         }
 
         /// <summary>属性</summary>

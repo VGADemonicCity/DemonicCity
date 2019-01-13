@@ -44,7 +44,7 @@ namespace DemonicCity.StoryScene
         void Start()
         {
             //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
-            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
+            touchGestureDetector.onGestureDetected.AddListener((UnityEngine.Events.UnityAction<TouchGestureDetector.Gesture, TouchGestureDetector.TouchInfo>)((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
@@ -59,7 +59,7 @@ namespace DemonicCity.StoryScene
                             DivideTexts();
                             return;
                         }
-                        flag = putSentence[talkPosition].end;
+                        flag = putSentence[talkPosition].End;
                         if (flag)
                         {
                             if (texts.Count <= textIndex ||
@@ -72,7 +72,7 @@ namespace DemonicCity.StoryScene
                             {
                                 textIndex += 1;
                             }
-                            putSentence[talkPosition].end = false;
+                            putSentence[talkPosition].End = false;
                         }
                         else
                         {
@@ -135,7 +135,7 @@ namespace DemonicCity.StoryScene
 
                 //        }
                 //    }
-            });
+            }));
 
             TextReset();
             SetText();
