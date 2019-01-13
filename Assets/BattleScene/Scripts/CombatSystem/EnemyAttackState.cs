@@ -16,7 +16,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Start()
         {
-            m_battleManager.m_behaviourByState.AddListener((state) => // ステートマシンにイベント登録
+            m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
                 if (state != BattleManager.StateMachine.State.EnemyAttack) // StateがEnemyAttack以外の時は処理終了
                 {
@@ -45,7 +45,7 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_battleManager.m_currentEnemy.Stats.m_attack - m_battleManager.m_magiaStats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
+                var damage = m_battleManager.CurrentEnemy.Stats.m_attack - m_battleManager.m_magiaStats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
                 if(damage > 0)
                 {
                     m_battleManager.m_magiaStats.m_hitPoint -= damage; // ダメージ

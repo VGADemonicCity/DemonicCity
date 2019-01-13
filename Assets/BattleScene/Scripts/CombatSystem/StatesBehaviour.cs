@@ -12,6 +12,8 @@ namespace DemonicCity.BattleScene
     {
         /// <summary>PanelFrameManagerの参照</summary>
         protected PanelFrameManager m_panelFrameManager;
+        /// <summary>GameManagerの参照</summary>
+        protected GameManager m_gameManager;
         /// <summary>BattleManagerの参照</summary>
         protected BattleManager m_battleManager;
         /// <summary>PanelManagerの参照</summary>
@@ -33,8 +35,8 @@ namespace DemonicCity.BattleScene
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
+            m_gameManager = GameManager.Instance; // Magiaの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得
-
         }
 
         /// <summary>
@@ -43,11 +45,11 @@ namespace DemonicCity.BattleScene
         /// <param name="state">State machine.</param>
         protected void SetStateMachine(BattleManager.StateMachine.State state)
         {
-            m_battleManager.m_stateMachine.m_state = state; // stateをセット
+            m_battleManager.m_StateMachine.m_state = state; // stateをセット
             // ==================================
             // イベント呼び出し
             // ==================================
-            m_battleManager.m_behaviourByState.Invoke(state);
+            m_battleManager.m_BehaviourByState.Invoke(state);
         }
     }
 }

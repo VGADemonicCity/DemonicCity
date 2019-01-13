@@ -67,7 +67,7 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
-            m_battleManager.m_behaviourByState.AddListener((state) =>
+            m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if (state == BattleManager.StateMachine.State.Init) // init時に初期化する
                 {

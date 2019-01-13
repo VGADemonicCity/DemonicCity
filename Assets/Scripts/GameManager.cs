@@ -10,18 +10,32 @@ namespace DemonicCity
     /// </summary>
     public class GameManager : MonoSingleton<GameManager>
     {
-        [SerializeField] private float m_fadeTime = 1f;
-
-        SceneFader fader;
-        private void Start()
+        /// <summary>現在のチャプター</summary>
+        public Chapter CurrentChapter
         {
-            fader = SceneFader.Instance;
+            get { return m_currentChapter; }
+            set { m_currentChapter = value; }
+        }
+
+        /// <summary>Scene遷移に掛ける時間</summary>
+        [SerializeField]  float m_fadeTime = 1f;
+
+        /// <summary></summary>
+        SceneFader m_sceneFader;
+        /// <summary></summary>
+        ChapterManager m_chapterManager;
+        Chapter m_currentChapter;
+
+        private void Awake()
+        {
+            m_sceneFader = SceneFader.Instance;
 
             SceneManager.sceneLoaded += ((scene, mode) =>
             {
-                fader.FadeIn();
+                m_sceneFader.FadeIn(); // SceneLoad時の画面演出
             });
         }
+
 
 
         /// <summary>

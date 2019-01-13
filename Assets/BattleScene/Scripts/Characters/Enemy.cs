@@ -39,7 +39,7 @@ namespace DemonicCity.BattleScene
             m_animator = GetComponent<Animator>();
 
             m_battleManager = BattleManager.Instance;
-            m_battleManager.m_behaviourByState.AddListener((state) =>
+            m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if(state != BattleManager.StateMachine.State.EnemyAttack)
                 {

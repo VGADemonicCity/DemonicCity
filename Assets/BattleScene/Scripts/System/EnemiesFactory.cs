@@ -15,7 +15,7 @@ namespace DemonicCity
         List<GameObject> enemies;
 
         /// <summary>
-        /// Chapterクラスに設定されているIdを元にそのチャプターで登場する敵オブジェクトをリストにして返す
+        /// Chapterクラスに設定されているIdを元にそのチャプターで登場する敵オブジェクトをIdの順番通りにリストにして返す
         /// </summary>
         /// <returns>The create.</returns>
         /// <param name="chapter">Chapter.</param>
