@@ -3,13 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Panel
-  - PanelFrame
-  - Button
-  - Enemy
-  - PlayerSkillGauge
-  - ShufflePanels
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -48,39 +42,20 @@ TagManager:
     uniqueID: 0
     locked: 0
   - name: Background
-<<<<<<< HEAD
-    uniqueID: 187450691
+    uniqueID: 1329916587
     locked: 0
   - name: Character
-    uniqueID: 113775455
+    uniqueID: 2212561131
     locked: 0
   - name: PanelFrame
-    uniqueID: 2882982539
+    uniqueID: 2473986729
     locked: 0
   - name: Panel
-    uniqueID: 2146741605
+    uniqueID: 234603309
     locked: 0
   - name: Effect
-    uniqueID: 3050110061
+    uniqueID: 1157972191
     locked: 0
   - name: UI
-    uniqueID: 2985162997
-=======
-    uniqueID: 2897044313
-    locked: 0
-  - name: Caractor
-    uniqueID: 1197557623
-    locked: 0
-  - name: UI
-    uniqueID: 3201141085
-    locked: 0
-  - name: PanelFrame
-    uniqueID: 921460269
-    locked: 0
-  - name: Panel
-    uniqueID: 1466581227
-    locked: 0
-  - name: Effect
-    uniqueID: 2573241901
->>>>>>> Develop
+    uniqueID: 469756773
     locked: 0
