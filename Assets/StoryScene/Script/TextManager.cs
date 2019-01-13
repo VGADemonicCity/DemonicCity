@@ -77,29 +77,26 @@ namespace DemonicCity.StoryScene
 
 
             SetText(progress.ThisQuestProgress.ToString() + ".json");
-            DivideTexts();
-            flag = putSentence.A(texts[textIndex].sentence);
+            TextsDraw();
         }
         /// <summary>
         /// 次の行を再生する。
         /// </summary>
         public void TextsDraw()
         {
-            if (putSentence.end)
+            if (putSentence.End)
             {
-                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
-                {
-                    textIndex += 1;
-                }
                 if (DivideTexts())
                 {
                     flag = putSentence.CallSentence(texts[textIndex].sentence);
-
                 }
                 else
                 {
                     director.Staging(texts[textIndex]);
-
+                }
+                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
+                {
+                    textIndex += 1;
                 }
             }
             else
