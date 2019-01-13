@@ -11,7 +11,7 @@ namespace DemonicCity
     /// Magia.
     /// </summary>
     [Serializable]
-    public class Magia : SavableSingletonBase<Magia>
+    public class Magia : MonoSingleton<Magia>
     {
 
         /// <summary>パッシブスキルフラグのプロパティ</summary>
