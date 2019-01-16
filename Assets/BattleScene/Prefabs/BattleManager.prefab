@@ -78,7 +78,7 @@ GameObject:
   - component: {fileID: 114177336636838174}
   - component: {fileID: 114212980024678998}
   m_Layer: 0
-  m_Name: Battle_Manager
+  m_Name: BattleManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -235,7 +235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1947101f5d825954585b59f9e0cce558, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_filePath: UniqueSkillManager
   m_uniqueSkillGauge: {fileID: 0}
   m_condition: 0
   m_flag: 0
@@ -302,19 +301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemy:
-    m_id: Nahura
-    m_stats:
-      m_level: 0
-      m_durability: 0
-      m_muscularStrength: 0
-      m_knowledge: 0
-      m_sense: 0
-      m_charm: 0
-      m_dignity: 0
-      m_hitPoint: 40000
-      m_attack: 7000
-      m_defense: 5000
   m_magiaStats:
     m_level: 0
     m_durability: 0
@@ -326,6 +312,10 @@ MonoBehaviour:
     m_hitPoint: 0
     m_attack: 0
     m_defense: 0
+  m_enemyObjects: []
+  m_enemies: []
+  m_CoordinateForSpawn: {fileID: 4184631970027960, guid: 229cbc9cd28fc468596fbd71b9b5445b,
+    type: 2}
 --- !u!114 &114306332384846622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -540,6 +530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_magiaHPGauge: {fileID: 0}
   m_enemyHPGauge: {fileID: 0}
+  m_spawnSpacingValue: -5
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1

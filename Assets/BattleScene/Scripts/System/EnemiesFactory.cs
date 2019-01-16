@@ -12,7 +12,7 @@ namespace DemonicCity
     public class EnemiesFactory : SingletonBase<EnemiesFactory>
     {
         /// <summary>バトルに登場させる敵オブジェクトのリスト</summary>
-        List<GameObject> enemies;
+        List<GameObject> enemies = new List<GameObject>();
 
         /// <summary>
         /// Chapterクラスに設定されているIdを元にそのチャプターで登場する敵オブジェクトをIdの順番通りにリストにして返す
@@ -45,10 +45,14 @@ namespace DemonicCity
             Barl,
             /// <summary>イクスマギナ</summary>
             Ixmagina,
-            MobRed,
-            MobBlue,
-
-
+            /// <summary>一本角魔族</summary>
+            SingleCorner,
+            /// <summary>二本角魔族</summary>
+            DoubleCorner,
+            /// <summary>反面魔族長</summary>
+            HalfMask,
+            /// <summary>セトゥラス</summary>
+            Setulus,
         }
     }
 }
