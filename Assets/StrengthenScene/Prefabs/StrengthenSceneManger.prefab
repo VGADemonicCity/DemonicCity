@@ -51,8 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a8ebe379c2fef44cba7445a90f74860, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ConfirmAndResetButtons: {fileID: 1674951563613998, guid: c32613f7e2ee5214c91d2978afb02b7e,
-    type: 2}
   currentAttributeText: {fileID: 0}
   currentBasicStatusTexts:
   - {fileID: 0}
@@ -85,14 +83,11 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f9a12500d8351984ca3c8cd5d61165e6, type: 3}
   - {fileID: 21300000, guid: c76269d1fa4e5ff45865a8277145b68c, type: 3}
   - {fileID: 21300000, guid: b33453e668c7bc541b71b2782f8fe0a0, type: 3}
-  confirmWarningMessageWindow: {fileID: 1371298462574606, guid: f81b85a9447a247428c677ce4bef8822,
-    type: 2}
-  resetWarningMessageWindow: {fileID: 1399544972814254, guid: 48d99a410442ed545b3edb5b86f29cef,
-    type: 2}
-  parent: {fileID: 0}
-  selectAttributeWindow: {fileID: 1615712432687040, guid: 3a30d7c817f6d9b4889e9dc0cd1a5985,
-    type: 2}
-  skillListWindow: {fileID: 1643743676037524, guid: 835454e91309bf74fab5dc65235e622d,
-    type: 2}
-  skillDescriptionText: {fileID: 1524544117648916, guid: 2bd8271a36e87f143885477a520403e9,
-    type: 2}
+  confirmWarningMessageWindow: {fileID: 0}
+  resetWarningMessageWindow: {fileID: 0}
+  confirmResetButtons: {fileID: 0}
+  selectAttributeWindow: {fileID: 0}
+  skillListWindow: {fileID: 0}
+  skillDescriptionText:
+  - {fileID: 0}
+  - {fileID: 0}
