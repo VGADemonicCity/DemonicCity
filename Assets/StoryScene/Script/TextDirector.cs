@@ -129,7 +129,7 @@ namespace DemonicCity.StoryScene
             {
                 Debug.Log(toScene);
                 Progress.Instance.ThisQuestProgress += 1;
-                fader.FadeOut(toScene, 0.5f);
+                fader.FadeOut(SceneFader.SceneTitle.Home, 0.5f);
             }
             else
             {
