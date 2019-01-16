@@ -13,7 +13,7 @@ namespace DemonicCity.HomeScene
     public class WindowManager : MonoBehaviour
     {
         public TouchGestureDetector touchGestureDetector;
-        
+        SceneFader sceneFader;
         //Color windowColor = new Color(1, 1, 1, 0.9f);
         [SerializeField] GameObject[] parents = new GameObject[(int)Window.Last];
         [SerializeField] GameObject[] windowObjects = new GameObject[(int)Window.Last];
@@ -25,6 +25,7 @@ namespace DemonicCity.HomeScene
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
+            sceneFader = SceneFader.Instance;
         }
         // Use this for initialization
         void Start()
@@ -48,8 +49,8 @@ namespace DemonicCity.HomeScene
                 {
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
-                        if (touchInfo.HitDetection(out endObject, buttonObjects[i])
-                        && buttonObjects[i])
+                        if (touchInfo.HitDetection(out endObject)
+                        && endObject == buttonObjects[i])
                         {
                             if (beginObject == endObject)
                             {
@@ -57,15 +58,15 @@ namespace DemonicCity.HomeScene
                                 switch ((Window)i)
                                 {
                                     case Window.Growth:
-                                        SceneChanger.SceneChange(SceneName.Strengthen);
+                                        sceneFader.FadeOut(SceneFader.SceneTitle.Strengthen);
                                         break;
                                     case Window.Story:
-                                        SceneChanger.SceneChange(SceneName.StorySelect);
+                                        sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
                                         break;
                                     case Window.Summon:
                                         if (true)//一部クリアフラグ
                                         {
-                                            SceneChanger.SceneChange(SceneName.Home);
+                                            sceneFader.FadeOut(SceneFader.SceneTitle.Home);
                                         }
                                         break;
                                     case Window.Config:

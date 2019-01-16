@@ -10,9 +10,15 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class SceneMover : MonoBehaviour
     {
-        public void MovingScene()
+        SceneFader m_sceneFader;
+        private void Start()
         {
-            SceneManager.LoadScene("Battle");
+            m_sceneFader = SceneFader.Instance;
+        }
+
+        public void OnClick()
+        {
+            m_sceneFader.FadeOut(SceneFader.SceneTitle.Home);
         }
     }
 }

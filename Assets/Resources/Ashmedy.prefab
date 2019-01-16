@@ -9,48 +9,49 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1758138740521478}
+  m_RootGameObject: {fileID: 1327912409227080}
   m_IsPrefabAsset: 1
---- !u!1 &1758138740521478
+--- !u!1 &1327912409227080
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4279791964626406}
-  - component: {fileID: 212500557230291682}
-  - component: {fileID: 95542251052286168}
-  m_Layer: 0
-  m_Name: Magia
-  m_TagString: Player
+  - component: {fileID: 4866127432364854}
+  - component: {fileID: 212489472529952678}
+  - component: {fileID: 95204437066560128}
+  - component: {fileID: 114250633123588026}
+  m_Layer: 10
+  m_Name: Ashmedy
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4279791964626406
+--- !u!4 &4866127432364854
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1758138740521478}
+  m_GameObject: {fileID: 1327912409227080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.54, y: 2.28, z: 0}
-  m_LocalScale: {x: 1.0982974, y: 1.0982974, z: 1.0982974}
+  m_LocalPosition: {x: -1.7437475, y: -3.4399822, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!95 &95542251052286168
+--- !u!95 &95204437066560128
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1758138740521478}
+  m_GameObject: {fileID: 1327912409227080}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 424128a33a1b24cd79a2c1af20180144, type: 2}
+  m_Controller: {fileID: 9100000, guid: ac18f17e97c954d888374bdd00e934b6, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -59,12 +60,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!212 &212500557230291682
+--- !u!114 &114250633123588026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1327912409227080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74d2839edf2e74bc48d1ce4cdf25a3da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_id: 1
+  m_stats:
+    m_level: 0
+    m_durability: 0
+    m_muscularStrength: 0
+    m_knowledge: 0
+    m_sense: 0
+    m_charm: 0
+    m_dignity: 0
+    m_hitPoint: 1900
+    m_attack: 900
+    m_defense: 550
+  m_animator: {fileID: 95204437066560128}
+--- !u!212 &212489472529952678
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1758138740521478}
+  m_GameObject: {fileID: 1327912409227080}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -91,10 +116,10 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1197557623
+  m_SortingLayerID: -2082406165
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5ef6ebf9fae374630a4a1c8cbc9e14a4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d328b566185a444539341d33ade639d3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

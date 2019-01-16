@@ -8,12 +8,13 @@ namespace DemonicCity.StorySelectScene
         TouchGestureDetector touchGestureDetector;
 
         GameObject beginObject, endObject;
-
+        SceneFader sceneFader;
 
 
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
+            sceneFader = SceneFader.Instance;
         }
         void Start()
         {
@@ -22,18 +23,21 @@ namespace DemonicCity.StorySelectScene
                 switch (gesture)
                 {
                     case TouchGestureDetector.Gesture.TouchBegin:
-                        touchInfo.HitDetection(out beginObject, gameObject);
+                        touchInfo.HitDetection(out beginObject);
                         break;
 
                     case TouchGestureDetector.Gesture.Click:
-                        if (touchInfo.HitDetection(out endObject, gameObject))
+                        if (touchInfo.HitDetection(out endObject))
                         {
-                            if (beginObject == endObject)
+                            Debug.Log(beginObject.GetHashCode());
+                            Debug.Log(gameObject.GetHashCode());
+                            Debug.Log(endObject.GetHashCode());
+
+                            if (beginObject == endObject
+                            && beginObject == gameObject)
                             {
-                                SceneChanger.SceneChange(SceneName.Home);
+                                sceneFader.FadeOut(SceneFader.SceneTitle.Home);
                             }
-
-
                         }
                         break;
 

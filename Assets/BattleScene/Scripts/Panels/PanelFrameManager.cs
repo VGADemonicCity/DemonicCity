@@ -37,15 +37,12 @@ namespace DemonicCity.BattleScene
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
-        /// <summary>パネルフレームの初期座標</summary>
-        Vector2 m_panelFlamePosition;
         /// <summary>パネル枠が動いている最中はフラグ</summary>
         bool m_wait;
 
         public void Start()
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
-            m_panelFlamePosition = transform.position; // パネル枠の初期位置を保存する
 
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>

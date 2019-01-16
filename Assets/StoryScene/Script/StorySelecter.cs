@@ -8,7 +8,7 @@ namespace DemonicCity.StorySelectScene
     {
         Progress progress;
         Progress.StoryProgress MyStory;
-
+        SceneFader sceneFader;
         [SerializeField] ChapterManager chapterManager;
         [SerializeField] RectTransform parent;
         [SerializeField] GameObject SelectButton;
@@ -17,6 +17,7 @@ namespace DemonicCity.StorySelectScene
         {
             progress = Progress.Instance;
             chapterManager = ChapterManager.Instance;
+            sceneFader = SceneFader.Instance;
         }
         void Start()
         {
@@ -36,7 +37,7 @@ namespace DemonicCity.StorySelectScene
             Debug.Log(chapter.ToString());
             progress.ThisStoryProgress = chapter;
             progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
-            SceneChanger.SceneChange(SceneName.Story);
+            sceneFader.FadeOut(SceneFader.SceneTitle.Story);
         }
 
     }

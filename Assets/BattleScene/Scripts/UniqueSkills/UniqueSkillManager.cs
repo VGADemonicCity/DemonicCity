@@ -33,8 +33,6 @@ namespace DemonicCity.BattleScene
         TouchGestureDetector m_touchGestureDetector;
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
-        /// <summary>PanelManagerの参照</summary>
-        PanelManager m_panelManager;
         /// <summary>Magiaの参照</summary>
         Magia m_magia;
 
@@ -42,7 +40,6 @@ namespace DemonicCity.BattleScene
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
-            m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_magia = Magia.Instance; // 参照取得
         }
 

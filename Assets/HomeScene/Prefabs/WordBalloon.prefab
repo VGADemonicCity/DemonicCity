@@ -105,7 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 114395913499035314}
-  end: 0
   onoff: 0
 --- !u!114 &114308240211066598
 MonoBehaviour:
@@ -118,8 +117,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca682765786dfd744b2e748d57718954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  director: {fileID: 0}
+  parentTransform: {fileID: 0}
+  characterObjects: []
+  isStaging: 0
   touchGestureDetector: {fileID: 0}
   putSentence: {fileID: 114041601255472716}
+  nameObj: {fileID: 0}
 --- !u!114 &114395913499035314
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -278,8 +282,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 921460269
-  m_SortingLayer: 4
+  m_SortingLayerID: 469756773
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -316,7 +320,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
-  m_SortingLayerID: -1721725395
+  m_SortingLayerID: 469756773
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224217475447294890

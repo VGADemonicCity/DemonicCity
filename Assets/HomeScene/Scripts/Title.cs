@@ -7,10 +7,10 @@ namespace DemonicCity.HomeScene
     public class Title : MonoBehaviour
     {
         TouchGestureDetector touchGestureDetector;
-
+        SceneFader sceneFader;
         private void Awake()
         {
-            
+            sceneFader = SceneFader.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
         }
 
@@ -29,7 +29,7 @@ namespace DemonicCity.HomeScene
         }
         public void ToHome()
         {
-            SceneChanger.SceneChange(SceneName.Home);
+            sceneFader.FadeOut(SceneFader.SceneTitle.Home);
         }
     }
 }

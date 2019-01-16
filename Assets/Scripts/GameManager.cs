@@ -17,9 +17,6 @@ namespace DemonicCity
             set { m_currentChapter = value; }
         }
 
-        /// <summary>Scene遷移に掛ける時間</summary>
-        [SerializeField]  float m_fadeTime = 1f;
-
         /// <summary></summary>
         SceneFader m_sceneFader;
         /// <summary></summary>
