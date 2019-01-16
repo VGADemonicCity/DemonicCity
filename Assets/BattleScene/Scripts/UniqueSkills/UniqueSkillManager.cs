@@ -60,7 +60,7 @@ namespace DemonicCity.BattleScene
                 touchInfo.HitDetection(out hitResult);
 
                 // クリック時 && プレイヤー選択時 && ユニークスキルフラグtrueの時 && タッチしたゲームオブジェクトのタグが"PlayerSkillGauge"の時
-                if (gesture == TouchGestureDetector.Gesture.Click && m_battleManager.m_StateMachine.m_state == BattleManager.StateMachine.State.PlayerChoice && SkillFlag == true && hitResult != null)
+                if (gesture == TouchGestureDetector.Gesture.Click && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice && SkillFlag == true && hitResult != null)
                 {
                     if (hitResult.tag != "PlayerSkillGauge")
                     {

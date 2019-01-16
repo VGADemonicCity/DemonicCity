@@ -32,7 +32,6 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 StartCoroutine(Activate());
             });
-
         }
 
         IEnumerator Activate()

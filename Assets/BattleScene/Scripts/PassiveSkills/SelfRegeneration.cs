@@ -27,14 +27,14 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 自己再生");
-            m_hitPointBuffer = m_panelCounter.DestructionCount * m_battleManager.m_magiaStats.Temp.m_hitPoint * m_incease; // 丸め込み対策の為に一度変数に保存
-            m_battleManager.m_magiaStats.m_hitPoint += (int)m_hitPointBuffer; // ここでintに変換
+            m_hitPointBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.m_hitPoint * m_incease; // 丸め込み対策の為に一度変数に保存
+            m_battleManager.m_MagiaStats.m_hitPoint += (int)m_hitPointBuffer; // ここでintに変換
 
-            if (m_battleManager.m_magiaStats.m_hitPoint > m_battleManager.m_magiaStats.MaxHP) // もしMaxHPを越したら
+            if (m_battleManager.m_MagiaStats.m_hitPoint > m_battleManager.m_MagiaStats.MaxHP) // もしMaxHPを越したら
             {
-                m_battleManager.m_magiaStats.m_hitPoint = m_battleManager.m_magiaStats.MaxHP; // hpをmaxに戻す
+                m_battleManager.m_MagiaStats.m_hitPoint = m_battleManager.m_MagiaStats.MaxHP; // hpをmaxに戻す
             }
-            m_magiaHPGauge.Sync(m_battleManager.m_magiaStats.m_hitPoint); // HPGaugeと同期
+            m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.m_hitPoint); // HPGaugeと同期
         }
 
         protected override void SkillDeactivate()

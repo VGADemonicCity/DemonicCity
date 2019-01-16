@@ -35,7 +35,7 @@ namespace DemonicCity.BattleScene
                     Debug.Log("m_enemyObjectsが設定されていません");
                 }
 
-                switch (m_StateMachine.m_wave)
+                switch (m_StateMachine.m_Wave)
                 {
                     case StateMachine.Wave.FirstWave:
                         return m_enemyObjects[0];
@@ -60,7 +60,7 @@ namespace DemonicCity.BattleScene
                     Debug.Log("m_enemiesが設定されていません");
                 }
 
-                switch (m_StateMachine.m_wave)
+                switch (m_StateMachine.m_Wave)
                 {
                     case StateMachine.Wave.FirstWave:
                         return Enemies[0];
@@ -90,11 +90,8 @@ namespace DemonicCity.BattleScene
         #region Field
         /// <summary>StateMacineのUnityEvent</summary>
         public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
-
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Statistics m_magiaStats;
-        /// <summary>バトル用の敵のステータス</summary>
-        [SerializeField] public Statistics m_currentEnemyStats;
+        [SerializeField] public Statistics m_MagiaStats;
         /// <summary>ステートマシン</summary>
         public StateMachine m_StateMachine { get; set; }
         /// <summary>敵キャラのデータベース</summary>
@@ -115,7 +112,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void InitWave()
         {
-            m_StateMachine.m_wave = StateMachine.Wave.FirstWave;
+            m_StateMachine.m_Wave = StateMachine.Wave.FirstWave;
         }
 
         /// <summary>
@@ -123,10 +120,10 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void TryNextWave()
         {
-            if (m_StateMachine.m_wave != StateMachine.Wave.LastWave)
+            if (m_StateMachine.m_Wave != StateMachine.Wave.LastWave)
             {
-                m_StateMachine.m_wave++;
-                Debug.Log(m_StateMachine.m_wave);
+                m_StateMachine.m_Wave++;
+                Debug.Log(m_StateMachine.m_Wave);
                 // ==============================
                 // イベント呼び出し : StateMachine.NextWave
                 // ==============================
@@ -136,7 +133,7 @@ namespace DemonicCity.BattleScene
             // ==============================
             // イベント呼び出し : StateMachine.End
             // ==============================
-            m_BehaviourByState.Invoke(StateMachine.State.End);
+            m_BehaviourByState.Invoke(StateMachine.State.Win);
         }
 
         /// <summary>
@@ -188,8 +185,6 @@ namespace DemonicCity.BattleScene
                 Lose,
                 /// <summary>次のWaveに遷移する時</summary>
                 NextWave,
-                /// <summary>Battle終了時</summary>
-                End,
             }
 
             /// <summary>
@@ -207,9 +202,9 @@ namespace DemonicCity.BattleScene
             }
 
             /// <summary>ステート</summary>
-            public State m_state;
+            public State m_State;
             /// <summary>ウェーブ</summary>
-            public Wave m_wave;
+            public Wave m_Wave;
         }
         #endregion
     }

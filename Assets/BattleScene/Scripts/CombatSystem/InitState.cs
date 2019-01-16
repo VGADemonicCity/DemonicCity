@@ -18,9 +18,11 @@ namespace DemonicCity.BattleScene
         /// <summary>章情報に基づき敵のインスタンスを生成する工場</summary>
         EnemiesFactory m_enemiesFactory;
 
-
+        /// <summary>
+        /// 敵オブジェクト群の生成間隔
+        /// </summary>
         [Header("Parameters")]
-        [SerializeField] float m_spawnSpacingValue = -5f;
+        const float m_spawnSpacing = -5f;
 
         protected override void Awake()
         {
@@ -57,14 +59,18 @@ namespace DemonicCity.BattleScene
             m_enemiesMover.Moving();
 
             m_battleManager.InitWave(); // wave初期化
-            m_battleManager.m_magiaStats = m_magia.GetStats(); // 現在のマギアのステータスをバトル用Statisticsのインスタンスを作る
-            m_battleManager.m_magiaStats.Init(m_battleManager.m_magiaStats); // magiaのステータスを初期化
             m_panelCounter.InitCounts(); // カウント初期化
             m_panelManager.InitPanels(); // パネル初期化
-            m_magiaHPGauge.Initialize(m_battleManager.m_magiaStats.m_hitPoint); // マギアのHP最大値を引数に初期化する
+            m_battleManager.m_MagiaStats = m_magia.GetStats(); // バトル用のStatisticsインスタンスにmagiaのStatsの各値を登録する
+            m_battleManager.m_MagiaStats.Init(m_battleManager.m_MagiaStats); //バトル開始直前の Magiaのステータスの初期値を保存
+            m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); // 敵のステータスを初期化
+            m_magiaHPGauge.Initialize(m_battleManager.m_MagiaStats.m_hitPoint); // マギアのHP最大値を引数に初期化する
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // 敵のHP最大値を引数に初期化する
         }
 
+        /// <summary>
+        /// Waveに出現する敵群を生成する
+        /// </summary>
         private void SpawnEnemies()
         {
             m_chapterManager = ChapterManager.Instance;
@@ -80,7 +86,7 @@ namespace DemonicCity.BattleScene
 
             for (int i = 0; i < m_battleManager.EnemyObjects.Count; i++)
             {
-                spacings = m_battleManager.m_CoordinateForSpawn.position.x + (m_spawnSpacingValue * i);
+                spacings = m_battleManager.m_CoordinateForSpawn.position.x + (m_spawnSpacing * i);
                 spawnPosition.x = spacings;
                 enemyObject = Instantiate(m_battleManager.EnemyObjects[i], spawnPosition, Quaternion.identity, m_battleManager.m_CoordinateForSpawn);
                 m_battleManager.Enemies.Add(enemyObject.GetComponent<Enemy>());

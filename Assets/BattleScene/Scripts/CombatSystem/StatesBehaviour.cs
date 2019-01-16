@@ -51,7 +51,7 @@ namespace DemonicCity.BattleScene
         /// <param name="state">State machine.</param>
         protected void SetStateMachine(BattleManager.StateMachine.State state)
         {
-            m_battleManager.m_StateMachine.m_state = state; // stateをセット
+            m_battleManager.m_StateMachine.m_State = state; // stateをセット
             // ==================================
             // イベント呼び出し
             // ==================================

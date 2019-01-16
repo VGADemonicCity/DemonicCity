@@ -62,7 +62,7 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
-                var damage = m_battleManager.m_magiaStats.m_attack - m_battleManager.CurrentEnemy.Stats.m_defense;
+                var damage = m_battleManager.m_MagiaStats.m_attack - m_battleManager.CurrentEnemy.Stats.m_defense;
                 if (damage > 0)
                 {
                     m_battleManager.CurrentEnemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
@@ -88,9 +88,9 @@ namespace DemonicCity.BattleScene
             else // 敵のHPが0以下だったら
             {
                 m_battleManager.CurrentEnemy.Destroy(); // 敵の破壊処理
-                yield return new WaitWhile(() => m_battleManager.CurrentEnemy != null); // nullになるまで待機
+                yield return new WaitWhile(() => m_battleManager.CurrentEnemy != null); // 敵オブジェクトが破壊される迄待機
 
-                if (m_battleManager.m_StateMachine.m_wave != BattleManager.StateMachine.Wave.LastWave) // 現在のウェーブが最後のウェーブではなかったら
+                if (m_battleManager.m_StateMachine.m_Wave != BattleManager.StateMachine.Wave.LastWave) // 現在のウェーブが最後のウェーブではなかったら
                 {
                     SetStateMachine(BattleManager.StateMachine.State.NextWave);
                 }

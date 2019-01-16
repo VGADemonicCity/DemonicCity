@@ -43,7 +43,7 @@ namespace DemonicCity.BattleScene
             m_battleManager = BattleManager.Instance;
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != BattleManager.StateMachine.State.EnemyAttack)
+                if(state != BattleManager.StateMachine.State.EnemyAttack || this != m_battleManager.CurrentEnemy)
                 {
                     return;
                 }
@@ -57,7 +57,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void OnAttack()
         {
-            Debug.Log("OnAttackが呼ばれたよ");
+            Debug.Log("OnAttackがよばれたよ");
             m_animator.SetTrigger("Attack");
         }
 

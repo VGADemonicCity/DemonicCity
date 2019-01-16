@@ -18,6 +18,10 @@ namespace DemonicCity.BattleScene
                     return;
                 }
                 Debug.Log("Win state called.");
+
+                //=======================
+                //Resultのポップアップ等の処理を書く予定
+                //=======================
             });
         }
     }
