@@ -25,8 +25,8 @@ namespace DemonicCity.StoryScene
         "バアル",
         "イクスマギア",
         "魔王",
-        "？？？",
-        ""
+        "???",
+        "",
         };
 
 

@@ -14,6 +14,7 @@ namespace DemonicCity.StoryScene
         void Awake()
         {
             myFace = GetComponent<Image>();
+            myFace.sprite = faceSprites[(int)FaceIndex.Normal];
         }
 
         public void InportSprite(Sprite[] sprites)
