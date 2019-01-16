@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 4625466939697302}
   - component: {fileID: 212690700636132120}
   - component: {fileID: 95968592173747034}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: MaximizedEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_halflyGaugeIcon: {fileID: 114339975144598904}
   m_fullyGaugeIcon: {fileID: 114400866293903470}
-  m_alphaChannel: 1
+  m_alphaChannel: 0
   m_panelCount: 0
 --- !u!114 &114376447748296498
 MonoBehaviour:
@@ -890,7 +890,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1721725395
-  m_SortingLayer: 5
+  m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300030, guid: 3743c7a14cf89ab4f98948760e273535, type: 3}
   m_Color: {r: 1, g: 0, b: 0.46666667, a: 1}
@@ -1018,7 +1018,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
-  m_SortingLayerID: -1093826211
+  m_SortingLayerID: 469756773
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &224117346237633024

@@ -298,6 +298,7 @@ namespace DemonicCity
             InfernosFist = 256,
             /// <summary>魔王ノ細胞</summary>
             SatansCell = 512,
+            /// <summary>天照権現</summary>
             AmaterasuIncanation = 1024,
             /// <summary>天照-爆炎-</summary>
             AmaterasuInferno = 2048,
