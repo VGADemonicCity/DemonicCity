@@ -309,7 +309,7 @@ namespace DemonicCity
                     if (hit.collider != null) // Raycastにオブジェクトが検出されたら
                     {
                         hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
-                        if (hit.collider.gameObject == targetGameObject) // そのオブジェクトが引数のオブジェクトと一緒なら
+                        if (hit.collider.gameObject == targetGameObject || targetGameObject == null) // そのオブジェクトが引数のオブジェクトと一緒なら
                         {
                             return true; // trueを返す
                         }

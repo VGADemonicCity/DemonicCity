@@ -69,7 +69,7 @@ namespace DemonicCity.StorySelectScene
                     default:
                         break;
                 }
-                Debug.Log(beginObject+"" +endObject);
+                //Debug.Log(beginObject+"" +endObject);
             });
         }
 

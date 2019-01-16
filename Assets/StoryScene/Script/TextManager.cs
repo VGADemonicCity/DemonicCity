@@ -42,6 +42,7 @@ namespace DemonicCity.StoryScene
         bool flag;
         int textIndex = 0;
         public TouchGestureDetector touchGestureDetector;
+        SceneFader sceneFader;
         List<TextStorage> texts = new List<TextStorage>();
         [SerializeField] PutSentence putSentence;
         [SerializeField] TMPro.TMP_Text nameObj;
@@ -49,6 +50,7 @@ namespace DemonicCity.StoryScene
         {
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
+            sceneFader = SceneFader.Instance;
         }
         void Start()
         {
@@ -142,10 +144,10 @@ namespace DemonicCity.StoryScene
         }
         void Staging(TextStorage storage)
         {
-            SceneName outName;
-            if (EnumCommon.TryParse<SceneName>(storage.sentence, out outName))
+            SceneFader.SceneTitle outName;
+            if (EnumCommon.TryParse(storage.sentence, out outName))
             {
-                SceneChanger.SceneChange(outName);
+                sceneFader.FadeOut(outName);
             }
             else
             {

@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4279791964626406}
   - component: {fileID: 212500557230291682}
   - component: {fileID: 95542251052286168}
+  - component: {fileID: 114336381541017238}
   m_Layer: 0
   m_Name: Magia
   m_TagString: Player
@@ -61,7 +62,7 @@ Animator:
   m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114336381541017238
 MonoBehaviour:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1758138740521478}
@@ -120,7 +121,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1197557623
-  m_SortingLayer: 0
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 5ef6ebf9fae374630a4a1c8cbc9e14a4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
