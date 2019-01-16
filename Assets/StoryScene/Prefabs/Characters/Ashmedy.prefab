@@ -43,11 +43,11 @@ MonoBehaviour:
   charName: 4
   facer: 0
   faceSprites:
-  - {fileID: 21300000, guid: c312df736df620c4aa9190220afc8b8e, type: 3}
-  - {fileID: 21300000, guid: f702782333b47fa42b88ffdd3664ad4b, type: 3}
+  - {fileID: 21300000, guid: 04c985a68a762744a8583452f41d3198, type: 3}
+  - {fileID: 21300000, guid: 261241be41ee67d42a2e39722fadd459, type: 3}
   - {fileID: 21300000, guid: b342f7d3bf4df47429e6abd119ce581c, type: 3}
-  - {fileID: 21300000, guid: 10b090dc206b4c545ad336ac2912177e, type: 3}
-  - {fileID: 21300000, guid: 548686063ab17cb4d880cc28b84e5b6e, type: 3}
+  - {fileID: 21300000, guid: 771035fb2a80795459bcea888a0d6045, type: 3}
+  - {fileID: 21300000, guid: 0e01ae309d4a8fd4a9349bb2d04e85ab, type: 3}
   - {fileID: 21300000, guid: 1e6f24cfb895e534e8489ab8b9458c69, type: 3}
 --- !u!114 &114876191533832138
 MonoBehaviour:
@@ -91,13 +91,13 @@ RectTransform:
   m_GameObject: {fileID: 1975014521590236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: 0}
+  m_AnchoredPosition: {x: -10000, y: 10000}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}

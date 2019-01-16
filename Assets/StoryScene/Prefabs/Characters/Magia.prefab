@@ -40,9 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36f01ed214f5fc04ea6739c0116ce285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  charName: 0
   facer: 0
   faceSprites:
-  - {fileID: 21300000, guid: c312df736df620c4aa9190220afc8b8e, type: 3}
+  - {fileID: 21300000, guid: 94c61cd8d6c288e4eb8c7166dab5d4e9, type: 3}
   - {fileID: 21300000, guid: f702782333b47fa42b88ffdd3664ad4b, type: 3}
   - {fileID: 21300000, guid: b342f7d3bf4df47429e6abd119ce581c, type: 3}
   - {fileID: 21300000, guid: 10b090dc206b4c545ad336ac2912177e, type: 3}
@@ -90,13 +91,13 @@ RectTransform:
   m_GameObject: {fileID: 1975014521590236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: 0}
+  m_AnchoredPosition: {x: -10000, y: 10000}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
