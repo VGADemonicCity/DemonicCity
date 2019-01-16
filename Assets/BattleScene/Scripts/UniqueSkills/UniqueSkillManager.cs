@@ -41,6 +41,15 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             m_magia = Magia.Instance; // 参照取得
+
+            m_battleManager.m_BehaviourByState.AddListener((state) =>
+            {
+                // init時マギアの形態に応じてユニークスキルの条件値を設定する
+                if (state == BattleManager.StateMachine.State.Init)
+                {
+                    Condition = m_magia.UniqueSkillConditionByAttribute;
+                }
+            });
         }
 
         private void Start()
@@ -62,15 +71,6 @@ namespace DemonicCity.BattleScene
                     var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
                     uniqueSkill.Activate();
                     m_uniqueSkillGauge.SkillActivated();
-                }
-            });
-
-            m_battleManager.m_BehaviourByState.AddListener((state) =>
-            {
-                // init時マギアの形態に応じてユニークスキルの条件値を設定する
-                if(state == BattleManager.StateMachine.State.Init)
-                {
-                    Condition = m_magia.UniqueSkillConditionByAttribute;
                 }
             });
         }

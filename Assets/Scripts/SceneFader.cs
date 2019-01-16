@@ -79,7 +79,6 @@ namespace DemonicCity
         /// </summary>
         IEnumerator FadingIn()
         {
-            Debug.Log("called fadingIn");
             if (m_fadeImage == null)
             {
                 Init();
@@ -92,7 +91,6 @@ namespace DemonicCity
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
                 yield return null;
             }
-            Debug.Log("called");
             m_fadeCanvas.enabled = false;
        }
 

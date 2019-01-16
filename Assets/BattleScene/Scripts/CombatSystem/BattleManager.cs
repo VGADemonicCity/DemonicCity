@@ -14,7 +14,7 @@ namespace DemonicCity.BattleScene
     [Serializable]
     public class BattleManager : MonoSingleton<BattleManager>
     {
-    #region Property
+        #region Property
         /// <summary>そのバトルに登場する敵オブジェクトのリスト</summary>
         public List<GameObject> EnemyObjects
         {
@@ -92,6 +92,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] private List<GameObject> m_enemyObjects;
         /// <summary>そのバトルに出てくる敵のクラスのリスト</summary>
         [SerializeField] private List<Enemy> m_enemies;
+        /// <summary>敵の出現座標</summary>
+        [SerializeField] public Transform m_CoordinateForSpawn;
         #endregion
 
         #region Method
@@ -123,7 +125,7 @@ namespace DemonicCity.BattleScene
             if (m_StateMachine.m_wave != StateMachine.Wave.LastWave)
             {
                 m_StateMachine.m_wave++;
-                Debug.Log(m_StateMachine.m_wave); 
+                Debug.Log(m_StateMachine.m_wave);
                 // ==============================
                 // イベント呼び出し : StateMachine.NextWave
                 // ==============================
