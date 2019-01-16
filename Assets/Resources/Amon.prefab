@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 95204437066560128}
   - component: {fileID: 114250633123588026}
   m_Layer: 10
-  m_Name: Nafla
+  m_Name: Amon
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,8 +36,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327912409227080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7, y: 1, z: 0}
-  m_LocalScale: {x: 1.0982974, y: 1.0982974, z: 1.0982974}
+  m_LocalPosition: {x: 1.52, y: -0.687837, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -71,7 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d2839edf2e74bc48d1ce4cdf25a3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_id: 0
+  m_id: 1
   m_stats:
     m_level: 0
     m_durability: 0
@@ -119,7 +119,7 @@ SpriteRenderer:
   m_SortingLayerID: -2082406165
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8635aa9ae0cc74407a1215f29179b51f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 58c762182bb1b4d1aaf9225efc16e4b0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

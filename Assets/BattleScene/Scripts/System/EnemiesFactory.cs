@@ -36,15 +36,19 @@ namespace DemonicCity
             /// <summary>フィニクス</summary>
             Phoenix,
             /// <summary>アーモン</summary>
-            Ammon,
+            Amon,
             /// <summary>アシュメダイ</summary>
-            Ashmedai,
+            Ashmedy,
             /// <summary>フォーラス</summary>
-            Forlas,
+            Faulus,
             /// <summary>バアル</summary>
-            Baal,
+            Barl,
             /// <summary>イクスマギナ</summary>
-            Exmugina
+            Ixmagina,
+            MobRed,
+            MobBlue,
+
+
         }
     }
 }

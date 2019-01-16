@@ -649,20 +649,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 1327912409227080, guid: 2be5e5503c2db40b5ac4681404b9e051, type: 2}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 212489472529952678, guid: 2be5e5503c2db40b5ac4681404b9e051,
-        type: 2}
-      propertyPath: m_SortingLayerID
-      value: -2082406165
-      objectReference: {fileID: 0}
-    - target: {fileID: 212489472529952678, guid: 2be5e5503c2db40b5ac4681404b9e051,
-        type: 2}
-      propertyPath: m_SortingLayer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2be5e5503c2db40b5ac4681404b9e051, type: 2}
   m_IsPrefabAsset: 0
@@ -937,6 +923,38 @@ Prefab:
       propertyPath: m_SortingLayerID
       value: 469756773
       objectReference: {fileID: 0}
+    - target: {fileID: 223204168752090460, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_RenderMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114368700491867846, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_fullyGaugeIcon
+      value: 
+      objectReference: {fileID: 1988134956}
+    - target: {fileID: 114368700491867846, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_alphaChannel
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114368700491867846, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_halflyGaugeIcon
+      value: 
+      objectReference: {fileID: 1988134957}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1988134956 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114400866293903470, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1988134955}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+--- !u!114 &1988134957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114339975144598904, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1988134955}
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}

@@ -11,7 +11,7 @@ namespace DemonicCity
     public class SceneFader : MonoSingleton<SceneFader>
     {
         /// <summary>フェード時に使用するCanvas</summary>
-        private Canvas m_fadeCanvas;
+        static private Canvas m_fadeCanvas;
         /// <summary>フェーディング演出に使うImage</summary>
         private Image m_fadeImage;
         /// <summary>m_fadeImadeのアルファ値</summary>
@@ -69,7 +69,7 @@ namespace DemonicCity
             {
                 m_fadeTime = fadeTime;
             }
-
+            m_fadeCanvas.enabled = true;
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
         }
@@ -79,19 +79,22 @@ namespace DemonicCity
         /// </summary>
         IEnumerator FadingIn()
         {
+            Debug.Log("called fadingIn");
             if (m_fadeImage == null)
             {
                 Init();
             }
             m_fadeImage.color = Color.black;
             m_alpha = 1f;
-            while (m_alpha <= 1f)
+            while (m_alpha < 1f)
             {
                 m_alpha -= Time.deltaTime / m_fadeTime;
                 m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
                 yield return null;
             }
-        }
+            Debug.Log("called");
+            m_fadeCanvas.enabled = false;
+       }
 
         /// <summary>
         /// フェードアウトのコルーチン
