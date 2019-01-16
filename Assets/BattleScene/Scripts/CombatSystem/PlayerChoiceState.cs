@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DemonicCity.BattleScene.Skill;
 
 namespace DemonicCity.BattleScene
 {
@@ -31,7 +30,14 @@ namespace DemonicCity.BattleScene
                 // PlayerCoiceStateから遷移する処理はPanelCounterが敵パネルを認識してState遷移処理をさせている
                 // PlayerChoiceの時のinvokeはPanelCounter.PanelJudgerが行っている
                 // ==============================
+                StartCoroutine(Activate());
             });
+
+        }
+
+        IEnumerator Activate()
+        {
+            yield return null;
         }
     }
 }

@@ -24,6 +24,10 @@ namespace DemonicCity.BattleScene
         protected SkillManager m_skillManager;
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
+        /// <summary>MagiaのHPDrawの参照</summary>
+         protected HitPointGauge m_magiaHPGauge;
+        /// <summary>EnemyのHPDrawの参照</summary>
+         protected HitPointGauge m_enemyHPGauge;
 
         /// <summary>
         /// Awake this instance.
@@ -37,6 +41,8 @@ namespace DemonicCity.BattleScene
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
             m_gameManager = GameManager.Instance; // Magiaの参照取得
             m_magia = Magia.Instance; // Magiaの参照取得
+            m_magiaHPGauge = GameObject.Find("MagiaHPGauge").GetComponentInChildren<HitPointGauge>();
+            m_enemyHPGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<HitPointGauge>();
         }
 
         /// <summary>

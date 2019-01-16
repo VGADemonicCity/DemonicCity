@@ -22,7 +22,6 @@ namespace DemonicCity.BattleScene
             set
             {
                 m_enemyObjects = value;
-                OnSetted();
             }
         }
 
@@ -56,7 +55,7 @@ namespace DemonicCity.BattleScene
         {
             get
             {
-                if (m_enemies == null)
+                if (Enemies == null)
                 {
                     Debug.Log("m_enemiesが設定されていません");
                 }
@@ -64,17 +63,28 @@ namespace DemonicCity.BattleScene
                 switch (m_StateMachine.m_wave)
                 {
                     case StateMachine.Wave.FirstWave:
-                        return m_enemies[0];
+                        return Enemies[0];
                     case StateMachine.Wave.SecondWave:
-                        return m_enemies[1];
+                        return Enemies[1];
                     case StateMachine.Wave.LastWave:
-                        return m_enemies[2];
+                        return Enemies[2];
                     default:
                         Debug.Log("CurrentEnemy取得に失敗しました。");
                         return null;
                 }
             }
         }
+
+        /// <summary>
+        /// Gets or sets the m_enemies.
+        /// </summary>
+        /// <value>The enemies.</value>
+        public List<Enemy> Enemies
+        {
+            get { return m_enemies; }
+            set { m_enemies = value; }
+        }
+
         #endregion
 
         #region Field
@@ -83,6 +93,8 @@ namespace DemonicCity.BattleScene
 
         /// <summary>バトル用のマギアのステータス</summary>
         [SerializeField] public Statistics m_magiaStats;
+        /// <summary>バトル用の敵のステータス</summary>
+        [SerializeField] public Statistics m_currentEnemyStats;
         /// <summary>ステートマシン</summary>
         public StateMachine m_StateMachine { get; set; }
         /// <summary>敵キャラのデータベース</summary>
@@ -97,17 +109,6 @@ namespace DemonicCity.BattleScene
         #endregion
 
         #region Method
-        /// <summary>
-        /// 敵オブジェクト群を設定した時同時にそのEnemyクラスも取得する
-        /// </summary>
-        private void OnSetted()
-        {
-            foreach (var enemy in m_enemyObjects)
-            {
-                m_enemies.Add(enemy.GetComponent<Enemy>());
-            }
-        }
-
         /// <summary>
         /// Setting wave to StateMachine
         /// ステートマシンに<param name="wave">wave</param>を設定する

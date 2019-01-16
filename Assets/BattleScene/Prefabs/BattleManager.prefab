@@ -53,6 +53,7 @@ GameObject:
   - component: {fileID: 114306332384846622}
   - component: {fileID: 114844704490148818}
   - component: {fileID: 114574456638883488}
+  - component: {fileID: 114947920586921256}
   m_Layer: 0
   m_Name: StateMachine
   m_TagString: Untagged
@@ -312,10 +313,20 @@ MonoBehaviour:
     m_hitPoint: 0
     m_attack: 0
     m_defense: 0
+  m_currentEnemyStats:
+    m_level: 0
+    m_durability: 0
+    m_muscularStrength: 0
+    m_knowledge: 0
+    m_sense: 0
+    m_charm: 0
+    m_dignity: 0
+    m_hitPoint: 0
+    m_attack: 0
+    m_defense: 0
   m_enemyObjects: []
   m_enemies: []
-  m_CoordinateForSpawn: {fileID: 4184631970027960, guid: 229cbc9cd28fc468596fbd71b9b5445b,
-    type: 2}
+  m_CoordinateForSpawn: {fileID: 0}
 --- !u!114 &114306332384846622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,6 +541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_magiaHPGauge: {fileID: 0}
   m_enemyHPGauge: {fileID: 0}
+  m_enemiesMover: {fileID: 0}
   m_spawnSpacingValue: -5
 --- !u!114 &114901776095078312
 MonoBehaviour:
@@ -545,6 +557,19 @@ MonoBehaviour:
   m_CountCondition: 30
   m_passiveSkill: 0
   m_incease: 0
+--- !u!114 &114947920586921256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1233448914028238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e9f9c2d0e343f44aee7671ab3fd679, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_enemiesMover: {fileID: 0}
+  m_enemyHPGauge: {fileID: 0}
 --- !u!114 &114949723133331002
 MonoBehaviour:
   m_ObjectHideFlags: 1

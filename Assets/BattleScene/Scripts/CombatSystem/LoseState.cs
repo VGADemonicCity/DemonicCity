@@ -16,6 +16,7 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
+
                 Debug.Log("Lose state called.");
             });
         }

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 namespace DemonicCity.BattleScene
 {
     /// <summary>
@@ -8,8 +9,6 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class EnemyAttackState : StatesBehaviour
     {
-        /// <summary>MagiaのHPDrawの参照</summary>
-        [SerializeField] HitPointGauge m_magiaHPGauge;
 
         /// <summary>
         /// Start this instance.

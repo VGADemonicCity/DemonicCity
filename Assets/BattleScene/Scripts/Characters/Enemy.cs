@@ -34,6 +34,8 @@ namespace DemonicCity.BattleScene
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
 
+        [SerializeField] float m_destroyingTime = 3f;
+
         private void Start()
         {
             m_animator = GetComponent<Animator>();
@@ -50,10 +52,23 @@ namespace DemonicCity.BattleScene
             });
         }
 
+        /// <summary>
+        /// Ons the attack.
+        /// </summary>
         public void OnAttack()
         {
             Debug.Log("OnAttackが呼ばれたよ");
             m_animator.SetTrigger("Attack");
+        }
+
+        /// <summary>
+        /// Destroy this instance.
+        /// </summary>
+        public void Destroy()
+        {
+            Debug.Log(gameObject.name + "は破壊されたよ");
+            gameObject.SetActive(false);
+            Destroy(gameObject, m_destroyingTime);
         }
     }
 }

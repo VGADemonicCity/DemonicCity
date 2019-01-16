@@ -11,8 +11,6 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerAttackState : StatesBehaviour
     {
-        /// <summary>EnemyのHPDrawの参照</summary>
-        [SerializeField] HitPointGauge m_enemyHPGauge;
 
         /// <summary>
         /// Start this instance.
@@ -89,11 +87,21 @@ namespace DemonicCity.BattleScene
             }
             else // 敵のHPが0以下だったら
             {
-                // ==================================
-                // イベント呼び出し : StateMachine.Win
-                // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
-                // ==================================
-                SetStateMachine(BattleManager.StateMachine.State.Win);
+                m_battleManager.CurrentEnemy.Destroy(); // 敵の破壊処理
+                yield return new WaitWhile(() => m_battleManager.CurrentEnemy != null); // nullになるまで待機
+
+                if (m_battleManager.m_StateMachine.m_wave != BattleManager.StateMachine.Wave.LastWave) // 現在のウェーブが最後のウェーブではなかったら
+                {
+                    SetStateMachine(BattleManager.StateMachine.State.NextWave);
+                }
+                else
+                {
+                    // ==================================
+                    // イベント呼び出し : StateMachine.Win
+                    // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
+                    // ==================================
+                    SetStateMachine(BattleManager.StateMachine.State.Win);
+                }
             }
         }
     }
