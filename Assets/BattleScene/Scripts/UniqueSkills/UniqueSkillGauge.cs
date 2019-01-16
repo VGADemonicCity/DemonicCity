@@ -63,10 +63,8 @@ namespace DemonicCity.BattleScene
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得;
             m_uniqueSkillManager = UniqueSkillManager.Instance; // 参照取得
             m_effectAnimator = GetComponentInChildren<Animator>();
-        }
 
-        private void Start()
-        {
+
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if (state == BattleManager.StateMachine.State.Init) // init時に初期化する
@@ -82,6 +80,7 @@ namespace DemonicCity.BattleScene
         private void Initialize()
         {
             m_fullyGaugeIcon.color = Color.clear;
+            m_halflyGaugeIcon.color = Color.clear;
             AlphaChannel = 0f;
             m_panelCount = 0;
             m_uniqueSkillManager.SkillFlag = false;
