@@ -63,5 +63,11 @@ namespace DemonicCity
                 return false;
             }
         }
+
+
+        public static int GetLength<T>()
+        {
+            return Enum.GetValues(typeof(T)).Length;
+        }
     }
 }

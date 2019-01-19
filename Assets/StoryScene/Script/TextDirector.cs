@@ -24,6 +24,8 @@ namespace DemonicCity.StoryScene
         SwitchBack,
         /// <summary>アイテム出現</summary>
         Item,
+        /// <summary>ウィンドウがポップする</summary>
+        PopWindow,
     }
 
     public class TextDirector : MonoBehaviour
@@ -34,12 +36,18 @@ namespace DemonicCity.StoryScene
         {
             Type, Target, Content
         }
+        enum WindowTag
+        {
+            ToNext
+        }
 
         delegate void Stagings();
         string[] contents;
         public List<GameObject> characters = new List<GameObject>();
         [SerializeField] TextManager textManager;
         [SerializeField] GameObject blackOut;
+        [SerializeField] GameObject[] popWindows;
+        [SerializeField] Transform popCanvas;
         SceneFader fader;
         float moveTime = 0.5f;
 
@@ -117,19 +125,42 @@ namespace DemonicCity.StoryScene
                 case StageType.Item:
                     Item(contents);
                     break;
+                case StageType.PopWindow:
+                    PopWindow(contents[(int)StageTag.Target]);
+                    break;
                 default:
                     break;
             }
         }
 
-        void SceneTrans(string content)
+        public void SceneTrans(string content)
         {
             SceneFader.SceneTitle toScene;
+
             if (EnumCommon.TryParse(content, out toScene))
             {
+                Progress progress = Progress.Instance;
+                switch (toScene)
+                {
+                    case SceneFader.SceneTitle.Battle:
+                        progress.ThisQuestProgress = Progress.QuestProgress.Battle;
+                        break;
+                    case SceneFader.SceneTitle.Story:
+                        if (progress.ThisQuestProgress == Progress.QuestProgress.Prologue)
+                        {
+                            progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
+                        }
+                        else
+                        {
+                            progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
+                        }
+                        break;
+                    default:
+                        progress.ThisQuestProgress = Progress.QuestProgress.None;
+                        break;
+                }
                 Debug.Log(toScene);
-                Progress.Instance.ThisQuestProgress += 1;
-                fader.FadeOut(SceneFader.SceneTitle.Home, 0.5f);
+                fader.FadeOut(toScene, 0.5f);
             }
             else
             {
@@ -176,7 +207,10 @@ namespace DemonicCity.StoryScene
                 StartCoroutine(ChangeColor(blackOut, color, 0.5f));
             }
         }
-
+        void Coloring(Color color)
+        {
+            StartCoroutine(ChangeColor(blackOut, color, 0.5f));
+        }
         void Clear()
         {
             StartCoroutine(ChangeColor(blackOut, Color.clear, 0.5f));
@@ -207,6 +241,16 @@ namespace DemonicCity.StoryScene
 
         }
 
+        public void PopWindow(string content)
+        {
+            WindowTag windowTag;
+            if (EnumCommon.TryParse(content, out windowTag))
+            {
+                popCanvas.gameObject.SetActive(true);
+                GameObject newPopWindow = Instantiate(popWindows[(int)windowTag], popCanvas);
+            }
+            EndStaging();
+        }
 
         void DivideContent(string content)
         {

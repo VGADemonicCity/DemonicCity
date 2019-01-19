@@ -8,6 +8,16 @@ using UnityEngine;
 
 namespace DemonicCity
 {
+    //[Serializable]
+    //[CreateAssetMenu(fileName = "ChapterData", menuName = "CreateChapterData")]
+    //public class ChapterData : ScriptableObject
+    //{
+    //    [SerializeField] List<Chapter> chapterData;
+    //    public List<Chapter> ChapterDatas
+    //    {
+    //        get { return chapterData; }
+    //    }
+    //}
     [Serializable]
     public class ChapterManager : SingletonBase<ChapterManager>
     {

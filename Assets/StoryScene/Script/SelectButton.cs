@@ -8,6 +8,7 @@ namespace DemonicCity.StorySelectScene
     {
         TouchGestureDetector touchGestureDetector;
         StorySelecter storySelecter;
+        ToStories toStories;
         [SerializeField] TMPro.TMP_Text text = null;
 
         GameObject beginObject;
@@ -41,6 +42,7 @@ namespace DemonicCity.StorySelectScene
         {
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
+            toStories = new ToStories();
         }
 
         void Start()
@@ -59,7 +61,7 @@ namespace DemonicCity.StorySelectScene
                         {
                             if (beginObject == endObject)
                             {
-                                storySelecter.ToStory(chapterTag);
+                                toStories.ToStory(chapterTag);
                             }
 
 

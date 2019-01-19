@@ -57,11 +57,20 @@ namespace DemonicCity.StoryScene
             //test用
             //progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
             //progress.ThisStoryProgress = Progress.StoryProgress.Nafla;
-            if (progress.ThisQuestProgress != Progress.QuestProgress.Prologue)
-            {
-                progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
-            }
+            //if (progress.ThisQuestProgress != Progress.QuestProgress.Prologue)
+            //{
+            //    progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
+            //}
             //
+
+
+            //ファイル名からQuestProgressを素即して、Trueなら変換して代入する。
+            //Progress.QuestProgress tmpQuest;
+            //if (EnumCommon.TryParse())
+            //{
+
+            //}
+
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -173,6 +182,10 @@ namespace DemonicCity.StoryScene
         public void TextSkip()
         {
             textIndex = texts.FindLastIndex(text => text == texts.Last());
+            if (progress.ThisQuestProgress == Progress.QuestProgress.Epilogue)
+            {
+                textIndex -= 1;
+            }
             TextsDraw();
         }
 
