@@ -79,9 +79,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>割り振られた威厳値</summary>
         private int addDignity;
 
-        /// <summary>確定ボタンと中止ボタン</summary>
-        [SerializeField] private GameObject ConfirmAndResetButtons;
-
         /// <summary>属性テキスト</summary>
         [SerializeField] private Text currentAttributeText;
 
@@ -112,35 +109,32 @@ namespace DemonicCity.StrengthenScene
         /// <summary>ステータス初期化前のメッセージウィンドウ</summary>
         [SerializeField] private GameObject resetWarningMessageWindow;
 
-        /// <summary>ポップアップウィンドウの生成先</summary>
-        [SerializeField] private Transform parent;
-
-        /// <summary>ポップアップウィンドウを一時的に保持する変数</summary>
-        private GameObject popUpWindow = null;
-
-        /// <summary>確定ボタンとリセットボタンを一時的に保持する変数</summary>
-        private GameObject confirmResetButtons = null;
+        /// <summary>確定ボタンとリセットボタン</summary>
+        [SerializeField] private GameObject confirmResetButtons;
 
         /// <summary>属性選択ウィンドウ</summary>
         [SerializeField] private GameObject selectAttributeWindow;
 
-        /// <summary>スキルの一覧ウィンドウ</summary>
+        /// <summary>習得済みスキル一覧ウィンドウ</summary>
         [SerializeField] private GameObject skillListWindow;
 
         /// <summary>習得済みスキル</summary>
         private Magia.PassiveSkill passiveSkill;
 
-        /// <summary>習得済みスキルの表示先</summary>
-        private GameObject content;
+        /// <summary>各スキルの説明ウィンドウ</summary>
+        [SerializeField] private GameObject[] skillDescriptionText;
 
-        /// <summary>スキルの説明ウィンドウ</summary>
-        [SerializeField] private GameObject skillDescriptionText;
-
-        /// <summary>スキルの説明テキスト</summary>
+        /// <summary>各スキルの説明</summary>
         private List<string> skillDescriptionList = new List<string>();
 
-        /// <summary>スキルの説明テキストを一時的に保持する</summary>
-        private GameObject skillDescriptionWindow;
+        /// <summary>ポップアップウィンドウの表示/非表示</summary>
+        private bool setActivePopUpWindow = false;
+
+        /// <summary>スキル説明テキストの表示/非表示</summary>
+        private bool setActiveSkillDescription = false;
+
+        /// <summary>確定/中止ボタンの表示/非表示</summary>
+        private bool setActiveConfirmResetButtons = false;
 
         private void Awake()
         {
@@ -155,10 +149,26 @@ namespace DemonicCity.StrengthenScene
 
         private void Start()
         {
-            passiveSkill = magia.MyPassiveSkill;
-
             skillDescriptionList.Add("街破壊数1以上で発動\n街破壊数×攻撃力の1%\nを加算して攻撃");
-            skillDescriptionList.Add("街破壊数７以上で発動\n街破壊数×0.5%\n攻撃力防御力を上昇");
+            skillDescriptionList.Add("街破壊数7以上で発動\n街破壊数×0.5%\n攻撃力防御力を上昇");
+            skillDescriptionList.Add("街破壊数14以上で発動\n街破壊数×最大 HPの1%回復");
+            skillDescriptionList.Add("自分の攻撃力2分の1を敵に防御力を\n無視してダメージを与える");
+            skillDescriptionList.Add("街破壊数19以上で発動\n次の敵の攻撃を5%軽減");
+            skillDescriptionList.Add("街破壊数21以上で発動\n街破壊数×攻撃力の0.5%を加算して攻撃");
+            skillDescriptionList.Add("街破壊数24以上で発動　街破壊数×0.5%攻撃力上昇");
+            skillDescriptionList.Add("街破壊数27以上で発動\n次の敵の攻撃を10%軽減");
+            skillDescriptionList.Add("破壊数30以上で発動\n破壊数×攻撃力の0.5%を加算して攻撃");
+            skillDescriptionList.Add("街破壊数32枚以上で発動\n街破壊数×最大HPの2%回復");
+            skillDescriptionList.Add("街破壊数34以上で発動\n街破壊数×0.5%攻撃力上昇");
+            skillDescriptionList.Add("街破壊数38以上で発動\n自分の攻撃力1倍を敵に防御力を無視してダメージを与える");
+            skillDescriptionList.Add("街破壊数36以上で発動\n次の敵の攻撃を無効化");
+            skillDescriptionList.Add("スキル発動枚数-10");
+
+            for (int i = 0; i < skillDescriptionText.Length; i++)
+            {
+                skillDescriptionText[i].SetActive(false);
+                skillDescriptionText[i].GetComponentInChildren<Text>().text = skillDescriptionList[i];
+            }
 
             ResetStatus();
 
@@ -166,11 +176,6 @@ namespace DemonicCity.StrengthenScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    if (skillDescriptionWindow != null)
-                    {
-                        Destroy(skillDescriptionWindow);
-                    }
-
                     GameObject button;
                     touchInfo.HitDetection(out button);
 
@@ -183,34 +188,78 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "SelectAttributeButton":
-                                if (popUpWindow == null)
+                                if (setActivePopUpWindow == false)
                                 {
-                                    popUpWindow = Instantiate(selectAttributeWindow, parent);
+                                    selectAttributeWindow.SetActive(true);
+                                    setActivePopUpWindow = true;
+                                }
+                                break;
+
+                            case "BackAttribute":
+                                if (setActivePopUpWindow)
+                                {
+                                    selectAttributeWindow.SetActive(false);
+                                    setActivePopUpWindow = false;
                                 }
                                 break;
 
                             case "ShowSkillButton":
-                                if (popUpWindow == null)
+                                if (setActivePopUpWindow == false)
                                 {
-                                    popUpWindow = Instantiate(skillListWindow, parent);
-                                    content = GameObject.FindGameObjectWithTag("Content");
+                                    skillListWindow.SetActive(true);
+                                    setActivePopUpWindow = true;
                                 }
                                 break;
 
-                            case "BackButton":
-                                if (popUpWindow != null)
+                            case "BackSkill":
+                                if (setActivePopUpWindow)
                                 {
-                                    Destroy(popUpWindow);
+                                    skillListWindow.SetActive(false);
+                                    setActivePopUpWindow = false;
                                 }
                                 break;
 
+                            //ここから各スキル名の処理
                             case "DevilsFist":
-                                PopUpSkillDetailWindow(0);
+                                SkillDescriptionManager(0);
                                 break;
-
-                            case ("HighConcentrationMagicalAbsorption"):
-                                PopUpSkillDetailWindow(1);
+                            case "HighConcentrationMagicalAbsorption":
+                                SkillDescriptionManager(1);
                                 break;
+                            case "SelfRegeneration":
+                                SkillDescriptionManager(2);
+                                break;
+                            case "ExplosiveFlamePillar":
+                                SkillDescriptionManager(3);
+                                break;
+                            case "CrimsonBarrier":
+                                SkillDescriptionManager(4);
+                                break;
+                            case "DevilsFistInfernoType":
+                                SkillDescriptionManager(5);
+                                break;
+                            case "BraveHeartsIncarnation":
+                                SkillDescriptionManager(6);
+                                break;
+                            case "GreatCrimsonBarrier":
+                                SkillDescriptionManager(7);
+                                break;
+                            case "InfernosFist":
+                                SkillDescriptionManager(8);
+                                break;
+                            case "SatansCell":
+                                SkillDescriptionManager(9);
+                                break;
+                            case "AmaterasuIncanation":
+                                SkillDescriptionManager(10);
+                                break;
+                            case "AmaterasuInferno":
+                                SkillDescriptionManager(11);
+                                break;
+                            case "AmaterasuFlameWall":
+                                SkillDescriptionManager(12);
+                                break;
+                            //ここまで各スキル名の処理
 
                             case "AddCharmButton":
                                 ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], true);
@@ -260,103 +309,102 @@ namespace DemonicCity.StrengthenScene
                                 ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], false);
                                 break;
 
+                                //ここから各属性名の処理
                             case "Mado":
                                 attribute = Magia.Attribute.Standard;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
 
                             case "Kenki":
                                 attribute = Magia.Attribute.FemaleWarrior;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
 
                             case "Jinou":
                                 attribute = Magia.Attribute.MaleWarrior;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
 
                             case "Jotei":
                                 attribute = Magia.Attribute.FemaleWitch;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
 
                             case "Kokuo":
                                 attribute = Magia.Attribute.MaleWizard;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
 
                             case "Majin":
                                 attribute = Magia.Attribute.FemaleTrancendental;
                                 UpdateText();
-                                if (confirmResetButtons == null)
+                                if (confirmResetButtons == false)
                                 {
-                                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                                    confirmResetButtons.SetActive(true);
                                 }
                                 break;
+                                //ここまで各属性名の処理
 
                             case "ConfirmButton":
-                                if (popUpWindow == null)
+                                if (setActivePopUpWindow == false)
                                 {
+                                    confirmWarningMessageWindow.SetActive(true);
+                                    setActivePopUpWindow = true;
                                     confirmWarningMessageWindow.GetComponentInChildren<Text>().text = "変更したステータスを確定します";
-                                    popUpWindow = Instantiate(confirmWarningMessageWindow, parent);
                                 }
                                 break;
 
                             case "ResetButton":
-                                if (popUpWindow == null)
+                                if (setActivePopUpWindow == false)
                                 {
-                                    resetWarningMessageWindow.GetComponentInChildren<Text>().text = "変更したステータスを初期化します";
-                                    popUpWindow = Instantiate(resetWarningMessageWindow, parent);
+                                    confirmWarningMessageWindow.SetActive(true);
+                                    setActivePopUpWindow = true;
+                                    confirmWarningMessageWindow.GetComponentInChildren<Text>().text = "変更したステータスを初期化します";
                                 }
                                 break;
 
                             case "YesConfirm":
                                 ConfirmStatus();
-                                Destroy(popUpWindow);
-                                if (confirmResetButtons != null)
+                                if (setActivePopUpWindow)
                                 {
-                                    Destroy(confirmResetButtons);
+                                    confirmWarningMessageWindow.SetActive(false);
+                                    setActivePopUpWindow = false;
                                 }
+                                confirmResetButtons.SetActive(false);
+
                                 break;
 
                             case "YesReset":
                                 ResetStatus();
-                                Destroy(popUpWindow);
-                                if (confirmResetButtons != null)
-                                {
-                                    Destroy(confirmResetButtons);
-                                }
                                 break;
 
                             case "No":
-                                if (popUpWindow != null)
+                                if (setActivePopUpWindow)
                                 {
-                                    Destroy(popUpWindow);
+                                    confirmWarningMessageWindow.SetActive(false);
+                                    resetWarningMessageWindow.SetActive(false);
+                                    setActivePopUpWindow = false;
                                 }
-                                break;
-
-                            case "ScrollView":
-                                Debug.Log("ghvjv");
                                 break;
                         }
                     }
@@ -369,16 +417,20 @@ namespace DemonicCity.StrengthenScene
             });
         }
 
-        /// <summary>スキルの説明を表示</summary>
-        /// <param name="index">スキル名に対応した説明を指定</param>
-        public void PopUpSkillDetailWindow(int index)
+        /// <summary>スキルの説明テキストを表示/非表示</summary>
+        /// <param name="index"></param>
+        public void SkillDescriptionManager(int index)
         {
-            if (skillDescriptionWindow == null)
+            if (setActiveSkillDescription == false)
             {
-                skillDescriptionWindow = Instantiate(skillDescriptionText, content.transform);
-                skillDescriptionWindow.GetComponentInChildren<Text>().text = skillDescriptionList[index];
+                skillDescriptionText[index].SetActive(true);
+                setActiveSkillDescription = true;
             }
-
+            else
+            {
+                skillDescriptionText[index].SetActive(false);
+                setActiveSkillDescription = false;
+            }
         }
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
@@ -410,6 +462,18 @@ namespace DemonicCity.StrengthenScene
         /// <summary>ステータスの変動値を初期化</summary>
         public void ResetStatus()
         {
+            skillListWindow.SetActive(false);
+            selectAttributeWindow.SetActive(false);
+            resetWarningMessageWindow.SetActive(false);
+            confirmWarningMessageWindow.SetActive(false);
+
+            setActivePopUpWindow = false;
+
+            confirmResetButtons.SetActive(false);
+
+            setActiveConfirmResetButtons = false;
+
+            passiveSkill = magia.MyPassiveSkill;
             attribute = magia.MyAttribute;
             hitPoint = magia.GetStats().m_hitPoint;
             attack = magia.GetStats().m_attack;
@@ -434,7 +498,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>変更したステータスを確定する</summary>
         public void ConfirmStatus()
         {
-
             hitPoint = updatedHitPoint;
             attack = updatedAttack;
             defense = updatedDefense;
@@ -524,9 +587,10 @@ namespace DemonicCity.StrengthenScene
                 uniqueStatus = 1;
 
                 totalAddPoint += 1;
-                if (totalAddPoint > 0 && confirmResetButtons == null)
+                if (totalAddPoint > 0 && setActiveConfirmResetButtons == false)
                 {
-                    confirmResetButtons = Instantiate(ConfirmAndResetButtons, parent);
+                    confirmResetButtons.SetActive(true);
+                    setActiveConfirmResetButtons = true;
                 }
             }
             else
@@ -548,10 +612,11 @@ namespace DemonicCity.StrengthenScene
                 statusPointText.text = statusPoint.ToString();
 
                 totalAddPoint -= 1;
-                if (totalAddPoint <= 0 && confirmResetButtons != null)
+                if (totalAddPoint <= 0 && setActiveConfirmResetButtons)
                 {
                     totalAddPoint = 0;
-                    Destroy(confirmResetButtons);
+                    confirmResetButtons.SetActive(false);
+                    setActiveConfirmResetButtons = false;
                 }
             }
             else
