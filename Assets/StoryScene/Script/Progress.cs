@@ -54,6 +54,9 @@ namespace DemonicCity
             Battle,
             /// <summary>戦闘後のストーリー</summary>
             Epilogue,
+            /// <summary>ストーリー外</summary>
+            None,
+
             All,
         }
 
@@ -86,6 +89,19 @@ namespace DemonicCity
             set { questProgress = value; Save(); }
         }
 
+        public StoryProgress NextStory(StoryProgress nowStory)
+        {
+            int tmpStory=0;
+            foreach (StoryProgress story in Enum.GetValues(typeof(StoryProgress)))
+            {
+                if ((nowStory & story) == story)
+                {
+                    tmpStory = (int)story;
+                }
+            }
+            tmpStory = tmpStory << 1;
+            return (StoryProgress)tmpStory;
+        }
     }
 
 }

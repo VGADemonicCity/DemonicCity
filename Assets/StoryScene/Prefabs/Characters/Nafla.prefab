@@ -43,12 +43,12 @@ MonoBehaviour:
   charName: 2
   facer: 0
   faceSprites:
-  - {fileID: 21300000, guid: c312df736df620c4aa9190220afc8b8e, type: 3}
-  - {fileID: 21300000, guid: f702782333b47fa42b88ffdd3664ad4b, type: 3}
-  - {fileID: 21300000, guid: b342f7d3bf4df47429e6abd119ce581c, type: 3}
-  - {fileID: 21300000, guid: 10b090dc206b4c545ad336ac2912177e, type: 3}
-  - {fileID: 21300000, guid: 548686063ab17cb4d880cc28b84e5b6e, type: 3}
-  - {fileID: 21300000, guid: 1e6f24cfb895e534e8489ab8b9458c69, type: 3}
+  - {fileID: 21300000, guid: 8635aa9ae0cc74407a1215f29179b51f, type: 3}
+  - {fileID: 21300000, guid: 08d5bb1ceb1494fcea8da527d1b45b6a, type: 3}
+  - {fileID: 21300000, guid: ff30ae783a7e54fa281711dd589e8954, type: 3}
+  - {fileID: 21300000, guid: 4c9cc18179f9b4b3aac7d41f4e542d44, type: 3}
+  - {fileID: 21300000, guid: c32c434ccde0b40ef85530e3d22f3bed, type: 3}
+  - {fileID: 21300000, guid: 8635aa9ae0cc74407a1215f29179b51f, type: 3}
 --- !u!114 &114876191533832138
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,13 +91,13 @@ RectTransform:
   m_GameObject: {fileID: 1975014521590236}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -700, y: 0}
+  m_AnchoredPosition: {x: -10000, y: 10000}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
