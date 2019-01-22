@@ -13,7 +13,7 @@ namespace DemonicCity
     [Serializable]
     public class Magia : MonoSingleton<Magia>
     {
-
+        #region Property
         /// <summary>パッシブスキルフラグのプロパティ</summary>
         public PassiveSkill MyPassiveSkill
         {
@@ -36,27 +36,24 @@ namespace DemonicCity
             get { return m_allocationPoint; }
             set { m_allocationPoint = value; }
         }
-        /// <summary>m_attributeのプロパティ</summary>
+        /// <summary>属性フラグ</summary>
         public Attribute MyAttribute
         {
             get { return m_attribute; }
             set { m_attribute = value; }
         }
-
         /// <summary>m_totalExperienceのプロパティ</summary>
         public int TotalExperience
         {
             get { return m_totalExperience; }
             set { m_totalExperience = value; }
         }
-
         /// <summary>m_totalDestructionCountのプロパティ</summary>
         public int TotalDestructionCount
         {
             get { return m_totalDestructionCount; }
             set { m_totalDestructionCount = value; }
         }
-
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
 
@@ -71,19 +68,19 @@ namespace DemonicCity
                     case Attribute.Standard:
                         condition = 30;
                         break;
-                    case Attribute.MaleWarrior:
+                    case Attribute.SwordPrincess:
                         condition = 30;
                         break;
-                    case Attribute.FemaleWarrior:
+                    case Attribute.BladeEmperor:
                         condition = 30;
                         break;
-                    case Attribute.MaleWizard:
+                    case Attribute.Empress:
                         condition = 30;
                         break;
-                    case Attribute.FemaleWitch:
+                    case Attribute.BlackKing:
                         condition = 30;
                         break;
-                    case Attribute.FemaleTrancendental:
+                    case Attribute.DevilsGod:
                         condition = 30;
                         break;
                     default:
@@ -94,15 +91,15 @@ namespace DemonicCity
                 return condition;
             }
         }
-
-
+        #endregion
+        #region Field
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
         /// <summary>総街破壊数</summary>
         [SerializeField] int m_totalDestructionCount;
         /// <summary>振り分けポイント</summary>
         [SerializeField] int m_allocationPoint;
-        /// <summary>属性フラグ</summary>
+        /// <summary>MyAttributeのバッキングフィールド</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
@@ -136,6 +133,8 @@ namespace DemonicCity
         /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
         int m_magnificationByAttribute = 50;
 
+        #endregion
+        #region Method
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
         /// </summary>
@@ -249,23 +248,24 @@ namespace DemonicCity
 
             });
         }
-
+        #endregion
+        #region Enum
         /// <summary>属性</summary>
         [Serializable]
         public enum Attribute
         {
             /// <summary>初期形態</summary>
             Standard,
-            /// <summary>男近接形態</summary>
-            MaleWarrior,
-            /// <summary>女近接形態</summary>
-            FemaleWarrior,
-            /// <summary>男魔法使い形態</summary>
-            MaleWizard,
-            /// <summary>女魔法使い形態</summary>
-            FemaleWitch,
-            /// <summary>女超越形態</summary>
-            FemaleTrancendental,
+            /// <summary>剣姫</summary>
+            SwordPrincess,
+            /// <summary>刀皇</summary>
+            BladeEmperor,
+            /// <summary>女帝</summary>
+            Empress,
+            /// <summary>黒王</summary>
+            BlackKing,
+            /// <summary>魔神</summary>
+            DevilsGod,
         }
 
         /// <summary>
@@ -307,5 +307,6 @@ namespace DemonicCity
             /// <summary>全てのスキルフラグ(全てのenumの論理和)</summary>
             AllSkill = 8191,
         }
+        #endregion 
     }
 }
