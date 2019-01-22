@@ -87,7 +87,7 @@ namespace DemonicCity.ResultScene
         [SerializeField] private GameObject selectSceneWindow;
 
         /// <summary>経験値ゲージ</summary>
-        [SerializeField] private Slider expSlider;
+        [SerializeField] private Slider expGauge;
 
         /// <summary>YesOrNoウィンドウ</summary>
         [SerializeField] private GameObject twoChoicesWindow;
@@ -103,7 +103,8 @@ namespace DemonicCity.ResultScene
 
         private void Awake()
         {
-            magia = Magia.Instance;
+            //magia = Magia.Instance;
+            magia = new Magia();
             touchGestureDetector = TouchGestureDetector.Instance;
             panelCounter = new PanelCounter();
         }
@@ -148,7 +149,7 @@ namespace DemonicCity.ResultScene
 
         private void Update()
         {
-            needExpText.text = (expSlider.maxValue - expSlider.value).ToString("f0");
+            needExpText.text = (expGauge.maxValue - expGauge.value).ToString("f0");
         }
 
         /// <summary>ステータス変動アニメーション</summary>
@@ -160,10 +161,10 @@ namespace DemonicCity.ResultScene
             {
 
                 currentExp += addAmount;
-                expSlider.maxValue = requiredExp;
-                expSlider.value = currentExp;
+                expGauge.maxValue = requiredExp;
+                expGauge.value = currentExp;
 
-                if (expSlider.value >= expSlider.maxValue)//レベルアップ判定
+                if (expGauge.value >= expGauge.maxValue)//レベルアップ判定
                 {
                     popUpWindow = Instantiate(levelUpImage, parent);
                     Destroy(popUpWindow, 2);
@@ -171,9 +172,9 @@ namespace DemonicCity.ResultScene
                     updatedExp -= requiredExp;
                     currentExp -= requiredExp;
                     requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
-                    expSlider.maxValue = requiredExp;
+                    expGauge.maxValue = requiredExp;
                     currentlevel += 1;
-                    needExp = expSlider.maxValue - expSlider.value;
+                    needExp = expGauge.maxValue - expGauge.value;
 
                     if (needExp < 0)
                     {
@@ -194,7 +195,7 @@ namespace DemonicCity.ResultScene
                     }
 
                     UpdateText();
-                    expSlider.value = 0;
+                    expGauge.value = 0;
                 }
                 yield return new WaitForSeconds(0.01f);
             }
@@ -214,10 +215,10 @@ namespace DemonicCity.ResultScene
                 updatedBasicStatusTexts[i].enabled = false;
             }
 
-            //currentExp = magia.TotalExperience;
-            //destructionCount = panelCounter.TotalDestructionCount;
-            currentExp = 4;
-            destructionCount = 20;
+            currentExp = magia.TotalExperience;
+            destructionCount = panelCounter.TotalDestructionCount;
+            //currentExp = 4;
+            //destructionCount = 20;
 
             needExp = requiredExp - currentExp;
 
@@ -228,9 +229,8 @@ namespace DemonicCity.ResultScene
 
             updatedExp = currentExp + destructionCount;
             requiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
-
-            expSlider.maxValue = requiredExp;
-            expSlider.value = currentExp;
+            expGauge.maxValue = requiredExp;
+            expGauge.value = currentExp;
 
             getStatusPoint = magia.AllocationPoint;
         }

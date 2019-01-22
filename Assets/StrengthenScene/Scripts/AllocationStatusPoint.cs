@@ -128,7 +128,7 @@ namespace DemonicCity.StrengthenScene
         private List<string> skillDescriptionList = new List<string>();
 
         /// <summary>ポップアップウィンドウの表示/非表示</summary>
-        private bool setActivePopUpWindow = false;
+        private bool ActivePopUpWindow = false;
 
         /// <summary>スキル説明テキストの表示/非表示</summary>
         private bool setActiveSkillDescription = false;
@@ -140,11 +140,6 @@ namespace DemonicCity.StrengthenScene
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
-        }
-
-        public enum BUTTONNAME
-        {
-            BACK,
         }
 
         private void Start()
@@ -188,34 +183,34 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "SelectAttributeButton":
-                                if (setActivePopUpWindow == false)
+                                if (ActivePopUpWindow == false)
                                 {
                                     selectAttributeWindow.SetActive(true);
-                                    setActivePopUpWindow = true;
+                                    ActivePopUpWindow = true;
                                 }
                                 break;
 
                             case "BackAttribute":
-                                if (setActivePopUpWindow)
+                                if (ActivePopUpWindow)
                                 {
                                     selectAttributeWindow.SetActive(false);
-                                    setActivePopUpWindow = false;
+                                    ActivePopUpWindow = false;
                                 }
                                 break;
 
                             case "ShowSkillButton":
-                                if (setActivePopUpWindow == false)
+                                if (ActivePopUpWindow == false)
                                 {
                                     skillListWindow.SetActive(true);
-                                    setActivePopUpWindow = true;
+                                    ActivePopUpWindow = true;
                                 }
                                 break;
 
                             case "BackSkill":
-                                if (setActivePopUpWindow)
+                                if (ActivePopUpWindow)
                                 {
                                     skillListWindow.SetActive(false);
-                                    setActivePopUpWindow = false;
+                                    ActivePopUpWindow = false;
                                 }
                                 break;
 
@@ -366,29 +361,29 @@ namespace DemonicCity.StrengthenScene
                                 //ここまで各属性名の処理
 
                             case "ConfirmButton":
-                                if (setActivePopUpWindow == false)
+                                if (ActivePopUpWindow == false)
                                 {
                                     confirmWarningMessageWindow.SetActive(true);
-                                    setActivePopUpWindow = true;
+                                    ActivePopUpWindow = true;
                                     confirmWarningMessageWindow.GetComponentInChildren<Text>().text = "変更したステータスを確定します";
                                 }
                                 break;
 
                             case "ResetButton":
-                                if (setActivePopUpWindow == false)
+                                if (ActivePopUpWindow == false)
                                 {
                                     confirmWarningMessageWindow.SetActive(true);
-                                    setActivePopUpWindow = true;
+                                    ActivePopUpWindow = true;
                                     confirmWarningMessageWindow.GetComponentInChildren<Text>().text = "変更したステータスを初期化します";
                                 }
                                 break;
 
                             case "YesConfirm":
                                 ConfirmStatus();
-                                if (setActivePopUpWindow)
+                                if (ActivePopUpWindow)
                                 {
                                     confirmWarningMessageWindow.SetActive(false);
-                                    setActivePopUpWindow = false;
+                                    ActivePopUpWindow = false;
                                 }
                                 confirmResetButtons.SetActive(false);
 
@@ -399,11 +394,11 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "No":
-                                if (setActivePopUpWindow)
+                                if (ActivePopUpWindow)
                                 {
                                     confirmWarningMessageWindow.SetActive(false);
                                     resetWarningMessageWindow.SetActive(false);
-                                    setActivePopUpWindow = false;
+                                    ActivePopUpWindow = false;
                                 }
                                 break;
                         }
@@ -467,7 +462,7 @@ namespace DemonicCity.StrengthenScene
             resetWarningMessageWindow.SetActive(false);
             confirmWarningMessageWindow.SetActive(false);
 
-            setActivePopUpWindow = false;
+            ActivePopUpWindow = false;
 
             confirmResetButtons.SetActive(false);
 
