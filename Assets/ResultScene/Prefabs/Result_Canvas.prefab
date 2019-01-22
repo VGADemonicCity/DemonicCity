@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 224683947102078528}
   - component: {fileID: 222891939176513512}
   - component: {fileID: 114312279404277202}
+  - component: {fileID: 95124085406366054}
   m_Layer: 5
   m_Name: BackGround
   m_TagString: Untagged
@@ -653,6 +654,24 @@ Transform:
   m_Father: {fileID: 224664786541844040}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95124085406366054
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1207932926515362}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: fa37742ab28bd5d4997d92076aeb9baf, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &114045093216910104
 MonoBehaviour:
   m_ObjectHideFlags: 1
