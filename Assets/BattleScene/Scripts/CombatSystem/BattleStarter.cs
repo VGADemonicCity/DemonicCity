@@ -17,7 +17,7 @@ namespace DemonicCity.BattleScene
             // ==============================
             // イベント呼び出し : StateMachine.PlayerChoice
             // ==============================
-            SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+            m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
         }
     }
 }

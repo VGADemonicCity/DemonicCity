@@ -23,11 +23,13 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>UniqueSkillGaugeの参照</summary>
-       [SerializeField]  UniqueSkillGauge m_uniqueSkillGauge;
+        [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
         /// <summary>固有スキル発動条件(開いたパネル枚数)</summary>
         [SerializeField] int m_condition;
         /// <summary>ユニークスキルが使用可能かどうか判断するフラグ</summary>
         [SerializeField] bool m_flag;
+        /// <summary>スキル使用時の確認画面</summary>
+        [SerializeField] ConfirmWindow m_confirmWindow;
 
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -59,20 +61,34 @@ namespace DemonicCity.BattleScene
                 GameObject hitResult;
                 touchInfo.HitDetection(out hitResult);
 
-                // クリック時 && プレイヤー選択時 && ユニークスキルフラグtrueの時 && タッチしたゲームオブジェクトのタグが"PlayerSkillGauge"の時
-                if (gesture == TouchGestureDetector.Gesture.Click && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice && SkillFlag == true && hitResult != null)
+                // クリック時 && プレイヤー選択時 
+                // && ユニークスキルフラグtrueの時
+                //&& タッチしたゲームオブジェクトのタグが"PlayerSkillGauge"の時
+                if (gesture == TouchGestureDetector.Gesture.Click
+                && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
+                && SkillFlag == true
+                && hitResult != null)
                 {
                     if (hitResult.tag != "PlayerSkillGauge")
                     {
                         return;
                     }
-                    // 形態に応じたユニークスキルを取得,発動する.
-                    var uniqueSkillFactory =  GetComponent<UniqueSkillFactory>();
-                    var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
-                    uniqueSkill.Activate();
-                    m_uniqueSkillGauge.SkillActivated();
+                    m_popupSystem.gameObject.SetActive(true);
+                    m_popupSystem.Popup();
                 }
             });
+        }
+
+        /// <summary>
+        /// 固有スキル発動
+        /// </summary>
+        public void Activate()
+        {
+            // 形態に応じたユニークスキルを取得,発動する.
+            var uniqueSkillFactory = GetComponent<UniqueSkillFactory>();
+            var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
+            uniqueSkill.Activate();
+            m_uniqueSkillGauge.SkillActivated();
         }
     }
 }

@@ -123,7 +123,6 @@ namespace DemonicCity.BattleScene
             if (m_StateMachine.m_Wave != StateMachine.Wave.LastWave)
             {
                 m_StateMachine.m_Wave++;
-                Debug.Log(m_StateMachine.m_Wave);
                 // ==============================
                 // イベント呼び出し : StateMachine.NextWave
                 // ==============================
@@ -134,6 +133,19 @@ namespace DemonicCity.BattleScene
             // イベント呼び出し : StateMachine.End
             // ==============================
             m_BehaviourByState.Invoke(StateMachine.State.Win);
+        }
+
+        /// <summary>
+        /// 指定したステートに遷移させてBattleManagerのイベントを呼び出す
+        /// </summary>
+        /// <param name="state">State machine.</param>
+        public void SetStateMachine(StateMachine.State state)
+        {
+            m_StateMachine.m_State = state; // stateをセット
+            // ==================================
+            // イベント呼び出し
+            // ==================================
+            m_BehaviourByState.Invoke(state);
         }
 
         /// <summary>
