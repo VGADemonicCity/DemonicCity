@@ -73,8 +73,8 @@ namespace DemonicCity.BattleScene
                     {
                         return;
                     }
-                    m_popupSystem.gameObject.SetActive(true);
-                    m_popupSystem.Popup();
+                    m_confirmWindow.gameObject.SetActive(true);
+                    m_confirmWindow.Popup();
                 }
             });
         }

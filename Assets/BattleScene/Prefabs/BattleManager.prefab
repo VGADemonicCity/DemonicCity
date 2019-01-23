@@ -239,6 +239,7 @@ MonoBehaviour:
   m_uniqueSkillGauge: {fileID: 0}
   m_condition: 0
   m_flag: 0
+  m_confirmWindow: {fileID: 0}
 --- !u!114 &114195271979354084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -302,18 +303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaStats:
-    m_level: 0
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 0
-    m_attack: 0
-    m_defense: 0
-  m_currentEnemyStats:
+  m_MagiaStats:
     m_level: 0
     m_durability: 0
     m_muscularStrength: 0
@@ -375,7 +365,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c358759b966a4e6e82ec6acd2137326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_enemyHPGauge: {fileID: 0}
 --- !u!114 &114452556554156664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,7 +431,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1862b4cbb19b24479915824c34b786cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114637994177244260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -539,10 +527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c46f318e26830449398369d6fdfcd6d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_magiaHPGauge: {fileID: 0}
-  m_enemyHPGauge: {fileID: 0}
   m_enemiesMover: {fileID: 0}
-  m_spawnSpacingValue: -5
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -569,7 +554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemiesMover: {fileID: 0}
-  m_enemyHPGauge: {fileID: 0}
 --- !u!114 &114949723133331002
 MonoBehaviour:
   m_ObjectHideFlags: 1
