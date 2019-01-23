@@ -136,10 +136,12 @@ namespace DemonicCity.StrengthenScene
         /// <summary>確定/中止ボタンの表示/非表示</summary>
         private bool changedStatus = false;
 
+        /// <summary>割り振られたポイントの合計値</summary>
+        private int allocationPoint = 0;
+
         private void Awake()
         {
-            //magia = Magia.Instance;
-            magia = new Magia();
+            magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
         }
 
@@ -387,13 +389,13 @@ namespace DemonicCity.StrengthenScene
 
                             case "YesConfirm":
                                 ConfirmStatus();
+
                                 if (activePopUpWindow)
                                 {
                                     confirmMessageWindow.SetActive(false);
                                     activePopUpWindow = false;
                                 }
-                                confirmResetButtons.SetActive(false);
-
+                                changedStatus = false;
                                 break;
 
                             case "YesReset":
@@ -417,6 +419,18 @@ namespace DemonicCity.StrengthenScene
 
                 }
             });
+        }
+
+        private void Update()
+        {
+            if (changedStatus)
+            {
+                confirmResetButtons.SetActive(true);
+            }
+            else
+            {
+                confirmResetButtons.SetActive(false);
+            }
         }
 
         /// <summary>スキルの説明テキストを表示/非表示</summary>
@@ -473,7 +487,7 @@ namespace DemonicCity.StrengthenScene
 
             activePopUpWindow = false;
 
-            confirmResetButtons.SetActive(false);
+            // confirmResetButtons.SetActive(false);
 
             changedStatus = false;
 
@@ -526,6 +540,56 @@ namespace DemonicCity.StrengthenScene
 
             UpdateText();
             magia.Sync();
+        }
+
+        /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
+        /// <param name="uniqueStatus">固有ステータス</param>
+        public int AddStatusPoint(int uniqueStatus)
+        {
+            if (statusPoint > 0)
+            {
+                statusPoint -= 1;
+                statusPointText.text = statusPoint.ToString();
+                uniqueStatus = 1;
+
+                totalAddPoint += 1;
+                if (totalAddPoint > 0 && !changedStatus)
+                {
+                    // confirmResetButtons.SetActive(true);
+                    changedStatus = true;
+                }
+            }
+            else
+            {
+                uniqueStatus = 0;
+                statusPoint = 0;
+            }
+            return uniqueStatus;
+        }
+
+        /// <summary>固有ステータスポイント-1、割り振りポイント+1</summary>
+        /// <param name="uniqueStatus">固有ステータス</param>
+        public int ReductionStatusPoint(int uniqueStatus)
+        {
+            if (uniqueStatus > 0)
+            {
+                uniqueStatus = 1;
+                statusPoint += 1;
+                statusPointText.text = statusPoint.ToString();
+
+                totalAddPoint -= 1;
+                if (totalAddPoint <= 0 && changedStatus)
+                {
+                    totalAddPoint = 0;
+                    //  confirmResetButtons.SetActive(false);
+                    changedStatus = false;
+                }
+            }
+            else
+            {
+                uniqueStatus = 0;
+            }
+            return uniqueStatus;
         }
 
         /// <summary>テキストを更新</summary>
@@ -582,56 +646,6 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5].text = "+ " + addKnowledge.ToString();
 
             statusPointText.text = statusPoint.ToString();
-        }
-
-        /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
-        /// <param name="uniqueStatus">固有ステータス</param>
-        public int AddStatusPoint(int uniqueStatus)
-        {
-            if (statusPoint > 0)
-            {
-                statusPoint -= 1;
-                statusPointText.text = statusPoint.ToString();
-                uniqueStatus = 1;
-
-                totalAddPoint += 1;
-                if (totalAddPoint > 0 && !changedStatus)
-                {
-                    confirmResetButtons.SetActive(true);
-                    changedStatus = true;
-                }
-            }
-            else
-            {
-                uniqueStatus = 0;
-                statusPoint = 0;
-            }
-            return uniqueStatus;
-        }
-
-        /// <summary>固有ステータスポイント-1、割り振りポイント+1</summary>
-        /// <param name="uniqueStatus">固有ステータス</param>
-        public int ReductionStatusPoint(int uniqueStatus)
-        {
-            if (uniqueStatus > 0)
-            {
-                uniqueStatus = 1;
-                statusPoint += 1;
-                statusPointText.text = statusPoint.ToString();
-
-                totalAddPoint -= 1;
-                if (totalAddPoint <= 0 && changedStatus)
-                {
-                    totalAddPoint = 0;
-                    confirmResetButtons.SetActive(false);
-                    changedStatus = false;
-                }
-            }
-            else
-            {
-                uniqueStatus = 0;
-            }
-            return uniqueStatus;
         }
     }
 }
