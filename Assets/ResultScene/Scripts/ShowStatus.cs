@@ -99,10 +99,9 @@ namespace DemonicCity.ResultScene
 
         private void Awake()
         {
-            //magia = Magia.Instance;
-            magia = new Magia();
+            magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
-            panelCounter = new PanelCounter();
+            panelCounter = PanelCounter.Instance;
         }
 
         private void Start()
