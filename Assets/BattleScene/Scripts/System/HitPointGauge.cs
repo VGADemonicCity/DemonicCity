@@ -33,7 +33,6 @@ namespace DemonicCity.BattleScene
         public void Initialize(int max)
         {
             m_maxHP = max;
-            //m_image.fillAmount = 1f;
             Sync(m_maxHP);
         }
 
@@ -46,9 +45,6 @@ namespace DemonicCity.BattleScene
         {
             targetRatio = currentHP / m_maxHP;
             changeRatio = m_image.fillAmount - targetRatio;
-            Debug.Log(currentHP);
-            Debug.Log(m_maxHP);
-            Debug.Log(targetRatio);
             StartCoroutine(Drawing());
         }
 
@@ -80,10 +76,8 @@ namespace DemonicCity.BattleScene
 
        public  IEnumerator FullGameDrawing()
         {
-            Debug.Log("yobareta");
             while (m_image.fillAmount < 1f)
             {
-            Debug.Log("yield return null");
                 m_image.fillAmount += Time.deltaTime * m_drawSpeed;
                 yield return null;
             }

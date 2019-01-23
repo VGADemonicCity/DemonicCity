@@ -25,7 +25,6 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-                Debug.Log("NextWave state called.");
                 m_battleManager.m_StateMachine.m_Wave++;
 
                 m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); //バトル開始直前の 敵のステータスの初期値を保存
