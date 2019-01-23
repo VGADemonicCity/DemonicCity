@@ -83,23 +83,19 @@ namespace DemonicCity.ResultScene
         /// <summary>オブジェクトの生成先</summary>
         [SerializeField] private Transform parent;
 
-        /// <summary>次の章へ進むかホームへ戻るかを選択するウィンドウ</summary>
-        [SerializeField] private GameObject selectSceneWindow;
-
         /// <summary>経験値ゲージ</summary>
         [SerializeField] private Slider expGauge;
 
-        /// <summary>YesOrNoウィンドウ</summary>
-        [SerializeField] private GameObject twoChoicesWindow;
-
-        /// <summary>ポップアップウィンドウを一時的に保持する変数</summary>
-        private GameObject popUpWindow = null;
+        /// <summary>ストーリーに進むか選択するウィンドウウィンドウ</summary>
+        [SerializeField] private GameObject loadStoryWindow;
 
         /// <summary>画面をタップした回数</summary>
         private int touchCount = 0;
 
         /// <summary>アニメーションコルーチン</summary>
         private IEnumerator coroutine;
+
+        private float waitTime = 0;
 
         private void Awake()
         {
@@ -124,9 +120,9 @@ namespace DemonicCity.ResultScene
                         StartCoroutine(coroutine);
                         touchCount = 1;
                     }
-                    else if (touchCount == 1 && popUpWindow == null)
+                    else if (touchCount == 1)
                     {
-                        popUpWindow = Instantiate(twoChoicesWindow, parent);
+                        loadStoryWindow.SetActive(true);
                     }
 
                     GameObject button;
@@ -138,9 +134,9 @@ namespace DemonicCity.ResultScene
                         {
                             SceneChanger.SceneChange(SceneName.Story);
                         }
-                        else if (button.name == "No" && popUpWindow != null)
+                        else if (button.name == "No")
                         {
-                            Destroy(popUpWindow);
+                            loadStoryWindow.SetActive(false);
                         }
                     }
                 }
@@ -166,9 +162,13 @@ namespace DemonicCity.ResultScene
 
                 if (expGauge.value >= expGauge.maxValue)//レベルアップ判定
                 {
-                    popUpWindow = Instantiate(levelUpImage, parent);
-                    Destroy(popUpWindow, 2);
-
+                    levelUpImage.SetActive(true);
+                    waitTime += Time.deltaTime;
+                    if (waitTime > 2)
+                    {
+                        levelUpImage.SetActive(false);
+                    }
+                    Debug.Log("ksvnl");
                     updatedExp -= requiredExp;
                     currentExp -= requiredExp;
                     requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
@@ -204,6 +204,9 @@ namespace DemonicCity.ResultScene
         /// <summary>バトル前のステータスを表示</summary>
         public void LoadBeforeStatus()
         {
+            loadStoryWindow.SetActive(false);
+            levelUpImage.SetActive(false);
+
             var getStats = magia.GetStats();
             currentlevel = getStats.m_level;
             currentHitPoint = getStats.m_hitPoint;
