@@ -33,7 +33,7 @@ namespace DemonicCity.BattleScene
                 m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // HPの値をゲージに同期
                 m_enemiesMover.Moving(); // 敵を前進させる
                 Debug.Log("current wave is : " + m_battleManager.m_StateMachine.m_Wave);
-                SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             });
         }
     }

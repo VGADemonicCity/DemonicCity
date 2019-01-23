@@ -83,7 +83,7 @@ namespace DemonicCity.BattleScene
                 // ==================================
                 // イベント呼び出し : StateMachine.EnemyAttack
                 // ==================================
-                SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
             }
             else // 敵のHPが0以下だったら
             {
@@ -92,7 +92,7 @@ namespace DemonicCity.BattleScene
 
                 if (m_battleManager.m_StateMachine.m_Wave != BattleManager.StateMachine.Wave.LastWave) // 現在のウェーブが最後のウェーブではなかったら
                 {
-                    SetStateMachine(BattleManager.StateMachine.State.NextWave);
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.NextWave);
                 }
                 else
                 {
@@ -100,7 +100,7 @@ namespace DemonicCity.BattleScene
                     // イベント呼び出し : StateMachine.Win
                     // もし次のWaveが存在すれば、次のWaveへ遷移する処理を書く
                     // ==================================
-                    SetStateMachine(BattleManager.StateMachine.State.Win);
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Win);
                 }
             }
         }

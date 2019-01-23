@@ -319,7 +319,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "Kenki":
-                                attribute = Magia.Attribute.FemaleWarrior;
+                                attribute = Magia.Attribute.BladeEmperor;
                                 UpdateText();
                                 if (!confirmResetButtons)
                                 {
@@ -329,7 +329,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "Jinou":
-                                attribute = Magia.Attribute.MaleWarrior;
+                                attribute = Magia.Attribute.SwordPrincess;
                                 UpdateText();
                                 if (!confirmResetButtons)
                                 {
@@ -339,7 +339,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "Jotei":
-                                attribute = Magia.Attribute.FemaleWitch;
+                                attribute = Magia.Attribute.BlackKing;
                                 UpdateText();
                                 if (!confirmResetButtons)
                                 {
@@ -349,7 +349,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "Kokuo":
-                                attribute = Magia.Attribute.MaleWizard;
+                                attribute = Magia.Attribute.Empress;
                                 UpdateText();
                                 if (!confirmResetButtons)
                                 {
@@ -359,7 +359,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "Majin":
-                                attribute = Magia.Attribute.FemaleTrancendental;
+                                attribute = Magia.Attribute.DevilsGod;
                                 UpdateText();
                                 if (!confirmResetButtons)
                                 {
@@ -601,23 +601,23 @@ namespace DemonicCity.StrengthenScene
                     attributeImage.sprite = attributeSprite[0];
                     currentAttributeText.text = "魔童";
                     break;
-                case Magia.Attribute.MaleWarrior:
+                case Magia.Attribute.SwordPrincess:
                     attributeImage.sprite = attributeSprite[1];
                     currentAttributeText.text = "刀皇";
                     break;
-                case Magia.Attribute.FemaleWarrior:
+                case Magia.Attribute.BladeEmperor:
                     attributeImage.sprite = attributeSprite[2];
                     currentAttributeText.text = "剣姫";
                     break;
-                case Magia.Attribute.MaleWizard:
+                case Magia.Attribute.Empress:
                     attributeImage.sprite = attributeSprite[3];
                     currentAttributeText.text = "黒王";
                     break;
-                case Magia.Attribute.FemaleWitch:
+                case Magia.Attribute.BlackKing:
                     attributeImage.sprite = attributeSprite[4];
                     currentAttributeText.text = "女帝";
                     break;
-                case Magia.Attribute.FemaleTrancendental:
+                case Magia.Attribute.DevilsGod:
                     attributeImage.sprite = attributeSprite[5];
                     currentAttributeText.text = "魔神";
                     break;

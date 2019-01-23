@@ -61,14 +61,14 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し : StateMachine.PlayerChoice
                 // ==============================
-                SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             }
             else // PlayerのHPが0以下になったらLoseステートに遷移する
             {
                 // ==============================
                 // イベント呼び出し : StateMachine.Lose
                 // ==============================
-                SetStateMachine(BattleManager.StateMachine.State.Lose);
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
             }
         }
     }
