@@ -46,7 +46,15 @@ namespace DemonicCity.BattleScene
         {
             targetRatio = currentHP / m_maxHP;
             changeRatio = m_image.fillAmount - targetRatio;
+            Debug.Log(currentHP);
+            Debug.Log(m_maxHP);
+            Debug.Log(targetRatio);
             StartCoroutine(Drawing());
+        }
+
+        public void FullGauge()
+        {
+            StartCoroutine(FullGameDrawing());
         }
 
         /// <summary>
@@ -56,17 +64,28 @@ namespace DemonicCity.BattleScene
         {
 
             var changePerFrame = changeRatio * Time.deltaTime * m_drawSpeed;
-            var reminingProcess = changeRatio; // 変動させる比率がプラス(ダメージ)ならそのまま、マイナス(回復)なら引数がマイナスなので符合を逆にして代入
+            var remainingProcess = changeRatio; // 変動させる比率がプラス(ダメージ)ならそのまま、マイナス(回復)なら引数がマイナスなので符合を逆にして代入
             var changeValue = changePerFrame;
-            while (reminingProcess > 0)
+            while (remainingProcess > 0)
             {
                 if (m_image.fillAmount - targetRatio < 0)
                 {
                     changeValue = -changeValue;
                 }
                 m_image.fillAmount -= changePerFrame;
-                reminingProcess -= changeValue;
+                remainingProcess -= changeValue;
                 yield return null; // 1frame待つ
+            }
+        }
+
+       public  IEnumerator FullGameDrawing()
+        {
+            Debug.Log("yobareta");
+            while (m_image.fillAmount < 1f)
+            {
+            Debug.Log("yield return null");
+                m_image.fillAmount += Time.deltaTime * m_drawSpeed;
+                yield return null;
             }
         }
     }
