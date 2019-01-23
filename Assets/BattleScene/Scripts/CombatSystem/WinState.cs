@@ -6,6 +6,8 @@ namespace DemonicCity.BattleScene
 {
     public class WinState : StatesBehaviour
     {
+        [SerializeField] GameObject resultWindow;
+
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -22,6 +24,8 @@ namespace DemonicCity.BattleScene
                 //=======================
                 //Resultのポップアップ等の処理を書く予定
                 //=======================
+
+                resultWindow.SetActive(true);
             });
         }
     }

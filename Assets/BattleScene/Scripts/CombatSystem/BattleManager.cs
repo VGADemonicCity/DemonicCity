@@ -94,8 +94,6 @@ namespace DemonicCity.BattleScene
         [SerializeField] public Statistics m_MagiaStats;
         /// <summary>ステートマシン</summary>
         public StateMachine m_StateMachine { get; set; }
-        /// <summary>敵キャラのデータベース</summary>
-        public EnemiesFactory m_EnemiesFactory { get; set; }
 
         /// <summary>そのバトルに出てくる敵のオブジェクトのリスト</summary>
         [SerializeField] private List<GameObject> m_enemyObjects;
@@ -141,6 +139,7 @@ namespace DemonicCity.BattleScene
         /// <param name="state">State machine.</param>
         public void SetStateMachine(StateMachine.State state)
         {
+            m_StateMachine.m_PreviousState = m_StateMachine.m_State; // ステート遷移前のステートを保存 
             m_StateMachine.m_State = state; // stateをセット
             // ==================================
             // イベント呼び出し
@@ -154,7 +153,6 @@ namespace DemonicCity.BattleScene
         private void Awake()
         {
             m_StateMachine = StateMachine.Instance; // StateMachineの参照取得
-            m_EnemiesFactory = EnemiesFactory.Instance; // EnemiesDataBaseの参照取得
         }
         #endregion
 
@@ -215,6 +213,8 @@ namespace DemonicCity.BattleScene
 
             /// <summary>ステート</summary>
             public State m_State;
+            /// <summary>遷移前のステート</summary>
+            public State m_PreviousState;
             /// <summary>ウェーブ</summary>
             public Wave m_Wave;
         }

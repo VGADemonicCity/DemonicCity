@@ -10,18 +10,8 @@ namespace DemonicCity
     /// </summary>
     public class GameManager : MonoSingleton<GameManager>
     {
-        /// <summary>現在のチャプター</summary>
-        public Chapter CurrentChapter
-        {
-            get { return m_currentChapter; }
-            set { m_currentChapter = value; }
-        }
-
         /// <summary></summary>
         SceneFader m_sceneFader;
-        /// <summary></summary>
-        ChapterManager m_chapterManager;
-        Chapter m_currentChapter;
 
         private void Awake()
         {

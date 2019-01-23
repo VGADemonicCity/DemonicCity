@@ -68,6 +68,7 @@ namespace DemonicCity.BattleScene
                     m_battleManager.CurrentEnemy.Stats.m_hitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
                     m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // HPGaugeと同期
                 }
+                Debug.Log("Damage is " + damage);
                 Debug.Log("攻撃した後の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.m_hitPoint);
 
 

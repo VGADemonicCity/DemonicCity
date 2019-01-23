@@ -21,7 +21,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] public Animator animator;
         bool isActivating;
         BattleManager.StateMachine.State stateBuffer;
-        string trigger = "Switch";
+        const string parameter = "Switch";
 
         protected virtual void OnEnable()
         {
@@ -67,7 +67,7 @@ namespace DemonicCity.BattleScene
         {
             stateBuffer = battleManager.m_StateMachine.m_State;
             battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
-            animator.SetTrigger(trigger);
+            animator.SetTrigger(parameter);
             isActivating = true;
         }
 
@@ -77,7 +77,7 @@ namespace DemonicCity.BattleScene
         public virtual void Close()
         {
             isActivating = false;
-            animator.SetTrigger(trigger);
+            animator.SetTrigger(parameter);
             battleManager.SetStateMachine(stateBuffer);
         }
 
