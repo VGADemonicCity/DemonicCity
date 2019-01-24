@@ -154,7 +154,6 @@ namespace DemonicCity.ResultScene
         {
             while (currentExp < updatedExp)
             {
-
                 currentExp += addAmount;
                 expGauge.maxValue = requiredExp;
                 expGauge.value = currentExp;
@@ -167,12 +166,11 @@ namespace DemonicCity.ResultScene
                     {
                         levelUpImage.SetActive(false);
                     }
-                    Debug.Log("ksvnl");
+
                     updatedExp -= requiredExp;
                     currentExp -= requiredExp;
                     requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
                     expGauge.maxValue = requiredExp;
-                    currentlevel += 1;
                     needExp = expGauge.maxValue - expGauge.value;
 
                     if (needExp < 0)
@@ -218,9 +216,9 @@ namespace DemonicCity.ResultScene
             }
 
             currentExp = magia.TotalExperience;
-            destructionCount = panelCounter.TotalDestructionCount;
+            //destructionCount = panelCounter.TotalDestructionCount;
             //currentExp = 4;
-            //destructionCount = 20;
+            destructionCount = 120;
 
             needExp = requiredExp - currentExp;
 

@@ -244,7 +244,7 @@ namespace DemonicCity
         private void Awake()
         {
             SceneManager.sceneLoaded += ((scene, loadSceneMode) =>
-            { 
+            {
 
             });
         }

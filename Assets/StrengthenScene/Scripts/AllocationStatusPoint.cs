@@ -59,7 +59,7 @@ namespace DemonicCity.StrengthenScene
         private int statusPoint;
 
         /// <summary>割り振られたポイントの合計値</summary>
-        private int totalAddPoint;
+        private int allocationPoint;
 
         /// <summary>割り振られた魅力値</summary>
         private int addCharm;
@@ -79,8 +79,11 @@ namespace DemonicCity.StrengthenScene
         /// <summary>割り振られた威厳値</summary>
         private int addDignity;
 
-        /// <summary>属性テキスト</summary>
-        [SerializeField] private Text currentAttributeText;
+        /// <summary>現在の属性色</summary>
+        [SerializeField] private Image currentAttributeColor;
+
+        /// <summary>現在の属性テキスト</summary>
+        [SerializeField] private TextMeshProUGUI currentAttributeText;
 
         /// <summary>現在の基礎ステータステキスト</summary>
         [SerializeField] TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
@@ -136,9 +139,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>確定/中止ボタンの表示/非表示</summary>
         private bool changedStatus = false;
 
-        /// <summary>割り振られたポイントの合計値</summary>
-        private int allocationPoint = 0;
-
         private void Awake()
         {
             magia = Magia.Instance;
@@ -164,7 +164,7 @@ namespace DemonicCity.StrengthenScene
 
             for (int i = 0; i < skillExplanationText.Length; i++)
             {
-                skillExplanationText[i].GetComponentInChildren<Text>().text = skillExplanationList[i];
+                skillExplanationText[i].GetComponentInChildren<TextMeshProUGUI>().text = skillExplanationList[i];
                 skillExplanationText[i].SetActive(false);
             }
 
@@ -328,26 +328,6 @@ namespace DemonicCity.StrengthenScene
                                 changedStatus = true;
                                 break;
 
-                            case "Jinou":
-                                attribute = Magia.Attribute.SwordPrincess;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-
-                            case "Jotei":
-                                attribute = Magia.Attribute.BlackKing;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-
                             case "Kokuo":
                                 attribute = Magia.Attribute.Empress;
                                 UpdateText();
@@ -423,11 +403,11 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
-            if (changedStatus)
+            if (changedStatus && allocationPoint > 0)
             {
                 confirmResetButtons.SetActive(true);
             }
-            else
+            else if (!changedStatus && allocationPoint <= 0)
             {
                 confirmResetButtons.SetActive(false);
             }
@@ -487,8 +467,7 @@ namespace DemonicCity.StrengthenScene
 
             activePopUpWindow = false;
 
-            // confirmResetButtons.SetActive(false);
-
+           
             changedStatus = false;
 
             passiveSkill = magia.MyPassiveSkill;
@@ -512,7 +491,7 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
             //StatusPoint = magia.AllocationPoint;
-            statusPoint = 10;
+            statusPoint = 10;//debug
 
             UpdateText();
         }
@@ -552,10 +531,9 @@ namespace DemonicCity.StrengthenScene
                 statusPointText.text = statusPoint.ToString();
                 uniqueStatus = 1;
 
-                totalAddPoint += 1;
-                if (totalAddPoint > 0 && !changedStatus)
+                allocationPoint += 1;
+                if (!changedStatus)
                 {
-                    // confirmResetButtons.SetActive(true);
                     changedStatus = true;
                 }
             }
@@ -577,11 +555,10 @@ namespace DemonicCity.StrengthenScene
                 statusPoint += 1;
                 statusPointText.text = statusPoint.ToString();
 
-                totalAddPoint -= 1;
-                if (totalAddPoint <= 0 && changedStatus)
+                allocationPoint -= 1;
+                if (allocationPoint <= 0 && changedStatus)
                 {
-                    totalAddPoint = 0;
-                    //  confirmResetButtons.SetActive(false);
+                    allocationPoint = 0;
                     changedStatus = false;
                 }
             }
@@ -600,26 +577,25 @@ namespace DemonicCity.StrengthenScene
                 case Magia.Attribute.Standard:
                     attributeImage.sprite = attributeSprite[0];
                     currentAttributeText.text = "魔童";
+                    currentAttributeColor.color = new Color(1, 0, 0, 0.5f);//赤
                     break;
-                case Magia.Attribute.SwordPrincess:
-                    attributeImage.sprite = attributeSprite[1];
-                    currentAttributeText.text = "刀皇";
-                    break;
+
                 case Magia.Attribute.BladeEmperor:
-                    attributeImage.sprite = attributeSprite[2];
+                    attributeImage.sprite = attributeSprite[1];
                     currentAttributeText.text = "剣姫";
+                    currentAttributeColor.color = new Color(0, 0, 1, 0.5f);//青
                     break;
+
                 case Magia.Attribute.Empress:
-                    attributeImage.sprite = attributeSprite[3];
+                    attributeImage.sprite = attributeSprite[2];
                     currentAttributeText.text = "黒王";
+                    currentAttributeColor.color = new Color(0, 1, 0, 0.5f);//緑
                     break;
-                case Magia.Attribute.BlackKing:
-                    attributeImage.sprite = attributeSprite[4];
-                    currentAttributeText.text = "女帝";
-                    break;
+
                 case Magia.Attribute.DevilsGod:
-                    attributeImage.sprite = attributeSprite[5];
+                    attributeImage.sprite = attributeSprite[3];
                     currentAttributeText.text = "魔神";
+                    currentAttributeColor.color = new Color(1, 0, 1, 0.5f);//紫
                     break;
             }
 
@@ -638,12 +614,12 @@ namespace DemonicCity.StrengthenScene
             currentUniqueStatusTexts[4].text = durability.ToString();
             currentUniqueStatusTexts[5].text = knowledge.ToString();
 
-            addUniqueStatusTexts[0].text = "+ " + addCharm.ToString();
-            addUniqueStatusTexts[1].text = "+ " + addDignity.ToString();
-            addUniqueStatusTexts[2].text = "+ " + addMuscularStrength.ToString();
-            addUniqueStatusTexts[3].text = "+ " + addSense.ToString();
-            addUniqueStatusTexts[4].text = "+ " + addDurability.ToString();
-            addUniqueStatusTexts[5].text = "+ " + addKnowledge.ToString();
+            addUniqueStatusTexts[0].text = "+" + addCharm.ToString();
+            addUniqueStatusTexts[1].text = "+" + addDignity.ToString();
+            addUniqueStatusTexts[2].text = "+" + addMuscularStrength.ToString();
+            addUniqueStatusTexts[3].text = "+" + addSense.ToString();
+            addUniqueStatusTexts[4].text = "+" + addDurability.ToString();
+            addUniqueStatusTexts[5].text = "+" + addKnowledge.ToString();
 
             statusPointText.text = statusPoint.ToString();
         }
