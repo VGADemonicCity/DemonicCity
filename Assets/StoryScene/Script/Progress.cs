@@ -43,6 +43,7 @@ namespace DemonicCity
             /// <summary>12章</summary>
             Ixmagina = 4096,
             All = 8191,
+            Test=8192,
         }
         /// <summary>1クエスト内での進行度</summary>
 
@@ -58,6 +59,7 @@ namespace DemonicCity
             None,
 
             All,
+            Test,
         }
 
         /// <summary>ストーリーの進行度</summary>

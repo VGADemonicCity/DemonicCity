@@ -40,6 +40,7 @@ namespace DemonicCity
             new Chapter("決戦の覚悟",Progress.StoryProgress.Barl,sourceFolderPath+"11/"),
             new Chapter("偽りの仮面",Progress.StoryProgress.InvigoratedPhoenix,sourceFolderPath+"12/"),
             new Chapter("終末の王",Progress.StoryProgress.Ixmagina,sourceFolderPath+"13/"),
+            new Chapter("Test",Progress.StoryProgress.Test,sourceFolderPath+""),
         };
 
 
