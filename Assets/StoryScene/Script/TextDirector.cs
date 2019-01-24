@@ -315,6 +315,7 @@ namespace DemonicCity.StoryScene
                 fromColor.b += diffB * Time.deltaTime / time;
                 fromColor.a += diffA * Time.deltaTime / time;
                 targetObject.GetComponent<SpriteRenderer>().color = fromColor;
+                Debug.Log(fromColor);
                 yield return null;
             }
             Debug.Log("end");

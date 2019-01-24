@@ -50,8 +50,18 @@ namespace DemonicCity.StorySelectScene
         {
             Debug.Log(chapter.ToString());
             progress.ThisStoryProgress = chapter;
-            progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
-            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
+            Chapter thisChapter = ChapterManager.Instance.GetChapter(chapter);
+            if (thisChapter.isStory)
+            {
+                progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
+                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
+            }
+            else
+            {
+                progress.ThisQuestProgress = Progress.QuestProgress.Battle;
+                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Battle);
+            }
+
         }
     }
 
