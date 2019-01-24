@@ -88,12 +88,37 @@ namespace DemonicCity.StoryScene
 
 
             SetText(progress.ThisQuestProgress.ToString() + ".json");
-            TextsDraw();
+            ThisTextDraw();
         }
         /// <summary>
         /// 次の行を再生する。
         /// </summary>
         public void TextsDraw()
+        {
+            if (putSentence.End)
+            {
+                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
+                {
+                    textIndex += 1;
+                }
+                if (DivideTexts())
+                {
+                    flag = putSentence.CallSentence(texts[textIndex].sentence);
+                }
+                else
+                {
+                    director.Staging(texts[textIndex]);
+                }
+            }
+            else
+            {
+                putSentence.FullTexts();
+            }
+
+        }/// <summary>
+         /// 今の行を再生する。
+         /// </summary>
+        public void ThisTextDraw()
         {
             if (putSentence.End)
             {
@@ -104,10 +129,6 @@ namespace DemonicCity.StoryScene
                 else
                 {
                     director.Staging(texts[textIndex]);
-                }
-                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
-                {
-                    textIndex += 1;
                 }
             }
             else
@@ -221,11 +242,12 @@ namespace DemonicCity.StoryScene
             characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
             SetCharacter(characters);
         }
-        string folderPath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/";
+        public string FolderPath { get { return "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/"; } }
+
         public void SetText(string fileName)
         {
-            folderPath += progress.ThisStoryProgress.ToString() + "/";
-            filePath = folderPath + fileName;
+            //string folderPath += progress.ThisStoryProgress.ToString() + "/";
+            filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/" + fileName;
             Debug.Log(filePath);
             if (null == File.ReadAllText(filePath))
             {
