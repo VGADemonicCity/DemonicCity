@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 
 
 
@@ -41,6 +42,15 @@ namespace DemonicCity.StoryScene
             ToNext
         }
 
+        enum BackIndex
+        {
+            Evening,
+            Noon,
+            Edge,
+
+        }
+
+
         delegate void Stagings();
         string[] contents;
         public List<GameObject> characters = new List<GameObject>();
@@ -48,6 +58,8 @@ namespace DemonicCity.StoryScene
         [SerializeField] GameObject blackOut;
         [SerializeField] GameObject[] popWindows;
         [SerializeField] Transform popCanvas;
+        [SerializeField] SpriteRenderer backGround;
+
         SceneFader fader;
         float moveTime = 0.5f;
 
@@ -120,7 +132,7 @@ namespace DemonicCity.StoryScene
                     Clear();
                     break;
                 case StageType.SwitchBack:
-                    SwitchBack();
+                    SwitchBack(contents[(int)StageTag.Target]);
                     break;
                 case StageType.Item:
                     Item(contents);
@@ -205,6 +217,7 @@ namespace DemonicCity.StoryScene
             if (ColorUtility.TryParseHtmlString(content, out color))
             {
                 StartCoroutine(ChangeColor(blackOut, color, 0.5f));
+
             }
         }
         void Coloring(Color color)
@@ -216,8 +229,18 @@ namespace DemonicCity.StoryScene
             StartCoroutine(ChangeColor(blackOut, Color.clear, 0.5f));
         }
 
-        void SwitchBack()
+        void SwitchBack(string content)
         {
+            BackIndex index;
+            if (EnumCommon.TryParse(content, out index))
+            {
+                Debug.Log("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
+                Sprite back = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
+                if (back)
+                {
+                    backGround.sprite = back;
+                }
+            }
             EndStaging();
         }
 
@@ -315,6 +338,7 @@ namespace DemonicCity.StoryScene
                 fromColor.b += diffB * Time.deltaTime / time;
                 fromColor.a += diffA * Time.deltaTime / time;
                 targetObject.GetComponent<SpriteRenderer>().color = fromColor;
+                Debug.Log(fromColor);
                 yield return null;
             }
             Debug.Log("end");

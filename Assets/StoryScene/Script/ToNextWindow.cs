@@ -8,16 +8,19 @@ namespace DemonicCity
     public class ToNextWindow : MonoBehaviour
     {
         Progress progress;
-        StorySelectScene.StorySelecter storySelecter;
+        StorySelectScene.ToStories toStories;
+        SceneFader fader;
 
-
-        void ToNextChapter()
+        public void ToNextChapter()
         {
             progress = Progress.Instance;
-
+            toStories = new StorySelectScene.ToStories();
+            toStories.ToStory(progress.NextStory(progress.ThisStoryProgress));
         }
-
-
-
+        public void ToHome()
+        {
+            fader = SceneFader.Instance;
+            fader.FadeOut(SceneFader.SceneTitle.Home,0.5f);
+        }
     }
 }
