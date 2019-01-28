@@ -13,7 +13,7 @@ namespace DemonicCity.StoryScene
         /// <summary>/// 表示用のTextComponent/// </summary>
         [SerializeField] TMP_Text text;
         /// <summary>/// /// </summary>
-        TextStorage textContena = new TextStorage();
+        //TextStorage textContena = new TextStorage();
         /// <summary>/// 現在表示している文字列/// </summary>
         string sentence;
         /// <summary>/// /// </summary>
@@ -53,7 +53,7 @@ namespace DemonicCity.StoryScene
             End = true;
         }
         /// <summary>コルーチンを開始</summary>
-        public bool CallSentence(string s)
+        public void CallSentence(string s)
         {
             if (End)
             {
@@ -65,8 +65,6 @@ namespace DemonicCity.StoryScene
             else
             {
             }
-
-            return End;
         }
 
 

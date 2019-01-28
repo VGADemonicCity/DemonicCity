@@ -7,7 +7,6 @@ namespace DemonicCity.StorySelectScene
     public class SelectButton : MonoBehaviour
     {
         TouchGestureDetector touchGestureDetector;
-        StorySelecter storySelecter;
         ToStories toStories;
         [SerializeField] TMPro.TMP_Text text = null;
 
@@ -17,31 +16,28 @@ namespace DemonicCity.StorySelectScene
         string chapterName;
         Progress.StoryProgress chapterTag;
 
-        Progress progress;
+        //Progress progress;
 
 
-        public void Initialize(Progress.StoryProgress chapter, StorySelecter selecter)
+        public void Initialize(Progress.StoryProgress chapter)
         {
-            storySelecter = selecter;
             chapterTag = chapter;
             chapterName = chapterTag.ToString();
         }
         public void Initialize(string title, StorySelecter selecter)
         {
-            storySelecter = selecter;
             chapterName = title;
         }
-        public void Initialize(Progress.StoryProgress chapter, string title, StorySelecter selecter)
+        public void Initialize(Progress.StoryProgress chapter, string title)
         {
             chapterTag = chapter;
-            storySelecter = selecter;
             chapterName = title;
         }
 
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
-            progress = Progress.Instance;
+            //progress = Progress.Instance;
             toStories = new ToStories();
         }
 
