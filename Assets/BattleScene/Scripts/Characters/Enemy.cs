@@ -57,7 +57,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void OnAttack()
         {
-            Debug.Log("OnAttackがよばれたよ");
             m_animator.SetTrigger("Attack");
         }
 

@@ -240,14 +240,6 @@ namespace DemonicCity
         {
             MaxHP = maxHP;
         }
-
-        private void Awake()
-        {
-            SceneManager.sceneLoaded += ((scene, loadSceneMode) =>
-            {
-
-            });
-        }
         #endregion
         #region Enum
         /// <summary>属性</summary>

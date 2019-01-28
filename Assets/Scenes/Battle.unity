@@ -4996,9 +4996,13 @@ Prefab:
     - target: {fileID: 224789379860605118, guid: 8c6858077d111804a838cf01874de597,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1429422743416864, guid: 8c6858077d111804a838cf01874de597, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1207932926515362, guid: 8c6858077d111804a838cf01874de597, type: 2}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -5184,31 +5188,21 @@ Prefab:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_panelFrame
+      propertyPath: resultWindow
       value: 
-      objectReference: {fileID: 1892036566}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 1254297059}
+    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemiesMover
       value: 
       objectReference: {fileID: 1287150239}
-    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_magiaHPGauge
+      propertyPath: m_CoordinateForSpawn
       value: 
-      objectReference: {fileID: 235250964}
-    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 235250964}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_uniqueSkillGauge
-      value: 
-      objectReference: {fileID: 1605222337}
+      objectReference: {fileID: 1287150242}
     - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_uniqueSkillGauge
@@ -5219,16 +5213,46 @@ Prefab:
       propertyPath: m_confirmWindow
       value: 
       objectReference: {fileID: 845467183}
-    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_CoordinateForSpawn
+      propertyPath: m_uniqueSkillGauge
       value: 
-      objectReference: {fileID: 1287150242}
-    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 1605222337}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 235250964}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemiesMover
       value: 
       objectReference: {fileID: 1287150239}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_panelFrame
+      value: 
+      objectReference: {fileID: 1892036566}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_debugFlag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_waitTime
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_flag
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
@@ -6243,7 +6267,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 10
+      scalar: 14.71
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -10229,9 +10253,15 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 111933114460565936, guid: da2a0428a5628e74e93bfadc415c28c6, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: da2a0428a5628e74e93bfadc415c28c6, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &1254297059 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1429422743416864, guid: 8c6858077d111804a838cf01874de597,
+    type: 2}
+  m_PrefabInternal: {fileID: 306667201}
 --- !u!1 &1287150238 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1740351951433900, guid: 229cbc9cd28fc468596fbd71b9b5445b,
@@ -10487,9 +10517,14 @@ Prefab:
       propertyPath: m_Name
       value: CanvasGauges
       objectReference: {fileID: 0}
-    - target: {fileID: 223204168752090460, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    - target: {fileID: 224832220640092172, guid: c78ebd9c2baf2754fb05c664d301f86d,
         type: 2}
-      propertyPath: m_RenderMode
+      propertyPath: m_AnchoredPosition.x
+      value: 263.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114741887781505488, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: m_drawSpeed
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
