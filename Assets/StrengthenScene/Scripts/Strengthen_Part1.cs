@@ -4,20 +4,16 @@ using System;
 using DemonicCity.BattleScene;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
 
 namespace DemonicCity.StrengthenScene
 {
-    public class AllocationStatusPoint : MonoBehaviour
+    public class Strengthen_Part1 : MonoBehaviour
     {
         /// <summary>Magiaクラスのインスタンス</summary>
         Magia magia;
 
         /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
         TouchGestureDetector touchGestureDetector;
-
-        /// <summary>現在の属性</summary>
-        private Magia.Attribute attribute;
 
         /// <summary>現在の体力</summary>
         private int hp;
@@ -79,12 +75,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>割り振られた威厳値</summary>
         private int addDignity;
 
-        /// <summary>現在の属性色</summary>
-        [SerializeField] private Image currentAttributeColor;
-
-        /// <summary>現在の属性テキスト</summary>
-        [SerializeField] private TextMeshProUGUI currentAttributeText;
-
         /// <summary>現在の基礎ステータステキスト</summary>
         [SerializeField] TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
 
@@ -100,12 +90,6 @@ namespace DemonicCity.StrengthenScene
         /// <summary>割り振りポイントテキスト(魔力値)</summary>
         [SerializeField] TextMeshProUGUI statusPointText;
 
-        /// <summary>現在の属性</summary>
-        [SerializeField] private Image attributeImage;
-
-        /// <summary>6種類の属性スプライト</summary>
-        [SerializeField] private Sprite[] attributeSprite;
-
         /// <summary>ステータス確定前のメッセージウィンドウ</summary>
         [SerializeField] private GameObject confirmMessageWindow;
 
@@ -114,9 +98,6 @@ namespace DemonicCity.StrengthenScene
 
         /// <summary>確定ボタンとリセットボタン</summary>
         [SerializeField] private GameObject confirmResetButtons;
-
-        /// <summary>属性選択ウィンドウ</summary>
-        [SerializeField] private GameObject selectAttributeWindow;
 
         /// <summary>習得済みスキル一覧ウィンドウ</summary>
         [SerializeField] private GameObject skillListWindow;
@@ -162,12 +143,6 @@ namespace DemonicCity.StrengthenScene
             skillExplanationList.Add("街破壊数36以上で発動\n次の敵の攻撃を無効化");
             skillExplanationList.Add("スキル発動枚数-10");
 
-            for (int i = 0; i < skillExplanationText.Length; i++)
-            {
-                skillExplanationText[i].GetComponentInChildren<TextMeshProUGUI>().text = skillExplanationList[i];
-                skillExplanationText[i].SetActive(false);
-            }
-
             ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -182,23 +157,8 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHome":
+                                Debug.Log("dsisucd");
                                 SceneChanger.SceneChange(SceneName.Home);
-                                break;
-
-                            case "SelectAttributeButton":
-                                if (!activePopUpWindow)
-                                {
-                                    selectAttributeWindow.SetActive(true);
-                                    activePopUpWindow = true;
-                                }
-                                break;
-
-                            case "BackAttribute":
-                                if (activePopUpWindow)
-                                {
-                                    selectAttributeWindow.SetActive(false);
-                                    activePopUpWindow = false;
-                                }
                                 break;
 
                             case "ShowSkillButton":
@@ -260,94 +220,28 @@ namespace DemonicCity.StrengthenScene
                             //ここまで各スキル名の処理
 
                             case "AddCharmButton":
-                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], true);
-                                break;
-
-                            case "ReductionCharmButton":
-                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0], false);
+                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0]);
                                 break;
 
                             case "AddDignityButton":
-                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], true);
-                                break;
-
-                            case "ReductionDignityButton":
-                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1], false);
+                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1]);
                                 break;
 
                             case "AddMuscularStrengthButton":
-                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], true);
-                                break;
-
-                            case "ReductionMuscularStrengthButton":
-                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2], false);
+                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2]);
                                 break;
 
                             case "AddSenseButton":
-                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], true);
-                                break;
-
-                            case "ReductionSenseButton":
-                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3], false);
+                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3]);
                                 break;
 
                             case "AddDurabilityButton":
-                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], true);
-                                break;
-
-                            case "ReductionDurabilityButton":
-                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4], false);
+                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4]);
                                 break;
 
                             case "AddKnowledgeButton":
-                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], true);
+                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5]);
                                 break;
-
-                            case "ReductionKnowledgeButton":
-                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5], false);
-                                break;
-
-                            //ここから各属性名の処理
-                            case "Mado":
-                                attribute = Magia.Attribute.Standard;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-
-                            case "Kenki":
-                                attribute = Magia.Attribute.BladeEmperor;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-
-                            case "Kokuo":
-                                attribute = Magia.Attribute.Empress;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-
-                            case "Majin":
-                                attribute = Magia.Attribute.DevilsGod;
-                                UpdateText();
-                                if (!confirmResetButtons)
-                                {
-                                    confirmResetButtons.SetActive(true);
-                                }
-                                changedStatus = true;
-                                break;
-                            //ここまで各属性名の処理
 
                             case "ConfirmButton":
                                 if (!activePopUpWindow)
@@ -433,16 +327,9 @@ namespace DemonicCity.StrengthenScene
         /// <param name="uniqueStatus">固有ステータス</param>
         /// <param name="uniqueStatusText">固有ステータスのテキスト</param>
         /// <param name="addStatus">ステータスの増減判定</param>
-        public void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText, bool addStatus)
+        public void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText)
         {
-            if (addStatus)
-            {
-                uniqueStatus += AddStatusPoint(uniqueStatus);
-            }
-            else
-            {
-                uniqueStatus -= ReductionStatusPoint(uniqueStatus);
-            }
+            uniqueStatus += AddStatusPoint(uniqueStatus);
             uniqueStatusText.text = "+ " + uniqueStatus.ToString();
 
             //固有ステータスを基礎ステータスに変換
@@ -460,17 +347,21 @@ namespace DemonicCity.StrengthenScene
         /// <summary>ステータスの変動値を初期化</summary>
         public void ResetStatus()
         {
+            for (int i = 0; i < skillExplanationText.Length; i++)
+            {
+                skillExplanationText[i].GetComponentInChildren<TextMeshProUGUI>().text = skillExplanationList[i];
+                skillExplanationText[i].SetActive(false);
+            }
+
             skillListWindow.SetActive(false);
             resetMessageWindow.SetActive(false);
             confirmMessageWindow.SetActive(false);
 
             activePopUpWindow = false;
 
-           
             changedStatus = false;
 
             passiveSkill = magia.MyPassiveSkill;
-            attribute = magia.MyAttribute;
 
             var getStats = magia.GetStats();
             hp = getStats.m_hitPoint;
@@ -531,10 +422,6 @@ namespace DemonicCity.StrengthenScene
                 uniqueStatus = 1;
 
                 allocationPoint += 1;
-                if (!changedStatus)
-                {
-                    changedStatus = true;
-                }
             }
             else
             {
@@ -544,60 +431,9 @@ namespace DemonicCity.StrengthenScene
             return uniqueStatus;
         }
 
-        /// <summary>固有ステータスポイント-1、割り振りポイント+1</summary>
-        /// <param name="uniqueStatus">固有ステータス</param>
-        public int ReductionStatusPoint(int uniqueStatus)
-        {
-            if (uniqueStatus > 0)
-            {
-                uniqueStatus = 1;
-                statusPoint += 1;
-                statusPointText.text = statusPoint.ToString();
-
-                allocationPoint -= 1;
-                if (allocationPoint <= 0 && changedStatus)
-                {
-                    allocationPoint = 0;
-                    changedStatus = false;
-                }
-            }
-            else
-            {
-                uniqueStatus = 0;
-            }
-            return uniqueStatus;
-        }
-
         /// <summary>テキストを更新</summary>
         public void UpdateText()
         {
-            switch (attribute)
-            {
-                case Magia.Attribute.Standard:
-                    attributeImage.sprite = attributeSprite[0];
-                    currentAttributeText.text = "魔童";
-                    currentAttributeColor.color = new Color(1, 0, 0, 0.5f);//赤
-                    break;
-
-                case Magia.Attribute.BladeEmperor:
-                    attributeImage.sprite = attributeSprite[1];
-                    currentAttributeText.text = "剣姫";
-                    currentAttributeColor.color = new Color(0, 0, 1, 0.5f);//青
-                    break;
-
-                case Magia.Attribute.Empress:
-                    attributeImage.sprite = attributeSprite[2];
-                    currentAttributeText.text = "黒王";
-                    currentAttributeColor.color = new Color(0, 1, 0, 0.5f);//緑
-                    break;
-
-                case Magia.Attribute.DevilsGod:
-                    attributeImage.sprite = attributeSprite[3];
-                    currentAttributeText.text = "魔神";
-                    currentAttributeColor.color = new Color(1, 0, 1, 0.5f);//紫
-                    break;
-            }
-
             currentBasicStatusTexts[0].text = hp.ToString();
             currentBasicStatusTexts[1].text = attack.ToString();
             currentBasicStatusTexts[2].text = defense.ToString();
