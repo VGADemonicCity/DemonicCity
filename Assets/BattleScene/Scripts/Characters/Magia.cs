@@ -104,7 +104,7 @@ namespace DemonicCity
         /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
-        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.AllSkill;
+        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
 
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
@@ -188,8 +188,6 @@ namespace DemonicCity
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 
-
-
         /// <summary>
         /// 現在のマギアのステータスを取得する
         /// 参照渡しにならない様に各値を代入して新しいインスタンスを生成して返す
@@ -229,8 +227,6 @@ namespace DemonicCity
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
             Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
-
-
 
         /// <summary>
         /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する

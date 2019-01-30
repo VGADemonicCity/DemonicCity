@@ -17,15 +17,15 @@ public class Button : MonoBehaviour
 
     public void Onclick()
     {
-        //if (m_battleDebugger.m_debugFlag == true)
-        //{
-        //    m_battleDebugger.m_debugFlag = false;
-        //    return;
-        //}
-        //if (m_battleDebugger.m_debugFlag == false)
-        //{
-        //    m_battleDebugger.m_debugFlag = true;
-        //    return;
-        //}
-    }               
+        if (m_battleDebugger.DebugFlag == true)
+        {
+            m_battleDebugger.DebugFlag = false;
+            return;
+        }
+        if (m_battleDebugger.DebugFlag == false)
+        {
+            m_battleDebugger.DebugFlag = true;
+            return;
+        }
+    }
 }

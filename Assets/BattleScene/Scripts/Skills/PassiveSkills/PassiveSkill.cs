@@ -12,6 +12,8 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public abstract class PassiveSkill : MonoBehaviour
     {
+        public int CountCondition { get { return m_CountCondition; } }
+
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_CountCondition = 1;
         /// <summary>パッシブスキルフラグ用変数</summary>

@@ -22,7 +22,7 @@ namespace DemonicCity.Debugger
             {
                 return m_debugFlag;
             }
-            private set
+             set
             {
                 m_debugFlag = value;
             }
