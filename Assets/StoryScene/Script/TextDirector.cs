@@ -37,9 +37,10 @@ namespace DemonicCity.StoryScene
         {
             Type, Target, Content
         }
-        enum WindowTag
+        public enum WindowTag
         {
-            ToNext
+            ToNext,
+            Skip,
         }
 
         enum BackIndex
@@ -266,14 +267,21 @@ namespace DemonicCity.StoryScene
 
         public void PopWindow(string content)
         {
+            textManager.TextClear();
             WindowTag windowTag;
             if (EnumCommon.TryParse(content, out windowTag))
             {
                 popCanvas.gameObject.SetActive(true);
-                GameObject newPopWindow = Instantiate(popWindows[(int)windowTag], popCanvas);
+                Instantiate(popWindows[(int)windowTag], popCanvas);
             }
             EndStaging();
         }
+        public void PopWindow(WindowTag windowTag)
+        {
+            popCanvas.gameObject.SetActive(true);
+            Instantiate(popWindows[(int)windowTag], popCanvas);
+        }
+
 
         void DivideContent(string content)
         {

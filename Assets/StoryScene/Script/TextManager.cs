@@ -46,6 +46,7 @@ namespace DemonicCity.StoryScene
         List<TextStorage> texts = new List<TextStorage>();
         [SerializeField] PutSentence putSentence;
         [SerializeField] TMPro.TMP_Text nameObj;
+        [SerializeField] UnityEngine.UI.Button skipButton;
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
@@ -116,6 +117,10 @@ namespace DemonicCity.StoryScene
                 {
                     textIndex += 1;
                 }
+                else
+                {
+                    return;
+                }
                 if (DivideTexts())
                 {
                     putSentence.CallSentence(texts[textIndex].sentence);
@@ -154,7 +159,11 @@ namespace DemonicCity.StoryScene
         }
 
 
-
+        public void TextClear()
+        {
+            putSentence.Init();
+            nameObj.text = "";
+        }
 
 
 
@@ -212,6 +221,10 @@ namespace DemonicCity.StoryScene
             }
         }
 
+
+
+
+
         /// <summary>
         /// 現在のシナリオの最終行(シーン遷移などのはず)に飛ぶ
         /// </summary>
@@ -222,7 +235,8 @@ namespace DemonicCity.StoryScene
             {
                 textIndex -= 1;
             }
-            TextsDraw();
+            skipButton.interactable = false;
+            ThisTextDraw();
         }
 
         string filePath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Texts.json";

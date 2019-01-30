@@ -28,8 +28,15 @@ namespace DemonicCity.StoryScene
 
         void Awake()
         {
-            text.text = "";
+            Init();
         }
+
+        public void Init()
+        {
+            text.text = "";
+
+        }
+
 
         /// <summary>引数のStringを一文字ずつ表示する。endがtrueならコルーチンが終了</summary>
         public IEnumerator SentenceFeed(string s)
