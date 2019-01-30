@@ -72,7 +72,6 @@ GameObject:
   - component: {fileID: 114637994177244260}
   - component: {fileID: 114395287615114370}
   - component: {fileID: 61020726325893518}
-  - component: {fileID: 114706097535228408}
   - component: {fileID: 114294880535250120}
   - component: {fileID: 114024525100392670}
   - component: {fileID: 114195271979354084}
@@ -251,7 +250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debugFlag: 0
+  m_debugFlag: 1
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -503,19 +502,6 @@ MonoBehaviour:
   m_CountCondition: 11
   m_passiveSkill: 0
   m_incease: 0.11
---- !u!114 &114706097535228408
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291335245634264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43764d8e86cf0458384d16c25b92a476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_sensor: {fileID: 61020726325893518}
-  m_shuffleSkillConditions: 30
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -28,6 +28,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] Vector2 m_VecMin;
         /// <summary>範囲指定をする最大値のvector</summary>
         [SerializeField] Vector2 m_VecMax;
+        /// <summary>ShufflePanelsの参照</summary>
+       [SerializeField] ShufflePanels m_shufflePanels;
 
 
         /// <summary>TouchGestureDetectorの参照</summary>
@@ -36,8 +38,6 @@ namespace DemonicCity.BattleScene
         BattleManager m_battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter m_panelCounter;
-        /// <summary>ShufflePanelsの参照</summary>
-        ShufflePanels m_shufflePanels;
         /// <summary>オープン後のパネル</summary>
         List<Panel> m_panelsAfterOpened;
         /// <summary>各パネルの生成座標</summary>
@@ -55,7 +55,6 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
-            m_shufflePanels = GetComponent<ShufflePanels>(); // ShufflePanelsの参照取得
             m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
             m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
@@ -100,10 +99,7 @@ namespace DemonicCity.BattleScene
                         ProcessingFactory(hitResult); // 結果内容を判別し結果に応じて処理を自動的に行わせる
                     }
                 }
-                if (gesture == TouchGestureDetector.Gesture.FlickBottomToTop) // Debug用
-                {
-                    m_shufflePanels.PanelShuffle(); // Debug用
-                }
+
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
                     var a = Magia.Instance; // Debug用
@@ -135,6 +131,10 @@ namespace DemonicCity.BattleScene
                     break;
                 case "ShufflePanels":
                     {
+                        if(!m_shufflePanels.IsActivatable)
+                        {
+                            return;
+                        }
                         m_shufflePanels.PanelShuffle();
                         break;
                     }
