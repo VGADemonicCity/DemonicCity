@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using System.IO;
+//using System.IO;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -88,7 +88,7 @@ namespace DemonicCity.StoryScene
             });
 
 
-            SetText(progress.ThisQuestProgress.ToString() + ".json");
+            SetText(progress.ThisQuestProgress.ToString());
             ThisTextDraw();
         }
         /// <summary>
@@ -225,50 +225,51 @@ namespace DemonicCity.StoryScene
         }
 
         string filePath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Texts.json";
-        public void SetText()
-        {
-            if (null == File.ReadAllText(filePath))
-            {
-                return;
-            }
-            string textsJson = File.ReadAllText(filePath);
-            Debug.Log(textsJson);
-            string[] spritKey = { "><" };
+        //public void SetText()
+        //{
+        //    if (null == File.ReadAllText(filePath))
+        //    {
+        //        return;
+        //    }
+        //    string textsJson = File.ReadAllText(filePath);
+        //    Debug.Log(textsJson);
+        //    string[] spritKey = { "><" };
 
-            string[] tmpTexts = textsJson.Split(spritKey, StringSplitOptions.None);
-            //Debug.Log(tmpTexts);
-            foreach (string s in tmpTexts)
-            {
+        //    string[] tmpTexts = textsJson.Split(spritKey, StringSplitOptions.None);
+        //    //Debug.Log(tmpTexts);
+        //    foreach (string s in tmpTexts)
+        //    {
 
-                //Debug.Log(s);
-                var sss = JsonUtility.FromJson<TextStorage>(s);
-                //Debug.Log(sss);   
-                if (sss.face == null || sss.face == "")
-                {
-                    sss.face = FaceIndex.Last.ToString();
-                }
-                var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
-                characters.Add((int)tmpStorage.cName);
-                //Debug.Log(tmpStorage);
-                texts.Add(tmpStorage);
+        //        //Debug.Log(s);
+        //        var sss = JsonUtility.FromJson<TextStorage>(s);
+        //        //Debug.Log(sss);   
+        //        if (sss.face == null || sss.face == "")
+        //        {
+        //            sss.face = FaceIndex.Last.ToString();
+        //        }
+        //        var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
+        //        characters.Add((int)tmpStorage.cName);
+        //        //Debug.Log(tmpStorage);
+        //        texts.Add(tmpStorage);
 
-            }
-            characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
-            SetCharacter(characters);
-        }
-        public string FolderPath { get { return "D:/SourceTree/DemonicCity/Assets/StoryScene/Sources/"; } }
+        //    }
+        //    characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
+        //    SetCharacter(characters);
+        //}
+        public string FolderPath { get { return "Sources/"; } }
 
         public void SetText(string fileName)
         {
             //string folderPath += progress.ThisStoryProgress.ToString() + "/";
             filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/" + fileName;
             Debug.Log(filePath);
-            if (null == File.ReadAllText(filePath))
+            if (null == Resources.Load(filePath))
             {
                 Debug.LogError("error");
                 return;
             }
-            string textsJson = File.ReadAllText(filePath);
+            TextAsset textAsset = Instantiate((TextAsset)Resources.Load(filePath));
+            string textsJson = textAsset.text;
             Debug.Log(textsJson);
             string[] spritKey = { "><" };
 

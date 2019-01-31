@@ -51,7 +51,7 @@ namespace DemonicCity.StoryScene
             sourceFileName = storage.sourceFileName;
             FaceIndex tmpIndex;
             CharName tmpName;
-            StageType tmpStage;
+            //StageType tmpStage;
 
 
             if (storage.unknown == "")

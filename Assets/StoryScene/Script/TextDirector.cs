@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 
 
 
@@ -235,8 +235,8 @@ namespace DemonicCity.StoryScene
             BackIndex index;
             if (EnumCommon.TryParse(content, out index))
             {
-                Debug.Log("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
-                Sprite back = AssetDatabase.LoadAssetAtPath<Sprite>("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
+                //Debug.Log("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
+                Sprite back = Resources.Load<Sprite>("Sources/" + "BackGrounds/" + index.ToString());
                 if (back)
                 {
                     backGround.sprite = back;
