@@ -39,7 +39,7 @@ namespace DemonicCity.StoryScene
 
         public bool isStaging = false;
         string buttonTag = "Button";
-        bool flag;
+        //bool flag;
         int textIndex = 0;
         public TouchGestureDetector touchGestureDetector;
         SceneFader sceneFader;
@@ -91,6 +91,21 @@ namespace DemonicCity.StoryScene
             SetText(progress.ThisQuestProgress.ToString());
             ThisTextDraw();
         }
+
+        void Update()
+        {
+            bool isAuto = false;
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                isAuto = true;
+            }
+            if (isAuto)
+            {
+                TextsDraw();
+            }
+        }
+
+
         /// <summary>
         /// 次の行を再生する。
         /// </summary>
@@ -108,7 +123,7 @@ namespace DemonicCity.StoryScene
                 }
                 if (DivideTexts())
                 {
-                    flag = putSentence.CallSentence(texts[textIndex].sentence);
+                    putSentence.CallSentence(texts[textIndex].sentence);
                 }
                 else
                 {
@@ -129,7 +144,7 @@ namespace DemonicCity.StoryScene
             {
                 if (DivideTexts())
                 {
-                    flag = putSentence.CallSentence(texts[textIndex].sentence);
+                    putSentence.CallSentence(texts[textIndex].sentence);
                 }
                 else
                 {

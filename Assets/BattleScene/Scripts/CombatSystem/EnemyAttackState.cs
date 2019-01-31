@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -44,7 +45,14 @@ namespace DemonicCity.BattleScene
             yield return new WaitWhile(() => // falseになるまで待つ
             {
                 Debug.Log("PlayerAttack state called.");
+                if(m_enemySkillGauge.m_flag == true)
+                {
+                    m_enemySkillGauge.SkillActivate();
+                }
+
                 var damage = m_battleManager.CurrentEnemy.Stats.m_attack - m_battleManager.m_MagiaStats.m_defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
+                var attack = m_battleManager.CurrentEnemy.Stats.Temp.m_attack;
+                Debug.Log("敵の攻撃力     " + attack);
                 if(damage > 0)
                 {
                     m_battleManager.m_MagiaStats.m_hitPoint -= damage; // ダメージ
@@ -55,6 +63,7 @@ namespace DemonicCity.BattleScene
                 return false;
             });
 
+            OnProcessEnded();
 
             if (m_battleManager.m_MagiaStats.m_hitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
             {
@@ -70,6 +79,16 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
             }
+        }
+
+        private void OnProcessEnded()
+        {
+
+            if (m_enemySkillGauge.m_flag == true)
+            {
+                m_enemySkillGauge.SkillDeactivate();
+            }
+            m_enemySkillGauge.Sync();
         }
     }
 }

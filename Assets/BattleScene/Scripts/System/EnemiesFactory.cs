@@ -46,9 +46,9 @@ namespace DemonicCity
             /// <summary>イクスマギナ</summary>
             Ixmagina,
             /// <summary>一本角魔族</summary>
-            SingleCorner,
+            SingleHorn,
             /// <summary>二本角魔族</summary>
-            DoubleCorner,
+            DoubleHorns,
             /// <summary>反面魔族長</summary>
             HalfMask,
             /// <summary>セトゥラス</summary>

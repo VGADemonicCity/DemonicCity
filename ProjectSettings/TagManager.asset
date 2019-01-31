@@ -10,6 +10,9 @@ TagManager:
   - PlayerSkillGauge
   - PanelFrame
   - Button
+  - SkillDestructionText
+  - Content
+  - AddCharmButton
   layers:
   - Default
   - TransparentFX
@@ -24,7 +27,7 @@ TagManager:
   - Character
   - 
   - Canvas
-  - 
+  - PopUpWindow
   - 
   - 
   - 

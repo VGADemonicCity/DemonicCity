@@ -28,7 +28,7 @@ namespace DemonicCity.StorySelectScene
                 if (((Progress.StoryProgress)progressIndex & MyStory) == (Progress.StoryProgress)progressIndex)
                 {
                     GameObject newSelectButton = Instantiate(SelectButton, parent);
-                    newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)progressIndex, chapterManager.GetTitle((Progress.StoryProgress)progressIndex), this);
+                    newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)progressIndex, chapterManager.GetTitle((Progress.StoryProgress)progressIndex));
                 }
             }
             //for (int i = (int)MyStory; i >= 1; i /= 2)

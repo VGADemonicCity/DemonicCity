@@ -25,14 +25,12 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-                Debug.Log("NextWave state called.");
                 m_battleManager.m_StateMachine.m_Wave++;
 
                 m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); //バトル開始直前の 敵のステータスの初期値を保存
-                m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // 敵のHP最大値をGaugeに登録する
-                m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // HPの値をゲージに同期
+                m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.Temp.m_hitPoint); // 敵のHP最大値をGaugeに登録する
+                StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
                 m_enemiesMover.Moving(); // 敵を前進させる
-                Debug.Log("current wave is : " + m_battleManager.m_StateMachine.m_Wave);
                 m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             });
         }

@@ -29,7 +29,7 @@ namespace DemonicCity
         {
             new Chapter("プロローグ",Progress.StoryProgress.Prologue,sourceFolderPath+"1/"),
             new Chapter("はじまりと邂逅",Progress.StoryProgress.Phoenix, EnemiesFactory.EnemiesId.Phoenix, EnemiesFactory.EnemiesId.Phoenix, EnemiesFactory.EnemiesId.Phoenix,sourceFolderPath+"2/"),
-            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesFactory.EnemiesId.SingleCorner, EnemiesFactory.EnemiesId.DoubleCorner, EnemiesFactory.EnemiesId.Nafla,sourceFolderPath+"3/"),
+            new Chapter("道なき道へ",Progress.StoryProgress.Nafla, EnemiesFactory.EnemiesId.SingleHorn, EnemiesFactory.EnemiesId.DoubleHorns, EnemiesFactory.EnemiesId.Nafla,sourceFolderPath+"3/"),
             new Chapter("迫る鎮圧部隊",Progress.StoryProgress.ZAKO1,sourceFolderPath+"4/",false),
             new Chapter("消えぬ炎",Progress.StoryProgress.Amon,sourceFolderPath+"5/"),
             new Chapter("怒り狂う軍隊",Progress.StoryProgress.ZAKO2,sourceFolderPath+"6/",false),
