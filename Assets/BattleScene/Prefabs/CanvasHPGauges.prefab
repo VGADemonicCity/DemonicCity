@@ -488,7 +488,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Button
+  m_Text: 'GameStart
+
+'
 --- !u!114 &114155401179931024
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -869,8 +871,9 @@ MonoBehaviour:
   m_halflyGaugeIcon: {fileID: 114155401179931024}
   m_fullyGaugeIcon: {fileID: 114935999770711794}
   m_alphaChannel: 0
-  m_condition: 4
   m_magnification: 1.5
+  m_flag: 0
+  m_drawSpeed: 2
 --- !u!114 &114935999770711794
 MonoBehaviour:
   m_ObjectHideFlags: 1
