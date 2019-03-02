@@ -107,7 +107,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             LoadBeforeStatus();
-            UpdateText();
+            
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -115,7 +115,7 @@ namespace DemonicCity.ResultScene
                 {
                     if (touchCount == 0)
                     {
-                        coroutine = AnimationExpGauge(0.1f);
+                        coroutine = AnimationExpGauge(0.2f);
                         StartCoroutine(coroutine);
                         touchCount = 1;
                     }
@@ -158,7 +158,7 @@ namespace DemonicCity.ResultScene
                 expGauge.maxValue = requiredExp;
                 expGauge.value = currentExp;
 
-                if (expGauge.value >= expGauge.maxValue)//レベルアップ判定
+                if (expGauge.value >= expGauge.maxValue)//レベルアップしたら
                 {
                     levelUpImage.SetActive(true);
                     waitTime += Time.deltaTime;
@@ -177,7 +177,6 @@ namespace DemonicCity.ResultScene
                     {
                         needExp = -needExp;
                     }
-
                     magia.LevelUp();
 
                     var getStats = magia.GetStats();
@@ -185,11 +184,7 @@ namespace DemonicCity.ResultScene
                     updatedHitPoint = getStats.m_hitPoint;
                     updatedAttack = getStats.m_attack;
                     updatedDefense = getStats.m_defense;
-
-                    for (int a = 0; a < updatedBasicStatusTexts.Length; a++)
-                    {
-                        updatedBasicStatusTexts[a].enabled = true;
-                    }
+                    getStatusPoint = magia.AllocationPoint;
 
                     UpdateText();
                     expGauge.value = 0;
@@ -210,14 +205,8 @@ namespace DemonicCity.ResultScene
             currentAttack = getStats.m_attack;
             currentDefense = getStats.m_defense;
 
-            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
-            {
-                updatedBasicStatusTexts[i].enabled = false;
-            }
-
             currentExp = magia.TotalExperience;
             //destructionCount = panelCounter.TotalDestructionCount;
-            //currentExp = 4;
             destructionCount = 120;
 
             needExp = requiredExp - currentExp;
@@ -233,6 +222,11 @@ namespace DemonicCity.ResultScene
             expGauge.value = currentExp;
 
             getStatusPoint = magia.AllocationPoint;
+
+            UpdateText();
+            updatedBasicStatusTexts[0].text = currentHitPoint.ToString();
+            updatedBasicStatusTexts[1].text = currentAttack.ToString();
+            updatedBasicStatusTexts[2].text = currentDefense.ToString();
         }
 
         /// <summary>テキスト更新</summary>

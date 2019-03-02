@@ -157,7 +157,6 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHome":
-                                Debug.Log("dsisucd");
                                 SceneChanger.SceneChange(SceneName.Home);
                                 break;
 
