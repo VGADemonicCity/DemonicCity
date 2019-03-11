@@ -81,6 +81,9 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        /// <summary>
+        /// スキルの発動が済んだら
+        /// </summary>
         private void OnProcessEnded()
         {
 
