@@ -64,8 +64,8 @@ namespace DemonicCity.BattleScene
             m_battleManager.m_MagiaStats = m_magia.GetStats(); // バトル用のStatisticsインスタンスにmagiaのStatsの各値を登録する
             m_battleManager.m_MagiaStats.Init(m_battleManager.m_MagiaStats); //バトル開始直前の Magiaのステータスの初期値を保存
             m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); // 敵のステータスを初期化
-            m_magiaHPGauge.Initialize(m_battleManager.m_MagiaStats.m_hitPoint); // マギアのHP最大値を引数に初期化する
-            m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.m_hitPoint); // 敵のHP最大値を引数に初期化する
+            m_magiaHPGauge.Initialize(m_battleManager.m_MagiaStats.HitPoint); // マギアのHP最大値を引数に初期化する
+            m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.HitPoint); // 敵のHP最大値を引数に初期化する
         }
 
         /// <summary>

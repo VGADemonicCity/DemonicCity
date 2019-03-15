@@ -174,10 +174,10 @@ namespace DemonicCity.ResultScene
                     magia.LevelUp();
 
                     var getStats = magia.GetStats();
-                    beforeStatus.m_level = getStats.m_level;
-                    updatedHitPoint = getStats.m_hitPoint;
-                    updatedAttack = getStats.m_attack;
-                    updatedDefense = getStats.m_defense;
+                    beforeStatus.Level = getStats.Level;
+                    updatedHitPoint = getStats.HitPoint;
+                    updatedAttack = getStats.Attack;
+                    updatedDefense = getStats.Defense;
                     getStatusPoint = magia.AllocationPoint;
 
                     UpdateText();
@@ -197,7 +197,7 @@ namespace DemonicCity.ResultScene
             beforeStatus = magia.GetStats();
             currentExp = magia.TotalExperience;
             destructionCount = panelCounter.TotalDestructionCount;
-            requiredExp = magia.GetRequiredExpToNextLevel(beforeStatus.m_level);
+            requiredExp = magia.GetRequiredExpToNextLevel(beforeStatus.Level);
 
             
             needExp = requiredExp - currentExp;
@@ -215,9 +215,9 @@ namespace DemonicCity.ResultScene
             getStatusPoint = magia.AllocationPoint;
 
             UpdateText();
-            updatedBasicStatusTexts[0].text = beforeStatus.m_hitPoint.ToString();
-            updatedBasicStatusTexts[1].text = beforeStatus.m_attack.ToString();
-            updatedBasicStatusTexts[2].text = beforeStatus.m_defense.ToString();
+            updatedBasicStatusTexts[0].text = beforeStatus.HitPoint.ToString();
+            updatedBasicStatusTexts[1].text = beforeStatus.Attack.ToString();
+            updatedBasicStatusTexts[2].text = beforeStatus.Defense.ToString();
         }
 
         /// <summary>変動後のステータスを表示</summary>
@@ -231,10 +231,10 @@ namespace DemonicCity.ResultScene
         /// <summary>テキスト更新</summary>
         private void UpdateText()
         {
-            levelText.text = beforeStatus.m_level.ToString();
-            currentBasicStatusTexts[0].text = beforeStatus.m_hitPoint.ToString();
-            currentBasicStatusTexts[1].text = beforeStatus.m_attack.ToString();
-            currentBasicStatusTexts[2].text = beforeStatus.m_defense.ToString();
+            levelText.text = beforeStatus.Level.ToString();
+            currentBasicStatusTexts[0].text = beforeStatus.HitPoint.ToString();
+            currentBasicStatusTexts[1].text = beforeStatus.Attack.ToString();
+            currentBasicStatusTexts[2].text = beforeStatus.Defense.ToString();
 
             updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
             updatedBasicStatusTexts[1].text = updatedAttack.ToString();
