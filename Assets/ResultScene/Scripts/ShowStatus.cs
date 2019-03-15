@@ -4,6 +4,7 @@ using TMPro;
 using DemonicCity.BattleScene;
 using UnityEngine.UI;
 
+
 namespace DemonicCity.ResultScene
 {
     public class ShowStatus : MonoBehaviour
@@ -17,17 +18,8 @@ namespace DemonicCity.ResultScene
         /// <summary>PanelCounterクラスのインスタンス</summary>
         PanelCounter panelCounter;
 
-        /// <summary>現在のレベル</summary>
-        private int currentlevel;
-
-        /// <summary>現在の体力</summary>
-        private int currentHitPoint;
-
-        /// <summary>現在の攻撃力</summary>
-        private int currentAttack;
-
-        /// <summary>現在の防御力</summary>
-        private int currentDefense;
+        /// <summary>バトル開始前のマギアのステータス</summary>
+        private Status beforeStatus;
 
         /// <summary>変動後の体力</summary>
         private int updatedHitPoint;
@@ -57,7 +49,7 @@ namespace DemonicCity.ResultScene
         private float currentExp;
 
         /// <summary>変動後の経験値</summary>
-        private float updatedExp;
+        private float afterExp;
 
         /// <summary>現在のレベルテキスト</summary>
         [SerializeField] TextMeshProUGUI levelText;
@@ -108,7 +100,6 @@ namespace DemonicCity.ResultScene
         {
             LoadBeforeStatus();
             
-
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -131,10 +122,12 @@ namespace DemonicCity.ResultScene
                     {
                         if (button.name == "Yes")
                         {
+                            Debug.Log("yes");
                             SceneChanger.SceneChange(SceneName.Story);
                         }
                         else if (button.name == "No")
                         {
+                            Debug.Log("no");
                             loadStoryWindow.SetActive(false);
                         }
                     }
@@ -147,12 +140,13 @@ namespace DemonicCity.ResultScene
             needExpText.text = (expGauge.maxValue - expGauge.value).ToString("f0");
         }
 
+
         /// <summary>ステータス変動アニメーション</summary>
         /// <param name="addAmount">経験値ゲージの増加量</param>
         /// <returns></returns>
         private IEnumerator AnimationExpGauge(float addAmount)
         {
-            while (currentExp < updatedExp)
+            while (currentExp < afterExp)
             {
                 currentExp += addAmount;
                 expGauge.maxValue = requiredExp;
@@ -167,9 +161,9 @@ namespace DemonicCity.ResultScene
                         levelUpImage.SetActive(false);
                     }
 
-                    updatedExp -= requiredExp;
+                    afterExp -= requiredExp;
                     currentExp -= requiredExp;
-                    requiredExp = magia.GetRequiredExpToNextLevel(currentlevel + 1);
+                    requiredExp = magia.GetRequiredExpToNextLevel( + 1);
                     expGauge.maxValue = requiredExp;
                     needExp = expGauge.maxValue - expGauge.value;
 
@@ -180,7 +174,7 @@ namespace DemonicCity.ResultScene
                     magia.LevelUp();
 
                     var getStats = magia.GetStats();
-                    currentlevel = getStats.m_level;
+                    beforeStatus.m_level = getStats.m_level;
                     updatedHitPoint = getStats.m_hitPoint;
                     updatedAttack = getStats.m_attack;
                     updatedDefense = getStats.m_defense;
@@ -193,22 +187,19 @@ namespace DemonicCity.ResultScene
             }
         }
 
-        /// <summary>バトル前のステータスを表示</summary>
+        /// <summary>バトル前のステータスを取得する</summary>
         public void LoadBeforeStatus()
         {
             loadStoryWindow.SetActive(false);
             levelUpImage.SetActive(false);
 
-            var getStats = magia.GetStats();
-            currentlevel = getStats.m_level;
-            currentHitPoint = getStats.m_hitPoint;
-            currentAttack = getStats.m_attack;
-            currentDefense = getStats.m_defense;
-
+            // バトル前のステータスと必要経験値を取得する
+            beforeStatus = magia.GetStats();
             currentExp = magia.TotalExperience;
-            //destructionCount = panelCounter.TotalDestructionCount;
-            destructionCount = 120;
+            destructionCount = panelCounter.TotalDestructionCount;
+            requiredExp = magia.GetRequiredExpToNextLevel(beforeStatus.m_level);
 
+            
             needExp = requiredExp - currentExp;
 
             if (needExp < 0)
@@ -216,33 +207,40 @@ namespace DemonicCity.ResultScene
                 needExp = -needExp;
             }
 
-            updatedExp = currentExp + destructionCount;
-            requiredExp = magia.GetRequiredExpToNextLevel(currentlevel);
+            afterExp = currentExp + destructionCount;
             expGauge.maxValue = requiredExp;
             expGauge.value = currentExp;
+            
 
             getStatusPoint = magia.AllocationPoint;
 
             UpdateText();
-            updatedBasicStatusTexts[0].text = currentHitPoint.ToString();
-            updatedBasicStatusTexts[1].text = currentAttack.ToString();
-            updatedBasicStatusTexts[2].text = currentDefense.ToString();
+            updatedBasicStatusTexts[0].text = beforeStatus.m_hitPoint.ToString();
+            updatedBasicStatusTexts[1].text = beforeStatus.m_attack.ToString();
+            updatedBasicStatusTexts[2].text = beforeStatus.m_defense.ToString();
+        }
+
+        /// <summary>変動後のステータスを表示</summary>
+        private void UpdateStatus()
+        {
+            
+
+           
         }
 
         /// <summary>テキスト更新</summary>
-        public void UpdateText()
+        private void UpdateText()
         {
-            levelText.text = currentlevel.ToString();
-            currentBasicStatusTexts[0].text = currentHitPoint.ToString();
-            currentBasicStatusTexts[1].text = currentAttack.ToString();
-            currentBasicStatusTexts[2].text = currentDefense.ToString();
+            levelText.text = beforeStatus.m_level.ToString();
+            currentBasicStatusTexts[0].text = beforeStatus.m_hitPoint.ToString();
+            currentBasicStatusTexts[1].text = beforeStatus.m_attack.ToString();
+            currentBasicStatusTexts[2].text = beforeStatus.m_defense.ToString();
 
             updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
             updatedBasicStatusTexts[1].text = updatedAttack.ToString();
             updatedBasicStatusTexts[2].text = updatedDefense.ToString();
 
             destructionCountText.text = destructionCount.ToString();
-            //needExp = Mathf.CeilToInt(needExp);
             needExpText.text = needExp.ToString();
             getStatusPointText.text = getStatusPoint.ToString();
         }

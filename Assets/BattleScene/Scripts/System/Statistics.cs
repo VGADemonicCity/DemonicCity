@@ -9,7 +9,7 @@ namespace DemonicCity
     /// キャラクターのステータス
     /// </summary>
     [Serializable]
-    public class Statistics
+    public struct Status
     {
 
 
@@ -57,18 +57,15 @@ namespace DemonicCity
             get { return Temp.m_hitPoint; }
         }
 
-        [SerializeField] private Statistics m_temp;
+        [SerializeField] private Status m_temp;
         /// <summary>Tempにバトル開始時のhp,atk,defの初期値を一時保存しておく</summary>
-        public Statistics Temp
+        public Status Temp
         {
             get { return m_temp; }
             set { m_temp = value; }
         }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="T:DemonicCity.Statistics"/> class.
-        /// </summary>
-        public Statistics() { }
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="T:DemonicCity.Statistics"/> class.
@@ -76,7 +73,7 @@ namespace DemonicCity
         /// <param name="hitPoint">Hit point.</param>
         /// <param name="attack">Attack.</param>
         /// <param name="defense">Defense.</param>
-        public Statistics(int hitPoint, int attack, int defense)
+        public Status(int hitPoint, int attack, int defense)
         {
             m_hitPoint = hitPoint;
             m_attack = attack;
@@ -88,9 +85,9 @@ namespace DemonicCity
         /// バトル開始時のステータスの初期値を保存
         /// </summary>
         /// <param name="stats">Stats.</param>
-        public void Init(Statistics stats)
+        public void Init(Status stats)
         {
-            Temp = new Statistics
+            Temp = new Status
             {
                 m_hitPoint = stats.m_hitPoint,
                 m_attack = stats.m_attack,

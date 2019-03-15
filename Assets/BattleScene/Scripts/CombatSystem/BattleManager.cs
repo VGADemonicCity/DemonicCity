@@ -91,7 +91,7 @@ namespace DemonicCity.BattleScene
         /// <summary>StateMacineのUnityEvent</summary>
         public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Statistics m_MagiaStats;
+        [SerializeField] public Status m_MagiaStats;
         /// <summary>ステートマシン</summary>
         public StateMachine m_StateMachine { get; set; }
 

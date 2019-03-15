@@ -25,7 +25,7 @@ namespace DemonicCity
             get { return m_requiredExps.Length + 1; }
         }
         /// <summary>ステータスクラスのプロパティ</summary>
-        public Statistics Stats
+        public Status Stats
         {
             get { return m_stats; }
             set { m_stats = value; }
@@ -42,17 +42,12 @@ namespace DemonicCity
             get { return m_attribute; }
             set { m_attribute = value; }
         }
-        /// <summary>m_totalExperienceのプロパティ</summary>
+
+        /// <summary>総経験値</summary>
         public int TotalExperience
         {
             get { return m_totalExperience; }
             set { m_totalExperience = value; }
-        }
-        /// <summary>m_totalDestructionCountのプロパティ</summary>
-        public int TotalDestructionCount
-        {
-            get { return m_totalDestructionCount; }
-            set { m_totalDestructionCount = value; }
         }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
@@ -95,8 +90,6 @@ namespace DemonicCity
         #region Field
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
-        /// <summary>総街破壊数</summary>
-        [SerializeField] int m_totalDestructionCount;
         /// <summary>振り分けポイント</summary>
         [SerializeField] int m_allocationPoint;
         /// <summary>MyAttributeのバッキングフィールド</summary>
@@ -108,7 +101,7 @@ namespace DemonicCity
 
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
-        Statistics m_stats = new Statistics()
+        Status m_stats = new Status()
         {
             m_level = 1,
             m_hitPoint = 24250,
@@ -161,30 +154,30 @@ namespace DemonicCity
             // レベルアップする直前のレベルに合わせてステータスを上昇させる
             if (Stats.m_level < 50) // レベル50以下なら
             {
-                Stats.m_hitPoint += 50;
-                Stats.m_attack += 15;
-                Stats.m_defense += 15;
+                m_stats.m_hitPoint += 50;
+                m_stats.m_attack += 15;
+                m_stats.m_defense += 15;
             }
             else if (Stats.m_level >= 50 && Stats.m_level < 100) // レベル50~99なら
             {
-                Stats.m_hitPoint += 25;
-                Stats.m_attack += 10;
-                Stats.m_defense += 10;
+                m_stats.m_hitPoint += 25;
+                m_stats.m_attack += 10;
+                m_stats.m_defense += 10;
             }
             else if (Stats.m_level >= 100 && Stats.m_level < 150) // レベル100~149なら
             {
-                Stats.m_hitPoint += 10;
-                Stats.m_attack += 5;
-                Stats.m_defense += 5;
+                m_stats.m_hitPoint += 10;
+                m_stats.m_attack += 5;
+                m_stats.m_defense += 5;
             }
             else if (Stats.m_level >= 150 && Stats.m_level < 200) // レベル150~199なら
             {
-                Stats.m_hitPoint += 5;
-                Stats.m_attack += 1;
-                Stats.m_defense += 1;
+                m_stats.m_hitPoint += 5;
+                m_stats.m_attack += 1;
+                m_stats.m_defense += 1;
             }
 
-            Stats.m_level++; // levelを1上げる
+            m_stats.m_level++; // levelを1上げる
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 
@@ -193,9 +186,9 @@ namespace DemonicCity
         /// 参照渡しにならない様に各値を代入して新しいインスタンスを生成して返す
         /// </summary>
         /// <returns>現在のマギアのステータス</returns>
-        public Statistics GetStats()
+        public Status GetStats()
         {
-            Statistics result = new Statistics()
+            Status result = new Status()
             {
                 m_level = Stats.m_level,
                 m_hitPoint = Stats.m_hitPoint,
@@ -214,7 +207,7 @@ namespace DemonicCity
         /// <summary>
         /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
         /// </summary>
-        public void Sync(Statistics stats = null)
+        public void Sync(Status stats = null)
         {
             if (stats != null)
             {
