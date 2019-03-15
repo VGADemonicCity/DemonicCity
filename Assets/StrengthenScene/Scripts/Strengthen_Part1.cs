@@ -150,14 +150,13 @@ namespace DemonicCity.StrengthenScene
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     GameObject button;
-                    touchInfo.HitDetection(out button);
-
+                    touchInfo.HitDetection(out button, confirmMessageWindow);
+                    Debug.Log(button.name);
                     if (button != null)
                     {
                         switch (button.name)
                         {
                             case "BackToHome":
-                                Debug.Log("dsisucd");
                                 SceneChanger.SceneChange(SceneName.Home);
                                 break;
 

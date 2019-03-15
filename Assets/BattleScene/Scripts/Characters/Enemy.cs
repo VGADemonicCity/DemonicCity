@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
     public class Enemy : MonoBehaviour , IAttackHandler
     {
         /// <summary>m_statsのプロパティ</summary>
-        public Statistics Stats
+        public Status Stats
         {
             get { return m_stats; }
             set { m_stats = value; }
@@ -28,7 +28,7 @@ namespace DemonicCity.BattleScene
         /// <summary>敵キャラのID</summary>
         [SerializeField] private EnemiesFactory.EnemiesId m_id;
         /// <summary>ステータス</summary>
-        [SerializeField] Statistics m_stats = new Statistics();
+        [SerializeField] Status m_stats = new Status();
         /// <summary>敵キャラのアニメーター</summary>
         [SerializeField] Animator m_animator;
         /// <summary>BattleManagerの参照</summary>
