@@ -174,10 +174,10 @@ namespace DemonicCity
             {
                 m_stats.m_hitPoint += 5;
                 m_stats.m_attack += 1;
-                m_stats.m_defense += 1;
+                Stats.m_defense += 1;
             }
 
-            m_stats.m_level++; // levelを1上げる
+            Stats.m_level++; // levelを1上げる
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 

@@ -407,7 +407,7 @@ namespace DemonicCity.StrengthenScene
             addKnowledge = 0;
 
             UpdateText();
-            magia.Sync();
+            //magia.Sync();
         }
 
         /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
