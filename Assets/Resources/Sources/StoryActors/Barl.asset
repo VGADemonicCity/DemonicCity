@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354859291a28fd64f8b0125283ee29eb, type: 3}
+  m_Name: Barl
+  m_EditorClassIdentifier: 
+  id: 6
+  name: "\u30D0\u30A2\u30EB"
+  faces:
+  - {fileID: 21300000, guid: 952a33c602529e8458680e46aac58875, type: 3}
+  - {fileID: 21300000, guid: 0c58b35cb1633d2429f09d4633d8444a, type: 3}
+  - {fileID: 21300000, guid: 7ab5c5f8b6a0aa24e98afcd645c0a7db, type: 3}
+  - {fileID: 21300000, guid: e24dc751fff0cda4ebbdaff0f35aa5f6, type: 3}
+  - {fileID: 21300000, guid: 6af98845bc05ef84d984087c1e5ae9b8, type: 3}
+  - {fileID: 0}
+  index: 0

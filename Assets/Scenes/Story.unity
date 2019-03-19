@@ -607,12 +607,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &629779180 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
-    type: 2}
-  m_PrefabInternal: {fileID: 347136657}
-  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 --- !u!1 &674071357
 GameObject:
   m_ObjectHideFlags: 0
@@ -646,12 +640,6 @@ RectTransform:
   m_AnchoredPosition: {x: -300, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &680087525 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114004022373394516, guid: a200ebd214bc76a47ae008546486ac2b,
-    type: 2}
-  m_PrefabInternal: {fileID: 347136657}
-  m_Script: {fileID: 11500000, guid: d0512fb2897442e4e8a793842e60b581, type: 3}
 --- !u!1 &718607013
 GameObject:
   m_ObjectHideFlags: 0
@@ -1423,13 +1411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f373c8b9461f24a8f8a9b5b9303813, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  touchGestureDetector: {fileID: 0}
-  putSentence:
-  - {fileID: 1382222496}
-  - {fileID: 680087525}
-  nameObj:
-  - {fileID: 671158}
-  - {fileID: 629779180}
 --- !u!4 &1750996254
 Transform:
   m_ObjectHideFlags: 0
@@ -1465,6 +1446,9 @@ MonoBehaviour:
   - {fileID: 1975014521590236, guid: 514aab17db32d4446b63849aed217ce6, type: 2}
   - {fileID: 1975014521590236, guid: 43506c380cb9a4e438b6da47be8dbee3, type: 2}
   - {fileID: 1975014521590236, guid: 559796c510aa95445ad40c2e7a40d939, type: 2}
+  characterObject: {fileID: 1975014521590236, guid: db386259a51a6884c80a5caefd18182e,
+    type: 2}
+  actors: []
   isStaging: 0
   touchGestureDetector: {fileID: 0}
   putSentence: {fileID: 1382222496}

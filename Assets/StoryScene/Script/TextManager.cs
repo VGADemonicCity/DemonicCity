@@ -11,7 +11,7 @@ namespace DemonicCity.StoryScene
 {
     public enum CharName
     {
-        Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, Maou, Ixmagina, Unknown, None, System
+        Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, InvigoratedPhoenix, Maou, Ixmagina, Unknown, None, System
     }
     public class TextManager : MonoBehaviour
     {
@@ -23,6 +23,7 @@ namespace DemonicCity.StoryScene
         "アシュメダイ",
         "フォーラス",
         "バアル",
+        "フィニクス",
         "イクスマギア",
         "魔王",
         "???",
@@ -33,8 +34,10 @@ namespace DemonicCity.StoryScene
         [SerializeField] TextDirector director;
         [SerializeField] Transform parentTransform;
         [SerializeField] List<GameObject> characterObjects = new List<GameObject>();
+        [SerializeField] GameObject characterObject;
+        [SerializeField] List<TextActor> actors = new List<TextActor>();
         List<FaceChanger> faceChangers = new List<FaceChanger>();
-        List<int> characters = new List<int>();
+        List<CharName> characters = new List<CharName>();
         Progress progress;
 
         public bool isStaging = false;
@@ -47,6 +50,7 @@ namespace DemonicCity.StoryScene
         [SerializeField] PutSentence putSentence;
         [SerializeField] TMPro.TMP_Text nameObj;
         [SerializeField] UnityEngine.UI.Button skipButton;
+        public bool DrawEnd { get { return !isStaging & putSentence.End; } }
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
@@ -71,6 +75,8 @@ namespace DemonicCity.StoryScene
             //{
 
             //}
+            actors = Resources.LoadAll<TextActor>("Sources/StoryActors").ToList();
+
 
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -106,6 +112,20 @@ namespace DemonicCity.StoryScene
         }
 
 
+        IEnumerator TextDraw()
+        {
+            yield return new WaitWhile(() => !DrawEnd);
+            textIndex += 1;
+            if (DivideTexts())
+            {
+                putSentence.CallSentence(texts[textIndex].sentence);
+            }
+            else
+            {
+                director.Staging(texts[textIndex]);
+            }
+        }
+
         /// <summary>
         /// 次の行を再生する。
         /// </summary>
@@ -135,9 +155,13 @@ namespace DemonicCity.StoryScene
                 putSentence.FullTexts();
             }
 
-        }/// <summary>
-         /// 今の行を再生する。
-         /// </summary>
+        }
+
+
+
+        /// <summary>
+        /// 今の行を再生する。
+        /// </summary>
         public void ThisTextDraw()
         {
             if (putSentence.End)
@@ -165,7 +189,7 @@ namespace DemonicCity.StoryScene
             nameObj.text = "";
         }
 
-
+        public CharName[] talker = new CharName[2] { CharName.None, CharName.None };
 
         /// <summary>ListのCharNameに応じた名前を出力するが、演出がある場合はその演出を再生する</summary>
         bool DivideTexts()
@@ -182,6 +206,14 @@ namespace DemonicCity.StoryScene
                 //faceChangers[0].ChangeFace(texts[textIndex].faceIndex);
             }
 
+            Cast cast = new Cast();
+            if (MissMatchTalker(out cast))
+            {
+                director.SwitchTalker(director.casts.Find(x => x.name == talker[(int)cast.posTag]), cast);
+                talker[(int)cast.posTag] = cast.name;
+            }
+
+
             if (texts[textIndex].isUnknown)
             {
                 nameObj.text = CHARNAME[(int)CharName.Unknown];
@@ -196,6 +228,39 @@ namespace DemonicCity.StoryScene
             }
             return true;
         }
+
+        bool MissMatchTalker(out Cast cast)
+        {
+            cast = director.casts.Find(x => x.name == texts[textIndex].cName);
+            if (cast != null)
+            {
+                if (cast.posTag == PositionTag.Ally)
+                {
+                    if (talker[0] == cast.name)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+                else if (cast.posTag == PositionTag.Enemy)
+                {
+                    if (talker[1] == cast.name)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+
         void Staging(TextStorage storage)
         {
             SceneFader.SceneTitle outName;
@@ -211,11 +276,13 @@ namespace DemonicCity.StoryScene
 
         }
 
-        void SetCharacter(List<int> names)
+        void SetCharacter(List<CharName> names)
         {
             foreach (var item in names)
             {
-                GameObject charObj = Instantiate(characterObjects[item], parentTransform);
+                GameObject charObj = Instantiate(characterObject, parentTransform);
+                charObj.AddComponent(typeof(FaceChanger));
+                charObj.GetComponent<FaceChanger>().Init(actors.Find(x => x.id == item));
                 director.characters.Add(charObj);
                 faceChangers.Add(charObj.GetComponent<FaceChanger>());
             }
@@ -278,11 +345,14 @@ namespace DemonicCity.StoryScene
             //string folderPath += progress.ThisStoryProgress.ToString() + "/";
             filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/" + fileName;
             Debug.Log(filePath);
+
             if (null == Resources.Load(filePath))
             {
-                Debug.LogError("error");
-                return;
+                Debug.LogError("ScenarioNotFound : " + filePath);
+
+                filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/Test";
             }
+
             TextAsset textAsset = Instantiate((TextAsset)Resources.Load(filePath));
             string textsJson = textAsset.text;
             Debug.Log(textsJson);
@@ -301,12 +371,12 @@ namespace DemonicCity.StoryScene
                     sss.face = FaceIndex.Last.ToString();
                 }
                 var tmpStorage = new TextStorage(JsonUtility.FromJson<TextStorage>(s));
-                characters.Add((int)tmpStorage.cName);
+                characters.Add(tmpStorage.cName);
                 //Debug.Log(tmpStorage);
                 texts.Add(tmpStorage);
 
             }
-            characters = characters.Distinct().Where(item => item <= (int)CharName.Ixmagina).ToList();
+            characters = characters.Distinct().Where(item => item <= CharName.Ixmagina).ToList();
             SetCharacter(characters);
         }
     }
