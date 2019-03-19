@@ -20,8 +20,8 @@ namespace DemonicCity.StoryScene
         int charCount = 0;
         /// <summary>コルーチンが終了しているか </summary>
         bool end = true;
-        /// <summary>全文表示しているか</summary>
-        public bool onoff;
+        ///// <summary>全文表示しているか</summary>
+        //public bool onoff;
         /// <summary>コルーチンを保存する</summary>
         IEnumerator feedCoroutine;
         public bool End { get { return end; } set { end = value; } }
@@ -71,6 +71,7 @@ namespace DemonicCity.StoryScene
             }
             else
             {
+                FullTexts();
             }
         }
 

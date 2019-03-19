@@ -6,19 +6,34 @@ public class ToTest : MonoBehaviour
 {
 
     [SerializeField] GameObject[] testObject;
+    GameObject[] testInstance = new GameObject[2];
     [SerializeField] Transform parent;
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
             parent.gameObject.SetActive(true);
-            Instantiate(testObject[0], parent);
+            if (testInstance[0] == null)
+            {
+                testInstance[0] = Instantiate(testObject[0], parent);
+            }
+            else
+            {
+                testInstance[0].SetActive(!testInstance[0].activeSelf);
+            }
         }
 
         if (Input.GetKeyDown(KeyCode.W))
         {
             parent.gameObject.SetActive(true);
-            Instantiate(testObject[1], parent);
+            if (testInstance[1] == null)
+            {
+                testInstance[1] = Instantiate(testObject[1], parent);
+            }
+            else
+            {
+                testInstance[1].SetActive(!testInstance[1].activeSelf);
+            }
         }
     }
 }
