@@ -150,14 +150,13 @@ namespace DemonicCity.StrengthenScene
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     GameObject button;
-                    touchInfo.HitDetection(out button);
-
+                    touchInfo.HitDetection(out button, confirmMessageWindow);
+                    Debug.Log(button.name);
                     if (button != null)
                     {
                         switch (button.name)
                         {
                             case "BackToHome":
-                                Debug.Log("dsisucd");
                                 SceneChanger.SceneChange(SceneName.Home);
                                 break;
 
@@ -364,15 +363,15 @@ namespace DemonicCity.StrengthenScene
             passiveSkill = magia.MyPassiveSkill;
 
             var getStats = magia.GetStats();
-            hp = getStats.m_hitPoint;
-            attack = getStats.m_attack;
-            defense = getStats.m_defense;
-            charm = getStats.m_charm;
-            dignity = getStats.m_dignity;
-            muscularStrength = getStats.m_muscularStrength;
-            sense = getStats.m_sense;
-            durability = getStats.m_durability;
-            knowledge = getStats.m_knowledge;
+            hp = getStats.HitPoint;
+            attack = getStats.Attack;
+            defense = getStats.Defense;
+            charm = getStats.Charm;
+            dignity = getStats.Dignity;
+            muscularStrength = getStats.MuscularStrength;
+            sense = getStats.Sense;
+            durability = getStats.Durability;
+            knowledge = getStats.Knowledge;
 
             addCharm = 0;
             addDignity = 0;

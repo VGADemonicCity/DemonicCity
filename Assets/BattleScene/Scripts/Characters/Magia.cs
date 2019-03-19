@@ -25,7 +25,7 @@ namespace DemonicCity
             get { return m_requiredExps.Length + 1; }
         }
         /// <summary>ステータスクラスのプロパティ</summary>
-        public Statistics Stats
+        public Status Stats
         {
             get { return m_stats; }
             set { m_stats = value; }
@@ -42,17 +42,12 @@ namespace DemonicCity
             get { return m_attribute; }
             set { m_attribute = value; }
         }
-        /// <summary>m_totalExperienceのプロパティ</summary>
+
+        /// <summary>総経験値</summary>
         public int TotalExperience
         {
             get { return m_totalExperience; }
             set { m_totalExperience = value; }
-        }
-        /// <summary>m_totalDestructionCountのプロパティ</summary>
-        public int TotalDestructionCount
-        {
-            get { return m_totalDestructionCount; }
-            set { m_totalDestructionCount = value; }
         }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
@@ -95,8 +90,6 @@ namespace DemonicCity
         #region Field
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
-        /// <summary>総街破壊数</summary>
-        [SerializeField] int m_totalDestructionCount;
         /// <summary>振り分けポイント</summary>
         [SerializeField] int m_allocationPoint;
         /// <summary>MyAttributeのバッキングフィールド</summary>
@@ -108,18 +101,18 @@ namespace DemonicCity
 
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
-        Statistics m_stats = new Statistics()
+        Status m_stats = new Status()
         {
-            m_level = 1,
-            m_hitPoint = 24250,
-            m_attack = 3635,
-            m_defense = 3635,
-            m_charm = 0,
-            m_sense = 0,
-            m_dignity = 0,
-            m_knowledge = 0,
-            m_durability = 0,
-            m_muscularStrength = 0,
+            Level = 1,
+            HitPoint = 24250,
+            Attack = 3635,
+            Defense = 3635,
+            Charm = 0,
+            Sense = 0,
+            Dignity = 0,
+            Knowledge = 0,
+            Durability = 0,
+            MuscularStrength = 0,
         };
 
         /// <summary>マギアの画像</summary>
@@ -151,40 +144,40 @@ namespace DemonicCity
         /// </summary>
         public void LevelUp()
         {
-            var requiredExp = GetRequiredExpToNextLevel(Stats.m_level); // 現在のレベルに必要な経験値(総パネル破壊枚数)
+            var requiredExp = GetRequiredExpToNextLevel(Stats.Level); // 現在のレベルに必要な経験値(総パネル破壊枚数)
 
-            if (MaxLevel >= Stats.m_level && requiredExp <= Stats.m_level) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
+            if (MaxLevel >= Stats.Level && requiredExp <= Stats.Level) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
             {
                 return;
             }
 
             // レベルアップする直前のレベルに合わせてステータスを上昇させる
-            if (Stats.m_level < 50) // レベル50以下なら
+            if (Stats.Level < 50) // レベル50以下なら
             {
-                Stats.m_hitPoint += 50;
-                Stats.m_attack += 15;
-                Stats.m_defense += 15;
+                m_stats.HitPoint += 50;
+                m_stats.Attack += 15;
+                m_stats.Defense += 15;
             }
-            else if (Stats.m_level >= 50 && Stats.m_level < 100) // レベル50~99なら
+            else if (Stats.Level >= 50 && Stats.Level < 100) // レベル50~99なら
             {
-                Stats.m_hitPoint += 25;
-                Stats.m_attack += 10;
-                Stats.m_defense += 10;
+                m_stats.HitPoint += 25;
+                m_stats.Attack += 10;
+                m_stats.Defense += 10;
             }
-            else if (Stats.m_level >= 100 && Stats.m_level < 150) // レベル100~149なら
+            else if (Stats.Level >= 100 && Stats.Level < 150) // レベル100~149なら
             {
-                Stats.m_hitPoint += 10;
-                Stats.m_attack += 5;
-                Stats.m_defense += 5;
+                m_stats.HitPoint += 10;
+                m_stats.Attack += 5;
+                m_stats.Defense += 5;
             }
-            else if (Stats.m_level >= 150 && Stats.m_level < 200) // レベル150~199なら
+            else if (Stats.Level >= 150 && Stats.Level < 200) // レベル150~199なら
             {
-                Stats.m_hitPoint += 5;
-                Stats.m_attack += 1;
-                Stats.m_defense += 1;
+                m_stats.HitPoint += 5;
+                m_stats.Attack += 1;
+                m_stats.Defense += 1;
             }
 
-            Stats.m_level++; // levelを1上げる
+            m_stats.Level++; // levelを1上げる
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 
@@ -193,20 +186,20 @@ namespace DemonicCity
         /// 参照渡しにならない様に各値を代入して新しいインスタンスを生成して返す
         /// </summary>
         /// <returns>現在のマギアのステータス</returns>
-        public Statistics GetStats()
+        public Status GetStats()
         {
-            Statistics result = new Statistics()
+            Status result = new Status()
             {
-                m_level = Stats.m_level,
-                m_hitPoint = Stats.m_hitPoint,
-                m_attack = Stats.m_attack,
-                m_defense = Stats.m_defense,
-                m_durability = Stats.m_durability,
-                m_muscularStrength = Stats.m_muscularStrength,
-                m_knowledge = Stats.m_knowledge,
-                m_sense = Stats.m_sense,
-                m_charm = Stats.m_charm,
-                m_dignity = Stats.m_dignity,
+                Level = Stats.Level,
+                HitPoint = Stats.HitPoint,
+                Attack = Stats.Attack,
+                Defense = Stats.Defense,
+                Durability = Stats.Durability,
+                MuscularStrength = Stats.MuscularStrength,
+                Knowledge = Stats.Knowledge,
+                Sense = Stats.Sense,
+                Charm = Stats.Charm,
+                Dignity = Stats.Dignity,
             };
             return result;
         }
@@ -214,18 +207,18 @@ namespace DemonicCity
         /// <summary>
         /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
         /// </summary>
-        public void Sync(Statistics stats = null)
+        public void Sync(Status stats = null)
         {
             if (stats != null)
             {
                 Stats = stats;
             }
-            Stats.m_attack = Stats.m_attack + (Stats.m_sense * m_magnificationByStats); // センスを攻撃力に変換
-            Stats.m_attack = Stats.m_attack + (Stats.m_muscularStrength * m_magnificationByStats); // 筋力を攻撃力に変換
-            Stats.m_defense = Stats.m_defense + (Stats.m_durability * m_magnificationByStats); // 耐久力を防御力に変換
-            Stats.m_defense = Stats.m_defense + (Stats.m_knowledge * m_magnificationByStats); // 知識を防御力に変換
-            Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_charm * m_magnificationByAttribute); // 魅力をHPに変換
-            Stats.m_hitPoint = Stats.m_hitPoint + (Stats.m_dignity * m_magnificationByAttribute); // 威厳をHPに変換
+            Stats.Attack = Stats.Attack + (Stats.Sense * m_magnificationByStats); // センスを攻撃力に変換
+            Stats.Attack = Stats.Attack + (Stats.MuscularStrength * m_magnificationByStats); // 筋力を攻撃力に変換
+            Stats.Defense = Stats.Defense + (Stats.Durability * m_magnificationByStats); // 耐久力を防御力に変換
+            Stats.Defense = Stats.Defense + (Stats.Knowledge * m_magnificationByStats); // 知識を防御力に変換
+            Stats.HitPoint = Stats.HitPoint + (Stats.Charm * m_magnificationByAttribute); // 魅力をHPに変換
+            Stats.HitPoint = Stats.HitPoint + (Stats.Dignity * m_magnificationByAttribute); // 威厳をHPに変換
         }
 
         /// <summary>
