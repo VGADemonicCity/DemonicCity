@@ -27,6 +27,7 @@ namespace DemonicCity.ResultScene
         /// <summary>変動後の攻撃力</summary>
         private int updatedAttack;
 
+
         /// <summary>変動後の防御力</summary>
         private int updatedDefense;
 
