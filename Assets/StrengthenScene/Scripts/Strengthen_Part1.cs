@@ -51,6 +51,16 @@ namespace DemonicCity.StrengthenScene
         /// <summary>現在の威厳値</summary>
         private int dignity;
 
+        private int defaultHp;
+        private int defaultAttack;
+        private int defaultDefence;
+        private int defaultDurebility;
+        private int defaultMuscularStrength;
+        private int defaultKnowledge;
+        private int defaultSence;
+        private int defaultCharm;
+        private int defaultDignity;
+
         /// <summary>割り振りポイント(魔力値)</summary>
         private int statusPoint;
 
@@ -143,16 +153,20 @@ namespace DemonicCity.StrengthenScene
             skillExplanationList.Add("街破壊数36以上で発動\n次の敵の攻撃を無効化");
             skillExplanationList.Add("スキル発動枚数-10");
 
-            ResetStatus();
+            //ResetStatus();
+
+            var 
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     GameObject button;
-                    touchInfo.HitDetection(out button, confirmMessageWindow);
+                    touchInfo.HitDetection(out button);
+
                     if (button != null)
                     {
+                      
                         switch (button.name)
                         {
                             case "BackToHome":
@@ -285,11 +299,6 @@ namespace DemonicCity.StrengthenScene
                         }
                     }
                 }
-                if (gesture == TouchGestureDetector.Gesture.TouchMove)
-                {
-                    //touchGestureDetector.TouchInfo.Diff();
-
-                }
             });
         }
 
@@ -328,7 +337,7 @@ namespace DemonicCity.StrengthenScene
         public void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText)
         {
             uniqueStatus += AddStatusPoint(uniqueStatus);
-            uniqueStatusText.text = "+ " + uniqueStatus.ToString();
+            uniqueStatusText.text = "+" + uniqueStatus.ToString();
 
             //固有ステータスを基礎ステータスに変換
             updatedHitPoint = hp + (addCharm * 50) + (addDignity * 50);
@@ -361,16 +370,27 @@ namespace DemonicCity.StrengthenScene
 
             passiveSkill = magia.MyPassiveSkill;
 
-            var getStats = magia.GetStats();
-            hp = getStats.HitPoint;
-            attack = getStats.Attack;
-            defense = getStats.Defense;
-            charm = getStats.Charm;
-            dignity = getStats.Dignity;
-            muscularStrength = getStats.MuscularStrength;
-            sense = getStats.Sense;
-            durability = getStats.Durability;
-            knowledge = getStats.Knowledge;
+            var stats = magia.GetStats();
+
+            hp = stats.HitPoint;
+            attack = stats.Attack;
+            defense = stats.Defense;
+            charm = stats.Charm;
+            dignity = stats.Dignity;
+            muscularStrength = stats.MuscularStrength;
+            sense = stats.Sense;
+            durability = stats.Durability;
+            knowledge = stats.Knowledge;
+
+            defaultHp = hp;
+            defaultAttack = attack;
+            defaultDefence = defense;
+            defaultCharm = charm;
+            defaultDignity = dignity;
+            defaultMuscularStrength = muscularStrength;
+            defaultSence = sense;
+            defaultDurebility = durability;
+            defaultKnowledge = knowledge;
 
             addCharm = 0;
             addDignity = 0;
@@ -378,8 +398,8 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            //StatusPoint = magia.AllocationPoint;
-            statusPoint = 10;//debug
+            //statusPoint = magia.AllocationPoint;
+            statusPoint = 99;//debug
 
             UpdateText();
         }
@@ -405,8 +425,8 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
 
+            magia.Sync();
             UpdateText();
-            //magia.Sync();
         }
 
         /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
@@ -447,12 +467,12 @@ namespace DemonicCity.StrengthenScene
             currentUniqueStatusTexts[4].text = durability.ToString();
             currentUniqueStatusTexts[5].text = knowledge.ToString();
 
-            addUniqueStatusTexts[0].text = "+" + addCharm.ToString();
-            addUniqueStatusTexts[1].text = "+" + addDignity.ToString();
-            addUniqueStatusTexts[2].text = "+" + addMuscularStrength.ToString();
-            addUniqueStatusTexts[3].text = "+" + addSense.ToString();
-            addUniqueStatusTexts[4].text = "+" + addDurability.ToString();
-            addUniqueStatusTexts[5].text = "+" + addKnowledge.ToString();
+            addUniqueStatusTexts[0].text = addCharm.ToString();
+            addUniqueStatusTexts[1].text = addDignity.ToString();
+            addUniqueStatusTexts[2].text = addMuscularStrength.ToString();
+            addUniqueStatusTexts[3].text = addSense.ToString();
+            addUniqueStatusTexts[4].text = addDurability.ToString();
+            addUniqueStatusTexts[5].text = addKnowledge.ToString();
 
             statusPointText.text = statusPoint.ToString();
         }
