@@ -102,11 +102,11 @@ namespace DemonicCity.StoryScene
         //    }
         //}
 
-        public void Staging(TextStorage storage)
+        public void Staging(string sentence)
         {
             fader = SceneFader.Instance;
             textManager.isStaging = true;
-            DivideContent(storage.sentence);
+            DivideContent(sentence);
             StageType type;
             if (!EnumCommon.TryParse(contents[(int)StageTag.Type], out type))
             {
@@ -242,6 +242,7 @@ namespace DemonicCity.StoryScene
                         textManager.talker[(int)posTag] = tmp.name;
                     }
                 }
+                casts.RemoveAll(x => x.name == charName);
             }
         }
 
