@@ -1,0 +1,155 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6c5acad7a5c014a8d7cd3836b4dee1, type: 3}
+  m_Name: Prologue
+  m_EditorClassIdentifier: 
+  texts:
+  - charName: 
+    cName: 11
+    sentence: "\u5834\u6240\u3060\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: Appear:Magia:Ally
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: Magia
+    cName: 0
+    sentence: "\u308F\u3063\u3057\u3087\u3044"
+    face: 
+    faceIndex: 2
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: Voice1
+  - charName: System
+    cName: 12
+    sentence: Appear:Phoenix:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 1
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u308F\u308F\u308F\u3063\u3057\u3087\u3044"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 1
+    stage: 
+    stageTag: 0
+    sourceFileName: Voice2
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u308F\u30FC\u3044"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: Voice3
+  - charName: System
+    cName: 12
+    sentence: Coloring:Black
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: SwicthBack:Edge
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: Leave:Phoenix
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: Appear:Nafla:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: Clear
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: Nafla
+    cName: 2
+    sentence: "\u308F\u3057\u3058\u3083\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: Voice4
+  - charName: System
+    cName: 12
+    sentence: Item:Crown
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  - charName: System
+    cName: 12
+    sentence: SceneTrans:Home
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    sourceFileName: 
+  characters: 000000000100000002000000
