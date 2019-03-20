@@ -27,14 +27,14 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 天照ー焔壁ー");
-            m_defenseBuffer = m_battleManager.CurrentEnemy.Stats.m_attack; // 敵の攻撃力をそのまま自分の防御力に加算
-            m_battleManager.m_MagiaStats.m_defense += (int)m_defenseBuffer;
+            m_defenseBuffer = m_battleManager.CurrentEnemy.Stats.Attack; // 敵の攻撃力をそのまま自分の防御力に加算
+            m_battleManager.m_MagiaStats.Defense += (int)m_defenseBuffer;
         }
 
         protected override void SkillDeactivate()
         {
             Debug.Log("Deactivated the 天照ー焔壁ー");
-            m_battleManager.m_MagiaStats.m_defense -= (int)m_defenseBuffer;
+            m_battleManager.m_MagiaStats.Defense -= (int)m_defenseBuffer;
         }
     }
 }

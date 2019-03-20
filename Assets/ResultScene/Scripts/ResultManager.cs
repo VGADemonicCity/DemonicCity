@@ -97,17 +97,29 @@ namespace DemonicCity.ResultScene
         private void ResultCalculation()
         {
             var totalExperience = magia.TotalExperience + panelCounter.TotalDestructionCount;
+<<<<<<< HEAD
             var requiredTotalExperiences = new List<int>();
             requiredTotalExperiences.Add(magia.GetRequiredExpToNextLevel(magia.GetStats().m_level));
             StatusDifference.Add(magia.GetStats());
+=======
+            var requiredTotalExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
+            StatusDifference.Add(magia.Stats);
+>>>>>>> Develop
 
             // 総経験値がレベルアップに必要な経験値よりも高かった場合条件が満たさなくなる迄レベルアップ処理を行う
             while (totalExperience >= requiredTotalExperiences.Last())
             {
                 magia.LevelUp();
+<<<<<<< HEAD
                 StatusDifference.Add(magia.GetStats());
                 requiredTotalExperiences.Add(magia.GetRequiredExpToNextLevel(magia.GetStats().m_level));
                 levelUpCount++;
+=======
+                var a = new Status();
+                //StatusDifference.Add();
+                requiredTotalExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
+                
+>>>>>>> Develop
             }
             //var diff = requiredTotalExperience - totalExperience;
             afterStatus = magia.GetStats();

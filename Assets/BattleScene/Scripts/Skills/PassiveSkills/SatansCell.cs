@@ -22,6 +22,7 @@
 //            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
 //        }
 
+<<<<<<< HEAD
 //        /// <summary>
 //        /// スキル発動
 //        /// </summary>
@@ -37,6 +38,23 @@
 //            }
 //            m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.m_hitPoint); // HPGaugeと同期
 //        }
+=======
+        /// <summary>
+        /// スキル発動
+        /// </summary>
+        protected override void SkillActivate()
+        {
+            Debug.Log("Activated the 魔王ノ細胞");
+            m_hitPointBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.MaxHP * m_incease; // 街破壊数 * 最大HP * 割合
+            m_battleManager.m_MagiaStats.HitPoint += (int)m_hitPointBuffer;
+
+            if (m_battleManager.m_MagiaStats.HitPoint > m_battleManager.m_MagiaStats.MaxHP) // もしMaxHPを越したら
+            {
+                m_battleManager.m_MagiaStats.HitPoint = m_battleManager.m_MagiaStats.MaxHP; // hpをmaxに戻す
+            }
+            m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
+        }
+>>>>>>> Develop
 
 //        protected override void SkillDeactivate()
 //        {

@@ -91,7 +91,7 @@ namespace DemonicCity.BattleScene
         public void SkillDeactivate()
         {
             Initialize();
-            m_battleManager.CurrentEnemy.Stats.Temp.m_attack = m_battleManager.CurrentEnemy.Stats.m_attack;
+            m_battleManager.CurrentEnemy.Stats.Temp.Attack = m_battleManager.CurrentEnemy.Stats.Attack;
             m_turnCount--;
         }
 
@@ -100,7 +100,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void SkillActivate()
         {
-            m_battleManager.CurrentEnemy.Stats.Temp.m_attack = (int)(m_battleManager.CurrentEnemy.Stats.Temp.m_attack * m_magnification);
+            m_battleManager.CurrentEnemy.Stats.Temp.Attack = (int)(m_battleManager.CurrentEnemy.Stats.Temp.Attack * m_magnification);
         }
 
         /// <summary>

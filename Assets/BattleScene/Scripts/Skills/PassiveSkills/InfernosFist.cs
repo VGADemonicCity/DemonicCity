@@ -25,8 +25,8 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 豪炎爆砕掌");
-            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.m_attack * m_incease; // 攻撃力の任意の%分加算
-            m_battleManager.m_MagiaStats.m_attack += (int)m_attackBuffer; // intに変換
+            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.Attack * m_incease; // 攻撃力の任意の%分加算
+            m_battleManager.m_MagiaStats.Attack += (int)m_attackBuffer; // intに変換
         }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillDeactivate()
         {
             Debug.Log("Deactivated the 豪炎爆砕掌");
-            m_battleManager.m_MagiaStats.m_attack -= (int)m_attackBuffer; // intに変換
+            m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // intに変換
         }
     }
 }
