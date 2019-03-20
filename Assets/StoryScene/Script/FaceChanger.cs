@@ -13,8 +13,7 @@ namespace DemonicCity.StoryScene
         Image myFace;
         void Awake()
         {
-            myFace = GetComponent<Image>();
-            myFace.sprite = faceSprites[(int)FaceIndex.Normal];
+
         }
 
         public void InportSprite(Sprite[] sprites)
@@ -30,6 +29,15 @@ namespace DemonicCity.StoryScene
         public void ChangeFace(int faceIndex)
         {
             myFace.sprite = faceSprites[faceIndex];
+        }
+
+
+        public void Init(TextActor actor)
+        {
+            charName = actor.id;
+            faceSprites = actor.faces;
+            myFace = GetComponent<Image>();
+            myFace.sprite = faceSprites[(int)FaceIndex.Normal];
         }
     }
 }

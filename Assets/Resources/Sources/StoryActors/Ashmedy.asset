@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 354859291a28fd64f8b0125283ee29eb, type: 3}
+  m_Name: Ashmedy
+  m_EditorClassIdentifier: 
+  id: 4
+  name: "\u30A2\u30B7\u30E5\u30E1\u30C0\u30A4"
+  faces:
+  - {fileID: 21300000, guid: 04c985a68a762744a8583452f41d3198, type: 3}
+  - {fileID: 21300000, guid: 261241be41ee67d42a2e39722fadd459, type: 3}
+  - {fileID: 21300000, guid: 04c985a68a762744a8583452f41d3198, type: 3}
+  - {fileID: 21300000, guid: 771035fb2a80795459bcea888a0d6045, type: 3}
+  - {fileID: 21300000, guid: 0e01ae309d4a8fd4a9349bb2d04e85ab, type: 3}
+  - {fileID: 21300000, guid: 04c985a68a762744a8583452f41d3198, type: 3}
+  index: 0

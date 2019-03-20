@@ -172,21 +172,12 @@ namespace DemonicCity
             }
             else if (Stats.Level >= 150 && Stats.Level < 200) // レベル150~199なら
             {
-<<<<<<< HEAD
-                m_stats.m_hitPoint += 5;
-                m_stats.m_attack += 1;
-                Stats.m_defense += 1;
-            }
-
-            Stats.m_level++; // levelを1上げる
-=======
                 m_stats.HitPoint += 5;
                 m_stats.Attack += 1;
                 m_stats.Defense += 1;
             }
 
             m_stats.Level++; // levelを1上げる
->>>>>>> Develop
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
         }
 

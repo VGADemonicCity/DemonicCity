@@ -72,22 +72,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_totalExperience: 0
-  m_totalDestructionCount: 0
   m_allocationPoint: 0
   m_attribute: 0
   m_requiredExps: 050000000a0000000f00000014000000190000001e00000023000000280000002d000000320000003c00000046000000500000005a0000006400000096000000c8000000fa0000002c01000090010000f4010000
   m_passiveSkill: 8191
-  m_stats:
-    m_level: 1
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 10000
-    m_attack: 100
-    m_defense: 100
 --- !u!212 &212500557230291682
 SpriteRenderer:
   m_ObjectHideFlags: 1

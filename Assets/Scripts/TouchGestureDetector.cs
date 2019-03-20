@@ -289,7 +289,7 @@ namespace DemonicCity
             /// camera引数には指定カメラを引数にする事が可能.何も渡さなかった場合MainCameraタグが付いているカメラを代入する
             /// 戻り値には当たったかどうかの真偽値,out引数に当たったオブジェクトを代入して返す.何も検出出来なかったらnullが入る
             /// </summary>
-            /// <returns><c>true</c>, if detection was hit, <c>false</c> otherwise.</returns>
+            /// <returns><c>true</c>, if detection was hit, <c>false</c> otherwise false.</returns>
             /// <param name="targetGameObject">Target game object.</param>
             /// <param name="hitResult">Hit result.</param>
             /// <param name="camera">Camera.</param>
@@ -299,49 +299,54 @@ namespace DemonicCity
                 {
                     camera = Camera.main; // 最初に検出したメインカメラタグがついているカメラオブジェクトを代入する
                 }
-
                 var lastTouchPosition = positions.Last(); // タッチを離す瞬間のフレームの座標
-                if (targetGameObject == null || targetGameObject.GetComponent<RectTransform>() == null) // 引数のゲームオブジェクトがnull,又はRectTransformがなければ(UIではないなら)
-                {
-                    var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
-                    RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);
 
-                    if (hit.collider != null) // Raycastにオブジェクトが検出されたら
-                    {
-                        hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
-                        if (hit.collider.gameObject == targetGameObject || targetGameObject == null) // そのオブジェクトが引数のオブジェクトと一緒なら
-                        {
-                            return true; // trueを返す
-                        }
-                        return false; // 然もなくばfalseを返す
-                    }
-                }
-                else // 引数のゲームオブジェクトにRectTransformがあったら。つまりUIならば？
+                // UIではないGameObject用のraycast
+                var ray2d = new Ray2D(Camera.main.ScreenToWorldPoint(lastTouchPosition), Vector2.zero);// 最後にタッチした座標をRay2Dに変換する
+                RaycastHit2D hit = Physics2D.Raycast(ray2d.origin, ray2d.direction, Mathf.Infinity);
+                if (hit.collider != null) // Raycastにオブジェクトが検出されたら
                 {
-                    var pointerEventData = new PointerEventData(EventSystem.current) // RaycastAll用の変数
+                    hitResult = hit.collider.gameObject; // 検出したゲームオブジェクトの参照を代入
+                    if (hit.collider.gameObject == targetGameObject || targetGameObject == null) // そのオブジェクトが引数のオブジェクトと一緒,もしくはTargetを指定していない場合
                     {
-                        position = lastTouchPosition // 指を離す瞬間のフレーム時の座標を代入する
-                    };
-                    var raycastResults = new List<RaycastResult>(); // UI用レイキャストの結果をリストで保持する変数
-                    EventSystem.current.RaycastAll(pointerEventData, raycastResults); // ここでレイキャストを飛ばして当たったオブジェクトをリストに格納する
-                    if (raycastResults.Count == 0) // UIを1個も検出出来なかったらout引数にnull,returnにfalseを返す
-                    {
-                        hitResult = null;
-                        return false;
+                        return true; // trueを返す
                     }
-                    var resultGameObject = raycastResults.First().gameObject; // 最初に検出したオブジェクトを代入する
-                    while (null != resultGameObject) // 検出したオブジェクトがあれば
+                    return false; // 然もなくばfalseを返す
+                }
+
+                // UI用のraycast,GameObject用のRaycastで検出出来なかった場合此方で再検査する
+                var pointerEventData = new PointerEventData(EventSystem.current) // RaycastAll用の変数
+                {
+                    position = lastTouchPosition // 指を離す瞬間のフレーム時の座標を代入する
+                };
+                var raycastResults = new List<RaycastResult>(); // UI用レイキャストの結果をリストで保持する変数
+                EventSystem.current.RaycastAll(pointerEventData, raycastResults); // ここでレイキャストを飛ばして当たったオブジェクトをリストに格納する
+                if (raycastResults.Count == 0) // UIを1個も検出出来なかったらout引数にnull,returnにfalseを返す
+                {
+                    hitResult = null;
+                    return false;
+                }
+                var resultGameObject = raycastResults.First().gameObject; // 最初に検出したオブジェクトを代入する
+
+                // Targetを指定していない,且つ何かしらのUIを検出出来た場合そのゲームオブジェクトを返す
+                if (targetGameObject == null && resultGameObject != null)
+                {
+                    hitResult = resultGameObject;
+                    return true;
+                }
+
+                while (null != resultGameObject) // 検出したオブジェクトがあれば
+                {
+                    if (resultGameObject == targetGameObject) // 検出したオブジェクトが引数と一緒ならばそのゲームオブジェクトとtrueを返す
                     {
                         hitResult = resultGameObject; // 検出したゲームオブジェクトの参照を代入
-                        if (resultGameObject == targetGameObject) // 検出したオブジェクトが引数と一緒ならばtrueを返す
-                        {
-                            return true;
-                        }
-                        var parent = resultGameObject.transform.parent; // 検出したオブジェクトの親が存在するならば、代入
-                        // もし検出したオブジェクトに親がいるなら、親を代入してwhile文の最初からやり直し。これを行う事により、特定のCanvas等UIの親に存在するゲームオブジェクトも検出可能
-                        resultGameObject = null != parent ? parent.gameObject : null;
+                        return true;
                     }
+                    var parent = resultGameObject.transform.parent; // 検出したオブジェクトの親が存在するならば、代入
+                                                                    // もし検出したオブジェクトに親がいるなら、親を代入してwhile文の最初からやり直し。これを行う事により、特定のCanvas等UIの親に存在するゲームオブジェクトも検出可能
+                    resultGameObject = null != parent ? parent.gameObject : null;
                 }
+
                 hitResult = null; // Raycastに何も引っかからなかった場合out引数をnull,returnをfalseにする
                 return false;
             }

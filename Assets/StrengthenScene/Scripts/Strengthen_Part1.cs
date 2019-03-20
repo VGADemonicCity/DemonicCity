@@ -151,7 +151,6 @@ namespace DemonicCity.StrengthenScene
                 {
                     GameObject button;
                     touchInfo.HitDetection(out button, confirmMessageWindow);
-                    Debug.Log(button.name);
                     if (button != null)
                     {
                         switch (button.name)
