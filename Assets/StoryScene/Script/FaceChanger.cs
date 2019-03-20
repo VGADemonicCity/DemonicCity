@@ -28,7 +28,13 @@ namespace DemonicCity.StoryScene
         }
         public void ChangeFace(int faceIndex)
         {
+            myFace.color = Color.white;
             myFace.sprite = faceSprites[faceIndex];
+        }
+
+        public void DeSelect()
+        {
+            myFace.color = new Color(0.6f, 0.6f, 0.6f);
         }
 
 
