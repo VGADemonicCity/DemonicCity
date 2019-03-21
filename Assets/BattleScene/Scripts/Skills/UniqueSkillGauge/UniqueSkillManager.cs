@@ -29,7 +29,7 @@ namespace DemonicCity.BattleScene
         /// <summary>ユニークスキルが使用可能かどうか判断するフラグ</summary>
         [SerializeField] bool m_flag;
         /// <summary>スキル使用時の確認画面</summary>
-        [SerializeField] ConfirmWindow m_confirmWindow;
+        [SerializeField] PopupWindowSystem m_pws;
 
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -56,10 +56,11 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
+
+
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 GameObject hitResult;
-                touchInfo.HitDetection(out hitResult);
 
                 // クリック時 && プレイヤー選択時 
                 // && ユニークスキルフラグtrueの時
@@ -67,28 +68,42 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.Click
                 && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
                 && SkillFlag == true
-                && hitResult != null)
+                && touchInfo.HitDetection(out hitResult))
                 {
                     if (hitResult.tag != "PlayerSkillGauge")
                     {
                         return;
                     }
-                    m_confirmWindow.gameObject.SetActive(true);
-                    m_confirmWindow.Popup();
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
+                    m_pws.Popup();
+                    // buttonのイベント登録
+                    m_pws.SubscribeButtons(Activate, true, Specification.PositiveButton);
+                    m_pws.SubscribeButtons(Chancel, true, Specification.NegativeButton);
                 }
             });
         }
 
         /// <summary>
-        /// 固有スキル発動
+        /// PositiveButton押下時固有スキル発動
         /// </summary>
-        public void Activate()
+         public void Activate()
         {
             // 形態に応じたユニークスキルを取得,発動する.
             var uniqueSkillFactory = GetComponent<UniqueSkillFactory>();
             var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
             uniqueSkill.Activate();
             m_uniqueSkillGauge.SkillActivated();
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
         }
+
+        /// <summary>
+        /// NegativeButton押下時何もせず戻る
+        /// </summary>
+        public void Chancel()
+        {
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
+        }
+
+
     }
 }

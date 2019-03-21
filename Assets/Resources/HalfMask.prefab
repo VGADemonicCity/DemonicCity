@@ -73,17 +73,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 9
   m_stats:
-    m_level: 0
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 1900
-    m_attack: 900
-    m_defense: 550
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 50000
+    Attack: 0
+    Defense: 0
   m_animator: {fileID: 95420014309395674}
+  m_destroyingTime: 3
 --- !u!212 &212107661254485318
 SpriteRenderer:
   m_ObjectHideFlags: 1
