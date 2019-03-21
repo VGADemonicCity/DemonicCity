@@ -9,6 +9,6 @@ namespace DemonicCity.StoryScene
     public class Scenario : ScriptableObject
     {
         public List<TextStorage> texts = new List<TextStorage>();
-
+        public List<CharName> characters = new List<CharName>();
     }
 }
