@@ -51,9 +51,9 @@ namespace DemonicCity
         /// <summary>
         /// フェードイン
         /// </summary>
-        public void FadeIn(float fadeTime = 0f)
+        public void FadeIn(float fadeTime = 1f)
         {
-            if (fadeTime != 0f)
+            if (fadeTime != 1f)
             {
                 m_fadeTime = fadeTime;
             }
@@ -66,9 +66,9 @@ namespace DemonicCity
         /// </summary>
         /// <param name="sceneTitle">遷移先のシーンタイトル</param>
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
-        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 0f, FadeColor color = FadeColor.Black)
+        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 1f, FadeColor color = FadeColor.Black)
         {
-            if (fadeTime != 0f)
+            if (fadeTime != 1f)
             {
                 m_fadeTime = fadeTime;
             }

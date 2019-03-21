@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114031244210748834}
   m_Layer: 0
   m_Name: P_Icon
-  m_TagString: Untagged
+  m_TagString: ShufflePanels
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 199932351791581146}
   m_Layer: 0
   m_Name: P_Wave
-  m_TagString: Untagged
+  m_TagString: ShufflePanels
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -56,6 +56,8 @@ GameObject:
   - component: {fileID: 4660332993885624}
   - component: {fileID: 114682881085454400}
   - component: {fileID: 61239239636646072}
+  - component: {fileID: 114208239253275740}
+  - component: {fileID: 114496770639849778}
   m_Layer: 0
   m_Name: TeleportSkillIcon
   m_TagString: ShufflePanels
@@ -127,7 +129,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.39, y: 3.27}
+  m_Size: {x: 1.39, y: 1.4}
   m_EdgeRadius: 0
 --- !u!114 &114031244210748834
 MonoBehaviour:
@@ -141,13 +143,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_particleSystem: {fileID: 198522072589928502}
-  m_waveParticle: {fileID: 0}
+  m_waveParticle: {fileID: 198727784972911488}
   xRotation: 0
   yRotation: 2.6
   zRotation: 1.52
   m_InvokeInterbal: 0.016
   m_speed: 0.1
   m_rateOverTime: 10
+--- !u!114 &114208239253275740
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567899684645860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 1740414137449340, guid: 7d426489c17a8414ea37411b977f4b00,
+    type: 2}
+  scalingTime: 1
+--- !u!114 &114496770639849778
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1567899684645860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c27c90d07afd1d48bf0a748bdf2290e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114682881085454400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,6 +188,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_sensor: {fileID: 0}
   m_conditions: 30
+  PositiveButton: {fileID: 114398168004594168, guid: 7d426489c17a8414ea37411b977f4b00,
+    type: 2}
+  NegativeButton: {fileID: 114517927953733370, guid: 7d426489c17a8414ea37411b977f4b00,
+    type: 2}
+  popupSystem: {fileID: 114208239253275740}
 --- !u!198 &198522072589928502
 ParticleSystem:
   m_ObjectHideFlags: 1

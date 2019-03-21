@@ -29,7 +29,8 @@ namespace DemonicCity.BattleScene
         /// <summary>ユニークスキルが使用可能かどうか判断するフラグ</summary>
         [SerializeField] bool m_flag;
         /// <summary>スキル使用時の確認画面</summary>
-        [SerializeField] PopupWindowSystem m_pws;
+        [SerializeField] PopupSystem m_popupSystem;
+
 
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -56,8 +57,6 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
-
-
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 GameObject hitResult;
@@ -75,10 +74,10 @@ namespace DemonicCity.BattleScene
                         return;
                     }
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
-                    m_pws.Popup();
+                    m_popupSystem.Popup();
                     // buttonのイベント登録
-                    m_pws.SubscribeButtons(Activate, true, Specification.PositiveButton);
-                    m_pws.SubscribeButtons(Chancel, true, Specification.NegativeButton);
+                    m_popupSystem.SubscribeButton(new PopupSystemMaterial(Activate,  "PositiveButton", true));
+                    m_popupSystem.SubscribeButton(new PopupSystemMaterial(Chancel, "NegativeButton", true));
                 }
             });
         }
@@ -103,7 +102,5 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
         }
-
-
     }
 }

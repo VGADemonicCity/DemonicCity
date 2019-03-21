@@ -92,9 +92,8 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.Click) // タップ時
                 {
                     GameObject hitResult; // Raycastの結果を入れる変数
-                    touchInfo.HitDetection(out hitResult); // レイキャストしてゲームオブジェクトをとってくる
 
-                    if (hitResult != null) // タッチしたオブジェクトのタグがnullじゃないなら
+                    if (touchInfo.HitDetection(out hitResult)) // タッチしたオブジェクトのタグがnullじゃないなら
                     {
                         ProcessingFactory(hitResult); // 結果内容を判別し結果に応じて処理を自動的に行わせる
                     }
@@ -129,15 +128,6 @@ namespace DemonicCity.BattleScene
                     }
                     PanelProcessing(panel);
                     break;
-                case "ShufflePanels":
-                    {
-                        if(!m_shufflePanels.IsActivatable)
-                        {
-                            return;
-                        }
-                        m_shufflePanels.PanelShuffle();
-                        break;
-                    }
             }
         }
 
