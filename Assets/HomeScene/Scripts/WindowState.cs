@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -24,24 +25,25 @@ namespace DemonicCity.HomeScene
         {
             windowRect = GetComponent<RectTransform>();
             windowRect.localScale = Vector3.zero;
+            touchGestureDetector = TouchGestureDetector.Instance;
         }
         void Start()
         {
             //touchGestureDetector= GetComponent<TouchGestureDetector>();
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (gesture==TouchGestureDetector.Gesture.TouchBegin)
+                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     touchInfo.HitDetection(out beginObject);
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    
+
                     if (touchInfo.HitDetection(out endObject, exitButton)
                     || exitButton == null)
                     {
-                        if (beginObject==endObject
-                        &&windowEnabled)
+                        if (beginObject == endObject
+                        && windowEnabled)
                         {
                             WindowScaling(false);
 
@@ -53,9 +55,12 @@ namespace DemonicCity.HomeScene
 
             });
             //ChangeState(key, true);
+            //WindowScaling(true);
+        }
+        void OnEnable()
+        {
             WindowScaling(true);
         }
-
         // Update is called once per frame
         void Update()
         {
@@ -80,11 +85,19 @@ namespace DemonicCity.HomeScene
         public void OnDisable()
         {
             transform.parent.gameObject.SetActive(false);
-            Destroy(gameObject);
+            //Destroy(gameObject);
+        }
+        private void OnDestroy()
+        {
+            enabled = false;
         }
 
         public void WindowScaling(bool isOpen)
         {
+            if (!enabled)
+            {
+                return;
+            }
             if (isOpen)
             {
                 WindowAnimation[0] = ChangeScale(Vector3.one);
@@ -103,6 +116,15 @@ namespace DemonicCity.HomeScene
 
         IEnumerator ChangeScale(Vector3 targetScale)
         {
+            if (windowEnabled)
+            {
+                windowRect.localScale = new Vector3(1, 0, 1);
+            }
+            else
+            {
+                yield break;
+                //enabled = false;
+            }
             while (windowRect.localScale != targetScale)
             {
                 windowRect.localScale = Vector3.Lerp(windowRect.localScale, targetScale, 0.02f * 10f);
@@ -110,26 +132,23 @@ namespace DemonicCity.HomeScene
 
                 yield return new WaitForSecondsRealtime(0.01f);
             }
-            if (!windowEnabled)
-            {
-                this.enabled = false;
 
-            }
         }
         IEnumerator ChangeColor(Color targetColor)
         {
+            if (!windowEnabled)
+            {
+
+                enabled = false;
+            }
             while (GetComponent<SpriteRenderer>().color != targetColor)
             {
                 GetComponent<SpriteRenderer>().color = Color.Lerp(GetComponent<SpriteRenderer>().color, targetColor, 0.02f * 10f);
 
-
                 yield return new WaitForSecondsRealtime(0.005f);
-            }
-            if (!windowEnabled)
-            {
-                this.enabled = false;
 
             }
+
         }
     }
 }
