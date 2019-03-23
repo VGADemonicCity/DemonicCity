@@ -93,7 +93,7 @@ namespace DemonicCity.StoryScene
         }
 
 
-        IEnumerator TextDraw()
+        public IEnumerator TextDraw()
         {
             yield return new WaitWhile(() => !DrawEnd);
             textIndex += 1;
@@ -196,6 +196,7 @@ namespace DemonicCity.StoryScene
             {
                 director.SwitchTalker(director.casts.Find(x => x.name == talker[(int)cast.posTag]), cast);
                 talker[(int)cast.posTag] = cast.name;
+
             }
 
 
