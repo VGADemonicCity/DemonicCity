@@ -109,5 +109,10 @@ namespace DemonicCity.BattleScene
         {
             iTween.RotateTo(go, iTween.Hash(axis, m_rotationDegrees, "time", time));
         }
+
+        public void Rotate(string axis, float time)
+        {
+            iTween.RotateTo(gameObject, iTween.Hash(axis, m_rotationDegrees, "time", time));
+        }
     }
 }
