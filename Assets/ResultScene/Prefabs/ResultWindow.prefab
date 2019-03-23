@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 222940009846178612}
   - component: {fileID: 114600643119804668}
   m_Layer: 5
-  m_Name: UpdatedDefenseText
+  m_Name: AfterDefenseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 222031070382214850}
   - component: {fileID: 114045093216910104}
   m_Layer: 5
-  m_Name: CurrentDefenseText
+  m_Name: BeforeDefenseText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -239,7 +239,7 @@ GameObject:
   - component: {fileID: 222843001589953034}
   - component: {fileID: 114580710134030862}
   m_Layer: 5
-  m_Name: CurrentAttackText
+  m_Name: BeforeAttackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -256,7 +256,7 @@ GameObject:
   - component: {fileID: 222314643680954672}
   - component: {fileID: 114945461941934918}
   m_Layer: 5
-  m_Name: UpdatedHitPointText
+  m_Name: AfterHpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 222853685106593070}
   - component: {fileID: 114252107463357802}
   m_Layer: 5
-  m_Name: UpdatedAttackText
+  m_Name: AfterAttackText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -363,22 +363,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1598625797708376
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4092222724611954}
-  - component: {fileID: 114313313071077722}
-  m_Layer: 1
-  m_Name: TapEffect
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
 --- !u!1 &1610733894154470
 GameObject:
   m_ObjectHideFlags: 1
@@ -557,7 +541,7 @@ GameObject:
   - component: {fileID: 222240766170991676}
   - component: {fileID: 114183924131519036}
   m_Layer: 5
-  m_Name: GetStatusPointText
+  m_Name: StatusPointText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -604,7 +588,7 @@ GameObject:
   - component: {fileID: 222739762587139660}
   - component: {fileID: 114045103226104228}
   m_Layer: 5
-  m_Name: Image
+  m_Name: VictoryImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +605,7 @@ GameObject:
   - component: {fileID: 222967147934022966}
   - component: {fileID: 114233466136748574}
   m_Layer: 5
-  m_Name: CurrentHitPointText
+  m_Name: BeforeHpText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -704,7 +688,7 @@ GameObject:
   - component: {fileID: 222330749321946464}
   - component: {fileID: 114261225163545706}
   m_Layer: 5
-  m_Name: NeedExpText
+  m_Name: NeedDestructionCountText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -761,19 +745,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4092222724611954
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1598625797708376}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 224664786541844040}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4747920560197954
 Transform:
   m_ObjectHideFlags: 1
@@ -1756,17 +1727,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114313313071077722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1598625797708376}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0a16fe404b5e9f45aee5931503a5a7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114384190013057684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3055,7 +3015,7 @@ RectTransform:
   - {fileID: 224265253006806650}
   - {fileID: 224728981327076310}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3095,7 +3055,7 @@ RectTransform:
   - {fileID: 224053737405576016}
   - {fileID: 224270852591846228}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 3
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3168,15 +3128,15 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224313397909529450}
-  - {fileID: 224029660657959798}
-  - {fileID: 224282424957808838}
-  - {fileID: 224061038132645354}
-  - {fileID: 224100078683006686}
-  - {fileID: 224406161764582730}
   - {fileID: 224810729112462050}
   - {fileID: 224904783113750790}
-  - {fileID: 224422286821263356}
+  - {fileID: 224100078683006686}
+  - {fileID: 224029660657959798}
+  - {fileID: 224282424957808838}
+  - {fileID: 224406161764582730}
+  - {fileID: 224061038132645354}
   - {fileID: 224161713337071922}
+  - {fileID: 224422286821263356}
   m_Father: {fileID: 224683947102078528}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3216,7 +3176,7 @@ RectTransform:
   - {fileID: 224099648840494978}
   - {fileID: 224965802967135134}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3236,7 +3196,7 @@ RectTransform:
   - {fileID: 224424600543206308}
   - {fileID: 224286556903454860}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3330,7 +3290,7 @@ RectTransform:
   - {fileID: 224194949636294828}
   - {fileID: 224428312230155544}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 2
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3423,7 +3383,7 @@ RectTransform:
   - {fileID: 224081565548823048}
   - {fileID: 224853157440330472}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3462,7 +3422,7 @@ RectTransform:
   - {fileID: 224429455523190846}
   - {fileID: 224705358419572328}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3608,7 +3568,6 @@ RectTransform:
   m_Children:
   - {fileID: 224683947102078528}
   - {fileID: 4747920560197954}
-  - {fileID: 4092222724611954}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3741,7 +3700,7 @@ RectTransform:
   - {fileID: 224415376376626924}
   - {fileID: 224960857725775470}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3815,7 +3774,7 @@ RectTransform:
   - {fileID: 224320454225887174}
   - {fileID: 224067816220844114}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 7
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
