@@ -79,7 +79,7 @@ namespace DemonicCity.StrengthenScene
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
         private GameObject[] skillExplanationTexts = null;
-        private GameObject notAcquiredMessage=null;
+        private GameObject notAcquiredMessage = null;
 
         /// <summary>ポップアップウィンドウの表示/非表示</summary>
         private bool activePopUpWindow = false;
@@ -98,7 +98,7 @@ namespace DemonicCity.StrengthenScene
 
         private void Start()
         {
-            
+
             ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -249,9 +249,6 @@ namespace DemonicCity.StrengthenScene
 
                             case "YesReset":
                                 ResetStatus();
-
-                                confirmMessageWindow.SetActive(false);
-                                activePopUpWindow = false;
                                 break;
 
                             case "No":
@@ -326,28 +323,25 @@ namespace DemonicCity.StrengthenScene
         private void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText)
         {
             uniqueStatus += AddStatusPoint(uniqueStatus);
-            uniqueStatusText.text = "+" + uniqueStatus.ToString();
+            if (statusPoint > 0)
+            {
+                uniqueStatusText.text = "+" + uniqueStatus.ToString();
+                //固有ステータスを基礎ステータスに変換
+                updatedHitPoint = hp + (addCharm * 50) + (addDignity * 50);
+                updatedAttack = attack + (addSense * 5) + (addMuscularStrength * 5);
+                updatedDefense = defense + (addDurability * 5) + (addKnowledge * 5);
 
-            //固有ステータスを基礎ステータスに変換
-            updatedHitPoint = hp + (addCharm * 50) + (addDignity * 50);
-            updatedAttack = attack + (addSense * 5) + (addMuscularStrength * 5);
-            updatedDefense = defense + (addDurability * 5) + (addKnowledge * 5);
+                updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
+                updatedBasicStatusTexts[1].text = updatedAttack.ToString();
+                updatedBasicStatusTexts[2].text = updatedDefense.ToString();
 
-            updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
-            updatedBasicStatusTexts[1].text = updatedAttack.ToString();
-            updatedBasicStatusTexts[2].text = updatedDefense.ToString();
-
-            changedStatus = true;
+                changedStatus = true;
+            }
         }
 
         /// <summary>ステータスの変動値を初期化</summary>
         private void ResetStatus()
         {
-            skillListWindow.SetActive(false);
-            resetMessageWindow.SetActive(false);
-
-            activePopUpWindow = false;
-
             var status = magia.GetStats();
 
             hp = status.HitPoint;
@@ -366,11 +360,13 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            statusPoint = magia.AllocationPoint;
-            //statusPoint = 99;//debug
+            //statusPoint = magia.AllocationPoint;
+            statusPoint = 99;//debug
 
             UpdateText();
 
+            skillListWindow.SetActive(false);
+            resetMessageWindow.SetActive(false);
             confirmMessageWindow.SetActive(false);
             activePopUpWindow = false;
             changedStatus = false;
@@ -397,7 +393,19 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
 
-            magia.Sync();
+            magia.Stats.HitPoint = hp;
+            magia.Stats.Attack = attack;
+            magia.Stats.Defense = defense;
+            magia.Stats.Charm = charm;
+            magia.Stats.Dignity = dignity;
+            magia.Stats.MuscularStrength = muscularStrength;
+            magia.Stats.Sense =sense;
+            magia.Stats.Durability = durability;
+            magia.Stats.Knowledge = knowledge;
+
+
+            //magia.Sync();
+
             UpdateText();
 
             confirmMessageWindow.SetActive(false);
