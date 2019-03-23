@@ -141,6 +141,7 @@ namespace DemonicCity.BattleScene
         {
             m_StateMachine.m_PreviousState = m_StateMachine.m_State; // ステート遷移前のステートを保存 
             m_StateMachine.m_State = state; // stateをセット
+            Debug.Log(state);
             // ==================================
             // イベント呼び出し
             // ==================================

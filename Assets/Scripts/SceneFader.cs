@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
 namespace DemonicCity
 {
     /// <summary>
@@ -14,6 +15,8 @@ namespace DemonicCity
         static private Canvas m_fadeCanvas;
         /// <summary>フェーディング演出に使うImage</summary>
         private Image m_fadeImage;
+        private Color fadingColor = Color.black;
+
         /// <summary>m_fadeImadeのアルファ値</summary>
         private float m_alpha;
         /// <summary>フェーディング演出に掛ける時間</summary>
@@ -37,7 +40,7 @@ namespace DemonicCity
 
             // fade用のImage生成
             m_fadeImage = new GameObject("ImageFade").AddComponent<Image>();
-            m_fadeImage.color = Color.black;
+            m_fadeImage.color = Color.white;
             m_fadeImage.transform.SetParent(m_fadeCanvas.transform, false);
             m_fadeImage.rectTransform.anchoredPosition = Vector2.zero;
 
@@ -48,9 +51,9 @@ namespace DemonicCity
         /// <summary>
         /// フェードイン
         /// </summary>
-        public void FadeIn(float fadeTime = 0f)
+        public void FadeIn(float fadeTime = 1f)
         {
-            if (fadeTime != 0f)
+            if (fadeTime != 1f)
             {
                 m_fadeTime = fadeTime;
             }
@@ -63,13 +66,25 @@ namespace DemonicCity
         /// </summary>
         /// <param name="sceneTitle">遷移先のシーンタイトル</param>
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
-        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 0f)
+        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 1f, FadeColor color = FadeColor.Black)
         {
-            if (fadeTime != 0f)
+            if (fadeTime != 1f)
             {
                 m_fadeTime = fadeTime;
             }
-            m_fadeCanvas.enabled = true;
+
+            switch (color)
+            {
+                case FadeColor.White:
+                    fadingColor = Color.white;
+                    break;
+                case FadeColor.Black:
+                    fadingColor = Color.black;
+                    break;
+                default:
+                    break;
+            }
+
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
         }
@@ -83,16 +98,16 @@ namespace DemonicCity
             {
                 Init();
             }
-            m_fadeImage.color = Color.black;
+            m_fadeImage.color = Color.white;
             m_alpha = 1f;
-            while (m_alpha < 1f)
+            while (m_alpha > 0f)
             {
-                m_alpha -= Time.deltaTime / m_fadeTime;
-                m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
+                m_alpha -= Time.deltaTime * m_fadeTime;
+                m_fadeImage.color = new Color(fadingColor.r, fadingColor.g, fadingColor.b, m_alpha);
                 yield return null;
             }
             m_fadeCanvas.enabled = false;
-       }
+        }
 
         /// <summary>
         /// フェードアウトのコルーチン
@@ -103,10 +118,13 @@ namespace DemonicCity
             {
                 Init();
             }
+            m_fadeCanvas.enabled = true;
+            m_alpha = 0f;
+
             while (m_alpha < 1f)
             {
-                m_alpha += Time.deltaTime / m_fadeTime;
-                m_fadeImage.color = new Color(0f, 0f, 0f, m_alpha);
+                m_alpha += Time.deltaTime * m_fadeTime;
+                m_fadeImage.color = new Color(fadingColor.r, fadingColor.g, fadingColor.b, m_alpha);
                 yield return null;
             }
             SceneManager.LoadScene(m_nextSceneTitle);
@@ -131,6 +149,15 @@ namespace DemonicCity
             Home,
             StorySelect,
             Strengthen,
+        }
+
+        /// <summary>
+        ///  Background color during transition
+        /// </summary>
+        public enum FadeColor
+        {
+            White,
+            Black,
         }
     }
 }

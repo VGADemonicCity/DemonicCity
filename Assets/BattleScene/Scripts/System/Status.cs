@@ -13,27 +13,27 @@ namespace DemonicCity
     {
         #region Properties
         /// <summary>レベル : Character's level</summary>
-        public int Level { get; set; }
+        public int Level;
 
         /// <summary>耐久力</summary>
-        public int Durability { get; set; }
+        public int Durability;
         /// <summary>筋力</summary>
-        public int MuscularStrength { get; set; }
+        public int MuscularStrength;
         /// <summary>知識</summary>
-        public int Knowledge { get; set; }
+        public int Knowledge;
         /// <summary>センス</summary>
-        public int Sense { get; set; }
+        public int Sense;
         /// <summary>魅力</summary>
-        public int Charm { get; set; }
+        public int Charm;
         /// <summary>威厳</summary>
-        public int Dignity { get; set; }
+        public int Dignity;
 
         /// <summary>ヒットポイント</summary>
-        public int HitPoint { get; set; }
+        public int HitPoint;
         /// <summary>攻撃力</summary>
-        public int Attack { get; set; }
+        public int Attack;
         /// <summary>防御力</summary>
-        public int Defense { get; set; }
+        public int Defense;
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP
         {

@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327912409227080}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.7048826, y: 1, z: 0}
+  m_LocalPosition: {x: -1.9508468, y: 1.6729889, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -72,6 +72,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_id: 3
+  m_stats:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 50000
+    Attack: 0
+    Defense: 0
   m_animator: {fileID: 95204437066560128}
   m_destroyingTime: 3
 --- !u!212 &212489472529952678

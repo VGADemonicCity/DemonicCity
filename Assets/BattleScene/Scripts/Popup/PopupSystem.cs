@@ -1,89 +1,85 @@
-﻿using System.Collections;
+﻿using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using System;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity
 {
-    public abstract class PopupSystem : MonoBehaviour
+    /// <summary>
+    /// popupさせたいオブジェクトの呼び出し側にこのscriptをアタッチ
+    /// inspectorにpopupさせたいオブジェクト(UI)とその親となるcanvas,
+    /// </summary>
+    public class PopupSystem : MonoBehaviour
     {
-        // First process, Play "Start" animation.
-        // Any processes, Popup system execution.
-        // Last process, Play "Exit" animation.
+        Canvas canvas;
+        GameObject canvasObject;
+        GameObject popupedObject;
 
-        public delegate void Execution();
-        public delegate bool Confirmation();
-        public event Execution Execute;
-        public event Confirmation Confirm;
+        [SerializeField] GameObject popupObject;
+        [SerializeField] float scalingTime = 1f;
 
-        BattleManager battleManager;
-        [SerializeField] public Animator animator;
-        bool isActivating;
-        BattleManager.StateMachine.State stateBuffer;
-        const string parameter = "Switch";
 
-        protected virtual void OnEnable()
+        /// <summary>
+        /// UIに配置されているボタンに対してイベントハンドラを登録する
+        /// </summary>
+        /// <param name="popupMaterial"></param>
+        public void SubscribeButton(PopupSystemMaterial popupSystemMaterial)
         {
-            battleManager = BattleManager.Instance;
+            var buttons = popupedObject.GetComponentsInChildren<Button>().ToList();
+            var button = buttons.Find(obj => obj.gameObject.name == popupSystemMaterial.ButtonName);
 
-            if (!animator)
+            button.onClick.AddListener(() =>
             {
-                animator = GetComponent<Animator>();
-            }
-        }
-
-        protected virtual void Update()
-        {
-            if (!isActivating)
-            {
-                return;
-            }
-
-            if (Execute != null)
-            {
-                Execute();
-                Execute -= Execute;
-            }
-
-            if(Confirm != null)
-            {
-                if(Confirm())
+                popupSystemMaterial.EventHandler();
+                if (popupSystemMaterial.IsPushAfterClose)
                 {
-                    Allowed();
+                    Close();
                 }
-                else
-                {
-                    Denied();
-                }
-                Confirm -= Confirm;
-            }
+            });
         }
 
         /// <summary>
-        /// ポップアップウィンドウを表示
+        /// Scene上にCanvasを作成
         /// </summary>
-        public virtual void Popup()
+        void CreateCanvas()
         {
-            stateBuffer = battleManager.m_StateMachine.m_State;
-            battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
-            animator.SetTrigger(parameter);
-            isActivating = true;
+            // Create canvas
+            canvasObject = new GameObject("PopupCanvas");
+            canvas = canvasObject.AddComponent<Canvas>();
+            canvasObject.AddComponent<GraphicRaycaster>();
+            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+
+            // 最前面に来る様適当なSortingOderに設定する
+            canvas.sortingOrder = 100;
         }
 
         /// <summary>
-        /// ポップアップウィンドウを閉じる
+        /// 引数のUIをポップアップさせる
+        /// Popupさせるポジションは予めCanvasに配置してTransform情報を保持したPrefabから取得する
         /// </summary>
-        public virtual void Close()
+        public void Popup()
         {
-            isActivating = false;
-            animator.SetTrigger(parameter);
-            battleManager.SetStateMachine(stateBuffer);
+            if (canvas == null)
+            {
+                CreateCanvas();
+            }
+            popupedObject = Instantiate(popupObject, canvas.transform);
+            popupedObject.transform.localScale = new Vector3(1f, 0f, 1f);
+            iTween.ScaleTo(popupedObject, iTween.Hash("scale", Vector3.one, "time", scalingTime));
         }
 
-        /// <summary>Psitiveな入力があった時</summary>
-        protected abstract void Allowed();
-        /// <summary>negativeな入力があった時</summary>
-        protected abstract void Denied();
+        /// <summary>
+        /// popupしたオブジェクトを閉じた後削除
+        /// </summary>
+        public void Close()
+        {
+            //iTween.ScaleTo(popupObject, iTween.Hash("scale", new Vector3(1f,0f,0f), "time", scalingTime));
+            //Destroy(canvasObject,scalingTime);
+
+            Destroy(canvasObject);
+        }
     }
 }

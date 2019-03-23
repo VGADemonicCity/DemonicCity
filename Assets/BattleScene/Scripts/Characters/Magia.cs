@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
+using System.Linq;
 
 namespace DemonicCity
 {
@@ -98,6 +99,7 @@ namespace DemonicCity
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
+
 
         /// <summary>実際にセーブするステータスクラス</summary>
         [SerializeField] // ==============nullの時はロードする様プロパティに設定する予定======================
@@ -229,6 +231,12 @@ namespace DemonicCity
         {
             MaxHP = maxHP;
         }
+
+        public void Attack()
+        {
+            m_animator.SetTrigger("Attack");
+        }
+
         #endregion
         #region Enum
         /// <summary>属性</summary>

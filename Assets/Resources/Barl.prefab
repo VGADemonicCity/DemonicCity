@@ -36,7 +36,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1590911346608476}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -3.8, z: 0}
+  m_LocalPosition: {x: -1.7048826, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ Animator:
   m_GameObject: {fileID: 1590911346608476}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ac18f17e97c954d888374bdd00e934b6, type: 2}
+  m_Controller: {fileID: 22100000, guid: 3a643947fec3c8c4aaae17958e48f41e, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -73,17 +73,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 5
   m_stats:
-    m_level: 0
-    m_durability: 0
-    m_muscularStrength: 0
-    m_knowledge: 0
-    m_sense: 0
-    m_charm: 0
-    m_dignity: 0
-    m_hitPoint: 1900
-    m_attack: 900
-    m_defense: 550
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 50000
+    Attack: 0
+    Defense: 0
   m_animator: {fileID: 95962232058553398}
+  m_destroyingTime: 3
 --- !u!212 &212600189120539074
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -119,7 +120,7 @@ SpriteRenderer:
   m_SortingLayerID: -2082406165
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 168cf070aee5d46f6b8023bd65dffe44, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d81277f6f475ddb43bcf1d731a5a3519, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

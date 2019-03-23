@@ -60,8 +60,6 @@ namespace DemonicCity.StoryScene
         void Start()
         {
 
-
-
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
@@ -95,7 +93,7 @@ namespace DemonicCity.StoryScene
         }
 
 
-        IEnumerator TextDraw()
+        public IEnumerator TextDraw()
         {
             yield return new WaitWhile(() => !DrawEnd);
             textIndex += 1;
@@ -114,30 +112,24 @@ namespace DemonicCity.StoryScene
         /// </summary>
         public void TextsDraw()
         {
-            if (putSentence.End)
+
+            if (textIndex < texts.Count - 1)
             {
-                if (textIndex < texts.FindLastIndex(text => text == texts.Last()))
+                if (putSentence.End)
                 {
                     textIndex += 1;
                 }
-                else
+                TextStorage thisText = texts[textIndex];
+                if (DivideTexts(thisText))
                 {
-                    return;
-                }
-                if (DivideTexts(texts[textIndex]))
-                {
-                    putSentence.CallSentence(texts[textIndex].sentence);
+                    putSentence.CallSentence(thisText.sentence);
                 }
                 else
                 {
-                    director.Staging(texts[textIndex].sentence);
+                    director.Staging(thisText.sentence);
                 }
-            }
-            else
-            {
-                putSentence.FullTexts();
-            }
 
+            }
         }
 
 
@@ -185,6 +177,17 @@ namespace DemonicCity.StoryScene
             else if (storage.cName != CharName.None)
             {
                 Debug.Log(storage.faceIndex);
+                foreach (FaceChanger item in faceChangers)
+                {
+                    if (item.charName == storage.cName)
+                    {
+                        item.ChangeFace(storage.faceIndex);
+                    }
+                    else
+                    {
+                        item.DeSelect();
+                    }
+                }
                 faceChangers.Find(x => x.charName == storage.cName).ChangeFace(storage.faceIndex);
             }
 
@@ -193,6 +196,7 @@ namespace DemonicCity.StoryScene
             {
                 director.SwitchTalker(director.casts.Find(x => x.name == talker[(int)cast.posTag]), cast);
                 talker[(int)cast.posTag] = cast.name;
+
             }
 
 

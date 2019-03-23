@@ -27,6 +27,8 @@ namespace DemonicCity.StoryScene
         Item,
         /// <summary>ウィンドウがポップする</summary>
         PopWindow,
+        /// <summary>画面が揺れる</summary>
+        Quake,
     }
 
     public class TextDirector : MonoBehaviour
@@ -141,6 +143,9 @@ namespace DemonicCity.StoryScene
                 case StageType.PopWindow:
                     PopWindow(contents[(int)StageTag.Target]);
                     break;
+                case StageType.Quake:
+                    Quake();
+                    break;
                 default:
                     break;
             }
@@ -216,6 +221,7 @@ namespace DemonicCity.StoryScene
 
         public void SwitchTalker(Cast nowCast, Cast nextCast)
         {
+            textManager.isStaging = true;
             GameObject leaveCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == nowCast.name);
             StartCoroutine(MoveObject(leaveCharObj, startPositions[(int)nowCast.posTag], moveTime, false));
 
@@ -317,6 +323,12 @@ namespace DemonicCity.StoryScene
         }
 
 
+        void Quake()
+        {
+            StartCoroutine(QuakeObject(Camera.main.transform, 1f, 0.1f));
+        }
+
+
         void DivideContent(string content)
         {
             //string[] tmpTexts = content.Split(':');
@@ -325,7 +337,27 @@ namespace DemonicCity.StoryScene
         }
 
 
+        IEnumerator QuakeObject(Transform targetObj, float lim, float deflection)
+        {
+            Vector3 originPos = targetObj.localPosition;
+            float time = 0f;
 
+            while (time < lim)
+            {
+                float x = originPos.x + UnityEngine.Random.Range(-1f, 1f) * deflection;
+                float y = originPos.y + UnityEngine.Random.Range(-1f, 1f) * deflection;
+
+                targetObj.localPosition = new Vector3(x, y, originPos.z);
+
+                time += Time.deltaTime;
+
+                yield return null;
+            }
+            targetObj.localPosition = originPos;
+
+            EndStaging();
+
+        }
 
         IEnumerator MoveObject(GameObject targetObj, Vector3 targetPos, float time, bool isNext = true)
         {
@@ -407,7 +439,9 @@ namespace DemonicCity.StoryScene
         void EndStaging()
         {
             textManager.isStaging = false;
-            textManager.TextsDraw();
+
+            StartCoroutine(textManager.TextDraw());
+
         }
 
         void ContinueStaging()
