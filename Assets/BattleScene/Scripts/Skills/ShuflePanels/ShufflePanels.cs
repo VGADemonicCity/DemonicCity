@@ -73,6 +73,10 @@ namespace DemonicCity.BattleScene
             panelCounter = PanelCounter.Instance; // PannelCounterの参照取得
             battleManager = BattleManager.Instance;
         }
+
+        /// <summary>
+        /// registration events
+        /// </summary>
         private void Start()
         {
             GameObject hitResult;
@@ -123,19 +127,17 @@ namespace DemonicCity.BattleScene
         public void PanelShuffle(AnimatorStateInfo stateInfo)
         {
             var targetHash = Animator.StringToHash("TransitionSkill");
-            Debug.Log("nameHash is " + stateInfo.nameHash);
-            Debug.Log("tagHash is " + stateInfo.tagHash);
-            Debug.Log("shortNameHash is " + stateInfo.shortNameHash);
-
             if (stateInfo.shortNameHash == targetHash)
             {
                 Debug.Log("called");
                 StartCoroutine(Anim());
             }
-
-
         }
 
+        /// <summary>
+        /// Skill animation
+        /// </summary>
+        /// <returns></returns>
         IEnumerator Anim()
         {
             m_sensor.enabled = true; // colliderをactiveにする
