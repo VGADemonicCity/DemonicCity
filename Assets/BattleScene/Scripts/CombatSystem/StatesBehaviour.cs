@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// State machine behaviour.
     /// </summary>
-    public abstract class StatesBehaviour : MonoSingleton<StatesBehaviour>
+    public abstract  class StatesBehaviour : MonoSingleton<StatesBehaviour>
     {
         /// <summary>PanelFrameManagerの参照</summary>
         protected PanelFrameManager m_panelFrameManager;
@@ -28,6 +28,7 @@ namespace DemonicCity.BattleScene
          protected HitPointGauge m_enemyHPGauge;
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
+        /// <summary>Enemy skill gauge</summary>
         protected EnemySkillGauge m_enemySkillGauge;
 
         /// <summary>

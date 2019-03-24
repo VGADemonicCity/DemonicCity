@@ -5,6 +5,8 @@ namespace DemonicCity.BattleScene
 {
     public class LoseState : StatesBehaviour
     {
+        [SerializeField] float fadingTime = 3f;
+
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -16,8 +18,8 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-
                 Debug.Log("Lose state called.");
+                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, fadingTime);
             });
         }
     }

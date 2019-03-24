@@ -16,7 +16,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void Awake()
         {
             base.Awake();
-            m_passiveSkill = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
+            m_passiveSkillName = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
             m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
