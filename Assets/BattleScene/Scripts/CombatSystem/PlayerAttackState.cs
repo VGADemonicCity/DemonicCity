@@ -51,13 +51,14 @@ namespace DemonicCity.BattleScene
         /// <returns>The enhancement.</returns>
         IEnumerator ActivateSkill()
         {
-            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,Skill発動に必要なパネル数が少ない順から発動アニメーションを行う
+            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
             var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
             foreach (var skill in sortedSkills)
             {
                 if (skill.IsActivatable)
                 {
+                    Debug.Log(skill.GetType());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     yield return null;
                     var clipInfo = magiaAnimator.GetCurrentAnimatorClipInfo(0);

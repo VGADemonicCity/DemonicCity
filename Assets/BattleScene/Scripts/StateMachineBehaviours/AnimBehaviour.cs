@@ -12,13 +12,13 @@ namespace DemonicCity.BattleScene
     {
         /// <summary>The on state enter listener.</summary>
         private Action OnStateEnterListener = (() => { });
-        /// <summary>The on state exit listener.</summary>
+        /// <summary>The on state eexitxit listener.</summary>
         private Action OnStateExitListener = (() => { });
-        /// <summary>The on state exit listener.</summary>
+        /// <summary>The on state update listener.</summary>
         private Action OnStateUpdateListener = (() => { });
-        /// <summary>The on state exit listener.</summary>
+        /// <summary>The on state move listener.</summary>
         private Action OnStateMoveListener = (() => { });
-        /// <summary>The on state exit listener.</summary>
+        /// <summary>The on state stateIK listener.</summary>
         private Action OnStateStateIKListener = (() => { });
 
         /// <summary>The on state enter listener with stateInfo.</summary>
