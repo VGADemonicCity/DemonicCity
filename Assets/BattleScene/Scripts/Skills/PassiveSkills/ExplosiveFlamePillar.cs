@@ -15,7 +15,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void Awake()
         {
             base.Awake();
-            m_passiveSkill = Magia.PassiveSkill.ExplosiveFlamePillar; // フラグを設定
+            m_passiveSkillName = Magia.PassiveSkill.ExplosiveFlamePillar; // フラグを設定
             m_timing = SkillManager.Timing.SpecialAttack; // フラグを設定
         }
 

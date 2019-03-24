@@ -14,7 +14,7 @@ namespace DemonicCity.BattleScene.Skill
         protected override void Awake()
         {
             base.Awake();
-            m_passiveSkill = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
+            m_passiveSkillName = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
             m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
