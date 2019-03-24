@@ -16,7 +16,7 @@ namespace DemonicCity
             BGM,
             SE,
             Voice,
-
+            Master,
         }
 
 
@@ -35,14 +35,19 @@ namespace DemonicCity
         [SerializeField] SoundAsset[] sounds;
 
         SceneFader fader;
-        void Awake()
-        {
 
-        }
+
+        //private void Awake()
+        //{
+
+        //}
+
         // Use this for initialization
         void Start()
         {
             //Init();
+            //LoadVol();
+
         }
 
         // Update is called once per frame
@@ -95,14 +100,25 @@ namespace DemonicCity
 
 
 
-        public float GetVol(string key)
+        //public float GetVol(string key)
+        //{
+        //    float dec;
+        //    mixer.GetFloat(key, out dec);
+        //    return dec;
+        //    //Mathf.Pow(10f, dec / 20f);
+        //}
+        bool GetVol(string key)
         {
-            float dec;
-            mixer.GetFloat(key, out dec);
-            return dec;
-            //Mathf.Pow(10f, dec / 20f);
+            float vol;
+            if (mixer.GetFloat(key, out vol))
+            {
+                if (vol <= -70f)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
-
         public void SetVol(string key, float vol)
         {
             //float dec = vol;
@@ -113,16 +129,60 @@ namespace DemonicCity
             //}
             mixer.SetFloat(key, vol);
         }
+        float muteVol = -80f;
+        float defVol = 0f;
+        public void SwitchVol(string key, bool isOn)
+        {
+            if (isOn)
+            {
+                mixer.SetFloat(key, defVol);
+            }
+            else
+            {
+                mixer.SetFloat(key, muteVol);
+            }
+        }
+        public void SwitchVol(SoundTag tag, bool isOn)
+        {
+            if (isOn)
+            {
+                mixer.SetFloat(keys[tag], defVol);
+            }
+            else
+            {
+                mixer.SetFloat(keys[tag], muteVol);
+            }
+        }
 
-        string master = "mas";
-        string bgm = "bgm";
-        string voice = "voice";
-        string se = "se";
-        string volKey = "volKey";
+
+        public readonly string master = "MasterVol";
+        public readonly string bgm = "BGMVol";
+        public readonly string voice = "VoiceVol";
+        public readonly string se = "SEVol";
+        public readonly string volKey = "volKey";
+        Dictionary<SoundTag, string> keys = new Dictionary<SoundTag, string>()
+        {
+            {SoundTag.BGM,"BGMVol" },
+            {SoundTag.SE,"SEVol" },
+            {SoundTag.Voice,"VoiceVol" },
+            {SoundTag.Master,"MasterVol" },
+                    };
+        public Vols CurrentVol
+        {
+            get
+            {
+                Vols vs = JsonUtility.FromJson<Vols>(PlayerPrefs.GetString(volKey));
+                if (vs == null)
+                {
+                    return new Vols(true, true, true, true);
+                }
+                return vs;
+            }
+        }
 
         public void SaveVol()
         {
-            string s = JsonUtility.ToJson(new Vols(GetVol(master), GetVol(bgm), GetVol(voice), GetVol(se)));
+            string s = JsonUtility.ToJson(new Vols(GetVol(master), GetVol(bgm), GetVol(se), GetVol(voice)));
             PlayerPrefs.SetString(volKey, s);
         }
 
@@ -131,29 +191,56 @@ namespace DemonicCity
             Vols vs = JsonUtility.FromJson<Vols>(PlayerPrefs.GetString(volKey));
             if (vs == null)
             {
-                return;
+                vs = new Vols();
             }
-            SetVol(master, vs.master);
-            SetVol(bgm, vs.bgm);
-            SetVol(volKey, vs.voice);
-            SetVol(se, vs.se);
+            //SetVol(master, vs.master);
+            //SetVol(bgm, vs.bgm);
+            //SetVol(volKey, vs.voice);
+            //SetVol(se, vs.se);            
+            SwitchVol(master, vs.vol[(int)SoundTag.Master]);
+            SwitchVol(bgm, vs.vol[(int)SoundTag.BGM]);
+            SwitchVol(se, vs.vol[(int)SoundTag.SE]);
+            SwitchVol(voice, vs.vol[(int)SoundTag.Voice]);
         }
 
         [System.Serializable]
         public class Vols
         {
-            public float master;
-            public float bgm;
-            public float voice;
-            public float se;
-            public Vols(float m, float b, float v, float s)
+            //public bool master;
+            //public bool bgm;
+            //public bool se;
+            //public bool voice;
+            public Vols(bool m, bool b, bool s, bool v)
             {
-                master = m;
-                bgm = b;
-                voice = v;
-                se = s;
+                vol[0] = b;
+                vol[1] = s;
+                vol[2] = v;
+                vol[3] = m;
+                //master = m;
+                //bgm = b;
+                //se = s;
+                //voice = v;
             }
+            public Vols()
+            {
+                vol = new bool[4] { true, true, true, true };
+            }
+            public bool[] vol = new bool[4];
         }
+        //public class Vols
+        //{
+        //    public float master;
+        //    public float bgm;
+        //    public float voice;
+        //    public float se;
+        //    public Vols(float m, float b, float v, float s)
+        //    {
+        //        master = m;
+        //        bgm = b;
+        //        voice = v;
+        //        se = s;
+        //    }
+        //}
 
         /// <summary>音源再生</summary>
         /// <param name="tag">再生する音の種類</param>
