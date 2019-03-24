@@ -12,12 +12,14 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public abstract class PassiveSkill : MonoBehaviour
     {
-        public int CountCondition { get { return m_CountCondition; } }
+        public int CountCondition { get { return m_countCondition; } }
+        public bool IsActivatable { get; set; }
+        public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkillName; } }
 
         /// <summary>count conditions</summary>
-        [SerializeField] protected int m_CountCondition = 1;
+        [SerializeField] protected int m_countCondition = 1;
         /// <summary>パッシブスキルフラグ用変数</summary>
-        [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
+        [SerializeField] protected Magia.PassiveSkill m_passiveSkillName;
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] protected float m_incease;
         /// <summary>BattleManagerの参照</summary>
@@ -61,9 +63,11 @@ namespace DemonicCity.BattleScene.Skill
             m_skillManager.m_skillJudger.AddListener(TryProcess); // キャラのレベルと街破壊数を引数に渡して条件を満たせばスキルフラグを建てて効果を反映させる
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                if(state == BattleManager.StateMachine.State.PlayerChoice && m_skillActivated) // playerChoice時 && スキルが呼ばれていない時
+                if (state == BattleManager.StateMachine.State.PlayerChoice && m_skillActivated) // playerChoice時 && スキルが呼ばれていない時
                 {
-                    m_skillActivated = false; // フラグを降ろす
+                    // フラグを降ろす
+                    m_skillActivated = false;
+                    IsActivatable = false;
                     SkillDeactivate();
                 }
             });
@@ -74,13 +78,15 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         /// <param name="passiveSkill">Passive skill.</param>
         /// <param name="cityDestructionCount">City destruction count.</param>
-        protected virtual void TryProcess(Magia.PassiveSkill passiveSkill,SkillManager.Timing timing, int cityDestructionCount)
+        protected virtual void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
         {
             // パッシブスキルフラグが建っている && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkill) == m_passiveSkill && cityDestructionCount >= m_CountCondition && timing == m_timing)
+            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName && cityDestructionCount >= m_countCondition && timing == m_timing)
             {
-                m_skillActivated = true; // フラグを立てる
                 SkillActivate();
+                // フラグを立てる
+                IsActivatable = true;
+                m_skillActivated = true; 
             }
         }
 
