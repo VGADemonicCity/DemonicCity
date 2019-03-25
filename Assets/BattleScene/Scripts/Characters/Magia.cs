@@ -12,7 +12,7 @@ namespace DemonicCity
     /// Magia.
     /// </summary>
     [Serializable]
-    public class Magia : MonoSingleton<Magia>
+    public class Magia : SavableSingletonBase<Magia>
     {
         #region Property
         /// <summary>パッシブスキルフラグのプロパティ</summary>
@@ -28,7 +28,15 @@ namespace DemonicCity
         /// <summary>ステータスクラスのプロパティ</summary>
         public Status Stats
         {
-            get { return m_stats; }
+            get
+            {
+                if(m_stats == null)
+                {
+                    var saveData = SaveData.Instance;
+                    m_stats = saveData.magia.m_stats;
+                }
+                return m_stats;
+            }
             set { m_stats = value; }
         }
         /// <summary>振り分けポイントのプロパティ</summary>
@@ -88,6 +96,7 @@ namespace DemonicCity
             }
         }
         #endregion
+
         #region Field
         /// <summary>経験値</summary>
         [SerializeField] int m_totalExperience;
@@ -106,9 +115,9 @@ namespace DemonicCity
         Status m_stats = new Status()
         {
             Level = 1,
-            HitPoint = 24250,
-            Attack = 3635,
-            Defense = 3635,
+            HitPoint = 1000,
+            Attack = 100,
+            Defense = 100,
             Charm = 0,
             Sense = 0,
             Dignity = 0,
@@ -117,10 +126,6 @@ namespace DemonicCity
             MuscularStrength = 0,
         };
 
-        /// <summary>マギアの画像</summary>
-        SpriteRenderer m_spriteRenderer;
-        /// <summary>アニメーター</summary>
-        Animator m_animator;
         /// <summary>1levelUP毎の固有ステータス用振り分けポイント追加量</summary>
         int m_addStatsPoint = 3;
         /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
@@ -129,7 +134,9 @@ namespace DemonicCity
         int m_magnificationByAttribute = 50;
 
         #endregion
+
         #region Method
+
         /// <summary>
         /// 次のレベルに上がるために必要な経験値を返します
         /// </summary>
@@ -232,12 +239,10 @@ namespace DemonicCity
             MaxHP = maxHP;
         }
 
-        public void Attack()
-        {
-            m_animator.SetTrigger("Attack");
-        }
+
 
         #endregion
+
         #region Enum
         /// <summary>属性</summary>
         [Serializable]

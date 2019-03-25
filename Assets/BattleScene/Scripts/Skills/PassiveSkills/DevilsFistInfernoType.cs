@@ -17,7 +17,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -33,6 +32,7 @@ namespace DemonicCity.BattleScene.Skill
 
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
             Debug.Log("Deactivated the 魔拳烈火ノ型");
             m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // 変動値を元に戻す
         }

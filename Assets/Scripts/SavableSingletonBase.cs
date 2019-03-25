@@ -27,14 +27,14 @@ namespace DemonicCity
                 if (null == m_instance)
                 {
                     var json = File.Exists(GetSavePath()) ? File.ReadAllText(GetSavePath()) : "";
-                    if (json.Length > 0)
-                    {
-                        LoadFromJSON(json);
-                    }
-                    else
+                    if (string.IsNullOrEmpty(json))
                     {
                         m_instance = new T();
                         m_instance.m_isLoaded = true;
+                    }
+                    else
+                    {
+                        LoadFromJSON(json);
                     }
                 }
                 return m_instance;
@@ -103,8 +103,14 @@ namespace DemonicCity
         /// <returns>The save path.</returns>
         static string GetSavePath()
         {
-            //Debug.Log("セーブ先のパス : " + string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey()));
-            return string.Format("{0}/{1}", Application.persistentDataPath, GetSaveKey());
+            //確認しやすい様にエディタではAssetsと同じ階層に保存し、それ以外ではApplication.persistentDataPath以下に保存する様にする
+            string filePath;
+#if UNITY_EDITOR
+            filePath = GetSaveKey() + ".json";
+#else
+            filePath = Application.persistentDataPath + "/" + GetSaveKey() + ".json";
+#endif
+            return filePath;
         }
 
         /// <summary>

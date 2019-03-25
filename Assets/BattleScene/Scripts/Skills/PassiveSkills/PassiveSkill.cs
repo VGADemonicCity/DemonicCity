@@ -38,8 +38,6 @@ namespace DemonicCity.BattleScene.Skill
         protected float m_attackBuffer;
         /// <summary>defenseの変動値を一時保存</summary>
         protected float m_defenseBuffer;
-        /// <summary>スキル呼びたしイベントを区別するフラグ</summary>
-        protected SkillManager.Timing m_timing;
 
 
 
@@ -78,10 +76,10 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         /// <param name="passiveSkill">Passive skill.</param>
         /// <param name="cityDestructionCount">City destruction count.</param>
-        protected virtual void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
+        protected virtual void TryProcess(Magia.PassiveSkill passiveSkill,  int cityDestructionCount)
         {
             // パッシブスキルフラグが建っている && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName && cityDestructionCount >= m_countCondition && timing == m_timing)
+            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName && cityDestructionCount >= m_countCondition )
             {
                 SkillActivate();
                 // フラグを立てる
@@ -98,7 +96,10 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>
         /// 此処に各スキルの非アクティブ時の効果をを実装する
         /// </summary>
-        protected abstract void SkillDeactivate();
+        protected virtual void SkillDeactivate()
+        {
+            IsActivatable = false;
+        }
 
     }
 }

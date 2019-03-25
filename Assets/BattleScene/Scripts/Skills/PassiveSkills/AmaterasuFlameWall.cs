@@ -18,7 +18,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.AmaterasuFlameWall; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -33,6 +32,7 @@ namespace DemonicCity.BattleScene.Skill
 
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
             Debug.Log("Deactivated the 天照ー焔壁ー");
             m_battleManager.m_MagiaStats.Defense -= (int)m_defenseBuffer;
         }

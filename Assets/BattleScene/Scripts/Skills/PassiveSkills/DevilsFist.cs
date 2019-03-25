@@ -15,7 +15,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.DevilsFist; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -24,16 +23,16 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         /// <param name="passiveSkill">Passive skill.</param>
         /// <param name="cityDestructionCount">City destruction count.</param>
-        protected override void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
+        protected override void TryProcess(Magia.PassiveSkill passiveSkill, int cityDestructionCount)
         {
 
-            // パッシブスキルフラグが建っている && パッシブスキルフラグに魔拳烈火ノ型 && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
+            // パッシブスキルフラグが建っている && パッシブスキルフラグに魔拳烈火ノ型 && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない時　SkillActivateを呼ぶ
             if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
                 && cityDestructionCount < GetComponent<DevilsFistInfernoType>().CountCondition
-                && cityDestructionCount >= CountCondition
-                && timing == m_timing)
+                && cityDestructionCount >= CountCondition)
             {
                 m_skillActivated = true; // フラグを立てる
+                IsActivatable = true;
                 SkillActivate();
             }
         }
@@ -53,9 +52,10 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
             Debug.Log("Deactivated the 魔拳");
             m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // intに変換
-        } 
+        }
     }
 }
 
