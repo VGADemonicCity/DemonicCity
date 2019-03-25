@@ -47,6 +47,7 @@ namespace DemonicCity.ResultScene
         private int currentLevelTotalExperience;
         private bool isLevelUp = false;
         int afterTotalExperience;
+        int experienceDifference;
 
         private void Awake()
         {
@@ -78,8 +79,8 @@ namespace DemonicCity.ResultScene
                     }
                     else if (tapCount == 2 && isAnimation)
                     {
-                        isAnimation = false;
                         ReflectionAfterStatus();
+                        isAnimation = false;
                     }
                     else if (tapCount == 3 || !isAnimation)
                     {
@@ -199,7 +200,7 @@ namespace DemonicCity.ResultScene
                 index++;
                 if (index == levelDifference.Count)
                 {
-                    int experienceDifference = requiredExperiences.Last() - magia.TotalExperience;
+                    experienceDifference = requiredExperiences.Last() - magia.TotalExperience;
                     experienceGauge.value = experienceDifference;
                     isAnimation = false;
                 }
@@ -225,7 +226,7 @@ namespace DemonicCity.ResultScene
             afterHpText.text = afterStatus.HitPoint.ToString();
             afterAttackText.text = afterStatus.Attack.ToString();
             afterDefenseText.text = afterStatus.Defense.ToString();
-            experienceGauge.value = afterTotalExperience;
+            experienceGauge.value = experienceDifference;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
         }
     }
