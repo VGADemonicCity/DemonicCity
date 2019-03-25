@@ -18,7 +18,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.SelfRegeneration; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -39,6 +38,7 @@ namespace DemonicCity.BattleScene.Skill
 
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
         }
     }
 }

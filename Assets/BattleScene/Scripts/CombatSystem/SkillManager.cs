@@ -12,7 +12,6 @@ namespace DemonicCity.BattleScene
     {
         /// <summary>SkillProcessor</summary>
         public SkillJudger m_skillJudger = new SkillJudger();
-        public Timing m_timing;
 
 
         /// <summary>
@@ -21,20 +20,9 @@ namespace DemonicCity.BattleScene
         /// int arg0 = Level.
         /// int arg1 = City destruction count.
         /// </summary>
-        public class SkillJudger : UnityEvent<Magia.PassiveSkill,Timing,int>
+        public class SkillJudger : UnityEvent<Magia.PassiveSkill,int>
         {
             public SkillJudger() { }
-        }
-
-        /// <summary>
-        /// スキル発動のタイミング
-        /// </summary>
-        public enum Timing
-        {
-            /// <summary>強化</summary>
-            Enhancement,
-            /// <summary>特殊攻撃</summary>
-            SpecialAttack,
         }
     }
 }

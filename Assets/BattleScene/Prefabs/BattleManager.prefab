@@ -193,8 +193,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d2894b6343445ff9416300487282cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 20
-  m_passiveSkill: 0
+  m_countCondition: 24
+  m_passiveSkillName: 0
   m_incease: 0.05
 --- !u!114 &114017009472620254
 MonoBehaviour:
@@ -241,8 +241,6 @@ MonoBehaviour:
   m_condition: 0
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
-  m_popupObject: {fileID: 1649516800190944, guid: 9aaf6dbfc7652d748b4db7ec83272453,
-    type: 2}
 --- !u!114 &114195271979354084
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -266,8 +264,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3292d3ee0e444410bb62ec13ef202867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 21
-  m_passiveSkill: 0
+  m_countCondition: 32
+  m_passiveSkillName: 0
   m_incease: 0.02
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
@@ -292,8 +290,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfa60838c2a24796afd1e328078d815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 18
-  m_passiveSkill: 0
+  m_countCondition: 19
+  m_passiveSkillName: 0
   m_incease: 0.1
 --- !u!114 &114290885052486680
 MonoBehaviour:
@@ -306,6 +304,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  popupObject: {fileID: 1649516800190944, guid: 9aaf6dbfc7652d748b4db7ec83272453,
+    type: 2}
   scalingTime: 1
 --- !u!114 &114294880535250120
 MonoBehaviour:
@@ -343,6 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd07388a1b40840ab8ee83c15266007b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fadingTime: 3
 --- !u!114 &114312102800550904
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +366,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c7500c8a19f740b8a47a3e5b7c2f094, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_timing: 0
 --- !u!114 &114432879614141590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -377,8 +377,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08aac4f5664a608469d92bae02b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 11
-  m_passiveSkill: 0
+  m_countCondition: 30
+  m_passiveSkillName: 0
   m_incease: 0.01
 --- !u!114 &114445989290795632
 MonoBehaviour:
@@ -391,6 +391,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c358759b966a4e6e82ec6acd2137326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magiaAnimator: {fileID: 0}
+  adjustmentCoefficent: 0.5
 --- !u!114 &114452556554156664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -402,8 +404,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35a59fb471da746cfbe0962025729615, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 1
-  m_passiveSkill: 1
+  m_countCondition: 1
+  m_passiveSkillName: 0
   m_incease: 0.01
 --- !u!114 &114459537921108872
 MonoBehaviour:
@@ -416,8 +418,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84baedb530b674a7faa10a6fceacbc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 26
-  m_passiveSkill: 0
+  m_countCondition: 34
+  m_passiveSkillName: 0
   m_incease: 0.01
 --- !u!114 &114496166160569242
 MonoBehaviour:
@@ -430,8 +432,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc495d98eba42450c854bb4f1b9ede44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 12
-  m_passiveSkill: 4
+  m_countCondition: 14
+  m_passiveSkillName: 0
   m_incease: 0.1
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114542386805354352
@@ -485,8 +487,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfdf3e44409645c6ae610fb57b54b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 22
-  m_passiveSkill: 0
+  m_countCondition: 27
+  m_passiveSkillName: 0
   m_incease: 0.1
 --- !u!114 &114676999750379174
 MonoBehaviour:
@@ -499,8 +501,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0003a3e259e0845f4aa38671e70ca994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 7
-  m_passiveSkill: 2
+  m_countCondition: 11
+  m_passiveSkillName: 0
   m_incease: 0.5
 --- !u!114 &114677235418965648
 MonoBehaviour:
@@ -513,8 +515,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaf68ab6045f4c3eb32500d439b72c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 28
-  m_passiveSkill: 0
+  m_countCondition: 38
+  m_passiveSkillName: 0
   m_incease: 0.51
 --- !u!114 &114697641580245106
 MonoBehaviour:
@@ -527,8 +529,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785573e7e4dbb45998f203c666be7f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 11
-  m_passiveSkill: 0
+  m_countCondition: 21
+  m_passiveSkillName: 0
   m_incease: 0.11
 --- !u!114 &114844704490148818
 MonoBehaviour:
@@ -553,8 +555,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc27f66d876f34139912946d7f5a3abf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 30
-  m_passiveSkill: 0
+  m_countCondition: 36
+  m_passiveSkillName: 0
   m_incease: 0
 --- !u!114 &114947920586921256
 MonoBehaviour:
@@ -591,6 +593,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff8da14bd824437cb830b1d2d613157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CountCondition: 16
-  m_passiveSkill: 0
+  m_countCondition: 16
+  m_passiveSkillName: 0
   m_incease: 0.5

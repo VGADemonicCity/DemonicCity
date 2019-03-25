@@ -30,7 +30,7 @@ namespace DemonicCity
                 return m_instance;
             }
         }
-        
+
         //SaveDataをJsonに変換したテキスト(リロード時に何度も読み込まなくていいように保持)
         [SerializeField]
         static string _jsonText = "";
@@ -38,6 +38,11 @@ namespace DemonicCity
         //=================================================================================
         //保存されるデータ(public or SerializeFieldを付ける)
         //=================================================================================
+
+        public Magia magia;
+        public Progress progress;
+
+
 
         //=================================================================================
         //シリアライズ,デシリアライズ時のコールバック
@@ -62,6 +67,15 @@ namespace DemonicCity
             //{
             //    //m_statistics = Deserialize<Dictionary<string, int>>(m_dictJon);
             //}
+
+            if(magia == null)
+            {
+                magia = Magia.Instance;
+            }
+            if(progress ==null)
+            {
+                progress = Progress.Instance;
+            }
         }
 
         // ---------------------------------------------
@@ -132,10 +146,33 @@ namespace DemonicCity
         //保存
         //=================================================================================
 
+        //public void MagiaDataSaving(Magia magia)
+        //{
+        //    this.magia = magia;
+        //    Save();
+        //}
+
+        //public void ProgressDataSaving(Progress progress)
+        //{
+        //    this.progress = progress;
+        //    Save();
+        //}
+
+            /// <summary>
+            /// 
+            /// </summary>
+        public void AllDataSaving()
+        {
+            magia = Magia.Instance;
+            progress = Progress.Instance;
+            Save();
+        }
+
+
         /// <summary>
         /// データをJsonにして保存する。
         /// </summary>
-        public void Save()
+        void Save()
         {
             _jsonText = JsonUtility.ToJson(this);
             File.WriteAllText(GetSaveFilePath(), _jsonText);

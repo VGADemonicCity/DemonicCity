@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using UnityEngine;
 
 namespace DemonicCity
@@ -16,7 +17,6 @@ namespace DemonicCity
         protected static T m_instance;
         /// <summary>SaveDataをJsonに変換したテキスト(Reload時になんども読み込まなくて良い様に保持)</summary>
         [SerializeField] static string m_jsonText = "";
-        [SerializeField] protected string m_filePath = "SaveData";
 
         /// <summary>
         /// Gets the instance.
@@ -41,6 +41,7 @@ namespace DemonicCity
 
                     GameObject gameObject = new GameObject(typeName, type); // typeNameという名のゲームオブジェクトを生成してtypeという名のComponentをアタッチする
                     instance = gameObject.GetComponent<T>(); // 先程作ったオブジェクトのコンポーネントを参照
+                    Initialize(instance); // 初期化する
 
                     if (instance == null) // 生成に失敗したらエラーを返す
                     {
@@ -162,7 +163,7 @@ namespace DemonicCity
         /// <summary>
         /// データを再読み込みする
         /// </summary>
-        protected void ReLoad()
+        protected void Reload()
         {
             JsonUtility.FromJsonOverwrite(GetJson(), this);
         }
@@ -220,7 +221,7 @@ namespace DemonicCity
         public void Delete()
         {
             m_jsonText = "";
-            ReLoad();
+            Reload();
         }
 
         /// <summary>
@@ -232,11 +233,22 @@ namespace DemonicCity
             //確認しやすい様にエディタではAssetsと同じ階層に保存し、それ以外ではApplication.persistentDataPath以下に保存する様にする
             string filePath;
 #if UNITY_EDITOR
-            filePath = m_filePath + ".json";
+            filePath = GetSaveKey() + ".json";
 #else
-            filePath = Application.persistentDataPath + "/" + m_filePath;
+            filePath = Application.persistentDataPath + "/" +GetSaveKey() + ".json";
 #endif
             return filePath;
+        }
+
+        /// <summary>
+        /// Gets the save key.
+        /// </summary>
+        /// <returns>The save key.</returns>
+        static string GetSaveKey()
+        {
+            var provider = new SHA1CryptoServiceProvider();
+            var hash = provider.ComputeHash(System.Text.Encoding.ASCII.GetBytes(typeof(T).FullName));
+            return BitConverter.ToString(hash);
         }
 
         /// <summary>

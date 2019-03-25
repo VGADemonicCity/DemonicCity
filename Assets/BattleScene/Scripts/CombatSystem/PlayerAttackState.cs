@@ -17,14 +17,11 @@ namespace DemonicCity.BattleScene
         /// <summary>攻撃アニメーションの途中からゲージの減少処理を挟む為の調整係数</summary>
         [SerializeField] float adjustmentCoefficent= .5f;
 
-
         /// <summary>
         /// Start this instance.
         /// </summary>
         void Start()
         {
-            magiaAnimator = Magia.Instance.gameObject.GetComponent<Animator>();
-
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
                 if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
@@ -35,13 +32,8 @@ namespace DemonicCity.BattleScene
                 // ==============================
                 // イベント呼び出し : SkillJudger,強化
                 // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(ActivateSkill()); // 強化の演出開始
-
-                // ==============================
-                // イベント呼び出し : SkillJudger,特殊攻撃
-                // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.SpecialAttack, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
             });
         }
 

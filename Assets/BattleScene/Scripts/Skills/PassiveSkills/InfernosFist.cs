@@ -16,7 +16,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.InfernosFist; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -34,6 +33,7 @@ namespace DemonicCity.BattleScene.Skill
         /// </summary>
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
             Debug.Log("Deactivated the 豪炎爆砕掌");
             m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // intに変換
         }

@@ -54,7 +54,7 @@ Animator:
   m_Controller: {fileID: 22100000, guid: dc631483cb7019e4e8b2bd3f766538f1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -80,7 +80,7 @@ MonoBehaviour:
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 50000
+    HitPoint: 1000
     Attack: 0
     Defense: 0
   m_animator: {fileID: 95204437066560128}

@@ -15,7 +15,6 @@ namespace DemonicCity.BattleScene.Skill
         {
             base.Awake();
             m_passiveSkillName = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
-            m_timing = SkillManager.Timing.Enhancement; // フラグを設定
         }
 
         /// <summary>
@@ -32,6 +31,7 @@ namespace DemonicCity.BattleScene.Skill
 
         protected override void SkillDeactivate()
         {
+            base.SkillDeactivate();
             Debug.Log("Deactivated the 高濃度魔力吸収");
             m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // 変動値を元に戻す
             m_battleManager.m_MagiaStats.Defense -= (int)m_defenseBuffer; // 変動値を元に戻す
