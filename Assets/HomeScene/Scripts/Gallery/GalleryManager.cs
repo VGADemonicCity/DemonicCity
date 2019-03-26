@@ -5,11 +5,15 @@ using UnityEngine;
 
 namespace DemonicCity.HomeScene
 {
-    public class GalleryContent : MonoBehaviour
+    public class GalleryManager: MonoBehaviour
     {
         public enum ItemTag
         {
+            TestItem,
 
+
+
+            TestPerson,
         }
 
         List<Item> items = new List<Item>();
@@ -27,7 +31,6 @@ namespace DemonicCity.HomeScene
 
         }
 
-        
 
 
         #region Import
@@ -37,7 +40,6 @@ namespace DemonicCity.HomeScene
 
         void ImportItems()
         {
-            //Resources.LoadAll
             items = Resources.LoadAll<Item>(itemPath).ToList();
             people = Resources.LoadAll<Person>(peoplePath).ToList();
 

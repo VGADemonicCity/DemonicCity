@@ -9,6 +9,6 @@ namespace DemonicCity.HomeScene
     public class Person : Item
     {
         public Sprite illust;
-        public AudioClip voice;
+        public List<AudioClip> voice = new List<AudioClip>();
     }
 }
