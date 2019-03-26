@@ -16,7 +16,8 @@ namespace DemonicCity.ResultScene
         TouchGestureDetector touchGestureDetector;
         Status beforeStatus;
         Status afterStatus;
-
+        Progress progress;
+        
         List<int> levelDifference = new List<int>();
         List<int> hpDifference = new List<int>();
         List<int> attackDifference = new List<int>();
@@ -54,6 +55,7 @@ namespace DemonicCity.ResultScene
             magia = Magia.Instance;
             panelCounter = PanelCounter.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+            progress = Progress.Instance;
         }
         private void Start()
         {
@@ -84,6 +86,9 @@ namespace DemonicCity.ResultScene
                     }
                     else if (tapCount == 3 || !isAnimation)
                     {
+                        //progress.MyStoryProgress = Progress.StoryProgress.All;
+                        
+                        SavableSingletonBase<Magia>.Instance.Save();
                         SceneChanger.SceneChange(SceneName.Story);
                     }
                 }
@@ -108,7 +113,7 @@ namespace DemonicCity.ResultScene
             currentLevelTotalExperience = magia.TotalExperience;
             //currentExperience = 1;//debug
             destructionCount= panelCounter.TotalDestructionCount;
-            destructionCount = 6;//debug
+            //destructionCount = 6;//debug
 
             afterTotalExperience = currentLevelTotalExperience + destructionCount;
 

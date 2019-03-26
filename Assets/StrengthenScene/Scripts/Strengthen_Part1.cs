@@ -360,8 +360,12 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            //statusPoint = magia.AllocationPoint;
-            statusPoint = 99;//debug
+            statusPoint = magia.AllocationPoint;
+            //statusPoint = 99;//debug
+
+            updatedBasicStatusTexts[0].text = hp.ToString();
+            updatedBasicStatusTexts[1].text = attack.ToString();
+            updatedBasicStatusTexts[2].text = defense.ToString();
 
             UpdateText();
 
@@ -404,7 +408,7 @@ namespace DemonicCity.StrengthenScene
             magia.Stats.Knowledge = knowledge;
 
 
-            //magia.Sync();
+            SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
 
@@ -438,9 +442,9 @@ namespace DemonicCity.StrengthenScene
             currentBasicStatusTexts[1].text = attack.ToString();
             currentBasicStatusTexts[2].text = defense.ToString();
 
-            updatedBasicStatusTexts[0].text = "";
-            updatedBasicStatusTexts[1].text = "";
-            updatedBasicStatusTexts[2].text = "";
+            //updatedBasicStatusTexts[0].text = "";
+            //updatedBasicStatusTexts[1].text = "";
+            //updatedBasicStatusTexts[2].text = "";
 
             currentUniqueStatusTexts[0].text = charm.ToString();
             currentUniqueStatusTexts[1].text = dignity.ToString();
