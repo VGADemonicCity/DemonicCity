@@ -46,6 +46,7 @@ namespace DemonicCity.StoryScene
         int textIndex = 0;
         public TouchGestureDetector touchGestureDetector;
         SceneFader sceneFader;
+        ChapterManager chapterM;
         List<TextStorage> texts = new List<TextStorage>();
         [SerializeField] PutSentence putSentence;
         [SerializeField] TMPro.TMP_Text nameObj;
@@ -56,6 +57,7 @@ namespace DemonicCity.StoryScene
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
             sceneFader = SceneFader.Instance;
+            chapterM = ChapterManager.Instance;
         }
         void Start()
         {
@@ -75,7 +77,7 @@ namespace DemonicCity.StoryScene
             });
 
 
-            SetText(progress.ThisQuestProgress.ToString());
+            SetText(progress.ThisQuestProgress);
             ThisTextDraw();
         }
 
@@ -326,7 +328,14 @@ namespace DemonicCity.StoryScene
             //characters = characters.Distinct().Where(item => item <= CharName.Ixmagina).ToList();
             SetCharacter(characters);
         }
+        public void SetText(Progress.QuestProgress currentState)
+        {
 
+            Scenario tmp = chapterM.GetChapter().scenario[currentState];
+            characters = tmp.characters;
+            texts = tmp.texts;
+            SetCharacter(characters);
+        }
 
 
         void SetCharacter(List<CharName> names)
