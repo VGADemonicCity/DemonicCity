@@ -13,9 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemiesIds: 
   storyProgress: 1
-  chapterTitle: 
+  chapterTitle: "\u3046"
   isBattle: 0
   isStory: 0
-  sourceFolderPath: 
   BackGround: []
   BattleStage: []
+  prologue: {fileID: 11400000, guid: 1bd21dab3909d11429f494d53c140d15, type: 2}
+  epilogue: {fileID: 0}
+  test: {fileID: 0}
