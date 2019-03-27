@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ed2fc04f55e7343b996cd33a835f48, type: 3}
+  m_Name: TestPerson
+  m_EditorClassIdentifier: 
+  tag: 1
+  id: TestPerson
+  name: "\u30C6\u30B9\u30C8\u30D1\u30FC\u30BD\u30F3"
+  text: "\u3055\u3044\u3055\u3044\n\u305D\u3044\u305D\u3044\n\u305B\u3048\u3048\n\u304A\u304A\u304A\u304A\n\u304B\u308F\u3089\u3075\u3041"
+  UnLockStory: 1
+  illust: {fileID: 21300000, guid: 58c762182bb1b4d1aaf9225efc16e4b0, type: 3}
+  voice:
+  - {fileID: 8300000, guid: 014122db2f16edf4a9963e093150ddb0, type: 3}
+  - {fileID: 8300000, guid: 83eb4bfc69e4c9449b87cdf4376c480a, type: 3}

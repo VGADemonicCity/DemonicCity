@@ -21,6 +21,9 @@ namespace DemonicCity.StorySelectScene
         void Start()
         {
             MyStory = progress.MyStoryProgress;
+
+            progress.MyStoryProgress= Progress.StoryProgress.All;
+
             int progressCount = EnumCommon.GetLength<Progress.StoryProgress>() - 1;
             for (int i = progressCount - 1; 0 <= i; i--)
             {
@@ -45,12 +48,12 @@ namespace DemonicCity.StorySelectScene
     }
     public class ToStories
     {
-        Progress progress = Progress.Instance;
         public void ToStory(Progress.StoryProgress chapter)
         {
+            Progress progress = Progress.Instance;
             Debug.Log(chapter.ToString());
             progress.ThisStoryProgress = chapter;
-            Chapter thisChapter = ChapterManager.Instance.GetChapter(chapter);
+            Chapter thisChapter = ChapterManager.Instance.GetChapter();
             if (thisChapter.isStory)
             {
                 progress.ThisQuestProgress = Progress.QuestProgress.Prologue;

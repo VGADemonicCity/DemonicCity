@@ -8,7 +8,7 @@ namespace DemonicCity.HomeScene
     [CreateAssetMenu(fileName ="ItemData",menuName ="Gallery/Item")]
     public class Item : ScriptableObject
     {
-        public GalleryContent.ItemTag tag;
+        public GalleryManager.ItemTag tag;
         public string id;
         public string name;
         [Multiline(5)] public string text;
