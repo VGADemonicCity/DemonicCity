@@ -1685,6 +1685,48 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!1001 &1523012530
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1.7048826
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4866127432364854, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: eb5d515ad61884809b2abee32d8b4712, type: 2}
+  m_IsPrefabAsset: 0
 --- !u!114 &1542643548 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 114682881085454400, guid: b302ca13a47d8fc45a50d68b77abf06b,
