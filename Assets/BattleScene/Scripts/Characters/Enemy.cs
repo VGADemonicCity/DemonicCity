@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Linq;
 
 namespace DemonicCity.BattleScene
 {
@@ -9,7 +10,7 @@ namespace DemonicCity.BattleScene
     /// Enemy character.
     /// </summary>
     [Serializable]
-    public class Enemy : MonoBehaviour , IAttackHandler
+    public class Enemy : MonoBehaviour
     {
         /// <summary>m_statsのプロパティ</summary>
         public Status Stats
@@ -25,12 +26,20 @@ namespace DemonicCity.BattleScene
             set { m_id = value; }
         }
 
+        /// <summary>
+        /// Get Animator component
+        /// </summary>
+        public Animator AnimCtrl { get { return m_animator; } }
+
         /// <summary>敵キャラのID</summary>
         [SerializeField] private EnemiesFactory.EnemiesId m_id;
         /// <summary>ステータス</summary>
         [SerializeField] Status m_stats = new Status();
         /// <summary>敵キャラのアニメーター</summary>
         [SerializeField] Animator m_animator;
+        [SerializeField] Animator skillAnimator;
+
+
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
 
@@ -38,26 +47,25 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
-            m_animator = GetComponent<Animator>();
-
             m_battleManager = BattleManager.Instance;
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != BattleManager.StateMachine.State.EnemyAttack || this != m_battleManager.CurrentEnemy)
+                if (state != BattleManager.StateMachine.State.EnemyAttack || this != m_battleManager.CurrentEnemy)
                 {
                     return;
                 }
-
-                OnAttack();
             });
         }
 
         /// <summary>
-        /// Ons the attack.
+        ///  Ons the attack.
         /// </summary>
-        public void OnAttack()
+        /// <returns>time of animation clip</returns>
+        public float Attack()
         {
-            m_animator.SetTrigger("Attack");
+            m_animator.CrossFadeInFixedTime("Attack", 0);
+            var clips = m_animator.GetNextAnimatorClipInfo(0).ToList();
+            return clips.First().clip.length;
         }
 
         /// <summary>
@@ -68,6 +76,11 @@ namespace DemonicCity.BattleScene
             Debug.Log(gameObject.name + "は破壊されたよ");
             gameObject.SetActive(false);
             Destroy(gameObject, m_destroyingTime);
+        }
+
+        public void PlayEffect()
+        {
+            skillAnimator.CrossFadeInFixedTime("Effect", 0);
         }
     }
 }
