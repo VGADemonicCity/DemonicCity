@@ -1,27 +1,27 @@
 fileFormatVersion: 2
-guid: 996cca596a2802f46bf9822443b9278a
+guid: f149466ff5a56514f91b3e7a2840f8e0
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Barl_SkillEffect_0
-    21300002: Barl_SkillEffect_1
-    21300004: Barl_SkillEffect_2
-    21300006: Barl_SkillEffect_3
-    21300008: Barl_SkillEffect_4
-    21300010: Barl_SkillEffect_5
-    21300012: Barl_SkillEffect_6
-    21300014: Barl_SkillEffect_7
-    21300016: Barl_SkillEffect_8
-    21300018: Barl_SkillEffect_9
-    21300020: Barl_SkillEffect_10
-    21300022: Barl_SkillEffect_11
-    21300024: Barl_SkillEffect_12
-    21300026: Barl_SkillEffect_13
-    21300028: Barl_SkillEffect_14
-    21300030: Barl_SkillEffect_15
-    21300032: Barl_SkillEffect_16
-    21300034: Barl_SkillEffect_17
-    21300036: Barl_SkillEffect_18
-    21300038: Barl_SkillEffect_19
+    21300000: Ashmedy_Skill_0
+    21300002: Ashmedy_Skill_1
+    21300004: Ashmedy_Skill_2
+    21300006: Ashmedy_Skill_3
+    21300008: Ashmedy_Skill_4
+    21300010: Ashmedy_Skill_5
+    21300012: Ashmedy_Skill_6
+    21300014: Ashmedy_Skill_7
+    21300016: Ashmedy_Skill_8
+    21300018: Ashmedy_Skill_9
+    21300020: Ashmedy_Skill_10
+    21300022: Ashmedy_Skill_11
+    21300024: Ashmedy_Skill_12
+    21300026: Ashmedy_Skill_13
+    21300028: Ashmedy_Skill_14
+    21300030: Ashmedy_Skill_15
+    21300032: Ashmedy_Skill_16
+    21300034: Ashmedy_Skill_17
+    21300036: Ashmedy_Skill_18
+    21300038: Ashmedy_Skill_19
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -115,13 +115,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Barl_SkillEffect_0
+      name: Ashmedy_Skill_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 3456
-        width: 384
-        height: 384
+        y: 576
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -129,19 +129,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e574e74591e3ad14fbfa6759b14e9d31
+      spriteID: 09cc4a210f559074da6cc0b1c050b93c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_1
+      name: Ashmedy_Skill_1
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 576
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cd65eeb3bc18b514cb44a3be4d50bff9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_2
       rect:
         serializedVersion: 2
         x: 384
-        y: 3456
-        width: 384
-        height: 384
+        y: 576
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -149,19 +169,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dfb881e2351438745a92d15511b43d87
+      spriteID: c76941b19eb764445b773e06bec78bdc
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_2
+      name: Ashmedy_Skill_3
       rect:
         serializedVersion: 2
-        x: 0
-        y: 3072
-        width: 384
-        height: 384
+        x: 576
+        y: 576
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -169,19 +189,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d22a118fc9463a4287edd5692403cd9
+      spriteID: d8b22e13f09ff64408e6d455aa31111a
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_3
+      name: Ashmedy_Skill_4
       rect:
         serializedVersion: 2
-        x: 384
-        y: 3072
-        width: 384
-        height: 384
+        x: 768
+        y: 576
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -189,259 +209,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0910cd8ef390a5c4ab7d41c849082d58
+      spriteID: 3581c29a703a9c34b8a82abdf3fcf6df
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_4
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2688
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 56b8557f839e86c49ae63baa4f58bff5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_5
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 2688
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 3535fbac478a5fb40ad34daad36d680c
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_6
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 2304
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ec4573182fa4f8d46b0ddfaee4f24dbb
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_7
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 2304
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a596906064e92444cb451c41ecaf012d
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_8
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1920
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: c5fb31c01ec70c542beaf383593ac267
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_9
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 1920
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 4840482712814f04d9c0cbd317ecac17
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_10
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1536
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 41342464b77be4441ba84f0eb8e74fd6
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_11
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 1536
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 517a9646c845dcf4090166a13c1e29c7
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_12
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 1152
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: dd9386299e8efb54daa6b547699a7a68
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_13
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 1152
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d0fa5dd827ae07540a9ef3bbebf26380
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_14
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 768
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 5728a2ddb3ea6eb49a0f20697b47f4b5
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_15
-      rect:
-        serializedVersion: 2
-        x: 384
-        y: 768
-        width: 384
-        height: 384
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 576b21d5dc871344899d3061cc40c911
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Barl_SkillEffect_16
+      name: Ashmedy_Skill_5
       rect:
         serializedVersion: 2
         x: 0
         y: 384
-        width: 384
-        height: 384
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -449,19 +229,39 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef3528f7873f8794fb5b46f5ecbe8026
+      spriteID: b24adc3fb56c6b3488b156ba7da0502b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_17
+      name: Ashmedy_Skill_6
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 384
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c608ef356a136b34e9b8c9a11b584e79
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_7
       rect:
         serializedVersion: 2
         x: 384
         y: 384
-        width: 384
-        height: 384
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -469,19 +269,159 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 53065b06d5aa9f74c9fd02bdfd6f4323
+      spriteID: 2af1b2b475cbe1744a4c9902dc6f294e
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_18
+      name: Ashmedy_Skill_8
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 384
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a4fe674016aa44e9e17529d6e35f51
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_9
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a67713d8d50097645b2d8a0fbf3d90db
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d69a5f1ed7f6304cbf2c18d518d8416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_11
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bc8e425c0554d504aada463d59234d17
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_12
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18d852b22ce24a04b864a7fa3f448da5
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_13
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 57406e478998ce14cb37f1ec2f558955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_14
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0c895d339f67e2948b945f46d49b91a6
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_15
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 384
-        height: 384
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -489,19 +429,19 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03d45d443b524434aac55a70ce2139b2
+      spriteID: c71a9ba469a0b5a4bbe154dd7e171781
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Barl_SkillEffect_19
+      name: Ashmedy_Skill_16
       rect:
         serializedVersion: 2
-        x: 384
+        x: 192
         y: 0
-        width: 384
-        height: 384
+        width: 192
+        height: 192
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -509,7 +449,67 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ea2894661900c5d4f988cd8e22350b11
+      spriteID: 8a778abb885836e40a4195dbd00caebc
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_17
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8bf1e59949af42943b5d91bf5e246690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_18
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 0
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e260dc725463c4c419fdc0e055e8d762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Ashmedy_Skill_19
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 192
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a094ac9cdf3299f46ac1ccb84497ce92
       vertices: []
       indices: 
       edges: []
@@ -517,7 +517,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 267695e98be70904fbb274f3636ea742
+    spriteID: 5b7f9969f6bf94644a3b45fefbf279eb
     vertices: []
     indices: 
     edges: []

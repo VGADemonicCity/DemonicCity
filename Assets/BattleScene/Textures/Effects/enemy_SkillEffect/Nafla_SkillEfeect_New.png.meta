@@ -1,7 +1,32 @@
 fileFormatVersion: 2
 guid: 715fc4381fbc69e418701b8154d6d6eb
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Nafla_SkillEfeect_New_0
+    21300002: Nafla_SkillEfeect_New_1
+    21300004: Nafla_SkillEfeect_New_2
+    21300006: Nafla_SkillEfeect_New_3
+    21300008: Nafla_SkillEfeect_New_4
+    21300010: Nafla_SkillEfeect_New_5
+    21300012: Nafla_SkillEfeect_New_6
+    21300014: Nafla_SkillEfeect_New_7
+    21300016: Nafla_SkillEfeect_New_8
+    21300018: Nafla_SkillEfeect_New_9
+    21300020: Nafla_SkillEfeect_New_10
+    21300022: Nafla_SkillEfeect_New_11
+    21300024: Nafla_SkillEfeect_New_12
+    21300026: Nafla_SkillEfeect_New_13
+    21300028: Nafla_SkillEfeect_New_14
+    21300030: Nafla_SkillEfeect_New_15
+    21300032: Nafla_SkillEfeect_New_16
+    21300034: Nafla_SkillEfeect_New_17
+    21300036: Nafla_SkillEfeect_New_18
+    21300038: Nafla_SkillEfeect_New_19
+    21300040: Nafla_SkillEfeect_New_20
+    21300042: Nafla_SkillEfeect_New_21
+    21300044: Nafla_SkillEfeect_New_22
+    21300046: Nafla_SkillEfeect_New_23
+    21300048: Nafla_SkillEfeect_New_24
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -40,7 +65,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -69,9 +94,131 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Nafla_SkillEfeect_New_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 480
+        width: 320
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcf1e64a1c5db7940a78d08dbcc09cff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nafla_SkillEfeect_New_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 361
+        width: 320
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 351157f59d2a72b43aeee22524a777ae
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nafla_SkillEfeect_New_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 240
+        width: 320
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9807c1e780307b41bac7a8fca2ab8b9
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nafla_SkillEfeect_New_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 120
+        width: 320
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09260c076263a8247896aa4084686ffd
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Nafla_SkillEfeect_New_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 320
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc468873056d9c24faabada99bec0889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

@@ -35,6 +35,10 @@ namespace DemonicCity.BattleScene
                 }
                 Debug.Log("Init state called.");
                 Initialize();
+                // ==============================
+                // イベント呼び出し : StateMachine.PlayerChoice
+                // ==============================
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             });
         }
 
