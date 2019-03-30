@@ -17,7 +17,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         bool windowEnabled;
         RectTransform windowRect;
-        IEnumerator[] WindowAnimation = new IEnumerator[2];
+        IEnumerator WindowAnimation ;
 
         GameObject beginObject;
         GameObject endObject;
@@ -100,18 +100,18 @@ namespace DemonicCity.HomeScene
             }
             if (isOpen)
             {
-                WindowAnimation[0] = ChangeScale(Vector3.one);
-                WindowAnimation[1] = ChangeColor(windowColor);
+                WindowAnimation= ChangeScale(Vector3.one);
+                //WindowAnimation[1] = ChangeColor(windowColor);
                 windowEnabled = true;
             }
             else
             {
-                WindowAnimation[0] = ChangeScale(Vector3.zero);
-                WindowAnimation[1] = ChangeColor(Color.clear);
+                WindowAnimation = ChangeScale(Vector3.zero);
+                //WindowAnimation[1] = ChangeColor(Color.clear);
                 windowEnabled = false;
             }
-            StartCoroutine(WindowAnimation[0]);
-            StartCoroutine(WindowAnimation[1]);
+            StartCoroutine(WindowAnimation);
+            //StartCoroutine(WindowAnimation[1]);
         }
 
         IEnumerator ChangeScale(Vector3 targetScale)
