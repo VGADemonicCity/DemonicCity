@@ -293,28 +293,28 @@ namespace DemonicCity.StrengthenScene
             }
         }
 
-        ///<summary>ScrollRectのスクロール位置をGameObjectにあわせる</summary>
-        /// <param name="align">0:下、0.5:中央、1:上</param>
-        private float ScrollToCore(ScrollRect scrollRect, GameObject go, float align)
-        {
-            var targetRect = go.transform.GetComponent<RectTransform>();
-            var contentHeight = scrollRect.content.rect.height;
-            var viewportHeight = scrollRect.viewport.rect.height;
-            // スクロール不要
-            if (contentHeight < viewportHeight)
-            {
-                return 0f;
-            }
-            // ローカル座標が contentHeight の上辺を0として負の値で格納されてる
-            // これは現在のレイアウト特有なのかもしれないので、要確認
-            var targetPos = contentHeight + (targetRect.localPosition.y + targetRect.rect.y) + targetRect.rect.height * align;
-            var gap = viewportHeight * align; // 上端〜下端あわせのための調整量
-            var normalizedPos = (targetPos - gap) / (contentHeight - viewportHeight);
+        /////<summary>ScrollRectのスクロール位置をGameObjectにあわせる</summary>
+        ///// <param name="align">0:下、0.5:中央、1:上</param>
+        //private float ScrollToCore(ScrollRect scrollRect, GameObject go, float align)
+        //{
+        //    var targetRect = go.transform.GetComponent<RectTransform>();
+        //    var contentHeight = scrollRect.content.rect.height;
+        //    var viewportHeight = scrollRect.viewport.rect.height;
+        //    // スクロール不要
+        //    if (contentHeight < viewportHeight)
+        //    {
+        //        return 0f;
+        //    }
+        //    // ローカル座標が contentHeight の上辺を0として負の値で格納されてる
+        //    // これは現在のレイアウト特有なのかもしれないので、要確認
+        //    var targetPos = contentHeight + (targetRect.localPosition.y + targetRect.rect.y) + targetRect.rect.height * align;
+        //    var gap = viewportHeight * align; // 上端〜下端あわせのための調整量
+        //    var normalizedPos = (targetPos - gap) / (contentHeight - viewportHeight);
 
-            normalizedPos = Mathf.Clamp01(normalizedPos);
-            scrollRect.verticalNormalizedPosition = normalizedPos;
-            return normalizedPos;
-        }
+        //    normalizedPos = Mathf.Clamp01(normalizedPos);
+        //    scrollRect.verticalNormalizedPosition = normalizedPos;
+        //    return normalizedPos;
+        //}
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
         /// <param name="uniqueStatus">固有ステータス</param>
@@ -360,8 +360,12 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            //statusPoint = magia.AllocationPoint;
-            statusPoint = 99;//debug
+            statusPoint = magia.AllocationPoint;
+            //statusPoint = 99;//debug
+
+            updatedBasicStatusTexts[0].text = hp.ToString();
+            updatedBasicStatusTexts[1].text = attack.ToString();
+            updatedBasicStatusTexts[2].text = defense.ToString();
 
             UpdateText();
 
@@ -399,12 +403,12 @@ namespace DemonicCity.StrengthenScene
             magia.Stats.Charm = charm;
             magia.Stats.Dignity = dignity;
             magia.Stats.MuscularStrength = muscularStrength;
-            magia.Stats.Sense =sense;
+            magia.Stats.Sense = sense;
             magia.Stats.Durability = durability;
             magia.Stats.Knowledge = knowledge;
+            magia.AllocationPoint = statusPoint;
 
-
-            //magia.Sync();
+            SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
 
@@ -438,9 +442,9 @@ namespace DemonicCity.StrengthenScene
             currentBasicStatusTexts[1].text = attack.ToString();
             currentBasicStatusTexts[2].text = defense.ToString();
 
-            updatedBasicStatusTexts[0].text = "";
-            updatedBasicStatusTexts[1].text = "";
-            updatedBasicStatusTexts[2].text = "";
+            //updatedBasicStatusTexts[0].text = "";
+            //updatedBasicStatusTexts[1].text = "";
+            //updatedBasicStatusTexts[2].text = "";
 
             currentUniqueStatusTexts[0].text = charm.ToString();
             currentUniqueStatusTexts[1].text = dignity.ToString();

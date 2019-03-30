@@ -53,10 +53,10 @@ namespace DemonicCity
         }
 
         /// <summary>総経験値</summary>
-        public int TotalExperience
+        public int MyExperience
         {
-            get { return m_totalExperience; }
-            set { m_totalExperience = value; }
+            get { return m_experience; }
+            set { m_experience = value; }
         }
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP { get; private set; }
@@ -99,12 +99,12 @@ namespace DemonicCity
 
         #region Field
         /// <summary>経験値</summary>
-        [SerializeField] int m_totalExperience;
+        [SerializeField] int m_experience;
         /// <summary>振り分けポイント</summary>
         [SerializeField] int m_allocationPoint;
         /// <summary>MyAttributeのバッキングフィールド</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
-        /// <summary>レベルアップに必要な経験値(破壊したパネルの総数)</summary>
+        /// <summary>レベルに応じて相対的にレベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
         [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
@@ -151,13 +151,13 @@ namespace DemonicCity
         /// レベル上限に達していない、且つ次のレベルに上がるのに必要な経験値を超えていたら
         /// 1レベルアップする.
         /// </summary>
-        public void LevelUp()
+        public bool LevelUp()
         {
             var requiredExp = GetRequiredExpToNextLevel(Stats.Level); // 現在のレベルに必要な経験値(総パネル破壊枚数)
 
-            if (MaxLevel >= Stats.Level && requiredExp <= Stats.Level) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
+            if (MaxLevel >= Stats.Level && requiredExp <= m_experience) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
             {
-                return;
+                return false ;
             }
 
             // レベルアップする直前のレベルに合わせてステータスを上昇させる
@@ -188,6 +188,7 @@ namespace DemonicCity
 
             m_stats.Level++; // levelを1上げる
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
+            return true;
         }
 
         /// <summary>
