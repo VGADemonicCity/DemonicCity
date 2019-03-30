@@ -136,10 +136,10 @@ namespace DemonicCity.HomeScene
 
                 }
             }
-            cImage[1] = cImage[i];
+            cImage[1].sprite = cImage[i].sprite;
             swicher.targetObj.transform.localPosition = new Vector3(0, swicher.targetObj.transform.localPosition.y, swicher.targetObj.transform.localPosition.z);
-            contents = galleryM.GetSide(IsItem, contents[i]);
 
+            Reflect(contents[i]);
         }
 
         void SpriteReflect(List<Sprite> sprites)
@@ -149,7 +149,10 @@ namespace DemonicCity.HomeScene
             cImage[2].sprite = sprites[2];
         }
 
-        void Reflect(Item data)
+        /// <summary>ItemならTrue</summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        bool Reflect(Item data)
         {
             TextObjects[ObjectTag.Name].text = data.name;
             TextObjects[ObjectTag.Info].text = data.text;
@@ -159,18 +162,22 @@ namespace DemonicCity.HomeScene
             if (person != null)
             {
                 List<Person> tmp = galleryM.GetSide(false, person);
+                contents = tmp.Cast<Item>().ToList();
                 SpriteReflect(tmp.Select(x => x.illust).ToList());
-                cImage[1].sprite = person.illust;
+                //cImage[1].sprite = person.illust;
                 //GetSideしてそれぞれ反映
 
                 currentContent = person;
+                return false;
             }
             else
             {
                 item = data;
-                currentContent = item;
-            }
+                contents = galleryM.GetSide(true, item);
 
+                currentContent = item;
+                return true;
+            }
         }
 
 
@@ -180,15 +187,8 @@ namespace DemonicCity.HomeScene
             galleryM = gM;
 
 
-            TextObjects[ObjectTag.Name].text = data.name;
-            TextObjects[ObjectTag.Info].text = data.text;
-
-
-            person = data as Person;
-            if (person != null)
+            if (!Reflect(data))
             {
-                cImage[1].sprite = person.illust;
-                //GetSideしてそれぞれ反映
                 touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
                 {
                     GameObject beginObject = null;
@@ -209,14 +209,7 @@ namespace DemonicCity.HomeScene
                         }
                     }
                 });
-                currentContent = person;
             }
-            else
-            {
-                item = data;
-                currentContent = item;
-            }
-
         }
 
     }
