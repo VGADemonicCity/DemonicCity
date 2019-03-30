@@ -15,9 +15,9 @@ MonoBehaviour:
   storyProgress: 8192
   chapterTitle: "\u3051"
   isBattle: 0
-  isStory: 0
+  isStory: 1
   BackGround: []
   BattleStage: []
   prologue: {fileID: 0}
   epilogue: {fileID: 0}
-  test: {fileID: 0}
+  test: {fileID: 11400000, guid: 45cf5d23c9eeb104bb178c10aee85cea, type: 2}
