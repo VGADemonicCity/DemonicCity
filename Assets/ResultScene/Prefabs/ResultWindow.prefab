@@ -340,8 +340,8 @@ GameObject:
   - component: {fileID: 222127335283014538}
   - component: {fileID: 114130082354062806}
   m_Layer: 5
-  m_Name: Image (2)
-  m_TagString: Untagged
+  m_Name: RightArrow
+  m_TagString: RightArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,8 +543,8 @@ GameObject:
   - component: {fileID: 222169632196961830}
   - component: {fileID: 114160550641286566}
   m_Layer: 5
-  m_Name: Image (1)
-  m_TagString: Untagged
+  m_Name: RightArrow
+  m_TagString: RightArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -690,8 +690,8 @@ GameObject:
   - component: {fileID: 222874939372586638}
   - component: {fileID: 114891235074133584}
   m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
+  m_Name: RightArrow
+  m_TagString: RightArrow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3226,7 +3226,7 @@ RectTransform:
   - {fileID: 224053737405576016}
   - {fileID: 224270852591846228}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -3305,8 +3305,8 @@ RectTransform:
   - {fileID: 224100078683006686}
   - {fileID: 224029660657959798}
   - {fileID: 224282424957808838}
-  - {fileID: 224406161764582730}
   - {fileID: 224061038132645354}
+  - {fileID: 224406161764582730}
   - {fileID: 224161713337071922}
   - {fileID: 224422286821263356}
   m_Father: {fileID: 224683947102078528}
@@ -3573,7 +3573,7 @@ RectTransform:
   - {fileID: 224081565548823048}
   - {fileID: 224853157440330472}
   m_Father: {fileID: 224092888169599124}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}

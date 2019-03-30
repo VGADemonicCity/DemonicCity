@@ -43,6 +43,7 @@ namespace DemonicCity.ResultScene
         private TextMeshProUGUI needDestructionCountText = null;
         private TextMeshProUGUI statusPointText = null;
 
+        private GameObject[] rightArrows = null;
         [SerializeField] private GameObject toNextStoryPrefab = null;
 
         private Slider experienceGauge = null;
@@ -163,7 +164,6 @@ namespace DemonicCity.ResultScene
         private void LevelUpPerformance()
         {
             addAmount = 0.1f * levelDifference[0];
-           // Debug.Log(levelDifference[0]);
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
     
@@ -183,6 +183,11 @@ namespace DemonicCity.ResultScene
                 afterAttackText.text = attackDifference[index].ToString();
                 afterDefenseText.text = defenceDifference[index].ToString();
                 statusPointText.text = statusPointDifferences[index].ToString();
+                for (int i = 0; i < rightArrows.Length; i++)
+                {
+                    rightArrows[i].SetActive(true);
+                }
+
                 addAmount = 0.1f * levelDifference[index];
                 index++;
                 if (index == levelDifference.Count)
@@ -247,8 +252,8 @@ namespace DemonicCity.ResultScene
 
             needDestructionCountText.text = (nextLevelRequiredTotalExperience - MyExperience).ToString();
             destructionCount = panelCounter.TotalDestructionCount;
-            //destructionCount = 600;//debug
-            destructionCountText.text = destructionCount.ToString();
+            destructionCount = 600;//debug
+            //destructionCountText.text = destructionCount.ToString();
         }
 
         /// <summary>バトル後のステータスをテキストに反映する(演出スキップ)</summary>
@@ -269,6 +274,11 @@ namespace DemonicCity.ResultScene
         {
             levelUpImage = GameObject.Find("LevelUpImage");
             levelUpImage.SetActive(false);
+            rightArrows = GameObject.FindGameObjectsWithTag("RightArrow");
+            for (int i = 0; i < rightArrows.Length; i++)
+            {
+                rightArrows[i].SetActive(false);
+            }
             currentLevelText = GameObject.Find("CurrentLevelText").GetComponent<TextMeshProUGUI>();
             nextLevelText = GameObject.Find("NextLevelText").GetComponent<TextMeshProUGUI>();
             nextLevelText.text = "";
