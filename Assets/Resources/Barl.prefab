@@ -99,7 +99,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1490364268264410}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -127,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 1799152998562362}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.31, y: 0.07999998, z: 0}
-  m_LocalScale: {x: 0.55792, y: 0.55792, z: 0.55792}
+  m_LocalScale: {x: 0.90430546, y: 0.90430546, z: 0.90430546}
   m_Children: []
   m_Father: {fileID: 4836421334743582}
   m_RootOrder: 0
@@ -218,11 +218,11 @@ MonoBehaviour:
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 1000
+    HitPoint: 10000
     Attack: 0
     Defense: 0
   m_animator: {fileID: 95962232058553398}
-  skillAnimator: {fileID: 0}
+  skillAnimator: {fileID: 95636150058692394}
   m_destroyingTime: 3
 --- !u!212 &212103078036374022
 SpriteRenderer:
@@ -356,7 +356,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1.92, y: 1.92}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
