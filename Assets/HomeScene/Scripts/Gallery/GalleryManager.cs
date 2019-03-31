@@ -12,6 +12,7 @@ namespace DemonicCity.HomeScene
         {
             TestItem,
 
+            MagiaHome,
             Getia,
             Demons,
             GehennaClown,
@@ -52,6 +53,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] Button LeftArrow;
         [SerializeField] Button RightArrow;
         TouchGestureDetector tGD;
+        Progress progress;
 
         [SerializeField] ItemContent drawer;
 
@@ -81,6 +83,7 @@ namespace DemonicCity.HomeScene
         void Awake()
         {
             tGD = TouchGestureDetector.Instance;
+            progress = Progress.Instance;
             ImportItems();
         }
         // Use this for initialization
@@ -166,7 +169,6 @@ namespace DemonicCity.HomeScene
         }
 
 
-
         T GetContent<T>(ItemTag tag) where T : Item
         {
             Item tmpItem = items.FirstOrDefault(x => x.tag == tag);
@@ -180,6 +182,25 @@ namespace DemonicCity.HomeScene
                 return tmpItem as T;
             }
             return null;
+        }
+
+
+        bool CheckContent<T>(T item) where T : Item
+        {
+            if ((progress.MyStoryProgress & item.UnLockStory) == item.UnLockStory)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        void NextContent<T>(T item) where T : Item
+        {
+
+        }
+        void PreviewContent<T>(T item)where T : Item
+        {
+
         }
 
         public List<T> GetSide<T>(bool isItem, T item) where T : Item
