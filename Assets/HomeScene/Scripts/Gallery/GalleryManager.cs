@@ -141,7 +141,7 @@ namespace DemonicCity.HomeScene
         void ToLeft()
         {
             drawer.Scroll(true, 1f);
-            
+
         }
         void ToRight()
         {
@@ -149,7 +149,37 @@ namespace DemonicCity.HomeScene
         }
         public void CharacterSpeak(List<AudioClip> clips)
         {
+            Debug.Log("Speak!");
+        }
 
+
+        public void ContentOpen(ItemTag tag)
+        {
+            drawer.gameObject.SetActive(true);
+            drawer.Init(GetContent<Item>(tag), this);
+        }
+
+
+        public void ContentClose()
+        {
+            drawer.gameObject.SetActive(false);
+        }
+
+
+
+        T GetContent<T>(ItemTag tag) where T : Item
+        {
+            Item tmpItem = items.FirstOrDefault(x => x.tag == tag);
+            Person tmpPerson = people.FirstOrDefault(x => x.tag == tag);
+            if (tmpPerson != null)
+            {
+                return tmpPerson as T;
+            }
+            if (tmpItem != null)
+            {
+                return tmpItem as T;
+            }
+            return null;
         }
 
         public List<T> GetSide<T>(bool isItem, T item) where T : Item
@@ -195,6 +225,12 @@ namespace DemonicCity.HomeScene
                     indexs.Add(center - 1);
                     indexs.Add(center);
                     indexs.Add(0);
+                }
+                else
+                {
+                    indexs.Add(center - 1);
+                    indexs.Add(center);
+                    indexs.Add(center + 1);
                 }
 
                 foreach (int i in indexs)
