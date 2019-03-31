@@ -33,37 +33,39 @@ namespace DemonicCity.BattleScene
             // ==============================
             // ここに攻撃の演出処理を入れる予定
             // ==============================
-            Debug.Log("attack process called.");
-            yield return new WaitForSeconds(1f);
-
 
             Debug.Log("敵から攻撃される前の[" + m_magia + "]の体力 : " + m_battleManager.m_MagiaStats.HitPoint);
-            //yield return new WaitForSeconds(1f);
 
-
-
-            yield return new WaitWhile(() => // falseになるまで待つ
+            // Enemyの攻撃アニメーションを再生する
+            m_battleManager.CurrentEnemy.AnimCtrl.CrossFadeInFixedTime("Attack", 0);
+            var clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
+            while(clips.Length == 0)
             {
-                Debug.Log("PlayerAttack state called.");
-                if(m_enemySkillGauge.m_flag == true)
-                {
-                    m_enemySkillGauge.SkillActivate();
-                }
+                yield return null;
+                clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
+            }
+            yield return new WaitForSeconds(clips[0].clip.length); // アニメーションの長さ分遅延させる
 
-                var damage = m_battleManager.CurrentEnemy.Stats.Attack - m_battleManager.m_MagiaStats.Defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
-                var attack = m_battleManager.CurrentEnemy.Stats.Temp.Attack;
-                Debug.Log("敵の攻撃力     " + attack);
-                if(damage > 0)
-                {
-                    m_battleManager.m_MagiaStats.HitPoint -= damage; // ダメージ
-                    m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
-                }
-                Debug.Log("敵から攻撃された後の[" + m_magia + "]の体力 : " + m_battleManager.m_MagiaStats.HitPoint);
+            if (m_enemySkillGauge.m_flag == true)
+            {
+                m_enemySkillGauge.SkillActivate();
+            }
 
-                return false;
-            });
+            var damage = m_battleManager.CurrentEnemy.Stats.Attack - m_battleManager.m_MagiaStats.Defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
+            var attack = m_battleManager.CurrentEnemy.Stats.Temp.Attack;
+            Debug.Log("敵の攻撃力     " + attack);
+            if (damage > 0)
+            {
+                m_battleManager.m_MagiaStats.HitPoint -= damage; // ダメージ
+                m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
+            }
+            Debug.Log("敵から攻撃された後の[" + m_magia + "]の体力 : " + m_battleManager.m_MagiaStats.HitPoint);
 
             OnProcessEnded();
+
+            // ゲージが現状してる間の待つ
+            yield return new WaitForSeconds(1f);
+
 
             if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
             {
