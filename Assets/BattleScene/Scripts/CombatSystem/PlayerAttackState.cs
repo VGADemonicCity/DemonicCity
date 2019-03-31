@@ -53,8 +53,8 @@ namespace DemonicCity.BattleScene
                     Debug.Log(skill.GetType());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     yield return null;
-                    var clipInfo = magiaAnimator.GetCurrentAnimatorClipInfo(0);
-                    yield return new WaitForSeconds(clipInfo[0].clip.length);
+                    var clipsInfo = magiaAnimator.GetCurrentAnimatorClipInfo(0);
+                    yield return new WaitForSeconds(clipsInfo[0].clip.length);
                 }
             }
             // スキル発動の演出を終えたら攻撃アニメーション再生

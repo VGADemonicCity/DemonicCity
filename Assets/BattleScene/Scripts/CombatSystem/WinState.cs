@@ -25,6 +25,10 @@ namespace DemonicCity.BattleScene
                 //Resultのポップアップ等の処理を書く予定
                 //=======================
 
+                // TODO: 適正レベルに応じて総街破壊数に倍率処理を入れる
+
+
+                // りょうくんのリザルト画面呼び出し
                 resultWindow.SetActive(true);
             });
         }
