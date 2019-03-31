@@ -29,7 +29,7 @@ namespace DemonicCity.ResultScene
         List<int> experienceDifferences = new List<int>();
         private int tapCount = 0;
         private GameObject levelUpImage = null;
-       
+
         private TextMeshProUGUI currentLevelText = null;
         private TextMeshProUGUI nextLevelText = null;
         private TextMeshProUGUI beforeHpText = null;
@@ -49,20 +49,19 @@ namespace DemonicCity.ResultScene
         private Slider experienceGauge = null;
         private float addAmount = 0.1f;
         private bool isAnimation = false;
-        int index = 0;
+        private int index = 0;
         private int destructionCount;
         private bool isLevelUp = false;
         int totalExperience;
-        int MyExperience;
+        int myExperience;
         int statusPoint;
         /// <summary>現在のレベルで必要とされる総経験値</summary>
-        int nextLevelRequiredTotalExperience;
+        int nextLevelRequiredExperience;
         /// <summary>ポップアップが表示されたかどうか</summary>
         private bool isPopup = false;
-        private bool isSlot = true;
         private Animator animator;
 
-      
+
 
         private void Awake()
         {
@@ -71,10 +70,11 @@ namespace DemonicCity.ResultScene
             panelCounter = PanelCounter.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
         }
+
         private void Start()
         {
-            GetGameObject();
-           
+            GetGameObjects();
+
             ReflectionBeforeStatus();
             ResultCalculation();
             afterStatus = magia.Stats;
@@ -109,7 +109,6 @@ namespace DemonicCity.ResultScene
 
         private void Update()
         {
-
             if (isAnimation && isLevelUp && destructionCount > 0)
             {
                 LevelUpPerformance();
@@ -118,44 +117,40 @@ namespace DemonicCity.ResultScene
             {
                 NotLevelUpPerformance();
             }
-           
         }
 
         /// <summary>経験値を計算</summary>
         void ResultCalculation()
         {
 
-            totalExperience = MyExperience + destructionCount;
+            totalExperience = myExperience + destructionCount;
 
-            if (nextLevelRequiredTotalExperience <= totalExperience)
+            if (nextLevelRequiredExperience <= totalExperience)
             {
                 isLevelUp = true;
-            }
-            requiredExperiences.Add(nextLevelRequiredTotalExperience);
-            statusPointDifferences.Add(statusPoint);
-            if (isLevelUp)
-            {
                 // 総経験値がレベルアップに必要な経験値よりも高かった場合条件が満たさなくなる迄レベルアップ処理を行う
-                while (totalExperience >= nextLevelRequiredTotalExperience)
+                while (totalExperience >= nextLevelRequiredExperience && nextLevelRequiredExperience > 0 && isLevelUp)
                 {
-                    totalExperience -= nextLevelRequiredTotalExperience;
+                    totalExperience -= nextLevelRequiredExperience;
 
                     magia.LevelUp();
 
-                    levelDifference.Add(magia.Stats.Level);
 
-                    
+                    levelDifference.Add(magia.Stats.Level);
                     hpDifference.Add(magia.Stats.HitPoint);
                     attackDifference.Add(magia.Stats.Attack);
                     defenceDifference.Add(magia.Stats.Defense);
                     statusPointDifferences.Add(magia.AllocationPoint);
 
-                    nextLevelRequiredTotalExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
-                    requiredExperiences.Add(nextLevelRequiredTotalExperience);
+                    nextLevelRequiredExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
+                    requiredExperiences.Add(nextLevelRequiredExperience);
                 }
                 magia.MyExperience = totalExperience;
-                MyExperience = magia.MyExperience;
+                myExperience = magia.MyExperience;
+
             }
+            requiredExperiences.Add(nextLevelRequiredExperience);
+            statusPointDifferences.Add(statusPoint);
         }
 
 
@@ -166,12 +161,12 @@ namespace DemonicCity.ResultScene
             addAmount = 0.1f * levelDifference[0];
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
-    
+
             if (experienceGauge.value >= experienceGauge.maxValue)
             {
-                GameObject levelUp = levelUpImage;
-                levelUp.SetActive(true);
-               
+                GameObject levelUpObj = levelUpImage;
+                levelUpObj.SetActive(true);
+
                 experienceGauge.value = 0;
                 experienceGauge.maxValue = requiredExperiences[index];
                 currentLevelText.text = "";
@@ -183,17 +178,20 @@ namespace DemonicCity.ResultScene
                 afterAttackText.text = attackDifference[index].ToString();
                 afterDefenseText.text = defenceDifference[index].ToString();
                 statusPointText.text = statusPointDifferences[index].ToString();
+
                 for (int i = 0; i < rightArrows.Length; i++)
                 {
                     rightArrows[i].SetActive(true);
                 }
 
                 addAmount = 0.1f * levelDifference[index];
+                Debug.Log(index);
                 index++;
+
                 if (index == levelDifference.Count)
                 {
                     StartCoroutine(GaugeAnimation());
-                    Destroy(levelUp, 2);
+                    levelUpObj.SetActive(false);
                 }
             }
         }
@@ -203,14 +201,14 @@ namespace DemonicCity.ResultScene
         {
             experienceGauge.maxValue = requiredExperiences.Last();
 
-            while ((int)experienceGauge.value < MyExperience)
+            while ((int)experienceGauge.value < myExperience)
             {
                 experienceGauge.value += addAmount;
                 needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
                 yield return new WaitForSeconds(0.01f);
             }
-            experienceGauge.value = MyExperience;
-            needDestructionCountText.text = (requiredExperiences.Last() - MyExperience).ToString();
+            experienceGauge.value = myExperience;
+            needDestructionCountText.text = (requiredExperiences.Last() - myExperience).ToString();
             isAnimation = false;
         }
 
@@ -245,15 +243,15 @@ namespace DemonicCity.ResultScene
             statusPoint = magia.AllocationPoint;
             statusPointText.text = statusPoint.ToString();
 
-            nextLevelRequiredTotalExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
-            experienceGauge.maxValue = nextLevelRequiredTotalExperience;
-            MyExperience = magia.MyExperience;
-            experienceGauge.value = MyExperience;
+            nextLevelRequiredExperience = magia.GetRequiredExpToNextLevel(magia.Stats.Level);
+            experienceGauge.maxValue = nextLevelRequiredExperience;
+            myExperience = magia.MyExperience;
+            experienceGauge.value = myExperience;
 
-            needDestructionCountText.text = (nextLevelRequiredTotalExperience - MyExperience).ToString();
+            needDestructionCountText.text = (nextLevelRequiredExperience - myExperience).ToString();
             destructionCount = panelCounter.TotalDestructionCount;
-            destructionCount = 600;//debug
-            //destructionCountText.text = destructionCount.ToString();
+            //destructionCount = 50;//debug
+            destructionCountText.text = destructionCount.ToString();
         }
 
         /// <summary>バトル後のステータスをテキストに反映する(演出スキップ)</summary>
@@ -263,14 +261,14 @@ namespace DemonicCity.ResultScene
             afterHpText.text = afterStatus.HitPoint.ToString();
             afterAttackText.text = afterStatus.Attack.ToString();
             afterDefenseText.text = afterStatus.Defense.ToString();
-            experienceGauge.value = MyExperience;
+            experienceGauge.value = myExperience;
             experienceGauge.maxValue = requiredExperiences.Last();
-            needDestructionCountText.text = (requiredExperiences.Last() - MyExperience).ToString();
+            needDestructionCountText.text = (requiredExperiences.Last() - myExperience).ToString();
             statusPointText.text = statusPointDifferences.Last().ToString();
         }
 
         /// <summary>シーン上にあるゲームオブジェクトを取得</summary>
-        private void GetGameObject()
+        private void GetGameObjects()
         {
             levelUpImage = GameObject.Find("LevelUpImage");
             levelUpImage.SetActive(false);
