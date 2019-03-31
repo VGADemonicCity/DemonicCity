@@ -47,6 +47,10 @@ namespace DemonicCity.BattleScene
             {
                 return m_totalDestructionCount;
             }
+            set
+            {
+                m_totalDestructionCount = value;
+            }
         }
 
         /// <summary>シャッフルスキル専用カウンター : inspectorに表示させる為アクセサーと使用変数を分けている</summary>
