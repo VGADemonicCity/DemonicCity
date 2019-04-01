@@ -15,18 +15,18 @@ namespace DemonicCity.StrengthenScene
         TouchGestureDetector touchGestureDetector;
 
         /// <summary>現在の体力</summary>
-        private int hp;
+        private int currentHp;
         /// <summary>現在の攻撃力</summary>
-        private int attack;
+        private int currentAttack;
         /// <summary>現在の防御力</summary>
-        private int defense;
+        private int currentDefence;
 
         /// <summary>変動後の体力</summary>
         private int updatedHitPoint;
         /// <summary>変動後の攻撃力</summary>
         private int updatedAttack;
         /// <summary>変動後の防御力</summary>
-        private int updatedDefense;
+        private int updatedDefence;
 
         /// <summary>現在の耐久値</summary>
         private int durability;
@@ -57,24 +57,24 @@ namespace DemonicCity.StrengthenScene
         private int addDignity;
 
         /// <summary>現在の基礎ステータステキスト</summary>
-        [SerializeField] TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
+        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
         /// <summary>変動後の基礎ステータステキスト</summary>
-        [SerializeField] TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
+        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
         /// <summary>現在の固有ステータステキスト</summary>
-        [SerializeField] TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
+        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
         /// <summary>割り振った固有ステータステキスト</summary>
-        [SerializeField] TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
+        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
         /// <summary>割り振りポイントテキスト(魔力値)</summary>
-        [SerializeField] TextMeshProUGUI statusPointText;
+        TextMeshProUGUI statusPointText;
 
         /// <summary>ステータス確定前のメッセージウィンドウ</summary>
-        [SerializeField] private GameObject confirmMessageWindow;
+        private GameObject confirmMessageWindow;
         /// <summary>ステータス初期化前のメッセージウィンドウ</summary>
-        [SerializeField] private GameObject resetMessageWindow;
+        private GameObject resetMessageWindow;
         /// <summary>確定ボタンとリセットボタン</summary>
-        [SerializeField] private GameObject confirmResetButtons;
+        private GameObject confirmAndResetButtons;
         /// <summary>習得済みスキル一覧ウィンドウ</summary>
-        [SerializeField] private GameObject skillListWindow;
+        private GameObject skillListWindow;
         /// <summary>各スキル名</summary>
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
@@ -98,7 +98,7 @@ namespace DemonicCity.StrengthenScene
 
         private void Start()
         {
-
+            GetGameObjects();
             ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -270,11 +270,11 @@ namespace DemonicCity.StrengthenScene
         {
             if (changedStatus)
             {
-                confirmResetButtons.SetActive(true);
+                confirmAndResetButtons.SetActive(true);
             }
             else if (!changedStatus)
             {
-                confirmResetButtons.SetActive(false);
+                confirmAndResetButtons.SetActive(false);
             }
         }
 
@@ -327,13 +327,13 @@ namespace DemonicCity.StrengthenScene
             {
                 uniqueStatusText.text = "+" + uniqueStatus.ToString();
                 //固有ステータスを基礎ステータスに変換
-                updatedHitPoint = hp + (addCharm * 50) + (addDignity * 50);
-                updatedAttack = attack + (addSense * 5) + (addMuscularStrength * 5);
-                updatedDefense = defense + (addDurability * 5) + (addKnowledge * 5);
+                updatedHitPoint = currentHp + (addCharm * 50) + (addDignity * 50);
+                updatedAttack = currentAttack + (addSense * 5) + (addMuscularStrength * 5);
+                updatedDefence = currentDefence + (addDurability * 5) + (addKnowledge * 5);
 
                 updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
                 updatedBasicStatusTexts[1].text = updatedAttack.ToString();
-                updatedBasicStatusTexts[2].text = updatedDefense.ToString();
+                updatedBasicStatusTexts[2].text = updatedDefence.ToString();
 
                 changedStatus = true;
             }
@@ -344,9 +344,9 @@ namespace DemonicCity.StrengthenScene
         {
             var status = magia.GetStats();
 
-            hp = status.HitPoint;
-            attack = status.Attack;
-            defense = status.Defense;
+            currentHp = status.HitPoint;
+            currentAttack = status.Attack;
+            currentDefence = status.Defense;
             charm = status.Charm;
             dignity = status.Dignity;
             muscularStrength = status.MuscularStrength;
@@ -363,15 +363,21 @@ namespace DemonicCity.StrengthenScene
             statusPoint = magia.AllocationPoint;
             //statusPoint = 99;//debug
 
-            updatedBasicStatusTexts[0].text = hp.ToString();
-            updatedBasicStatusTexts[1].text = attack.ToString();
-            updatedBasicStatusTexts[2].text = defense.ToString();
+            updatedBasicStatusTexts[0].text = currentHp.ToString();
+            updatedBasicStatusTexts[1].text = currentAttack.ToString();
+            updatedBasicStatusTexts[2].text = currentDefence.ToString();
 
             UpdateText();
+
+            for (int i = 0; i < addUniqueStatusTexts.Length; i++)
+            {
+                addUniqueStatusTexts[i].text = "";
+            }
 
             skillListWindow.SetActive(false);
             resetMessageWindow.SetActive(false);
             confirmMessageWindow.SetActive(false);
+            confirmAndResetButtons.SetActive(false);
             activePopUpWindow = false;
             changedStatus = false;
         }
@@ -379,9 +385,9 @@ namespace DemonicCity.StrengthenScene
         /// <summary>変更したステータスを確定する</summary>
         private void ConfirmStatus()
         {
-            hp = updatedHitPoint;
-            attack = updatedAttack;
-            defense = updatedDefense;
+            currentHp = updatedHitPoint;
+            currentAttack = updatedAttack;
+            currentDefence = updatedDefence;
 
             charm += addCharm;
             dignity += addDignity;
@@ -397,9 +403,9 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
 
-            magia.Stats.HitPoint = hp;
-            magia.Stats.Attack = attack;
-            magia.Stats.Defense = defense;
+            magia.Stats.HitPoint = currentHp;
+            magia.Stats.Attack = currentAttack;
+            magia.Stats.Defense = currentDefence;
             magia.Stats.Charm = charm;
             magia.Stats.Dignity = dignity;
             magia.Stats.MuscularStrength = muscularStrength;
@@ -411,7 +417,10 @@ namespace DemonicCity.StrengthenScene
             SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
-
+            for (int i = 0; i < addUniqueStatusTexts.Length; i++)
+            {
+                addUniqueStatusTexts[i].text = "";
+            }
             confirmMessageWindow.SetActive(false);
             activePopUpWindow = false;
             changedStatus = false;
@@ -438,9 +447,9 @@ namespace DemonicCity.StrengthenScene
         /// <summary>テキストを更新</summary>
         private void UpdateText()
         {
-            currentBasicStatusTexts[0].text = hp.ToString();
-            currentBasicStatusTexts[1].text = attack.ToString();
-            currentBasicStatusTexts[2].text = defense.ToString();
+            currentBasicStatusTexts[0].text = currentHp.ToString();
+            currentBasicStatusTexts[1].text = currentAttack.ToString();
+            currentBasicStatusTexts[2].text = currentDefence.ToString();
 
             //updatedBasicStatusTexts[0].text = "";
             //updatedBasicStatusTexts[1].text = "";
@@ -461,6 +470,40 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5].text = addKnowledge.ToString();
 
             statusPointText.text = statusPoint.ToString();
+        }
+
+        /// <summary>シーン上にあるゲームオブジェクトを取得</summary>
+        private void GetGameObjects()
+        {
+            currentBasicStatusTexts[0] = GameObject.Find("CurrentHpText").GetComponent<TextMeshProUGUI>();
+            currentBasicStatusTexts[1] = GameObject.Find("CurrentAttackText").GetComponent<TextMeshProUGUI>();
+            currentBasicStatusTexts[2] = GameObject.Find("CurrentDefenceText").GetComponent<TextMeshProUGUI>();
+
+            updatedBasicStatusTexts[0] = GameObject.Find("UpdatedHpText").GetComponent<TextMeshProUGUI>();
+            updatedBasicStatusTexts[1] = GameObject.Find("UpdatedAttackText").GetComponent<TextMeshProUGUI>();
+            updatedBasicStatusTexts[2] = GameObject.Find("UpdatedDefenceText").GetComponent<TextMeshProUGUI>();
+
+            currentUniqueStatusTexts[0] = GameObject.Find("CurrentCharmText").GetComponent<TextMeshProUGUI>();
+            currentUniqueStatusTexts[1] = GameObject.Find("CurrentDignityText").GetComponent<TextMeshProUGUI>();
+            currentUniqueStatusTexts[2] = GameObject.Find("CurrentMuscularStrengthText").GetComponent<TextMeshProUGUI>();
+            currentUniqueStatusTexts[3] = GameObject.Find("CurrentSenseText").GetComponent<TextMeshProUGUI>();
+            currentUniqueStatusTexts[4] = GameObject.Find("CurrentDurabilityText").GetComponent<TextMeshProUGUI>();
+            currentUniqueStatusTexts[5] = GameObject.Find("CurrentKnowledgeText").GetComponent<TextMeshProUGUI>();
+
+
+            addUniqueStatusTexts[0] = GameObject.Find("AddCharmText").GetComponent<TextMeshProUGUI>();
+            addUniqueStatusTexts[1] = GameObject.Find("AddDignityText").GetComponent<TextMeshProUGUI>();
+            addUniqueStatusTexts[2] = GameObject.Find("AddMuscularStrengthText").GetComponent<TextMeshProUGUI>();
+            addUniqueStatusTexts[3] = GameObject.Find("AddSenseText").GetComponent<TextMeshProUGUI>();
+            addUniqueStatusTexts[4] = GameObject.Find("AddDurabilityText").GetComponent<TextMeshProUGUI>();
+            addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
+
+            statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
+
+            confirmMessageWindow = GameObject.Find("ConfirmMessageWindow");
+            resetMessageWindow = GameObject.Find("ResetMessageWindow");
+            confirmAndResetButtons = GameObject.Find("ConfirmAndResetButtons");
+            skillListWindow = GameObject.Find("SkillListWindow");
         }
     }
 }
