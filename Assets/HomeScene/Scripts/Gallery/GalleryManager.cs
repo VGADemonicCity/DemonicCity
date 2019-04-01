@@ -32,8 +32,8 @@ namespace DemonicCity.HomeScene
             Ashmedy,
             Faulus,
             Barl,
-            Setulus,
-            Satan,
+            //Setulus,
+            Satan = 19,
             Single,
             Double,
             HalfMask,
@@ -45,10 +45,17 @@ namespace DemonicCity.HomeScene
         List<Item> items = new List<Item>();
         List<Person> people = new List<Person>();
 
+        List<GalleryButton> itemInstance = new List<GalleryButton>();
+        List<GalleryButton> personInstance = new List<GalleryButton>();
+
         [SerializeField] GameObject leftObj;
         [SerializeField] GameObject rightObj;
         [SerializeField] GameObject returnObj;
         [SerializeField] GameObject homeObj;
+        [SerializeField] Button[] tabs;
+
+        [SerializeField] Transform listParent;
+        [SerializeField] GameObject galleryButton;
 
         [SerializeField] Button LeftArrow;
         [SerializeField] Button RightArrow;
@@ -63,6 +70,8 @@ namespace DemonicCity.HomeScene
             ToHome,
             LeftArrow,
             RightArrow,
+            Person,
+            Item,
             None,
         }
 
@@ -107,11 +116,11 @@ namespace DemonicCity.HomeScene
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log(hitObj.name);
+                    //Debug.Log(hitObj.name);
                     if (hitTag != ObjectTag.None
                     && touchInfo.HitDetection(out hitObj, TouchObjects[hitTag]))
                     {
-                        Debug.Log(hitObj.name);
+                        //Debug.Log(hitObj.name);
                         switch (hitTag)
                         {
                             case ObjectTag.Return:
@@ -133,7 +142,18 @@ namespace DemonicCity.HomeScene
             });
             LeftArrow.onClick.AddListener(() => { ToLeft(); });
             RightArrow.onClick.AddListener(() => { ToRight(); });
+
+            ListReset();
         }
+
+
+        public void TabSelect(bool isItem)
+        {
+            tabs[0].interactable = isItem;
+            tabs[1].interactable = !isItem;
+            ListCheck(isItem);
+        }
+
 
         // Update is called once per frame
         void Update()
@@ -158,8 +178,15 @@ namespace DemonicCity.HomeScene
 
         public void ContentOpen(ItemTag tag)
         {
-            drawer.gameObject.SetActive(true);
-            drawer.Init(GetContent<Item>(tag), this);
+            drawer.transform.parent.gameObject.SetActive(true);
+            if (GetItem(tag) != null)
+            {
+                drawer.Init(GetItem(tag), this);
+            }
+            if (GetPerson(tag) != null)
+            {
+                drawer.Init(GetPerson(tag), this);
+            }
         }
 
 
@@ -169,19 +196,14 @@ namespace DemonicCity.HomeScene
         }
 
 
-        T GetContent<T>(ItemTag tag) where T : Item
+        public Item GetItem(ItemTag tag)
         {
-            Item tmpItem = items.FirstOrDefault(x => x.tag == tag);
-            Person tmpPerson = people.FirstOrDefault(x => x.tag == tag);
-            if (tmpPerson != null)
-            {
-                return tmpPerson as T;
-            }
-            if (tmpItem != null)
-            {
-                return tmpItem as T;
-            }
-            return null;
+            return items.FirstOrDefault(x => x.tag == tag);
+        }
+        public Person GetPerson(ItemTag tag)
+        {
+            return people.FirstOrDefault(x => x.tag == tag);
+
         }
 
 
@@ -194,74 +216,207 @@ namespace DemonicCity.HomeScene
             return false;
         }
 
-        void NextContent<T>(T item) where T : Item
+        public bool CheckContent(ItemTag item)
         {
-
-        }
-        void PreviewContent<T>(T item)where T : Item
-        {
-
-        }
-
-        public List<T> GetSide<T>(bool isItem, T item) where T : Item
-        {
-            List<T> tmp = new List<T>();
-
-            List<int> indexs = new List<int>();
-            int center = 0;
-
-            if (isItem)
+            Item tmpItem = items.FirstOrDefault(x => x.tag == item);
+            if (tmpItem != null)
             {
-                center = items.FindIndex(x => x.tag == item.tag);
-
-                if (center == 0)
-                {
-                    indexs.Add(items.Count - 1);
-                    indexs.Add(center);
-                    indexs.Add(center + 1);
-                }
-                else if (center == items.Count - 1)
-                {
-                    indexs.Add(center - 1);
-                    indexs.Add(center);
-                    indexs.Add(0);
-                }
-
-                foreach (int i in indexs)
-                {
-                    tmp.Add(items[i] as T);
-                }
+                return (progress.MyStoryProgress & tmpItem.UnLockStory) == tmpItem.UnLockStory;
             }
-            else
+            Person tmpPerson = people.FirstOrDefault(x => x.tag == item);
+            if (tmpPerson != null)
             {
-                center = people.FindIndex(x => x.tag == item.tag);
-                if (center == 0)
-                {
-                    indexs.Add(people.Count - 1);
-                    indexs.Add(center);
-                    indexs.Add(center + 1);
-                }
-                else if (center == people.Count - 1)
-                {
-                    indexs.Add(center - 1);
-                    indexs.Add(center);
-                    indexs.Add(0);
-                }
-                else
-                {
-                    indexs.Add(center - 1);
-                    indexs.Add(center);
-                    indexs.Add(center + 1);
-                }
-
-                foreach (int i in indexs)
-                {
-                    tmp.Add(people[i] as T);
-                }
+                return (progress.MyStoryProgress & tmpPerson.UnLockStory) == tmpPerson.UnLockStory;
             }
-            return tmp;
-
+            return false;
         }
+
+        Item NextContent(Item item)
+        {
+            int index = items.FindIndex(x => x.tag == item.tag);
+            if (index == -1)
+            {
+                return null;
+            }
+            int currentIndex = index;
+            currentIndex += 1;
+            while (currentIndex != index)
+            {
+                if (currentIndex == items.Count)
+                {
+                    currentIndex = 0;
+                }
+                if (CheckContent(items[currentIndex]))
+                {
+                    return items[currentIndex];
+                }
+                currentIndex += 1;
+            }
+            return null;
+        }
+        Person NextContent(Person item)
+        {
+            int index = people.FindIndex(x => x.tag == item.tag);
+            if (index == -1)
+            {
+                return null;
+            }
+            int currentIndex = index;
+            currentIndex += 1;
+            while (currentIndex != index)
+            {
+                if (currentIndex == people.Count)
+                {
+                    currentIndex = 0;
+                }
+                if (CheckContent(people[currentIndex]))
+                {
+                    return people[currentIndex];
+                }
+                currentIndex += 1;
+            }
+            return null;
+        }
+
+        Person PreviewContent(Person item)
+        {
+            int index = people.FindIndex(x => x.tag == item.tag);
+            if (index == -1)
+            {
+                return null;
+            }
+            int currentIndex = index;
+            currentIndex -= 1;
+            while (currentIndex != index)
+            {
+                if (CheckContent(people[currentIndex]))
+                {
+                    return people[currentIndex];
+                }
+                if (currentIndex == 0)
+                {
+                    currentIndex = people.Count;
+                }
+                currentIndex -= 1;
+            }
+            return null;
+        }
+        Item PreviewContent(Item item)
+        {
+            int index = items.FindIndex(x => x.tag == item.tag);
+            if (index == -1)
+            {
+                return null;
+            }
+            int currentIndex = index;
+            currentIndex -= 1;
+            while (currentIndex != index)
+            {
+                if (CheckContent(items[currentIndex]))
+                {
+                    return items[currentIndex];
+                }
+                if (currentIndex == 0)
+                {
+                    currentIndex = items.Count;
+                }
+                currentIndex -= 1;
+            }
+            return null;
+        }
+
+        public List<Item> GetSide(Item item)
+        {
+            return new List<Item>()
+            {
+                PreviewContent(item),
+                item,
+                NextContent(item)
+            };
+        }
+        public List<Person> GetSide(Person item)
+        {
+            return new List<Person>()
+            {
+                PreviewContent(item),
+                item,
+                NextContent(item)
+            };
+        }
+
+
+        void ListCheck(bool isItem)
+        {
+            if (itemInstance.Count == 0)
+            {
+                ListGenerate(items);
+            }
+            if (personInstance.Count == 0)
+            {
+                ListGenerate(people);
+            }
+
+            itemInstance.ForEach(x => x.gameObject.SetActive(isItem));
+            personInstance.ForEach(x => x.gameObject.SetActive(!isItem));
+        }
+        void ListReset()
+        {
+            itemInstance.Clear();
+            personInstance.Clear();
+            foreach (Transform item in listParent)
+            {
+                Destroy(item.gameObject);
+            }
+
+            ListGenerate(items);
+            ListGenerate(people);
+
+            TabSelect(false);
+        }
+
+
+
+
+        void ListGenerate(List<Item> contents)
+        {
+            foreach (Item item in contents)
+            {
+                GalleryButton newBtn = Instantiate(galleryButton.gameObject, listParent).GetComponent<GalleryButton>();
+                newBtn.Init(this, item.tag);
+
+                itemInstance.Add(newBtn);
+            }
+        }
+        void ListGenerate(List<Person> contents)
+        {
+            foreach (Person item in contents)
+            {
+                GalleryButton newBtn = Instantiate(galleryButton.gameObject, listParent).GetComponent<GalleryButton>();
+                newBtn.Init(this, item.tag);
+
+                personInstance.Add(newBtn);
+            }
+        }
+
+        //void ListGenerate<T>(List<T> contents) where T : Item
+        //{
+        //    List<Person> tmp = contents.Cast<Person>().ToList();
+        //    bool isPerson = tmp[0] as Person;
+        //    foreach (T item in contents)
+        //    {
+        //        GalleryButton newBtn = Instantiate(galleryButton.gameObject, listParent).GetComponent<GalleryButton>();
+        //        newBtn.Init(this, item.tag);
+
+        //        if (isPerson)
+        //        {
+        //            people.Add(item as Person);
+        //        }
+        //        else
+        //        {
+        //            items.Add(item);
+        //        }
+        //    }
+        //}
 
 
         #region Import

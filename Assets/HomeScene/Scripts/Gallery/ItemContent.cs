@@ -8,8 +8,8 @@ namespace DemonicCity.HomeScene
 {
     public class ItemContent : MonoBehaviour
     {
-        [SerializeField] Person testData;
-        [SerializeField] GalleryManager gallery;
+        //[SerializeField] Person testData;
+        //[SerializeField] GalleryManager gallery;
 
 
         [SerializeField] Image[] cImage = new Image[3];
@@ -65,7 +65,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-            Init(testData, gallery);
+            //Init(testData, gallery);
 
 
 
@@ -161,7 +161,7 @@ namespace DemonicCity.HomeScene
             person = data as Person;
             if (person != null)
             {
-                List<Person> tmp = galleryM.GetSide(false, person);
+                List<Person> tmp = galleryM.GetSide(person);
                 contents = tmp.Cast<Item>().ToList();
                 SpriteReflect(tmp.Select(x => x.illust).ToList());
                 //cImage[1].sprite = person.illust;
@@ -173,8 +173,9 @@ namespace DemonicCity.HomeScene
             else
             {
                 item = data;
-                contents = galleryM.GetSide(true, item);
-
+                contents = galleryM.GetSide(item);
+                List<Sprite> tmp = contents.Select(x => x.illust).ToList();
+                SpriteReflect(tmp);
                 currentContent = item;
                 return true;
             }
