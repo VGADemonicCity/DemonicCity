@@ -39,7 +39,7 @@ namespace DemonicCity.BattleScene
             StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
             backgroundCtrl.FadingImageOfStage(); // ステージ背景を遷移させるアニメーション再生
 
-            // 敵を前進させてその秒数分遅延させる
+            // 敵を前進させてその秒数分遅延させた後ステートマシンを状態遷移させる
             var waitTime = m_enemiesMover.Moving();
             yield return new WaitForSeconds(waitTime);
             m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
