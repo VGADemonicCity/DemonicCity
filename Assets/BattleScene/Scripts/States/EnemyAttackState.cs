@@ -11,7 +11,7 @@ namespace DemonicCity.BattleScene
     public class EnemyAttackState : StatesBehaviour
     {
         /// <summary>敵の攻撃力上昇倍率</summary>
-        [SerializeField] float increase;
+        [SerializeField] float penaltyIncrease;
         /// <summary>敵のバフアニメーション</summary>
         [SerializeField] Animator buffAnimator;
 
@@ -31,7 +31,7 @@ namespace DemonicCity.BattleScene
                 if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
                 {
                     // 敵の攻撃力を上げて、エフェクトを再生
-                    m_battleManager.CurrentEnemy.AttackBuffActivate((int)((m_battleManager.CurrentEnemy.Stats.Attack * increase) - m_battleManager.CurrentEnemy.Stats.Attack));
+                    m_battleManager.CurrentEnemy.AttackBuffActivate((int)((m_battleManager.CurrentEnemy.Stats.Attack * penaltyIncrease) - m_battleManager.CurrentEnemy.Stats.Attack));
                     StartCoroutine(PenaltyEffect());
                 }
                 else

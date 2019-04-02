@@ -97,12 +97,17 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// Inits the counts.
         /// </summary>
-        public void InitCounts()
+        public void InitializeCounter()
         {
+            // カウンターを全てリセットする
             m_CityCount = 0;
             m_doubleCount = 0;
             m_tripleCount = 0;
             m_destructionCount = 0;
+
+            // 攻撃ボタンを表示可能にする
+            attackButtonDisplayFlag = false;
+
 
             if (m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.Init) // ゲーム開始時のみトータルパネルカウントとスキル用カウンターを初期化する
             {
@@ -163,7 +168,6 @@ namespace DemonicCity.BattleScene
                 case PanelType.Enemy: // enemyパネルを引いた時ペナルティ処理を行う
                     // 攻撃ボタンを閉じてフラグを降ろす
                     attackButtonProcess.ButtonClose();
-                    attackButtonDisplayFlag = false;
 
                     // =========================================
                     // イベント呼び出し : StateMachine.PlayerAttack

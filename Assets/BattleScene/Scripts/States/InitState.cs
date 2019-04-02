@@ -56,21 +56,20 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// Initialize this instance.
         /// </summary>
-        private void Initialize()
+        void Initialize()
         {
             // その章のChapterを取得
             //m_chapter = ChapterManager.Instance.GetChapter();
             m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
 
 
-            SettingBackground();
             SpawnEnemies();
             m_enemiesMover.Moving();
-            
+
 
 
             m_battleManager.InitWave(); // wave初期化
-            m_panelCounter.InitCounts(); // カウント初期化
+            m_panelCounter.InitializeCounter(); // カウント初期化
             m_panelManager.InitPanels(); // パネル初期化
             m_battleManager.m_MagiaStats = m_magia.GetStats(); // バトル用のStatisticsインスタンスにmagiaのStatsの各値を登録する
             m_battleManager.m_MagiaStats.Init(m_battleManager.m_MagiaStats); //バトル開始直前の Magiaのステータスの初期値を保存
@@ -79,19 +78,12 @@ namespace DemonicCity.BattleScene
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.HitPoint); // 敵のHP最大値を引数に初期化する
         }
 
-        /// <summary>
-        /// 背景の画像を適切に設定する
-        /// </summary>
-        void SettingBackground()
-        {
-            m_background.sprite = m_chapter.BackGround[0];
-            //m_firstWaveBattleStage.sprite = m_chapter.BattleStage[0];
-        }
+
 
         /// <summary>
         /// Waveに出現する敵群を生成する
         /// </summary>
-        private void SpawnEnemies()
+        void SpawnEnemies()
         {
             m_enemiesFactory = EnemiesFactory.Instance;
             m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter); // ======DEBUG======完成時は引数なしにする　
