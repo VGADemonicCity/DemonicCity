@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DemonicCity.BattleScene
 {
@@ -65,11 +66,14 @@ namespace DemonicCity.BattleScene
         [SerializeField] int m_totalDestructionCount;
         /// <summary>固有スキルゲージ</summary>
         [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
+        /// <summary>攻撃ボタンを表示する</summary>
+        [SerializeField] AttackButtonProcess attackButtonProcess;
 
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
         BattleManager m_battleManager;
 
-
+        /// <summary>バトルボタンを表示するフラグ</summary>
+        bool attackButtonDisplayFlag;
 
         /// <summary>
         /// Awake this instance.
@@ -93,12 +97,18 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// Inits the counts.
         /// </summary>
-        public void InitCounts()
+        public void InitializeCounter()
         {
+            // カウンターを全てリセットする
             m_CityCount = 0;
             m_doubleCount = 0;
             m_tripleCount = 0;
             m_destructionCount = 0;
+
+            // 攻撃ボタンを表示可能にする
+            attackButtonDisplayFlag = false;
+
+
             if (m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.Init) // ゲーム開始時のみトータルパネルカウントとスキル用カウンターを初期化する
             {
                 m_totalPanelCount = 0;
@@ -128,21 +138,41 @@ namespace DemonicCity.BattleScene
                 case PanelType.City: // cityパネルを引いた時
                     m_CityCount++; // シティパネルカウントアップ
                     destructionCount++;
+                    if (!attackButtonDisplayFlag)
+                    {
+                        attackButtonDisplayFlag = true;
+                        attackButtonProcess.DisplayAttackButton();
+                    }
                     break;
+
                 case PanelType.DoubleCity: // doubleパネルを引いた時
                     m_doubleCount++;// ダブルパネルカウントアップ
                     destructionCount += 2;
+                    if (!attackButtonDisplayFlag)
+                    {
+                        attackButtonDisplayFlag = true;
+                        attackButtonProcess.DisplayAttackButton();
+                    }
                     break;
+
                 case PanelType.TripleCity: // tripleパネルを引いた時
                     m_tripleCount++;// トリプルパネルカウントアップ
                     destructionCount += 3;
+                    if (!attackButtonDisplayFlag)
+                    {
+                        attackButtonDisplayFlag = true;
+                        attackButtonProcess.DisplayAttackButton();
+                    }
                     break;
-                case PanelType.Enemy: // enemyパネルを引いた時
-                    m_battleManager.m_StateMachine.m_State = BattleManager.StateMachine.State.PlayerAttack; // ステートマシンをPlayerAttackへ
+
+                case PanelType.Enemy: // enemyパネルを引いた時ペナルティ処理を行う
+                    // 攻撃ボタンを閉じてフラグを降ろす
+                    attackButtonProcess.ButtonClose();
+
                     // =========================================
                     // イベント呼び出し : StateMachine.PlayerAttack
                     // =========================================
-                    m_battleManager.m_BehaviourByState.Invoke(BattleManager.StateMachine.State.PlayerAttack); // m_behaviourByStateイベントを起動する
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                     break;
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ

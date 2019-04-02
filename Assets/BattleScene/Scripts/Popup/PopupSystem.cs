@@ -28,8 +28,12 @@ namespace DemonicCity
         /// <param name="popupMaterial"></param>
         public void SubscribeButton(PopupSystemMaterial popupSystemMaterial)
         {
-            var buttons = popupedObject.GetComponentsInChildren<Button>().ToList();
-            var button = buttons.Find(obj => obj.gameObject.name == popupSystemMaterial.ButtonName);
+            var button = popupedObject.GetComponent<Button>();
+            if (button == null)
+            {
+                var buttons = popupedObject.GetComponentsInChildren<Button>().ToList();
+                button = buttons.Find(obj => obj.gameObject.name == popupSystemMaterial.ButtonName);
+            }
 
             button.onClick.AddListener(() =>
             {
