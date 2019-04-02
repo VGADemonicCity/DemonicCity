@@ -1,27 +1,26 @@
 fileFormatVersion: 2
-guid: 9a59067c67b9b1c45a3bdd13760fa6db
+guid: 87b10c3b3f72b1a4f955ad781c2c4976
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Magia_DvilsInfelnoType_0
-    21300002: Magia_DvilsInfelnoType_1
-    21300004: Magia_DvilsInfelnoType_2
-    21300006: Magia_DvilsInfelnoType_3
-    21300008: Magia_DvilsInfelnoType_4
-    21300010: Magia_DvilsInfelnoType_5
-    21300012: Magia_DvilsInfelnoType_6
-    21300014: Magia_DvilsInfelnoType_7
-    21300016: Magia_DvilsInfelnoType_8
-    21300018: Magia_DvilsInfelnoType_9
-    21300020: Magia_DvilsInfelnoType_10
-    21300022: Magia_DvilsInfelnoType_11
-    21300024: Magia_DvilsInfelnoType_12
-    21300026: Magia_DvilsInfelnoType_13
-    21300028: Magia_DvilsInfelnoType_14
-    21300030: Magia_DvilsInfelnoType_15
-    21300032: Magia_DvilsInfelnoType_16
-    21300034: Magia_DvilsInfelnoType_17
-    21300036: Magia_DvilsInfelnoType_18
-    21300038: Magia_DvilsInfelnoType_19
+    21300000: AttackBuff_0
+    21300002: AttackBuff_1
+    21300004: AttackBuff_2
+    21300006: AttackBuff_3
+    21300008: AttackBuff_4
+    21300010: AttackBuff_5
+    21300012: AttackBuff_6
+    21300014: AttackBuff_7
+    21300016: AttackBuff_8
+    21300018: AttackBuff_9
+    21300020: AttackBuff_10
+    21300022: AttackBuff_11
+    21300024: AttackBuff_12
+    21300026: AttackBuff_13
+    21300028: AttackBuff_14
+    21300030: AttackBuff_15
+    21300032: AttackBuff_16
+    21300034: AttackBuff_17
+    21300036: AttackBuff_18
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -115,7 +114,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_0
+      name: AttackBuff_0
       rect:
         serializedVersion: 2
         x: 0
@@ -129,13 +128,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 46e9c405259165442990ded459d88fb4
+      spriteID: c36ae0a6ae096c947b6c0409c366a80b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_1
+      name: AttackBuff_1
       rect:
         serializedVersion: 2
         x: 192
@@ -149,13 +148,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bfc06abdf57b2644bda11d449dfab08
+      spriteID: 67bf0da40bef16546a61a0986bdd4806
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_2
+      name: AttackBuff_2
       rect:
         serializedVersion: 2
         x: 384
@@ -169,13 +168,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5a61e350f0a034444aeec0630665b80a
+      spriteID: d4a80dec5ee761542837ec079690eff3
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_3
+      name: AttackBuff_3
       rect:
         serializedVersion: 2
         x: 576
@@ -189,13 +188,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6af48eb889d1a934ea47fa84efde2da1
+      spriteID: 3b8c3b041fee4a746a242f568114a27c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_4
+      name: AttackBuff_4
       rect:
         serializedVersion: 2
         x: 768
@@ -209,13 +208,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b51c22da4219ea4b9c9c4b2987ba3eb
+      spriteID: c87c0a537d3687d4faa87358ea23f041
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_5
+      name: AttackBuff_5
       rect:
         serializedVersion: 2
         x: 0
@@ -229,13 +228,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13a5d70119774e8479679fbf047f50b2
+      spriteID: 5fd9378d08e515b4bab5926d2a4b9b7d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_6
+      name: AttackBuff_6
       rect:
         serializedVersion: 2
         x: 192
@@ -249,17 +248,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 08d09446513ba4c43ab5b59a487f411a
+      spriteID: fd9c0b397f87eef46b54b5ed2e9ded45
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_7
+      name: AttackBuff_7
       rect:
         serializedVersion: 2
         x: 384
-        y: 385
+        y: 384
         width: 192
         height: 192
       alignment: 0
@@ -269,13 +268,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 468d78c0c5f5d944896c262b0c1ab92c
+      spriteID: a386c51fd367bcb4887fbdc53aa331c8
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_8
+      name: AttackBuff_8
       rect:
         serializedVersion: 2
         x: 576
@@ -289,13 +288,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d2c62fa9d1e6b0e46a04e5e768b9dfa1
+      spriteID: 43036d4e2b88bd34c9289838bf01d0af
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_9
+      name: AttackBuff_9
       rect:
         serializedVersion: 2
         x: 768
@@ -309,17 +308,17 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 96082deacc9b2114bb2777c1ec152e3e
+      spriteID: 9e7058daaabf127488bcb693e36dfb9c
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_10
+      name: AttackBuff_10
       rect:
         serializedVersion: 2
         x: 0
-        y: 191
+        y: 192
         width: 192
         height: 192
       alignment: 0
@@ -329,13 +328,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d97533da6d672de4aaedd3d94900eae7
+      spriteID: a09afca7aa1214543bfd36a4ab39e96f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_11
+      name: AttackBuff_11
       rect:
         serializedVersion: 2
         x: 192
@@ -349,13 +348,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9bd6569ca3cba5a40a1fb278893f2576
+      spriteID: d2cae31449203854d9d443ca2a9f3b13
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_12
+      name: AttackBuff_12
       rect:
         serializedVersion: 2
         x: 384
@@ -369,13 +368,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 91e812e7b6e03214fb982ddeeec3654a
+      spriteID: 1f2faa71e268a5748b6b9475647feb94
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_13
+      name: AttackBuff_13
       rect:
         serializedVersion: 2
         x: 576
@@ -389,13 +388,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c77a111183e5e164b806e33e8064316a
+      spriteID: ba42970ffd1d05e4aaf9cee372269bdb
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_14
+      name: AttackBuff_14
       rect:
         serializedVersion: 2
         x: 768
@@ -409,13 +408,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f5740c4fba3da574f826cd884e50f1ae
+      spriteID: 7007a838ab5db7344af4bec3d36d6b88
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_15
+      name: AttackBuff_15
       rect:
         serializedVersion: 2
         x: 0
@@ -429,13 +428,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 269267011dbeffc4bb54cd69ffdaa833
+      spriteID: 9485ea0ab95c67c4eba379bf0361df33
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_16
+      name: AttackBuff_16
       rect:
         serializedVersion: 2
         x: 192
@@ -449,13 +448,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 102eadba1fba1cc43a59df0afb159430
+      spriteID: 8dde6eac07ca2a642a97c93c1b75fac2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_17
+      name: AttackBuff_17
       rect:
         serializedVersion: 2
         x: 384
@@ -469,13 +468,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ffb0ef3387920c94894191e163db1e9f
+      spriteID: d2b3f2aa4de6bfa43882892cec8a812f
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_18
+      name: AttackBuff_18
       rect:
         serializedVersion: 2
         x: 576
@@ -489,27 +488,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 11132cfe3696f99409c5e121344fae80
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Magia_DvilsInfelnoType_19
-      rect:
-        serializedVersion: 2
-        x: 768
-        y: 0
-        width: 192
-        height: 192
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: d5bbc141a7c926746b09469c2a1b8487
+      spriteID: 11823124952ce6540919ccfacfb9c932
       vertices: []
       indices: 
       edges: []
@@ -517,7 +496,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 8530eae5c4a34c343a0db7aada3dfd91
+    spriteID: 5c7e5c68801d0494db929ef0fad264a1
     vertices: []
     indices: 
     edges: []

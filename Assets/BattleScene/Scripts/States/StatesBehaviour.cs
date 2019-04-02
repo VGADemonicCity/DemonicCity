@@ -8,7 +8,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// State machine behaviour.
     /// </summary>
-    public abstract  class StatesBehaviour : MonoSingleton<StatesBehaviour>
+    public abstract class StatesBehaviour : MonoSingleton<StatesBehaviour>
     {
         /// <summary>PanelFrameManagerの参照</summary>
         protected PanelFrameManager m_panelFrameManager;
@@ -23,13 +23,17 @@ namespace DemonicCity.BattleScene
         /// <summary>SkillManagerの参照</summary>
         protected SkillManager m_skillManager;
         /// <summary>MagiaのHPDrawの参照</summary>
-         protected HitPointGauge m_magiaHPGauge;
+        protected HitPointGauge m_magiaHPGauge;
         /// <summary>EnemyのHPDrawの参照</summary>
-         protected HitPointGauge m_enemyHPGauge;
+        protected HitPointGauge m_enemyHPGauge;
         /// <summary>Magiaの参照</summary>
         protected Magia m_magia;
         /// <summary>Enemy skill gauge</summary>
         protected EnemySkillGauge m_enemySkillGauge;
+        /// <summary>背景</summary>
+        protected SpriteRenderer m_background;
+        /// <summary>その章で使うChapterクラス</summary>
+        protected Chapter m_chapter;
 
         /// <summary>
         /// Awake this instance.
@@ -46,6 +50,7 @@ namespace DemonicCity.BattleScene
             m_magiaHPGauge = GameObject.Find("MagiaHPGauge").GetComponentInChildren<HitPointGauge>();
             m_enemyHPGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<HitPointGauge>();
             m_enemySkillGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<EnemySkillGauge>();
+            m_background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+        }
     }
-}
 }
