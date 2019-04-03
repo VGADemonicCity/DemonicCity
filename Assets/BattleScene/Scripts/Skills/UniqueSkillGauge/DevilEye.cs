@@ -30,7 +30,6 @@ namespace DemonicCity.BattleScene
         public void Activate()
         {
             var enemyPanel = m_panelManager.m_panelsBforeOpen.Find((panel) => panel.MyPanelType == PanelType.Enemy); // パネル枠の中から敵パネルを取得
-            var panelIndex = m_panelManager.m_panelsBforeOpen.FindIndex((panel) => panel.MyPanelType == PanelType.Enemy); // パネルのインデックスを取得
             enemyPanel.Open(m_processingTime);
             m_panelFrameManager.StartCoroutine(m_panelFrameManager.MovingFrame(enemyPanel.MyFramePosition)); // 敵パネルの位置情報の場所にパネルフレームを移動させる
 

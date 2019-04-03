@@ -52,16 +52,17 @@ namespace DemonicCity.BattleScene
         /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnim;
 
+        /// <summary>BattleManager</summary>
+        BattleManager battleManager;
+        /// <summary>PanelCounterの参照</summary>
+        PanelCounter panelCounter;
 
         [Header("Parameters")]
         [SerializeField] float panelRotateTime = 1f;
         [SerializeField] float intervalForEachRotation = .1f;
         [SerializeField] Axis rotateAxis;
 
-        /// <summary>BattleManager</summary>
-        BattleManager battleManager;
-        /// <summary>PanelCounterの参照</summary>
-        PanelCounter panelCounter;
+
 
 
 

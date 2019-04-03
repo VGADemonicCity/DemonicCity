@@ -606,6 +606,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemiesMover: {fileID: 0}
+  waveTitle: {fileID: 0}
+  firstWaitTime: 2
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -633,6 +635,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemiesMover: {fileID: 0}
   backgroundCtrl: {fileID: 0}
+  waveTitle: {fileID: 0}
 --- !u!114 &114949723133331002
 MonoBehaviour:
   m_ObjectHideFlags: 1
