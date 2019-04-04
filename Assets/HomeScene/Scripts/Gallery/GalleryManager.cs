@@ -48,6 +48,8 @@ namespace DemonicCity.HomeScene
         List<GalleryButton> itemInstance = new List<GalleryButton>();
         List<GalleryButton> personInstance = new List<GalleryButton>();
 
+        [SerializeField] RectTransform galleryPanel;
+
         [SerializeField] GameObject leftObj;
         [SerializeField] GameObject rightObj;
         [SerializeField] GameObject returnObj;
@@ -63,6 +65,9 @@ namespace DemonicCity.HomeScene
         Progress progress;
 
         [SerializeField] ItemContent drawer;
+
+
+        [SerializeField] Image fadePanel;
 
         enum ObjectTag
         {
@@ -89,51 +94,168 @@ namespace DemonicCity.HomeScene
             }
         }
 
+        bool IsBlack
+        {
+            get
+            {
+                return (fadePanel.gameObject.activeSelf != false)
+                    && (fadePanel.color == Color.black || 1 <= fadePanelAlpha);
+            }
+        }
+        bool IsClear
+        {
+            get
+            {
+                return (fadePanel.gameObject.activeSelf == false
+                        || fadePanel.color == Color.clear
+                        || fadePanelAlpha <= 0);
+            }
+        }
+        private void OnEnable()
+        {
+            Debug.Log("Enabled");
+            StartCoroutine(WaitInit());
+            drawer.transform.parent.gameObject.SetActive(false);
+        }
+
         void Awake()
+        {
+        }
+
+        IEnumerator WaitInit()
+        {
+            tabs[0].gameObject.SetActive(false);
+            tabs[1].gameObject.SetActive(false);
+            returnObj.SetActive(false);
+            SetFadeOut();
+            //yield return null;
+            yield return new WaitWhile(() => !IsBlack);
+            tabs[0].gameObject.SetActive(true);
+            tabs[1].gameObject.SetActive(true);
+            returnObj.SetActive(true);
+
+            Init();
+
+            SetFadeIn();
+        }
+
+        IEnumerator WaitExit()
+        {
+            SetFadeOut();
+            //yield return null;
+            yield return new WaitWhile(() => !IsBlack);
+            galleryPanel.localPosition = new Vector3(2000, 0, 0);
+            SetFadeIn();
+            yield return new WaitWhile(() => !IsClear);
+            transform.parent.parent.gameObject.SetActive(false);
+        }
+
+        #region Fade
+
+        void SetFadeOut()
+        {
+            if (FadeCoroutine != null)
+            {
+                StopCoroutine(FadeCoroutine);
+            }
+            FadeCoroutine = FadeOut();
+            StartCoroutine(FadeCoroutine);
+        }
+        void SetFadeIn()
+        {
+            if (FadeCoroutine != null)
+            {
+                StopCoroutine(FadeCoroutine);
+            }
+            FadeCoroutine = FadeIn();
+            StartCoroutine(FadeCoroutine);
+        }
+
+
+        IEnumerator FadeCoroutine;
+
+        float fadePanelAlpha = 0;
+        float fadeTime = 1f;
+        IEnumerator FadeIn()
+        {
+            fadePanel.gameObject.SetActive(true);
+
+            fadePanel.color = Color.black;
+            fadePanelAlpha = 1f;
+
+            while (0 < fadePanelAlpha)
+            {
+                fadePanelAlpha -= Time.deltaTime * fadeTime;
+                fadePanel.color = new Color(0, 0, 0, fadePanelAlpha);
+                Debug.Log(fadePanelAlpha);
+                yield return null;
+            }
+            fadePanelAlpha = 0f;
+            fadePanel.color = Color.clear;
+            fadePanel.gameObject.SetActive(false);
+        }
+        IEnumerator FadeOut()
+        {
+            fadePanel.gameObject.SetActive(true);
+
+            fadePanel.color = Color.clear;
+            fadePanelAlpha = 0;
+
+            while (fadePanelAlpha < 1f)
+            {
+                fadePanelAlpha += Time.deltaTime * fadeTime;
+                fadePanel.color = new Color(0, 0, 0, fadePanelAlpha);
+                Debug.Log(fadePanelAlpha);
+                yield return null;
+            }
+            fadePanelAlpha = 1f;
+            fadePanel.color = Color.black;
+        }
+
+        #endregion 
+
+        void Init()
         {
             tGD = TouchGestureDetector.Instance;
             progress = Progress.Instance;
             ImportItems();
-        }
-        // Use this for initialization
-        void Start()
-        {
+            galleryPanel.localPosition = new Vector3(0, 0, 0);
+            galleryPanel.sizeDelta = new Vector2(1080, 1920);
+
+
             ObjectTag hitTag = ObjectTag.None;
             GameObject hitObj = null;
             tGD.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    foreach (ObjectTag item in TouchObjects.Keys)
+                    hitTag = ObjectTag.None;
+                    if (touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
                     {
-                        if (touchInfo.HitDetection(out hitObj, TouchObjects[item]))
-                        {
-                            hitTag = item;
-                            break;
-                        }
-                        hitTag = ObjectTag.None;
+                        hitTag = ObjectTag.Return;
                     }
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
                     //Debug.Log(hitObj.name);
-                    if (hitTag != ObjectTag.None
-                    && touchInfo.HitDetection(out hitObj, TouchObjects[hitTag]))
+                    if (hitTag == ObjectTag.Return
+                    && touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
                     {
-                        //Debug.Log(hitObj.name);
-                        switch (hitTag)
-                        {
-                            case ObjectTag.Return:
-                                break;
-                            //case ObjectTag.LeftArrow:
-                            //    ToLeft();
-                            //    break;
-                            //case ObjectTag.RightArrow:
-                            //    ToRight();
-                            //    break;
-                            default:
-                                break;
-                        }
+                        SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+                        ////Debug.Log(hitObj.name);
+                        //switch (hitTag)
+                        //{
+                        //    case ObjectTag.Return:
+                        //        break;
+                        //    //case ObjectTag.LeftArrow:
+                        //    //    ToLeft();
+                        //    //    break;
+                        //    //case ObjectTag.RightArrow:
+                        //    //    ToRight();
+                        //    //    break;
+                        //    default:
+                        //        break;
+                        //}
                     }
 
                 }
@@ -142,6 +264,13 @@ namespace DemonicCity.HomeScene
             RightArrow.onClick.AddListener(() => { ToRight(); });
 
             ListReset();
+        }
+
+        // Use this for initialization
+        void Start()
+        {
+            Debug.Log("Start");
+            //OnEnable();
         }
 
 
@@ -153,11 +282,6 @@ namespace DemonicCity.HomeScene
         }
 
 
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
         void ToLeft()
         {
@@ -174,8 +298,11 @@ namespace DemonicCity.HomeScene
         }
 
 
-        public void ContentOpen(ItemTag tag)
+        IEnumerator WaitContentOpen(ItemTag tag)
         {
+            SetFadeOut();
+            yield return new WaitWhile(() => !IsBlack);
+            //yield return null;
             drawer.transform.parent.gameObject.SetActive(true);
             if (GetItem(tag) != null)
             {
@@ -186,13 +313,42 @@ namespace DemonicCity.HomeScene
                 drawer.Init(GetPerson(tag), this);
             }
             returnObj.SetActive(false);
+
+            SetFadeIn();
+        }
+
+        public void ContentOpen(ItemTag tag)
+        {
+            StartCoroutine(WaitContentOpen(tag));
+            //drawer.transform.parent.gameObject.SetActive(true);
+            //if (GetItem(tag) != null)
+            //{
+            //    drawer.Init(GetItem(tag), this);
+            //}
+            //if (GetPerson(tag) != null)
+            //{
+            //    drawer.Init(GetPerson(tag), this);
+            //}
+            //returnObj.SetActive(false);
         }
 
 
         public void ContentClose()
         {
+            StartCoroutine(WaitContentClose());
+        }
+
+        IEnumerator WaitContentClose()
+        {
+            SetFadeOut();
+
+            yield return new WaitWhile(() => IsBlack);
+
+            //yield return null;
             returnObj.SetActive(true);
             drawer.transform.parent.gameObject.SetActive(false);
+
+            SetFadeIn();
         }
 
 
