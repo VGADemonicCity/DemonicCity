@@ -51,7 +51,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] GameObject leftObj;
         [SerializeField] GameObject rightObj;
         [SerializeField] GameObject returnObj;
-        [SerializeField] GameObject homeObj;
+        //[SerializeField] GameObject homeObj;
         [SerializeField] Button[] tabs;
 
         [SerializeField] Transform listParent;
@@ -67,7 +67,7 @@ namespace DemonicCity.HomeScene
         enum ObjectTag
         {
             Return,
-            ToHome,
+            //ToHome,
             LeftArrow,
             RightArrow,
             Person,
@@ -84,7 +84,7 @@ namespace DemonicCity.HomeScene
                     {ObjectTag.LeftArrow,leftObj },
                     {ObjectTag.RightArrow,rightObj},
                     {ObjectTag.Return,returnObj },
-                    {ObjectTag.ToHome,homeObj},
+                    //{ObjectTag.ToHome,homeObj},
                 };
             }
         }
@@ -124,8 +124,6 @@ namespace DemonicCity.HomeScene
                         switch (hitTag)
                         {
                             case ObjectTag.Return:
-                                break;
-                            case ObjectTag.ToHome:
                                 break;
                             //case ObjectTag.LeftArrow:
                             //    ToLeft();
@@ -187,12 +185,14 @@ namespace DemonicCity.HomeScene
             {
                 drawer.Init(GetPerson(tag), this);
             }
+            returnObj.SetActive(false);
         }
 
 
         public void ContentClose()
         {
-            drawer.gameObject.SetActive(false);
+            returnObj.SetActive(true);
+            drawer.transform.parent.gameObject.SetActive(false);
         }
 
 
