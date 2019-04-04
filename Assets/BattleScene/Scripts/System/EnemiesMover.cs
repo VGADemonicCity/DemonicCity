@@ -10,9 +10,14 @@ namespace DemonicCity.BattleScene
         readonly float m_movementSpacing = 5f;
         [SerializeField] float movingTime = 3f;
 
-        public void Moving()
+        /// <summary>
+        /// 背後に控えている敵を前面迄動かす
+        /// </summary>
+        /// <returns>遷移に掛ける時間</returns>
+        public float  Moving()
         {
             iTween.MoveBy(gameObject, iTween.Hash("x", m_movementSpacing, "time", movingTime));
+            return movingTime;
         }
     }
 }
