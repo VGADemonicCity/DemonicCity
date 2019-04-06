@@ -13,10 +13,23 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PanelManager : MonoSingleton<PanelManager>
     {
+
         /// <summary>Flag</summary>
         public bool m_isPanelProcessing { get; private set; }
-        /// <summary>オープン前のパネル</summary>
-        public List<Panel> m_panelsBforeOpen { get; set; }
+        /// <summary>Scene上に存在する全てのパネルのリスト</summary>
+        public List<Panel> PanelsInTheScene { get; set; }
+        /// <summary>Scene上に存在する敵以外のパネル</summary>
+        public List<Panel> AllPanelsExceptEnemyPanels { get; set; }
+        /// <summary>Scene上に存在する敵以外のパネルが全てオープンされていたらTrueを返す</summary>
+        public bool IsOpenedAllPanelsExceptEnemyPanels
+        {
+            get
+            {
+                //var allPanelsExceptEnemyPanels = PanelsInTheScene.Count(panel => panel.MyPanelType != PanelType.Enemy);
+                var opendPanels = PanelsInTheScene.Count(panel => panel.IsOpened && panel.MyPanelType != PanelType.Enemy);
+                return opendPanels == AllPanelsExceptEnemyPanels.Count;
+            }
+        }
 
         /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
@@ -29,7 +42,7 @@ namespace DemonicCity.BattleScene
         /// <summary>範囲指定をする最大値のvector</summary>
         [SerializeField] Vector2 m_VecMax;
         /// <summary>ShufflePanelsの参照</summary>
-       [SerializeField] ShufflePanels m_shufflePanels;
+        [SerializeField] ShufflePanels m_shufflePanels;
 
 
         /// <summary>TouchGestureDetectorの参照</summary>
@@ -61,6 +74,7 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[1] = new[] { -4.155f, -2.955f, -1.755f, -0.355f, .845f, 2.045f, 3.445f, 4.645f, 5.845f }; //行
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<Panel>();
+            AllPanelsExceptEnemyPanels = new List<Panel>();
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
             {
@@ -84,10 +98,10 @@ namespace DemonicCity.BattleScene
             // タッチによる任意の処理をイベントに登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-            if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了  || m_battleDebugger.DebugFlag
-            {
-                return;
-            }
+                if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice || m_isPanelProcessing) // プレイヤーのターンじゃない or パネルが処理中なら処理終了  || m_battleDebugger.DebugFlag
+                {
+                    return;
+                }
 
                 if (gesture == TouchGestureDetector.Gesture.Click) // タップ時
                 {
@@ -150,11 +164,11 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void InitPanels()
         {
-            if (m_panelsBforeOpen != null) // パネルリストが既に存在していたら
+            if (PanelsInTheScene != null) // パネルリストが既に存在していたら
             {
                 PanelType[] panelAllocations = GetRandomPanels(); // 新たにGuidインスタンスを使ってランダム配列生成。
                 int count = 0; // panelTypeの要素を順に充てていく為のカウント
-                m_panelsBforeOpen.ForEach((obj) => // パネルを全てリセット。
+                PanelsInTheScene.ForEach((obj) => // パネルを全てリセット。
                 {
                     Panel panel = obj.GetComponent<Panel>(); // 各パネルのPanelコンポーネントの参照
                     panel.ResetPanel(); // パネルをオープン前の状態に戻す
@@ -164,7 +178,7 @@ namespace DemonicCity.BattleScene
             }
             else // パネルリストが生成されていなかったら
             {
-                m_panelsBforeOpen = new List<Panel>(); // パネルを開く前のリスト
+                PanelsInTheScene = new List<Panel>(); // パネルを開く前のリスト
                 PanelType[] panelAllocations = GetRandomPanels(); // パネルの数分PanelTypeのenum値を適切にランダム配分させたリスト
                 // パネルを生成後PanelTypeを適切に割り振る. m_panelAllocationsとm_panelPositionsの要素数は一緒になっていなければおかしいので同時に条件分岐をとる
                 for (int i = 0; i < panelAllocations.Length && i < m_panelPositions.Count; i++)
@@ -174,8 +188,14 @@ namespace DemonicCity.BattleScene
                     Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
                     panel.MyPanelType = panelAllocations[i]; // パネルタイプを割り当てる
                     panel.MyFramePosition = DetectFramePosition(i); // パネルの位置を特定して代入
-                    m_panelsBforeOpen.Add(panel); // パネルをリストに入れる
+
+                    // パネルをリストに入れる
+                    PanelsInTheScene.Add(panel); 
+                    AllPanelsExceptEnemyPanels.Add(panel);
                 }
+
+                // 敵パネルをこのリストから削除する
+                AllPanelsExceptEnemyPanels.RemoveAll(panel => panel.MyPanelType == PanelType.Enemy);
             }
         }
 

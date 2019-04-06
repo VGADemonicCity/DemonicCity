@@ -13,9 +13,13 @@ namespace DemonicCity.BattleScene
         [Header("Components")]
         /// <summary>敵のオブジェクト群を動かすクラス</summary>
         [SerializeField] EnemiesMover m_enemiesMover;
+        /// <summary>animator of wave title</summary>
+        [SerializeField] WaveTitle waveTitle;
 
         /// <summary>章情報に基づき敵のインスタンスを生成する工場</summary>
         EnemiesFactory m_enemiesFactory;
+        /// <summary>最初の遅延時間</summary>
+        [SerializeField] float firstWaitTime = 1f;
 
         /// <summary>
         /// 敵オブジェクト群の生成間隔
@@ -34,11 +38,25 @@ namespace DemonicCity.BattleScene
                 }
                 Debug.Log("Init state called.");
                 Initialize();
-                // ==============================
-                // イベント呼び出し : StateMachine.PlayerChoice
-                // ==============================
-                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                StartCoroutine(FirstWaveAnimation());
             });
+        }
+
+        IEnumerator FirstWaveAnimation()
+        {
+            yield return new WaitForSeconds(firstWaitTime);
+            // 敵を動かす
+            var waitTime = m_enemiesMover.Moving();
+            //yield return new WaitForSeconds(waitTime);
+
+            // Waveタイトルのアニメーションを再生した後,ステートを遷移させる
+            waitTime =waveTitle.Play();
+            yield return new WaitForSeconds(waitTime);
+            // ==============================
+            // イベント呼び出し : StateMachine.PlayerChoice
+            // ==============================
+            m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+
         }
 
 
@@ -64,7 +82,6 @@ namespace DemonicCity.BattleScene
 
 
             SpawnEnemies();
-            m_enemiesMover.Moving();
 
 
 

@@ -13,8 +13,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] EnemiesMover m_enemiesMover;
         /// <summary>ステージ背景を制御するクラス</summary>
         [SerializeField] BackgroundController backgroundCtrl;
-        /// <summary>移動間隔</summary>
-        readonly Vector2 m_movementSpacing = new Vector2(5f, 0f);
+        /// <summary>animator of wave title</summary>
+        [SerializeField] WaveTitle waveTitle;
 
         /// <summary>
         /// Start this instance.
@@ -38,8 +38,9 @@ namespace DemonicCity.BattleScene
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.Temp.HitPoint); // 敵のHP最大値をGaugeに登録する
             StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
             m_enemiesMover.Moving(); // 待機させている次の敵を最前面迄動かす
-            var waitTime = backgroundCtrl.FadingImageOfTheStage(); // ステージ背景を遷移させるアニメーション再生
+            backgroundCtrl.FadingImageOfTheStage(); // ステージ背景を遷移させるアニメーション再生
 
+            var waitTime = waveTitle.Play();
             // 指定秒数分遅延させた後ステートマシンを状態遷移させる
             yield return new WaitForSeconds(waitTime);
             m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
