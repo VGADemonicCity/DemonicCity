@@ -17,6 +17,7 @@ namespace DemonicCity.ResultScene
         Status beforeStatus;
         Status afterStatus;
         LevelTextAnimation levelTextAnimation;
+        private const int maxLevel = 200;
 
         List<int> levelDifference = new List<int>();
         List<int> hpDifference = new List<int>();
@@ -34,7 +35,9 @@ namespace DemonicCity.ResultScene
         private int tapCount = 0;
         private GameObject levelUpImage = null;
         private GameObject skillMasterdMessageWindow = null;
-        private GameObject[] mastedSkillName = null;
+        private GameObject[] masterdSkillNameObj = null;
+        private int[] skillMasterdLevels = { 1, 11, 23, 31, 44, 58, 70, 82, 100, 111, 136, 160, 181, 198 };
+        private string skillName;
 
         private TextMeshProUGUI currentLevelText = null;
         private TextMeshProUGUI nextLevelText = null;
@@ -67,8 +70,6 @@ namespace DemonicCity.ResultScene
         private bool isPopup = false;
         private Animator animator;
 
-
-
         private void Awake()
         {
             animator = GetComponent<Animator>();
@@ -82,7 +83,10 @@ namespace DemonicCity.ResultScene
             FindGameObjects();
 
             ReflectionBeforeStatus();
-            ResultCalculation();
+            if (beforeStatus.Level < maxLevel)
+            {
+                ResultCalculation();
+            }
             afterStatus = magia.Stats;
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -98,11 +102,21 @@ namespace DemonicCity.ResultScene
                     else if (tapCount == 2 && isAnimation)
                     {
                         ReflectionAfterStatus();
+                        nextLevelText.text = "";
                         isAnimation = false;
                     }
                     else if (tapCount == 3 || !isAnimation)
                     {
                         SavableSingletonBase<Magia>.Instance.Save();
+                        if (masterdSkillNames.Count > 0)
+                        {
+                            StartCoroutine(PopUpSkillMasterdMessageWindow());
+                            isPopup = true;
+                        }
+                        tapCount++;
+                    }
+                    else if(tapCount == 4 || isPopup)
+                    {
                         if (!isPopup)
                         {
                             Instantiate(toNextStoryPrefab, transform);
@@ -111,6 +125,62 @@ namespace DemonicCity.ResultScene
                     }
                 }
             });
+        }
+
+        /// <summary>レベルアップ時に習得したスキルを表示する</summary>
+        private string GetSkillName(int level)
+        {
+
+            switch (level)
+            {
+                case 1:
+                    //passiveSkill = Magia.PassiveSkill.DevilsFist;
+                    //skillContents[0].SetActive(true);
+                    //skillContents[0].GetComponent<Text>().text = Magia.PassiveSkill.DevilsFist.ToString();
+                    skillName = "魔拳";
+                    break;
+                case 11:
+                    skillName = "高濃度魔力吸収";
+                    break;
+                case 23:
+                    skillName = "自己再生";
+                    break;
+                case 31:
+                    skillName = "爆炎熱風柱";
+                    break;
+                case 44:
+                    skillName = "紅蓮障壁";
+                    break;
+                case 58:
+                    skillName = "魔拳烈火ノ型";
+                    break;
+                case 70:
+                    skillName = "心焔権現";
+                    break;
+                case 82:
+                    skillName = "大紅蓮障壁";
+                    break;
+                case 100:
+                    skillName = "豪炎爆砕掌";
+                    break;
+                case 111:
+                    skillName = "魔王ノ細胞";
+                    break;
+                case 136:
+                    skillName = "天照権現";
+                    break;
+                case 160:
+                    skillName = "天照-爆炎-";
+                    break;
+                case 181:
+                    skillName = "天照-焔壁-";
+                    break;
+                case 198:
+                    skillName = "王ノ器";
+                    break;
+
+            }
+            return skillName;
         }
 
         private void Update()
@@ -123,6 +193,33 @@ namespace DemonicCity.ResultScene
             {
                 NotLevelUpPerformance();
             }
+        }
+
+        private IEnumerator PopUpSkillMasterdMessageWindow()
+        {
+            for (int i = 0; i < levelDifference.Count; i++)
+            {
+                for (int a = 0; a < skillMasterdLevels.Length; a++)
+                {
+                    if (levelDifference[i] == skillMasterdLevels[a])
+                    {
+                        //そのレベルに応じたスキルをListに追加
+                        masterdSkillNames.Add(GetSkillName(levelDifference[i]));
+                        Debug.Log("Lv" + levelDifference[i] + "で" + GetSkillName(levelDifference[i]) + "を習得");
+                    }
+                }
+            }
+
+            yield return new WaitForSeconds(1f);
+            skillMasterdMessageWindow.SetActive(true);
+
+            for (int i = 0; i < masterdSkillNames.Count; i++)
+            {
+                masterdSkillNameObj[i].SetActive(true);
+                masterdSkillNameObj[i].GetComponent<TextMeshProUGUI>().text = masterdSkillNames[i];
+            }
+            yield return new WaitForSeconds(5f);
+            skillMasterdMessageWindow.SetActive(false);
         }
 
         /// <summary>経験値を計算</summary>
@@ -140,7 +237,6 @@ namespace DemonicCity.ResultScene
                     totalExperience -= nextLevelRequiredExperience;
 
                     magia.LevelUp();
-
 
                     levelDifference.Add(magia.Stats.Level);
                     hpDifference.Add(magia.Stats.HitPoint);
@@ -191,7 +287,7 @@ namespace DemonicCity.ResultScene
                 }
 
                 addAmount = 0.1f * levelDifference[index];
-                Debug.Log(index);
+
                 index++;
 
                 if (index == levelDifference.Count)
@@ -256,7 +352,7 @@ namespace DemonicCity.ResultScene
 
             needDestructionCountText.text = (nextLevelRequiredExperience - myExperience).ToString();
             destructionCount = panelCounter.TotalDestructionCount;
-            //destructionCount = 50;//debug
+            destructionCount = 5000;//debug
             destructionCountText.text = destructionCount.ToString();
         }
 
@@ -298,7 +394,11 @@ namespace DemonicCity.ResultScene
             experienceGauge = GameObject.Find("ExperienceGauge").GetComponent<Slider>();
             levelTextAnimation = FindObjectOfType<LevelTextAnimation>();
             skillMasterdMessageWindow = GameObject.Find("SkillMasterdMessageWindow");
-            mastedSkillName = GameObject.FindGameObjectsWithTag("MasterdSkillName");
+            masterdSkillNameObj = GameObject.FindGameObjectsWithTag("MasterdSkillName");
+            for (int i = 0; i < masterdSkillNameObj.Length; i++)
+            {
+                masterdSkillNameObj[i].GetComponent<TextMeshProUGUI>().text = "";
+            }
             skillMasterdMessageWindow.SetActive(false);
 
         }

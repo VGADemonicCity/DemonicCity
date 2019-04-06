@@ -144,7 +144,7 @@ namespace DemonicCity
         /// <param name="currentLevel">Current level.</param>
         public int GetRequiredExpToNextLevel(int currentLevel)
         {
-            return currentLevel >= MaxLevel ? 0 : m_requiredExps[currentLevel - 1];
+            return currentLevel >= MaxLevel ? m_requiredExps.Last() : m_requiredExps[currentLevel - 1];
         }
 
         /// <summary>

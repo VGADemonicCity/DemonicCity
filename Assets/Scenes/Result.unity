@@ -372,7 +372,14 @@ Prefab:
       propertyPath: m_TagString
       value: MasterdSkillName
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114281392145389100, guid: 8c6858077d111804a838cf01874de597,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: e9c40e64d167ae6468251e401b4d64f1,
+        type: 3}
+    m_RemovedComponents:
+    - {fileID: 114013299172636716, guid: 8c6858077d111804a838cf01874de597, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 8c6858077d111804a838cf01874de597, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1 &650538889
