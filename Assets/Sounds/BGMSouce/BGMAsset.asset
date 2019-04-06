@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aafa699fc9456d44c8b9311188584cb6, type: 3}
+  m_Name: BGMAsset
+  m_EditorClassIdentifier: 
+  sources:
+  - tag: 0
+    clips:
+    - {fileID: 8300000, guid: 014122db2f16edf4a9963e093150ddb0, type: 3}
+  - tag: 2
+    clips:
+    - {fileID: 8300000, guid: 16f9fef69669f154394ec4700123fcd1, type: 3}
+  - tag: 1
+    clips:
+    - {fileID: 8300000, guid: 8bf0142949d781c459cc5c23572d8625, type: 3}

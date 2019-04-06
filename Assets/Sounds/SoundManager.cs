@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-
+using UnityEngine.SceneManagement;
 
 namespace DemonicCity
 {
@@ -21,7 +21,7 @@ namespace DemonicCity
 
 
         List<AudioSource> BgmSources = new List<AudioSource>();
-        List<AudioSource> MenuSESources = new List<AudioSource>();
+        List<AudioSource> SESources = new List<AudioSource>();
         List<AudioSource> VoiceSources = new List<AudioSource>();
 
 
@@ -29,10 +29,17 @@ namespace DemonicCity
         SoundAsset GetMenuSeAsset { get { return sounds[(int)SoundTag.SE]; } }
         SoundAsset GetVoiceAsset { get { return sounds[(int)SoundTag.Voice]; } }
 
-
+        float storyVol = -20f;
 
         public AudioMixer mixer;
         [SerializeField] SoundAsset[] sounds;
+        [SerializeField] BGMAsset bgms;
+        [SerializeField] SEAsset ses;
+
+        [SerializeField] string title = "Title";
+        [SerializeField] string battle = "Battle";
+        [SerializeField] string story = "Story";
+
 
         SceneFader fader;
 
@@ -63,32 +70,75 @@ namespace DemonicCity
             Init();
         }
 
+        void BGMCheck(Scene scene, LoadSceneMode mode)
+        {
+            LoadVol();
+
+            if (CurrentVol.vol[0])
+            {
+                if (scene.name == story)
+                {
+                    mixer.SetFloat(keys[SoundTag.BGM], storyVol);
+                }
+                else
+                {
+                    mixer.SetFloat(keys[SoundTag.BGM], defVol);
+                }
+
+            }
+            if (scene.name == title)
+            {
+                PlayWithFade(SoundAsset.BGMTag.Title);
+            }
+            else if (scene.name == battle)
+            {
+
+            }
+            else
+            {
+
+                PlayWithFade(SoundAsset.BGMTag.Home);
+            }
+
+
+        }
 
         public void Init()
         {
             fader = SceneFader.Instance;
             LoadVol();
+            //VolCheck(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
+            SceneManager.sceneLoaded += BGMCheck;
 
-            if (BgmSources.Count * MenuSESources.Count * VoiceSources.Count == 0)
+            if (BgmSources.Count * SESources.Count * VoiceSources.Count == 0)
             {
                 foreach (Transform item in transform)
                 {
                     Destroy(item.gameObject);
                 }
                 BgmSources.Clear();
-                MenuSESources.Clear();
+                SESources.Clear();
                 VoiceSources.Clear();
                 foreach (AudioSource source in GetBgmAsset.audioSource)
                 {
-                    BgmSources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
+                    var tmp = Instantiate(source.gameObject, transform).GetComponent<AudioSource>();
+                    tmp.outputAudioMixerGroup = source.outputAudioMixerGroup;
+
+                    BgmSources.Add(tmp);
                 }
                 foreach (AudioSource source in GetMenuSeAsset.audioSource)
                 {
-                    MenuSESources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
+                    var tmp = Instantiate(source.gameObject, transform).GetComponent<AudioSource>();
+                    tmp.outputAudioMixerGroup = source.outputAudioMixerGroup;
+
+                    SESources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
                 }
                 foreach (AudioSource source in GetVoiceAsset.audioSource)
                 {
+                    var tmp = Instantiate(source.gameObject, transform).GetComponent<AudioSource>();
+                    tmp.outputAudioMixerGroup = source.outputAudioMixerGroup;
+
                     VoiceSources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
                 }
             }
@@ -133,6 +183,11 @@ namespace DemonicCity
         float defVol = 0f;
         public void SwitchVol(string key, bool isOn)
         {
+            float tmpVol = 0;
+            if (mixer.GetFloat(key, out tmpVol))
+            {
+                Debug.Log(tmpVol);
+            }
             if (isOn)
             {
                 mixer.SetFloat(key, defVol);
@@ -140,6 +195,10 @@ namespace DemonicCity
             else
             {
                 mixer.SetFloat(key, muteVol);
+            }
+            if (mixer.GetFloat(key, out tmpVol))
+            {
+                Debug.Log(tmpVol);
             }
         }
         public void SwitchVol(SoundTag tag, bool isOn)
@@ -255,7 +314,7 @@ namespace DemonicCity
                     tmpList = BgmSources;
                     break;
                 case SoundTag.SE:
-                    tmpList = MenuSESources;
+                    tmpList = SESources;
                     break;
                 case SoundTag.Voice:
                     tmpList = VoiceSources;
@@ -267,6 +326,40 @@ namespace DemonicCity
             AudioSource emptySouce = tmpList.FirstOrDefault(x => x.isPlaying == false);
 
             AudioSource playingSouce = tmpList.FirstOrDefault(x => x.isPlaying == true);
+            if (playingSouce != null)
+            {
+                StartCoroutine(playingSouce.StopWithFadeOut(fade));
+            }
+
+            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+        }
+        /// <summary>音源再生</summary>
+        /// <param name="tag">流すBGMの種類</param>
+        /// <param name="fade">二種類以上ある場合の音のフェード時間</param>
+        public void PlayWithFade(SoundAsset.BGMTag tag, float fade = 0.1f)
+        {
+            AudioClip clip = bgms.GetClip(tag);
+
+            AudioSource emptySouce = BgmSources.FirstOrDefault(x => x.isPlaying == false);
+
+            AudioSource playingSouce = BgmSources.FirstOrDefault(x => x.isPlaying == true);
+            if (playingSouce != null)
+            {
+                StartCoroutine(playingSouce.StopWithFadeOut(fade));
+            }
+
+            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+        }
+        /// <summary>音源再生</summary>
+        /// <param name="tag">流すSEの種類</param>
+        /// <param name="fade">二種類以上ある場合の音のフェード時間</param>
+        public void PlayWithFade(SoundAsset.SETag tag, float fade = 0.1f)
+        {
+            AudioClip clip = ses.GetClip(tag);
+
+            AudioSource emptySouce = SESources.FirstOrDefault(x => x.isPlaying == false);
+
+            AudioSource playingSouce = SESources.FirstOrDefault(x => x.isPlaying == true);
             if (playingSouce != null)
             {
                 StartCoroutine(playingSouce.StopWithFadeOut(fade));
