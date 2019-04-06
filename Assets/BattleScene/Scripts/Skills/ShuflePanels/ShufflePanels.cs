@@ -131,7 +131,7 @@ namespace DemonicCity.BattleScene
             if (stateInfo.shortNameHash == targetHash)
             {
                 Debug.Log("called");
-                StartCoroutine(Anim());
+                StartCoroutine(SkillActivate());
             }
         }
 
@@ -139,7 +139,7 @@ namespace DemonicCity.BattleScene
         /// Skill animation
         /// </summary>
         /// <returns></returns>
-        IEnumerator Anim()
+        IEnumerator SkillActivate()
         {
             m_sensor.enabled = true; // colliderをactiveにする
             var results = new Collider2D[9]; // 結果を受け取るための配列
