@@ -37,13 +37,16 @@ namespace DemonicCity.BattleScene
         [SerializeField] Status m_stats = new Status();
         /// <summary>敵キャラのアニメーター</summary>
         [SerializeField] Animator m_animator;
+        /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnimator;
-
+        /// <summary>Required time for destruction</summary>
+        [SerializeField] float m_destroyingTime = 3f;
 
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
 
-        [SerializeField] float m_destroyingTime = 3f;
+        /// <summary>バフの上昇値を保存しておく変数</summary>
+        int buffBuffer;
 
         private void Start()
         {
@@ -61,7 +64,7 @@ namespace DemonicCity.BattleScene
         ///  Ons the attack.
         /// </summary>
         /// <returns>time of animation clip</returns>
-        public float Attack()
+        public float PlayAnimationOfAttack()
         {
             m_animator.CrossFadeInFixedTime("Attack", 0);
             var clips = m_animator.GetNextAnimatorClipInfo(0).ToList();
@@ -78,9 +81,32 @@ namespace DemonicCity.BattleScene
             Destroy(gameObject, m_destroyingTime);
         }
 
+        /// <summary>
+        /// エフェクトアニメーションを再生する
+        /// Animationからこのイベントを登録する
+        /// </summary>
         public void PlayEffect()
         {
             skillAnimator.CrossFadeInFixedTime("Effect", 0);
+        }
+
+        /// <summary>
+        /// 攻撃力を引数の整数分上昇させる
+        /// 
+        /// </summary>
+        /// <param name="increase"></param>
+        public void AttackBuffActivate(int increase)
+        {
+            buffBuffer = increase;
+            Stats.Attack += increase;
+        }
+
+        /// <summary>
+        /// 上昇した攻撃力を元に戻る
+        /// </summary>
+        public void AttackBuffDeactivate()
+        {
+            Stats.Attack -= buffBuffer;
         }
     }
 }

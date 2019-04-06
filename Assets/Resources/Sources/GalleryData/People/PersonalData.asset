@@ -11,10 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ed2fc04f55e7343b996cd33a835f48, type: 3}
   m_Name: PersonalData
   m_EditorClassIdentifier: 
-  tag: 0
+  tag: 8
   id: 
   name: 
+  illust: {fileID: 21300000, guid: 58c762182bb1b4d1aaf9225efc16e4b0, type: 3}
+  creator: "\u9162\u2606\u91A4\u6CB9"
   text: 
-  UnLockStory: 0
-  illust: {fileID: 0}
+  UnLockStory: 8192
+  actor: 
   voice: []

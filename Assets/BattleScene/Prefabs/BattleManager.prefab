@@ -11,6 +11,23 @@ Prefab:
   m_SourcePrefab: {fileID: 0}
   m_RootGameObject: {fileID: 1291335245634264}
   m_IsPrefabAsset: 1
+--- !u!1 &1004165285240170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4596012782248328}
+  - component: {fileID: 114254286006001736}
+  - component: {fileID: 114261590507737774}
+  m_Layer: 0
+  m_Name: AttackButtonProcess
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1192228181428470
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,6 +132,19 @@ Transform:
   m_Father: {fileID: 4691038718456576}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4596012782248328
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004165285240170}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4678241758042684
 Transform:
   m_ObjectHideFlags: 1
@@ -141,6 +171,7 @@ Transform:
   - {fileID: 4678241758042684}
   - {fileID: 4293241256990584}
   - {fileID: 4883720955422510}
+  - {fileID: 4596012782248328}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -194,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 24
-  m_passiveSkillName: 0
+  m_passiveSkillName: 64
   m_incease: 0.05
 --- !u!114 &114017009472620254
 MonoBehaviour:
@@ -226,6 +257,7 @@ MonoBehaviour:
   m_totalPanelCount: 0
   m_totalDestructionCount: 0
   m_uniqueSkillGauge: {fileID: 0}
+  attackButtonProcess: {fileID: 114254286006001736}
 --- !u!114 &114177336636838174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +270,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uniqueSkillGauge: {fileID: 0}
-  m_condition: 0
+  m_condition: 30
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
 --- !u!114 &114195271979354084
@@ -265,7 +297,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 32
-  m_passiveSkillName: 0
+  m_passiveSkillName: 512
   m_incease: 0.02
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
@@ -279,6 +311,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 474093afe83e4e248a4747232fad0772, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114254286006001736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004165285240170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cb3b3f14d0d9fa45ae2f5b53e4f9c99, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupSystem: {fileID: 114261590507737774}
+  attackButton: {fileID: 114651453717757812, guid: 9b77ade4b38d47d47b496db6eee7c5b0,
+    type: 2}
+--- !u!114 &114261590507737774
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1004165285240170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 1925187357752364, guid: 9b77ade4b38d47d47b496db6eee7c5b0,
+    type: 2}
+  scalingTime: 1
 --- !u!114 &114267313029801558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,7 +351,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 19
-  m_passiveSkillName: 0
+  m_passiveSkillName: 16
   m_incease: 0.1
 --- !u!114 &114290885052486680
 MonoBehaviour:
@@ -378,8 +438,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 30
-  m_passiveSkillName: 0
-  m_incease: 0.01
+  m_passiveSkillName: 256
+  m_incease: 0.02
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -405,7 +465,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 1
-  m_passiveSkillName: 0
+  m_passiveSkillName: 1
   m_incease: 0.01
 --- !u!114 &114459537921108872
 MonoBehaviour:
@@ -419,7 +479,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 34
-  m_passiveSkillName: 0
+  m_passiveSkillName: 1024
   m_incease: 0.01
 --- !u!114 &114496166160569242
 MonoBehaviour:
@@ -433,7 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 14
-  m_passiveSkillName: 0
+  m_passiveSkillName: 4
   m_incease: 0.1
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114542386805354352
@@ -459,6 +519,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1862b4cbb19b24479915824c34b786cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  penaltyIncrease: 1.5
+  buffAnimator: {fileID: 0}
 --- !u!114 &114637994177244260
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,7 +550,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 27
-  m_passiveSkillName: 0
+  m_passiveSkillName: 128
   m_incease: 0.1
 --- !u!114 &114676999750379174
 MonoBehaviour:
@@ -502,7 +564,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 11
-  m_passiveSkillName: 0
+  m_passiveSkillName: 2
   m_incease: 0.5
 --- !u!114 &114677235418965648
 MonoBehaviour:
@@ -516,7 +578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 38
-  m_passiveSkillName: 0
+  m_passiveSkillName: 2048
   m_incease: 0.51
 --- !u!114 &114697641580245106
 MonoBehaviour:
@@ -530,8 +592,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 21
-  m_passiveSkillName: 0
-  m_incease: 0.11
+  m_passiveSkillName: 32
+  m_incease: 0.015
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -556,7 +618,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 36
-  m_passiveSkillName: 0
+  m_passiveSkillName: 4096
   m_incease: 0
 --- !u!114 &114947920586921256
 MonoBehaviour:
@@ -570,6 +632,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_enemiesMover: {fileID: 0}
+  backgroundCtrl: {fileID: 0}
 --- !u!114 &114949723133331002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -594,5 +657,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 16
-  m_passiveSkillName: 0
+  m_passiveSkillName: 8
   m_incease: 0.5

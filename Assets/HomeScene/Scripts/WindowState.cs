@@ -17,10 +17,12 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         bool windowEnabled;
         RectTransform windowRect;
-        IEnumerator WindowAnimation ;
+        IEnumerator WindowAnimation;
 
         GameObject beginObject;
         GameObject endObject;
+
+        bool beginIsExit;
         void Awake()
         {
             windowRect = GetComponent<RectTransform>();
@@ -34,22 +36,32 @@ namespace DemonicCity.HomeScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    touchInfo.HitDetection(out beginObject);
+                    beginIsExit = false;
+                    if (touchInfo.HitDetection(out beginObject, exitButton))
+                    {
+                        beginIsExit = true;
+                    }
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-
-                    if (touchInfo.HitDetection(out endObject, exitButton)
-                    || exitButton == null)
-                    {
-                        if (beginObject == endObject
+                    if (((touchInfo.HitDetection(out endObject, exitButton) && beginIsExit)
+                        || exitButton == null)
                         && windowEnabled)
-                        {
-                            WindowScaling(false);
-
-                        }
-                        //ChangeState(key, false);
+                    {
+                        WindowScaling(false);
                     }
+
+                    //if (touchInfo.HitDetection(out endObject, exitButton)
+                    //|| exitButton == null)
+                    //{
+                    //    if (beginObject == endObject
+                    //    && windowEnabled)
+                    //    {
+                    //        WindowScaling(false);
+
+                    //    }
+                    //    //ChangeState(key, false);
+                    //}
                     //Debug.Log(outObject.name);
                 }
 
@@ -100,7 +112,7 @@ namespace DemonicCity.HomeScene
             }
             if (isOpen)
             {
-                WindowAnimation= ChangeScale(Vector3.one);
+                WindowAnimation = ChangeScale(Vector3.one);
                 //WindowAnimation[1] = ChangeColor(windowColor);
                 windowEnabled = true;
             }
@@ -122,6 +134,8 @@ namespace DemonicCity.HomeScene
             }
             else
             {
+                windowRect.localScale = targetScale;
+                Destroy(gameObject);
                 yield break;
                 //enabled = false;
             }

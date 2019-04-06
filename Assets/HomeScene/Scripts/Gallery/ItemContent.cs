@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.IO;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,20 @@ namespace DemonicCity.HomeScene
 {
     public class ItemContent : MonoBehaviour
     {
-        [SerializeField] Person testData;
-        [SerializeField] GalleryManager gallery;
+        //[SerializeField] Person testData;
+        //[SerializeField] GalleryManager gallery;
 
 
         [SerializeField] Image[] cImage = new Image[3];
         [SerializeField] Text nameLabel;
         [SerializeField] Text infoText;
+        [SerializeField] Text creatorLabel;
+        [SerializeField] GameObject creatorObj;
+        [SerializeField] Text actorLabel;
+        [SerializeField] GameObject actorObj;
+        [SerializeField] GameObject returnObj;
+        [SerializeField] GameObject soundIcon;
+
         [SerializeField] GameObject[] charaObj = new GameObject[3];
 
         [SerializeField] PageSwitch swicher;
@@ -40,6 +48,13 @@ namespace DemonicCity.HomeScene
             Character,
             Name,
             Info,
+            CreLabel,
+            CreObj,
+            ActLabel,
+            ActObj,
+            ReturnObj,
+            Sound,
+            None,
         }
 
         Dictionary<ObjectTag, Text> TextObjects
@@ -50,6 +65,10 @@ namespace DemonicCity.HomeScene
                 {
                     {ObjectTag.Name,nameLabel},
                     {ObjectTag.Info,infoText},
+                    {ObjectTag.CreLabel,creatorLabel},
+                    {ObjectTag.ActLabel,actorLabel},
+                    //{ObjectTag.CreObj,creatorObj},
+                    //{ObjectTag.ActObj,actorObj},
                 };
             }
         }
@@ -65,7 +84,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-            Init(testData, gallery);
+            //Init(testData, gallery);
 
 
 
@@ -149,6 +168,18 @@ namespace DemonicCity.HomeScene
             cImage[2].sprite = sprites[2];
         }
 
+        void CreatorReflect(string creName)
+        {
+            creatorLabel.text = "\n" + creName;
+            creatorObj.SetActive(!string.IsNullOrEmpty(creName));
+        }
+
+        void ActorReflect(string actName)
+        {
+            actorLabel.text = actName;
+            actorObj.SetActive(!string.IsNullOrEmpty(actName));
+        }
+
         /// <summary>ItemならTrue</summary>
         /// <param name="data"></param>
         /// <returns></returns>
@@ -157,11 +188,14 @@ namespace DemonicCity.HomeScene
             TextObjects[ObjectTag.Name].text = data.name;
             TextObjects[ObjectTag.Info].text = data.text;
 
+            CreatorReflect(data.creator);
 
             person = data as Person;
             if (person != null)
             {
-                List<Person> tmp = galleryM.GetSide(false, person);
+                ActorReflect(person.actor);
+
+                List<Person> tmp = galleryM.GetSide(person);
                 contents = tmp.Cast<Item>().ToList();
                 SpriteReflect(tmp.Select(x => x.illust).ToList());
                 //cImage[1].sprite = person.illust;
@@ -172,9 +206,12 @@ namespace DemonicCity.HomeScene
             }
             else
             {
-                item = data;
-                contents = galleryM.GetSide(true, item);
+                ActorReflect(null);
 
+                item = data;
+                contents = galleryM.GetSide(item);
+                List<Sprite> tmp = contents.Select(x => x.illust).ToList();
+                SpriteReflect(tmp);
                 currentContent = item;
                 return true;
             }
@@ -186,26 +223,47 @@ namespace DemonicCity.HomeScene
             touchGestureDetector = TouchGestureDetector.Instance;
             galleryM = gM;
 
-
+            ObjectTag touchTag = ObjectTag.None;
+            GameObject beginObject = null;
             if (!Reflect(data))
             {
                 touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
                 {
-                    GameObject beginObject = null;
                     if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                     {
-                        if (!touchInfo.HitDetection(out beginObject, charaObj[2]))
+                        touchTag = ObjectTag.None;
+                        beginObject = null;
+                        if (touchInfo.HitDetection(out beginObject, charaObj[2]))
                         {
-                            beginObject = null;
+                            touchTag = ObjectTag.Character;
                         }
+                        if (touchInfo.HitDetection(out beginObject, returnObj))
+                        {
+                            touchTag = ObjectTag.ReturnObj;
+                        }
+                        if (touchInfo.HitDetection(out beginObject, soundIcon))
+                        {
+                            touchTag = ObjectTag.Sound;
+                        }
+
                     }
                     if (gesture == TouchGestureDetector.Gesture.Click)
                     {
                         GameObject hit;
-                        if (beginObject != null
-                        && touchInfo.HitDetection(out hit, beginObject))
+                        if (touchTag == ObjectTag.Character
+                        && touchInfo.HitDetection(out hit, charaObj[2]))
                         {
                             galleryM.CharacterSpeak(person.voice);
+                        }
+                        if (touchTag == ObjectTag.Sound
+                        && touchInfo.HitDetection(out hit, soundIcon))
+                        {
+                            galleryM.CharacterSpeak(person.voice);
+                        }
+                        if (touchTag == ObjectTag.ReturnObj
+                        && touchInfo.HitDetection(out hit, returnObj))
+                        {
+                            galleryM.ContentClose();
                         }
                     }
                 });
