@@ -13,10 +13,9 @@ namespace DemonicCity.BattleScene
         [SerializeField] ParticleSystem m_particleSystem;
         ParticleSystem.MainModule m_mainModule;
         ParticleSystem.EmissionModule m_emittionModule;
-        ShufflePanels m_shufflePanels;
         PanelCounter m_panelCounter;
-        BattleManager m_battleManager;
         [SerializeField] ParticleSystem m_waveParticle;
+        ShufflePanels m_shufflePanels;
 
         [Header("Parameters")]
         [SerializeField] float xRotation = 0F;
@@ -32,15 +31,14 @@ namespace DemonicCity.BattleScene
         readonly float m_defaultRateOverTime = 10;
         readonly float m_rateOverTimeRatio = 1.33f;
         readonly float m_maxRateOverTime = 50;
-        bool m_flag;
+        bool m_flag = true;
 
         private void Awake()
         {
             m_panelCounter = PanelCounter.Instance;
-            m_battleManager = BattleManager.Instance;
-            m_shufflePanels = GetComponentInParent<ShufflePanels>();
             m_mainModule = m_particleSystem.main;
             m_emittionModule = m_particleSystem.emission;
+            m_shufflePanels = transform.parent.GetComponent<ShufflePanels>();
         }
 
         private void Update()
@@ -92,7 +90,7 @@ namespace DemonicCity.BattleScene
                 m_mainModule.startSpeed = m_speed;
                 m_emittionModule.rateOverTime = m_rateOverTime;
 
-                if (m_panelCounter.CounterForShuffleSkill == 30 && m_flag)
+                if (m_panelCounter.CounterForShuffleSkill == m_shufflePanels.Conditions && m_flag)
                 {
                     m_waveParticle.Play();
                     m_flag = false;

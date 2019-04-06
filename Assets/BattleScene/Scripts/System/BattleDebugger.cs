@@ -14,7 +14,20 @@ namespace DemonicCity.Debugger
         /// <summary></summary>
         BattleManager m_battleManager;
         /// <summary></summary>
+        [Header("自動でパネルを選択させるか")]
         [SerializeField] bool m_debugFlag;
+        /// <summary>パネルを表示させる</summary>
+        [Header("開かれていないパネルを全て可視化するか")]
+        [SerializeField] bool displayPanels;
+        [Header("自動パネル選択設定時のパネルを引き始める直前の遅延")]
+        /// <summary></summary>
+        [SerializeField] float waitTime = 1f;
+
+        /// <summary>パネルを開く枚数</summary>
+        [Header("ボタンを押した時に開くパネルの枚数(ランダム)")]
+        [Range(0, 25)]
+        [SerializeField] int openPanelQuantity;
+
         /// <summary></summary>
         public bool DebugFlag
         {
@@ -22,7 +35,7 @@ namespace DemonicCity.Debugger
             {
                 return m_debugFlag;
             }
-             set
+            set
             {
                 m_debugFlag = value;
             }
@@ -35,11 +48,32 @@ namespace DemonicCity.Debugger
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
         }
 
+#if UNITY_EDITOR
+        /// <summary>
+        /// Inspectorのチェックボックスでtrueに設定した時パネルの種類を全て可視化する
+        /// </summary>
+        private void OnValidate()
+        {
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+            Debug.Log("Called OnValidate");
+            if (displayPanels && m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
+            {
+                PanelManager.Instance.PanelsInTheScene.ForEach(panel =>
+                {
+                    panel.ChangingTexture();
+                });
+            }
+        }
+#endif
+
         private void Start()
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if(state != BattleManager.StateMachine.State.PlayerChoice || !DebugFlag) // PlayerChoice以外,debugフラグがオフの時は何もしない
+                if (state != BattleManager.StateMachine.State.PlayerChoice || !m_debugFlag) // PlayerChoice以外,debugフラグがオフの時は何もしない
                 {
                     return;
                 }
@@ -48,13 +82,40 @@ namespace DemonicCity.Debugger
         }
 
         /// <summary>
+        /// 敵パネル以外の全てのパネルを開く
+        /// </summary>
+        public void OpenAllPanelsExceptEnemyPanels()
+        {
+            if (m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice)
+            {
+
+                var openCount = 0;
+                var panels = m_panelManager.AllPanelsExceptEnemyPanels.OrderBy(panel => Guid.NewGuid());
+                foreach (var panel in panels)
+                {
+                    if(panel.MyPanelType == PanelType.Enemy)
+                    {
+                        Debug.Log("Enemyが混じってるよ");
+                        Debug.Break();
+                    }
+                    m_panelManager.PanelProcessing(panel);
+                    openCount++;
+                    if (openCount >= openPanelQuantity)
+                    {
+                        break;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
         /// パネルをランダムに自動選択する
         /// </summary>
         /// <returns></returns>
         IEnumerator AutoPanelSelector()
         {
-            var panels = m_panelManager.m_panelsBforeOpen.OrderBy(i => Guid.NewGuid()); // パネルをランダムにソートする
-
+            var panels = m_panelManager.PanelsInTheScene.OrderBy(i => Guid.NewGuid()); // パネルをランダムにソートする
+            yield return new WaitForSeconds(waitTime);
             foreach (var panel in panels)
             {
                 m_panelManager.PanelProcessing(panel);

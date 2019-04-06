@@ -52,16 +52,17 @@ namespace DemonicCity.BattleScene
         /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnim;
 
+        /// <summary>BattleManager</summary>
+        BattleManager battleManager;
+        /// <summary>PanelCounterの参照</summary>
+        PanelCounter panelCounter;
 
         [Header("Parameters")]
         [SerializeField] float panelRotateTime = 1f;
         [SerializeField] float intervalForEachRotation = .1f;
         [SerializeField] Axis rotateAxis;
 
-        /// <summary>BattleManager</summary>
-        BattleManager battleManager;
-        /// <summary>PanelCounterの参照</summary>
-        PanelCounter panelCounter;
+
 
 
 
@@ -130,7 +131,7 @@ namespace DemonicCity.BattleScene
             if (stateInfo.shortNameHash == targetHash)
             {
                 Debug.Log("called");
-                StartCoroutine(Anim());
+                StartCoroutine(SkillActivate());
             }
         }
 
@@ -138,7 +139,7 @@ namespace DemonicCity.BattleScene
         /// Skill animation
         /// </summary>
         /// <returns></returns>
-        IEnumerator Anim()
+        IEnumerator SkillActivate()
         {
             m_sensor.enabled = true; // colliderをactiveにする
             var results = new Collider2D[9]; // 結果を受け取るための配列
