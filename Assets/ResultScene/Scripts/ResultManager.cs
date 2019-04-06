@@ -27,8 +27,14 @@ namespace DemonicCity.ResultScene
         /// <summary>各レベルで必要な総経験値</summary>
         List<int> requiredExperiences = new List<int>();
         List<int> experienceDifferences = new List<int>();
+
+        /// <summary>レベルアップによって習得したスキルリスト</summary>
+        List<string> masterdSkillNames = new List<string>();
+
         private int tapCount = 0;
         private GameObject levelUpImage = null;
+        private GameObject skillMasterdMessageWindow = null;
+        private GameObject[] mastedSkillName = null;
 
         private TextMeshProUGUI currentLevelText = null;
         private TextMeshProUGUI nextLevelText = null;
@@ -73,7 +79,7 @@ namespace DemonicCity.ResultScene
 
         private void Start()
         {
-            GetGameObjects();
+            FindGameObjects();
 
             ReflectionBeforeStatus();
             ResultCalculation();
@@ -268,7 +274,7 @@ namespace DemonicCity.ResultScene
         }
 
         /// <summary>シーン上にあるゲームオブジェクトを取得</summary>
-        private void GetGameObjects()
+        private void FindGameObjects()
         {
             levelUpImage = GameObject.Find("LevelUpImage");
             levelUpImage.SetActive(false);
@@ -291,6 +297,10 @@ namespace DemonicCity.ResultScene
             statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
             experienceGauge = GameObject.Find("ExperienceGauge").GetComponent<Slider>();
             levelTextAnimation = FindObjectOfType<LevelTextAnimation>();
+            skillMasterdMessageWindow = GameObject.Find("SkillMasterdMessageWindow");
+            mastedSkillName = GameObject.FindGameObjectsWithTag("MasterdSkillName");
+            skillMasterdMessageWindow.SetActive(false);
+
         }
 
     }

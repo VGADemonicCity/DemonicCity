@@ -24,19 +24,6 @@ namespace DemonicCity.StrengthenScene
 
         public virtual void JudgementMastering(Magia.PassiveSkill m_passiveSkill)
         {
-            //if ((magia.MyPassiveSkill & m_passiveSkill) == m_passiveSkill)
-            //{
-            //    isMastering = true;
-            //    Debug.Log(m_passiveSkill + "は習得済み");
-            //    gameObject.SetActive(true);
-            //}
-            //else
-            //{
-            //    isMastering = false;
-            //    Debug.Log(m_passiveSkill + "は未習得");
-            //    gameObject.SetActive(false);
-
-            //}
             if (magia.MyPassiveSkill >= m_passiveSkill)
             {
                 isMastering = true;
