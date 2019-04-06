@@ -27,6 +27,10 @@ namespace DemonicCity
         public List<Sprite> BackGround = new List<Sprite>();
         /// <summary>戦闘で使用するステージ</summary>
         public List<Sprite> BattleStage = new List<Sprite>();
+
+        /// <summary>適正レベル[0]下限、[1]上限</summary>
+        public int[] levelRange = new int[2];
+
         /// <summary>バトル前シナリオ</summary>
         [SerializeField] StoryScene.Scenario prologue;
         /// <summary>バトル後シナリオ</summary>

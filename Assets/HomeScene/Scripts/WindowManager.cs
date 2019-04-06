@@ -8,7 +8,7 @@ namespace DemonicCity.HomeScene
 {
     public enum Window
     {
-        Growth, Story, Summon, Magia, Config, PresentBox, Last
+        Growth, Story, Summon, Magia, Config, Gallery, Last
     }
     public class WindowManager : MonoBehaviour
     {
@@ -29,6 +29,7 @@ namespace DemonicCity.HomeScene
             sceneFader = SceneFader.Instance;
         }
         // Use this for initialization
+        Window touchedWindow = Window.Last;
         void Start()
         {
             //Debug.Log("Start");
@@ -39,47 +40,55 @@ namespace DemonicCity.HomeScene
 
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
+                    touchedWindow = Window.Last;
                     touchInfo.HitDetection(out beginObject);
-
-
+                    for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
+                    {
+                        if (touchInfo.HitDetection(out beginObject, buttonObjects[i]))
+                        {
+                            //重なってるときどうなるかわからない
+                            touchedWindow = (Window)i;
+                            break;
+                        }
+                    }
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
+                    //for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
+                    //{
+                    if (touchedWindow != Window.Last
+                       && touchInfo.HitDetection(out endObject, buttonObjects[(int)touchedWindow]))
                     {
-                        if (touchInfo.HitDetection(out endObject)
-                        && endObject == buttonObjects[i])
+                        //if (beginObject == endObject)
+                        //{
+                        parents[(int)touchedWindow].SetActive(true);
+                        switch (touchedWindow)
                         {
-                            if (beginObject == endObject)
-                            {
-                                parents[i].SetActive(true);
-                                switch ((Window)i)
+                            case Window.Growth:
+                                sceneFader.FadeOut(SceneFader.SceneTitle.Strengthen);
+                                break;
+                            case Window.Story:
+                                sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
+                                break;
+                            case Window.Summon:
+                                if (true)//一部クリアフラグ
                                 {
-                                    case Window.Growth:
-                                        sceneFader.FadeOut(SceneFader.SceneTitle.Strengthen);
-                                        break;
-                                    case Window.Story:
-                                        sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
-                                        break;
-                                    case Window.Summon:
-                                        if (true)//一部クリアフラグ
-                                        {
-                                            sceneFader.FadeOut(SceneFader.SceneTitle.Home);
-                                        }
-                                        break;
-                                    case Window.Config:
-                                    case Window.PresentBox:
-                                    case Window.Magia:
-                                        WindowOpen(i);
-                                        break;
-                                    default:
-                                        Debug.Log("Error");
-                                        break;
+                                    sceneFader.FadeOut(SceneFader.SceneTitle.Home);
                                 }
-
-                            }
+                                break;
+                            case Window.Config:
+                            case Window.Gallery:
+                            case Window.Magia:
+                                WindowOpen((int)touchedWindow);
+                                break;
+                            default:
+                                Debug.Log("Error");
+                                break;
                         }
+
+                        //}
                     }
+                    //}
                 }
 
 

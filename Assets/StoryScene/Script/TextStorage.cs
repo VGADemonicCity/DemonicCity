@@ -26,7 +26,7 @@ namespace DemonicCity.StoryScene
         public string charName;
         public CharName cName;
         /// <summary>内容</summary>
-        public string sentence;
+        [Multiline]public string sentence;
         /// <summary>表情</summary>
         public string face;
         /// <summary>表情</summary>

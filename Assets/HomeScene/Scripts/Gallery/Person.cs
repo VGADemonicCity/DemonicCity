@@ -8,7 +8,7 @@ namespace DemonicCity.HomeScene
     [CreateAssetMenu(fileName = "PersonalData", menuName = "Gallery/Person")]
     public class Person : Item
     {
-        public Sprite illust;
+        public string actor;
         public List<AudioClip> voice = new List<AudioClip>();
     }
 }

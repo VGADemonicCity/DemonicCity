@@ -49,6 +49,10 @@ namespace DemonicCity.BattleScene
             {
                 return m_totalDestructionCount;
             }
+            set
+            {
+                m_totalDestructionCount = value;
+            }
         }
 
 
