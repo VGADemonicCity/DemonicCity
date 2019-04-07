@@ -11,6 +11,8 @@ namespace DemonicCity.BattleScene
 {
         /// <summary>panelを開けるのに掛ける時間</summary>
         [SerializeField] float m_processingTime = 3f;
+        /// <summary>封印された敵パネル</summary>
+        [SerializeField] Sprite sealdEnemyPanel;
 
         /// <summary>PanelManagerの参照</summary>
         PanelManager m_panelManager;
@@ -30,8 +32,9 @@ namespace DemonicCity.BattleScene
         public void Activate()
         {
             var enemyPanel = m_panelManager.PanelsInTheScene.Find((panel) => panel.MyPanelType == PanelType.Enemy); // パネル枠の中から敵パネルを取得
-            enemyPanel.Open(m_processingTime);
+            enemyPanel.Open(m_processingTime, sealdEnemyPanel);// スキル発動時専用の敵パネルのスプライトを渡してそれに変える
             m_panelFrameManager.StartCoroutine(m_panelFrameManager.MovingFrame(enemyPanel.MyFramePosition)); // 敵パネルの位置情報の場所にパネルフレームを移動させる
+            enemyPanel.IsOpened = true;
 
 
             Debug.Log("Activated Devil eye.");

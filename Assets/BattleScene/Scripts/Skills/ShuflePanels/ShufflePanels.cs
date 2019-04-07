@@ -87,7 +87,8 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.Click
                 && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
                 && touchInfo.HitDetection(out hitResult)
-                && panelCounter.CounterForShuffleSkill >= conditions)
+                && panelCounter.CounterForShuffleSkill >= conditions
+                && !PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     if (hitResult.tag != "ShufflePanels")
                     {

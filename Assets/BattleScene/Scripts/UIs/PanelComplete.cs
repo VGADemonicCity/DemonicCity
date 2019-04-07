@@ -18,29 +18,30 @@ namespace DemonicCity.BattleScene
             animator = GetComponent<Animator>();
         }
 
-        public float CuttingIn()
+         float CuttingIn()
         {
             animator.CrossFadeInFixedTime(cutIn.name, 0f);
             return cutIn.length;
         }
 
-        public float PlaySkillAnimation()
+         float PlaySkillAnimation()
         {
             animator.CrossFadeInFixedTime(skill.name, 0);
             return skill.length;
         }
 
-        void OnCompleted()
-        {
-            
-        }
-
-
-        public IEnumerator PanelCompleteSkillAnimation()
+        /// <summary>
+        /// パネルコンプリート時のアニメーション再生し,プレイヤーの攻撃ステートへ遷移
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerator PlayPanelCompleteSkillAnimation()
         {
             yield return new WaitForSeconds(CuttingIn());
             yield return new WaitForSeconds(PlaySkillAnimation());
-
+            // =========================================
+            // イベント呼び出し : StateMachine.PlayerAttack
+            // =========================================
+            BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
         }
     }
 }

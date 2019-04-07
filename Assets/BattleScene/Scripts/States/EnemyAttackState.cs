@@ -103,7 +103,11 @@ namespace DemonicCity.BattleScene
 
             // ゲージが減少している間待つ
             yield return new WaitForSeconds(1f);
+            TrantisionState();
+        }
 
+        void TrantisionState()
+        {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
             if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
             {
@@ -111,7 +115,7 @@ namespace DemonicCity.BattleScene
                 // イベント呼び出し : StateMachine.PlayerAttack
                 // ==============================
                 m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
-                yield break;
+                 return;
             }
 
             if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する

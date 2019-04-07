@@ -27,29 +27,53 @@ namespace DemonicCity.BattleScene
                 if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
+                }   
+
+                if(m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
+                {
+                    OnPanelCompleted();
+                    return;
                 }
 
-                // ==============================
+                // 破壊数が0の時攻撃処理を行わずステート遷移する
+                if(m_panelCounter.DestructionCount == 0)
+                {
+                    StartCoroutine(TransitionState());
+                    return;
+                }
+
+                // =====================
                 // イベント呼び出し : SkillJudger,強化
-                // ==============================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
-                StartCoroutine(ActivateSkill()); // 強化の演出開始
+                // =====================
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                StartCoroutine(ActivateSkill(false)); // 強化の演出開始
+
+                // =====================
+                // イベント呼び出し : SkillJudger,攻撃
+                // =====================
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Attack, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                StartCoroutine(ActivateSkill(true)); // 攻撃の演出開始
             });
         }
 
         /// <summary>
-        /// 敵パネル以外の
+        /// 敵パネル以外の全て引いた時敵を一撃で倒す
         /// </summary>
         public void OnPanelCompleted()
         {
-            
+            // 敵のHPをそのまま攻撃力に転換してダメージを与える
+            var damage = m_battleManager.CurrentEnemy.Stats.HitPoint;
+            AttackProcess(damage);
         }
 
+
+
         /// <summary>
-        /// 強化時の演出
+        /// 発動可能なスキルのアニメーションを行う<see langword="true"/>is Attack animation, and <see langword="false"/>is Enhance animation.
         /// </summary>
-        /// <returns>The enhancement.</returns>
-        IEnumerator ActivateSkill()
+        /// <param name="isAttack">攻撃演出かどうか</param>
+        /// <returns></returns>
+        IEnumerator ActivateSkill(bool isAttack)
         {
             // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
@@ -58,8 +82,7 @@ namespace DemonicCity.BattleScene
             {
                 if (skill.IsActivatable)
                 {
-
-                    Debug.Log(skill.GetType());
+                    Debug.Log(skill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     while (clipInfos.Length == 0)
@@ -68,34 +91,30 @@ namespace DemonicCity.BattleScene
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
                     yield return new WaitForSeconds(clipInfos[0].clip.length);
+                    // スキルが発動された時のコールバック.
+                    skill.OnSkillActivated();
                 }
             }
-            // スキル発動の演出を終えたら攻撃アニメーション再生
-            magiaAnimator.CrossFadeInFixedTime("Attack", 0);
-            var clips = magiaAnimator.GetCurrentAnimatorClipInfo(0);
-            while (clips.Length == 0)
-            {
-                yield return null;
-                clips = magiaAnimator.GetCurrentAnimatorClipInfo(0);
-            }
-            yield return new WaitForSeconds(clips[0].clip.length * adjustmentCoefficent);
 
-            // 攻撃の演出開始
-            StartCoroutine(AttackProcess());
+            // ダメージ計算を行い攻撃の演出開始
+            if(isAttack)
+            {
+            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Temp.Defense;
+            AttackProcess(damage);
+            }
         }
 
-
         /// <summary>
-        /// スキル効果反映後、攻撃処理と演出を行う
+        /// 引数のダメージを元に攻撃処理を行う
         /// </summary>
-        /// <returns>The process.</returns>
-        IEnumerator AttackProcess()
+        /// <param name="damage"></param>
+        void AttackProcess(int damage)
         {
             // ==============================
             // ここに攻撃の演出処理を入れる予定
             // ==============================
             Debug.Log("攻撃する前の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.Temp.HitPoint);
-            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Temp.Defense;
+            //var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Temp.Defense;
             if (damage > 0)
             {
                 m_battleManager.CurrentEnemy.Stats.Temp.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
@@ -104,17 +123,26 @@ namespace DemonicCity.BattleScene
             Debug.Log("Damage is " + damage);
             Debug.Log("攻撃した後の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.Temp.HitPoint);
 
+            StartCoroutine(TransitionState());
+        }
 
-            // ==================================
+        /// <summary>
+        /// 敵のHPに応じてステート遷移を行う
+        /// </summary>
+        /// <returns>The process.</returns>
+        IEnumerator TransitionState()
+        {
+
+            // =====================
             // イベント呼び出し : StateMachine.
-            // ==================================
+            // =====================
             if (m_battleManager.CurrentEnemy.Stats.Temp.HitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
             {
                 if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.EnemyAttack)
                 {
-                    // ==================================
+                    // =============================
                     // イベント呼び出し : StateMachine.PlayerChoice
-                    // ==================================
+                    // =============================
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
                 }
                 else

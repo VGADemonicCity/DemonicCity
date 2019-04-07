@@ -180,7 +180,7 @@ namespace DemonicCity.BattleScene
                     attackButtonProcess.ButtonClose();
 
                     // =========================================
-                    // イベント呼び出し : StateMachine.PlayerAttack
+                    // イベント呼び出し : StateMachine.EnemyAttack
                     // =========================================
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                     break;
@@ -194,8 +194,8 @@ namespace DemonicCity.BattleScene
             // パネルコンプリート
             if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
             {
-                //panelComplete.StartCoroutine(PanelCompleteSkillAnimation);
-                StartCoroutine(panelComplete.PanelCompleteSkillAnimation());
+                attackButtonProcess.ButtonClose();
+                StartCoroutine(panelComplete.PlayPanelCompleteSkillAnimation());
             }
         }
     }
