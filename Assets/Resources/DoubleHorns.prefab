@@ -81,7 +81,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1327912409227080}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.7048826, y: 0.38, z: 0}
+  m_LocalPosition: {x: -1.704883, y: 0.557, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4966058742081450}
@@ -96,8 +96,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1349269353808352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.31, y: 0.07999998, z: 0}
-  m_LocalScale: {x: 4.6547275, y: 4.6547275, z: 4.6547275}
+  m_LocalPosition: {x: 3.49, y: 0.16, z: 0}
+  m_LocalScale: {x: 2.6671588, y: 2.6671588, z: 2.6671588}
   m_Children: []
   m_Father: {fileID: 4866127432364854}
   m_RootOrder: 0
@@ -129,7 +129,7 @@ Animator:
   m_GameObject: {fileID: 1349269353808352}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 1aef681f537536746aee17d09385fe46, type: 2}
+  m_Controller: {fileID: 22100000, guid: fd1315bb8d83e9d439ed429019c2ce7c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -158,11 +158,11 @@ MonoBehaviour:
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 1000
+    HitPoint: 100000
     Attack: 0
     Defense: 0
   m_animator: {fileID: 95204437066560128}
-  skillAnimator: {fileID: 0}
+  skillAnimator: {fileID: 95864045544708812}
   m_destroyingTime: 3
 --- !u!212 &212791648049558108
 SpriteRenderer:

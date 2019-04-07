@@ -16,15 +16,6 @@ namespace DemonicCity.BattleScene
         private void Awake()
         {
             animator = GetComponent<Animator>();
-            BattleManager.Instance.m_BehaviourByState.AddListener(state =>
-            {
-                if(state != BattleManager.StateMachine.State.PlayerChoice)
-                {
-                    return;
-                }
-
-
-            });
         }
 
         public float CuttingIn()
@@ -39,11 +30,17 @@ namespace DemonicCity.BattleScene
             return skill.length;
         }
 
+        void OnCompleted()
+        {
+            
+        }
+
 
         public IEnumerator PanelCompleteSkillAnimation()
         {
             yield return new WaitForSeconds(CuttingIn());
-            PlaySkillAnimation();
+            yield return new WaitForSeconds(PlaySkillAnimation());
+
         }
     }
 }
