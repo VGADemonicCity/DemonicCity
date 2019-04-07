@@ -294,7 +294,7 @@ namespace DemonicCity
             /// <summary>魔王ノ細胞</summary>
             SatansCell = 512,
             /// <summary>天照権現</summary>
-            AmaterasuIncanation = 1024,
+            AmaterasuIncarnation = 1024,
             /// <summary>天照-爆炎-</summary>
             AmaterasuInferno = 2048,
             /// <summary>天照-焔壁-</summary>

@@ -13,12 +13,6 @@ namespace DemonicCity.BattleScene.Skill
     public class DevilsFistInfernoType : PassiveSkill
     {
 
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.DevilsFistInfernoType; // フラグを設定
-        }
-
         /// <summary>
         /// スキル発動条件の審査を行う
         /// 魔拳烈火ノ型の発動条件が正の場合発動させない

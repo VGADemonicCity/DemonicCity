@@ -27,6 +27,11 @@ namespace DemonicCity.Debugger
         [Header("ボタンを押した時に開くパネルの枚数(ランダム)")]
         [Range(0, 25)]
         [SerializeField] int openPanelQuantity;
+        /// <summary>バトル中のマギアのステータス</summary>
+        [SerializeField] Status magiaStatus;
+        /// <summary>バトル中の敵のステータス</summary>
+        [SerializeField] Status currentEnemyStatus;
+
 
         /// <summary></summary>
         public bool DebugFlag
@@ -41,6 +46,14 @@ namespace DemonicCity.Debugger
             }
         }
 
+        private void Update()
+        {
+            if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
+            {
+                magiaStatus = m_battleManager.m_MagiaStats;
+                currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
+            }
+        }
 
         private void Awake()
         {
@@ -58,7 +71,6 @@ namespace DemonicCity.Debugger
             {
                 return;
             }
-            Debug.Log("Called OnValidate");
             if (displayPanels && m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
             {
                 PanelManager.Instance.PanelsInTheScene.ForEach(panel =>

@@ -35,7 +35,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_StateMachine.m_Wave++;
             m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); //バトル開始直前の 敵のステータスの初期値を保存
-            m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.Temp.HitPoint); // 敵のHP最大値をGaugeに登録する
+            m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.HitPoint); // 敵のHP最大値をGaugeに登録する
             StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
             m_enemiesMover.Moving(); // 待機させている次の敵を最前面迄動かす
             backgroundCtrl.FadingImageOfTheStage(); // ステージ背景を遷移させるアニメーション再生

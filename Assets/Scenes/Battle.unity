@@ -758,6 +758,36 @@ Prefab:
       propertyPath: panelComplete
       value: 
       objectReference: {fileID: 1429502534}
+    - target: {fileID: 114452556554156664, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_timing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114697641580245106, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_timing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677235418965648, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_timing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114432879614141590, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_timing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114677235418965648, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_incease
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: openPanelQuantity
+      value: 24
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0

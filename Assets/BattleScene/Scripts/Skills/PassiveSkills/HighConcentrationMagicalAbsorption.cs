@@ -11,11 +11,6 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class HighConcentrationMagicalAbsorption : PassiveSkill
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.HighConcentrationMagicalAbsorption; // フラグを設定
-        }
 
         /// <summary>
         /// スキル発動

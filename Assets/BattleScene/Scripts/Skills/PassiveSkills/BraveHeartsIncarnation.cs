@@ -11,11 +11,6 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class BraveHeartsIncarnation : PassiveSkill
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.BraveHeartsIncarnation; // フラグを設定
-        }
 
         /// <summary>
         /// スキル発動

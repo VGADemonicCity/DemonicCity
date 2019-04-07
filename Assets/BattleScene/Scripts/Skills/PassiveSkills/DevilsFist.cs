@@ -11,12 +11,6 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class DevilsFist : PassiveSkill
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.DevilsFist; // フラグを設定
-        }
-
         /// <summary>
         /// スキル発動条件の審査を行う
         /// 魔拳烈火ノ型の発動条件が正の場合発動させない

@@ -48,11 +48,7 @@ namespace DemonicCity.BattleScene
                 m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(ActivateSkill(false)); // 強化の演出開始
 
-                // =====================
-                // イベント呼び出し : SkillJudger,攻撃
-                // =====================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Attack, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
-                StartCoroutine(ActivateSkill(true)); // 攻撃の演出開始
+
             });
         }
 
@@ -82,7 +78,7 @@ namespace DemonicCity.BattleScene
             {
                 if (skill.IsActivatable)
                 {
-                    Debug.Log(skill.ToString());
+                    Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     while (clipInfos.Length == 0)
@@ -99,8 +95,16 @@ namespace DemonicCity.BattleScene
             // ダメージ計算を行い攻撃の演出開始
             if(isAttack)
             {
-            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Temp.Defense;
+            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
             AttackProcess(damage);
+            }
+            else
+            {
+                // =====================
+                // イベント呼び出し : SkillJudger,攻撃
+                // =====================
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Attack, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                StartCoroutine(ActivateSkill(true)); // 攻撃の演出開始
             }
         }
 
@@ -110,18 +114,12 @@ namespace DemonicCity.BattleScene
         /// <param name="damage"></param>
         void AttackProcess(int damage)
         {
-            // ==============================
-            // ここに攻撃の演出処理を入れる予定
-            // ==============================
-            Debug.Log("攻撃する前の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.Temp.HitPoint);
-            //var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Temp.Defense;
+
             if (damage > 0)
             {
-                m_battleManager.CurrentEnemy.Stats.Temp.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
-                m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.Temp.HitPoint); // HPGaugeと同期
+                m_battleManager.CurrentEnemy.Stats.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
+                m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.HitPoint); // HPGaugeと同期
             }
-            Debug.Log("Damage is " + damage);
-            Debug.Log("攻撃した後の[" + m_battleManager.CurrentEnemy.Id + "]の体力 : " + m_battleManager.CurrentEnemy.Stats.Temp.HitPoint);
 
             StartCoroutine(TransitionState());
         }
@@ -136,7 +134,7 @@ namespace DemonicCity.BattleScene
             // =====================
             // イベント呼び出し : StateMachine.
             // =====================
-            if (m_battleManager.CurrentEnemy.Stats.Temp.HitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
+            if (m_battleManager.CurrentEnemy.Stats.HitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
             {
                 if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.EnemyAttack)
                 {
