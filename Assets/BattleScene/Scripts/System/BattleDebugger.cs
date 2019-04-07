@@ -77,7 +77,10 @@ namespace DemonicCity.Debugger
                 {
                     return;
                 }
-                StartCoroutine(AutoPanelSelector());
+                //StartCoroutine(AutoPanelSelector());
+                OpenAllPanelsExceptEnemyPanels();
+                var enemyPanel = m_panelManager.PanelsInTheScene.Find(panel => panel.MyPanelType == PanelType.Enemy);
+                m_panelManager.PanelProcessing(enemyPanel);
             });
         }
 
@@ -90,15 +93,12 @@ namespace DemonicCity.Debugger
             {
 
                 var openCount = 0;
-                var panels = m_panelManager.AllPanelsExceptEnemyPanels.OrderBy(panel => Guid.NewGuid());
-                foreach (var panel in panels)
+                var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
+                var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());
+                foreach (var panel in orderedPanels)
                 {
-                    if(panel.MyPanelType == PanelType.Enemy)
-                    {
-                        Debug.Log("Enemyが混じってるよ");
-                        Debug.Break();
-                    }
                     m_panelManager.PanelProcessing(panel);
+
                     openCount++;
                     if (openCount >= openPanelQuantity)
                     {

@@ -77,8 +77,8 @@ namespace DemonicCity.BattleScene
         void Initialize()
         {
             // その章のChapterを取得
-            //m_chapter = ChapterManager.Instance.GetChapter();
-            m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
+            m_chapter = ChapterManager.Instance.GetChapter();
+            //m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
 
 
             SpawnEnemies();

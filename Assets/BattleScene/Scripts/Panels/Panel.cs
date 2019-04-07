@@ -91,7 +91,6 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(); // PanelTypeに合わせてtextureを変える
             IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
-            Debug.Log(MyPanelType+ "Opened");
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>

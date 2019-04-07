@@ -77,7 +77,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
         /// <summary>攻撃ボタンを表示する</summary>
         [SerializeField] AttackButtonProcess attackButtonProcess;
-        [SerializeField] PanelCompleteCutIn panelCompleteCutIn;
+        [SerializeField] PanelComplete panelComplete;
 
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
         BattleManager m_battleManager;
@@ -192,9 +192,10 @@ namespace DemonicCity.BattleScene
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
 
             // パネルコンプリート
-            if(PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
+            if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
             {
-                panelCompleteCutIn.PlayAnimation();
+                //panelComplete.StartCoroutine(PanelCompleteSkillAnimation);
+                StartCoroutine(panelComplete.PanelCompleteSkillAnimation());
             }
         }
     }

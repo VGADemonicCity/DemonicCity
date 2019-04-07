@@ -38,6 +38,14 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
+        /// 敵パネル以外の
+        /// </summary>
+        public void OnPanelCompleted()
+        {
+            
+        }
+
+        /// <summary>
         /// 強化時の演出
         /// </summary>
         /// <returns>The enhancement.</returns>

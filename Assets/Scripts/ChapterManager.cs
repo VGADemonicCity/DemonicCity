@@ -79,7 +79,6 @@ namespace DemonicCity
             return chapter.enemiesIds;
         }
 
-
         /// <summary>
         /// 引数のストーリーの進行度に対応した章のタイトルを取得する
         /// </summary>

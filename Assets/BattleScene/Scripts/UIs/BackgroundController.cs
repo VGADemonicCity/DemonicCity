@@ -14,10 +14,6 @@ namespace DemonicCity.BattleScene
         [SerializeField] SpriteRenderer secondWaveBattleStage;
         /// <summary>バトルステージ背景</summary>
         [SerializeField] SpriteRenderer thirdWaveBattleStage;
-        /// <summary>背景</summary>
-        [SerializeField] SpriteRenderer background;
-        /// <summary>ウェーブ毎の現在地を表示するUI</summary>
-        [SerializeField] GameObject cityNameBox;
         /// <summary>cityNameBoxのテキストコンポーネント</summary>
         Text cityNameTextBox;
 
@@ -37,7 +33,6 @@ namespace DemonicCity.BattleScene
 
                     // 初期化を行い1wave目のStageを表示するアニメーションを再生
                     Initialize();
-                    SettingBackground();
                     FadingImageOfTheStage();
                 }
             });
@@ -48,8 +43,8 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void Initialize()
         {
-            //var chapter = ChapterManager.Instance.GetChapter();
-            chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
+            var chapter = ChapterManager.Instance.GetChapter();
+            //chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
 
             // ステージ画像を設定
             firstWaveBattleStage.sprite = chapter.BattleStage[0];
@@ -60,14 +55,6 @@ namespace DemonicCity.BattleScene
             firstWaveBattleStage.color = Color.clear;
             secondWaveBattleStage.color = Color.clear;
             thirdWaveBattleStage.color = Color.clear;
-        }
-
-        /// <summary>
-        /// 背景の画像を適切に設定する
-        /// </summary>
-        void SettingBackground()
-        {
-            background.sprite = chapter.BackGround[0];
         }
 
         /// <summary>
