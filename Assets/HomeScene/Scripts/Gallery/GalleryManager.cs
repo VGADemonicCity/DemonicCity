@@ -187,7 +187,7 @@ namespace DemonicCity.HomeScene
             {
                 fadePanelAlpha -= Time.deltaTime * fadeTime;
                 fadePanel.color = new Color(0, 0, 0, fadePanelAlpha);
-                Debug.Log(fadePanelAlpha);
+                //Debug.Log(fadePanelAlpha);
                 yield return null;
             }
             fadePanelAlpha = 0f;
@@ -205,14 +205,14 @@ namespace DemonicCity.HomeScene
             {
                 fadePanelAlpha += Time.deltaTime * fadeTime;
                 fadePanel.color = new Color(0, 0, 0, fadePanelAlpha);
-                Debug.Log(fadePanelAlpha);
+                //Debug.Log(fadePanelAlpha);
                 yield return null;
             }
             fadePanelAlpha = 1f;
             fadePanel.color = Color.black;
         }
 
-        #endregion 
+        #endregion
 
         void Init()
         {
@@ -304,6 +304,7 @@ namespace DemonicCity.HomeScene
             yield return new WaitWhile(() => !IsBlack);
             //yield return null;
             drawer.transform.parent.gameObject.SetActive(true);
+            drawer.transform.parent.gameObject.transform.localPosition = Vector3.zero;
             if (GetItem(tag) != null)
             {
                 drawer.Init(GetItem(tag), this);
