@@ -9,7 +9,8 @@ public class LevelTextAnimation : MonoBehaviour
 
     public enum AnimationClip
     {
-        TopToBottom
+        TopToBottom,
+        MiddleToBottom
     }
 
     void Start()
@@ -19,7 +20,7 @@ public class LevelTextAnimation : MonoBehaviour
 
     /// <summary>レベルアップ時のテキストアニメーション</summary>
     /// <param name="animationClip"></param>
-    public void TopToBottomAnimation(AnimationClip animationClip)
+    public void TextAnimation(AnimationClip animationClip)
     {
         textAnimator.CrossFadeInFixedTime(animationClip.ToString(), 0, 0);
     }

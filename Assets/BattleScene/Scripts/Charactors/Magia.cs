@@ -19,6 +19,7 @@ namespace DemonicCity
         public PassiveSkill MyPassiveSkill
         {
             get { return m_passiveSkill; }
+            set { m_passiveSkill = value; }
         }
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
         public int MaxLevel

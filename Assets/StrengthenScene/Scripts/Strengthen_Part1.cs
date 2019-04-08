@@ -79,8 +79,7 @@ namespace DemonicCity.StrengthenScene
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
         private GameObject[] skillExplanationTexts = null;
-        private GameObject notAcquiredMessage = null;
-
+   
         /// <summary>ポップアップウィンドウの表示/非表示</summary>
         private bool activePopUpWindow = false;
         /// <summary>スキル説明テキストの表示/非表示</summary>
@@ -120,12 +119,6 @@ namespace DemonicCity.StrengthenScene
                                 if (!activePopUpWindow)
                                 {
                                     skillListWindow.SetActive(true);
-                                    notAcquiredMessage = GameObject.Find("NotAcquiredMessage");
-                                    notAcquiredMessage.SetActive(false);
-                                    if (magia.MyPassiveSkill == Magia.PassiveSkill.Invalid)
-                                    {
-                                        notAcquiredMessage.SetActive(true);
-                                    }
 
                                     skillExplanationTexts = GameObject.FindGameObjectsWithTag("SkillDescriptionText");
                                     for (int i = 0; i < skillExplanationTexts.Length; i++)
@@ -368,6 +361,10 @@ namespace DemonicCity.StrengthenScene
             updatedBasicStatusTexts[2].text = currentDefence.ToString();
 
             UpdateText();
+            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            {
+                updatedBasicStatusTexts[i].text = "";
+            }
 
             for (int i = 0; i < addUniqueStatusTexts.Length; i++)
             {
@@ -417,6 +414,11 @@ namespace DemonicCity.StrengthenScene
             SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
+            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            {
+                updatedBasicStatusTexts[i].text = "";
+            }
+
             for (int i = 0; i < addUniqueStatusTexts.Length; i++)
             {
                 addUniqueStatusTexts[i].text = "";
@@ -450,10 +452,6 @@ namespace DemonicCity.StrengthenScene
             currentBasicStatusTexts[0].text = currentHp.ToString();
             currentBasicStatusTexts[1].text = currentAttack.ToString();
             currentBasicStatusTexts[2].text = currentDefence.ToString();
-
-            //updatedBasicStatusTexts[0].text = "";
-            //updatedBasicStatusTexts[1].text = "";
-            //updatedBasicStatusTexts[2].text = "";
 
             currentUniqueStatusTexts[0].text = charm.ToString();
             currentUniqueStatusTexts[1].text = dignity.ToString();
