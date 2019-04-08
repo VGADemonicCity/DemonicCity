@@ -108,7 +108,7 @@ namespace DemonicCity
         /// <summary>レベルに応じて相対的にレベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
-        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
+        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.DevilsFist;
 
 
         /// <summary>実際にセーブするステータスクラス</summary>

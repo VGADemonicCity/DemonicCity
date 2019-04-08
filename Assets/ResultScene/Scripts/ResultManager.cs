@@ -386,7 +386,7 @@ namespace DemonicCity.ResultScene
 
             needDestructionCountText.text = (nextLevelRequiredExperience - myExperience).ToString();
             destructionCount = panelCounter.TotalDestructionCount;
-            destructionCount = 500;//debug
+           // destructionCount = 500;//debug
             destructionCountText.text = destructionCount.ToString();
         }
 
