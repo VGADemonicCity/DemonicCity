@@ -153,70 +153,70 @@ namespace DemonicCity.ResultScene
             {
                 case 1:
                     skillName = "魔拳";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.DevilsFist;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.DevilsFist;
                     break;
                 case 11:
                     skillName = "高濃度魔力吸収";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.HighConcentrationMagicalAbsorption;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.HighConcentrationMagicalAbsorption;
                     break;
                 case 23:
                     skillName = "自己再生";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.SelfRegeneration;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.SelfRegeneration;
 
                     break;
                 case 31:
                     skillName = "爆炎熱風柱";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.ExplosiveFlamePillar;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.ExplosiveFlamePillar;
 
                     break;
                 case 44:
                     skillName = "紅蓮障壁";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.CrimsonBarrier;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.CrimsonBarrier;
 
                     break;
                 case 58:
                     skillName = "魔拳烈火ノ型";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.DevilsFistInfernoType;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.DevilsFistInfernoType;
 
                     break;
                 case 70:
                     skillName = "心焔権現";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.BraveHeartsIncarnation;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.BraveHeartsIncarnation;
 
                     break;
                 case 82:
                     skillName = "大紅蓮障壁";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.GreatCrimsonBarrier;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.GreatCrimsonBarrier;
 
                     break;
                 case 100:
                     skillName = "豪炎爆砕掌";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.InfernosFist;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.InfernosFist;
 
                     break;
                 case 111:
                     skillName = "魔王ノ細胞";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.SatansCell;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.SatansCell;
 
                     break;
                 case 136:
                     skillName = "天照権現";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.AmaterasuIncanation;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AmaterasuIncanation;
 
                     break;
                 case 160:
                     skillName = "天照-爆炎-";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.AmaterasuInferno;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AmaterasuInferno;
 
                     break;
                 case 181:
                     skillName = "天照-焔壁-";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.AmaterasuFlameWall;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AmaterasuFlameWall;
 
                     break;
                 case 198:
                     skillName = "王ノ器";
-                    magia.MyPassiveSkill = Magia.PassiveSkill.AllSkill;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AllSkill;
 
                     break;
             }
@@ -280,7 +280,6 @@ namespace DemonicCity.ResultScene
 
             }
             requiredExperiences.Add(nextLevelRequiredExperience);
-            // statusPointDifferences.Add(getTotalStatusPoint);
         }
 
         /// <summary>レベルアップするときの演出</summary>
@@ -386,7 +385,7 @@ namespace DemonicCity.ResultScene
 
             needDestructionCountText.text = (nextLevelRequiredExperience - myExperience).ToString();
             destructionCount = panelCounter.TotalDestructionCount;
-           // destructionCount = 500;//debug
+           //destructionCount = 500;//debug
             destructionCountText.text = destructionCount.ToString();
         }
 
