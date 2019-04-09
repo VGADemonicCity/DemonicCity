@@ -100,7 +100,7 @@ namespace DemonicCity.ResultScene
 
         private void Start()
         {
-            SavableSingletonBase<Magia>.Instance.Clear();//debug
+            //SavableSingletonBase<Magia>.Instance.Clear();//debug
 
             GetGameObjects();
 
