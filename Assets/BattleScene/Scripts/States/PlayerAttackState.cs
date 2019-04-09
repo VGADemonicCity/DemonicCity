@@ -47,8 +47,6 @@ namespace DemonicCity.BattleScene
                 // =====================
                 m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
                 StartCoroutine(ActivateSkill(false)); // 強化の演出開始
-
-
             });
         }
 
@@ -86,7 +84,7 @@ namespace DemonicCity.BattleScene
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
-                    yield return new WaitForSeconds(clipInfos[0].clip.length);
+                    //yield return new WaitForSeconds(clipInfos[0].clip.length);
                     // スキルが発動された時のコールバック.
                     skill.OnSkillActivated();
                 }

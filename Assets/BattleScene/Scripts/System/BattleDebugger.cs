@@ -5,7 +5,7 @@ using DemonicCity.BattleScene;
 using System.Linq;
 using System;
 
-namespace DemonicCity.Debugger
+namespace DemonicCity
 {
     public class BattleDebugger : MonoSingleton<BattleDebugger>
     {
@@ -14,15 +14,11 @@ namespace DemonicCity.Debugger
         /// <summary></summary>
         BattleManager m_battleManager;
         /// <summary></summary>
-        [Header("自動でパネルを選択させるか")]
+        [Header("任意の枚数自動でパネルを選択させる")]
         [SerializeField] bool m_debugFlag;
         /// <summary>パネルを表示させる</summary>
-        [Header("開かれていないパネルを全て可視化するか")]
+        [Header("開かれていないパネルを全て可視化する(開かれてはいない)")]
         [SerializeField] bool displayPanels;
-        [Header("自動パネル選択設定時のパネルを引き始める直前の遅延")]
-        /// <summary></summary>
-        [SerializeField] float waitTime = 1f;
-
         /// <summary>パネルを開く枚数</summary>
         [Header("ボタンを押した時に開くパネルの枚数(ランダム)")]
         [Range(0, 25)]
@@ -31,6 +27,14 @@ namespace DemonicCity.Debugger
         [SerializeField] Status magiaStatus;
         /// <summary>バトル中の敵のステータス</summary>
         [SerializeField] Status currentEnemyStatus;
+
+        //[Header("そのターンのマギアのステータス上昇値")]
+        //[SerializeField] int magiaAtkDiff;
+        //[SerializeField] int magiaDefDiff;
+        //[SerializeField] int magiaHpDiff;
+
+        //[Header("そのターンの敵のステータス上昇値")]
+        //[SerializeField] int EnemyAtkDiff;
 
 
         /// <summary></summary>
@@ -45,6 +49,34 @@ namespace DemonicCity.Debugger
                 m_debugFlag = value;
             }
         }
+
+        //public void UpdteStatusIncreases(UpdateStatusesTag tag, int increase =0)
+        //{
+        //    switch (tag)
+        //    {
+        //        case UpdateStatusesTag.MagiaAtk:
+        //            magiaAtkDiff = increase;
+        //            break;
+        //        case UpdateStatusesTag.MagiaDef:
+        //            magiaDefDiff = increase;
+        //            break;
+        //        case UpdateStatusesTag.MagiaHp:
+        //            magiaHpDiff = increase;
+        //            break;
+        //        case UpdateStatusesTag.EnemyAtk:
+        //            EnemyAtkDiff = increase;
+        //            break;
+        //        case UpdateStatusesTag.Reset:
+        //            magiaAtkDiff = 0;
+        //            magiaDefDiff = 0;
+        //            magiaHpDiff = 0;
+        //            EnemyAtkDiff = 0;
+        //            break;
+        //        default:
+        //            break;
+        //    }
+
+        //}
 
         private void Update()
         {
@@ -93,6 +125,11 @@ namespace DemonicCity.Debugger
                 OpenAllPanelsExceptEnemyPanels();
                 var enemyPanel = m_panelManager.PanelsInTheScene.Find(panel => panel.MyPanelType == PanelType.Enemy);
                 m_panelManager.PanelProcessing(enemyPanel);
+
+                //if (state == BattleManager.StateMachine.State.PlayerChoice)
+                //{
+                //    UpdteStatusIncreases(UpdateStatusesTag.Reset);
+                //}
             });
         }
 
@@ -101,42 +138,46 @@ namespace DemonicCity.Debugger
         /// </summary>
         public void OpenAllPanelsExceptEnemyPanels()
         {
-            if (m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice)
-            {
-
-                var openCount = 0;
-                var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
-                var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());
-                foreach (var panel in orderedPanels)
-                {
-                    m_panelManager.PanelProcessing(panel);
-
-                    openCount++;
-                    if (openCount >= openPanelQuantity)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// パネルをランダムに自動選択する
-        /// </summary>
-        /// <returns></returns>
-        IEnumerator AutoPanelSelector()
-        {
-            var panels = m_panelManager.PanelsInTheScene.OrderBy(i => Guid.NewGuid()); // パネルをランダムにソートする
-            yield return new WaitForSeconds(waitTime);
-            foreach (var panel in panels)
+            var openCount = 0;
+            var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
+            var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());
+            foreach (var panel in orderedPanels)
             {
                 m_panelManager.PanelProcessing(panel);
-                yield return new WaitUntil(() => panel.IsOpened); // パネルが処理中の間は此方の処理を一時停止させる
-                if (panel.MyPanelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
+
+                openCount++;
+                if (openCount >= openPanelQuantity)
                 {
                     break;
                 }
             }
+        }
+
+        ///// <summary>
+        ///// パネルをランダムに自動選択する
+        ///// </summary>
+        ///// <returns></returns>
+        //IEnumerator AutoPanelSelector()
+        //{
+        //    var panels = m_panelManager.PanelsInTheScene.OrderBy(i => Guid.NewGuid()); // パネルをランダムにソートする
+        //    yield return new WaitForSeconds(waitTime);
+        //    foreach (var panel in panels)
+        //    {
+        //        m_panelManager.PanelProcessing(panel);
+        //        yield return new WaitUntil(() => panel.IsOpened); // パネルが処理中の間は此方の処理を一時停止させる
+        //        if (panel.MyPanelType == PanelType.Enemy) // 敵パネルを引いたら処理終了
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
+        public enum UpdateStatusesTag
+        {
+            MagiaAtk,
+            MagiaDef,
+            MagiaHp,
+            EnemyAtk,
+            Reset,
         }
     }
 }

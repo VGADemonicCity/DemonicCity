@@ -14,6 +14,7 @@ namespace DemonicCity.BattleScene.Skill
     public class AmaterasuInferno : PassiveSkill
     {
 
+
         /// <summary>
         /// スキル発動
         /// </summary>
