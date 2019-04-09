@@ -59,26 +59,14 @@ namespace DemonicCity.BattleScene
 
         }
 
-
-        /// <summary>
-        /// Start this instance.
-        /// </summary>
-        void Start()
-        {
-            // ==============================
-            // イベント呼び出し : StateMachine.Init
-            // ==============================
-            m_battleManager.m_BehaviourByState.Invoke(BattleManager.StateMachine.State.Init);
-        }
-
         /// <summary>
         /// Initialize this instance.
         /// </summary>
         void Initialize()
         {
             // その章のChapterを取得
-            //m_chapter = ChapterManager.Instance.GetChapter();
-            m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
+            m_chapter = ChapterManager.Instance.GetChapter();
+            //m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
 
 
             SpawnEnemies();

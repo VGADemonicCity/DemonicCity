@@ -90,20 +90,22 @@ namespace DemonicCity.BattleScene
             }
 
             var damage = m_battleManager.CurrentEnemy.Stats.Attack - m_battleManager.m_MagiaStats.Defense; // 敵の攻撃力からプレイヤーの防御力を引いた値
-            var attack = m_battleManager.CurrentEnemy.Stats.Temp.Attack;
-            Debug.Log("敵の攻撃力     " + attack);
+            var attack = m_battleManager.CurrentEnemy.Stats.Attack;
             if (damage > 0)
             {
                 m_battleManager.m_MagiaStats.HitPoint -= damage; // ダメージ
                 m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
             }
-            Debug.Log("敵から攻撃された後の[" + m_magia + "]の体力 : " + m_battleManager.m_MagiaStats.HitPoint);
 
             OnProcessEnded();
 
             // ゲージが減少している間待つ
             yield return new WaitForSeconds(1f);
+            TrantisionState();
+        }
 
+        void TrantisionState()
+        {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
             if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
             {
@@ -111,7 +113,7 @@ namespace DemonicCity.BattleScene
                 // イベント呼び出し : StateMachine.PlayerAttack
                 // ==============================
                 m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
-                yield break;
+                 return;
             }
 
             if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する

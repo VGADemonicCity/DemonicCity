@@ -53,6 +53,8 @@ namespace DemonicCity
             HalfMask,
             /// <summary>セトゥラス</summary>
             Setulus,
+            /// <summary>超越フェニックス</summary>
+            IxPheonix,
         }
     }
 }

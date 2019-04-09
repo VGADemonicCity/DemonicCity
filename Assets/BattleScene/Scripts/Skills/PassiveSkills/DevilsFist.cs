@@ -11,25 +11,20 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class DevilsFist : PassiveSkill
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.DevilsFist; // フラグを設定
-        }
-
         /// <summary>
         /// スキル発動条件の審査を行う
         /// 魔拳烈火ノ型の発動条件が正の場合発動させない
         /// </summary>
         /// <param name="passiveSkill">Passive skill.</param>
         /// <param name="cityDestructionCount">City destruction count.</param>
-        protected override void TryProcess(Magia.PassiveSkill passiveSkill, int cityDestructionCount)
+        protected override void TryProcess(Magia.PassiveSkill passiveSkill,SkillManager.Timing timing, int cityDestructionCount)
         {
 
             // パッシブスキルフラグが建っている && パッシブスキルフラグに魔拳烈火ノ型 && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない時　SkillActivateを呼ぶ
             if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
                 && cityDestructionCount < GetComponent<DevilsFistInfernoType>().CountCondition
-                && cityDestructionCount >= CountCondition)
+                && cityDestructionCount >= CountCondition
+                && timing == m_timing)
             {
                 m_skillActivated = true; // フラグを立てる
                 IsActivatable = true;
