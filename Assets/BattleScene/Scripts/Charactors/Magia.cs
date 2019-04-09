@@ -5,6 +5,7 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
 using System.Linq;
+using DemonicCity.BattleScene.Debugger;
 
 namespace DemonicCity
 {
@@ -18,7 +19,16 @@ namespace DemonicCity
         /// <summary>パッシブスキルフラグのプロパティ</summary>
         public PassiveSkill MyPassiveSkill
         {
-            get { return m_passiveSkill; }
+            get
+            {
+                if (!BattleDebugger.Instance.LoadStatusFromInspector || SceneManager.GetActiveScene().name != "Battle")
+                {
+                    var saveData = SaveData.Instance;
+                    return saveData.magia.m_passiveSkill;
+                }
+
+                return m_passiveSkill;
+            }
             set { m_passiveSkill = value; }
         }
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
@@ -31,7 +41,7 @@ namespace DemonicCity
         {
             get
             {
-                if(m_stats == null)
+                if (m_stats == null)
                 {
                     var saveData = SaveData.Instance;
                     m_stats = saveData.magia.m_stats;
@@ -129,10 +139,6 @@ namespace DemonicCity
 
         /// <summary>1levelUP毎の固有ステータス用振り分けポイント追加量</summary>
         int m_addStatsPoint = 3;
-        /// <summary>固有ステータスを基礎ステータスに変換する際の倍率</summary>
-        int m_magnificationByStats = 5;
-        /// <summary>固有ステータスを形態毎に基礎ステータスに変換する際の倍率</summary>
-        int m_magnificationByAttribute = 50;
 
         #endregion
 
@@ -159,7 +165,7 @@ namespace DemonicCity
             if (MaxLevel >= Stats.Level && requiredExp <= m_experience) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
             {
                 allocationPoint = 0;
-                return false ;
+                return false;
             }
 
             // レベルアップする直前のレベルに合わせてステータスを上昇させる
@@ -227,23 +233,6 @@ namespace DemonicCity
         }
 
         /// <summary>
-        /// 強化画面で編集したStatsをmagiaにセットし、固有ステータスを基礎ステータスに反映させる
-        /// </summary>
-        public void Sync(Status stats = null)
-        {
-            if (stats != null)
-            {
-                Stats = stats;
-            }
-            Stats.Attack = Stats.Attack + (Stats.Sense * m_magnificationByStats); // センスを攻撃力に変換
-            Stats.Attack = Stats.Attack + (Stats.MuscularStrength * m_magnificationByStats); // 筋力を攻撃力に変換
-            Stats.Defense = Stats.Defense + (Stats.Durability * m_magnificationByStats); // 耐久力を防御力に変換
-            Stats.Defense = Stats.Defense + (Stats.Knowledge * m_magnificationByStats); // 知識を防御力に変換
-            Stats.HitPoint = Stats.HitPoint + (Stats.Charm * m_magnificationByAttribute); // 魅力をHPに変換
-            Stats.HitPoint = Stats.HitPoint + (Stats.Dignity * m_magnificationByAttribute); // 威厳をHPに変換
-        }
-
-        /// <summary>
         /// ステージ開始時,InitStateの時にその時のマギアのHP最大値で初期化する
         /// </summary>
         /// <param name="maxHP">Max hp.</param>
@@ -252,7 +241,20 @@ namespace DemonicCity
             MaxHP = maxHP;
         }
 
-
+        /// <summary>
+        /// レベルに応じてスキルを習得させる
+        /// </summary>
+        /// <param name="passiveSkills"></param>
+        public void SetPassiveSkillFromLevel(List<BattleScene.Skill.PassiveSkill> passiveSkills)
+        {
+            passiveSkills.ForEach(skill =>
+            {
+                if (m_stats.Level >= skill.LevelCondition)
+                {
+                    MyPassiveSkill |= skill.GetPassiveSkill;
+                }
+            });
+        }
 
         #endregion
 

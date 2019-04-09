@@ -112,13 +112,6 @@ namespace DemonicCity.BattleScene
                         ProcessingFactory(hitResult); // 結果内容を判別し結果に応じて処理を自動的に行わせる
                     }
                 }
-
-                if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
-                {
-                    var a = Magia.Instance; // Debug用
-                    a.LevelUp(); // Debug用
-
-                }
             });
         }
 

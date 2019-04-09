@@ -45,6 +45,10 @@ namespace DemonicCity
             });
         }
 
+        /// <summary>
+        /// UIに配置されているトグルに対してイベントハンドラを登録する
+        /// </summary>
+        /// <param name="popupMaterial"></param>
         public void SubscribeToggle(PopupSystemMaterial popupSystemMaterial)
         {
             var toggle = popupedObject.GetComponent<Toggle>();

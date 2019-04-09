@@ -79,6 +79,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1286192057750126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4887146168630968}
+  - component: {fileID: 114332594962796498}
+  m_Layer: 0
+  m_Name: Debugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1291335245634264
 GameObject:
   m_ObjectHideFlags: 0
@@ -92,7 +108,6 @@ GameObject:
   - component: {fileID: 61020726325893518}
   - component: {fileID: 114294880535250120}
   - component: {fileID: 114024525100392670}
-  - component: {fileID: 114195271979354084}
   - component: {fileID: 114177336636838174}
   - component: {fileID: 114212980024678998}
   - component: {fileID: 114290885052486680}
@@ -172,6 +187,7 @@ Transform:
   - {fileID: 4293241256990584}
   - {fileID: 4883720955422510}
   - {fileID: 4596012782248328}
+  - {fileID: 4887146168630968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -187,6 +203,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4691038718456576}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4887146168630968
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286192057750126}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61020726325893518
 BoxCollider2D:
@@ -225,6 +254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 24
+  m_levelCondition: 1
   m_passiveSkillName: 64
   m_timing: 0
   m_incease: 0.05
@@ -275,44 +305,6 @@ MonoBehaviour:
   m_condition: 30
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
---- !u!114 &114195271979354084
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1291335245634264}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  effectSkip: 0
-  autoPlay: 0
-  displayPanels: 0
-  openPanelQuantity: 24
-  magiaStatus:
-    Level: 0
-    Durability: 0
-    MuscularStrength: 0
-    Knowledge: 0
-    Sense: 0
-    Charm: 0
-    Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
-  currentEnemyStatus:
-    Level: 0
-    Durability: 0
-    MuscularStrength: 0
-    Knowledge: 0
-    Sense: 0
-    Charm: 0
-    Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
-  flag: 2
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,6 +317,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 32
+  m_levelCondition: 1
   m_passiveSkillName: 512
   m_timing: 0
   m_incease: 0.02
@@ -380,6 +373,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 19
+  m_levelCondition: 1
   m_passiveSkillName: 16
   m_timing: 0
   m_incease: 0.1
@@ -408,19 +402,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10e31b60ff1d34a5fbff62882bfc395a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MagiaStats:
-    Level: 0
-    Durability: 0
-    MuscularStrength: 0
-    Knowledge: 0
-    Sense: 0
-    Charm: 0
-    Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
-  m_enemyObjects: []
-  m_enemies: []
   m_CoordinateForSpawn: {fileID: 0}
 --- !u!114 &114306332384846622
 MonoBehaviour:
@@ -445,6 +426,58 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca2b3cd7582f44bb29ea5f8a2f73bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114332594962796498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1286192057750126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openPanelQuantity: 24
+  magiaStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  currentEnemyStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  flag: 2
+  LoadStatusFromInspector: 1
+  TargetMagiaLevel: 200
+  addStatus: 0
+  additionalStatus:
+    Level: 0
+    Durability: 83
+    MuscularStrength: 37
+    Knowledge: 186
+    Sense: 281
+    Charm: 84
+    Dignity: 63
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  hpFactor: 50
+  attackFactor: 5
+  defenseFactor: 5
 --- !u!114 &114395287615114370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -468,6 +501,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 30
+  m_levelCondition: 1
   m_passiveSkillName: 256
   m_timing: 1
   m_incease: 0.02
@@ -496,6 +530,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 1
+  m_levelCondition: 1
   m_passiveSkillName: 1
   m_timing: 1
   m_incease: 0.01
@@ -511,6 +546,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 34
+  m_levelCondition: 1
   m_passiveSkillName: 1024
   m_timing: 0
   m_incease: 0.01
@@ -526,6 +562,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 14
+  m_levelCondition: 1
   m_passiveSkillName: 4
   m_timing: 0
   m_incease: 0.1
@@ -585,6 +622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 27
+  m_levelCondition: 1
   m_passiveSkillName: 128
   m_timing: 0
   m_incease: 0.1
@@ -600,6 +638,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 11
+  m_levelCondition: 1
   m_passiveSkillName: 2
   m_timing: 0
   m_incease: 0.5
@@ -615,6 +654,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 38
+  m_levelCondition: 1
   m_passiveSkillName: 2048
   m_timing: 1
   m_incease: 0.05
@@ -630,6 +670,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 21
+  m_levelCondition: 1
   m_passiveSkillName: 32
   m_timing: 1
   m_incease: 0.015
@@ -659,6 +700,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 36
+  m_levelCondition: 1
   m_passiveSkillName: 4096
   m_timing: 0
   m_incease: 0
@@ -700,6 +742,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_countCondition: 16
+  m_levelCondition: 1
   m_passiveSkillName: 8
   m_timing: 0
   m_incease: 0.5

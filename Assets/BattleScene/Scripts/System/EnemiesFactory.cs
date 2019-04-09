@@ -46,13 +46,36 @@ namespace DemonicCity
             /// <summary>イクスマギナ</summary>
             Ixmagina,
             /// <summary>一本角魔族</summary>
-            SingleHorn,
+            SingleHorn1,
+            SingleHorn2,
+            SingleHorn3,
+            SingleHorn4,
+            SingleHorn5,
+            SingleHorn6,
+            SingleHorn7,
+            SingleHorn8,
+            SingleHorn9,
+            SingleHorn10,
+            SingleHorn11,
+            SingleHorn12,
             /// <summary>二本角魔族</summary>
-            DoubleHorns,
-            /// <summary>反面魔族長</summary>
-            HalfMask,
+            DoubleHorns1,
+            DoubleHorns2,
+            DoubleHorns3,
+            DoubleHorns4,
+            DoubleHorns5,
+            DoubleHorns6,
+            DoubleHorns7,
+            DoubleHorns8,
+            DoubleHorns9,
+            DoubleHorns10,
+            DoubleHorns11,
+            DoubleHorns12,
             /// <summary>セトゥラス</summary>
-            Setulus,
+            Setulus1,
+            Setulus2,
+            Setulus3,
+            Setulus4,
             /// <summary>超越フェニックス</summary>
             IxPheonix,
         }

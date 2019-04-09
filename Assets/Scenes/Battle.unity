@@ -528,13 +528,15 @@ GameObject:
   - component: {fileID: 335509482}
   - component: {fileID: 335509481}
   - component: {fileID: 335509480}
+  - component: {fileID: 335509484}
+  - component: {fileID: 335509483}
   m_Layer: 5
   m_Name: DebugButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &335509479
 RectTransform:
   m_ObjectHideFlags: 0
@@ -629,6 +631,34 @@ CanvasRenderer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 335509478}
   m_CullTransparentMesh: 0
+--- !u!114 &335509483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335509478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 0}
+  scalingTime: 1
+--- !u!114 &335509484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 335509478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ca3e572908d548d998c281ed6593785, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  closeButton: {fileID: 0}
+  autoPlayToggle: {fileID: 0}
+  skipEffectToggle: {fileID: 0}
+  displayPanelsToggle: {fileID: 0}
 --- !u!1 &403464217
 GameObject:
   m_ObjectHideFlags: 0
@@ -705,7 +735,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 639966032}
+      - m_Target: {fileID: 0}
         m_MethodName: OpenAllPanelsExceptEnemyPanels
         m_Mode: 1
         m_Arguments:
@@ -851,7 +881,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1006586628155794, guid: 456924705ceb65c448cdc1333492529c, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 456924705ceb65c448cdc1333492529c, type: 2}
@@ -1184,17 +1214,82 @@ Prefab:
     - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: openPanelQuantity
-      value: 25
+      value: 24
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: LoadStatusFromInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: TargetMagiaLevel
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: addStatus
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: hp
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Sense
+      value: 281
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Knowledge
+      value: 186
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Dignity
+      value: 63
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.HitPoint
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Charm
+      value: 84
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Defense
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.MuscularStrength
+      value: 37
+      objectReference: {fileID: 0}
+    - target: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Durability
+      value: 83
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
---- !u!114 &639966032 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 114195271979354084, guid: a07f1697570ccc44a9fd394ba7915bba,
-    type: 2}
-  m_PrefabInternal: {fileID: 639966031}
-  m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
 --- !u!1001 &721764068
 Prefab:
   m_ObjectHideFlags: 0
@@ -1460,6 +1555,87 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95542251052286168, guid: 8fbb58dc8140d4b9eb58bfc791298650,
     type: 2}
   m_PrefabInternal: {fileID: 878212108}
+--- !u!1 &1172056357
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1172056358}
+  - component: {fileID: 1172056359}
+  m_Layer: 0
+  m_Name: Debugger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1172056358
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172056357}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1574341757}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1172056359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1172056357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  openPanelQuantity: 24
+  magiaStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  currentEnemyStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  flag: 2
+  LoadStatusFromInspector: 1
+  TargetMagiaLevel: 200
+  addStatus: 0
+  additionalStatus:
+    Level: 0
+    Durability: 83
+    MuscularStrength: 37
+    Knowledge: 186
+    Sense: 281
+    Charm: 84
+    Dignity: 63
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  hpFactor: 50
+  attackFactor: 5
+  defenseFactor: 5
 --- !u!1 &1274561346
 GameObject:
   m_ObjectHideFlags: 0
@@ -1643,6 +1819,11 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95795095976477260, guid: 0c8d133ad172eeb438ae8c9abb70585d,
     type: 2}
   m_PrefabInternal: {fileID: 1547031149}
+--- !u!4 &1574341757 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4691038718456576, guid: a07f1697570ccc44a9fd394ba7915bba,
+    type: 2}
+  m_PrefabInternal: {fileID: 639966031}
 --- !u!1001 &1802063877
 Prefab:
   m_ObjectHideFlags: 0
