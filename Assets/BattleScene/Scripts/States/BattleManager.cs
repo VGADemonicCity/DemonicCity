@@ -133,6 +133,13 @@ namespace DemonicCity.BattleScene
             m_BehaviourByState.Invoke(StateMachine.State.Win);
         }
 
+        private void Start()
+        {
+            // call event
+            SetStateMachine(StateMachine.State.Init);
+        }
+
+
         /// <summary>
         /// 指定したステートに遷移させてBattleManagerのイベントを呼び出す
         /// </summary>

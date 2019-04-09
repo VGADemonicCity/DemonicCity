@@ -59,18 +59,6 @@ namespace DemonicCity.BattleScene
 
         }
 
-
-        /// <summary>
-        /// Start this instance.
-        /// </summary>
-        void Start()
-        {
-            // ==============================
-            // イベント呼び出し : StateMachine.Init
-            // ==============================
-            m_battleManager.m_BehaviourByState.Invoke(BattleManager.StateMachine.State.Init);
-        }
-
         /// <summary>
         /// Initialize this instance.
         /// </summary>
