@@ -19,6 +19,7 @@ namespace DemonicCity
         public PassiveSkill MyPassiveSkill
         {
             get { return m_passiveSkill; }
+            set { m_passiveSkill = value; }
         }
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
         public int MaxLevel
@@ -107,7 +108,7 @@ namespace DemonicCity
         /// <summary>レベルに応じて相対的にレベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
-        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
+        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.DevilsFist;
 
 
         /// <summary>実際にセーブするステータスクラス</summary>
@@ -144,7 +145,7 @@ namespace DemonicCity
         /// <param name="currentLevel">Current level.</param>
         public int GetRequiredExpToNextLevel(int currentLevel)
         {
-            return currentLevel >= MaxLevel ? 0 : m_requiredExps[currentLevel - 1];
+            return currentLevel >= MaxLevel ? m_requiredExps.Last() : m_requiredExps[currentLevel - 1];
         }
 
         /// <summary>
@@ -294,7 +295,7 @@ namespace DemonicCity
             /// <summary>魔王ノ細胞</summary>
             SatansCell = 512,
             /// <summary>天照権現</summary>
-            AmaterasuIncarnation = 1024,
+            AmaterasuIncanation = 1024,
             /// <summary>天照-爆炎-</summary>
             AmaterasuInferno = 2048,
             /// <summary>天照-焔壁-</summary>

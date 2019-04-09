@@ -12,7 +12,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-            level.text = "Lv. "+Magia.Instance.Stats.Level.ToString();
+            level.text = "Lv. " +Magia.Instance.Stats.Level.ToString();
         }
 
         // Update is called once per frame
