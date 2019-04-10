@@ -27,16 +27,16 @@ namespace DemonicCity.BattleScene
                 if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
-                }   
+                }
 
-                if(m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
+                if (m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     OnPanelCompleted();
                     return;
                 }
 
                 // 破壊数が0の時攻撃処理を行わずステート遷移する
-                if(m_panelCounter.DestructionCount == 0)
+                if (m_panelCounter.DestructionCount == 0)
                 {
                     StartCoroutine(TransitionState());
                     return;
@@ -72,6 +72,7 @@ namespace DemonicCity.BattleScene
             // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
             var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
+            var isSkip = Debugger.BattleDebugger.Instance.EffectSkip;
             foreach (var skill in sortedSkills)
             {
                 if (skill.IsActivatable)
@@ -84,17 +85,21 @@ namespace DemonicCity.BattleScene
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
-                    //yield return new WaitForSeconds(clipInfos[0].clip.length);
+
+                    if (!isSkip)
+                    {
+                        yield return new WaitForSeconds(clipInfos[0].clip.length);
+                    }
                     // スキルが発動された時のコールバック.
                     skill.OnSkillActivated();
                 }
             }
 
             // ダメージ計算を行い攻撃の演出開始
-            if(isAttack)
+            if (isAttack)
             {
-            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
-            AttackProcess(damage);
+                var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
+                AttackProcess(damage);
             }
             else
             {

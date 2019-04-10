@@ -361,6 +361,7 @@ MonoBehaviour:
   popupObject: {fileID: 1925187357752364, guid: 9b77ade4b38d47d47b496db6eee7c5b0,
     type: 2}
   scalingTime: 1
+  sortingOrder: 50
 --- !u!114 &114267313029801558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -391,6 +392,7 @@ MonoBehaviour:
   popupObject: {fileID: 1649516800190944, guid: 9aaf6dbfc7652d748b4db7ec83272453,
     type: 2}
   scalingTime: 1
+  sortingOrder: 100
 --- !u!114 &114294880535250120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -437,7 +439,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  openPanelQuantity: 24
   magiaStatus:
     Level: 0
     Durability: 0
@@ -466,12 +467,12 @@ MonoBehaviour:
   addStatus: 0
   additionalStatus:
     Level: 0
-    Durability: 83
-    MuscularStrength: 37
-    Knowledge: 186
-    Sense: 281
-    Charm: 84
-    Dignity: 63
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
     HitPoint: 0
     Attack: 0
     Defense: 0

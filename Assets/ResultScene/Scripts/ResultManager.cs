@@ -224,7 +224,7 @@ namespace DemonicCity.ResultScene
                     break;
                 case 136:
                     skillName = "天照権現";
-                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AmaterasuIncanation;
+                    magia.MyPassiveSkill = magia.MyPassiveSkill | Magia.PassiveSkill.AmaterasuIncarnation;
 
                     break;
                 case 160:

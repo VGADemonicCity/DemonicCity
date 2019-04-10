@@ -17,10 +17,10 @@ namespace DemonicCity.BattleScene.Skill
         public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkillName; } }
         public int LevelCondition { get { return m_levelCondition; } }
 
-        /// <summary>count conditions</summary>
-        [SerializeField] protected int m_countCondition = 1;
         /// <summary>level conditions</summary>
         [SerializeField] protected int m_levelCondition = 1;
+        /// <summary>count conditions</summary>
+        [SerializeField] protected int m_countCondition = 1;
         /// <summary>パッシブスキルフラグ用変数</summary>
         [SerializeField] protected Magia.PassiveSkill m_passiveSkillName;
         /// <summary>PassivesSkillの発動タイミング</summary>

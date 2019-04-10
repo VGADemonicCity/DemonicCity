@@ -11,15 +11,13 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary></summary>
         public bool AutoPlay { get { return DebuggingFlag.AutoPlay == (Flag & DebuggingFlag.AutoPlay); } }
         /// <summary></summary>
-        public bool DisplayPanels { get { return DebuggingFlag.DisplayPanels == (Flag & DebuggingFlag.DisplayPanels ); } }
+        public bool DisplayPanels { get { return DebuggingFlag.DisplayPanels == (Flag & DebuggingFlag.DisplayPanels); } }
         /// <summary></summary>
         public bool EffectSkip { get { return DebuggingFlag.SkipEffect == (Flag & DebuggingFlag.SkipEffect); } }
-
-
         /// <summary>パネルを開く枚数</summary>
-        [Header("ボタンを押した時に開くパネルの枚数(ランダム)")]
-        [Range(0, 25)]
-        [SerializeField] int openPanelQuantity;
+        public int OpenPanelQuantity { get; set; }
+
+
         /// <summary>バトル中のマギアのステータス</summary>
         [SerializeField] Status magiaStatus;
         /// <summary>バトル中の敵のステータス</summary>
@@ -30,7 +28,7 @@ namespace DemonicCity.BattleScene.Debugger
         [Header("これがTrueの時はTargetMagiaLevelから適切なマギアのステータスを読み込む")]
         [SerializeField] public bool LoadStatusFromInspector;
         /// <summary>Editor上からマギアのステータスを設定する時のクラス</summary>
-        [Range(0, 200)]
+        [Range(1, 200)]
         [SerializeField] public int TargetMagiaLevel;
         /// <summary>基礎ステータスに追加したいステータスがある場合true</summary>
         [Header("このフラグがTrueの時にここのStatusを追加し,固有ステータスも基礎ステータスに反映させる")]
@@ -82,24 +80,7 @@ namespace DemonicCity.BattleScene.Debugger
             {
                 return;
             }
-            if (DisplayPanels && m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
-            {
-                var panelManager = PanelManager.Instance;
-                if (DisplayPanels)
-                {
-                    panelManager.PanelsInTheScene.ForEach(panel =>
-                    {
-                        panel.ChangingTexture();
-                    });
-                }
-                else
-                {
-                    panelManager.AllPanelsExceptEnemyPanels.ForEach(panel =>
-                    {
-                        panel.ResetPanel();
-                    });
-                }
-            }
+
         }
 #endif
 
@@ -123,6 +104,24 @@ namespace DemonicCity.BattleScene.Debugger
                     m_panelManager.PanelProcessing(enemyPanel);
                 }
 
+                var panelManager = PanelManager.Instance;
+                if (DisplayPanels && m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
+                {
+                    panelManager.PanelsInTheScene.ForEach(panel =>
+                    {
+                        panel.ChangingTexture();
+                    });
+                }
+                else if (!DisplayPanels)
+                {
+                    panelManager.PanelsInTheScene.ForEach(panel =>
+                    {
+                        if (!panel.IsOpened)
+                        {
+                            panel.ResetPanel();
+                        }
+                    });
+                }
 
 
 
@@ -142,7 +141,7 @@ namespace DemonicCity.BattleScene.Debugger
                 m_panelManager.PanelProcessing(panel);
 
                 openCount++;
-                if (openCount >= openPanelQuantity)
+                if (openCount >= OpenPanelQuantity)
                 {
                     break;
                 }
@@ -234,6 +233,7 @@ namespace DemonicCity.BattleScene.Debugger
         [Flags]
         public enum DebuggingFlag
         {
+            Invalid = 0,
             AutoPlay = 1,
             SkipEffect = 2,
             DisplayPanels = 4,

@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene
         /// <summary>Scene上に存在する全てのパネルのリスト</summary>
         public List<Panel> PanelsInTheScene { get; set; }
         /// <summary>Scene上に存在する敵以外のパネル</summary>
-        public List<Panel> AllPanelsExceptEnemyPanels { get; set; }
+        public List<Panel> AllPanelsExceptEnemyPanels { get{return  PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy);  } }
         /// <summary>Scene上に存在する敵以外のパネルが全てオープンされていたらTrueを返す</summary>
         public bool IsOpenedAllPanelsExceptEnemyPanels
         {
@@ -74,7 +74,6 @@ namespace DemonicCity.BattleScene
             m_panelPosMatlix[1] = new[] { -4.155f, -2.955f, -1.755f, -0.355f, .845f, 2.045f, 3.445f, 4.645f, 5.845f }; //行
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<Panel>();
-            AllPanelsExceptEnemyPanels = new List<Panel>();
 
             for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
             {
