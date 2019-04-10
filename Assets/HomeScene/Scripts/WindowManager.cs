@@ -12,6 +12,7 @@ namespace DemonicCity.HomeScene
     }
     public class WindowManager : MonoBehaviour
     {
+        SoundManager soundM;
         public TouchGestureDetector touchGestureDetector;
         SceneFader sceneFader;
         //Color windowColor = new Color(1, 1, 1, 0.9f);
@@ -25,6 +26,7 @@ namespace DemonicCity.HomeScene
         //GameObject nowWindow;
         void Awake()
         {
+            soundM = SoundManager.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
             sceneFader = SceneFader.Instance;
         }
@@ -78,8 +80,10 @@ namespace DemonicCity.HomeScene
                                 break;
                             case Window.Config:
                             case Window.Gallery:
-                            case Window.Magia:
                                 WindowOpen((int)touchedWindow);
+                                break;
+                            case Window.Magia:
+                                soundM.PlayWithFade(SoundManager.SoundTag.Voice, GetRandomVoice(Progress.Instance.IsClear));
                                 break;
                             default:
                                 Debug.Log("Error");
@@ -124,5 +128,20 @@ namespace DemonicCity.HomeScene
         }
 
 
+        [SerializeField] List<AudioClip> beforeVoicies;
+        [SerializeField] List<AudioClip> afterVoicies;
+
+        AudioClip GetRandomVoice(bool isClear)
+        {
+            List<AudioClip> tmp = new List<AudioClip>();
+            tmp.AddRange(beforeVoicies);
+
+            if (isClear)
+            {
+                tmp.AddRange(afterVoicies); ;
+            }
+
+            return tmp[Random.Range(0, tmp.Count)];
+        }
     }
 }

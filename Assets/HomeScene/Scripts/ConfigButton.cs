@@ -14,7 +14,6 @@ namespace DemonicCity
 
         [SerializeField] Button[] btn;
 
-        ConfigPanel configPanel;
         SoundManager soundM;
 
         SoundManager.Vols vols;
