@@ -79,7 +79,7 @@ namespace DemonicCity.BattleScene
             {
                 m_battleManager.m_MagiaStats = debugger.GetStats();
                 var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
-                m_magia.SetPassiveSkillFromLevel(passiveSkills);
+                debugger.SetPassiveSkillFromLevel(passiveSkills);
             }
             else
             {

@@ -682,66 +682,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_uniqueSkillGauge
+      propertyPath: resultWindow
       value: 
-      objectReference: {fileID: 2074404321}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: panelComplete
-      value: 
-      objectReference: {fileID: 1429502534}
-    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_uniqueSkillGauge
-      value: 
-      objectReference: {fileID: 2074404321}
-    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 2074404320}
-    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_CoordinateForSpawn
-      value: 
-      objectReference: {fileID: 101201306}
-    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: magiaAnimator
-      value: 
-      objectReference: {fileID: 878212109}
-    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 2074404320}
-    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: buffAnimator
-      value: 
-      objectReference: {fileID: 1547031150}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_panelFrame
-      value: 
-      objectReference: {fileID: 37631616}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_shufflePanels
-      value: 
-      objectReference: {fileID: 849036633}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_enemiesMover
-      value: 
-      objectReference: {fileID: 101201305}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: waveTitle
-      value: 
-      objectReference: {fileID: 853279310}
+      objectReference: {fileID: 466659973}
     - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_enemiesMover
@@ -757,81 +702,66 @@ Prefab:
       propertyPath: waveTitle
       value: 
       objectReference: {fileID: 853279310}
-    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: resultWindow
+      propertyPath: m_enemiesMover
       value: 
-      objectReference: {fileID: 466659973}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 101201305}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: TargetMagiaLevel
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: waveTitle
+      value: 
+      objectReference: {fileID: 853279310}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: flag
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114676999750379174, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_panelFrame
+      value: 
+      objectReference: {fileID: 37631616}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 11
-      objectReference: {fileID: 0}
+      propertyPath: m_shufflePanels
+      value: 
+      objectReference: {fileID: 849036633}
+    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: buffAnimator
+      value: 
+      objectReference: {fileID: 1547031150}
     - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 23
-      objectReference: {fileID: 0}
-    - target: {fileID: 114974920874610500, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 31
-      objectReference: {fileID: 0}
-    - target: {fileID: 114267313029801558, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: magiaAnimator
+      value: 
+      objectReference: {fileID: 878212109}
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 44
-      objectReference: {fileID: 0}
-    - target: {fileID: 114697641580245106, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_levelCondition
-      value: 58
-      objectReference: {fileID: 0}
-    - target: {fileID: 114015538082176046, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_levelCondition
-      value: 70
-      objectReference: {fileID: 0}
-    - target: {fileID: 114658799238253382, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_levelCondition
-      value: 82
-      objectReference: {fileID: 0}
-    - target: {fileID: 114432879614141590, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_levelCondition
-      value: 100
-      objectReference: {fileID: 0}
+      propertyPath: m_CoordinateForSpawn
+      value: 
+      objectReference: {fileID: 101201306}
     - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 111
-      objectReference: {fileID: 0}
-    - target: {fileID: 114459537921108872, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 136
-      objectReference: {fileID: 0}
-    - target: {fileID: 114677235418965648, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_uniqueSkillGauge
+      value: 
+      objectReference: {fileID: 2074404321}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 160
-      objectReference: {fileID: 0}
-    - target: {fileID: 114901776095078312, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_uniqueSkillGauge
+      value: 
+      objectReference: {fileID: 2074404321}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_levelCondition
-      value: 181
-      objectReference: {fileID: 0}
+      propertyPath: panelComplete
+      value: 
+      objectReference: {fileID: 1429502534}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0

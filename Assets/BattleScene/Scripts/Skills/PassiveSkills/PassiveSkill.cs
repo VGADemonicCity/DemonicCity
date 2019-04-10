@@ -14,7 +14,7 @@ namespace DemonicCity.BattleScene.Skill
     {
         public int CountCondition { get { return m_countCondition; } }
         public bool IsActivatable { get; set; }
-        public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkillName; } }
+        public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkill; } }
         public int LevelCondition { get { return m_levelCondition; } }
 
         /// <summary>level conditions</summary>
@@ -22,7 +22,7 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_countCondition = 1;
         /// <summary>パッシブスキルフラグ用変数</summary>
-        [SerializeField] protected Magia.PassiveSkill m_passiveSkillName;
+        [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
         /// <summary>PassivesSkillの発動タイミング</summary>
         [SerializeField] protected SkillManager.Timing m_timing;
         /// <summary>任意の増加割合(%)</summary>
@@ -84,7 +84,7 @@ namespace DemonicCity.BattleScene.Skill
         protected virtual void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
         {
             // パッシブスキルフラグが建っている && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill
                 && cityDestructionCount >= m_countCondition
                 && timing == m_timing)
             {

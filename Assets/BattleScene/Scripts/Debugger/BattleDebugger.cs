@@ -25,7 +25,8 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary>Debug用フラグのバッキングフィールド</summary>
         [SerializeField] DebuggingFlag flag;
         /// <summary>マギアのステータスをEditorから読み込むかどうか</summary>
-        [Header("これがTrueの時はTargetMagiaLevelから適切なマギアのステータスを読み込む")]
+        [Header("これがTrueの時はTargetMagiaLevelのレベルから適切なマギアのステータスを読み込む.\nそうでない時はセーブデータから読み込む")]
+        [Space(10)]
         [SerializeField] public bool LoadStatusFromInspector;
         /// <summary>Editor上からマギアのステータスを設定する時のクラス</summary>
         [Range(1, 200)]
@@ -45,6 +46,7 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary>固有ステータスから基礎ステータスに変換する際のDefenseの係数</summary>
         [Header("固有ステータスから基礎ステータスに変換する際のDefenseの係数")]
         [SerializeField] int defenseFactor = 5;
+        [SerializeField] Status Stats;
 
         /// <summary></summary>
         PanelManager m_panelManager;
@@ -122,9 +124,6 @@ namespace DemonicCity.BattleScene.Debugger
                         }
                     });
                 }
-
-
-
             });
         }
 
@@ -178,8 +177,27 @@ namespace DemonicCity.BattleScene.Debugger
                     stats += additionalStatus;
                 }
                 Sync(stats);
+                Stats = stats;
                 return stats;
             }
+        }
+
+
+        /// <summary>
+        /// レベルに応じてスキルを習得させる
+        /// </summary>
+        /// <param name="passiveSkills"></param>
+        public void SetPassiveSkillFromLevel(List<Skill.PassiveSkill> passiveSkills)
+        {
+            var magia = Magia.Instance;
+            magia.MyPassiveSkill = Magia.PassiveSkill.Invalid;
+            passiveSkills.ForEach(skill =>
+            {
+                if (Stats.Level >= skill.LevelCondition)
+                {
+                    magia.MyPassiveSkill |= skill.GetPassiveSkill;
+                }
+            });
         }
 
         /// <summary>

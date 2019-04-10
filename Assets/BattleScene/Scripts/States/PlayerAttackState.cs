@@ -24,7 +24,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
                 }
@@ -77,6 +77,10 @@ namespace DemonicCity.BattleScene
             {
                 if (skill.IsActivatable)
                 {
+                    if(skill.GetPassiveSkill == Magia.PassiveSkill.Invalid)
+                    {
+                        continue;
+                    }
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);

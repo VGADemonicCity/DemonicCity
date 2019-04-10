@@ -241,20 +241,6 @@ namespace DemonicCity
             MaxHP = maxHP;
         }
 
-        /// <summary>
-        /// レベルに応じてスキルを習得させる
-        /// </summary>
-        /// <param name="passiveSkills"></param>
-        public void SetPassiveSkillFromLevel(List<BattleScene.Skill.PassiveSkill> passiveSkills)
-        {
-            passiveSkills.ForEach(skill =>
-            {
-                if (m_stats.Level >= skill.LevelCondition)
-                {
-                    MyPassiveSkill |= skill.GetPassiveSkill;
-                }
-            });
-        }
 
         #endregion
 
