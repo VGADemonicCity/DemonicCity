@@ -21,7 +21,6 @@ namespace DemonicCity.BattleScene
                 {
                     return;
                 }
-                Debug.Log("PlayerChoice state called.");
                 if (m_battleManager.m_StateMachine.m_PreviousState != BattleManager.StateMachine.State.Pause)
                 {
                     m_panelCounter.InitializeCounter();

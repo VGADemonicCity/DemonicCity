@@ -79,7 +79,6 @@ namespace DemonicCity.StrengthenScene
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
         private GameObject[] skillExplanationTexts = null;
-        private GameObject notAcquiredMessage = null;
 
         /// <summary>ポップアップウィンドウの表示/非表示</summary>
         private bool activePopUpWindow = false;
@@ -120,12 +119,6 @@ namespace DemonicCity.StrengthenScene
                                 if (!activePopUpWindow)
                                 {
                                     skillListWindow.SetActive(true);
-                                    notAcquiredMessage = GameObject.Find("NotAcquiredMessage");
-                                    notAcquiredMessage.SetActive(false);
-                                    if (magia.MyPassiveSkill == Magia.PassiveSkill.Invalid)
-                                    {
-                                        notAcquiredMessage.SetActive(true);
-                                    }
 
                                     skillExplanationTexts = GameObject.FindGameObjectsWithTag("SkillDescriptionText");
                                     for (int i = 0; i < skillExplanationTexts.Length; i++)
@@ -204,27 +197,27 @@ namespace DemonicCity.StrengthenScene
                             //ここまで各スキル名の処理
 
                             case "AddCharmButton":
-                                ChangeUniqueStatus(ref addCharm, ref addUniqueStatusTexts[0]);
+                                ChangeUniqueStatus(ref charm, ref addCharm, ref addUniqueStatusTexts[0]);
                                 break;
 
                             case "AddDignityButton":
-                                ChangeUniqueStatus(ref addDignity, ref addUniqueStatusTexts[1]);
+                                ChangeUniqueStatus(ref dignity, ref addDignity, ref addUniqueStatusTexts[1]);
                                 break;
 
                             case "AddMuscularStrengthButton":
-                                ChangeUniqueStatus(ref addMuscularStrength, ref addUniqueStatusTexts[2]);
+                                ChangeUniqueStatus(ref muscularStrength, ref addMuscularStrength, ref addUniqueStatusTexts[2]);
                                 break;
 
                             case "AddSenseButton":
-                                ChangeUniqueStatus(ref addSense, ref addUniqueStatusTexts[3]);
+                                ChangeUniqueStatus(ref sense, ref addSense, ref addUniqueStatusTexts[3]);
                                 break;
 
                             case "AddDurabilityButton":
-                                ChangeUniqueStatus(ref addDurability, ref addUniqueStatusTexts[4]);
+                                ChangeUniqueStatus(ref durability, ref addDurability, ref addUniqueStatusTexts[4]);
                                 break;
 
                             case "AddKnowledgeButton":
-                                ChangeUniqueStatus(ref addKnowledge, ref addUniqueStatusTexts[5]);
+                                ChangeUniqueStatus(ref knowledge, ref addKnowledge, ref addUniqueStatusTexts[5]);
                                 break;
 
                             case "ConfirmButton":
@@ -317,25 +310,28 @@ namespace DemonicCity.StrengthenScene
         //}
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
-        /// <param name="uniqueStatus">固有ステータス</param>
+        /// <param name="addUniqueStatus">固有ステータス</param>
         /// <param name="uniqueStatusText">固有ステータスのテキスト</param>
         /// <param name="addStatus">ステータスの増減判定</param>
-        private void ChangeUniqueStatus(ref int uniqueStatus, ref TextMeshProUGUI uniqueStatusText)
+        private void ChangeUniqueStatus(ref int uniqueStatus, ref int addUniqueStatus, ref TextMeshProUGUI uniqueStatusText)
         {
-            uniqueStatus += AddStatusPoint(uniqueStatus);
-            if (statusPoint > 0)
+            if (uniqueStatus + addUniqueStatus < 200)
             {
-                uniqueStatusText.text = "+" + uniqueStatus.ToString();
-                //固有ステータスを基礎ステータスに変換
-                updatedHitPoint = currentHp + (addCharm * 50) + (addDignity * 50);
-                updatedAttack = currentAttack + (addSense * 5) + (addMuscularStrength * 5);
-                updatedDefence = currentDefence + (addDurability * 5) + (addKnowledge * 5);
+                addUniqueStatus += AddStatusPoint(addUniqueStatus);
+                if (statusPoint > 0)
+                {
+                    uniqueStatusText.text = "+" + addUniqueStatus.ToString();
+                    //固有ステータスを基礎ステータスに変換
+                    updatedHitPoint = currentHp + (addCharm * 50) + (addDignity * 50);
+                    updatedAttack = currentAttack + (addSense * 5) + (addMuscularStrength * 5);
+                    updatedDefence = currentDefence + (addDurability * 5) + (addKnowledge * 5);
 
-                updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
-                updatedBasicStatusTexts[1].text = updatedAttack.ToString();
-                updatedBasicStatusTexts[2].text = updatedDefence.ToString();
+                    updatedBasicStatusTexts[0].text = updatedHitPoint.ToString();
+                    updatedBasicStatusTexts[1].text = updatedAttack.ToString();
+                    updatedBasicStatusTexts[2].text = updatedDefence.ToString();
 
-                changedStatus = true;
+                    changedStatus = true;
+                }
             }
         }
 
@@ -361,13 +357,17 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
             statusPoint = magia.AllocationPoint;
-            //statusPoint = 99;//debug
+           // statusPoint = 300;//debug
 
             updatedBasicStatusTexts[0].text = currentHp.ToString();
             updatedBasicStatusTexts[1].text = currentAttack.ToString();
             updatedBasicStatusTexts[2].text = currentDefence.ToString();
 
             UpdateText();
+            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            {
+                updatedBasicStatusTexts[i].text = "";
+            }
 
             for (int i = 0; i < addUniqueStatusTexts.Length; i++)
             {
@@ -417,6 +417,11 @@ namespace DemonicCity.StrengthenScene
             SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
+            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            {
+                updatedBasicStatusTexts[i].text = "";
+            }
+
             for (int i = 0; i < addUniqueStatusTexts.Length; i++)
             {
                 addUniqueStatusTexts[i].text = "";
@@ -450,10 +455,6 @@ namespace DemonicCity.StrengthenScene
             currentBasicStatusTexts[0].text = currentHp.ToString();
             currentBasicStatusTexts[1].text = currentAttack.ToString();
             currentBasicStatusTexts[2].text = currentDefence.ToString();
-
-            //updatedBasicStatusTexts[0].text = "";
-            //updatedBasicStatusTexts[1].text = "";
-            //updatedBasicStatusTexts[2].text = "";
 
             currentUniqueStatusTexts[0].text = charm.ToString();
             currentUniqueStatusTexts[1].text = dignity.ToString();

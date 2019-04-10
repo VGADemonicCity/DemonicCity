@@ -32,7 +32,7 @@ namespace DemonicCity
             if (button == null)
             {
                 var buttons = popupedObject.GetComponentsInChildren<Button>().ToList();
-                button = buttons.Find(obj => obj.gameObject.name == popupSystemMaterial.ButtonName);
+                button = buttons.Find(obj => obj.gameObject.name == popupSystemMaterial.ObjectName);
             }
 
             button.onClick.AddListener(() =>
@@ -42,6 +42,21 @@ namespace DemonicCity
                 {
                     Close();
                 }
+            });
+        }
+
+        public void SubscribeToggle(PopupSystemMaterial popupSystemMaterial)
+        {
+            var toggle = popupedObject.GetComponent<Toggle>();
+            if (toggle == null)
+            {
+                var toggles = popupedObject.GetComponentsInChildren<Toggle>().ToList();
+                toggle = toggles.Find(obj => obj.gameObject.name == popupSystemMaterial.ObjectName);
+            }
+
+            toggle.onValueChanged.AddListener(chagedValue =>
+            {
+                popupSystemMaterial.ToggleEventHandler(chagedValue);
             });
         }
 

@@ -13,11 +13,7 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public class AmaterasuInferno : PassiveSkill
     {
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.AmaterasuInferno; // フラグを設定
-        }
+
 
         /// <summary>
         /// スキル発動

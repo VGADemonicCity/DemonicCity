@@ -8,14 +8,21 @@ namespace DemonicCity
     public class PopupSystemMaterial
     {
         public Action EventHandler { get; set; }
+        public Action<bool> ToggleEventHandler { get; set; }
         public bool IsPushAfterClose { get; set; }
-        public string ButtonName { get; set; }
+        public string ObjectName { get; set; }
 
         public PopupSystemMaterial(Action eventHandler, string buttonName, bool isPushAfterClose)
         {
             EventHandler = eventHandler;
             IsPushAfterClose = isPushAfterClose;
-            ButtonName = buttonName;
+            ObjectName = buttonName;
+        }
+
+        public PopupSystemMaterial(Action<bool> eventHandler,string toggleName)
+        {
+            ToggleEventHandler = eventHandler;
+            ObjectName = toggleName;
         }
     }
 }

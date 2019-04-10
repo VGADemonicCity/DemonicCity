@@ -19,6 +19,7 @@ namespace DemonicCity
         public PassiveSkill MyPassiveSkill
         {
             get { return m_passiveSkill; }
+            set { m_passiveSkill = value; }
         }
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
         public int MaxLevel
@@ -101,13 +102,13 @@ namespace DemonicCity
         /// <summary>経験値</summary>
         [SerializeField] int m_experience;
         /// <summary>振り分けポイント</summary>
-        [SerializeField] int m_allocationPoint;
+        [SerializeField] int m_allocationPoint = 3;
         /// <summary>MyAttributeのバッキングフィールド</summary>
         [SerializeField] Attribute m_attribute = Attribute.Standard;
         /// <summary>レベルに応じて相対的にレベルアップに必要な経験値(破壊したパネルの総数)</summary>
         [SerializeField] int[] m_requiredExps = { 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 70, 80, 90, 100, 150, 200, 250, 300, 400, 500 };
         /// <summary>パッシブスキルフラグ</summary>     
-        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.Invalid;
+        [SerializeField] PassiveSkill m_passiveSkill = PassiveSkill.DevilsFist;
 
 
         /// <summary>実際にセーブするステータスクラス</summary>
@@ -144,19 +145,20 @@ namespace DemonicCity
         /// <param name="currentLevel">Current level.</param>
         public int GetRequiredExpToNextLevel(int currentLevel)
         {
-            return currentLevel >= MaxLevel ? 0 : m_requiredExps[currentLevel - 1];
+            return currentLevel >= MaxLevel ? m_requiredExps.Last() : m_requiredExps[currentLevel - 1];
         }
 
         /// <summary>
         /// レベル上限に達していない、且つ次のレベルに上がるのに必要な経験値を超えていたら
         /// 1レベルアップする.
         /// </summary>
-        public bool LevelUp()
+        public bool LevelUp(out int allocationPoint)
         {
             var requiredExp = GetRequiredExpToNextLevel(Stats.Level); // 現在のレベルに必要な経験値(総パネル破壊枚数)
 
             if (MaxLevel >= Stats.Level && requiredExp <= m_experience) // レベル上限を越していない且つ必要経験値以上の経験値を取得している　
             {
+                allocationPoint = 0;
                 return false ;
             }
 
@@ -186,8 +188,18 @@ namespace DemonicCity
                 m_stats.Defense += 1;
             }
 
+            if (Stats.Level >= 100)
+            {
+                m_addStatsPoint = 9;
+            }
+            else
+            {
+                m_addStatsPoint = 3;
+            }
+
             m_stats.Level++; // levelを1上げる
             m_allocationPoint += m_addStatsPoint; // レベルが上がる毎にステータスに振り分ける事が可能なポイントを一定値渡す
+            allocationPoint = m_addStatsPoint;
             return true;
         }
 

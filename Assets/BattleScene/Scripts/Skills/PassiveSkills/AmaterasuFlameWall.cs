@@ -14,11 +14,6 @@ namespace DemonicCity.BattleScene.Skill
     public class AmaterasuFlameWall : PassiveSkill
     {
 
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.AmaterasuFlameWall; // フラグを設定
-        }
 
         /// <summary>
         /// スキル発動

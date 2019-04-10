@@ -20,9 +20,15 @@ namespace DemonicCity.BattleScene
         /// int arg0 = Level.
         /// int arg1 = City destruction count.
         /// </summary>
-        public class SkillJudger : UnityEvent<Magia.PassiveSkill,int>
+        public class SkillJudger : UnityEvent<Magia.PassiveSkill, Timing, int>
         {
             public SkillJudger() { }
+        }
+
+        public enum Timing
+        {
+            Enhancement,
+            Attack,
         }
     }
 }

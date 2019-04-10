@@ -75,29 +75,34 @@ namespace DemonicCity.BattleScene
         /// 回転してパネルの中身を見せる
         /// </summary>
         /// <param name="waitTime">Wait time.</param>
-        public void Open(float waitTime)
+        public void Open(float waitTime, Sprite  sprite = null)
         {
             if (IsOpened) // パネルが既に開かれているならメソッド終了
             {
                 return;
             }
-            StartCoroutine(Processing(waitTime));
+            StartCoroutine(Processing(waitTime,sprite));
         }
 
         //選択されたら一回だけ演出を出してパネルの中身を表示する
-        public IEnumerator Processing(float waitTime)
+        public IEnumerator Processing(float waitTime, Sprite sprite = null)
         {
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
-            ChangingTexture(); // PanelTypeに合わせてtextureを変える
+            ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
             IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
-            Debug.Log(MyPanelType+ "Opened");
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>
-       public  void ChangingTexture()
+       public  void ChangingTexture(Sprite sprite = null)
         {
-            m_spriteRender.sprite = m_panelTextures[(int)MyPanelType]; //パネルタイプのenum値をキャストで渡す
+            var displaySprite = m_panelTextures[(int)MyPanelType];
+            if (sprite != null)
+            {
+                displaySprite = sprite;
+            }
+
+            m_spriteRender.sprite = displaySprite; //パネルタイプのenum値をキャストで渡す
         }
 
         /// <summary>

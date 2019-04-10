@@ -226,6 +226,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 24
   m_passiveSkillName: 64
+  m_timing: 0
   m_incease: 0.05
 --- !u!114 &114017009472620254
 MonoBehaviour:
@@ -250,7 +251,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_counterForShuffleSkill: 0
-  m_CityCount: 0
+  m_cityCount: 0
   m_doubleCount: 0
   m_destructionCount: 0
   m_tripleCount: 0
@@ -258,6 +259,7 @@ MonoBehaviour:
   m_totalDestructionCount: 0
   m_uniqueSkillGauge: {fileID: 0}
   attackButtonProcess: {fileID: 114254286006001736}
+  panelComplete: {fileID: 0}
 --- !u!114 &114177336636838174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -284,7 +286,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debugFlag: 0
+  effectSkip: 0
+  autoPlay: 0
+  displayPanels: 0
+  openPanelQuantity: 24
+  magiaStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  currentEnemyStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  flag: 2
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -298,6 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 32
   m_passiveSkillName: 512
+  m_timing: 0
   m_incease: 0.02
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
@@ -352,6 +381,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 19
   m_passiveSkillName: 16
+  m_timing: 0
   m_incease: 0.1
 --- !u!114 &114290885052486680
 MonoBehaviour:
@@ -439,6 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 30
   m_passiveSkillName: 256
+  m_timing: 1
   m_incease: 0.02
 --- !u!114 &114445989290795632
 MonoBehaviour:
@@ -466,6 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 1
   m_passiveSkillName: 1
+  m_timing: 1
   m_incease: 0.01
 --- !u!114 &114459537921108872
 MonoBehaviour:
@@ -480,6 +512,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 34
   m_passiveSkillName: 1024
+  m_timing: 0
   m_incease: 0.01
 --- !u!114 &114496166160569242
 MonoBehaviour:
@@ -494,6 +527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 14
   m_passiveSkillName: 4
+  m_timing: 0
   m_incease: 0.1
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114542386805354352
@@ -508,6 +542,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_processingTime: 3
+  sealdEnemyPanel: {fileID: 21300000, guid: a11f64fe18bb034498b862d6c03109b2, type: 3}
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -551,6 +586,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 27
   m_passiveSkillName: 128
+  m_timing: 0
   m_incease: 0.1
 --- !u!114 &114676999750379174
 MonoBehaviour:
@@ -565,6 +601,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 11
   m_passiveSkillName: 2
+  m_timing: 0
   m_incease: 0.5
 --- !u!114 &114677235418965648
 MonoBehaviour:
@@ -579,7 +616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 38
   m_passiveSkillName: 2048
-  m_incease: 0.51
+  m_timing: 1
+  m_incease: 0.05
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -593,6 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 21
   m_passiveSkillName: 32
+  m_timing: 1
   m_incease: 0.015
 --- !u!114 &114844704490148818
 MonoBehaviour:
@@ -621,6 +660,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 36
   m_passiveSkillName: 4096
+  m_timing: 0
   m_incease: 0
 --- !u!114 &114947920586921256
 MonoBehaviour:
@@ -661,4 +701,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 16
   m_passiveSkillName: 8
+  m_timing: 0
   m_incease: 0.5

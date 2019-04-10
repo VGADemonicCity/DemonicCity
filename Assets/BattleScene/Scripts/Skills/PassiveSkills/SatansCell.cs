@@ -15,11 +15,7 @@ namespace DemonicCity.BattleScene.Skill
         /// <summary>MagiaのHPDrawの参照</summary>
         [SerializeField] HitPointGauge m_magiaHPGauge;
 
-        protected override void Awake()
-        {
-            base.Awake();
-            m_passiveSkillName = Magia.PassiveSkill.SatansCell; // フラグを設定
-        }
+
 
         /// <summary>
         /// スキル発動

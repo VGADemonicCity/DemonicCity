@@ -17,7 +17,10 @@ MonoBehaviour:
   isBattle: 1
   isStory: 1
   BackGround: []
-  BattleStage: []
+  BattleStage:
+  - {fileID: 21300000, guid: ae23ed8f06762b646b7df615789c2501, type: 3}
+  - {fileID: 21300000, guid: 68a0945bf0365034b8c636de052a78c7, type: 3}
+  - {fileID: 21300000, guid: f7ddac9181b4e5c42b8155a35364d5fc, type: 3}
   levelRange: 1e00000027000000
   prologue: {fileID: 0}
   epilogue: {fileID: 0}

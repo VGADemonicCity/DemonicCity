@@ -25,9 +25,9 @@ namespace DemonicCity.BattleScene
         {
             get
             {
-                //var allPanelsExceptEnemyPanels = PanelsInTheScene.Count(panel => panel.MyPanelType != PanelType.Enemy);
+                var allPanelsExceptEnemyPanels = PanelsInTheScene.Count(panel => panel.MyPanelType != PanelType.Enemy);
                 var opendPanels = PanelsInTheScene.Count(panel => panel.IsOpened && panel.MyPanelType != PanelType.Enemy);
-                return opendPanels == AllPanelsExceptEnemyPanels.Count;
+                return opendPanels == allPanelsExceptEnemyPanels;
             }
         }
 
@@ -116,7 +116,7 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
                     var a = Magia.Instance; // Debug用
-                    a.LevelUp(); // Debug用
+//                    a.LevelUp(); // Debug用
 
                 }
             });
@@ -190,12 +190,8 @@ namespace DemonicCity.BattleScene
                     panel.MyFramePosition = DetectFramePosition(i); // パネルの位置を特定して代入
 
                     // パネルをリストに入れる
-                    PanelsInTheScene.Add(panel); 
-                    AllPanelsExceptEnemyPanels.Add(panel);
+                    PanelsInTheScene.Add(panel);
                 }
-
-                // 敵パネルをこのリストから削除する
-                AllPanelsExceptEnemyPanels.RemoveAll(panel => panel.MyPanelType == PanelType.Enemy);
             }
         }
 
