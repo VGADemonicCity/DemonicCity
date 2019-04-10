@@ -257,9 +257,9 @@ MonoBehaviour:
   m_countCondition: 24
   m_passiveSkill: 64
   m_timing: 0
+  enhanceType: 4
   m_incease: 0.05
   buffText: 
-  enhanceType: 0
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,9 +323,9 @@ MonoBehaviour:
   m_countCondition: 32
   m_passiveSkill: 512
   m_timing: 0
+  enhanceType: 3
   m_incease: 0.02
   buffText: 
-  enhanceType: 0
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
 MonoBehaviour:
@@ -382,9 +382,9 @@ MonoBehaviour:
   m_countCondition: 19
   m_passiveSkill: 16
   m_timing: 0
+  enhanceType: 2
   m_incease: 0.1
   buffText: 
-  enhanceType: 0
 --- !u!114 &114290885052486680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,6 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  magiaAvailableSkills: 
   magiaStatus:
     Level: 0
     Durability: 0
@@ -468,9 +469,8 @@ MonoBehaviour:
     HitPoint: 0
     Attack: 0
     Defense: 0
-  flag: 0
   LoadStatusFromInspector: 1
-  TargetMagiaLevel: 1
+  TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -486,17 +486,6 @@ MonoBehaviour:
   hpFactor: 50
   attackFactor: 5
   defenseFactor: 5
-  Stats:
-    Level: 0
-    Durability: 0
-    MuscularStrength: 0
-    Knowledge: 0
-    Sense: 0
-    Charm: 0
-    Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
 --- !u!114 &114395287615114370
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -523,9 +512,9 @@ MonoBehaviour:
   m_countCondition: 30
   m_passiveSkill: 256
   m_timing: 1
+  enhanceType: 0
   m_incease: 0.02
   buffText: 
-  enhanceType: 0
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -555,9 +544,9 @@ MonoBehaviour:
   m_countCondition: 1
   m_passiveSkill: 1
   m_timing: 1
+  enhanceType: 0
   m_incease: 0.01
   buffText: 
-  enhanceType: 0
 --- !u!114 &114459537921108872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -573,9 +562,9 @@ MonoBehaviour:
   m_countCondition: 34
   m_passiveSkill: 1024
   m_timing: 0
+  enhanceType: 4
   m_incease: 0.01
   buffText: 
-  enhanceType: 0
 --- !u!114 &114496166160569242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -591,9 +580,9 @@ MonoBehaviour:
   m_countCondition: 14
   m_passiveSkill: 4
   m_timing: 0
+  enhanceType: 3
   m_incease: 0.1
   buffText: 
-  enhanceType: 0
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114542386805354352
 MonoBehaviour:
@@ -653,9 +642,9 @@ MonoBehaviour:
   m_countCondition: 27
   m_passiveSkill: 128
   m_timing: 0
+  enhanceType: 2
   m_incease: 0.1
   buffText: 
-  enhanceType: 0
 --- !u!114 &114676999750379174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -671,9 +660,9 @@ MonoBehaviour:
   m_countCondition: 11
   m_passiveSkill: 2
   m_timing: 0
+  enhanceType: 4
   m_incease: 0.5
   buffText: 
-  enhanceType: 0
 --- !u!114 &114677235418965648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -689,9 +678,9 @@ MonoBehaviour:
   m_countCondition: 38
   m_passiveSkill: 2048
   m_timing: 1
+  enhanceType: 0
   m_incease: 0.05
   buffText: 
-  enhanceType: 0
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -707,9 +696,9 @@ MonoBehaviour:
   m_countCondition: 21
   m_passiveSkill: 32
   m_timing: 1
+  enhanceType: 0
   m_incease: 0.015
   buffText: 
-  enhanceType: 0
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -739,9 +728,9 @@ MonoBehaviour:
   m_countCondition: 36
   m_passiveSkill: 4096
   m_timing: 0
+  enhanceType: 2
   m_incease: 0
   buffText: 
-  enhanceType: 0
 --- !u!114 &114947920586921256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -783,6 +772,6 @@ MonoBehaviour:
   m_countCondition: 16
   m_passiveSkill: 8
   m_timing: 0
+  enhanceType: 0
   m_incease: 0.5
   buffText: 
-  enhanceType: 0

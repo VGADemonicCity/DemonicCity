@@ -26,7 +26,7 @@ namespace DemonicCity.BattleScene.Skill
                 && cityDestructionCount >= CountCondition
                 && timing == m_timing)
             {
-                if (cityDestructionCount >= GetComponent<DevilsFistInfernoType>().CountCondition && (Magia.PassiveSkill.AmaterasuInferno & m_passiveSkill) == m_passiveSkill)
+                if (cityDestructionCount >= GetComponent<AmaterasuInferno>().CountCondition && (Magia.PassiveSkill.AmaterasuInferno) == (m_magia.MyPassiveSkill & Magia.PassiveSkill.AmaterasuInferno))
                 {
                     return;
                 }

@@ -7,7 +7,7 @@ namespace DemonicCity.BattleScene
 {
     public class BuffTextBox : MonoBehaviour
     {
-        [SerializeField] float fadingTime = .5f;
+        [SerializeField] float fadingTime = .25f;
 
         TypefaceAnimator typeFaceAnimator;
         Outline outline;
@@ -19,13 +19,20 @@ namespace DemonicCity.BattleScene
             outline = GetComponent<Outline>();
             buffTextBox = GetComponent<Text>();
             buffTextBox.color = Color.clear;
+        }
 
-
+        private void Start()
+        {
             typeFaceAnimator.onComplete.AddListener(() =>
             {
-                Debug.Log("called");
-                iTween.ColorTo(gameObject, iTween.Hash("color", Color.clear, "time", fadingTime));
+                buffTextBox.color = Color.clear;
+                //iTween.ValueTo(gameObject, iTween.Hash("from", Color.white, "to", Color.clear, "time", fadingTime, "onupdate", "NextColorChange", "onupdatetarget", gameObject));
             });
+        }
+        
+        void NextColorChange(Color nextColor)
+        {
+            buffTextBox.color = nextColor;
         }
 
         public void PlayText(string text)
@@ -47,6 +54,9 @@ namespace DemonicCity.BattleScene
                     break;
                 case Skill.EnhanceType.HpBuff:
                     outline.effectColor = Color.green;
+                    break;
+                case Skill.EnhanceType.AttackAndDefenseBuff:
+                    outline.effectColor = Color.yellow;
                     break;
                 case Skill.EnhanceType.Invalid:
                 default:

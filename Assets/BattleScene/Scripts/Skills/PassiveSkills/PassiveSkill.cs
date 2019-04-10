@@ -27,12 +27,12 @@ namespace DemonicCity.BattleScene.Skill
         [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
         /// <summary>PassivesSkillの発動タイミング</summary>
         [SerializeField] protected SkillManager.Timing m_timing;
+        /// <summary>Skillのタイプ</summary>
+        [SerializeField] protected EnhanceType enhanceType;
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] protected float m_incease;
         /// <summary>バフUIに表示するテキスト</summary>
-        [SerializeField] protected string buffText = "";
-        /// <summary>Skillのタイプ</summary>
-        [SerializeField] protected EnhanceType enhanceType;
+         protected string buffText = "";
         /// <summary>BattleManagerの参照</summary>
         protected BattleManager m_battleManager;
         /// <summary>SkillManagerの参照</summary>
@@ -147,5 +147,6 @@ namespace DemonicCity.BattleScene.Skill
         AttackBuff,
         DefenseBuff,
         HpBuff,
+        AttackAndDefenseBuff,
     }
 }
