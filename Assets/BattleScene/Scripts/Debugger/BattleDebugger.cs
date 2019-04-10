@@ -16,14 +16,15 @@ namespace DemonicCity.BattleScene.Debugger
         public bool EffectSkip { get { return DebuggingFlag.SkipEffect == (Flag & DebuggingFlag.SkipEffect); } }
         /// <summary>パネルを開く枚数</summary>
         public int OpenPanelQuantity { get; set; }
+        /// <summary>Debug用フラグ</summary>
+        public DebuggingFlag Flag { get; set; }
 
 
+        [SerializeField] List<Magia.PassiveSkill> magiaAvailableSkills;
         /// <summary>バトル中のマギアのステータス</summary>
         [SerializeField] Status magiaStatus;
         /// <summary>バトル中の敵のステータス</summary>
         [SerializeField] Status currentEnemyStatus;
-        /// <summary>Debug用フラグのバッキングフィールド</summary>
-        [SerializeField] DebuggingFlag flag;
         /// <summary>マギアのステータスをEditorから読み込むかどうか</summary>
         [Header("これがTrueの時はTargetMagiaLevelのレベルから適切なマギアのステータスを読み込む.\nそうでない時はセーブデータから読み込む")]
         [Space(10)]
@@ -46,25 +47,11 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary>固有ステータスから基礎ステータスに変換する際のDefenseの係数</summary>
         [Header("固有ステータスから基礎ステータスに変換する際のDefenseの係数")]
         [SerializeField] int defenseFactor = 5;
-        [SerializeField] Status Stats;
 
         /// <summary></summary>
         PanelManager m_panelManager;
         /// <summary></summary>
         BattleManager m_battleManager;
-
-        /// <summary>Debug用フラグ</summary>
-        public DebuggingFlag Flag
-        {
-            get
-            {
-                return flag;
-            }
-            set
-            {
-                flag = value;
-            }
-        }
 
         private void Awake()
         {
@@ -97,6 +84,7 @@ namespace DemonicCity.BattleScene.Debugger
 
                 magiaStatus = m_battleManager.m_MagiaStats;
                 currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
+                magiaAvailableSkills = DetectAvailableSkills();
 
                 if (AutoPlay) // PlayerChoice以外,debugフラグがオフの時は何もしない
                 {
@@ -177,7 +165,7 @@ namespace DemonicCity.BattleScene.Debugger
                     stats += additionalStatus;
                 }
                 Sync(stats);
-                Stats = stats;
+                magiaStatus = stats;
                 return stats;
             }
         }
@@ -193,11 +181,22 @@ namespace DemonicCity.BattleScene.Debugger
             magia.MyPassiveSkill = Magia.PassiveSkill.Invalid;
             passiveSkills.ForEach(skill =>
             {
-                if (Stats.Level >= skill.LevelCondition)
+                if (magiaStatus.Level >= skill.LevelCondition)
                 {
                     magia.MyPassiveSkill |= skill.GetPassiveSkill;
                 }
             });
+        }
+
+        List<Magia.PassiveSkill> DetectAvailableSkills()
+        {
+            var result = new List<Magia.PassiveSkill>();
+            var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>();
+            foreach (var skill in skills)
+            {
+                result.Add(skill.GetPassiveSkill);
+            }
+            return result;
         }
 
         /// <summary>

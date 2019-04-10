@@ -22,6 +22,7 @@ namespace DemonicCity.BattleScene.Skill
             m_defenseBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.Defense * m_incease; // 街破壊数 * (防御力 * 任意の%)
             m_battleManager.m_MagiaStats.Attack += (int)m_attackBuffer; // intに変換
             m_battleManager.m_MagiaStats.Defense += (int)m_defenseBuffer; // intに変換
+            buffText = string.Format("攻{0}\n防{1}", m_attackBuffer, m_defenseBuffer);
         }
 
         protected override void SkillDeactivate()

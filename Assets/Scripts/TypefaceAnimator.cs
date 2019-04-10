@@ -39,7 +39,8 @@ public class TypefaceAnimator : BaseMeshEffect
     public float delay = 0;
     public Style style = Style.Once;
     public bool playOnAwake = true;
-    [SerializeField] float m_progress = 1.0f;
+    [Range(0f,1f)]
+    [SerializeField]float m_progress = 1.0f;
     public bool usePosition = false;
     public bool useRotation = false;
     public bool useScale = false;
