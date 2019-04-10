@@ -285,15 +285,13 @@ namespace DemonicCity.ResultScene
                 {
                     totalExperience -= nextLevelRequiredExperience;
 
-                    magia.LevelUp();
-
+                    magia.LevelUp(out getTotalStatusPoint);
                     levelDifference.Add(magia.Stats.Level);
                     hpDifference.Add(magia.Stats.HitPoint);
                     attackDifference.Add(magia.Stats.Attack);
                     defenceDifference.Add(magia.Stats.Defense);
 
-                    getTotalStatusPoint += 3;
-                    statusPointDifferences.Add(getTotalStatusPoint);
+                    statusPointDifferences.Add(getTotalStatusPoint * levelDifference.Count);
                     nextLevelRequiredExperience = magia.Stats.Level + 5;
                     requiredExperiences.Add(nextLevelRequiredExperience);
                 }
@@ -302,7 +300,7 @@ namespace DemonicCity.ResultScene
 
             }
             requiredExperiences.Add(nextLevelRequiredExperience);
-            statusPointDifferences.Add(getTotalStatusPoint);
+            statusPointDifferences.Add(getTotalStatusPoint * levelDifference.Count);
         }
 
         /// <summary>レベルアップするときの演出</summary>
@@ -408,7 +406,7 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            //destructionCount = 10000;//debug
+            //destructionCount = 1000;//debug
             destructionCountText.text = destructionCount.ToString();
 
             getTotalStatusPoint = 0;

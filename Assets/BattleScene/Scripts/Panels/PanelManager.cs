@@ -116,7 +116,7 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.FlickTopToBottom) // Debug用
                 {
                     var a = Magia.Instance; // Debug用
-                    a.LevelUp(); // Debug用
+//                    a.LevelUp(); // Debug用
 
                 }
             });

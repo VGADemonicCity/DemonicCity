@@ -286,10 +286,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_debugFlag: 0
+  effectSkip: 0
+  autoPlay: 0
   displayPanels: 0
-  waitTime: 0
-  openPanelQuantity: 25
+  openPanelQuantity: 24
+  magiaStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  currentEnemyStatus:
+    Level: 0
+    Durability: 0
+    MuscularStrength: 0
+    Knowledge: 0
+    Sense: 0
+    Charm: 0
+    Dignity: 0
+    HitPoint: 0
+    Attack: 0
+    Defense: 0
+  flag: 2
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -446,7 +469,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 30
   m_passiveSkillName: 256
-  m_timing: 0
+  m_timing: 1
   m_incease: 0.02
 --- !u!114 &114445989290795632
 MonoBehaviour:
@@ -474,7 +497,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 1
   m_passiveSkillName: 1
-  m_timing: 0
+  m_timing: 1
   m_incease: 0.01
 --- !u!114 &114459537921108872
 MonoBehaviour:
@@ -593,8 +616,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 38
   m_passiveSkillName: 2048
-  m_timing: 0
-  m_incease: 0.51
+  m_timing: 1
+  m_incease: 0.05
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -608,7 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_countCondition: 21
   m_passiveSkillName: 32
-  m_timing: 0
+  m_timing: 1
   m_incease: 0.015
 --- !u!114 &114844704490148818
 MonoBehaviour:
