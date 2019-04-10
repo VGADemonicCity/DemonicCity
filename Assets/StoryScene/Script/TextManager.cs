@@ -39,6 +39,9 @@ namespace DemonicCity.StoryScene
         List<FaceChanger> faceChangers = new List<FaceChanger>();
         List<CharName> characters = new List<CharName>();
         Progress progress;
+        SoundManager soundM;
+
+
 
         public bool isStaging = false;
         string buttonTag = "Button";
@@ -58,6 +61,7 @@ namespace DemonicCity.StoryScene
             progress = Progress.Instance;
             sceneFader = SceneFader.Instance;
             chapterM = ChapterManager.Instance;
+            soundM = SoundManager.Instance;
         }
         void Start()
         {
@@ -125,6 +129,7 @@ namespace DemonicCity.StoryScene
                 if (DivideTexts(thisText))
                 {
                     putSentence.CallSentence(thisText.sentence);
+                    PlayVoice();
                 }
                 else
                 {
@@ -292,7 +297,13 @@ namespace DemonicCity.StoryScene
         }
 
 
-
+        void PlayVoice()
+        {
+            if (texts[textIndex].voiceData != null)
+            {
+                soundM.PlayWithFade(SoundManager.SoundTag.Voice, texts[textIndex].voiceData);
+            }
+        }
 
         /// <summary>
         /// 現在のシナリオの最終行(シーン遷移などのはず)に飛ぶ

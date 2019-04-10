@@ -12,8 +12,14 @@ namespace DemonicCity
         public enum BGMTag
         {
             Title,
-            Battle,
             Home,
+            BattleAStd,
+            BattleABoss,
+            BattleBStd,
+            BattleBBoss,
+            BattleCStd,
+            BattleCBoss,
+            ThemaInst,
         }
 
         public enum SETag
@@ -21,6 +27,12 @@ namespace DemonicCity
             A,
             B,
             C,
+        }
+
+        public enum VoiceTag
+        {
+            A,
+
         }
 
         public SoundManager.SoundTag tag;

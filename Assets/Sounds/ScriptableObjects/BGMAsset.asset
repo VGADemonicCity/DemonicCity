@@ -13,11 +13,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sources:
   - tag: 0
-    clips:
-    - {fileID: 8300000, guid: 014122db2f16edf4a9963e093150ddb0, type: 3}
-  - tag: 2
-    clips:
-    - {fileID: 8300000, guid: 16f9fef69669f154394ec4700123fcd1, type: 3}
+    clip: {fileID: 8300000, guid: 7d548ac5b69062d4293b5dcaf1c7c196, type: 3}
   - tag: 1
-    clips:
-    - {fileID: 8300000, guid: 8bf0142949d781c459cc5c23572d8625, type: 3}
+    clip: {fileID: 8300000, guid: 16f9fef69669f154394ec4700123fcd1, type: 3}
+  - tag: 2
+    clip: {fileID: 0}
+  - tag: 3
+    clip: {fileID: 0}
+  - tag: 4
+    clip: {fileID: 0}
+  - tag: 5
+    clip: {fileID: 0}
+  - tag: 6
+    clip: {fileID: 0}
+  - tag: 7
+    clip: {fileID: 0}
+  - tag: 8
+    clip: {fileID: 0}

@@ -43,7 +43,7 @@ namespace DemonicCity
             /// <summary>12章</summary>
             Ixmagina = 4096,
             All = 8191,
-            Test=8192,
+            Test = 8192,
         }
         /// <summary>1クエスト内での進行度</summary>
 
@@ -93,7 +93,7 @@ namespace DemonicCity
 
         public StoryProgress NextStory(StoryProgress nowStory)
         {
-            int tmpStory=0;
+            int tmpStory = 0;
             foreach (StoryProgress story in Enum.GetValues(typeof(StoryProgress)))
             {
                 if ((nowStory & story) == story)
@@ -103,6 +103,19 @@ namespace DemonicCity
             }
             tmpStory = tmpStory << 1;
             return (StoryProgress)tmpStory;
+        }
+
+
+        public bool IsClear
+        {
+            get
+            {
+                if ((storyProgress & StoryProgress.Ixmagina) == StoryProgress.Ixmagina)
+                {
+                    return true;
+                }
+                return false;
+            }
         }
     }
 

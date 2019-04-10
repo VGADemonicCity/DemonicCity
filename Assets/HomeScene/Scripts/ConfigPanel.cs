@@ -8,24 +8,26 @@ namespace DemonicCity
     using SoundTag = SoundManager.SoundTag;
     public class ConfigPanel : MonoBehaviour
     {
+        [SerializeField] PopupSystem popupSystem;
+        [SerializeField] Button positiveButton;
+        [SerializeField] Button negativeButton;
 
 
-        
-        void Awake()
+        public void OnPush()
         {
-        }
-        // Use this for initialization
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
+            popupSystem.Popup();
+            popupSystem.SubscribeButton(new PopupSystemMaterial(DataReset, "PositiveButton", true));
+            popupSystem.SubscribeButton(new PopupSystemMaterial(Cancel, "NegativeButton", true));
         }
 
+        void DataReset()
+        {
 
+        }
 
+        void Cancel()
+        {
+
+        }
     }
 }

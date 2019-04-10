@@ -26,7 +26,7 @@ namespace DemonicCity
 
 
         SoundAsset GetBgmAsset { get { return sounds[(int)SoundTag.BGM]; } }
-        SoundAsset GetMenuSeAsset { get { return sounds[(int)SoundTag.SE]; } }
+        SoundAsset GetSEAsset { get { return sounds[(int)SoundTag.SE]; } }
         SoundAsset GetVoiceAsset { get { return sounds[(int)SoundTag.Voice]; } }
 
         float storyVol = -20f;
@@ -107,6 +107,7 @@ namespace DemonicCity
         {
             fader = SceneFader.Instance;
             LoadVol();
+
             //VolCheck(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
             SceneManager.sceneLoaded += BGMCheck;
@@ -127,19 +128,19 @@ namespace DemonicCity
 
                     BgmSources.Add(tmp);
                 }
-                foreach (AudioSource source in GetMenuSeAsset.audioSource)
+                foreach (AudioSource source in GetSEAsset.audioSource)
                 {
                     var tmp = Instantiate(source.gameObject, transform).GetComponent<AudioSource>();
                     tmp.outputAudioMixerGroup = source.outputAudioMixerGroup;
 
-                    SESources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
+                    SESources.Add(tmp);
                 }
                 foreach (AudioSource source in GetVoiceAsset.audioSource)
                 {
                     var tmp = Instantiate(source.gameObject, transform).GetComponent<AudioSource>();
                     tmp.outputAudioMixerGroup = source.outputAudioMixerGroup;
 
-                    VoiceSources.Add(Instantiate(source.gameObject, transform).GetComponent<AudioSource>());
+                    VoiceSources.Add(tmp);
                 }
             }
 
@@ -183,11 +184,6 @@ namespace DemonicCity
         float defVol = 0f;
         public void SwitchVol(string key, bool isOn)
         {
-            float tmpVol = 0;
-            if (mixer.GetFloat(key, out tmpVol))
-            {
-                Debug.Log(tmpVol);
-            }
             if (isOn)
             {
                 mixer.SetFloat(key, defVol);
@@ -195,10 +191,6 @@ namespace DemonicCity
             else
             {
                 mixer.SetFloat(key, muteVol);
-            }
-            if (mixer.GetFloat(key, out tmpVol))
-            {
-                Debug.Log(tmpVol);
             }
         }
         public void SwitchVol(SoundTag tag, bool isOn)

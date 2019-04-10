@@ -14,24 +14,19 @@ namespace DemonicCity
         public class Source
         {
             public SoundAsset.SETag tag;
-            public List<AudioClip> clips = new List<AudioClip>();
+            public AudioClip clip;
         }
 
         public List<Source> sources = new List<Source>();
 
-        public List<AudioClip> GetClips(SoundAsset.SETag tag)
+        public AudioClip GetClip(SoundAsset.SETag tag)
         {
             Source tmp = sources.FirstOrDefault(x => x.tag.ToString() == tag.ToString());
             if (tmp == null)
             {
                 return null;
             }
-            return tmp.clips;
-        }
-        public AudioClip GetClip(SoundAsset.SETag tag)
-        {
-            List<AudioClip> tmp = GetClips(tag);
-            return tmp[Random.Range(0, tmp.Count)];
+            return tmp.clip;
         }
     }
 }

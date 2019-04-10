@@ -21,7 +21,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: Appear:Magia:Ally
@@ -31,7 +31,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: Magia
     cName: 0
     sentence: "\u308F\u3063\u3057\u3087\u3044"
@@ -41,7 +41,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: Voice1
+    voiceData: {fileID: 8300000, guid: 014122db2f16edf4a9963e093150ddb0, type: 3}
   - charName: System
     cName: 12
     sentence: Appear:Phoenix:Enemy
@@ -51,7 +51,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: Phoenix
     cName: 1
     sentence: "\u308F\u308F\u308F\u3063\u3057\u3087\u3044"
@@ -61,7 +61,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    sourceFileName: Voice2
+    voiceData: {fileID: 8300000, guid: 83eb4bfc69e4c9449b87cdf4376c480a, type: 3}
   - charName: Phoenix
     cName: 1
     sentence: "\u308F\u30FC\u3044"
@@ -71,7 +71,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: Voice3
+    voiceData: {fileID: 8300000, guid: 8bf0142949d781c459cc5c23572d8625, type: 3}
   - charName: System
     cName: 12
     sentence: Coloring:Black
@@ -81,7 +81,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: SwicthBack:Edge
@@ -91,7 +91,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: Leave:Phoenix
@@ -101,7 +101,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: Appear:Nafla:Enemy
@@ -111,7 +111,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: Clear
@@ -121,7 +121,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: Nafla
     cName: 2
     sentence: "\u308F\u3057\u3058\u3083\u3088"
@@ -131,7 +131,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: Voice4
+    voiceData: {fileID: 8300000, guid: 677fd64793cfd594fa1700ab5c867a1f, type: 3}
   - charName: System
     cName: 12
     sentence: Item:Crown
@@ -141,7 +141,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   - charName: System
     cName: 12
     sentence: SceneTrans:Home
@@ -151,5 +151,5 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    sourceFileName: 
+    voiceData: {fileID: 0}
   characters: 000000000100000002000000
