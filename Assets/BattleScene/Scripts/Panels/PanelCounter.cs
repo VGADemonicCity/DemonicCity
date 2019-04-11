@@ -78,6 +78,8 @@ namespace DemonicCity.BattleScene
         /// <summary>攻撃ボタンを表示する</summary>
         [SerializeField] AttackButtonProcess attackButtonProcess;
         [SerializeField] PanelComplete panelComplete;
+        /// <summary>街破壊数のカウンター</summary>
+        [SerializeField] DestructionCounterBox destructionCounterBox;
 
         /// <summary>BattleManagerのシングルトンインスタンスの参照</summary>
         BattleManager m_battleManager;
@@ -153,6 +155,8 @@ namespace DemonicCity.BattleScene
                         isDisplayed = true;
                         attackButtonProcess.DisplayAttackButton();
                     }
+                    // UIに更新
+                    destructionCounterBox.OnPanelCount(destructionCount);
                     break;
 
                 case PanelType.DoubleCity: // doubleパネルを引いた時
@@ -163,6 +167,8 @@ namespace DemonicCity.BattleScene
                         isDisplayed = true;
                         attackButtonProcess.DisplayAttackButton();
                     }
+                    // UIに更新
+                    destructionCounterBox.OnPanelCount(destructionCount);
                     break;
 
                 case PanelType.TripleCity: // tripleパネルを引いた時
@@ -173,6 +179,8 @@ namespace DemonicCity.BattleScene
                         isDisplayed = true;
                         attackButtonProcess.DisplayAttackButton();
                     }
+                    // UIに更新
+                    destructionCounterBox.OnPanelCount(destructionCount);
                     break;
 
                 case PanelType.Enemy: // enemyパネルを引いた時ペナルティ処理を行う
@@ -190,6 +198,7 @@ namespace DemonicCity.BattleScene
             m_totalDestructionCount += destructionCount; // 総計に加算
             m_destructionCount += destructionCount;
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
+
 
             // パネルコンプリート
             if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)

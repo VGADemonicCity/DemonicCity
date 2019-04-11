@@ -39,7 +39,7 @@ namespace DemonicCity.StoryScene
         /// <summary>演出の種類</summary>
         public StageType stageTag;
         /// <summary>使用するファイル名</summary>
-        public string sourceFileName;
+        public AudioClip voiceData;
 
 
         /// <summary>コンストラクタ</summary>
@@ -48,7 +48,7 @@ namespace DemonicCity.StoryScene
             charName = storage.charName;
             sentence = storage.sentence;
             stage = storage.stage;
-            sourceFileName = storage.sourceFileName;
+            voiceData = storage.voiceData;
             FaceIndex tmpIndex;
             CharName tmpName;
             //StageType tmpStage;

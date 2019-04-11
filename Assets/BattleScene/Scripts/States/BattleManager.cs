@@ -11,7 +11,6 @@ namespace DemonicCity.BattleScene
     /// Battle manager.
     /// Singleton pattern
     /// </summary>
-    [Serializable]
     public class BattleManager : MonoSingleton<BattleManager>
     {
         #region Property
@@ -85,22 +84,21 @@ namespace DemonicCity.BattleScene
             set { m_enemies = value; }
         }
 
+        /// <summary>ステートマシン</summary>
+        public StateMachine m_StateMachine { get; set; }
         #endregion
 
         #region Field
+        /// <summary>敵の出現座標</summary>
+        [SerializeField] public Transform m_CoordinateForSpawn;
         /// <summary>StateMacineのUnityEvent</summary>
         public StateMachineEvent m_BehaviourByState = new StateMachineEvent();
         /// <summary>バトル用のマギアのステータス</summary>
-        [SerializeField] public Status m_MagiaStats;
-        /// <summary>ステートマシン</summary>
-        public StateMachine m_StateMachine { get; set; }
-
+        public Status m_MagiaStats { get; set; }
         /// <summary>そのバトルに出てくる敵のオブジェクトのリスト</summary>
-        [SerializeField] private List<GameObject> m_enemyObjects;
+        List<GameObject> m_enemyObjects;
         /// <summary>そのバトルに出てくる敵のクラスのリスト</summary>
-        [SerializeField] private List<Enemy> m_enemies;
-        /// <summary>敵の出現座標</summary>
-        [SerializeField] public Transform m_CoordinateForSpawn;
+        List<Enemy> m_enemies = new List<Enemy>();
         #endregion
 
         #region Method

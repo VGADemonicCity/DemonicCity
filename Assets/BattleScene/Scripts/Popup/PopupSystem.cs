@@ -14,12 +14,14 @@ namespace DemonicCity
     /// </summary>
     public class PopupSystem : MonoBehaviour
     {
+        public GameObject popupedObject { get; set; }
+
         Canvas canvas;
         GameObject canvasObject;
-        GameObject popupedObject;
 
         [SerializeField] GameObject popupObject;
         [SerializeField] float scalingTime = 1f;
+        [SerializeField] int sortingOrder = 100;
 
 
         /// <summary>
@@ -45,18 +47,36 @@ namespace DemonicCity
             });
         }
 
+        /// <summary>
+        /// UIに配置されているトグルに対してイベントハンドラを登録する
+        /// </summary>
+        /// <param name="popupMaterial"></param>
         public void SubscribeToggle(PopupSystemMaterial popupSystemMaterial)
         {
             var toggle = popupedObject.GetComponent<Toggle>();
-            if (toggle == null)
-            {
-                var toggles = popupedObject.GetComponentsInChildren<Toggle>().ToList();
-                toggle = toggles.Find(obj => obj.gameObject.name == popupSystemMaterial.ObjectName);
-            }
+            var toggles = popupedObject.GetComponentsInChildren<Toggle>().ToList();
+            toggle = toggles.Find(obj => obj.gameObject.name == popupSystemMaterial.ObjectName);
 
             toggle.onValueChanged.AddListener(chagedValue =>
             {
-                popupSystemMaterial.ToggleEventHandler(chagedValue);
+                popupSystemMaterial.BoolEventHandler(chagedValue);
+            });
+        }
+
+
+        /// <summary>
+        /// UIに配置されているスライダーに対してイベントハンドラを登録する
+        /// </summary>
+        /// <param name="popupMaterial"></param>
+        public void SubscribeSlider(PopupSystemMaterial popupSystemMaterial)
+        {
+            var slider = popupedObject.GetComponent<Slider>();
+            var sliders = popupedObject.GetComponentsInChildren<Slider>().ToList();
+            slider = sliders.Find(obj => obj.gameObject.name == popupSystemMaterial.ObjectName);
+
+            slider.onValueChanged.AddListener(changedvalue =>
+            {
+                popupSystemMaterial.FloatEventHandler(changedvalue);
             });
         }
 
@@ -72,7 +92,7 @@ namespace DemonicCity
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
 
             // 最前面に来る様適当なSortingOderに設定する
-            canvas.sortingOrder = 100;
+            canvas.sortingOrder = sortingOrder;
         }
 
         /// <summary>
@@ -87,7 +107,7 @@ namespace DemonicCity
             }
             popupedObject = Instantiate(popupObject, canvas.transform);
             popupedObject.transform.localScale = new Vector3(1f, 0f, 1f);
-            iTween.ScaleTo(popupedObject, iTween.Hash("scale", Vector3.one, "time", scalingTime));
+            iTween.ScaleTo(popupedObject, iTween.Hash("scale", Vector3.one, "time", scalingTime,"ignoretimescale",true));
         }
 
         /// <summary>

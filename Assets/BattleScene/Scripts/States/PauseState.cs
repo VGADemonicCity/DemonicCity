@@ -10,14 +10,14 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                //if (state == BattleManager.StateMachine.State.Pause)
-                //{
-                //    Time.timeScale = 0f;
-                //}
-                //else
-                //{
-                //    Time.timeScale = 1f;
-                //}
+                if (state == BattleManager.StateMachine.State.Pause)
+                {
+                    Time.timeScale = 0f;
+                }
+                else
+                {
+                    Time.timeScale = 1f;
+                }
             });
         }
     }

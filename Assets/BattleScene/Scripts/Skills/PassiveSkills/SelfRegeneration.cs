@@ -28,6 +28,7 @@ namespace DemonicCity.BattleScene.Skill
                 m_battleManager.m_MagiaStats.HitPoint = m_battleManager.m_MagiaStats.MaxHP; // hpをmaxに戻す
             }
             m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
+            SetBuffText(EnhanceType.HpBuff, (int)m_hitPointBuffer);
         }
 
         protected override void SkillDeactivate()

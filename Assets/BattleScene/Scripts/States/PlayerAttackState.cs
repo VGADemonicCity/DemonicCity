@@ -16,6 +16,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] Animator magiaAnimator;
         /// <summary>攻撃アニメーションの途中からゲージの減少処理を挟む為の調整係数</summary>
         [SerializeField] float adjustmentCoefficent = .5f;
+        /// <summary>バフの上昇値を表示するUI</summary>
+        [SerializeField] BuffTextBox buffTextBox;
 
         /// <summary>
         /// Start this instance.
@@ -24,19 +26,19 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
-                }   
+                }
 
-                if(m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
+                if (m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     OnPanelCompleted();
                     return;
                 }
 
                 // 破壊数が0の時攻撃処理を行わずステート遷移する
-                if(m_panelCounter.DestructionCount == 0)
+                if (m_panelCounter.DestructionCount == 0)
                 {
                     StartCoroutine(TransitionState());
                     return;
@@ -69,13 +71,19 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         IEnumerator ActivateSkill(bool isAttack)
         {
-            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
-            var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
-            foreach (var skill in sortedSkills)
+            //var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
+            var isSkip = Debugger.BattleDebugger.Instance.EffectSkip;
+
+            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
+            foreach (var skill in passiveSkills)
             {
                 if (skill.IsActivatable)
                 {
+                    if (skill.GetPassiveSkill == Magia.PassiveSkill.Invalid)
+                    {
+                        continue;
+                    }
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
@@ -84,17 +92,29 @@ namespace DemonicCity.BattleScene
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
-                    //yield return new WaitForSeconds(clipInfos[0].clip.length);
+
+                    // SkipFlagが建っていない場合
+                    if (!isSkip)
+                    {
+                        // バフUIに再生するテキストが存在する場合,対応したアウトラインの色に変えて,UIアニメーションを再生させる
+
+                        if (!string.IsNullOrEmpty(skill.BuffText))
+                        {
+                            buffTextBox.SyncSettings(skill.GetEnhanceType);
+                            buffTextBox.PlayText(skill.BuffText);
+                        }
+                        yield return new WaitForSeconds(clipInfos[0].clip.length);
+                    }
                     // スキルが発動された時のコールバック.
                     skill.OnSkillActivated();
                 }
             }
 
             // ダメージ計算を行い攻撃の演出開始
-            if(isAttack)
+            if (isAttack)
             {
-            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
-            AttackProcess(damage);
+                var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
+                AttackProcess(damage);
             }
             else
             {
@@ -105,6 +125,21 @@ namespace DemonicCity.BattleScene
                 StartCoroutine(ActivateSkill(true)); // 攻撃の演出開始
             }
         }
+
+        //bool DetermineDisplayText(List<string> texts, out string result)
+        //{
+        //    if (texts.Count == 0)
+        //    {
+        //        result = "";
+        //        return false;
+        //    }
+
+        //    texts.ForEach(text =>
+        //    {
+
+        //    });
+
+        //}
 
         /// <summary>
         /// 引数のダメージを元に攻撃処理を行う

@@ -21,12 +21,15 @@ namespace DemonicCity.BattleScene.Skill
         protected override void SkillActivate()
         {
             Debug.Log("Activated the 天照ー爆炎ー");
+            m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.Attack * m_incease; // 攻撃力の任意の%分加算
+            m_battleManager.m_MagiaStats.Attack += (int)m_attackBuffer; // intに変換
         }
 
         protected override void SkillDeactivate()
         {
             base.SkillDeactivate();
             Debug.Log("Deactivated the 天照ー爆炎ー");
+            m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // intに変換
         }
     }
 }

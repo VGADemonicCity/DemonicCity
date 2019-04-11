@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DemonicCity.BattleScene.Skill;
+using System.Linq;
 
 namespace DemonicCity.BattleScene
 {
@@ -50,7 +52,7 @@ namespace DemonicCity.BattleScene
             //yield return new WaitForSeconds(waitTime);
 
             // Waveタイトルのアニメーションを再生した後,ステートを遷移させる
-            waitTime =waveTitle.Play();
+            waitTime = waveTitle.Play();
             yield return new WaitForSeconds(waitTime);
             // ==============================
             // イベント呼び出し : StateMachine.PlayerChoice
@@ -71,12 +73,22 @@ namespace DemonicCity.BattleScene
 
             SpawnEnemies();
 
-
+            // BattleDebuggerのフラグが立っていた場合,指定されたステータスに合わせて初期化する
+            var debugger = Debugger.BattleDebugger.Instance;
+            if (debugger.LoadStatusFromInspector)
+            {
+                m_battleManager.m_MagiaStats = debugger.GetStats();
+                var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
+                debugger.SetPassiveSkillFromLevel(passiveSkills);
+            }
+            else
+            {
+                m_battleManager.m_MagiaStats = m_magia.GetStats(); // バトル用のStatisticsインスタンスにmagiaのStatsの各値を登録する
+            }
 
             m_battleManager.InitWave(); // wave初期化
             m_panelCounter.InitializeCounter(); // カウント初期化
             m_panelManager.InitPanels(); // パネル初期化
-            m_battleManager.m_MagiaStats = m_magia.GetStats(); // バトル用のStatisticsインスタンスにmagiaのStatsの各値を登録する
             m_battleManager.m_MagiaStats.Init(m_battleManager.m_MagiaStats); //バトル開始直前の Magiaのステータスの初期値を保存
             m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); // 敵のステータスを初期化
             m_magiaHPGauge.Initialize(m_battleManager.m_MagiaStats.HitPoint); // マギアのHP最大値を引数に初期化する
