@@ -4,6 +4,7 @@ using System;
 using DemonicCity.BattleScene;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace DemonicCity.StrengthenScene
 {
@@ -68,31 +69,48 @@ namespace DemonicCity.StrengthenScene
         TextMeshProUGUI statusPointText;
 
         /// <summary>ステータス確定前のメッセージウィンドウ</summary>
-        private GameObject confirmMessageWindow;
+        [SerializeField] private GameObject confirmMessageWindow;
         /// <summary>ステータス初期化前のメッセージウィンドウ</summary>
-        private GameObject resetMessageWindow;
+        [SerializeField] private GameObject resetMessageWindow;
         /// <summary>確定ボタンとリセットボタン</summary>
-        private GameObject confirmAndResetButtons;
+        [SerializeField] private GameObject confirmAndResetButtons;
         /// <summary>習得済みスキル一覧ウィンドウ</summary>
-        private GameObject skillListWindow;
+        [SerializeField] private GameObject skillListWindow;
         /// <summary>各スキル名</summary>
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
-        private GameObject[] skillExplanationTexts = null;
+        private GameObject[] skillDescriptionTexts = null;
 
         /// <summary>ポップアップウィンドウの表示/非表示</summary>
-        private bool activePopUpWindow = false;
+        private bool activePopUpWindowFlag = false;
         /// <summary>スキル説明テキストの表示/非表示</summary>
         private int activeSkillDescriptionText;
         private bool setActiveSkillDescriptionText = false;
         /// <summary>確定/中止ボタンの表示/非表示</summary>
-        private bool changedStatus = false;
+        private bool changedStatusFlag = false;
 
+        /// <summary>シーンがロードされたか</summary>
+        private bool sceneLoaded = false;
+
+        [SerializeField] private GameObject backGround = null;
+
+        public enum PopUpAnimation
+        {
+            Close_PopUpWindow
+        }
 
         private void Awake()
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+        }
+
+        /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
+        public IEnumerator ClosePopUpAnimation(GameObject window)
+        {
+            window.GetComponent<Animator>().CrossFadeInFixedTime(PopUpAnimation.Close_PopUpWindow.ToString(), 0);
+            yield return new WaitForSeconds(0.5f);
+            window.SetActive(false);
         }
 
         private void Start()
@@ -112,28 +130,29 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHomeSceneButton":
+                                StartCoroutine(ClosePopUpAnimation(backGround));
                                 SceneChanger.SceneChange(SceneName.Home);
                                 break;
 
                             case "ShowSkillButton":
-                                if (!activePopUpWindow)
+                                if (!activePopUpWindowFlag)
                                 {
                                     skillListWindow.SetActive(true);
 
-                                    skillExplanationTexts = GameObject.FindGameObjectsWithTag("SkillDescriptionText");
-                                    for (int i = 0; i < skillExplanationTexts.Length; i++)
+                                    skillDescriptionTexts = GameObject.FindGameObjectsWithTag("SkillDescriptionText");
+                                    for (int i = 0; i < skillDescriptionTexts.Length; i++)
                                     {
-                                        skillExplanationTexts[i].SetActive(false);
+                                        skillDescriptionTexts[i].SetActive(false);
                                     }
-                                    activePopUpWindow = true;
+                                    activePopUpWindowFlag = true;
                                 }
                                 break;
 
                             case "BackToAllocationWindow":
-                                if (activePopUpWindow)
+                                if (activePopUpWindowFlag)
                                 {
-                                    skillListWindow.SetActive(false);
-                                    activePopUpWindow = false;
+                                    StartCoroutine(ClosePopUpAnimation(skillListWindow));
+                                    activePopUpWindowFlag = false;
                                 }
                                 break;
 
@@ -194,6 +213,15 @@ namespace DemonicCity.StrengthenScene
                                 SkillDescriptionManager(13);
                                 activeSkillDescriptionText = 13;
                                 break;
+                            case "SuzakuFlameFist":
+                                SkillDescriptionManager(14);
+                                activeSkillDescriptionText = 14;
+                                break;
+                            case "DevilsEye":
+                                SkillDescriptionManager(15);
+                                activeSkillDescriptionText = 15;
+                                break;
+
                             //ここまで各スキル名の処理
 
                             case "AddCharmButton":
@@ -221,18 +249,18 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "ConfirmButton":
-                                if (!activePopUpWindow)
+                                if (!activePopUpWindowFlag)
                                 {
                                     confirmMessageWindow.SetActive(true);
-                                    activePopUpWindow = true;
+                                    activePopUpWindowFlag = true;
                                 }
                                 break;
 
                             case "ResetButton":
-                                if (!activePopUpWindow)
+                                if (!activePopUpWindowFlag)
                                 {
                                     resetMessageWindow.SetActive(true);
-                                    activePopUpWindow = true;
+                                    activePopUpWindowFlag = true;
                                 }
                                 break;
 
@@ -245,11 +273,11 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "No":
-                                if (activePopUpWindow)
+                                if (activePopUpWindowFlag)
                                 {
-                                    confirmMessageWindow.SetActive(false);
-                                    resetMessageWindow.SetActive(false);
-                                    activePopUpWindow = false;
+                                    StartCoroutine(ClosePopUpAnimation(confirmMessageWindow));
+                                    StartCoroutine(ClosePopUpAnimation(resetMessageWindow));
+                                    activePopUpWindowFlag = false;
                                 }
                                 break;
                         }
@@ -261,13 +289,13 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
-            if (changedStatus)
+            if (changedStatusFlag)
             {
                 confirmAndResetButtons.SetActive(true);
             }
-            else if (!changedStatus)
+            else
             {
-                confirmAndResetButtons.SetActive(false);
+                StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
             }
         }
 
@@ -276,38 +304,15 @@ namespace DemonicCity.StrengthenScene
         {
             if (activeSkillDescriptionText == index && !setActiveSkillDescriptionText)
             {
-                skillExplanationTexts[index].SetActive(true);
+                skillDescriptionTexts[index].SetActive(true);
                 setActiveSkillDescriptionText = true;
             }
             else if (activeSkillDescriptionText == index && setActiveSkillDescriptionText)
             {
-                skillExplanationTexts[index].SetActive(false);
+                StartCoroutine(ClosePopUpAnimation(skillDescriptionTexts[index]));
                 setActiveSkillDescriptionText = false;
             }
         }
-
-        /////<summary>ScrollRectのスクロール位置をGameObjectにあわせる</summary>
-        ///// <param name="align">0:下、0.5:中央、1:上</param>
-        //private float ScrollToCore(ScrollRect scrollRect, GameObject go, float align)
-        //{
-        //    var targetRect = go.transform.GetComponent<RectTransform>();
-        //    var contentHeight = scrollRect.content.rect.height;
-        //    var viewportHeight = scrollRect.viewport.rect.height;
-        //    // スクロール不要
-        //    if (contentHeight < viewportHeight)
-        //    {
-        //        return 0f;
-        //    }
-        //    // ローカル座標が contentHeight の上辺を0として負の値で格納されてる
-        //    // これは現在のレイアウト特有なのかもしれないので、要確認
-        //    var targetPos = contentHeight + (targetRect.localPosition.y + targetRect.rect.y) + targetRect.rect.height * align;
-        //    var gap = viewportHeight * align; // 上端〜下端あわせのための調整量
-        //    var normalizedPos = (targetPos - gap) / (contentHeight - viewportHeight);
-
-        //    normalizedPos = Mathf.Clamp01(normalizedPos);
-        //    scrollRect.verticalNormalizedPosition = normalizedPos;
-        //    return normalizedPos;
-        //}
 
         /// <summary>魔力値を固有ステータスに割り振り、基礎ステータスに変換する</summary>
         /// <param name="addUniqueStatus">固有ステータス</param>
@@ -330,7 +335,7 @@ namespace DemonicCity.StrengthenScene
                     updatedBasicStatusTexts[1].text = updatedAttack.ToString();
                     updatedBasicStatusTexts[2].text = updatedDefence.ToString();
 
-                    changedStatus = true;
+                    changedStatusFlag = true;
                 }
             }
         }
@@ -357,7 +362,7 @@ namespace DemonicCity.StrengthenScene
             addDurability = 0;
             addKnowledge = 0;
             statusPoint = magia.AllocationPoint;
-           // statusPoint = 300;//debug
+            // statusPoint = 300;//debug
 
             updatedBasicStatusTexts[0].text = currentHp.ToString();
             updatedBasicStatusTexts[1].text = currentAttack.ToString();
@@ -374,12 +379,23 @@ namespace DemonicCity.StrengthenScene
                 addUniqueStatusTexts[i].text = "";
             }
 
-            skillListWindow.SetActive(false);
-            resetMessageWindow.SetActive(false);
-            confirmMessageWindow.SetActive(false);
-            confirmAndResetButtons.SetActive(false);
-            activePopUpWindow = false;
-            changedStatus = false;
+            if (!sceneLoaded)
+            {
+                skillListWindow.SetActive(false);
+                resetMessageWindow.SetActive(false);
+                confirmMessageWindow.SetActive(false);
+                confirmAndResetButtons.SetActive(false);
+
+                sceneLoaded = true;
+            }
+
+            StartCoroutine(ClosePopUpAnimation(skillListWindow));
+            StartCoroutine(ClosePopUpAnimation(resetMessageWindow));
+            StartCoroutine(ClosePopUpAnimation(confirmMessageWindow));
+            StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
+
+            activePopUpWindowFlag = false;
+            changedStatusFlag = false;
         }
 
         /// <summary>変更したステータスを確定する</summary>
@@ -426,9 +442,9 @@ namespace DemonicCity.StrengthenScene
             {
                 addUniqueStatusTexts[i].text = "";
             }
-            confirmMessageWindow.SetActive(false);
-            activePopUpWindow = false;
-            changedStatus = false;
+            StartCoroutine(ClosePopUpAnimation(confirmMessageWindow));
+            activePopUpWindowFlag = false;
+            changedStatusFlag = false;
         }
 
         /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
@@ -500,11 +516,6 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
 
             statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
-
-            confirmMessageWindow = GameObject.Find("ConfirmMessageWindow");
-            resetMessageWindow = GameObject.Find("ResetMessageWindow");
-            confirmAndResetButtons = GameObject.Find("ConfirmAndResetButtons");
-            skillListWindow = GameObject.Find("SkillListWindow");
         }
     }
 }
