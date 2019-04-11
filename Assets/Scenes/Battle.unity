@@ -893,7 +893,7 @@ Prefab:
     - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
@@ -1021,6 +1021,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 735394537}
+    - target: {fileID: 114829807726434022, guid: c78ebd9c2baf2754fb05c664d301f86d,
+        type: 2}
+      propertyPath: fadingTime
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
   m_IsPrefabAsset: 0
@@ -1448,6 +1453,11 @@ Prefab:
       propertyPath: resultWindow
       value: 
       objectReference: {fileID: 466659973}
+    - target: {fileID: 114677235418965648, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_countCondition
+      value: 35
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0

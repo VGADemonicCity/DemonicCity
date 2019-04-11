@@ -93,6 +93,12 @@ namespace DemonicCity.BattleScene
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
 
+                    while(clipInfos[0].clip.name != skill.GetPassiveSkill.ToString())
+                    {
+                        yield return null;
+                        clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
+                    }
+
                     // SkipFlagが建っていない場合
                     if (!isSkip)
                     {
