@@ -106,7 +106,7 @@ namespace DemonicCity.StrengthenScene
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
-        public IEnumerator ClosePopUpAnimation(GameObject window)
+        private IEnumerator ClosePopUpAnimation(GameObject window)
         {
             window.GetComponent<Animator>().CrossFadeInFixedTime(PopUpAnimation.Close_PopUpWindow.ToString(), 0);
             yield return new WaitForSeconds(0.5f);

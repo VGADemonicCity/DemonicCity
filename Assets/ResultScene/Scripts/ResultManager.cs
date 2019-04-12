@@ -104,14 +104,13 @@ namespace DemonicCity.ResultScene
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
 
-        private Strengthen_Part1 strengthen;
+        //private Strengthen_Part1 strengthen;
 
         private void Awake()
         {
             magia = Magia.Instance;
             panelCounter = PanelCounter.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
-            strengthen = new Strengthen_Part1();
         }
 
         private void Start()
@@ -173,7 +172,7 @@ namespace DemonicCity.ResultScene
                             experienceGauge.value = experienceGauge.maxValue;
                             needDestructionCountText.text = 0.ToString();
                             //  levelUpImage.SetActive(false);
-                            StartCoroutine(strengthen.ClosePopUpAnimation(levelUpImage));
+                            StartCoroutine(ClosePopUpAnimation(levelUpImage));
                             //  maxLevelImage.SetActive(true);
                         }
                     }
@@ -285,7 +284,15 @@ namespace DemonicCity.ResultScene
                 masterdSkillNameText[i].GetComponent<TextMeshProUGUI>().text = masterdSkillNames[i];//習得したスキルを全て表示
             }
             yield return new WaitForSeconds(5f);
-            StartCoroutine(strengthen.ClosePopUpAnimation(skillMasterdMessageWindow));
+            StartCoroutine(ClosePopUpAnimation(skillMasterdMessageWindow));
+        }
+
+        /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
+        private IEnumerator ClosePopUpAnimation(GameObject window)
+        {
+            window.GetComponent<Animator>().CrossFadeInFixedTime(Strengthen_Part1.PopUpAnimation.Close_PopUpWindow.ToString(), 0);
+            yield return new WaitForSeconds(0.5f);
+            window.SetActive(false);
         }
 
         /// <summary>経験値を計算</summary>
@@ -360,7 +367,7 @@ namespace DemonicCity.ResultScene
                     experienceGauge.value = experienceGauge.maxValue;
                     needDestructionCountText.text = 0.ToString();
                     //levelUpImage.SetActive(false);
-                    StartCoroutine(strengthen.ClosePopUpAnimation(levelUpImage));
+                    StartCoroutine(ClosePopUpAnimation(levelUpImage));
                     levelMaxImage.SetActive(true);
                     isAnimation = false;
                     gaugeBackGround.sprite = defaultGaugeSprite;
@@ -421,7 +428,7 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            //destructionCount = 50;//debug
+            destructionCount = 150;//debug
             destructionCountText.text = destructionCount.ToString();
 
             statusPointText.text = 0.ToString();
@@ -478,7 +485,7 @@ namespace DemonicCity.ResultScene
                 experienceGauge.value = experienceGauge.maxValue;
                 needDestructionCountText.text = 0.ToString();
                 //levelUpImage.SetActive(false);
-                StartCoroutine(strengthen.ClosePopUpAnimation(levelUpImage));
+                StartCoroutine(ClosePopUpAnimation(levelUpImage));
                 levelMaxImage.SetActive(true);
             }
         }
