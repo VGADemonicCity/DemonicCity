@@ -25,8 +25,8 @@ namespace DemonicCity.BattleScene
         {
             typeFaceAnimator.onComplete.AddListener(() =>
             {
-                buffTextBox.color = Color.clear;
-                //iTween.ValueTo(gameObject, iTween.Hash("from", Color.white, "to", Color.clear, "time", fadingTime, "onupdate", "NextColorChange", "onupdatetarget", gameObject));
+                //buffTextBox.color = Color.clear;
+                iTween.ValueTo(gameObject, iTween.Hash("from", Color.white, "to", Color.clear, "time", fadingTime, "onupdate", "NextColorChange", "onupdatetarget", gameObject));
             });
         }
         

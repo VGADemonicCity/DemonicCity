@@ -48,15 +48,23 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         IEnumerator PenaltyEffect()
         {
-            buffAnimator.CrossFadeInFixedTime("AttackBuff", 0);
-            var clips = buffAnimator.GetCurrentAnimatorClipInfo(0);
-            while (clips.Length == 0)
+            // EffectSkipが無効な場合
+            if (!Debugger.BattleDebugger.Instance.EffectSkip)
             {
-                yield return null;
-                clips = buffAnimator.GetCurrentAnimatorClipInfo(0);
+                // 透明情報を消す
+                var spriteRenderer = buffAnimator.gameObject.GetComponent<SpriteRenderer>();
+                spriteRenderer.color = Color.white;
+                buffAnimator.CrossFadeInFixedTime("AttackBuff", 0);
+                var clips = buffAnimator.GetCurrentAnimatorClipInfo(0);
+                while (clips.Length == 0)
+                {
+                    yield return null;
+                    clips = buffAnimator.GetCurrentAnimatorClipInfo(0);
+                }
+                yield return new WaitForSeconds(clips[0].clip.length); // アニメーションの長さ分遅延させる
+                // 透明情報を戻す
+                spriteRenderer.color = Color.clear;
             }
-            yield return new WaitForSeconds(clips[0].clip.length); // アニメーションの長さ分遅延させる
-
             // 攻撃処理と演出
             StartCoroutine(AttackProcess());
             m_battleManager.CurrentEnemy.AttackBuffDeactivate(); // ペナルティによって上昇したステータスを元に戻す
@@ -73,16 +81,19 @@ namespace DemonicCity.BattleScene
             // ==============================
 
             Debug.Log("敵から攻撃される前の[" + m_magia + "]の体力 : " + m_battleManager.m_MagiaStats.HitPoint);
-
-            // Enemyの攻撃アニメーションを再生する
-            m_battleManager.CurrentEnemy.AnimCtrl.CrossFadeInFixedTime("Attack", 0);
-            var clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
-            while (clips.Length == 0)
+            // エフェクトスキップ無効時
+            if (!Debugger.BattleDebugger.Instance.EffectSkip)
             {
-                yield return null;
-                clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
+                // Enemyの攻撃アニメーションを再生する
+                m_battleManager.CurrentEnemy.AnimCtrl.CrossFadeInFixedTime("Attack", 0);
+                var clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
+                while (clips.Length == 0)
+                {
+                    yield return null;
+                    clips = m_battleManager.CurrentEnemy.AnimCtrl.GetCurrentAnimatorClipInfo(0);
+                }
+                yield return new WaitForSeconds(clips[0].clip.length); // アニメーションの長さ分遅延させる
             }
-            yield return new WaitForSeconds(clips[0].clip.length); // アニメーションの長さ分遅延させる
 
             if (m_enemySkillGauge.m_flag == true)
             {
@@ -101,10 +112,15 @@ namespace DemonicCity.BattleScene
 
             // ゲージが減少している間待つ
             yield return new WaitForSeconds(1f);
-            TrantisionState();
+            TransitionState();
         }
 
-        void TrantisionState()
+        public void OnPlayerHpSync()
+        {
+            TransitionState();
+        }
+
+        void TransitionState()
         {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
             if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
@@ -113,7 +129,7 @@ namespace DemonicCity.BattleScene
                 // イベント呼び出し : StateMachine.PlayerAttack
                 // ==============================
                 m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
-                 return;
+                return;
             }
 
             if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
