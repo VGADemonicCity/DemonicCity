@@ -18,6 +18,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] float adjustmentCoefficent = .5f;
         /// <summary>バフの上昇値を表示するUI</summary>
         [SerializeField] BuffTextBox buffTextBox;
+        [SerializeField] float waitTime = .5f;
 
         /// <summary>
         /// Start this instance.
@@ -59,15 +60,7 @@ namespace DemonicCity.BattleScene
         {
             // 敵のHPをそのまま攻撃力に転換してダメージを与える
             var damage = m_battleManager.CurrentEnemy.Stats.HitPoint;
-            AttackProcess(damage);
-        }
-
-        /// <summary>
-        /// 攻撃処理後の敵のHPの減少処理が終わった時呼ばれる
-        /// </summary>
-        public void OnEnemyHpSync()
-        {
-            StartCoroutine(TransitionState());
+            StartCoroutine(AttackProcess(damage));
         }
 
         /// <summary>
@@ -121,7 +114,7 @@ namespace DemonicCity.BattleScene
             if (isAttack)
             {
                 var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
-                AttackProcess(damage);
+                StartCoroutine(AttackProcess(damage));
             }
             else
             {
@@ -133,32 +126,19 @@ namespace DemonicCity.BattleScene
             }
         }
 
-        //bool DetermineDisplayText(List<string> texts, out string result)
-        //{
-        //    if (texts.Count == 0)
-        //    {
-        //        result = "";
-        //        return false;
-        //    }
-
-        //    texts.ForEach(text =>
-        //    {
-
-        //    });
-
-        //}
-
         /// <summary>
         /// 引数のダメージを元に攻撃処理を行う
         /// </summary>
         /// <param name="damage"></param>
-        void AttackProcess(int damage)
+        IEnumerator AttackProcess(int damage)
         {
             if (damage > 0)
             {
                 m_battleManager.CurrentEnemy.Stats.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
                 m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.HitPoint); // HPGaugeと同期
+                yield return new WaitForSeconds(waitTime);
             }
+            StartCoroutine(TransitionState());
         }
 
 
@@ -168,7 +148,6 @@ namespace DemonicCity.BattleScene
         /// <returns>The process.</returns>
         IEnumerator TransitionState()
         {
-
             // =====================
             // イベント呼び出し : StateMachine.
             // =====================
