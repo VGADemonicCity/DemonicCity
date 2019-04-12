@@ -62,7 +62,13 @@ namespace DemonicCity.BattleScene
             AttackProcess(damage);
         }
 
-
+        /// <summary>
+        /// 攻撃処理後の敵のHPの減少処理が終わった時呼ばれる
+        /// </summary>
+        public void OnEnemyHpSync()
+        {
+            StartCoroutine(TransitionState());
+        }
 
         /// <summary>
         /// 発動可能なスキルのアニメーションを行う<see langword="true"/>is Attack animation, and <see langword="false"/>is Enhance animation.
@@ -72,13 +78,12 @@ namespace DemonicCity.BattleScene
         IEnumerator ActivateSkill(bool isAttack)
         {
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
-            //var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
             var isSkip = Debugger.BattleDebugger.Instance.EffectSkip;
 
-            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
+            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている,SkipFlagが建っていない場合,発動アニメーションを行う
             foreach (var skill in passiveSkills)
             {
-                if (skill.IsActivatable)
+                if (skill.IsActivatable && !isSkip)
                 {
                     if (skill.GetPassiveSkill == Magia.PassiveSkill.Invalid)
                     {
@@ -87,33 +92,29 @@ namespace DemonicCity.BattleScene
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
+
+                    // 対象スキルと同じクリップが取得出来る迄処理を遅延させる
                     while (clipInfos.Length == 0)
                     {
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
-
-                    while(clipInfos[0].clip.name != skill.GetPassiveSkill.ToString())
+                    while (clipInfos[0].clip.name != skill.GetPassiveSkill.ToString())
                     {
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
 
-                    // SkipFlagが建っていない場合
-                    if (!isSkip)
+                    // バフUIに再生するテキストが存在する場合,対応したアウトラインの色に変えて,UIアニメーションを再生させる
+                    if (!string.IsNullOrEmpty(skill.BuffText))
                     {
-                        // バフUIに再生するテキストが存在する場合,対応したアウトラインの色に変えて,UIアニメーションを再生させる
-
-                        if (!string.IsNullOrEmpty(skill.BuffText))
-                        {
-                            buffTextBox.SyncSettings(skill.GetEnhanceType);
-                            buffTextBox.PlayText(skill.BuffText);
-                        }
-                        yield return new WaitForSeconds(clipInfos[0].clip.length);
+                        buffTextBox.SyncSettings(skill.GetEnhanceType);
+                        buffTextBox.PlayText(skill.BuffText);
                     }
-                    // スキルが発動された時のコールバック.
-                    skill.OnSkillActivated();
+                    yield return new WaitForSeconds(clipInfos[0].clip.length);
                 }
+                // スキルが発動された時のコールバック.
+                skill.OnSkillActivated();
             }
 
             // ダメージ計算を行い攻撃の演出開始
@@ -153,15 +154,13 @@ namespace DemonicCity.BattleScene
         /// <param name="damage"></param>
         void AttackProcess(int damage)
         {
-
             if (damage > 0)
             {
                 m_battleManager.CurrentEnemy.Stats.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
                 m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.HitPoint); // HPGaugeと同期
             }
-
-            StartCoroutine(TransitionState());
         }
+
 
         /// <summary>
         /// 敵のHPに応じてステート遷移を行う

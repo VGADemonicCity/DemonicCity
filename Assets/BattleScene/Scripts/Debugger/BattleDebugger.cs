@@ -57,6 +57,9 @@ namespace DemonicCity.BattleScene.Debugger
         {
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+
+            // パネルを開く枚数の初期値を指定
+            OpenPanelQuantity = 24;
         }
 
 #if UNITY_EDITOR
@@ -120,6 +123,11 @@ namespace DemonicCity.BattleScene.Debugger
         /// </summary>
         public void OpenAllPanelsExceptEnemyPanels()
         {
+            if(m_battleManager.m_StateMachine.m_State!= BattleManager.StateMachine.State.PlayerChoice)
+            {
+                return;
+            }
+
             var openCount = 0;
             var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
             var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());

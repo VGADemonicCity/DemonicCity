@@ -199,9 +199,8 @@ namespace DemonicCity.BattleScene
             m_destructionCount += destructionCount;
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
 
-
             // パネルコンプリート
-            if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
+            if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice)
             {
                 attackButtonProcess.ButtonClose();
                 StartCoroutine(panelComplete.PlayPanelCompleteSkillAnimation());

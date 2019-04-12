@@ -58,7 +58,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         IEnumerator Drawing()
         {
-
             var changePerFrame = changeRatio * Time.deltaTime * m_drawSpeed;
             var remainingProgress = changeRatio; // 変動させる比率がプラス(ダメージ)ならそのまま、マイナス(回復)なら引数がマイナスなので符合を逆にして代入
             var changeValue = changePerFrame;
@@ -74,7 +73,7 @@ namespace DemonicCity.BattleScene
             }
         }
 
-       public  IEnumerator FullGameDrawing()
+        public IEnumerator FullGameDrawing()
         {
             while (m_image.fillAmount < 1f)
             {
@@ -82,5 +81,14 @@ namespace DemonicCity.BattleScene
                 yield return null;
             }
         }
+    }
+
+    /// <summary>
+    /// GaugeTag
+    /// </summary>
+    public enum GaugeTag
+    {
+        Player,
+        Enemy,
     }
 }
