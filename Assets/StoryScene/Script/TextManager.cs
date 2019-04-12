@@ -36,6 +36,8 @@ namespace DemonicCity.StoryScene
         [SerializeField] List<GameObject> characterObjects = new List<GameObject>();
         [SerializeField] GameObject characterObject;
         [SerializeField] List<TextActor> actors = new List<TextActor>();
+        [SerializeField] Image backStage;
+
         List<FaceChanger> faceChangers = new List<FaceChanger>();
         List<CharName> characters = new List<CharName>();
         Progress progress;
@@ -272,7 +274,8 @@ namespace DemonicCity.StoryScene
             {
                 if (cast.posTag == PositionTag.Ally)
                 {
-                    if (talker[0] == cast.name)
+                    if (talker[0] == cast.name
+                        || talker[0] == CharName.None)
                     {
                         return false;
                     }
@@ -283,7 +286,8 @@ namespace DemonicCity.StoryScene
                 }
                 else if (cast.posTag == PositionTag.Enemy)
                 {
-                    if (talker[1] == cast.name)
+                    if (talker[1] == cast.name
+                        || talker[1] == CharName.None)
                     {
                         return false;
                     }
@@ -341,16 +345,29 @@ namespace DemonicCity.StoryScene
         }
         public void SetText(Progress.QuestProgress currentState)
         {
-
-            Scenario tmp = chapterM.GetChapter().scenario[currentState];
+            Chapter chapter = chapterM.GetChapter();
+            Scenario tmp = chapter.scenario[currentState];
             characters = tmp.characters;
             texts = tmp.texts;
             SetCharacter(characters);
+
+            int index = (int)progress.ThisQuestProgress;
+            if (index < chapter.BattleStage.Count)
+            {
+                backStage.sprite = chapterM.GetChapter().BattleStage[(int)progress.ThisQuestProgress];
+                backStage.enabled = true;
+            }
+            else
+            {
+                backStage.enabled = false;
+            }
+
         }
 
 
         void SetCharacter(List<CharName> names)
         {
+            director.charas.Clear();
             foreach (var item in names)
             {
                 TextActor tmpActor = Resources.Load<TextActor>("Sources/StoryActors/" + item.ToString());
@@ -359,6 +376,7 @@ namespace DemonicCity.StoryScene
                 //charObj.GetComponent<FaceChanger>().Init(actors.Find(x => x.id == item));
                 charObj.GetComponent<FaceChanger>().Init(tmpActor);
                 director.characters.Add(charObj);
+                director.charas.Add(item, charObj);
                 faceChangers.Add(charObj.GetComponent<FaceChanger>());
                 actors.Add(tmpActor);
             }

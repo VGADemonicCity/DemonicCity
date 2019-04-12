@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,24 +46,32 @@ namespace DemonicCity.StoryScene
             Skip,
         }
 
-        enum BackIndex
+        enum StageIndex
         {
-            Evening,
-            Noon,
             Edge,
-
+            Castle,
+            Ground,
         }
 
+        enum ItemTag
+        {
+            Clown,
+        }
+
+        public Dictionary<CharName, GameObject> charas = new Dictionary<CharName, GameObject>();
 
         delegate void Stagings();
         string[] contents;
         public List<GameObject> characters = new List<GameObject>();
+        public List<FaceChanger> faces = new List<FaceChanger>();
         [SerializeField] TextManager textManager;
+        [SerializeField] Image itemImage;
         [SerializeField] GameObject blackOut;
         [SerializeField] GameObject[] popWindows;
         [SerializeField] Transform popCanvas;
-        [SerializeField] SpriteRenderer backGround;
-
+        [SerializeField] Image backStage;
+        [SerializeField] List<Sprite> backStageSources = new List<Sprite>();
+        [SerializeField] List<Sprite> itemSources = new List<Sprite>();
         SceneFader fader;
         float moveTime = 0.5f;
 
@@ -151,6 +160,9 @@ namespace DemonicCity.StoryScene
             }
         }
 
+
+        #region Staging
+
         void StagingError(string s)
         {
             Debug.Log("Error : " + s);
@@ -222,12 +234,22 @@ namespace DemonicCity.StoryScene
         public void SwitchTalker(Cast nowCast, Cast nextCast)
         {
             textManager.isStaging = true;
-            GameObject leaveCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == nowCast.name);
-            StartCoroutine(MoveObject(leaveCharObj, startPositions[(int)nowCast.posTag], moveTime, false));
 
-            GameObject appearCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == nextCast.name);
-            appearCharObj.transform.localPosition = startPositions[(int)nextCast.posTag];
-            StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)nextCast.posTag], moveTime, false));
+
+            //GameObject leaveCharObj = characters.FirstOrDefault(item => item.GetComponent<FaceChanger>().charName == nowCast.name);
+            GameObject leaveCharObj = charas[nowCast.name];
+            if (leaveCharObj)
+            {
+                StartCoroutine(MoveObject(leaveCharObj, startPositions[(int)nowCast.posTag], moveTime, false));
+            }
+
+            //GameObject appearCharObj = characters.FirstOrDefault(item => item.GetComponent<FaceChanger>().charName == nextCast.name);
+            GameObject appearCharObj = charas[nextCast.name];
+            if (appearCharObj)
+            {
+                appearCharObj.transform.localPosition = startPositions[(int)nextCast.posTag];
+                StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)nextCast.posTag], moveTime, false));
+            }
         }
 
         void Leave(string content)
@@ -247,9 +269,14 @@ namespace DemonicCity.StoryScene
                         StartCoroutine(MoveObject(characters.Find(item => item.GetComponent<FaceChanger>().charName == tmp.name), targetPositions[(int)tmp.posTag], moveTime, false));
                         textManager.talker[(int)posTag] = tmp.name;
                     }
+                    else
+                    {
+                        textManager.talker[(int)posTag] = CharName.None;
+                    }
                 }
                 casts.RemoveAll(x => x.name == charName);
             }
+
         }
 
         void Coloring(string content)
@@ -270,20 +297,32 @@ namespace DemonicCity.StoryScene
             StartCoroutine(ChangeColor(blackOut, Color.clear, 0.5f));
         }
 
+        #endregion
+
+
+
+        [SerializeField] SpriteRenderer BackGround;
+        [SerializeField] Sprite afterGround;
         void SwitchBack(string content)
         {
-            BackIndex index;
+            StageIndex index;
             if (EnumCommon.TryParse(content, out index))
             {
-                //Debug.Log("Assets/StoryScene/Sources/" + "BackGrounds/" + index.ToString() + ".jpg");
-                Sprite back = Resources.Load<Sprite>("Sources/" + "BackGrounds/" + index.ToString());
-                if (back)
+                if (index == StageIndex.Ground)
                 {
-                    backGround.sprite = back;
+                    BackGround.sprite = afterGround;
+                    EndStaging();
+                    return;
+                }
+                if ((int)index < backStageSources.Count)
+                {
+                    backStage.sprite = backStageSources[(int)index];
                 }
             }
             EndStaging();
         }
+
+        #region Item
 
         void Item(string[] content)
         {
@@ -293,17 +332,91 @@ namespace DemonicCity.StoryScene
                 switch (itemType)
                 {
                     case StageType.Appear:
+                        ItemAppear(content[(int)StageTag.Content]);
                         break;
                     case StageType.Leave:
+                        ItemLeave(content[(int)StageTag.Content]);
                         break;
                     default:
+                        EndStaging();
                         break;
                 }
             }
+        }
 
-            EndStaging();
+        void ItemAppear(string content)
+        {
+            ItemTag item;
+            if (GetItem(content, out item))
+            {
+                StartCoroutine(FadeInObject(itemImage, itemSources[(int)item]));
+            }
+            else
+            {
+                EndStaging();
+            }
 
         }
+
+
+        void ItemLeave(string content)
+        {
+            ItemTag item;
+            if (GetItem(content, out item))
+            {
+                StartCoroutine(FadeOutObject(itemImage, itemSources[(int)item]));
+            }
+            else
+            {
+                EndStaging();
+            }
+        }
+        bool GetItem(string s, out ItemTag item)
+        {
+            return EnumCommon.TryParse(s, out item);
+        }
+
+        //アイテム用
+        IEnumerator FadeInObject(Image targetImage, Sprite sprite, float fade = 1f)
+        {
+
+            targetImage.color = Color.clear;
+            targetImage.sprite = sprite;
+            float a = 0f;
+            float time = 0f;
+
+            while (time < fade)
+            {
+                a += Time.deltaTime / fade;
+                targetImage.color = new Color(1, 1, 1, a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            targetImage.color = Color.white;
+
+            EndStaging();
+        }
+
+        IEnumerator FadeOutObject(Image targetImage, Sprite sprite, float fade = 1f)
+        {
+            targetImage.sprite = sprite;
+            targetImage.color = Color.white;
+            float a = 1f;
+            float time = 0f;
+
+            while (time < fade)
+            {
+                a -= Time.deltaTime / fade;
+                targetImage.color = new Color(1, 1, 1, a);
+                time += Time.deltaTime;
+                yield return null;
+            }
+            targetImage.color = Color.clear;
+
+            EndStaging();
+        }
+
+        #endregion
 
         public void PopWindow(string content)
         {
@@ -358,6 +471,8 @@ namespace DemonicCity.StoryScene
             EndStaging();
 
         }
+
+
 
         IEnumerator MoveObject(GameObject targetObj, Vector3 targetPos, float time, bool isNext = true)
         {
@@ -419,12 +534,12 @@ namespace DemonicCity.StoryScene
                 fromColor.g += diffG * Time.deltaTime / time;
                 fromColor.b += diffB * Time.deltaTime / time;
                 fromColor.a += diffA * Time.deltaTime / time;
-                targetObject.GetComponent<SpriteRenderer>().color = fromColor;
+                targetObject.GetComponent<Image>().color = fromColor;
                 Debug.Log(fromColor);
                 yield return null;
             }
             Debug.Log("end");
-            targetObject.GetComponent<SpriteRenderer>().color = toColor;
+            targetObject.GetComponent<Image>().color = toColor;
             if (isNext)
             {
                 EndStaging();

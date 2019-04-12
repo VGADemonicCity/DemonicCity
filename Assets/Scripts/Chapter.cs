@@ -24,7 +24,7 @@ namespace DemonicCity
         ///// <summary>その章のソースフォルダのパス</summary>
         //public string sourceFolderPath;
         /// <summary>使用する背景</summary>
-        public List<Sprite> BackGround = new List<Sprite>();
+        public Sprite BackGround;
         /// <summary>戦闘で使用するステージ</summary>
         public List<Sprite> BattleStage = new List<Sprite>();
 
