@@ -11,11 +11,11 @@ namespace DemonicCity
         float width = 1000f;
 
 
-        TouchGestureDetector tGD;
+        //TouchGestureDetector tGD;
 
         private void Awake()
         {
-            tGD = TouchGestureDetector.Instance;
+            //tGD = TouchGestureDetector.Instance;
             if (targetObj == null)
             {
                 targetObj = gameObject;
