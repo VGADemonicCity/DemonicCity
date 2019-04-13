@@ -65,20 +65,18 @@ namespace DemonicCity.HomeScene
                         parents[(int)touchedWindow].SetActive(true);
                         switch (touchedWindow)
                         {
-                            case Window.Growth:
-                                sceneFader.FadeOut(SceneFader.SceneTitle.Strengthen);
-                                break;
                             case Window.Story:
                                 sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
                                 break;
                             case Window.Summon:
-                                if (true)//一部クリアフラグ
+                                if (false)//一部クリアフラグ
                                 {
                                     sceneFader.FadeOut(SceneFader.SceneTitle.Home);
                                 }
                                 break;
                             case Window.Config:
                             case Window.Gallery:
+                            case Window.Growth:
                                 WindowOpen((int)touchedWindow);
                                 break;
                             case Window.Magia:

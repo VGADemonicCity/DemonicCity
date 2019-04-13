@@ -66,7 +66,7 @@ namespace DemonicCity.HomeScene
 
         [SerializeField] ItemContent drawer;
 
-
+        [SerializeField] Image backImage;
         [SerializeField] Image fadePanel;
 
         enum ObjectTag
@@ -133,6 +133,7 @@ namespace DemonicCity.HomeScene
             tabs[0].gameObject.SetActive(true);
             tabs[1].gameObject.SetActive(true);
             returnObj.SetActive(true);
+            backImage.enabled = true;
 
             Init();
 

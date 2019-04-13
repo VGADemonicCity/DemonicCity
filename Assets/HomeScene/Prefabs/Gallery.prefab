@@ -887,7 +887,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1106486936531220}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
@@ -1239,6 +1239,7 @@ MonoBehaviour:
   LeftArrow: {fileID: 114276913372399758}
   RightArrow: {fileID: 114223060188759082}
   drawer: {fileID: 114172846246954258}
+  backImage: {fileID: 114007169129426456}
   fadePanel: {fileID: 114893246275308914}
 --- !u!114 &114235087241939294
 MonoBehaviour:
