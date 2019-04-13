@@ -226,45 +226,50 @@ namespace DemonicCity.HomeScene
 
             ObjectTag hitTag = ObjectTag.None;
             GameObject hitObj = null;
-            tGD.onGestureDetected.AddListener((gesture, touchInfo) =>
-            {
-                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
-                {
-                    hitTag = ObjectTag.None;
-                    if (touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
-                    {
-                        hitTag = ObjectTag.Return;
-                    }
-                }
-                if (gesture == TouchGestureDetector.Gesture.Click)
-                {
-                    //Debug.Log(hitObj.name);
-                    if (hitTag == ObjectTag.Return
-                    && touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
-                    {
-                        SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
-                        ////Debug.Log(hitObj.name);
-                        //switch (hitTag)
-                        //{
-                        //    case ObjectTag.Return:
-                        //        break;
-                        //    //case ObjectTag.LeftArrow:
-                        //    //    ToLeft();
-                        //    //    break;
-                        //    //case ObjectTag.RightArrow:
-                        //    //    ToRight();
-                        //    //    break;
-                        //    default:
-                        //        break;
-                        //}
-                    }
+            //tGD.onGestureDetected.AddListener((gesture, touchInfo) =>
+            //{
+            //    if (gesture == TouchGestureDetector.Gesture.TouchBegin)
+            //    {
+            //        hitTag = ObjectTag.None;
+            //        if (touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
+            //        {
+            //            hitTag = ObjectTag.Return;
+            //        }
+            //    }
+            //    if (gesture == TouchGestureDetector.Gesture.Click)
+            //    {
+            //        //Debug.Log(hitObj.name);
+            //        if (hitTag == ObjectTag.Return
+            //        && touchInfo.HitDetection(out hitObj, TouchObjects[ObjectTag.Return]))
+            //        {
+            //            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+            //            ////Debug.Log(hitObj.name);
+            //            //switch (hitTag)
+            //            //{
+            //            //    case ObjectTag.Return:
+            //            //        break;
+            //            //    //case ObjectTag.LeftArrow:
+            //            //    //    ToLeft();
+            //            //    //    break;
+            //            //    //case ObjectTag.RightArrow:
+            //            //    //    ToRight();
+            //            //    //    break;
+            //            //    default:
+            //            //        break;
+            //            //}
+            //        }
 
-                }
-            });
+            //    }
+            //});
             LeftArrow.onClick.AddListener(() => { ToLeft(); });
             RightArrow.onClick.AddListener(() => { ToRight(); });
 
             ListReset();
+        }
+
+        public void GalleryClose()
+        {
+            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
         }
 
         // Use this for initialization

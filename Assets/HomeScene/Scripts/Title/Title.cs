@@ -11,16 +11,22 @@ namespace DemonicCity.HomeScene
 
         [SerializeField] SpriteRenderer touchText;
         [SerializeField] GameObject configBtn;
+        [SerializeField] GameObject CreditIcon;
         [SerializeField] Transform parent;
         [SerializeField] GameObject windowObject;
-        WindowState config = null;
+
+        [SerializeField] Transform creditRect;
+
+        WindowState Config { get; set; }
         bool isPop = false;
 
         bool IsPopUp
         {
             get
             {
-                return isPop && (config != null & config.enabled);
+
+
+                return isPop && (Config != null & Config.windowEnabled);
             }
             set
             {
@@ -51,8 +57,11 @@ namespace DemonicCity.HomeScene
                     {
                         ConfigOpen();
                     }
-                    //Debug.Log(hitObj.name);
-                    if (hitObj == null || hitObj.tag != "Button")
+                    else if (touchInfo.HitDetection(out hitObj, CreditIcon))
+                    {
+                        CreditChange();
+                    }
+                    else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
                     {
                         ToHome();
                     }
@@ -70,14 +79,20 @@ namespace DemonicCity.HomeScene
             Debug.Log("Open");
             IsPopUp = true;
             parent.gameObject.SetActive(true);
-            if (config)
+            if (Config)
             {
-                Destroy(config.gameObject);
+                DestroyImmediate(Config.gameObject);
+                Config = null;
             }
-            config = Instantiate(windowObject, parent).GetComponent<WindowState>();
+            Config = Instantiate(windowObject, parent).GetComponent<WindowState>();
+            Config.gameObject.SetActive(true);
         }
 
-
+        void CreditChange()
+        {
+            creditOpened = !creditOpened;
+            StartCoroutine(ChangeScale(creditOpened));
+        }
 
         IEnumerator FlashObject(SpriteRenderer targetRenderer)
         {
@@ -119,6 +134,32 @@ namespace DemonicCity.HomeScene
 
                 yield return null;
             }
+        }
+
+        bool creditOpened = false;
+        IEnumerator ChangeScale(bool isOpen)
+        {
+            Vector3 targetScale = Vector3.one;
+            if (isOpen)
+            {
+                creditRect.localScale = new Vector3(1, 0, 1);
+                creditRect.gameObject.SetActive(true);
+            }
+            else
+            {
+                creditRect.localScale = Vector3.zero;
+                creditRect.gameObject.SetActive(false);
+                yield break;
+                //enabled = false;
+            }
+            while (creditRect.localScale != targetScale)
+            {
+                creditRect.localScale = Vector3.Lerp(creditRect.localScale, targetScale, 0.02f * 10f);
+
+
+                yield return null;
+            }
+
         }
 
     }

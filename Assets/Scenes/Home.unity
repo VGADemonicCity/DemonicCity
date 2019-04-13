@@ -1419,7 +1419,7 @@ MonoBehaviour:
   - {fileID: 492891494}
   - {fileID: 492891494}
   windowObjects:
-  - {fileID: 1534324070673792, guid: 7485b31b8fe1bf743ba1e286f31144bf, type: 2}
+  - {fileID: 1537939738843736, guid: 90b9be51efe98ef49827065658948c84, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 1883694102369606, guid: 7a649e249126f2e4889e24f0f280261b, type: 2}
@@ -1438,6 +1438,7 @@ MonoBehaviour:
   afterVoicies:
   - {fileID: 8300000, guid: 8bf0142949d781c459cc5c23572d8625, type: 3}
   - {fileID: 8300000, guid: 677fd64793cfd594fa1700ab5c867a1f, type: 3}
+  voices: {fileID: 0}
 --- !u!1 &972485997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,31 +1735,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 224829608603651910, guid: c95e1c9c974ba6a43939d22ad6bbf07e,
     type: 2}
   m_PrefabInternal: {fileID: 1710845629}
---- !u!61 &1563414862
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1563414860}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.78, y: 7.34}
-    newSize: {x: 14.21, y: 16.16}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 5.78, y: 7.34}
-  m_EdgeRadius: 0
 --- !u!1 &1615490994
 GameObject:
   m_ObjectHideFlags: 0
@@ -1860,12 +1836,12 @@ Prefab:
     - target: {fileID: 224829608603651910, guid: c95e1c9c974ba6a43939d22ad6bbf07e,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 5.78
+      value: 173.4
       objectReference: {fileID: 0}
     - target: {fileID: 224829608603651910, guid: c95e1c9c974ba6a43939d22ad6bbf07e,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 7.34
+      value: 220.2
       objectReference: {fileID: 0}
     - target: {fileID: 224829608603651910, guid: c95e1c9c974ba6a43939d22ad6bbf07e,
         type: 2}
@@ -1896,11 +1872,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 212641963878857318, guid: c95e1c9c974ba6a43939d22ad6bbf07e,
-        type: 2}
-      propertyPath: m_SortingOrder
-      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c95e1c9c974ba6a43939d22ad6bbf07e, type: 2}
