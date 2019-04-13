@@ -13,14 +13,13 @@ namespace DemonicCity.HomeScene
         //string key = "IsOpen";
         //public delegate void CloseAnimation(bool isOpen);
         //public CloseAnimation closeAnimation;
-        Color windowColor = new Color(1, 1, 1, 0.9f);
+        //Color windowColor = new Color(1, 1, 1, 0.9f);
         // Use this for initialization
         bool windowEnabled;
         RectTransform windowRect;
         IEnumerator WindowAnimation;
 
-        GameObject beginObject;
-        GameObject endObject;
+        GameObject hit;
 
         bool beginIsExit;
         void Awake()
@@ -37,14 +36,14 @@ namespace DemonicCity.HomeScene
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     beginIsExit = false;
-                    if (touchInfo.HitDetection(out beginObject, exitButton))
+                    if (touchInfo.HitDetection(out hit, exitButton))
                     {
                         beginIsExit = true;
                     }
                 }
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    if (((touchInfo.HitDetection(out endObject, exitButton) && beginIsExit)
+                    if (((touchInfo.HitDetection(out hit, exitButton) && beginIsExit)
                         || exitButton == null)
                         && windowEnabled)
                     {

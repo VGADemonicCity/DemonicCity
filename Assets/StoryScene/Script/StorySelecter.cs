@@ -5,10 +5,11 @@ using UnityEngine;
 
 namespace DemonicCity.StorySelectScene
 {
+    using Story = Progress.StoryProgress;
     public class StorySelecter : MonoBehaviour
     {
         Progress progress;
-        Progress.StoryProgress MyStory;
+        Story MyStory;
         [SerializeField] ChapterManager chapterManager;
         [SerializeField] RectTransform parent;
         [SerializeField] GameObject SelectButton;
@@ -22,16 +23,17 @@ namespace DemonicCity.StorySelectScene
         {
             MyStory = progress.MyStoryProgress;
 
-            progress.MyStoryProgress= Progress.StoryProgress.All;
+            //progress.MyStoryProgress= Progress.StoryProgress.All;
 
-            int progressCount = EnumCommon.GetLength<Progress.StoryProgress>() - 1;
+            int progressCount = EnumCommon.GetLength<Story>() - 1;
             for (int i = progressCount - 1; 0 <= i; i--)
             {
-                int progressIndex = 1 << i;
-                if (((Progress.StoryProgress)progressIndex & MyStory) == (Progress.StoryProgress)progressIndex)
+                Story progressIndex = (Story)(1 << i);
+                Story previewIndex = (Story)((int)progressIndex / 2);
+                if ((previewIndex & MyStory) == previewIndex)
                 {
                     GameObject newSelectButton = Instantiate(SelectButton, parent);
-                    newSelectButton.GetComponent<SelectButton>().Initialize((Progress.StoryProgress)progressIndex, chapterManager.GetTitle((Progress.StoryProgress)progressIndex));
+                    newSelectButton.GetComponent<SelectButton>().Initialize(progressIndex, chapterManager.GetTitle(progressIndex));
                 }
             }
             //for (int i = (int)MyStory; i >= 1; i /= 2)

@@ -41,7 +41,7 @@ namespace DemonicCity
         [SerializeField] string story = "Story";
 
 
-        SceneFader fader;
+        //SceneFader fader;
 
 
         //private void Awake()
@@ -105,7 +105,7 @@ namespace DemonicCity
 
         public void Init()
         {
-            fader = SceneFader.Instance;
+            //fader = SceneFader.Instance;
             LoadVol();
 
             //VolCheck(SceneManager.GetActiveScene(), LoadSceneMode.Single);

@@ -20,8 +20,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] GameObject[] windowObjects = new GameObject[(int)Window.Last];
         GameObject[] windowInstance = new GameObject[(int)Window.Last];
         [SerializeField] GameObject[] buttonObjects = new GameObject[(int)Window.Last];
-        GameObject beginObject;
-        GameObject endObject;
+        GameObject hit;
         GameObject newPanel;
         //GameObject nowWindow;
         void Awake()
@@ -43,10 +42,10 @@ namespace DemonicCity.HomeScene
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     touchedWindow = Window.Last;
-                    touchInfo.HitDetection(out beginObject);
+                    touchInfo.HitDetection(out hit);
                     for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     {
-                        if (touchInfo.HitDetection(out beginObject, buttonObjects[i]))
+                        if (touchInfo.HitDetection(out hit, buttonObjects[i]))
                         {
                             //重なってるときどうなるかわからない
                             touchedWindow = (Window)i;
@@ -59,7 +58,7 @@ namespace DemonicCity.HomeScene
                     //for (int i = (int)Window.Growth; i < (int)Window.Last; i++)
                     //{
                     if (touchedWindow != Window.Last
-                       && touchInfo.HitDetection(out endObject, buttonObjects[(int)touchedWindow]))
+                       && touchInfo.HitDetection(out hit, buttonObjects[(int)touchedWindow]))
                     {
                         //if (beginObject == endObject)
                         //{

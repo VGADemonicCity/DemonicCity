@@ -33,7 +33,7 @@ namespace DemonicCity.StoryScene
 
         [SerializeField] TextDirector director;
         [SerializeField] Transform parentTransform;
-        [SerializeField] List<GameObject> characterObjects = new List<GameObject>();
+        //[SerializeField] List<GameObject> characterObjects = new List<GameObject>();
         [SerializeField] GameObject characterObject;
         [SerializeField] List<TextActor> actors = new List<TextActor>();
         [SerializeField] Image backStage;
@@ -50,7 +50,7 @@ namespace DemonicCity.StoryScene
         //bool flag;
         int textIndex = 0;
         public TouchGestureDetector touchGestureDetector;
-        SceneFader sceneFader;
+        //SceneFader sceneFader;
         ChapterManager chapterM;
         List<TextStorage> texts = new List<TextStorage>();
         [SerializeField] PutSentence putSentence;
@@ -61,7 +61,7 @@ namespace DemonicCity.StoryScene
         {
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
-            sceneFader = SceneFader.Instance;
+            //sceneFader = SceneFader.Instance;
             chapterM = ChapterManager.Instance;
             soundM = SoundManager.Instance;
         }

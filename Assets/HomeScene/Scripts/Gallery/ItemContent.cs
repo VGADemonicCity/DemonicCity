@@ -77,9 +77,9 @@ namespace DemonicCity.HomeScene
         List<Item> contents = new List<Item>();
 
         Item item;
-        Item[] items = new Item[3];
+        //Item[] items = new Item[3];
         Person person;
-        Person[] people = new Person[3];
+        //Person[] people = new Person[3];
 
         // Use this for initialization
         void Start()
