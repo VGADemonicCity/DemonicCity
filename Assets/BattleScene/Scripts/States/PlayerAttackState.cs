@@ -16,6 +16,9 @@ namespace DemonicCity.BattleScene
         [SerializeField] Animator magiaAnimator;
         /// <summary>攻撃アニメーションの途中からゲージの減少処理を挟む為の調整係数</summary>
         [SerializeField] float adjustmentCoefficent = .5f;
+        /// <summary>バフの上昇値を表示するUI</summary>
+        [SerializeField] BuffTextBox buffTextBox;
+        [SerializeField] float waitTime = .5f;
 
         /// <summary>
         /// Start this instance.
@@ -24,19 +27,19 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerAttack) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
-                }   
+                }
 
-                if(m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
+                if (m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     OnPanelCompleted();
                     return;
                 }
 
                 // 破壊数が0の時攻撃処理を行わずステート遷移する
-                if(m_panelCounter.DestructionCount == 0)
+                if (m_panelCounter.DestructionCount == 0)
                 {
                     StartCoroutine(TransitionState());
                     return;
@@ -57,10 +60,8 @@ namespace DemonicCity.BattleScene
         {
             // 敵のHPをそのまま攻撃力に転換してダメージを与える
             var damage = m_battleManager.CurrentEnemy.Stats.HitPoint;
-            AttackProcess(damage);
+            StartCoroutine(AttackProcess(damage));
         }
-
-
 
         /// <summary>
         /// 発動可能なスキルのアニメーションを行う<see langword="true"/>is Attack animation, and <see langword="false"/>is Enhance animation.
@@ -69,32 +70,51 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         IEnumerator ActivateSkill(bool isAttack)
         {
-            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている時,enumの数値が少ない順から発動アニメーションを行う
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
-            var sortedSkills = passiveSkills.OrderBy((skill) => skill.GetPassiveSkill);
-            foreach (var skill in sortedSkills)
+            var isSkip = Debugger.BattleDebugger.Instance.EffectSkip;
+
+            // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている,SkipFlagが建っていない場合,発動アニメーションを行う
+            foreach (var skill in passiveSkills)
             {
-                if (skill.IsActivatable)
+                if (skill.IsActivatable && !isSkip)
                 {
+                    if (skill.GetPassiveSkill == Magia.PassiveSkill.Invalid)
+                    {
+                        continue;
+                    }
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
+
+                    // 対象スキルと同じクリップが取得出来る迄処理を遅延させる
                     while (clipInfos.Length == 0)
                     {
                         yield return null;
                         clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
                     }
-                    //yield return new WaitForSeconds(clipInfos[0].clip.length);
-                    // スキルが発動された時のコールバック.
-                    skill.OnSkillActivated();
+                    while (clipInfos[0].clip.name != skill.GetPassiveSkill.ToString())
+                    {
+                        yield return null;
+                        clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
+                    }
+
+                    // バフUIに再生するテキストが存在する場合,対応したアウトラインの色に変えて,UIアニメーションを再生させる
+                    if (!string.IsNullOrEmpty(skill.BuffText))
+                    {
+                        buffTextBox.SyncSettings(skill.GetEnhanceType);
+                        buffTextBox.PlayText(skill.BuffText);
+                    }
+                    yield return new WaitForSeconds(clipInfos[0].clip.length);
                 }
+                // スキルが発動された時のコールバック.
+                skill.OnSkillActivated();
             }
 
             // ダメージ計算を行い攻撃の演出開始
-            if(isAttack)
+            if (isAttack)
             {
-            var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
-            AttackProcess(damage);
+                var damage = m_battleManager.m_MagiaStats.Attack - m_battleManager.CurrentEnemy.Stats.Defense;
+                StartCoroutine(AttackProcess(damage));
             }
             else
             {
@@ -110,17 +130,17 @@ namespace DemonicCity.BattleScene
         /// 引数のダメージを元に攻撃処理を行う
         /// </summary>
         /// <param name="damage"></param>
-        void AttackProcess(int damage)
+        IEnumerator AttackProcess(int damage)
         {
-
             if (damage > 0)
             {
                 m_battleManager.CurrentEnemy.Stats.HitPoint -= damage; // プレイヤーの攻撃力から敵防御力を引いた値分ダメージ
                 m_enemyHPGauge.Sync(m_battleManager.CurrentEnemy.Stats.HitPoint); // HPGaugeと同期
+                yield return new WaitForSeconds(waitTime);
             }
-
             StartCoroutine(TransitionState());
         }
+
 
         /// <summary>
         /// 敵のHPに応じてステート遷移を行う
@@ -128,7 +148,6 @@ namespace DemonicCity.BattleScene
         /// <returns>The process.</returns>
         IEnumerator TransitionState()
         {
-
             // =====================
             // イベント呼び出し : StateMachine.
             // =====================

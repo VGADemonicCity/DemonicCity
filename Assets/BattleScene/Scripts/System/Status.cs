@@ -34,6 +34,8 @@ namespace DemonicCity
         public int Attack;
         /// <summary>防御力</summary>
         public int Defense;
+
+
         /// <summary>マギアのHP最大値</summary>
         public int MaxHP
         {

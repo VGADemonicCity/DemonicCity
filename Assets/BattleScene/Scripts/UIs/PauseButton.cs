@@ -39,9 +39,9 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void InningThePause()
         {
-            if (battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Pause
-                && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init
-                && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Win)
+            if (battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
+                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerAttack
+                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.EnemyAttack)
             {
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
                 popupSystem.Popup();

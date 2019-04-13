@@ -22,11 +22,14 @@ namespace DemonicCity.BattleScene.Skill
         {
 
             // パッシブスキルフラグが建っている && 天照ー爆炎ーの条件以下の破壊数 && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
-                && cityDestructionCount < GetComponent<AmaterasuInferno>().CountCondition
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill
                 && cityDestructionCount >= CountCondition
                 && timing == m_timing)
             {
+                if (cityDestructionCount >= GetComponent<AmaterasuInferno>().CountCondition && (Magia.PassiveSkill.AmaterasuInferno) == (m_magia.MyPassiveSkill & Magia.PassiveSkill.AmaterasuInferno))
+                {
+                    return;
+                }
                 m_skillActivated = true; // フラグを立てる
                 IsActivatable = true;
                 SkillActivate();

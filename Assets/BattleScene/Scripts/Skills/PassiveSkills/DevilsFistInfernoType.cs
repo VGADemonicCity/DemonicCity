@@ -23,11 +23,14 @@ namespace DemonicCity.BattleScene.Skill
         {
 
             // パッシブスキルフラグが建っている && 豪炎爆砕掌の条件以下の破壊数&& 街破壊カウントが条件を満たしていたら && スキルを呼び出していない時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
-                && cityDestructionCount < GetComponent<InfernosFist>().CountCondition
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill
                 && cityDestructionCount >= CountCondition
                 && timing == m_timing)
             {
+                if (cityDestructionCount >= GetComponent<InfernosFist>().CountCondition && (Magia.PassiveSkill.InfernosFist) == (m_magia.MyPassiveSkill & Magia.PassiveSkill.InfernosFist))
+                {
+                    return;
+                }
                 m_skillActivated = true; // フラグを立てる
                 IsActivatable = true;
                 SkillActivate();

@@ -12,18 +12,27 @@ namespace DemonicCity.BattleScene.Skill
     /// </summary>
     public abstract class PassiveSkill : MonoBehaviour
     {
-        public int CountCondition { get { return m_countCondition; } }
         public bool IsActivatable { get; set; }
-        public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkillName; } }
+        public int LevelCondition { get { return m_levelCondition; } }
+        public int CountCondition { get { return m_countCondition; } }
+        public EnhanceType GetEnhanceType{ get { return enhanceType; } }
+        public string  BuffText { get { return buffText; } set { buffText = value; } }
+        public Magia.PassiveSkill GetPassiveSkill { get { return m_passiveSkill; } }
 
+        /// <summary>level conditions</summary>
+        [SerializeField] protected int m_levelCondition = 1;
         /// <summary>count conditions</summary>
         [SerializeField] protected int m_countCondition = 1;
         /// <summary>パッシブスキルフラグ用変数</summary>
-        [SerializeField] protected Magia.PassiveSkill m_passiveSkillName;
+        [SerializeField] protected Magia.PassiveSkill m_passiveSkill;
         /// <summary>PassivesSkillの発動タイミング</summary>
         [SerializeField] protected SkillManager.Timing m_timing;
+        /// <summary>Skillのタイプ</summary>
+        [SerializeField] protected EnhanceType enhanceType;
         /// <summary>任意の増加割合(%)</summary>
         [SerializeField] protected float m_incease;
+        /// <summary>バフUIに表示するテキスト</summary>
+         protected string buffText = "";
         /// <summary>BattleManagerの参照</summary>
         protected BattleManager m_battleManager;
         /// <summary>SkillManagerの参照</summary>
@@ -81,7 +90,7 @@ namespace DemonicCity.BattleScene.Skill
         protected virtual void TryProcess(Magia.PassiveSkill passiveSkill, SkillManager.Timing timing, int cityDestructionCount)
         {
             // パッシブスキルフラグが建っている && 街破壊カウントが条件を満たしていたら && スキルを呼び出していない && 呼び出しタイミングがAttack時　SkillActivateを呼ぶ
-            if ((passiveSkill & m_passiveSkillName) == m_passiveSkillName
+            if ((passiveSkill & m_passiveSkill) == m_passiveSkill
                 && cityDestructionCount >= m_countCondition
                 && timing == m_timing)
             {
@@ -112,5 +121,32 @@ namespace DemonicCity.BattleScene.Skill
         {
             IsActivatable = false;
         }
+
+        protected void SetBuffText(EnhanceType enhanceType,int factor)
+        {
+            switch (enhanceType)
+            {
+                case EnhanceType.AttackBuff:
+                    buffText = string.Format("攻{0}", factor);
+                    break;
+                case EnhanceType.DefenseBuff:
+                    buffText = string.Format("防{0}", factor);
+                    break;
+                case EnhanceType.HpBuff:
+                    buffText = string.Format("体{0}", factor);
+                    break;
+                case EnhanceType.Invalid:
+                default:
+                    break;
+            }
+        }
+    }
+    public enum EnhanceType
+    {
+        Invalid,
+        AttackBuff,
+        DefenseBuff,
+        HpBuff,
+        AttackAndDefenseBuff,
     }
 }
