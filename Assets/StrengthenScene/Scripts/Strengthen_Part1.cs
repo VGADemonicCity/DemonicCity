@@ -323,7 +323,7 @@ namespace DemonicCity.StrengthenScene
             if (uniqueStatus + addUniqueStatus < 200)
             {
                 addUniqueStatus += AddStatusPoint(addUniqueStatus);
-                if (statusPoint > 0)
+                if (statusPoint >= 0)
                 {
                     uniqueStatusText.text = "+" + addUniqueStatus.ToString();
                     //固有ステータスを基礎ステータスに変換
