@@ -77,9 +77,9 @@ namespace DemonicCity.HomeScene
         List<Item> contents = new List<Item>();
 
         Item item;
-        Item[] items = new Item[3];
+        //Item[] items = new Item[3];
         Person person;
-        Person[] people = new Person[3];
+        //Person[] people = new Person[3];
 
         // Use this for initialization
         void Start()
@@ -100,7 +100,7 @@ namespace DemonicCity.HomeScene
                 }
                 else if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log(touchInfo.Diff);
+                    Debug.Log(touchInfo.Diff + " : " + scrollLim);
                     if (touchInfo.Diff.x < -scrollLim)
                     {
                         Scroll(true, -1f);
@@ -130,30 +130,14 @@ namespace DemonicCity.HomeScene
         public void Scroll(bool isScroll, float sign = 0f)
         {
             swicher.Scroll(isScroll, sign);
-            int i = 0;
+            int i = 1;
             if (sign > 0)           //ToLeft
             {
                 i = 0;
-                if (IsItem)
-                {
-
-                }
-                else
-                {
-
-                }
             }
             else if (sign < 0)      //ToRight
             {
                 i = 2;
-                if (IsItem)
-                {
-
-                }
-                else
-                {
-
-                }
             }
             cImage[1].sprite = cImage[i].sprite;
             swicher.targetObj.transform.localPosition = new Vector3(0, swicher.targetObj.transform.localPosition.y, swicher.targetObj.transform.localPosition.z);
@@ -237,10 +221,10 @@ namespace DemonicCity.HomeScene
                         {
                             touchTag = ObjectTag.Character;
                         }
-                        if (touchInfo.HitDetection(out beginObject, returnObj))
-                        {
-                            touchTag = ObjectTag.ReturnObj;
-                        }
+                        //if (touchInfo.HitDetection(out beginObject, returnObj))
+                        //{
+                        //    touchTag = ObjectTag.ReturnObj;
+                        //}
                         if (touchInfo.HitDetection(out beginObject, soundIcon))
                         {
                             touchTag = ObjectTag.Sound;
@@ -260,11 +244,11 @@ namespace DemonicCity.HomeScene
                         {
                             galleryM.CharacterSpeak(person.voice);
                         }
-                        if (touchTag == ObjectTag.ReturnObj
-                        && touchInfo.HitDetection(out hit, returnObj))
-                        {
-                            galleryM.ContentClose();
-                        }
+                        //if (touchTag == ObjectTag.ReturnObj
+                        //&& touchInfo.HitDetection(out hit, returnObj))
+                        //{
+                        //    galleryM.ContentClose();
+                        //}
                     }
                 });
             }

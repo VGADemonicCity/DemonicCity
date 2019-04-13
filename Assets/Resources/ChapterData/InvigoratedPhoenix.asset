@@ -16,7 +16,7 @@ MonoBehaviour:
   chapterTitle: "\u507D\u308A\u306E\u4EEE\u9762"
   isBattle: 1
   isStory: 1
-  BackGround: []
+  BackGround: {fileID: 0}
   BattleStage:
   - {fileID: 21300000, guid: 608d251ce1f080a4e8b2492ee8a835d8, type: 3}
   - {fileID: 21300000, guid: 1c172f3ee4d64eb4c97641f5c6a153a7, type: 3}

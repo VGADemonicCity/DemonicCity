@@ -22,7 +22,9 @@ namespace DemonicCity
 
         void DataReset()
         {
-
+            Debug.Log("DataReset");
+            //データをリセットする処理
+            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title);
         }
 
         void Cancel()
