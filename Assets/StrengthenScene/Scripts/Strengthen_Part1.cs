@@ -94,6 +94,7 @@ namespace DemonicCity.StrengthenScene
 
         [SerializeField] private GameObject backGround = null;
 
+   
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -131,7 +132,8 @@ namespace DemonicCity.StrengthenScene
                         {
                             case "BackToHomeSceneButton":
                                 StartCoroutine(ClosePopUpAnimation(backGround));
-                                SceneChanger.SceneChange(SceneName.Home);
+                                //SceneChanger.SceneChange(SceneName.Home);
+                                Destroy(gameObject);
                                 break;
 
                             case "ShowSkillButton":
