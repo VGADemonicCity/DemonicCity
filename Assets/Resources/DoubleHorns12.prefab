@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 95204437066560128}
   - component: {fileID: 114250633123588026}
   m_Layer: 10
-  m_Name: DoubleHorns
+  m_Name: DoubleHorns12
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74d2839edf2e74bc48d1ce4cdf25a3da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_id: 19
+  m_id: 30
   m_stats:
     Level: 0
     Durability: 0
@@ -158,9 +158,9 @@ MonoBehaviour:
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 1000
-    Attack: 150
-    Defense: 50
+    HitPoint: 100000
+    Attack: 0
+    Defense: 0
   m_animator: {fileID: 95204437066560128}
   skillAnimator: {fileID: 95864045544708812}
   m_destroyingTime: 3

@@ -48,6 +48,8 @@ namespace DemonicCity
         [SerializeField] Button toPreviousButton;
         /// <summary>閉じるボタン</summary>
         [SerializeField] Button closeButton;
+        /// <summary>itween animationに使う時間</summary>
+        [SerializeField] float fadingTime = .5f;
 
         /// <summary>現在対象となっている素材</summary>
         TutorialItems.TutorialItem currentItem;
@@ -55,6 +57,8 @@ namespace DemonicCity
         TutorialItems.TutorialItem previousItem;
         /// <summary>popup materials</summary>
         List<PopupSystemMaterial> popupMaterials;
+
+
 
         const int width = 1080;
         const int height = 1920;
@@ -66,6 +70,7 @@ namespace DemonicCity
             {
                 new PopupSystemMaterial(OnPushNextButton,toNextButton.gameObject.name,false),
                 new PopupSystemMaterial(OnPushPreviousButton,toPreviousButton.gameObject.name,false),
+                new PopupSystemMaterial(Close,closeButton.gameObject.name,true),
             };
         }
 
@@ -87,25 +92,49 @@ namespace DemonicCity
             });
         }
 
-        void FadingImage()
-        {
-            //iTween.MoveTo()
-        }
-
-        void Close()
+        /// <summary>
+        /// fading image
+        /// </summary>
+        void FadingImage(Index index)
         {
 
+            switch (index)
+            {
+                case Index.Next:
+                    iTween.MoveBy(popupSystem.popupedObject, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
+                    break;
+                case Index.Previous:
+                    iTween.MoveBy(popupSystem.popupedObject, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
+                    break;
+                case Index.Last:
+                    break;
+                default:
+                    break;
+            }
         }
 
+        /// <summary>
+        /// 閉じるボタンのイベントハンドラ
+        /// </summary>
+        protected virtual void Close() { }
+
+        /// <summary>
+        /// 次へボタンのイベントハンドラ
+        /// </summary>
         void OnPushNextButton()
         {
             ChangeItem(Index.Next);
+            FadingImage(Index.Next);
             OnChangeItem();
         }
 
+        /// <summary>
+        /// 前へボタンのイベントハンドラ
+        /// </summary>
         void OnPushPreviousButton()
         {
             ChangeItem(Index.Previous);
+            FadingImage(Index.Previous);
             OnChangeItem();
         }
 
@@ -117,6 +146,14 @@ namespace DemonicCity
             // ボタンが表示可能かどうか判断し,ボタンを表示するかしないか決定する
             CheckButtonVibible(toNextButton, Index.Next);
             CheckButtonVibible(toPreviousButton, Index.Previous);
+            CheckButtonVibible(closeButton, Index.Last);
+
+            if (currentItem.useVoice)
+            {
+                // TODO: ボイスが存在する場合、ボイスを再生させる
+            }
+            
+            
         }
 
 
@@ -141,6 +178,17 @@ namespace DemonicCity
                     break;
                 case Index.Previous:
                     if (previousItem != null)
+                    {
+                        button.gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        button.gameObject.SetActive(false);
+                    }
+                    break;
+                case Index.Last:
+                    var index = tutorialObject.Items.IndexOf(currentItem);
+                    if(index == tutorialObject.Items.Count -1)
                     {
                         button.gameObject.SetActive(true);
                     }
