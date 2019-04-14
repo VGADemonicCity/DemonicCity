@@ -16,7 +16,7 @@ namespace DemonicCity
     {
         public GameObject popupedObject { get; set; }
 
-        Canvas canvas;
+        public Canvas canvas { get; set; }
         GameObject canvasObject;
 
         [SerializeField] GameObject popupObject;
