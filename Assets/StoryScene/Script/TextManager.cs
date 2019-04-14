@@ -173,7 +173,7 @@ namespace DemonicCity.StoryScene
             nameObj.text = "";
         }
 
-        public CharName[] talker = new CharName[2] { CharName.None, CharName.None };
+        public CharName[] talker = new CharName[3] { CharName.None, CharName.None, CharName.None };
 
 
 

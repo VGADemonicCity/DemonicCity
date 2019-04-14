@@ -11,6 +11,13 @@ namespace DemonicCity
     ///</summary>
     public class Progress : SavableSingletonBase<Progress>
     {
+        [Flags]
+        public enum TutorialFlag
+        {
+            Home = 1,
+            Battle = 2,
+            Strengthen = 4,
+        }
 
         /// <summary>ストーリーの進行度</summary>
         [Flags]
@@ -70,6 +77,8 @@ namespace DemonicCity
         /// <summary>現在進行しているクエストの進行度</summary>
         [SerializeField] QuestProgress questProgress = QuestProgress.Prologue;
 
+        [SerializeField] TutorialFlag tutorialProgress = 0;
+
         /// <summary>ストーリーの進行度のプロパティ</summary>
         public StoryProgress MyStoryProgress
         {
@@ -89,6 +98,44 @@ namespace DemonicCity
         {
             get { return questProgress; }
             set { questProgress = value; Save(); }
+        }
+
+        public TutorialFlag TutorialProgress
+        {
+            get { return tutorialProgress; }
+            set { tutorialProgress = value; Save(); }
+        }
+
+
+        /// <summary>
+        /// 指定したFlagが立っているか
+        /// </summary>
+        /// <param name="flag"></param>
+        /// <returns></returns>
+        public bool TutorialCheck(TutorialFlag flag)
+        {
+            if ((tutorialProgress & flag) == flag)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// チュートリアル用のFlagのセット
+        /// </summary>
+        /// <param name="flag">対象のFlag</param>
+        /// <param name="isTrue">Trueなら立てる、Falseなら降ろす</param>
+        public void SetTutorialProgress(TutorialFlag flag, bool isTrue)
+        {
+            if (isTrue)
+            {
+                TutorialProgress = tutorialProgress | flag;
+            }
+            else
+            {
+                TutorialProgress = tutorialProgress & (~flag);
+            }
         }
 
         public StoryProgress NextStory(StoryProgress nowStory)

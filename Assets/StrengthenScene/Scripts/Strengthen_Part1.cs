@@ -15,6 +15,8 @@ namespace DemonicCity.StrengthenScene
         /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
         TouchGestureDetector touchGestureDetector;
 
+        [SerializeField] private TutorialsPopper popupSystem;
+
         /// <summary>現在の体力</summary>
         private int currentHp;
         /// <summary>現在の攻撃力</summary>
@@ -94,6 +96,8 @@ namespace DemonicCity.StrengthenScene
 
         [SerializeField] private GameObject backGround = null;
 
+        Progress progress;
+
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -103,6 +107,9 @@ namespace DemonicCity.StrengthenScene
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+            progress = Progress.Instance;
+
+         //   SavableSingletonBase<Progress>.Instance.Clear();debug
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
@@ -131,7 +138,8 @@ namespace DemonicCity.StrengthenScene
                         {
                             case "BackToHomeSceneButton":
                                 StartCoroutine(ClosePopUpAnimation(backGround));
-                                SceneChanger.SceneChange(SceneName.Home);
+                                //SceneChanger.SceneChange(SceneName.Home);
+                                Destroy(gameObject);
                                 break;
 
                             case "ShowSkillButton":
@@ -289,6 +297,13 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
+
+            if (!progress.TutorialCheck(Progress.TutorialFlag.Strengthen))
+            {
+                popupSystem.Popup();
+                progress.SetTutorialProgress(Progress.TutorialFlag.Strengthen, true);
+            }
+
             if (changedStatusFlag)
             {
                 confirmAndResetButtons.SetActive(true);
@@ -297,6 +312,7 @@ namespace DemonicCity.StrengthenScene
             {
                 StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
             }
+
         }
 
         /// <summary>スキルの説明テキストを表示/非表示</summary>
@@ -516,6 +532,7 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
 
             statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
+
         }
     }
 }

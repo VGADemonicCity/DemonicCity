@@ -85,7 +85,7 @@ namespace DemonicCity.StoryScene
         {
             new Vector2(2000,0),
             new Vector2(-2000,0),
-            new Vector2(0,0),
+            new Vector2(-2000,0),
         };
         public List<Cast> casts = new List<Cast>();
 
@@ -221,6 +221,13 @@ namespace DemonicCity.StoryScene
                 if (textManager.talker[(int)posTag] == CharName.None)
                 {
                     textManager.talker[(int)posTag] = charName;
+                    if (posTag == PositionTag.Center)
+                    {
+                        GameObject leaveCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == textManager.talker[0]);
+                        StartCoroutine(MoveObject(leaveCharObj, startPositions[0], moveTime, false));
+                        leaveCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == textManager.talker[1]);
+                        StartCoroutine(MoveObject(leaveCharObj, startPositions[1], moveTime, false));
+                    }
                     StartCoroutine(MoveObject(appearCharObj, targetPositions[(int)posTag], moveTime));
                 }
                 else if (textManager.talker[(int)posTag] != charName)
@@ -273,6 +280,14 @@ namespace DemonicCity.StoryScene
                     {
                         textManager.talker[(int)posTag] = CharName.None;
                     }
+                    if (posTag == PositionTag.Center)
+                    {
+                        GameObject appearCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == textManager.talker[0]);
+                        StartCoroutine(MoveObject(appearCharObj, targetPositions[0], moveTime, false));
+                        appearCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == textManager.talker[1]);
+                        StartCoroutine(MoveObject(appearCharObj, targetPositions[1], moveTime, false));
+                    }
+
                 }
                 casts.RemoveAll(x => x.name == charName);
             }
