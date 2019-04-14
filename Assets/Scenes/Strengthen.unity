@@ -1360,6 +1360,25 @@ Prefab:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 224517624884878416, guid: 90b9be51efe98ef49827065658948c84,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517624884878416, guid: 90b9be51efe98ef49827065658948c84,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224517624884878416, guid: 90b9be51efe98ef49827065658948c84,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1537939738843736, guid: 90b9be51efe98ef49827065658948c84, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 90b9be51efe98ef49827065658948c84, type: 2}
   m_IsPrefabAsset: 0
@@ -1371,6 +1390,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1832650655}
+  - component: {fileID: 1832650657}
+  - component: {fileID: 1832650656}
   m_Layer: 0
   m_Name: PopUpSystem
   m_TagString: Untagged
@@ -1391,6 +1412,41 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1832650656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832650654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78db3385b690f8b4383fc0d4784a09ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialObject: {fileID: 11400000, guid: 5a9b611539193544b821aee4fa659315, type: 2}
+  popupSystem: {fileID: 1832650657}
+  toNextButton: {fileID: 114819065615786930, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  toPreviousButton: {fileID: 114050094659586106, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  closeButton: {fileID: 114194886120063984, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  fadingTime: 0.5
+--- !u!114 &1832650657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1832650654}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 1751496469293030, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  scalingTime: 1
+  sortingOrder: 100
 --- !u!1001 &1895451744
 Prefab:
   m_ObjectHideFlags: 0
