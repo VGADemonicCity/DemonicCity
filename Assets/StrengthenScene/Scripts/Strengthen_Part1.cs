@@ -15,7 +15,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
         TouchGestureDetector touchGestureDetector;
 
-        [SerializeField]private TutorialsPopper popupSystem;
+        [SerializeField] private TutorialsPopper popupSystem;
 
         /// <summary>現在の体力</summary>
         private int currentHp;
@@ -96,6 +96,8 @@ namespace DemonicCity.StrengthenScene
 
         [SerializeField] private GameObject backGround = null;
 
+        Progress progress;
+
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -105,6 +107,9 @@ namespace DemonicCity.StrengthenScene
         {
             magia = Magia.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
+            progress = Progress.Instance;
+
+         //   SavableSingletonBase<Progress>.Instance.Clear();debug
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
@@ -120,7 +125,6 @@ namespace DemonicCity.StrengthenScene
             GetGameObjects();
             ResetStatus();
 
-           
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -293,6 +297,13 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
+
+            if (!progress.TutorialCheck(Progress.TutorialFlag.Strengthen))
+            {
+                popupSystem.Popup();
+                progress.SetTutorialProgress(Progress.TutorialFlag.Strengthen, true);
+            }
+
             if (changedStatusFlag)
             {
                 confirmAndResetButtons.SetActive(true);
@@ -521,7 +532,7 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
 
             statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
-          
+
         }
     }
 }
