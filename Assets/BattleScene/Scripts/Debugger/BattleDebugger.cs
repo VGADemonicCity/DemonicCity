@@ -18,8 +18,18 @@ namespace DemonicCity.BattleScene.Debugger
         public int OpenPanelQuantity { get; set; }
         /// <summary>Debug用フラグ</summary>
         public DebuggingFlag Flag { get; set; }
+        /// <summary>Inspectorで指定したストーリーを呼び出すかどうか</summary>
+        public bool UseTargetStory { get { return useTargetStory; } set { useTargetStory = value; } }
+        /// <summary>指定された任意のストーリー</summary>
+        public Progress.StoryProgress TargetStory { get { return targetStory; } set { targetStory = value; } }
 
 
+
+
+        [Header("章の指定をここから呼び出すかどうかのフラグとその章")]
+        [SerializeField] bool useTargetStory;
+        [SerializeField] Progress.StoryProgress targetStory;
+        [Header("戦闘中のマギアが習得しているスキル一覧(操作不能)")]
         [SerializeField] List<Magia.PassiveSkill> magiaAvailableSkills;
         /// <summary>バトル中のマギアのステータス</summary>
         [SerializeField] Status magiaStatus;
@@ -123,7 +133,7 @@ namespace DemonicCity.BattleScene.Debugger
         /// </summary>
         public void OpenAllPanelsExceptEnemyPanels()
         {
-            if(m_battleManager.m_StateMachine.m_State!= BattleManager.StateMachine.State.PlayerChoice)
+            if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice)
             {
                 return;
             }

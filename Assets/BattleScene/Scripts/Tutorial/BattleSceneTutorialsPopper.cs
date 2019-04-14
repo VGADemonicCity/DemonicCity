@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -36,7 +37,28 @@ namespace DemonicCity.BattleScene
         {
             popupSystem.Popup();
             popupSystem.SubscribeButton(popupMaterial);
-            currentItem = tutorialObject.Items.Find(i => subject == i.subject);
+            var items = tutorialObject.Items.FindAll(item => subject == item.subject);
+            if(items.Count == 1)
+            {
+                //currentItem = items.
+            }
+            targetImage.sprite = currentItem.Sprite;
+            if (currentItem.useVoice)
+            {
+
+
+
+                //////////////
+
+
+
+
+
+
+
+
+                //SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.SE, clip);
+            }
         }
 
         void OnPushOk()

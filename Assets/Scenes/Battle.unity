@@ -1091,22 +1091,22 @@ Prefab:
     - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
       propertyPath: m_Size.x
-      value: 2.56
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
       propertyPath: m_Size.y
-      value: 2.56
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
       propertyPath: m_Size.x
-      value: 1.92
+      value: 2.56
       objectReference: {fileID: 0}
     - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
         type: 2}
       propertyPath: m_Size.y
-      value: 1.92
+      value: 2.56
       objectReference: {fileID: 0}
     - target: {fileID: 4046121451607452, guid: 8fbb58dc8140d4b9eb58bfc791298650, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1520,6 +1520,22 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 95762068010604308, guid: 2429ccc08ccac4245b1659f33702f1b9,
     type: 2}
   m_PrefabInternal: {fileID: 1583049627}
+--- !u!1 &1628121255 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1758138740521478, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+    type: 2}
+  m_PrefabInternal: {fileID: 878212108}
+--- !u!114 &1628121256
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1628121255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fd94802bb0dd6b42b1fda22ff5b1439, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1802063877
 Prefab:
   m_ObjectHideFlags: 0
@@ -1832,6 +1848,16 @@ Prefab:
     - target: {fileID: 1295432914653552, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: useTargetStory
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: targetStory
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
