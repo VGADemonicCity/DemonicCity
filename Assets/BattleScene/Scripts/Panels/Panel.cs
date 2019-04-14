@@ -88,7 +88,7 @@ namespace DemonicCity.BattleScene
         public IEnumerator Processing(float waitTime, Sprite sprite = null)
         {
             // Todo
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.A); 
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel); 
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
