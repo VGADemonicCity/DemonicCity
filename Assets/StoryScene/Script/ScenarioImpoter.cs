@@ -47,10 +47,18 @@ namespace DemonicCity
                 tmpScenario.characters.Add(tmpStorage.cName);
             }
             tmpScenario.characters = tmpScenario.characters.Distinct().Where(item => item <= CharName.Ixmagina).ToList();
+            Scenario tmp = AssetDatabase.LoadAssetAtPath<Scenario>(objPath + ".asset");
+            if (tmp == null)
+            {
+                AssetDatabase.CreateAsset(tmpScenario, objPath + ".asset");
+            }
+            else
+            {
+                tmp = tmpScenario;
+                EditorUtility.SetDirty(tmp);
+                AssetDatabase.SaveAssets();
+            }
 
-
-
-            AssetDatabase.CreateAsset(tmpScenario, objPath + ".asset");
         }
 
 

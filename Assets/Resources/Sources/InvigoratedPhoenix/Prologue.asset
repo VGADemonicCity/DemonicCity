@@ -22,11 +22,11 @@ MonoBehaviour:
     stage: 
     stageTag: 0
     voiceData: {fileID: 0}
-  - charName: Magia
-    cName: 0
-    sentence: "\u30D5\u30A3\u30CB\u30AF\u30B9\u2026\u2026\u3069\u3046\u3057\u3066\u2026\u2026"
+  - charName: System
+    cName: 12
+    sentence: Appear:Phoenix:Enemy
     face: 
-    faceIndex: 3
+    faceIndex: 0
     unknown: 
     isUnknown: 0
     stage: 
@@ -34,9 +34,19 @@ MonoBehaviour:
     voiceData: {fileID: 0}
   - charName: System
     cName: 12
-    sentence: Appear:Phoenix:Enemy
+    sentence: Clear
     face: 
     faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u30D5\u30A3\u30CB\u30AF\u30B9\u2026\u2026\u3069\u3046\u3057\u3066\u2026\u2026"
+    face: 
+    faceIndex: 3
     unknown: 
     isUnknown: 0
     stage: 
