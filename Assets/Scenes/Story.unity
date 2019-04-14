@@ -1420,6 +1420,56 @@ Prefab:
       propertyPath: m_inputSource
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_text
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a200ebd214bc76a47ae008546486ac2b, type: 2}
   m_IsPrefabAsset: 0
@@ -1590,15 +1640,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   director: {fileID: 1750996256}
   parentTransform: {fileID: 718607017}
-  characterObjects:
-  - {fileID: 1975014521590236, guid: 8f94bec2ca3c243499c07d3eec1bb409, type: 2}
-  - {fileID: 1975014521590236, guid: 6348cc139981c89449d800ceb3850b54, type: 2}
-  - {fileID: 1975014521590236, guid: e8b7f36801e3e7d489738869f6374931, type: 2}
-  - {fileID: 1975014521590236, guid: 42b6f45c901b7ba42878036504f86224, type: 2}
-  - {fileID: 1975014521590236, guid: 7ea3e9cdd0af279478d08848fd7dff0a, type: 2}
-  - {fileID: 1975014521590236, guid: 514aab17db32d4446b63849aed217ce6, type: 2}
-  - {fileID: 1975014521590236, guid: 43506c380cb9a4e438b6da47be8dbee3, type: 2}
-  - {fileID: 1975014521590236, guid: 559796c510aa95445ad40c2e7a40d939, type: 2}
   characterObject: {fileID: 1975014521590236, guid: db386259a51a6884c80a5caefd18182e,
     type: 2}
   actors: []
@@ -1608,7 +1649,7 @@ MonoBehaviour:
   putSentence: {fileID: 1382222496}
   nameObj: {fileID: 671158}
   skipButton: {fileID: 1583173792}
-  talker: 0b0000000b000000
+  talker: 0b0000000b0000000b000000
 --- !u!114 &1750996256
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1683,7 +1724,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
