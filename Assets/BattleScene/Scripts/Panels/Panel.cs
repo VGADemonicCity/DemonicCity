@@ -87,6 +87,8 @@ namespace DemonicCity.BattleScene
         //選択されたら一回だけ演出を出してパネルの中身を表示する
         public IEnumerator Processing(float waitTime, Sprite sprite = null)
         {
+            // Todo
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.A); 
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
