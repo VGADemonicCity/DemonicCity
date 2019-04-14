@@ -1,0 +1,235 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6c5acad7a5c014a8d7cd3836b4dee1, type: 3}
+  m_Name: Epilogue
+  m_EditorClassIdentifier: 
+  texts:
+  - charName: System
+    cName: 12
+    sentence: Appear:Magia:Ally
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Appear:Phoenix:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u30CF\u30A1\u3001\u30CF\u30A1\u3001\u30CF\u30A1\u2026\u2026"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3069\u3046\u3060\u2026\u898B\u305F\u304B\u2026!"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3053\u308C\u307B\u3069\u306E\u529B\u3068\u306F\u2026\u304A\u898B\u305D\u308C\u3057\u307E\u3057\u305F"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u30C3!?\u3000\u50B7\u304C\u6CBB\u3063\u305F\u2026"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u308F\u305F\u3057\u306E\u80FD\u529B\u306F\u201D\u518D\u751F\u201D"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u9B54\u529B\u304C\u3042\u308B\u9650\u308A\u4F55\u5EA6\u3067\u3082\u8607\u308B\u3053\u3068\u304C\u53EF\u80FD\u3067\u3059"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3042\u305F\u3057\u306F\u307E\u3060\u8AE6\u3081\u306A\u3044\u305E\u2026\u2026!"
+    face: 
+    faceIndex: 2
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3044\u3044\u3048\u3001\u3053\u308C\u3067\u7D42\u308F\u308A\u3067\u3059"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3053\u308C\u3088\u308A\u308F\u305F\u3057\u306F\u3042\u306A\u305F\u69D8\u306E\u4E0B\u306B\u4ED8\u304F\u3053\u3068\u306B\u3057\u307E\u3059"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u2026\u2026\u3069\u3046\u3044\u3046\u98A8\u306E\u5439\u304D\u56DE\u3057?"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3053\u306E\u5148\u3001\u4F55\u5EA6\u6226\u3063\u3066\u3082\u308F\u305F\u3057\u306F\u52DD\u3064\u3053\u3068\u304C\u3067\u304D\u306A\u3044\u3067\u3057\u3087\u3046"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u305D\u3057\u3066\u306A\u306B\u3088\u308A\u3001\u3042\u306A\u305F\u69D8\u306B\u30D0\u30A2\u30EB\u3092\u5012\u305B\u308B\u53EF\u80FD\u6027\u3092\u611F\u3058\u307E\u3057\u305F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u2026\u2026\u304A\u524D\u304C\u3053\u306E\u5148\u3044\u3064\u88CF\u5207\u308B\u304B\u308F\u304B\u3089\u306A\u3044"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u308F\u305F\u3057\u306E\u884C\u52D5\u539F\u7406\u306F\u5F31\u8089\u5F37\u98DF\u3067\u3059"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u305D\u3057\u3066\u30DE\u30AE\u30A2\u69D8\u304C\u5F37\u8005\u3060\u3068\u8A3C\u660E\u3055\u308C\u307E\u3057\u305F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u305D\u306E\u30DE\u30AE\u30A2\u69D8\u304C\u5F37\u8005\u3067\u3042\u308B\u4EE5\u4E0A\u3001\u3069\u3053\u307E\u3067\u3082\u304A\u4F9B\u81F4\u3057\u307E\u3057\u3087\u3046"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u30D5\u30F3\u3001\u52DD\u624B\u306B\u3057\u306A\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u4ED8\u3044\u3066\u304F\u308B\u306A\u3089\u3001\u3061\u3083\u3093\u3068\u50CD\u3044\u3066\u3082\u3089\u3046\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Coloring:#000000
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: PopWindow:ToNext
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  characters: 0000000001000000

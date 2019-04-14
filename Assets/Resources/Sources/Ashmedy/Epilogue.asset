@@ -1,0 +1,315 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6c5acad7a5c014a8d7cd3836b4dee1, type: 3}
+  m_Name: Epilogue
+  m_EditorClassIdentifier: 
+  texts:
+  - charName: 
+    cName: 11
+    sentence: "\u9B54\u754C\u30B2\u30FC\u30C6\u30A3\u30A2\u3000\uFF5E\u9B54\u529B\u7814\u7A76\u6240\u8DE1\uFF5E"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Appear:Magia:Ally
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Appear:Ashmedy:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u8CA0\u3051\u3061\u3083\u3063\u305F\u308F\uFF5E"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u30C8\u30C9\u30E1\u306F\u523A\u3055\u306A\u3044\u306E\u304B\u3057\u3089?"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u304A\u524D\u306F\u304A\u7236\u69D8\u306E\u3053\u3068\u3092\u826F\u304F\u77E5\u3063\u3066\u3044"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3060\u304B\u3089\u6559\u3048\u3066\u307B\u3057\u3044"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u304A\u7236\u69D8\u306F\u7121\u5DEE\u5225\u306E\u6BBA\u622E\u3092\u697D\u3057\u3093\u3067\u3044\u305F\u306E?"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u2026\u2026\u2026\u2026"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u5F7C\u304C\u5927\u91CF\u8650\u6BBA\u3092\u3057\u3066\u3044\u305F\u306E\u306F\u78BA\u304B\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u2026\u2026\u2026\u2026"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u3067\u3082\u697D\u3057\u3093\u3067\u3044\u305F\u308F\u3051\u3067\u306F\u306A\u304F\u3001\u4F7F\u547D\u306E\u3088\u3046\u306A\u3082\u306E\u3092\u611F\u3058\u305F\u308F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u305F\u3060\u3001\u305D\u306E\u7406\u7531\u306F\u5206\u304B\u3089\u306A\u304B\u3063\u305F\u308F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u3060\u304B\u3089\u7406\u89E3\u3055\u308C\u305A\u88CF\u5207\u3089\u308C\u305F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u59BB\u3067\u3042\u308B\u30A2\u30B7\u30E5\u306B\u3082\u6700\u5F8C\u307E\u3067\u6559\u3048\u3066\u304F\u308C\u306A\u304B\u3063\u305F\u308F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u30A2\u30B7\u30E5\u304C\u77E5\u3063\u3066\u3044\u308B\u306E\u306F\u305D\u308C\u3060\u3051\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u3058\u3083\u3042\u306D\u3001\u30DE\u30AE\u30A2\u3061\u3083\u3093"
+    face: 
+    faceIndex: 1
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u4EBA\u808C\u604B\u3057\u304F\u306A\u3063\u305F\u3089\u3044\u3064\u3067\u3082\u3044\u3089\u3063\u3057\u3083\u3044"
+    face: 
+    faceIndex: 1
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ashmedy
+    cName: 4
+    sentence: "\u3042\u306A\u305F\u306A\u3089\u3044\u3064\u3067\u3082\u5927\u6B53\u8FCE\u3088"
+    face: 
+    faceIndex: 1
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Leave:Ashmedy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u2026\u2026"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3055\u3041\u3001\u6848\u5185\u3057\u3066"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Appear:Phoenix:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3088\u3044\u306E\u3067\u3059\u304B\u30DE\u30AE\u30A2\u69D8?"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u3053\u3053\u3067\u5012\u3055\u306A\u3044\u3068\u5897\u63F4\u3092\u547C\u3076\u304B\u3082\u3057\u308C\u307E\u305B\u3093"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3046\u3046\u3093\u3001\u4ECA\u306F\u5148\u3092\u6025\u3054\u3046"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u304B\u3057\u3053\u307E\u308A\u307E\u3057\u305F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Phoenix
+    cName: 1
+    sentence: "\u9B54\u738B\u57CE\u306F\u3053\u3061\u3089\u3067\u3054\u3056\u3044\u307E\u3059"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Coloring:#000000
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: PopWindow:ToNext
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  characters: 040000000000000001000000

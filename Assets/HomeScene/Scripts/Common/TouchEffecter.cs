@@ -7,7 +7,7 @@ namespace DemonicCity.HomeScene
     public class TouchEffecter : MonoBehaviour
     {
 
-        
+
         ParticleSystem effect;
         TouchGestureDetector touchGestureDetector;
         //UnityEngine.ParticleSystem.MainModule psMain;
@@ -21,10 +21,14 @@ namespace DemonicCity.HomeScene
         {
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
+                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
+                {
+                    TouchCheck();
+                }
                 switch (gesture)
                 {
                     case TouchGestureDetector.Gesture.TouchBegin:
-                    case TouchGestureDetector.Gesture.TouchMove:                        
+                    case TouchGestureDetector.Gesture.TouchMove:
                     case TouchGestureDetector.Gesture.TouchStationary:
 
                         Vector3 pos = TouchPosition.TouchToCanvas();
@@ -35,20 +39,23 @@ namespace DemonicCity.HomeScene
 
 
             });
-            GameObject effectObj= ResourcesLoad.Load<GameObject>("Effects/TouchEffect");
+            GameObject effectObj = ResourcesLoad.Load<GameObject>("Effects/TouchEffect");
             //GetComponent<ParticleSystem>();
             GameObject newObj = Instantiate(effectObj.gameObject, transform);
             effect = newObj.GetComponent<ParticleSystem>();
         }
 
+        void TouchCheck()
+        {
 
+        }
 
         // Update is called once per frame
         void Update()
         {
 
 
-            
+
             if (Input.touchCount > 0)
             {
                 Vector3 pos = TouchPosition.TouchToCanvas();
@@ -61,9 +68,9 @@ namespace DemonicCity.HomeScene
                 //{
                 //    effect.Emit(1);
                 //}
-                
+
             }
-            
+
 
         }
 

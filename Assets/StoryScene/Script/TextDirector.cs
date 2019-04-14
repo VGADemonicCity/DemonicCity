@@ -83,8 +83,8 @@ namespace DemonicCity.StoryScene
         };
         List<Vector3> startPositions = new List<Vector3>()
         {
-            new Vector2(700,0),
-            new Vector2(-700,0),
+            new Vector2(2000,0),
+            new Vector2(-2000,0),
             new Vector2(0,0),
         };
         public List<Cast> casts = new List<Cast>();
