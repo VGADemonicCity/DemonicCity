@@ -118,6 +118,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1295432914653552
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4053168259867600}
+  - component: {fileID: 114127674806170954}
+  - component: {fileID: 114893046754740710}
+  m_Layer: 0
+  m_Name: TutorialPopper
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1384064767142864
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,6 +151,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!4 &4053168259867600
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295432914653552}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.8986453, y: 3.8388999, z: 98.59398}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4293241256990584
 Transform:
   m_ObjectHideFlags: 1
@@ -188,6 +218,7 @@ Transform:
   - {fileID: 4883720955422510}
   - {fileID: 4596012782248328}
   - {fileID: 4887146168630968}
+  - {fileID: 4053168259867600}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -259,7 +290,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 4
   m_incease: 0.05
-  buffText: 
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -293,6 +323,21 @@ MonoBehaviour:
   attackButtonProcess: {fileID: 114254286006001736}
   panelComplete: {fileID: 0}
   destructionCounterBox: {fileID: 0}
+--- !u!114 &114127674806170954
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295432914653552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 1751496469293030, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  scalingTime: 1
+  sortingOrder: 100
 --- !u!114 &114177336636838174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,7 +370,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 3
   m_incease: 0.02
-  buffText: 
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
 MonoBehaviour:
@@ -384,7 +428,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 2
   m_incease: 0.1
-  buffText: 
 --- !u!114 &114290885052486680
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -470,7 +513,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 1
-  TargetMagiaLevel: 200
+  TargetMagiaLevel: 127
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -514,7 +557,6 @@ MonoBehaviour:
   m_timing: 1
   enhanceType: 0
   m_incease: 0.02
-  buffText: 
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -529,6 +571,7 @@ MonoBehaviour:
   magiaAnimator: {fileID: 0}
   adjustmentCoefficent: 0.5
   buffTextBox: {fileID: 0}
+  waitTime: 1.25
 --- !u!114 &114452556554156664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +589,6 @@ MonoBehaviour:
   m_timing: 1
   enhanceType: 0
   m_incease: 0.01
-  buffText: 
 --- !u!114 &114459537921108872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -564,7 +606,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 4
   m_incease: 0.01
-  buffText: 
 --- !u!114 &114496166160569242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -582,7 +623,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 3
   m_incease: 0.1
-  buffText: 
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114542386805354352
 MonoBehaviour:
@@ -597,6 +637,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_processingTime: 3
   sealdEnemyPanel: {fileID: 21300000, guid: a11f64fe18bb034498b862d6c03109b2, type: 3}
+  uniqueSkillAnimator: {fileID: 0}
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,7 +685,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 2
   m_incease: 0.1
-  buffText: 
 --- !u!114 &114676999750379174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -662,7 +702,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 4
   m_incease: 0.5
-  buffText: 
 --- !u!114 &114677235418965648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -675,12 +714,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 160
-  m_countCondition: 38
+  m_countCondition: 35
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
   m_incease: 0.05
-  buffText: 
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -698,7 +736,6 @@ MonoBehaviour:
   m_timing: 1
   enhanceType: 0
   m_incease: 0.015
-  buffText: 
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -713,6 +750,29 @@ MonoBehaviour:
   m_enemiesMover: {fileID: 0}
   waveTitle: {fileID: 0}
   firstWaitTime: 2
+--- !u!114 &114893046754740710
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1295432914653552}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78db3385b690f8b4383fc0d4784a09ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialObject: {fileID: 11400000, guid: f9ab6a6dd4626e64a85a6309af800995, type: 2}
+  popupSystem: {fileID: 114127674806170954}
+  toNextButton: {fileID: 114819065615786930, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  toPreviousButton: {fileID: 114050094659586106, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  closeButton: {fileID: 114194886120063984, guid: 722083836e847a14ba87c2050c002487,
+    type: 2}
+  fadingTime: 0.5
+  popupedToNextButton: {fileID: 0}
+  popupedToPreviousButton: {fileID: 0}
+  popupedCloseButton: {fileID: 0}
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -730,7 +790,6 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 2
   m_incease: 0
-  buffText: 
 --- !u!114 &114947920586921256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -774,4 +833,3 @@ MonoBehaviour:
   m_timing: 0
   enhanceType: 0
   m_incease: 0.5
-  buffText: 

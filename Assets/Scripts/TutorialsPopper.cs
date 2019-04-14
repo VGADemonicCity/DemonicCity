@@ -53,11 +53,16 @@ namespace DemonicCity
 
         /// <summary>現在対象となっている素材</summary>
         TutorialItems.TutorialItem currentItem;
-        /// <summary>一つ前に対象になっていた素材</summary>
-        TutorialItems.TutorialItem previousItem;
         /// <summary>popup materials</summary>
         List<PopupSystemMaterial> popupMaterials;
-
+        /// <summary>チュートリアル画像を生成するオブジェクトの親</summary>
+        GameObject tutorialImagesParent;
+        /// <summary>次へボタン</summary>
+        Button popupedToNextButton;
+        /// <summary>前へボタン</summary>
+        Button popupedToPreviousButton;
+        /// <summary>閉じるボタン</summary>
+        Button popupedCloseButton;
 
 
         const int width = 1080;
@@ -79,17 +84,26 @@ namespace DemonicCity
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
             var imageSize = new Vector2(width, height);
-            var xPos = 0;
+            float xPos = 0;
             tutorialObject.Items.ForEach(item =>
             {
                 var go = new GameObject();
-                go = Instantiate(go, popupSystem.popupedObject.transform);
+                go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
                 var image = go.AddComponent<Image>();
                 image.sprite = item.Sprite;
                 image.rectTransform.sizeDelta = imageSize;
-                image.rectTransform.position = new Vector2(xPos, 0);
+                image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
                 xPos += width;
+                image.rectTransform.localScale = Vector2.one;
             });
+
+            // on pupuped.
+            currentItem = tutorialObject.Items.First();
+            popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
+            popupedToPreviousButton = GameObject.Find(toPreviousButton.gameObject.name).GetComponent<Button>();
+            popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
+            tutorialImagesParent = popupSystem.popupedObject.transform.GetChild(0).gameObject;
+            OnChangeItem();
         }
 
         /// <summary>
@@ -101,10 +115,10 @@ namespace DemonicCity
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(popupSystem.popupedObject, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(popupSystem.popupedObject, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
                     break;
                 case Index.Last:
                     break;
@@ -144,16 +158,16 @@ namespace DemonicCity
         void OnChangeItem()
         {
             // ボタンが表示可能かどうか判断し,ボタンを表示するかしないか決定する
-            CheckButtonVibible(toNextButton, Index.Next);
-            CheckButtonVibible(toPreviousButton, Index.Previous);
-            CheckButtonVibible(closeButton, Index.Last);
+            CheckButtonVibible(popupedToNextButton, Index.Next);
+            CheckButtonVibible(popupedToPreviousButton, Index.Previous);
+            CheckButtonVibible(popupedCloseButton, Index.Last);
 
             if (currentItem.useVoice)
             {
                 // TODO: ボイスが存在する場合、ボイスを再生させる
+                var audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();
+                audioSource.Play(currentItem.VoiceClip);
             }
-            
-            
         }
 
 
@@ -177,7 +191,7 @@ namespace DemonicCity
                     }
                     break;
                 case Index.Previous:
-                    if (previousItem != null)
+                    if (PreviousItem != null)
                     {
                         button.gameObject.SetActive(true);
                     }
@@ -188,7 +202,7 @@ namespace DemonicCity
                     break;
                 case Index.Last:
                     var index = tutorialObject.Items.IndexOf(currentItem);
-                    if(index == tutorialObject.Items.Count -1)
+                    if (index == tutorialObject.Items.Count - 1)
                     {
                         button.gameObject.SetActive(true);
                     }
