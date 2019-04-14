@@ -1,0 +1,325 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf6c5acad7a5c014a8d7cd3836b4dee1, type: 3}
+  m_Name: Epilogue
+  m_EditorClassIdentifier: 
+  texts:
+  - charName: System
+    cName: 12
+    sentence: Appear:Magia:Ally
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Appear:Ixmagina:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 1
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ixmagina
+    cName: 9
+    sentence: "\u30AF\u3001\u30AF\u30BD\u2026\u2026!"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ixmagina
+    cName: 9
+    sentence: "\u3053\u306E\u8089\u4F53\u3067\u306F\u3001\u529B\u304C\u8DB3\u308A\u3093\u2026\u2026!"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u304A\u524D\u3088\u308A\u3001\u3042\u305F\u3057\u306E\u65B9\u304C\u5F37\u304B\u3063\u305F"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u305D\u308C\u3060\u3051\u3088"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Ixmagina
+    cName: 9
+    sentence: "\u304C\u3041\u3042\u3042\u3042\u3042\u3042\u3042\u3042!"
+    face: 
+    faceIndex: 5
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Leave:Ixmagina
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u7D42\u308F\u3063\u305F\u2026\u2026"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Item:Appear:Clown
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u304B\u2026\u2026"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3053\u308C\u306F\u3044\u3089\u306A\u3044\u304B\u306A"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3055\u3066\u3001\u3053\u308C\u304B\u3089\u3069\u3046\u3057\u3088\u3046"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3042\u305F\u3057\u306E\u7F6A\u306F\u3053\u308C\u3067\u62ED\u3044\u5207\u308C\u305F\u308F\u3051\u3058\u3083\u306A\u3044\u3057"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u7F6A\u6EC5\u307C\u3057\u306E\u65C5\u306B\u51FA\u3088\u3046\u2015\u2015"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Quake
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u306A\u3001\u4F55!?"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u304C\u66B4\u8D70\u3057\u3066\u308B!?"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Coloring:#000000
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3046\u308F\u3042\u3042\u3042!"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Item:Leave:Clown
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: "\u63FA\u308C\u53CE\u307E\u308B"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: SwitchBack:Castle
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: SwitchBack:Ground
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Clear
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u2026\u2026\u3046\u3045"
+    face: 
+    faceIndex: 4
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u3069\u3046\u306A\u3063\u305F\u306E?"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "!?\u3000\u7A7A\u304C\u2026\u2026"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: Magia
+    cName: 0
+    sentence: "\u4E00\u4F53\u4F55\u304C\u8D77\u3053\u308D\u3046\u3068\u3057\u3066\u3044\u308B\u306E\u2026\u2026?"
+    face: 
+    faceIndex: 3
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Coloring:#000000
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: SceneTrans:StaffCredit
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  characters: 0900000000000000

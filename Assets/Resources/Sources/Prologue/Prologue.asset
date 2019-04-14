@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Name: Prologue
   m_EditorClassIdentifier: 
   texts:
+  - charName: System
+    cName: 12
+    sentence: Coloring:#000000
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
   - charName: 
     cName: 11
     sentence: "\u9B54\u754C\u30B2\u30FC\u30C6\u30A3\u30A2\u3000\u9B54\u738B\u57CE\uFF5E\u7389\u5EA7\u306E\u9593\uFF5E"
@@ -35,6 +45,16 @@ MonoBehaviour:
   - charName: System
     cName: 12
     sentence: Appear:Barl:Enemy
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Clear
     face: 
     faceIndex: 0
     unknown: 

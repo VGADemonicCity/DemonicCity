@@ -154,7 +154,7 @@ namespace DemonicCity.HomeScene
 
         void CreatorReflect(string creName)
         {
-            creatorLabel.text = "\n" + creName;
+            creatorLabel.text =  creName;
             creatorObj.SetActive(!string.IsNullOrEmpty(creName));
         }
 

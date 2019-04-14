@@ -16,12 +16,12 @@ MonoBehaviour:
   chapterTitle: "\u6C7A\u6226\u306E\u899A\u609F"
   isBattle: 1
   isStory: 1
-  BackGround: []
+  BackGround: {fileID: 0}
   BattleStage:
   - {fileID: 21300000, guid: 608d251ce1f080a4e8b2492ee8a835d8, type: 3}
   - {fileID: 21300000, guid: 1c172f3ee4d64eb4c97641f5c6a153a7, type: 3}
   - {fileID: 21300000, guid: 0211ef43a62ac3442a22f14e3cf6ecbb, type: 3}
   levelRange: 640000006d000000
-  prologue: {fileID: 0}
-  epilogue: {fileID: 0}
+  prologue: {fileID: 11400000, guid: 423f45d6513d2724abdc8b1159678273, type: 2}
+  epilogue: {fileID: 11400000, guid: 5b04624f9a003074392b3ca5301d6d66, type: 2}
   test: {fileID: 11400000, guid: 936fee875752997458dd05433097ad87, type: 2}
