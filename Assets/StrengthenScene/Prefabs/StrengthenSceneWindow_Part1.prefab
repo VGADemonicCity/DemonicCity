@@ -2273,9 +2273,9 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1624918268531116}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -17280}
-  m_LocalScale: {x: 192, y: 192, z: 192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 224651776715093732}
   m_RootOrder: 2
@@ -3819,7 +3819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupObject: {fileID: 1751496469293030, guid: 722083836e847a14ba87c2050c002487,
+  popupObject: {fileID: 1751496469293030, guid: 2e66cd88fca796b4a83e21c44cac7898,
     type: 2}
   scalingTime: 1
   sortingOrder: 100
@@ -6005,7 +6005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b2a8059e97e6034ea68f13490aa7545, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupSystem: {fileID: 1624918268531116}
+  popupSystem: {fileID: 114492420233895502}
   confirmMessageWindow: {fileID: 1886937551190370}
   resetMessageWindow: {fileID: 1068351851739928}
   confirmAndResetButtons: {fileID: 1756933400820928}

@@ -96,7 +96,6 @@ namespace DemonicCity.StrengthenScene
 
         [SerializeField] private GameObject backGround = null;
 
-   
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -121,9 +120,7 @@ namespace DemonicCity.StrengthenScene
             GetGameObjects();
             ResetStatus();
 
-            //popupSystem.GetComponent<PopupSystem>().Popup();
-            popupSystem.Popup();
-
+           
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -304,6 +301,7 @@ namespace DemonicCity.StrengthenScene
             {
                 StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
             }
+
         }
 
         /// <summary>スキルの説明テキストを表示/非表示</summary>
