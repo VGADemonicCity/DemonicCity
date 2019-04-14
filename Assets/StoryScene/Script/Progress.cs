@@ -103,7 +103,7 @@ namespace DemonicCity
         public TutorialFlag TutorialProgress
         {
             get { return tutorialProgress; }
-            set { tutorialProgress = value; Save()}
+            set { tutorialProgress = value; Save(); }
         }
 
 
