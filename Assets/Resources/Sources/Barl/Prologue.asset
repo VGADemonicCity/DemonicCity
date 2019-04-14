@@ -24,6 +24,16 @@ MonoBehaviour:
     voiceData: {fileID: 0}
   - charName: System
     cName: 12
+    sentence: Clear
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
     sentence: Appear:Magia:Ally
     face: 
     faceIndex: 0
@@ -64,7 +74,7 @@ MonoBehaviour:
     voiceData: {fileID: 0}
   - charName: System
     cName: 12
-    sentence: Appear:Phoenix:Ally
+    sentence: Appear:Phoenix:Enemy
     face: 
     faceIndex: 0
     unknown: 
@@ -105,6 +115,16 @@ MonoBehaviour:
   - charName: Phoenix
     cName: 1
     sentence: "\u2026\u2026\u3054\u6B66\u904B\u3092"
+    face: 
+    faceIndex: 0
+    unknown: 
+    isUnknown: 0
+    stage: 
+    stageTag: 0
+    voiceData: {fileID: 0}
+  - charName: System
+    cName: 12
+    sentence: Leave:Phoenix
     face: 
     faceIndex: 0
     unknown: 

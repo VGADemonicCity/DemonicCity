@@ -24,8 +24,8 @@ namespace DemonicCity
 
         public enum SETag
         {
-            A,
-            B,
+            PositiveButton,
+            NegativeButton,
             C,
         }
 

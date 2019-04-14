@@ -10,5 +10,14 @@ namespace DemonicCity.StoryScene
     {
         public List<TextStorage> texts = new List<TextStorage>();
         public List<CharName> characters = new List<CharName>();
+
+        public Scenario()
+        {
+        }
+        public Scenario(Scenario parent)
+        {
+            texts = parent.texts;
+            characters = parent.characters;
+        }
     }
 }
