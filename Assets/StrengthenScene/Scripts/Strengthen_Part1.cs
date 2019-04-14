@@ -15,6 +15,8 @@ namespace DemonicCity.StrengthenScene
         /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
         TouchGestureDetector touchGestureDetector;
 
+        [SerializeField]private TutorialsPopper popupSystem;
+
         /// <summary>現在の体力</summary>
         private int currentHp;
         /// <summary>現在の攻撃力</summary>
@@ -94,6 +96,7 @@ namespace DemonicCity.StrengthenScene
 
         [SerializeField] private GameObject backGround = null;
 
+   
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -118,6 +121,9 @@ namespace DemonicCity.StrengthenScene
             GetGameObjects();
             ResetStatus();
 
+            //popupSystem.GetComponent<PopupSystem>().Popup();
+            popupSystem.Popup();
+
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -131,7 +137,8 @@ namespace DemonicCity.StrengthenScene
                         {
                             case "BackToHomeSceneButton":
                                 StartCoroutine(ClosePopUpAnimation(backGround));
-                                SceneChanger.SceneChange(SceneName.Home);
+                                //SceneChanger.SceneChange(SceneName.Home);
+                                Destroy(gameObject);
                                 break;
 
                             case "ShowSkillButton":
@@ -516,6 +523,7 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
 
             statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
+          
         }
     }
 }
