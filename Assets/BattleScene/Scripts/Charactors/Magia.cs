@@ -21,12 +21,17 @@ namespace DemonicCity
         {
             get
             {
-                if (!BattleDebugger.Instance.LoadStatusFromInspector || SceneManager.GetActiveScene().name != "Battle")
+                if (SceneManager.GetActiveScene().name != "Battle")
                 {
                     var saveData = SaveData.Instance;
                     return saveData.magia.m_passiveSkill;
                 }
 
+                if (BattleDebugger.Instance.LoadStatusFromInspector)
+                {
+                    var saveData = SaveData.Instance;
+                    return saveData.magia.m_passiveSkill;
+                }
                 return m_passiveSkill;
             }
             set { m_passiveSkill = value; }

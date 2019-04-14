@@ -17,7 +17,8 @@ namespace DemonicCity
         /// <summary>
         /// チュートリアル用素材
         /// </summary>
-        public class TutorialItem : MonoBehaviour
+        [System.Serializable]
+        public class TutorialItem 
         {
             /// <summary>表示するテクスチャ</summary>
             public Sprite Sprite;

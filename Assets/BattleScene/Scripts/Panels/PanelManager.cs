@@ -137,7 +137,12 @@ namespace DemonicCity.BattleScene
             }
         }
 
-
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            Debug.Log("on initialize");
+            
+        }
 
         /// <summary>
         /// Panelをタッチした時の処理
