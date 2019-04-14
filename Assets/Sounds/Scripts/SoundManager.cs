@@ -379,7 +379,14 @@ namespace DemonicCity
             StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
         }
 
-
+        /// <summary>
+        /// AudioSourceごとに再生停止
+        /// </summary>
+        /// <param name="tag">停止したいAudioSourceのTag</param>
+        public void StopWithFade(SoundTag tag)
+        {
+            PlayWithFade(tag, null);
+        }
 
 
     }
