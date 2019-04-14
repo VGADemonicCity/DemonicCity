@@ -40,8 +40,6 @@ namespace DemonicCity
 
         /// <summary>表示させるチュートリアルの素材群</summary>
         [SerializeField] TutorialItems tutorialObject;
-        /// <summary>popup system</summary>
-        [SerializeField] PopupSystem popupSystem;
         /// <summary>次へボタン</summary>
         [SerializeField] Button toNextButton;
         /// <summary>前へボタン</summary>
@@ -51,6 +49,8 @@ namespace DemonicCity
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .5f;
 
+        /// <summary>popup system</summary>
+        PopupSystem popupSystem;
         /// <summary>現在対象となっている素材</summary>
         TutorialItems.TutorialItem currentItem;
         /// <summary>popup materials</summary>
@@ -71,6 +71,7 @@ namespace DemonicCity
 
         private void Start()
         {
+            popupSystem = GetComponent<PopupSystem>();
             popupMaterials = new List<PopupSystemMaterial>
             {
                 new PopupSystemMaterial(OnPushNextButton,toNextButton.gameObject.name,false),
