@@ -15,6 +15,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] BackgroundController backgroundCtrl;
         /// <summary>animator of wave title</summary>
         [SerializeField] WaveTitle waveTitle;
+        
 
         /// <summary>
         /// Start this instance.
@@ -39,6 +40,9 @@ namespace DemonicCity.BattleScene
             StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
             m_enemiesMover.Moving(); // 待機させている次の敵を最前面迄動かす
             backgroundCtrl.FadingImageOfTheStage(); // ステージ背景を遷移させるアニメーション再生
+
+            var soundManager = SoundManager.Instance;
+            soundManager.PlayWithFade(SoundManager.SoundTag.BGM,/*Clip*/);
 
             var waitTime = waveTitle.Play();
             // 指定秒数分遅延させた後ステートマシンを状態遷移させる

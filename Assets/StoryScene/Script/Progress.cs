@@ -19,6 +19,15 @@ namespace DemonicCity
             Strengthen = 4,
         }
 
+        [Flags]
+        public enum TutorialFlagInBattleScene
+        {
+            OpenFirstPanel,
+            OpenedPanel,
+            MoreOpenPanel,
+
+        }
+
         /// <summary>ストーリーの進行度</summary>
         [Flags]
         public enum StoryProgress
@@ -165,5 +174,4 @@ namespace DemonicCity
             }
         }
     }
-
 }

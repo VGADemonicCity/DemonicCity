@@ -31,12 +31,20 @@ namespace DemonicCity
         /// <summary>適正レベル[0]下限、[1]上限</summary>
         public int[] levelRange = new int[2];
 
+        /// <summary>ボス以外のウェーブのBGM</summary>
+        [Header("ボス以外のウェーブのBGM")]
+        public AudioClip StandardBgm;
+        /// <summary>ボスのウェーブのBGM</summary>
+        [Header("ボスのウェーブのBGM")]
+        public AudioClip BossBgm;
+
         /// <summary>バトル前シナリオ</summary>
         [SerializeField] StoryScene.Scenario prologue;
         /// <summary>バトル後シナリオ</summary>
         [SerializeField] StoryScene.Scenario epilogue;
         /// <summary>テスト用シナリオ</summary>
         [SerializeField] StoryScene.Scenario test;
+
 
         public Dictionary<Progress.QuestProgress, StoryScene.Scenario> scenario
         {

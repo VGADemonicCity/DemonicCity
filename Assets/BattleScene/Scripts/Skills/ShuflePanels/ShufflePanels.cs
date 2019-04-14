@@ -112,6 +112,7 @@ namespace DemonicCity.BattleScene
         void Activate()
         {
             skillAnim.SetTrigger("Activate");
+            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
         }
 
         /// <summary>
