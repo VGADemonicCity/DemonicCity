@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DemonicCity.StorySelectScene
 {
@@ -9,7 +10,7 @@ namespace DemonicCity.StorySelectScene
         TouchGestureDetector touchGestureDetector;
         ToStories toStories;
         [SerializeField] TMPro.TMP_Text text = null;
-
+        [SerializeField] Text level = null;
         GameObject beginObject;
         GameObject endObject;
 
@@ -32,6 +33,12 @@ namespace DemonicCity.StorySelectScene
         {
             chapterTag = chapter;
             chapterName = title;
+        }
+        public void Initialize(Chapter chapter)
+        {
+            chapterTag = chapter.storyProgress;
+            chapterName = chapter.chapterTitle;
+            level.text = "推奨Lv. " + chapter.levelRange[0] + "～" + chapter.levelRange[1];
         }
 
         void Awake()

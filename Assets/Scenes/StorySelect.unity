@@ -859,6 +859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   renderer: {fileID: 561040609}
+  image: {fileID: 0}
   backGrounds:
   - {fileID: 21300000, guid: d58189cfa8221994db44b6511bdfe7f3, type: 3}
   - {fileID: 21300000, guid: 4ead2190a5b8ac04588fa255f8455792, type: 3}
@@ -1179,6 +1180,9 @@ MonoBehaviour:
   parents: []
   windowObjects: []
   buttonObjects: []
+  beforeVoicies: []
+  afterVoicies: []
+  voices: {fileID: 0}
 --- !u!1 &972485997
 GameObject:
   m_ObjectHideFlags: 0
