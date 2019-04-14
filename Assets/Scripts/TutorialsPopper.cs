@@ -63,6 +63,7 @@ namespace DemonicCity
         Button popupedToPreviousButton;
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
+        AudioSource audioSource;
 
 
         const int width = 1080;
@@ -100,6 +101,7 @@ namespace DemonicCity
 
             // on pupuped.
             currentItem = tutorialObject.Items.First();
+            audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedToPreviousButton = GameObject.Find(toPreviousButton.gameObject.name).GetComponent<Button>();
             popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
@@ -158,15 +160,17 @@ namespace DemonicCity
         /// </summary>
         void OnChangeItem()
         {
+
+
             // ボタンが表示可能かどうか判断し,ボタンを表示するかしないか決定する
             CheckButtonVibible(popupedToNextButton, Index.Next);
             CheckButtonVibible(popupedToPreviousButton, Index.Previous);
             CheckButtonVibible(popupedCloseButton, Index.Last);
 
+            // 前の画面で再生されていた音声を停止して次の音声が存在する場合音声を再生させる
+            audioSource.Stop();
             if (currentItem.useVoice)
             {
-                // TODO: ボイスが存在する場合、ボイスを再生させる
-                var audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();
                 audioSource.Play(currentItem.VoiceClip);
             }
         }
