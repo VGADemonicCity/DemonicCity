@@ -99,6 +99,11 @@ namespace DemonicCity
                 image.rectTransform.localScale = Vector2.one;
             });
 
+            OnPopup();
+        }
+
+        void OnPopup()
+        {
             // on pupuped.
             currentItem = tutorialObject.Items.First();
             audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();

@@ -22,11 +22,15 @@ namespace DemonicCity
         {
             /// <summary>表示するテクスチャ</summary>
             public Sprite Sprite;
-            /// <summary>音声クリップ</summary>
-            public AudioClip VoiceClip;
-
             /// <summary>音声再生するかどうか</summary>
             public bool useVoice;
+            /// <summary>音声クリップ</summary>
+            public AudioClip VoiceClip;
+ 
+            [Header("BattleSceneでの識別用")]
+            /// <summary>battle scene用識別子</summary>
+            public Subject subject;
+
         }
     }
 }
