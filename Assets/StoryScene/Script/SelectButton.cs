@@ -38,7 +38,14 @@ namespace DemonicCity.StorySelectScene
         {
             chapterTag = chapter.storyProgress;
             chapterName = chapter.chapterTitle;
-            level.text = "推奨Lv. " + chapter.levelRange[0] + "～" + chapter.levelRange[1];
+            if (chapter.levelRange[0] == 0 && chapter.levelRange[1] == 0)
+            {
+                level.text = "";
+            }
+            else
+            {
+                level.text = "推奨Lv. " + chapter.levelRange[0] + "～" + chapter.levelRange[1];
+            }
         }
 
         void Awake()
