@@ -317,6 +317,55 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 122632feb8869a24cb1f5d4f8e98293b, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &242106558
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 242106560}
+  - component: {fileID: 242106559}
+  m_Layer: 12
+  m_Name: StoryTest
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &242106559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242106558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b6a878888fd5f240b78400506f1763c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  testObject:
+  - {fileID: 1856492862901854, guid: deea9a8bc46c1554086116b537ab5cf1, type: 2}
+  - {fileID: 1338296239478280, guid: 11806aa1acb1e1b45a987ffeb6e11495, type: 2}
+  parent: {fileID: 994548210}
+--- !u!224 &242106560
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 242106558}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 90}
+  m_LocalScale: {x: 0.0052083335, y: 0.0052083335, z: 0.0052083335}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &347136657
 Prefab:
   m_ObjectHideFlags: 0
@@ -787,7 +836,6 @@ GameObject:
   - component: {fileID: 891811367}
   - component: {fileID: 891811366}
   - component: {fileID: 891811365}
-  - component: {fileID: 891811369}
   m_Layer: 12
   m_Name: Canvas
   m_TagString: Untagged
@@ -879,21 +927,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &891811369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 891811364}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b6a878888fd5f240b78400506f1763c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  testObject:
-  - {fileID: 1856492862901854, guid: deea9a8bc46c1554086116b537ab5cf1, type: 2}
-  - {fileID: 1338296239478280, guid: 11806aa1acb1e1b45a987ffeb6e11495, type: 2}
-  parent: {fileID: 994548210}
 --- !u!1001 &994548209
 Prefab:
   m_ObjectHideFlags: 0
