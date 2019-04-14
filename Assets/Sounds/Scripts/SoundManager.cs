@@ -41,6 +41,9 @@ namespace DemonicCity
         [SerializeField] string battle = "Battle";
         [SerializeField] string story = "Story";
 
+        public EnemySkillSEAsset enemySkillSE;
+        public SkillSEAsset magiaSkillSE;
+
 
         //SceneFader fader;
 
