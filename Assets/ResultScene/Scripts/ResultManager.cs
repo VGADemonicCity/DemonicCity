@@ -428,7 +428,7 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            destructionCount = 150;//debug
+           // destructionCount = 150;//debug
             destructionCountText.text = destructionCount.ToString();
 
             statusPointText.text = 0.ToString();
