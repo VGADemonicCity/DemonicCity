@@ -33,7 +33,7 @@ namespace DemonicCity.StorySelectScene
                 if ((previewIndex & MyStory) == previewIndex)
                 {
                     GameObject newSelectButton = Instantiate(SelectButton, parent);
-                    newSelectButton.GetComponent<SelectButton>().Initialize(progressIndex, chapterManager.GetTitle(progressIndex));
+                    newSelectButton.GetComponent<SelectButton>().Initialize(chapterManager.GetChapter(progressIndex));
                 }
             }
             //for (int i = (int)MyStory; i >= 1; i /= 2)

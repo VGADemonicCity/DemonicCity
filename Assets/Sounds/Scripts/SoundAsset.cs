@@ -29,10 +29,16 @@ namespace DemonicCity
             C,
         }
 
+        public enum TutorialTag
+        {
+            Home,
+            Battle,
+            Growth,
+        }
         public enum VoiceTag
         {
-            A,
-
+            Before,
+            After,
         }
 
         public SoundManager.SoundTag tag;

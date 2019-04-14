@@ -18,7 +18,6 @@ namespace DemonicCity.BattleScene
         public void DisplayAttackButton()
         {
                 popupSystem.Popup();
-            Debug.Log(attackButton);
                 popupSystem.SubscribeButton(new PopupSystemMaterial(StartAttack, attackButton.gameObject.name, true));
         }
 

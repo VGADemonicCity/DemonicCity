@@ -15,7 +15,7 @@ namespace DemonicCity.HomeScene
         //public CloseAnimation closeAnimation;
         //Color windowColor = new Color(1, 1, 1, 0.9f);
         // Use this for initialization
-        bool windowEnabled;
+        public bool windowEnabled;
         RectTransform windowRect;
         IEnumerator WindowAnimation;
 
@@ -93,11 +93,11 @@ namespace DemonicCity.HomeScene
         {
             GetComponent<Animator>().SetBool(s, state);
         }
-        public void OnDisable()
-        {
-            transform.parent.gameObject.SetActive(false);
-            //Destroy(gameObject);
-        }
+        //public void OnDisable()
+        //{
+        //    transform.parent.gameObject.SetActive(false);
+        //    //Destroy(gameObject);
+        //}
         private void OnDestroy()
         {
             enabled = false;
@@ -134,7 +134,7 @@ namespace DemonicCity.HomeScene
             else
             {
                 windowRect.localScale = targetScale;
-                Destroy(gameObject);
+                DestroyImmediate(gameObject);
                 yield break;
                 //enabled = false;
             }

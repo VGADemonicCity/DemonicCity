@@ -65,20 +65,18 @@ namespace DemonicCity.HomeScene
                         parents[(int)touchedWindow].SetActive(true);
                         switch (touchedWindow)
                         {
-                            case Window.Growth:
-                                sceneFader.FadeOut(SceneFader.SceneTitle.Strengthen);
-                                break;
                             case Window.Story:
                                 sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
                                 break;
                             case Window.Summon:
-                                if (true)//一部クリアフラグ
+                                if (false)//一部クリアフラグ
                                 {
                                     sceneFader.FadeOut(SceneFader.SceneTitle.Home);
                                 }
                                 break;
                             case Window.Config:
                             case Window.Gallery:
+                            case Window.Growth:
                                 WindowOpen((int)touchedWindow);
                                 break;
                             case Window.Magia:
@@ -118,6 +116,7 @@ namespace DemonicCity.HomeScene
             else
             {
                 windowInstance[i] = Instantiate(windowObjects[i], parents[i].transform);
+                windowInstance[i].SetActive(true);
             }
             //newPanel.GetComponent<WindowState>().touchGestureDetector = touchGestureDetector;
             //if (i != (int)Window.Magia)
@@ -129,15 +128,15 @@ namespace DemonicCity.HomeScene
 
         [SerializeField] List<AudioClip> beforeVoicies;
         [SerializeField] List<AudioClip> afterVoicies;
-
+        [SerializeField] VoiceAsset voices;
         AudioClip GetRandomVoice(bool isClear)
         {
             List<AudioClip> tmp = new List<AudioClip>();
-            tmp.AddRange(beforeVoicies);
+            tmp.AddRange(voices.GetClips(SoundAsset.VoiceTag.Before));
 
             if (isClear)
             {
-                tmp.AddRange(afterVoicies); ;
+                tmp.AddRange(voices.GetClips(SoundAsset.VoiceTag.After));
             }
 
             return tmp[Random.Range(0, tmp.Count)];

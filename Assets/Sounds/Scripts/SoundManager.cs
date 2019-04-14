@@ -35,6 +35,7 @@ namespace DemonicCity
         [SerializeField] SoundAsset[] sounds;
         [SerializeField] BGMAsset bgms;
         [SerializeField] SEAsset ses;
+        [SerializeField] TutorialVoiceAsset tutorials;
 
         [SerializeField] string title = "Title";
         [SerializeField] string battle = "Battle";
@@ -359,7 +360,24 @@ namespace DemonicCity
 
             StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
         }
+        /// <summary>音源再生</summary>
+        /// <param name="tag">チュートリアルの種類</param>
+        /// <param name="index">何番目か</param>
+        /// <param name="fade">二種類以上ある場合の音のフェード時間</param>
+        public void PlayWithFade(SoundAsset.TutorialTag tag, int index, float fade = 0.1f)
+        {
+            AudioClip clip = tutorials.GetClip(tag, index);
 
+            AudioSource emptySouce = VoiceSources.FirstOrDefault(x => x.isPlaying == false);
+
+            AudioSource playingSouce = VoiceSources.FirstOrDefault(x => x.isPlaying == true);
+            if (playingSouce != null)
+            {
+                StartCoroutine(playingSouce.StopWithFadeOut(fade));
+            }
+
+            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+        }
 
 
 
