@@ -54,6 +54,9 @@ namespace DemonicCity.BattleScene
             // Waveタイトルのアニメーションを再生した後,ステートを遷移させる
             waitTime = waveTitle.Play();
             yield return new WaitForSeconds(waitTime);
+
+            // BGM再生
+            SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.BGM, m_chapter.StandardBgm);
             // ==============================
             // イベント呼び出し : StateMachine.PlayerChoice
             // ==============================
