@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class ToTest : MonoBehaviour
 {
-
+    void Start()
+    {
+        Debug.Log("[S]キーで章選択");
+        Debug.Log("[W]キーで次の章へ");
+    }
     [SerializeField] GameObject[] testObject;
     GameObject[] testInstance = new GameObject[2];
     [SerializeField] Transform parent;

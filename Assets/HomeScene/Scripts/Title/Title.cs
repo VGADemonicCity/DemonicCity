@@ -14,6 +14,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] GameObject CreditIcon;
         [SerializeField] Transform parent;
         [SerializeField] GameObject windowObject;
+        [SerializeField] GameObject returnObj;
 
         [SerializeField] Transform creditRect;
 
@@ -26,7 +27,7 @@ namespace DemonicCity.HomeScene
             {
 
 
-                return isPop && (Config != null & Config.windowEnabled);
+                return isPop && (Config != null && Config.windowEnabled) || creditOpened;
             }
             set
             {
@@ -53,13 +54,17 @@ namespace DemonicCity.HomeScene
                 {
                     Debug.Log("Click");
                     GameObject hitObj = null;
-                    if (touchInfo.HitDetection(out hitObj, configBtn))
+                    if (touchInfo.HitDetection(out hitObj, returnObj))
+                    {
+                        CreditChange(false);
+                    }
+                    else if (touchInfo.HitDetection(out hitObj, configBtn))
                     {
                         ConfigOpen();
                     }
                     else if (touchInfo.HitDetection(out hitObj, CreditIcon))
                     {
-                        CreditChange();
+                        CreditChange(true);
                     }
                     else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
                     {
@@ -88,9 +93,10 @@ namespace DemonicCity.HomeScene
             Config.gameObject.SetActive(true);
         }
 
-        void CreditChange()
+        public void CreditChange(bool isOpen)
         {
-            creditOpened = !creditOpened;
+            creditOpened = isOpen;
+            isPop = true;
             StartCoroutine(ChangeScale(creditOpened));
         }
 
@@ -149,6 +155,8 @@ namespace DemonicCity.HomeScene
             {
                 creditRect.localScale = Vector3.zero;
                 creditRect.gameObject.SetActive(false);
+
+
                 yield break;
                 //enabled = false;
             }
