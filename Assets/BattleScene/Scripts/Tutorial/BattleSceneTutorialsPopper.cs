@@ -11,6 +11,32 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class BattleSceneTutorialsPopper : MonoBehaviour
     {
+        public TutorialItems.TutorialItem NextItem
+        {
+            get
+            {
+                var index = tutorialObject.Items.IndexOf(currentItem);
+                if (index < tutorialObject.Items.Count - 1)
+                {
+                    return tutorialObject.Items[++index];
+                }
+                return null;
+            }
+        }
+
+        public TutorialItems.TutorialItem PreviousItem
+        {
+            get
+            {
+                var index = tutorialObject.Items.IndexOf(currentItem);
+                if (index > 0)
+                {
+                    return tutorialObject.Items[--index];
+                }
+                return null;
+            }
+        }
+
         [SerializeField] TutorialItems tutorialObject;
         /// <summary>閉じるボタン</summary>
         [SerializeField] Button okButton;
@@ -26,6 +52,8 @@ namespace DemonicCity.BattleScene
         /// <summary>対象の</summary>
         Image targetImage;
 
+        const int width = 1080;
+        const int height = 1920;
 
         private void Start()
         {
@@ -38,25 +66,31 @@ namespace DemonicCity.BattleScene
             popupSystem.Popup();
             popupSystem.SubscribeButton(popupMaterial);
             var items = tutorialObject.Items.FindAll(item => subject == item.subject);
-            if(items.Count == 1)
+            if (items.Count > 1)
             {
-                //currentItem = items.
+                var imageSize = new Vector2(width, height);
+                float xPos = 0;
+                tutorialObject.Items.ForEach(item =>
+                {
+                    var go = new GameObject();
+                    go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
+                    var image = go.AddComponent<Image>();
+                    image.sprite = item.Sprite;
+                    image.rectTransform.sizeDelta = imageSize;
+                    image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
+                    xPos += width;
+                    image.rectTransform.localScale = Vector2.one;
+                });
             }
+            else
+            {
+            currentItem = items.First();
+
+            }
+
             targetImage.sprite = currentItem.Sprite;
             if (currentItem.useVoice)
             {
-
-
-
-                //////////////
-
-
-
-
-
-
-
-
                 //SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.SE, clip);
             }
         }
