@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -9,7 +10,7 @@ namespace DemonicCity.BattleScene
     /// <summary>
     /// 
     /// </summary>
-    public class BattleSceneTutorialsPopper : MonoBehaviour
+    public class BattleSceneTutorialsPopper : MonoSingleton<BattleSceneTutorialsPopper>
     {
         public TutorialItems.TutorialItem NextItem
         {
@@ -37,79 +38,85 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        /// <summary>表示させるチュートリアルの素材群</summary>
         [SerializeField] TutorialItems tutorialObject;
+        /// <summary>次へボタン</summary>
+        [SerializeField] Button toNextButton;
         /// <summary>閉じるボタン</summary>
-        [SerializeField] Button okButton;
+        [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .5f;
+        [SerializeField] AudioSource audioSource;
 
         /// <summary>popup system</summary>
         PopupSystem popupSystem;
         /// <summary>現在対象となっている素材</summary>
         TutorialItems.TutorialItem currentItem;
+        /// <summary>そのタイミングに表示するチュートリアル素材の一覧</summary>
+        List<TutorialItems.TutorialItem> targetItems;
         /// <summary>popup materials</summary>
-        PopupSystemMaterial popupMaterial;
-        /// <summary>OKボタン</summary>
-        Button popupedOkButton;
-        /// <summary>対象の</summary>
-        Image targetImage;
-        /// <summary>次へボタン</summary>
-        Button popupedToNextButton;
+        List<PopupSystemMaterial> popupMaterials;
         /// <summary>チュートリアル画像を生成するオブジェクトの親</summary>
         GameObject tutorialImagesParent;
+        /// <summary>次へボタン</summary>
+        Button popupedToNextButton;
+        /// <summary>閉じるボタン</summary>
+        Button popupedCloseButton;
 
-        AudioSource audioSource;
 
         const int width = 1080;
         const int height = 1920;
 
+        public void TestPopup()
+        {
+            if(BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.Init )
+            Popup(Subject.AboutAttack | Subject.CompletePanels);
+        }
+
         private void Start()
         {
             popupSystem = GetComponent<PopupSystem>();
-            popupMaterial = new PopupSystemMaterial(OnPushOk, okButton.gameObject.name, true);
-        }
 
-        public void Popup(Subject subject)
-        {
-            popupSystem.Popup();
-            popupSystem.SubscribeButton(popupMaterial);
-            var items = tutorialObject.Items.FindAll(item => subject == item.subject);
-            if (items.Count > 1)
+            popupMaterials = new List<PopupSystemMaterial>()
             {
-                var imageSize = new Vector2(width, height);
-                float xPos = 0;
-                tutorialObject.Items.ForEach(item =>
-                {
-                    var go = new GameObject();
-                    go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
-                    var image = go.AddComponent<Image>();
-                    image.sprite = item.Sprite;
-                    image.rectTransform.sizeDelta = imageSize;
-                    image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
-                    xPos += width;
-                    image.rectTransform.localScale = Vector2.one;
-                });
-            }
-            else
-            {
-                currentItem = items.First();
-                var go = new GameObject();
-                go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
-            }
-
-            if (currentItem.useVoice)
-            {
-                //SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.SE, clip);
-            }
+                new PopupSystemMaterial(OnPushNextButton,toNextButton.gameObject.name,false),
+                new PopupSystemMaterial(OnPushOk, closeButton.gameObject.name, true),
+            };
         }
 
         /// <summary>
-        /// 次へボタンのイベントハンドラ
+        /// subject
         /// </summary>
-        void OnPushNextButton()
+        /// <param name="subject"></param>
+        public void Popup(Subject subject)
         {
-            ChangeItem(Index.Next);
-            FadingImage(Index.Next);
+            BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.Pause);
+            popupSystem.Popup();
+            popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
+            targetItems = tutorialObject.Items.FindAll(( item) => item.subject == (item.subject & subject));
+            var imageSize = new Vector2(width, height);
+            float xPos = 0;
+            targetItems.ForEach(item =>
+            {
+                var go = new GameObject();
+                go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
+                var image = go.AddComponent<Image>();
+                image.sprite = item.Sprite;
+                image.rectTransform.sizeDelta = imageSize;
+                image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
+                xPos += width;
+                image.rectTransform.localScale = Vector2.one;
+            });
+            OnPopup();
+        }
+
+        void OnPopup()
+        {
+            // on pupuped.
+            currentItem = targetItems.First();
+            popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
+            popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
+            tutorialImagesParent = popupSystem.popupedObject.transform.GetChild(0).gameObject;
             OnChangeItem();
         }
 
@@ -118,8 +125,9 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void OnChangeItem()
         {
-
-
+            // ボタンが表示可能かどうか判断し,ボタンを表示するかしないか決定する
+            CheckButtonVibible(popupedToNextButton, Index.Next);
+            CheckButtonVibible(popupedCloseButton, Index.Last);
 
             var soundManaegr = SoundManager.Instance;
 
@@ -127,7 +135,8 @@ namespace DemonicCity.BattleScene
             soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, null);
             if (currentItem.useVoice)
             {
-                soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, currentItem.VoiceClip);
+                //soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, currentItem.VoiceClip);
+                audioSource.PlayOneShot(currentItem.VoiceClip);
             }
         }
 
@@ -136,14 +145,13 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void FadingImage(Index index)
         {
-
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime,"ignoretimescale",true));
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Last:
                     break;
@@ -158,24 +166,37 @@ namespace DemonicCity.BattleScene
         /// <param name="direction"></param>
         void ChangeItem(Index direction)
         {
-            var index = tutorialObject.Items.IndexOf(currentItem);
+            var index = targetItems.IndexOf(currentItem);
             switch (direction)
             {
                 case Index.Next:
-                    currentItem = tutorialObject.Items[++index];
+                    currentItem = targetItems[++index];
                     break;
                 case Index.Previous:
-                    currentItem = tutorialObject.Items[--index];
+                    currentItem = targetItems[--index];
                     break;
                 default:
                     throw new System.ArgumentException("Directionが適切に指定されていません.");
             }
         }
 
+        /// <summary>
+        /// Okボタンへのイベントハンドラ
+        /// </summary>
         void OnPushOk()
         {
             var battleManager = BattleManager.Instance;
             battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+        }
+
+        /// <summary>
+        /// 次へボタンのイベントハンドラ
+        /// </summary>
+        void OnPushNextButton()
+        {
+            ChangeItem(Index.Next);
+            FadingImage(Index.Next);
+            OnChangeItem();
         }
 
         /// <summary>
@@ -208,8 +229,8 @@ namespace DemonicCity.BattleScene
                     }
                     break;
                 case Index.Last:
-                    var index = tutorialObject.Items.IndexOf(currentItem);
-                    if (index == tutorialObject.Items.Count - 1)
+                    var index = targetItems.IndexOf(currentItem);
+                    if (index == targetItems.Count - 1)
                     {
                         button.gameObject.SetActive(true);
                     }
@@ -224,21 +245,22 @@ namespace DemonicCity.BattleScene
         }
     }
 
+    [Flags]
     public enum Subject
     {
-        One,
-        Two,
-        Three,
-        Four,
-        Five,
-        Six,
-        Seven,
-        Eight,
-        Nine,
-        Ten,
-        Eleven,
-        Twelve,
-        Thirteen,
-        Fourteen,
+        AboutAttack = 1,
+        CompletePanels = 2,
+        AboutPause = 4,
+        UniqueSkillAccumulated = 8,
+        UsedUniqueSkill = 16,
+        AboutUniqueSkills = 32,
+        AboutTeleportSkill = 64,
+        AboutTeleportSkill_2 = 128,
+        AboutTeleportSkill_3 = 256,
+        FirstPanelOpen = 512,
+        FirstPanelOpen_2 = 1024,
+        FirstPanelOpen_3 = 2048,
+        FirstPanelOpen_4 = 4096,
+        AboutPanels = 8192,
     }
 }

@@ -63,7 +63,6 @@ namespace DemonicCity
         Button popupedToPreviousButton;
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
-        AudioSource audioSource;
 
 
         const int width = 1080;
@@ -106,7 +105,6 @@ namespace DemonicCity
         {
             // on pupuped.
             currentItem = tutorialObject.Items.First();
-            audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedToPreviousButton = GameObject.Find(toPreviousButton.gameObject.name).GetComponent<Button>();
             popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
@@ -123,10 +121,10 @@ namespace DemonicCity
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Last:
                     break;
