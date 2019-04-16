@@ -51,6 +51,12 @@ namespace DemonicCity.BattleScene
         [SerializeField] PopupSystem popupSystem;
         /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnim;
+        /// <summary>チュートリアル画面に表示する項目リスト</summary>
+        List<Subject> targetTutorialsList = new List<Subject>{
+            Subject.AboutTeleportSkill,
+            Subject.AboutTeleportSkill_2,
+            Subject.AboutTeleportSkill_3,
+            };
 
         /// <summary>BattleManager</summary>
         BattleManager battleManager;
@@ -121,6 +127,26 @@ namespace DemonicCity.BattleScene
         void Cancel()
         {
             battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+        }
+
+        public void OnCompleteConditions()
+        {
+            // Inspectorで指定したフラグをここで代入する
+            var targetTutorials = new Subject();
+            targetTutorialsList.ForEach(item =>
+            {
+                targetTutorials = targetTutorials | item;
+            });
+
+            // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
+            var progress = Progress.Instance;
+            var tutorialFlag = progress.TutorialProgressInBattleScene;
+            if (targetTutorials == (tutorialFlag & targetTutorials))
+            {
+                BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
+                progress.SetTutorialProgress(targetTutorials, false);
+            }
+
         }
 
 

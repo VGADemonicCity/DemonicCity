@@ -125,11 +125,21 @@ namespace DemonicCity.BattleScene
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
             if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
             {
-                // ==============================
-                // イベント呼び出し : StateMachine.PlayerAttack
-                // ==============================
-                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
-                return;
+
+                if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.PlayerAttack
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
+                }
+                else // PlayerのHPが0以下になったらLoseステートに遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.Lose
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                }
             }
 
             if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する

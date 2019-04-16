@@ -16,10 +16,10 @@ namespace DemonicCity.BattleScene
         {
             get
             {
-                var index = tutorialObject.Items.IndexOf(currentItem);
-                if (index < tutorialObject.Items.Count - 1)
+                var index = targetItems.IndexOf(currentItem);
+                if (index < targetItems.Count - 1)
                 {
-                    return tutorialObject.Items[++index];
+                    return targetItems[++index];
                 }
                 return null;
             }
@@ -29,10 +29,10 @@ namespace DemonicCity.BattleScene
         {
             get
             {
-                var index = tutorialObject.Items.IndexOf(currentItem);
+                var index = targetItems.IndexOf(currentItem);
                 if (index > 0)
                 {
-                    return tutorialObject.Items[--index];
+                    return targetItems[--index];
                 }
                 return null;
             }
@@ -94,6 +94,7 @@ namespace DemonicCity.BattleScene
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
             targetItems = tutorialObject.Items.FindAll(( item) => item.subject == (item.subject & subject));
+            //targetItems = targetItems.OrderBy(item => item.subject).ToList();
             var imageSize = new Vector2(width, height);
             float xPos = 0;
             targetItems.ForEach(item =>
@@ -113,7 +114,10 @@ namespace DemonicCity.BattleScene
         void OnPopup()
         {
             // on pupuped.
-            currentItem = targetItems.First();
+            if (targetItems[0] != null)
+            {
+            currentItem = targetItems[0];
+            }
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
             tutorialImagesParent = popupSystem.popupedObject.transform.GetChild(0).gameObject;
@@ -218,16 +222,6 @@ namespace DemonicCity.BattleScene
                         button.gameObject.SetActive(false);
                     }
                     break;
-                case Index.Previous:
-                    if (PreviousItem != null)
-                    {
-                        button.gameObject.SetActive(true);
-                    }
-                    else
-                    {
-                        button.gameObject.SetActive(false);
-                    }
-                    break;
                 case Index.Last:
                     var index = targetItems.IndexOf(currentItem);
                     if (index == targetItems.Count - 1)
@@ -248,19 +242,20 @@ namespace DemonicCity.BattleScene
     [Flags]
     public enum Subject
     {
-        AboutAttack = 1,
-        CompletePanels = 2,
+        AboutPanels = 1,
+        AboutAttack = 2,
         AboutPause = 4,
-        UniqueSkillAccumulated = 8,
-        UsedUniqueSkill = 16,
-        AboutUniqueSkills = 32,
-        AboutTeleportSkill = 64,
-        AboutTeleportSkill_2 = 128,
-        AboutTeleportSkill_3 = 256,
-        FirstPanelOpen = 512,
-        FirstPanelOpen_2 = 1024,
-        FirstPanelOpen_3 = 2048,
-        FirstPanelOpen_4 = 4096,
-        AboutPanels = 8192,
+        CompletePanels = 8,
+        FirstPanelOpen = 16,
+        UniqueSkillAccumulated = 32,
+        UsedUniqueSkill = 64,
+        AboutUniqueSkills = 128,
+        AboutTeleportSkill = 256,
+        AboutTeleportSkill_2 = 512,
+        AboutTeleportSkill_3 = 1024,
+        FirstPanelOpen_2 = 2048,
+        FirstPanelOpen_3 = 4096,
+        FirstPanelOpen_4 = 8192,
+        AllFlag = 16383,
     }
 }

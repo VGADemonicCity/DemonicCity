@@ -93,6 +93,7 @@ namespace DemonicCity.BattleScene
                 if (m_panelCounter.CounterForShuffleSkill == m_shufflePanels.Conditions && m_flag)
                 {
                     m_waveParticle.Play();
+                    m_shufflePanels.OnCompleteConditions();
                     m_flag = false;
                 }
             }

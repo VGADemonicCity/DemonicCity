@@ -47,10 +47,6 @@ namespace DemonicCity.BattleScene
 
             switch (m_battleManager.m_StateMachine.m_Wave)
             {
-                case BattleManager.StateMachine.Wave.FirstWave:
-                case BattleManager.StateMachine.Wave.SecondWave:
-                    SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.BGM, m_chapter.StandardBgm);
-                    break;
                 case BattleManager.StateMachine.Wave.LastWave:
                     SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.BGM, m_chapter.BossBgm);
                     break;
