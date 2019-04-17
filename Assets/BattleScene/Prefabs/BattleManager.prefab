@@ -397,7 +397,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 530093bf42a464b46957df756fe65bd7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetTutorialsList: 0020000001000000040000000200000000020000
 --- !u!114 &114024525100392670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -416,9 +415,6 @@ MonoBehaviour:
   m_tripleCount: 0
   m_totalPanelCount: 0
   m_totalDestructionCount: 0
-  afterFirstPanelOpen: 1024
-  moreOpenPanel: 2048
-  enemyPanelOpen: 4096
   m_uniqueSkillGauge: {fileID: 0}
   attackButtonProcess: {fileID: 114254286006001736}
   panelComplete: {fileID: 0}
@@ -435,11 +431,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uniqueSkillGauge: {fileID: 0}
-  m_condition: 30
+  m_condition: 25
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
-  beforeUseSkillTutorials: 0800000020000000
-  afterUseSkillTutorials: 10000000
 --- !u!114 &114187487230617858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -580,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca2b3cd7582f44bb29ea5f8a2f73bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  volumeInThePause: 0.5
 --- !u!114 &114332594962796498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -592,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 1
-  targetStory: 64
+  targetStory: 2
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -617,7 +613,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 1
-  TargetMagiaLevel: 127
+  TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -625,7 +621,7 @@ MonoBehaviour:
     MuscularStrength: 0
     Knowledge: 0
     Sense: 0
-    Charm: 0
+    Charm: 110
     Dignity: 0
     HitPoint: 0
     Attack: 0
