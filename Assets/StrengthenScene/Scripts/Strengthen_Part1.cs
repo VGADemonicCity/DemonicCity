@@ -109,7 +109,7 @@ namespace DemonicCity.StrengthenScene
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
 
-         //   SavableSingletonBase<Progress>.Instance.Clear();debug
+            //SavableSingletonBase<Progress>.Instance.Clear();
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
