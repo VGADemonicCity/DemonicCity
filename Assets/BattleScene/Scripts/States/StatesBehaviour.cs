@@ -53,6 +53,17 @@ namespace DemonicCity.BattleScene
             m_enemyHPGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<HitPointGauge>();
             m_enemySkillGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<EnemySkillGauge>();
             m_background = GameObject.Find("Background").GetComponent<SpriteRenderer>();
+
+            var debugger = Debugger.BattleDebugger.Instance;
+            if (debugger.UseTargetStory)
+            {
+                m_chapter = ChapterManager.Instance.GetChapter(debugger.TargetStory);
+            }
+            else
+            {
+                // その章のChapterを取得
+                m_chapter = ChapterManager.Instance.GetChapter();
+            }
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DemonicCity.BattleScene;
 
 namespace DemonicCity
 {
@@ -86,7 +87,10 @@ namespace DemonicCity
         /// <summary>現在進行しているクエストの進行度</summary>
         [SerializeField] QuestProgress questProgress = QuestProgress.Prologue;
 
+        /// <summary>Tutorialを出すかどうかを決定するフラグ</summary>
         [SerializeField] TutorialFlag tutorialProgress = 0;
+        /// <summary>バトルシーンのTutorialを出すかどうかを決定するフラグ</summary>
+        [SerializeField] Subject tutorialInBattleScene = Subject.AllFlag;
 
         /// <summary>ストーリーの進行度のプロパティ</summary>
         public StoryProgress MyStoryProgress
@@ -113,6 +117,11 @@ namespace DemonicCity
         {
             get { return tutorialProgress; }
             set { tutorialProgress = value; Save(); }
+        }
+        public Subject TutorialProgressInBattleScene
+        {
+            get { return tutorialInBattleScene; }
+            set { tutorialInBattleScene = value; Save(); }
         }
 
 
@@ -144,6 +153,23 @@ namespace DemonicCity
             else
             {
                 TutorialProgress = tutorialProgress & (~flag);
+            }
+        }
+
+        /// <summary>
+        /// チュートリアル用のFlagのセット
+        /// </summary>
+        /// <param name="flag">対象のFlag</param>
+        /// <param name="isTrue">Trueなら立てる、Falseなら降ろす</param>
+        public void SetTutorialProgress(Subject flag, bool isTrue)
+        {
+            if (isTrue)
+            {
+                TutorialProgressInBattleScene = tutorialInBattleScene | flag;
+            }
+            else
+            {
+                TutorialProgressInBattleScene = tutorialInBattleScene & (~flag);
             }
         }
 

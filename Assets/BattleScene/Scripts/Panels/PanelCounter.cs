@@ -55,9 +55,6 @@ namespace DemonicCity.BattleScene
             }
         }
 
-
-
-
         /// <summary>シャッフルスキル専用カウンター : inspectorに表示させる為アクセサーと使用変数を分けている</summary>
         [SerializeField] int m_counterForShuffleSkill;
         /// <summary>ターン毎のパネルカウントのカウント変数</summary>
@@ -72,6 +69,10 @@ namespace DemonicCity.BattleScene
         [SerializeField] int m_totalPanelCount;
         /// <summary>そのバトルにおける総街破壊数</summary>
         [SerializeField] int m_totalDestructionCount;
+
+        Subject enemyPanelOpen = Subject.FirstPanelOpen_4;
+        Subject afterFirstPanelOpen = Subject.FirstPanelOpen_2 | Subject.FirstPanelOpen_3;
+
 
         /// <summary>固有スキルゲージ</summary>
         [SerializeField] UniqueSkillGauge m_uniqueSkillGauge;
@@ -95,6 +96,8 @@ namespace DemonicCity.BattleScene
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
             if (m_battleManager == null) Debug.LogError("BattleManager is null.");
         }
+
+
 
 
         /// <summary>
@@ -157,6 +160,8 @@ namespace DemonicCity.BattleScene
                     }
                     // UIに更新
                     destructionCounterBox.OnPanelCount(destructionCount);
+                    // 条件に沿って適切なチュートリアルを表示する
+                    TryDisplayTutorials(afterFirstPanelOpen);
                     break;
 
                 case PanelType.DoubleCity: // doubleパネルを引いた時
@@ -169,6 +174,8 @@ namespace DemonicCity.BattleScene
                     }
                     // UIに更新
                     destructionCounterBox.OnPanelCount(destructionCount);
+                    // 条件に沿って適切なチュートリアルを表示する
+                    TryDisplayTutorials(afterFirstPanelOpen);
                     break;
 
                 case PanelType.TripleCity: // tripleパネルを引いた時
@@ -181,6 +188,8 @@ namespace DemonicCity.BattleScene
                     }
                     // UIに更新
                     destructionCounterBox.OnPanelCount(destructionCount);
+                    // 条件に沿って適切なチュートリアルを表示する
+                    TryDisplayTutorials(afterFirstPanelOpen);
                     break;
 
                 case PanelType.Enemy: // enemyパネルを引いた時ペナルティ処理を行う
@@ -191,6 +200,8 @@ namespace DemonicCity.BattleScene
                     // イベント呼び出し : StateMachine.EnemyAttack
                     // =========================================
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
+                    // 条件に沿って適切なチュートリアルを表示する
+                    TryDisplayTutorials(enemyPanelOpen);
                     break;
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ
@@ -204,6 +215,26 @@ namespace DemonicCity.BattleScene
             {
                 attackButtonProcess.ButtonClose();
                 StartCoroutine(panelComplete.PlayPanelCompleteSkillAnimation());
+            }
+        }
+
+        void TryDisplayTutorials(Subject item)
+        {
+            // Inspectorで指定したフラグをここで代入する
+            var targetTutorials = new Subject();
+            targetTutorials = targetTutorials | item;
+            if(targetTutorials == 0)
+            {
+                return;
+            }
+
+            // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
+            var progress = Progress.Instance;
+            var tutorialFlag = progress.TutorialProgressInBattleScene;
+            if (targetTutorials == (tutorialFlag & targetTutorials))
+            {
+                BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
+                progress.SetTutorialProgress(targetTutorials, false);
             }
         }
     }

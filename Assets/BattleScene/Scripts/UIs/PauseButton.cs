@@ -40,8 +40,8 @@ namespace DemonicCity.BattleScene
         public void InningThePause()
         {
             if (battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
-                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerAttack
-                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.EnemyAttack)
+                || battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerAttack
+                || battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.EnemyAttack)
             {
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
                 popupSystem.Popup();
@@ -68,7 +68,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Resumes()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
     }
 }

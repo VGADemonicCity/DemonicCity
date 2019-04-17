@@ -51,6 +51,12 @@ namespace DemonicCity.BattleScene
         [SerializeField] PopupSystem popupSystem;
         /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnim;
+        /// <summary>チュートリアル画面に表示する項目リスト</summary>
+        List<Subject> targetTutorialsList = new List<Subject>{
+            Subject.AboutTeleportSkill,
+            Subject.AboutTeleportSkill_2,
+            Subject.AboutTeleportSkill_3,
+            };
 
         /// <summary>BattleManager</summary>
         BattleManager battleManager;
@@ -87,7 +93,7 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.Click
                 && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
                 && touchInfo.HitDetection(out hitResult)
-                && panelCounter.CounterForShuffleSkill >= conditions
+                && IsActivatable
                 && !PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     if (hitResult.tag != "ShufflePanels")
@@ -112,7 +118,7 @@ namespace DemonicCity.BattleScene
         void Activate()
         {
             skillAnim.SetTrigger("Activate");
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
 
         /// <summary>
@@ -120,7 +126,27 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Cancel()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
+        }
+
+        public void OnCompleteConditions()
+        {
+            // Inspectorで指定したフラグをここで代入する
+            var targetTutorials = new Subject();
+            targetTutorialsList.ForEach(item =>
+            {
+                targetTutorials = targetTutorials | item;
+            });
+
+            // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
+            var progress = Progress.Instance;
+            var tutorialFlag = progress.TutorialProgressInBattleScene;
+            if (targetTutorials == (tutorialFlag & targetTutorials))
+            {
+                BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
+                progress.SetTutorialProgress(targetTutorials, false);
+            }
+
         }
 
 
@@ -170,7 +196,7 @@ namespace DemonicCity.BattleScene
 
             m_sensor.enabled = false; // colliderをdisableにする
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState); // stateを元に戻す       
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState); // stateを元に戻す       
         }
 
         /// <summary>

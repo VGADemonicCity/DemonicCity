@@ -63,7 +63,6 @@ namespace DemonicCity
         Button popupedToPreviousButton;
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
-        AudioSource audioSource;
 
 
         const int width = 1080;
@@ -106,7 +105,6 @@ namespace DemonicCity
         {
             // on pupuped.
             currentItem = tutorialObject.Items.First();
-            audioSource = popupSystem.popupedObject.GetComponent<AudioSource>();
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedToPreviousButton = GameObject.Find(toPreviousButton.gameObject.name).GetComponent<Button>();
             popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
@@ -123,10 +121,10 @@ namespace DemonicCity
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Last:
                     break;
@@ -165,18 +163,18 @@ namespace DemonicCity
         /// </summary>
         void OnChangeItem()
         {
-
-
             // ボタンが表示可能かどうか判断し,ボタンを表示するかしないか決定する
             CheckButtonVibible(popupedToNextButton, Index.Next);
             CheckButtonVibible(popupedToPreviousButton, Index.Previous);
             CheckButtonVibible(popupedCloseButton, Index.Last);
 
+            var soundManaegr= SoundManager.Instance;
+
             // 前の画面で再生されていた音声を停止して次の音声が存在する場合音声を再生させる
-            audioSource.Stop();
+            soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice,null);
             if (currentItem.useVoice)
             {
-                audioSource.Play(currentItem.VoiceClip);
+                soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, currentItem.VoiceClip);
             }
         }
 

@@ -101,11 +101,11 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// 条件を満たした時
         /// </summary>
-        private void OnConditionCompleted()
+        public void OnConditionCompleted()
         {
             // =============条件を満たした時の任意の処理や演出を実装する=============
-            m_uniqueSkillManager.SkillFlag= true;
             m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
+            m_uniqueSkillManager.OnConditionCompleted();
         }
 
         /// <summary>

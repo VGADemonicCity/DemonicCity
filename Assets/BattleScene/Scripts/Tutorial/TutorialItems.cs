@@ -27,7 +27,6 @@ namespace DemonicCity
             /// <summary>音声クリップ</summary>
             public AudioClip VoiceClip;
  
-            [Header("BattleSceneでの識別用")]
             /// <summary>battle scene用識別子</summary>
             public Subject subject;
 
