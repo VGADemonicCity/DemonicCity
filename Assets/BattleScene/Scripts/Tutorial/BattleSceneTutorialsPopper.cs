@@ -190,7 +190,7 @@ namespace DemonicCity.BattleScene
         void OnPushOk()
         {
             var battleManager = BattleManager.Instance;
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
 
         /// <summary>

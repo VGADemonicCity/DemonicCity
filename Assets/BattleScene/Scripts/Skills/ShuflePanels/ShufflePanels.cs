@@ -93,7 +93,7 @@ namespace DemonicCity.BattleScene
                 if (gesture == TouchGestureDetector.Gesture.Click
                 && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
                 && touchInfo.HitDetection(out hitResult)
-                && panelCounter.CounterForShuffleSkill >= conditions
+                && IsActivatable
                 && !PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
                 {
                     if (hitResult.tag != "ShufflePanels")
@@ -118,7 +118,7 @@ namespace DemonicCity.BattleScene
         void Activate()
         {
             skillAnim.SetTrigger("Activate");
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Cancel()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
 
         public void OnCompleteConditions()
@@ -196,7 +196,7 @@ namespace DemonicCity.BattleScene
 
             m_sensor.enabled = false; // colliderをdisableにする
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState); // stateを元に戻す       
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState); // stateを元に戻す       
         }
 
         /// <summary>

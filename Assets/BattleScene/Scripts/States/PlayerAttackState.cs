@@ -27,7 +27,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがPlayerAttack以外の時は処理終了
                 {
                     return;
                 }
@@ -153,7 +153,7 @@ namespace DemonicCity.BattleScene
             // =====================
             if (m_battleManager.CurrentEnemy.Stats.HitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
             {
-                if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.EnemyAttack)
+                if (m_battleManager.m_StateMachine.PreviousState == BattleManager.StateMachine.State.EnemyAttack)
                 {
                     // =============================
                     // イベント呼び出し : StateMachine.PlayerChoice

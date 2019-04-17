@@ -103,7 +103,7 @@ namespace DemonicCity.BattleScene
             var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
             uniqueSkill.Activate();
             m_uniqueSkillGauge.SkillActivated();
-            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.PreviousState);
         }
 
         public void OnConditionCompleted()
@@ -141,7 +141,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void Chancel()
         {
-            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.PreviousState);
         }
     }
 }

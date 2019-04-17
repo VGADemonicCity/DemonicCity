@@ -82,7 +82,6 @@ namespace DemonicCity.BattleScene.Debugger
             {
                 return;
             }
-
         }
 #endif
 
@@ -209,11 +208,14 @@ namespace DemonicCity.BattleScene.Debugger
         List<Magia.PassiveSkill> DetectAvailableSkills()
         {
             var result = new List<Magia.PassiveSkill>();
-            var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>();
-            foreach (var skill in skills)
+            var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>().ToList();
+            skills.ForEach(skill =>
             {
-                result.Add(skill.GetPassiveSkill);
-            }
+                if (skill.GetPassiveSkill == (Magia.Instance.MyPassiveSkill & skill.GetPassiveSkill))
+                {
+                    result.Add(skill.GetPassiveSkill);
+                }
+            });
             return result;
         }
 
