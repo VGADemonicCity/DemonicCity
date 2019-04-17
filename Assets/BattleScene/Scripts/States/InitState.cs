@@ -69,15 +69,19 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Initialize()
         {
-            // その章のChapterを取得
-            m_chapter = ChapterManager.Instance.GetChapter();
-            //m_chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
-
-
-            SpawnEnemies();
-
-            // BattleDebuggerのフラグが立っていた場合,指定されたステータスに合わせて初期化する
             var debugger = Debugger.BattleDebugger.Instance;
+            if (debugger.UseTargetStory)
+            {
+                m_chapter = ChapterManager.Instance.GetChapter(debugger.TargetStory);
+            }
+            else
+            {
+                // その章のChapterを取得
+                m_chapter = ChapterManager.Instance.GetChapter();
+            }
+
+            SpawnEnemies(); // 敵生産処理
+            // BattleDebuggerのフラグが立っていた場合,指定されたステータスに合わせて初期化する
             if (debugger.LoadStatusFromInspector)
             {
                 m_battleManager.m_MagiaStats = debugger.GetStats();

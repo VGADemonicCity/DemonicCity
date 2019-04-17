@@ -22,13 +22,13 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.EnemyAttack || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがEnemyAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.EnemyAttack || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがEnemyAttack以外の時は処理終了
                 {
                     return;
                 }
 
                 // もし敵パネルを選択して遷移してきた時
-                if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
+                if (m_battleManager.m_StateMachine.PreviousState == BattleManager.StateMachine.State.PlayerChoice)
                 {
                     // 敵の攻撃力を上げて、エフェクトを再生
                     m_battleManager.CurrentEnemy.AttackBuffActivate((int)((m_battleManager.CurrentEnemy.Stats.Attack * penaltyIncrease) - m_battleManager.CurrentEnemy.Stats.Attack));
@@ -123,28 +123,40 @@ namespace DemonicCity.BattleScene
         void TransitionState()
         {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
-            if (m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.PlayerChoice)
+            if (m_battleManager.m_StateMachine.PreviousState == BattleManager.StateMachine.State.PlayerChoice)
             {
-                // ==============================
-                // イベント呼び出し : StateMachine.PlayerAttack
-                // ==============================
-                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
-                return;
-            }
 
-            if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
-            {
-                // ==============================
-                // イベント呼び出し : StateMachine.PlayerChoice
-                // ==============================
-                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.PlayerAttack
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerAttack);
+                }
+                else // PlayerのHPが0以下になったらLoseステートに遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.Lose
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                }
             }
-            else // PlayerのHPが0以下になったらLoseステートに遷移する
+            else
             {
-                // ==============================
-                // イベント呼び出し : StateMachine.Lose
-                // ==============================
-                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.PlayerChoice
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                }
+                else // PlayerのHPが0以下になったらLoseステートに遷移する
+                {
+                    // ==============================
+                    // イベント呼び出し : StateMachine.Lose
+                    // ==============================
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                }
             }
         }
 

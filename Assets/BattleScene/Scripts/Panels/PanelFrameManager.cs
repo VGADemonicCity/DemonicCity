@@ -47,7 +47,7 @@ namespace DemonicCity.BattleScene
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_wait) // 枠移動中の時は終了
+                if (m_wait || BattleManager.Instance.m_StateMachine.m_State == BattleManager.StateMachine.State.Pause) // 枠移動中の時は終了
                 {
                     return;
                 }
