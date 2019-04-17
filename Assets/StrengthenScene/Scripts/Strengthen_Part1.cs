@@ -124,6 +124,8 @@ namespace DemonicCity.StrengthenScene
         {
             GetGameObjects();
             ResetStatus();
+            Debug.Log(magia.MyPassiveSkill);
+            Debug.Log("レベル" + magia.Stats.Level);
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -137,7 +139,6 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHomeSceneButton":
-                                //StartCoroutine(ClosePopUpAnimation(backGround));
                                 Destroy(gameObject);
                                 break;
 
