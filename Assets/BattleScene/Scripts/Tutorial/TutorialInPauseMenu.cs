@@ -106,7 +106,7 @@ namespace DemonicCity.BattleScene
             GameObject hitResult;
             if(touchInfo.HitDetection(out hitResult))
             {
-                hitResult.
+                //hitResult.
             }
         }
 
