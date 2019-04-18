@@ -68,14 +68,22 @@ namespace DemonicCity.HomeScene
                     }
                     else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
                     {
-                        ToHome();
+                        SceneTrans();
                     }
                     //Debug.Log(gesture);
                 }
             });
         }
-        public void ToHome()
+        public void SceneTrans()
         {
+            Progress progress = Progress.Instance;
+            if (progress.MyStoryProgress == 0)
+            {
+                progress.ThisStoryProgress = Progress.StoryProgress.Prologue;
+                progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
+                sceneFader.FadeOut(SceneFader.SceneTitle.Story);
+                return;
+            }
             sceneFader.FadeOut(SceneFader.SceneTitle.Home);
         }
 
