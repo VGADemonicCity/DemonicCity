@@ -20,6 +20,7 @@ namespace DemonicCity
             SceneManager.sceneLoaded += ((scene, mode) =>
             {
                 m_sceneFader.FadeIn(); // SceneLoad時の画面演出
+                Time.timeScale = 1f;
             });
         }
 
