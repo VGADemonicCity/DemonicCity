@@ -95,20 +95,28 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
 
+            //if(Perfect)
+            //{
+
+            //}
+            //else ここにしたの処理をいれる
+            //{
+
+            //}
             // オープン後のSE再生
             switch (MyPanelType)
             {
                 case PanelType.City:
-            //SoundManager.Instance.PlayWithFade(SoundAsset.SETag.);
+                    SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedSingle);
                     break;
                 case PanelType.DoubleCity:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedDouble);
                     break;
                 case PanelType.TripleCity:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedTriple);
                     break;
                 case PanelType.Enemy:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedEnemeyPanel);
                     break;
                 default:
                     break;
