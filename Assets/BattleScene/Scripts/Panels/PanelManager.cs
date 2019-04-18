@@ -20,6 +20,7 @@ namespace DemonicCity.BattleScene
         public List<Panel> PanelsInTheScene { get; set; }
         /// <summary>Scene上に存在する敵以外のパネル</summary>
         public List<Panel> AllPanelsExceptEnemyPanels { get{return  PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy);  } }
+        public float ProcesssingTimeOfOpenPanel{ get { return m_waitTime; } }
         /// <summary>Scene上に存在する敵以外のパネルが全てオープンされていたらTrueを返す</summary>
         public bool IsOpenedAllPanelsExceptEnemyPanels
         {

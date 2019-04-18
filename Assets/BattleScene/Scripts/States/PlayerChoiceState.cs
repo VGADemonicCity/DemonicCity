@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace DemonicCity.BattleScene
 {
@@ -10,14 +11,31 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerChoiceState : StatesBehaviour
     {
+        /// <summary>チュートリアル画面に表示する項目リスト</summary>
+         List<Subject> targetTutorialsList = new List<Subject>
+        {
+            Subject.AboutPanels,
+            Subject.AboutAttack,
+            Subject.AboutPause,
+            Subject.CompletePanels,
+            Subject.FirstPanelOpen,
+        };
+
         /// <summary>
-        /// Start this instance.
+        /// Start this instance.a
         /// </summary>
         void Start()
         {
+            // Inspectorで指定したフラグをここで代入する
+            var targetTutorials = new Subject();
+            targetTutorialsList.ForEach(item =>
+            {
+                targetTutorials = targetTutorials | item;
+            });
+
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerChoice || m_battleManager.m_StateMachine.m_PreviousState == BattleManager.StateMachine.State.Pause) // StateがPlayerChoice以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerChoice || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがPlayerChoice以外の時は処理終了
                 {
                     return;
                 }
@@ -26,6 +44,14 @@ namespace DemonicCity.BattleScene
                 m_panelManager.InitPanels();
                 m_panelFrameManager.MovingCenter();
 
+                // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
+                var progress = Progress.Instance;
+                var tutorialFlag = progress.TutorialProgressInBattleScene;
+                if (targetTutorials == (tutorialFlag & targetTutorials))
+                {
+                    BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
+                    progress.SetTutorialProgress(targetTutorials, false);
+                }
 
 
                 // ==============================

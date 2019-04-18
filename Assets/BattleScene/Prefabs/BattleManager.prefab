@@ -118,18 +118,19 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &1295432914653552
+--- !u!1 &1339054993674988
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4053168259867600}
-  - component: {fileID: 114127674806170954}
-  - component: {fileID: 114893046754740710}
+  - component: {fileID: 4410256117347438}
+  - component: {fileID: 114187487230617858}
+  - component: {fileID: 114551629130621486}
+  - component: {fileID: 82125522089787304}
   m_Layer: 0
-  m_Name: TutorialPopper
+  m_Name: BattleTutorialPopper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,19 +152,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4053168259867600
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1295432914653552}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.8986453, y: 3.8388999, z: 98.59398}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4691038718456576}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4293241256990584
 Transform:
   m_ObjectHideFlags: 1
@@ -176,6 +164,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4691038718456576}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4410256117347438
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339054993674988}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4596012782248328
 Transform:
@@ -218,7 +219,7 @@ Transform:
   - {fileID: 4883720955422510}
   - {fileID: 4596012782248328}
   - {fileID: 4887146168630968}
-  - {fileID: 4053168259867600}
+  - {fileID: 4410256117347438}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -273,6 +274,101 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.8, y: 3.8}
   m_EdgeRadius: 0
+--- !u!82 &82125522089787304
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339054993674988}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114015538082176046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -323,21 +419,6 @@ MonoBehaviour:
   attackButtonProcess: {fileID: 114254286006001736}
   panelComplete: {fileID: 0}
   destructionCounterBox: {fileID: 0}
---- !u!114 &114127674806170954
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1295432914653552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupObject: {fileID: 1751496469293030, guid: 722083836e847a14ba87c2050c002487,
-    type: 2}
-  scalingTime: 1
-  sortingOrder: 100
 --- !u!114 &114177336636838174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -350,9 +431,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uniqueSkillGauge: {fileID: 0}
-  m_condition: 30
+  m_condition: 25
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
+--- !u!114 &114187487230617858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339054993674988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupObject: {fileID: 1372210358693784, guid: 1ae23622a7b909f468411b183d0d393c,
+    type: 2}
+  scalingTime: 1
+  sortingOrder: 100
 --- !u!114 &114208943207490408
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -478,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca2b3cd7582f44bb29ea5f8a2f73bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  volumeInThePause: -20
 --- !u!114 &114332594962796498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,6 +587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  useTargetStory: 1
+  targetStory: 2
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -513,7 +613,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 1
-  TargetMagiaLevel: 127
+  TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -521,7 +621,7 @@ MonoBehaviour:
     MuscularStrength: 0
     Knowledge: 0
     Sense: 0
-    Charm: 0
+    Charm: 110
     Dignity: 0
     HitPoint: 0
     Attack: 0
@@ -638,6 +738,24 @@ MonoBehaviour:
   m_processingTime: 3
   sealdEnemyPanel: {fileID: 21300000, guid: a11f64fe18bb034498b862d6c03109b2, type: 3}
   uniqueSkillAnimator: {fileID: 0}
+--- !u!114 &114551629130621486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1339054993674988}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c597e570914bdb342a77a9a9aba0db13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tutorialObject: {fileID: 11400000, guid: f9ab6a6dd4626e64a85a6309af800995, type: 2}
+  toNextButton: {fileID: 114618696760316590, guid: 1ae23622a7b909f468411b183d0d393c,
+    type: 2}
+  closeButton: {fileID: 114467923459272970, guid: 1ae23622a7b909f468411b183d0d393c,
+    type: 2}
+  fadingTime: 0.5
+  audioSource: {fileID: 82125522089787304}
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -750,29 +868,6 @@ MonoBehaviour:
   m_enemiesMover: {fileID: 0}
   waveTitle: {fileID: 0}
   firstWaitTime: 2
---- !u!114 &114893046754740710
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1295432914653552}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78db3385b690f8b4383fc0d4784a09ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tutorialObject: {fileID: 11400000, guid: f9ab6a6dd4626e64a85a6309af800995, type: 2}
-  popupSystem: {fileID: 114127674806170954}
-  toNextButton: {fileID: 114819065615786930, guid: 722083836e847a14ba87c2050c002487,
-    type: 2}
-  toPreviousButton: {fileID: 114050094659586106, guid: 722083836e847a14ba87c2050c002487,
-    type: 2}
-  closeButton: {fileID: 114194886120063984, guid: 722083836e847a14ba87c2050c002487,
-    type: 2}
-  fadingTime: 0.5
-  popupedToNextButton: {fileID: 0}
-  popupedToPreviousButton: {fileID: 0}
-  popupedCloseButton: {fileID: 0}
 --- !u!114 &114901776095078312
 MonoBehaviour:
   m_ObjectHideFlags: 1

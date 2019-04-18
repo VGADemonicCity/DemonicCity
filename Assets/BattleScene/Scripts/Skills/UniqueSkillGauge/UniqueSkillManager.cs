@@ -30,7 +30,18 @@ namespace DemonicCity.BattleScene
         [SerializeField] bool m_flag;
         /// <summary>スキル使用時の確認画面</summary>
         [SerializeField] PopupSystem m_popupSystem;
+        /// <summary>チュートリアル画面に表示する項目リスト</summary>
+        List<Subject> beforeUseSkillTutorials = new List<Subject>
+        {
+            Subject.UniqueSkillAccumulated,
+            Subject.AboutUniqueSkills,
+        };
 
+        /// <summary>チュートリアル画面に表示する項目リスト</summary>
+        List<Subject> afterUseSkillTutorials = new List<Subject>
+        {
+            Subject.UsedUniqueSkill,
+        };
 
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -50,7 +61,7 @@ namespace DemonicCity.BattleScene
                 // init時マギアの形態に応じてユニークスキルの条件値を設定する
                 if (state == BattleManager.StateMachine.State.Init)
                 {
-                    Condition = m_magia.UniqueSkillConditionByAttribute;
+                    //Condition = m_magia.UniqueSkillConditionByAttribute;
                 }
             });
         }
@@ -76,7 +87,7 @@ namespace DemonicCity.BattleScene
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
                     m_popupSystem.Popup();
                     // buttonのイベント登録
-                    m_popupSystem.SubscribeButton(new PopupSystemMaterial(Activate,  "PositiveButton", true));
+                    m_popupSystem.SubscribeButton(new PopupSystemMaterial(Activate, "PositiveButton", true));
                     m_popupSystem.SubscribeButton(new PopupSystemMaterial(Chancel, "NegativeButton", true));
                 }
             });
@@ -85,14 +96,44 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// PositiveButton押下時固有スキル発動
         /// </summary>
-         public void Activate()
+        public void Activate()
         {
             // 形態に応じたユニークスキルを取得,発動する.
             var uniqueSkillFactory = GetComponent<UniqueSkillFactory>();
             var uniqueSkill = uniqueSkillFactory.Create(m_magia.MyAttribute);
             uniqueSkill.Activate();
             m_uniqueSkillGauge.SkillActivated();
-            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.PreviousState);
+        }
+
+        public void OnConditionCompleted()
+        {
+            m_flag = true;
+            TryDisplayTutorials(beforeUseSkillTutorials);
+        }
+
+        void TryDisplayTutorials(List<Subject> items)
+        {
+            // Inspectorで指定したフラグをここで代入する
+            var targetTutorials = new Subject();
+            items.ForEach(element =>
+            {
+                targetTutorials = targetTutorials | element;
+            });
+
+            // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
+            var progress = Progress.Instance;
+            var tutorialFlag = progress.TutorialProgressInBattleScene;
+            if (targetTutorials == (tutorialFlag & targetTutorials))
+            {
+                BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
+                progress.SetTutorialProgress(targetTutorials, false);
+            }
+        }
+
+        public void OnActivateSkill()
+        {
+            TryDisplayTutorials(afterUseSkillTutorials);
         }
 
         /// <summary>
@@ -100,7 +141,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void Chancel()
         {
-            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.m_PreviousState);
+            m_battleManager.SetStateMachine(m_battleManager.m_StateMachine.PreviousState);
         }
     }
 }

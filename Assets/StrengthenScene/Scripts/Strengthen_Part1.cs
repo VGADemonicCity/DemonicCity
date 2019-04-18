@@ -94,7 +94,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>シーンがロードされたか</summary>
         private bool sceneLoaded = false;
 
-        [SerializeField] private GameObject backGround = null;
+        //[SerializeField] private GameObject backGround = null;
 
         Progress progress;
 
@@ -109,7 +109,7 @@ namespace DemonicCity.StrengthenScene
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
 
-         //   SavableSingletonBase<Progress>.Instance.Clear();debug
+            //SavableSingletonBase<Progress>.Instance.Clear();
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
@@ -137,8 +137,7 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHomeSceneButton":
-                                StartCoroutine(ClosePopUpAnimation(backGround));
-                                //SceneChanger.SceneChange(SceneName.Home);
+                                //StartCoroutine(ClosePopUpAnimation(backGround));
                                 Destroy(gameObject);
                                 break;
 

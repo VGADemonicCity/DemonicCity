@@ -133,8 +133,10 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
+            Time.timeScale = 1f;
             // call event
             SetStateMachine(StateMachine.State.Init);
+            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
         }
 
 
@@ -144,8 +146,14 @@ namespace DemonicCity.BattleScene
         /// <param name="state">State machine.</param>
         public void SetStateMachine(StateMachine.State state)
         {
-            m_StateMachine.m_PreviousState = m_StateMachine.m_State; // ステート遷移前のステートを保存 
+            // ステート遷移前のステートを保存 
+            m_StateMachine.m_PreviousState = m_StateMachine.m_State;
+            if (state == StateMachine.State.Pause) // 遷移先がPauseステートの時保存
+            {
+                m_StateMachine.m_StateBeforePause = m_StateMachine.m_State;
+            }
             m_StateMachine.m_State = state; // stateをセット
+
             Debug.Log(state);
             // ==================================
             // イベント呼び出し
@@ -217,13 +225,37 @@ namespace DemonicCity.BattleScene
                 LastWave,
             }
 
-            /// <summary>ステート</summary>
-            public State m_State;
+
+            /// <summary>Pauseに遷移する前のステート</summary>
+            public State m_StateBeforePause;
             /// <summary>遷移前のステート</summary>
             public State m_PreviousState;
+            /// <summary>ステート</summary>
+            public State m_State;
             /// <summary>ウェーブ</summary>
             public Wave m_Wave;
+
+            public State PreviousState
+            {
+                get
+                {
+                    if (m_PreviousState == State.Pause)
+                    {
+                        return m_StateBeforePause;
+                    }
+                    return m_PreviousState;
+                }
+            }
+
+            public bool PreviousStateIsPause
+            {
+                get
+                {
+                    return m_PreviousState == State.Pause;
+                }
+            }
+
+            #endregion
         }
-        #endregion
     }
 }

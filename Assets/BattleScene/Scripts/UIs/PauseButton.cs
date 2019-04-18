@@ -18,8 +18,6 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button backToHomeButton;
         /// <summary>Button for restarting</summary>
         [SerializeField] Button restartingButton;
-        /// <summary>Button for resumes</summary>
-        [SerializeField] Button resumesButton;
 
         List<PopupSystemMaterial> ButtonEvents;
 
@@ -30,7 +28,6 @@ namespace DemonicCity.BattleScene
             ButtonEvents = new List<PopupSystemMaterial> {
                     new PopupSystemMaterial(BackToHomeScene,backToHomeButton.gameObject.name,true),
                     new PopupSystemMaterial(RestartingBattleScene,restartingButton.gameObject.name,true),
-                    new PopupSystemMaterial(Resumes,resumesButton.gameObject.name,true),
             };
         }
 
@@ -40,8 +37,8 @@ namespace DemonicCity.BattleScene
         public void InningThePause()
         {
             if (battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
-                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerAttack
-                && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.EnemyAttack)
+                || battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerAttack
+                || battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.EnemyAttack)
             {
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
                 popupSystem.Popup();
@@ -54,6 +51,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void BackToHomeScene()
         {
+            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, 1f);
         }
         /// <summary>
@@ -61,6 +59,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void RestartingBattleScene()
         {
+            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Battle, 1f);
         }
         /// <summary>
@@ -68,7 +67,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Resumes()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.m_PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
         }
     }
 }

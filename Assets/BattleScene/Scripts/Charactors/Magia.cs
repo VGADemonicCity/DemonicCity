@@ -27,7 +27,7 @@ namespace DemonicCity
                     return saveData.magia.m_passiveSkill;
                 }
 
-                if (BattleDebugger.Instance.LoadStatusFromInspector)
+                if (!BattleDebugger.Instance.LoadStatusFromInspector)
                 {
                     var saveData = SaveData.Instance;
                     return saveData.magia.m_passiveSkill;

@@ -1,22 +1,32 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
+
 
 namespace DemonicCity.BattleScene
 {
     public class PauseState : StatesBehaviour
     {
+        [SerializeField] AudioMixer mixer;
+        [SerializeField] float volumeInThePause = -20f;
+
         private void Start()
         {
+
+
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if (state == BattleManager.StateMachine.State.Pause)
                 {
                     Time.timeScale = 0f;
+                    mixer.SetFloat("BGMVol", volumeInThePause);
                 }
                 else
                 {
                     Time.timeScale = 1f;
+                    //mixer.SetFloat("BGMVol", 1f);
+                    mixer.ClearFloat("BGMVol");
                 }
             });
         }

@@ -230,7 +230,6 @@ namespace DemonicCity
         /// </summary>
         public class TouchInfo
         {
-
             /// <summary>
             /// Gets the difference.
             /// 二次元座標の差分
