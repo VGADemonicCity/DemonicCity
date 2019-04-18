@@ -30,6 +30,8 @@ namespace DemonicCity.StoryScene
         PopWindow,
         /// <summary>画面が揺れる</summary>
         Quake,
+
+        QuestClear,
     }
 
     public class TextDirector : MonoBehaviour
@@ -154,6 +156,9 @@ namespace DemonicCity.StoryScene
                     break;
                 case StageType.Quake:
                     Quake();
+                    break;
+                case StageType.QuestClear:
+                    QuestClear(contents[(int)StageTag.Target]);
                     break;
                 default:
                     break;
@@ -456,6 +461,18 @@ namespace DemonicCity.StoryScene
             StartCoroutine(QuakeObject(Camera.main.transform, 1f, 0.1f));
         }
 
+
+
+        void QuestClear(string content)
+        {
+            Progress.StoryProgress story;
+            if (EnumCommon.TryParse(content, out story))
+            {
+                Progress.Instance.MyStoryProgress = Progress.Instance.MyStoryProgress | story;
+            }
+            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+            //EndStaging();
+        }
 
         void DivideContent(string content)
         {
