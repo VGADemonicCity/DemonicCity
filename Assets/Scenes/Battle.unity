@@ -542,10 +542,15 @@ Prefab:
       propertyPath: destructionCounterBox
       value: 
       objectReference: {fileID: 695645745}
-    - target: {fileID: 114312102800550904, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: volumeInThePause
-      value: -20
+      propertyPath: additionalStatus.Charm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: targetStory
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
@@ -982,6 +987,16 @@ Prefab:
     - target: {fileID: 4279791964626406, guid: 8fbb58dc8140d4b9eb58bfc791298650, type: 2}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbb58dc8140d4b9eb58bfc791298650, type: 2}
