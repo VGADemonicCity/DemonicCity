@@ -297,6 +297,24 @@ namespace DemonicCity
         //    }
         //}
 
+
+        void PlaySuport(List<AudioSource> list, AudioClip clip, float fade = 0.1f)
+        {
+            AudioSource emptySouce = list.FirstOrDefault(x => x.isPlaying == false);
+
+            AudioSource playingSouce = list.FirstOrDefault(x => x.isPlaying == true);
+            if (playingSouce != null)
+            {
+                StartCoroutine(playingSouce.StopWithFadeOut(fade));
+                if (emptySouce == null)
+                {
+                    emptySouce = list.FirstOrDefault(x => x.GetHashCode() != playingSouce.GetHashCode());
+                }
+            }
+
+            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+        }
+
         /// <summary>音源再生</summary>
         /// <param name="tag">再生する音の種類</param>
         /// <param name="clip">音源</param>
@@ -319,15 +337,8 @@ namespace DemonicCity
                     break;
             }
 
-            AudioSource emptySouce = tmpList.FirstOrDefault(x => x.isPlaying == false);
 
-            AudioSource playingSouce = tmpList.FirstOrDefault(x => x.isPlaying == true);
-            if (playingSouce != null)
-            {
-                StartCoroutine(playingSouce.StopWithFadeOut(fade));
-            }
-
-            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+            PlaySuport(tmpList, clip, fade);
         }
         /// <summary>音源再生</summary>
         /// <param name="tag">流すBGMの種類</param>
@@ -336,15 +347,8 @@ namespace DemonicCity
         {
             AudioClip clip = bgms.GetClip(tag);
 
-            AudioSource emptySouce = BgmSources.FirstOrDefault(x => x.isPlaying == false);
+            PlaySuport(BgmSources, clip, fade);
 
-            AudioSource playingSouce = BgmSources.FirstOrDefault(x => x.isPlaying == true);
-            if (playingSouce != null)
-            {
-                StartCoroutine(playingSouce.StopWithFadeOut(fade));
-            }
-
-            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
         }
         /// <summary>音源再生</summary>
         /// <param name="tag">流すSEの種類</param>
@@ -353,15 +357,7 @@ namespace DemonicCity
         {
             AudioClip clip = ses.GetClip(tag);
 
-            AudioSource emptySouce = SESources.FirstOrDefault(x => x.isPlaying == false);
-
-            AudioSource playingSouce = SESources.FirstOrDefault(x => x.isPlaying == true);
-            if (playingSouce != null)
-            {
-                StartCoroutine(playingSouce.StopWithFadeOut(fade));
-            }
-
-            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+            PlaySuport(SESources, clip, fade);
         }
         /// <summary>音源再生</summary>
         /// <param name="tag">チュートリアルの種類</param>
@@ -371,16 +367,12 @@ namespace DemonicCity
         {
             AudioClip clip = tutorials.GetClip(tag, index);
 
-            AudioSource emptySouce = VoiceSources.FirstOrDefault(x => x.isPlaying == false);
-
-            AudioSource playingSouce = VoiceSources.FirstOrDefault(x => x.isPlaying == true);
-            if (playingSouce != null)
-            {
-                StartCoroutine(playingSouce.StopWithFadeOut(fade));
-            }
-
-            StartCoroutine(emptySouce.PlayWithFadeIn(clip, fade));
+            PlaySuport(VoiceSources, clip, fade);
         }
+
+
+
+
 
         /// <summary>
         /// AudioSourceごとに再生停止

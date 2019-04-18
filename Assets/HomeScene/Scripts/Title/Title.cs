@@ -49,28 +49,31 @@ namespace DemonicCity.HomeScene
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (gesture == TouchGestureDetector.Gesture.Click
-                && !IsPopUp)
+                if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log("Click");
                     GameObject hitObj = null;
-                    if (touchInfo.HitDetection(out hitObj, returnObj))
+                    if (IsPopUp)
                     {
-                        CreditChange(false);
+                        if (touchInfo.HitDetection(out hitObj, returnObj))
+                        {
+                            CreditChange(false);
+                        }
                     }
-                    else if (touchInfo.HitDetection(out hitObj, configBtn))
+                    else
                     {
-                        ConfigOpen();
+                        if (touchInfo.HitDetection(out hitObj, configBtn))
+                        {
+                            ConfigOpen();
+                        }
+                        else if (touchInfo.HitDetection(out hitObj, CreditIcon))
+                        {
+                            CreditChange(true);
+                        }
+                        else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
+                        {
+                            SceneTrans();
+                        }
                     }
-                    else if (touchInfo.HitDetection(out hitObj, CreditIcon))
-                    {
-                        CreditChange(true);
-                    }
-                    else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
-                    {
-                        SceneTrans();
-                    }
-                    //Debug.Log(gesture);
                 }
             });
         }
