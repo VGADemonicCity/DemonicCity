@@ -114,22 +114,22 @@ namespace DemonicCity.BattleScene
         /// <summary>
         /// 次のウェーブがあるか判断し、あれば次のウェーブへ。なければバトル終了へ。
         /// </summary>
-        public void TryNextWave()
-        {
-            if (m_StateMachine.m_Wave != StateMachine.Wave.LastWave)
-            {
-                m_StateMachine.m_Wave++;
-                // ==============================
-                // イベント呼び出し : StateMachine.NextWave
-                // ==============================
-                m_BehaviourByState.Invoke(StateMachine.State.NextWave);
-                return;
-            }
-            // ==============================
-            // イベント呼び出し : StateMachine.End
-            // ==============================
-            m_BehaviourByState.Invoke(StateMachine.State.Win);
-        }
+        //public void TryNextWave()
+        //{
+        //    if (m_StateMachine.m_Wave != StateMachine.Wave.LastWave)
+        //    {
+        //        m_StateMachine.m_Wave++;
+        //        // ==============================
+        //        // イベント呼び出し : StateMachine.NextWave
+        //        // ==============================
+        //        m_BehaviourByState.Invoke(StateMachine.State.NextWave);
+        //        return;
+        //    }
+        //    // ==============================
+        //    // イベント呼び出し : StateMachine.End
+        //    // ==============================
+        //    m_BehaviourByState.Invoke(StateMachine.State.Win);
+        //}
 
         private void Start()
         {

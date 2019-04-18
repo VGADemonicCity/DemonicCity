@@ -20,13 +20,10 @@ namespace DemonicCity.BattleScene
                 if (state == BattleManager.StateMachine.State.Pause)
                 {
                     Time.timeScale = 0f;
-                    mixer.SetFloat("BGMVol", volumeInThePause);
                 }
                 else
                 {
                     Time.timeScale = 1f;
-                    //mixer.SetFloat("BGMVol", 1f);
-                    mixer.ClearFloat("BGMVol");
                 }
             });
         }

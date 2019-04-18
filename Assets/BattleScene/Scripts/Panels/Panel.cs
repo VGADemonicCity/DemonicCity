@@ -87,16 +87,32 @@ namespace DemonicCity.BattleScene
         //選択されたら一回だけ演出を出してパネルの中身を表示する
         public IEnumerator Processing(float waitTime, Sprite sprite = null)
         {
+            IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
+
             // オープン前のSE再生
             SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel); 
-
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
-            IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
 
             // オープン後のSE再生
+            switch (MyPanelType)
+            {
+                case PanelType.City:
+            //SoundManager.Instance.PlayWithFade(SoundAsset.SETag.);
+                    break;
+                case PanelType.DoubleCity:
             SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+                    break;
+                case PanelType.TripleCity:
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+                    break;
+                case PanelType.Enemy:
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>
