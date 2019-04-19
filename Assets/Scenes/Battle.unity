@@ -845,6 +845,38 @@ Prefab:
       value: 
       objectReference: {fileID: 849036633}
     - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
+<<<<<<< HEAD
+        type: 2}
+      propertyPath: buffAnimator
+      value: 
+      objectReference: {fileID: 1547031150}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: magiaAnimator
+      value: 
+      objectReference: {fileID: 878212109}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: buffTextBox
+      value: 
+      objectReference: {fileID: 1069575819}
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_CoordinateForSpawn
+      value: 
+      objectReference: {fileID: 101201306}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
+=======
         type: 2}
       propertyPath: buffAnimator
       value: 
@@ -880,6 +912,13 @@ Prefab:
       value: 
       objectReference: {fileID: 2074404321}
     - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+>>>>>>> f97d8f4eb80e7a81c7001e95ff494d14b17f6ddb
+        type: 2}
+      propertyPath: m_uniqueSkillGauge
+      value: 
+      objectReference: {fileID: 2074404321}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+<<<<<<< HEAD
         type: 2}
       propertyPath: m_uniqueSkillGauge
       value: 
@@ -894,6 +933,32 @@ Prefab:
       propertyPath: destructionCounterBox
       value: 
       objectReference: {fileID: 695645745}
+=======
+        type: 2}
+      propertyPath: panelComplete
+      value: 
+      objectReference: {fileID: 1429502534}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: destructionCounterBox
+      value: 
+      objectReference: {fileID: 695645745}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: additionalStatus.Charm
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: targetStory
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_waitTime
+      value: 0.5
+      objectReference: {fileID: 0}
+>>>>>>> f97d8f4eb80e7a81c7001e95ff494d14b17f6ddb
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
