@@ -106,15 +106,15 @@ namespace DemonicCity.BattleScene
             // オープン後のSE再生
             switch (MyPanelType)
             {
-                case PanelType.City:
-                    SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedSingle);
-                    break;
-                case PanelType.DoubleCity:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedDouble);
-                    break;
-                case PanelType.TripleCity:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedTriple);
-                    break;
+            //    case PanelType.City:
+            //        SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedSingle);
+            //        break;
+            //    case PanelType.DoubleCity:
+            //SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedDouble);
+            //        break;
+            //    case PanelType.TripleCity:
+            //SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedTriple);
+                    //break;
                 case PanelType.Enemy:
             SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedEnemeyPanel);
                     break;
