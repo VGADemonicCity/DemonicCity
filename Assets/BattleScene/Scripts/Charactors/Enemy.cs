@@ -108,10 +108,5 @@ namespace DemonicCity.BattleScene
         {
             Stats.Attack -= buffBuffer;
         }
-
-        public void PlayAttackSE()
-        {
-            GetComponent<AudioSource>().Play();
-        }
     }
 }

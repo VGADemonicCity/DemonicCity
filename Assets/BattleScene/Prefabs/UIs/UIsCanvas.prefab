@@ -567,7 +567,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12f9a65c24a214e499af32e7da10893a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popupObject: {fileID: 1612016578364918, guid: 120bf37264463924ebde8d48cce0dcf3,
+  popupObject: {fileID: 1091701734923002, guid: bbdce0587fd372f4da56d1f14cc94d4a,
     type: 2}
   scalingTime: 1
   sortingOrder: 100
@@ -898,9 +898,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   popupSystem: {fileID: 114037134938860330}
-  backToHomeButton: {fileID: 114086817527797520, guid: 120bf37264463924ebde8d48cce0dcf3,
+  backToHomeButton: {fileID: 114713659660703492, guid: bbdce0587fd372f4da56d1f14cc94d4a,
     type: 2}
-  restartingButton: {fileID: 114211549155856786, guid: 120bf37264463924ebde8d48cce0dcf3,
+  restartingButton: {fileID: 114120586543001776, guid: bbdce0587fd372f4da56d1f14cc94d4a,
+    type: 2}
+  resumesButton: {fileID: 114852436307905754, guid: bbdce0587fd372f4da56d1f14cc94d4a,
     type: 2}
 --- !u!114 &114234622582219926
 MonoBehaviour:

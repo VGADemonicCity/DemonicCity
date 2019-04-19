@@ -157,7 +157,6 @@ GameObject:
   - component: {fileID: 222065538796953492}
   - component: {fileID: 114044058704795918}
   - component: {fileID: 114254787728752666}
-  - component: {fileID: 114181484125492824}
   m_Layer: 0
   m_Name: NegativeButton
   m_TagString: Untagged
@@ -252,17 +251,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114181484125492824
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1706690911551880}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84383b2a2b46d1c4893ba1cbeca296b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114188414462185632
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -18,6 +18,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button backToHomeButton;
         /// <summary>Button for restarting</summary>
         [SerializeField] Button restartingButton;
+        /// <summary>Button for resumes</summary>
+        [SerializeField] Button resumesButton;
 
         List<PopupSystemMaterial> ButtonEvents;
 
@@ -28,6 +30,7 @@ namespace DemonicCity.BattleScene
             ButtonEvents = new List<PopupSystemMaterial> {
                     new PopupSystemMaterial(BackToHomeScene,backToHomeButton.gameObject.name,true),
                     new PopupSystemMaterial(RestartingBattleScene,restartingButton.gameObject.name,true),
+                    new PopupSystemMaterial(Resumes,resumesButton.gameObject.name,true),
             };
         }
 
@@ -51,7 +54,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void BackToHomeScene()
         {
-            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, 1f);
         }
         /// <summary>
@@ -59,7 +61,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void RestartingBattleScene()
         {
-            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Battle, 1f);
         }
         /// <summary>

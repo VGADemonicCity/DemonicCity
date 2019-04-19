@@ -19,7 +19,6 @@ namespace DemonicCity.HomeScene
         }
         void Start()
         {
-            SoundManager soundM = SoundManager.Instance;
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
@@ -37,17 +36,8 @@ namespace DemonicCity.HomeScene
                         effect.Emit(1);
                         break;
                 }
-                if (gesture == TouchGestureDetector.Gesture.Click)
-                {
-                    GameObject hit;
-                    if (touchInfo.HitDetection(out hit))
-                    {
-                        if (!hit.GetComponent<NegativeTouched>())
-                        {
-                            soundM.PlayWithFade(SoundAsset.SETag.PositiveButton);
-                        }
-                    }
-                }
+
+
             });
             GameObject effectObj = ResourcesLoad.Load<GameObject>("Effects/TouchEffect");
             //GetComponent<ParticleSystem>();

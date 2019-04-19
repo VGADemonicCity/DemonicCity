@@ -13,18 +13,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sources:
   - tag: 0
-    clip: {fileID: 8300000, guid: e9aac4ea38374504ea17496f7380c4f6, type: 3}
-  - tag: 1
-    clip: {fileID: 8300000, guid: b3663f58561436f4d87fe5972151f04e, type: 3}
-  - tag: 2
-    clip: {fileID: 8300000, guid: 4688a84a986de8b41928d552b5f99613, type: 3}
-  - tag: 3
-    clip: {fileID: 8300000, guid: ad3794169386f7d4dbcf1f5ea8b9bc0a, type: 3}
-  - tag: 4
-    clip: {fileID: 8300000, guid: 797d778a7f83cbd44a1fcb21eeb45c40, type: 3}
-  - tag: 5
-    clip: {fileID: 8300000, guid: 03228ff1b26fba742aae6d7a88c0de32, type: 3}
-  - tag: 6
-    clip: {fileID: 8300000, guid: ba6cbd9a5de3cf64c85acc7fb81c2d06, type: 3}
-  - tag: 7
-    clip: {fileID: 8300000, guid: 892d2cd6a54ba9b4c935262158607535, type: 3}
+    clips:
+    - {fileID: 0}
+  - tag: 0
+    clips: []
+  - tag: 0
+    clips: []
+  - tag: 0
+    clips: []

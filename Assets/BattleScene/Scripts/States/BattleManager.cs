@@ -133,10 +133,8 @@ namespace DemonicCity.BattleScene
 
         private void Start()
         {
-            Time.timeScale = 1f;
             // call event
             SetStateMachine(StateMachine.State.Init);
-            SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
         }
 
 

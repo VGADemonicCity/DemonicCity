@@ -25,11 +25,8 @@ namespace DemonicCity
         public enum SETag
         {
             BeforeOpenPanel,
-            AfterOpenedSingle,
-            AfterOpenedDouble,
-            AfterOpenedTriple,
+            AfterOpenedPanel,
             AfterOpenedEnemeyPanel,
-            Perfect,
             PositiveButton,
             NegativeButton,
         }

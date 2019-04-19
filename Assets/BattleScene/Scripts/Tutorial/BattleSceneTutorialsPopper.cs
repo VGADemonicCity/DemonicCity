@@ -139,8 +139,8 @@ namespace DemonicCity.BattleScene
             soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, null);
             if (currentItem.useVoice)
             {
-                soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, currentItem.VoiceClip);
-                //audioSource.PlayOneShot(currentItem.VoiceClip);
+                //soundManaegr.PlayWithFade(SoundManager.SoundTag.Voice, currentItem.VoiceClip);
+                audioSource.PlayOneShot(currentItem.VoiceClip);
             }
         }
 
