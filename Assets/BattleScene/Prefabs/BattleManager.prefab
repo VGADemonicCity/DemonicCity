@@ -574,6 +574,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca2b3cd7582f44bb29ea5f8a2f73bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  volumeInThePause: -20
 --- !u!114 &114332594962796498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -610,7 +612,11 @@ MonoBehaviour:
     HitPoint: 0
     Attack: 0
     Defense: 0
+<<<<<<< HEAD
   LoadStatusFromInspector: 0
+=======
+  LoadStatusFromInspector: 1
+>>>>>>> f97d8f4eb80e7a81c7001e95ff494d14b17f6ddb
   TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
