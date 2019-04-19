@@ -9,7 +9,8 @@ namespace DemonicCity.StrengthenScene
     {
         protected Magia magia;
         public Magia.PassiveSkill m_passiveSkill;
-     
+        protected bool isMastering = false;
+
         public virtual void Awake()
         {
             magia = Magia.Instance;
@@ -25,11 +26,13 @@ namespace DemonicCity.StrengthenScene
         {
             if ((magia.MyPassiveSkill & passiveSkill) == passiveSkill)
             {
+                isMastering = true;
                 gameObject.SetActive(true);
                 Debug.Log(passiveSkill + "は習得済み");
             }
             else
             {
+                isMastering = false;
                 gameObject.SetActive(false);
                 Debug.Log(passiveSkill + "は未習得");
             }
