@@ -59,7 +59,7 @@ namespace DemonicCity
             /// <summary>12章</summary>
             Ixmagina = 4096,
             All = 8191,
-            Test = 8192,
+            //Test = 8192,
         }
         /// <summary>1クエスト内での進行度</summary>
 
@@ -171,6 +171,15 @@ namespace DemonicCity
                 TutorialProgressInBattleScene = tutorialInBattleScene & (~flag);
             }
         }
+
+        /// <summary>
+        /// 現在の進行度のクエストのクリアフラグを立てる
+        /// </summary>
+        public void QuestClear()
+        {
+            MyStoryProgress = storyProgress | thisStoryProgress;
+        }
+
 
         public StoryProgress NextStory(StoryProgress nowStory)
         {

@@ -18,8 +18,16 @@ namespace DemonicCity
         // Update is called once per frame
         void Update()
         {
-            if (panelInstance == null
-                && Input.GetKeyDown(KeyCode.P))
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                PanelDebugerOpen();
+            }
+        }
+
+
+        public void PanelDebugerOpen()
+        {
+            if (panelInstance == null)
             {
                 panelInstance = Instantiate(panel);
             }
