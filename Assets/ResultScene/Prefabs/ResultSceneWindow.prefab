@@ -456,12 +456,12 @@ GameObject:
   - component: {fileID: 114960287467997644}
   - component: {fileID: 114194567896817076}
   m_Layer: 5
-  m_Name: ResultWindow
+  m_Name: ResultSceneWindow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1444560696683438
 GameObject:
   m_ObjectHideFlags: 1
@@ -4445,8 +4445,6 @@ MonoBehaviour:
   levelUpImage: {fileID: 1592571030391374}
   levelMaxImage: {fileID: 1998779644654090}
   skillMasterdMessageWindow: {fileID: 1264278445844142}
-  toNextStoryPrefab: {fileID: 1338296239478280, guid: 11806aa1acb1e1b45a987ffeb6e11495,
-    type: 2}
   gaugeMoveSpeed: 0.03
 --- !u!114 &114937010176827050
 MonoBehaviour:
@@ -6080,7 +6078,7 @@ RectTransform:
   m_GameObject: {fileID: 1429422743416864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 224683947102078528}
   - {fileID: 4747920560197954}
@@ -6088,10 +6086,10 @@ RectTransform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 1080, y: 1920}
   m_Pivot: {x: 0, y: 0}
 --- !u!224 &224667213465170654
 RectTransform:
