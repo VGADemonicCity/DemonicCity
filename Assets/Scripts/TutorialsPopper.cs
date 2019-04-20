@@ -80,6 +80,9 @@ namespace DemonicCity
             };
         }
 
+        /// <summary>
+        /// Inspectorに設定したUIオブジェクトをポップアップさせる
+        /// </summary>
         public void Popup()
         {
             popupSystem.Popup();
@@ -98,12 +101,15 @@ namespace DemonicCity
                 image.rectTransform.localScale = Vector2.one;
             });
 
+            // ポップアップした後
             OnPopup();
         }
 
+        /// <summary>
+        /// ポップアップさせた直後の処理
+        /// </summary>
         void OnPopup()
         {
-            // on pupuped.
             currentItem = tutorialObject.Items.First();
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedToPreviousButton = GameObject.Find(toPreviousButton.gameObject.name).GetComponent<Button>();

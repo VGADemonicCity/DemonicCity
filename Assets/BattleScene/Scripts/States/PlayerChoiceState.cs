@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
     public class PlayerChoiceState : StatesBehaviour
     {
         /// <summary>チュートリアル画面に表示する項目リスト</summary>
-         List<Subject> targetTutorialsList = new List<Subject>
+        readonly List<Subject> targetTutorialsList = new List<Subject>
         {
             Subject.AboutPanels,
             Subject.AboutAttack,
