@@ -38,7 +38,7 @@ namespace DemonicCity.BattleScene
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
         /// <summary>パネル枠が動いている最中はフラグ</summary>
-        bool m_wait;
+        bool isMoving;
 
         public void Start()
         {
@@ -47,7 +47,7 @@ namespace DemonicCity.BattleScene
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (m_wait || BattleManager.Instance.m_StateMachine.m_State == BattleManager.StateMachine.State.Pause) // 枠移動中の時は終了
+                if (isMoving || BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice) // 枠移動中の時は終了
                 {
                     return;
                 }
@@ -110,12 +110,12 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         public IEnumerator MovingFrame(FramePosition framePosition)
         {
-            if(m_wait)
+            if(isMoving)
             {
                 yield break;
             }
 
-            m_wait = true;
+            isMoving = true;
             switch (framePosition)
             {
                 case FramePosition.Right:
@@ -130,7 +130,7 @@ namespace DemonicCity.BattleScene
             }
             yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
             m_framePosition = framePosition; // panelFrameの位置情報を更新する
-            m_wait = false;
+            isMoving = false;
         }
     }
 }

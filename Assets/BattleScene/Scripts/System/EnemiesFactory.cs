@@ -77,7 +77,7 @@ namespace DemonicCity
             Setulus3,
             Setulus4,
             /// <summary>超越フェニックス</summary>
-            IxPheonix,
+            IxPhoenix,
         }
     }
 }

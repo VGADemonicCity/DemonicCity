@@ -28,7 +28,7 @@ namespace DemonicCity.BattleScene
                 }
 
                 // もし敵パネルを選択して遷移してきた時
-                if (m_battleManager.m_StateMachine.PreviousState == BattleManager.StateMachine.State.PlayerChoice)
+                if (m_battleManager.m_StateMachine.PreviousStateWithoutPause == BattleManager.StateMachine.State.PlayerChoice)
                 {
                     // 敵の攻撃力を上げて、エフェクトを再生
                     m_battleManager.CurrentEnemy.AttackBuffActivate((int)((m_battleManager.CurrentEnemy.Stats.Attack * penaltyIncrease) - m_battleManager.CurrentEnemy.Stats.Attack));
@@ -123,7 +123,7 @@ namespace DemonicCity.BattleScene
         void TransitionState()
         {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
-            if (m_battleManager.m_StateMachine.PreviousState == BattleManager.StateMachine.State.PlayerChoice)
+            if (m_battleManager.m_StateMachine.PreviousStateWithoutPause == BattleManager.StateMachine.State.PlayerChoice)
             {
 
                 if (m_battleManager.m_MagiaStats.HitPoint > 0) // プレイヤーの体力が1以上だったら次のターンへ遷移する

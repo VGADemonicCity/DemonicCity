@@ -115,9 +115,6 @@ namespace DemonicCity
         /// </summary>
         public void Close()
         {
-            //iTween.ScaleTo(popupObject, iTween.Hash("scale", new Vector3(1f,0f,0f), "time", scalingTime));
-            //Destroy(canvasObject,scalingTime);
-
             Destroy(canvasObject);
         }
     }

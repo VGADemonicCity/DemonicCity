@@ -112,7 +112,7 @@ namespace DemonicCity.BattleScene
         void SpawnEnemies()
         {
             m_enemiesFactory = EnemiesFactory.Instance;
-            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter); // ======DEBUG======完成時は引数なしにする　
+            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter);　
 
             // 敵を1体生成する度にm_spawnSpacingValue分座標をずらして生成する
             // 生成した敵オブジェクトにアタッチされているEnemyコンポーネントをBattleManagerのリストに格納する
