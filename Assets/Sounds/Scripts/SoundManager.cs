@@ -96,6 +96,7 @@ namespace DemonicCity
             }
             else if (scene.name == battle)
             {
+                Debug.Log("Battle");
                 StopWithFade(SoundTag.BGM);
             }
             else

@@ -62,7 +62,10 @@ namespace DemonicCity.HomeScene
                     {
                         //if (beginObject == endObject)
                         //{
-                        parents[(int)touchedWindow].SetActive(true);
+                        if (parents[(int)touchedWindow] != null)
+                        {
+                            parents[(int)touchedWindow].SetActive(true);
+                        }
                         switch (touchedWindow)
                         {
                             case Window.Story:
@@ -115,7 +118,14 @@ namespace DemonicCity.HomeScene
             }
             else
             {
-                windowInstance[i] = Instantiate(windowObjects[i], parents[i].transform);
+                if (parents[i] == null)
+                {
+                    windowInstance[i] = Instantiate(windowObjects[i]);
+                }
+                else
+                {
+                    windowInstance[i] = Instantiate(windowObjects[i], parents[i].transform);
+                }
                 windowInstance[i].SetActive(true);
             }
             //newPanel.GetComponent<WindowState>().touchGestureDetector = touchGestureDetector;
