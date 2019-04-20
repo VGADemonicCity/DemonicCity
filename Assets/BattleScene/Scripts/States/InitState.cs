@@ -79,6 +79,8 @@ namespace DemonicCity.BattleScene
                 // その章のChapterを取得
                 m_chapter = ChapterManager.Instance.GetChapter();
             }
+            Debug.Log(m_chapter.name);
+            Debug.Log(m_chapter.chapterTitle);
 
             SpawnEnemies(); // 敵生産処理
             // BattleDebuggerのフラグが立っていた場合,指定されたステータスに合わせて初期化する

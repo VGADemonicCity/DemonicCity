@@ -24,18 +24,15 @@ namespace DemonicCity
         {
             get
             {
-                if (null == m_instance)
+                var json = File.Exists(GetSavePath()) ? File.ReadAllText(GetSavePath()) : "";
+                if (string.IsNullOrEmpty(json))
                 {
-                    var json = File.Exists(GetSavePath()) ? File.ReadAllText(GetSavePath()) : "";
-                    if (string.IsNullOrEmpty(json))
-                    {
-                        m_instance = new T();
-                        m_instance.m_isLoaded = true;
-                    }
-                    else
-                    {
-                        LoadFromJSON(json);
-                    }
+                    m_instance = new T();
+                    m_instance.m_isLoaded = true;
+                }
+                else
+                {
+                    LoadFromJSON(json);
                 }
                 return m_instance;
             }
