@@ -182,7 +182,6 @@ namespace DemonicCity.ResultScene
                         SavableSingletonBase<Magia>.Instance.Save();
                         //バトル後の会話シーンへ遷移
                         SceneChanger.SceneChange(SceneName.Story);
-
                     }
                 }
             });
