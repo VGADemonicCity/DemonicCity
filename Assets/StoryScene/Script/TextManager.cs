@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-//using System.IO;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,63 +8,57 @@ namespace DemonicCity.StoryScene
 {
     public enum CharName
     {
-        Magia, Phoenix, Nafla, Amon, Ashmedy, Faulus, Barl, InvigoratedPhoenix, Maou, Ixmagina, Unknown, None, System
+        Magia,
+        Phoenix,
+        Nafla,
+        Amon,
+        Ashmedy,
+        Faulus,
+        Barl,
+        InvigoratedPhoenix,
+        Maou,
+        Ixmagina,
+        Unknown,
+        None,
+        System,
     }
     public class TextManager : MonoBehaviour
     {
-        string[] CHARNAME = {
-        "マギア",
-        "フィニクス",
-        "ナフラ",
-        "アーモン",
-        "アシュメダイ",
-        "フォーラス",
-        "バアル",
-        "フィニクス",
-        "イクスマギア",
-        "魔王",
-        "???",
-        "",
-        };
 
+        [SerializeField] Transform parentTransform;
+        [SerializeField] GameObject characterObject;
+        [SerializeField] Image backStage;
+        [SerializeField] TMPro.TMP_Text nameObj;
+        [SerializeField] Button skipButton;
 
         [SerializeField] TextDirector director;
-        [SerializeField] Transform parentTransform;
-        //[SerializeField] List<GameObject> characterObjects = new List<GameObject>();
-        [SerializeField] GameObject characterObject;
-        [SerializeField] List<TextActor> actors = new List<TextActor>();
-        [SerializeField] Image backStage;
+        [SerializeField] PutSentence putSentence;
 
+        List<TextActor> actors = new List<TextActor>();
+        List<TextStorage> texts = new List<TextStorage>();
         List<FaceChanger> faceChangers = new List<FaceChanger>();
         List<CharName> characters = new List<CharName>();
+
+        TouchGestureDetector touchGestureDetector;
         Progress progress;
         SoundManager soundM;
+        ChapterManager chapterM;
 
-
+        string unknownName = "???";
+        string buttonTag = "Button";
 
         public bool isStaging = false;
-        string buttonTag = "Button";
-        //bool flag;
         int textIndex = 0;
-        public TouchGestureDetector touchGestureDetector;
-        //SceneFader sceneFader;
-        ChapterManager chapterM;
-        List<TextStorage> texts = new List<TextStorage>();
-        [SerializeField] PutSentence putSentence;
-        [SerializeField] TMPro.TMP_Text nameObj;
-        [SerializeField] UnityEngine.UI.Button skipButton;
         public bool DrawEnd { get { return !isStaging & putSentence.End; } }
         void Awake()
         {
             touchGestureDetector = TouchGestureDetector.Instance;
             progress = Progress.Instance;
-            //sceneFader = SceneFader.Instance;
             chapterM = ChapterManager.Instance;
             soundM = SoundManager.Instance;
         }
         void Start()
         {
-
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
@@ -211,7 +202,6 @@ namespace DemonicCity.StoryScene
 
             if (storage.isUnknown)
             {
-                //nameObj.text = CHARNAME[(int)CharName.Unknown];
                 nameObj.text = "？？？";
             }
             else if (storage.cName == CharName.None)
@@ -220,7 +210,6 @@ namespace DemonicCity.StoryScene
             }
             else
             {
-                //nameObj.text = CHARNAME[(int)storage.cName];
                 nameObj.text = actors.Find(x => x.id == storage.cName).name;
             }
             return true;
@@ -232,16 +221,16 @@ namespace DemonicCity.StoryScene
         /// <summary>ListのCharNameに応じた名前を出力するが、演出がある場合はその演出を再生する</summary>
         bool DivideTexts()
         {
-            Debug.Log(texts[textIndex].cName);
-            if (texts[textIndex].cName == CharName.System)
+            TextStorage currentText = texts[textIndex];
+            Debug.Log(currentText.cName);
+            if (currentText.cName == CharName.System)
             {
                 return false;
             }
-            else if (texts[textIndex].cName != CharName.None)
+            else if (currentText.cName != CharName.None)
             {
-                Debug.Log(texts[textIndex].faceIndex);
-                faceChangers.Find(x => x.charName == texts[textIndex].cName).ChangeFace(texts[textIndex].faceIndex);
-                //faceChangers[0].ChangeFace(texts[textIndex].faceIndex);
+                Debug.Log(currentText.faceIndex);
+                faceChangers.Find(x => x.charName == currentText.cName).ChangeFace(currentText.faceIndex);
             }
 
             Cast cast = new Cast();
@@ -252,17 +241,17 @@ namespace DemonicCity.StoryScene
             }
 
 
-            if (texts[textIndex].isUnknown)
+            if (currentText.isUnknown)
             {
-                nameObj.text = CHARNAME[(int)CharName.Unknown];
+                nameObj.text = unknownName;
             }
-            else if (texts[textIndex].cName == CharName.None)
+            else if (currentText.cName == CharName.None)
             {
                 nameObj.text = "";
             }
             else
             {
-                nameObj.text = CHARNAME[(int)texts[textIndex].cName];
+                nameObj.text = actors.Find(x => x.id == currentText.cName).name;
             }
             return true;
         }
@@ -315,39 +304,18 @@ namespace DemonicCity.StoryScene
         public void TextSkip()
         {
             skipButton.interactable = false;
-            //ThisTextDraw();
             director.Staging(texts[texts.Count - 1].sentence);
         }
 
         #region Settings
 
-        string filePath = "D:/SourceTree/DemonicCity/Assets/StoryScene/Texts.json";
-
-        public string FolderPath { get { return "Sources/"; } }
-
-
-        public void SetText(string fileName)
-        {
-            filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/" + fileName;
-            if (Resources.Load(filePath) == null)
-            {
-                filePath = FolderPath + progress.ThisStoryProgress.ToString() + "/Test";
-            }
-
-            Scenario tmp = Resources.Load<Scenario>(filePath);
-            //tmp.texts.ForEach(x => characters.Add(x.cName));
-            characters = tmp.characters;
-            texts = tmp.texts;
-            //characters = characters.Distinct().Where(item => item <= CharName.Ixmagina).ToList();
-            SetCharacter(characters);
-        }
         public void SetText(Progress.QuestProgress currentState)
         {
             Chapter chapter = chapterM.GetChapter();
             Scenario tmp = chapter.scenario[currentState];
             characters = tmp.characters;
             texts = tmp.texts;
-            SetCharacter(characters);
+            SetCharacter(ref characters);
 
             int index = (int)progress.ThisQuestProgress;
             if (index < chapter.BattleStage.Count)
@@ -363,7 +331,7 @@ namespace DemonicCity.StoryScene
         }
 
 
-        void SetCharacter(List<CharName> names)
+        void SetCharacter(ref List<CharName> names)
         {
             director.charas.Clear();
             foreach (var item in names)
@@ -371,7 +339,6 @@ namespace DemonicCity.StoryScene
                 TextActor tmpActor = Resources.Load<TextActor>("Sources/StoryActors/" + item.ToString());
                 GameObject charObj = Instantiate(characterObject, parentTransform);
                 charObj.AddComponent(typeof(FaceChanger));
-                //charObj.GetComponent<FaceChanger>().Init(actors.Find(x => x.id == item));
                 charObj.GetComponent<FaceChanger>().Init(tmpActor);
                 director.characters.Add(charObj);
                 director.charas.Add(item, charObj);

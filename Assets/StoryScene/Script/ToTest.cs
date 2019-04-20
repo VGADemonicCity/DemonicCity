@@ -16,15 +16,7 @@ public class ToTest : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.S))
         {
-            parent.gameObject.SetActive(true);
-            if (testInstance[0] == null)
-            {
-                testInstance[0] = Instantiate(testObject[0], parent);
-            }
-            else
-            {
-                testInstance[0].SetActive(!testInstance[0].activeSelf);
-            }
+            StoryTestDebugerOpen();
         }
 
         if (Input.GetKeyDown(KeyCode.W))
@@ -38,6 +30,20 @@ public class ToTest : MonoBehaviour
             {
                 testInstance[1].SetActive(!testInstance[1].activeSelf);
             }
+        }
+    }
+
+
+    public void StoryTestDebugerOpen()
+    {
+        parent.gameObject.SetActive(true);
+        if (testInstance[0] == null)
+        {
+            testInstance[0] = Instantiate(testObject[0], parent);
+        }
+        else
+        {
+            testInstance[0].SetActive(!testInstance[0].activeSelf);
         }
     }
 }
