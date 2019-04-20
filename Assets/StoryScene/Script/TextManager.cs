@@ -314,11 +314,9 @@ namespace DemonicCity.StoryScene
         /// </summary>
         public void TextSkip()
         {
-
-            textIndex = texts.Count - 1;
             skipButton.interactable = false;
             //ThisTextDraw();
-            director.Staging(texts[textIndex].sentence);
+            director.Staging(texts[texts.Count - 1].sentence);
         }
 
         #region Settings

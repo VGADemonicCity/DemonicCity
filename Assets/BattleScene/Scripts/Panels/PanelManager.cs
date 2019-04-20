@@ -87,9 +87,7 @@ namespace DemonicCity.BattleScene
 
 
         /// <summary>
-        /// --------------------------
         /// パネルのメインの処理を登録する
-        /// --------------------------
         /// </summary>
         void Start()
         {

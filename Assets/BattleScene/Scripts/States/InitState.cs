@@ -79,6 +79,8 @@ namespace DemonicCity.BattleScene
                 // その章のChapterを取得
                 m_chapter = ChapterManager.Instance.GetChapter();
             }
+            Debug.Log(m_chapter.name);
+            Debug.Log(m_chapter.chapterTitle);
 
             SpawnEnemies(); // 敵生産処理
             // BattleDebuggerのフラグが立っていた場合,指定されたステータスに合わせて初期化する
@@ -110,7 +112,7 @@ namespace DemonicCity.BattleScene
         void SpawnEnemies()
         {
             m_enemiesFactory = EnemiesFactory.Instance;
-            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter); // ======DEBUG======完成時は引数なしにする　
+            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter);　
 
             // 敵を1体生成する度にm_spawnSpacingValue分座標をずらして生成する
             // 生成した敵オブジェクトにアタッチされているEnemyコンポーネントをBattleManagerのリストに格納する

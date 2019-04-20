@@ -93,9 +93,6 @@ namespace DemonicCity.StrengthenScene
 
         /// <summary>シーンがロードされたか</summary>
         private bool sceneLoaded = false;
-
-        //[SerializeField] private GameObject backGround = null;
-
         Progress progress;
 
         public enum PopUpAnimation
@@ -137,7 +134,6 @@ namespace DemonicCity.StrengthenScene
                         switch (button.name)
                         {
                             case "BackToHomeSceneButton":
-                                //StartCoroutine(ClosePopUpAnimation(backGround));
                                 Destroy(gameObject);
                                 break;
 

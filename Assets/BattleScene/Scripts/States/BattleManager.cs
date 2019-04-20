@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-using UnityEngine.SceneManagement;
 
 namespace DemonicCity.BattleScene
 {
     /// <summary>
-    /// Battle manager.
+    /// ターンベースのステート管理をするクラス
     /// Singleton pattern
     /// </summary>
     public class BattleManager : MonoSingleton<BattleManager>
@@ -17,7 +16,10 @@ namespace DemonicCity.BattleScene
         /// <summary>そのバトルに登場する敵オブジェクトのリスト</summary>
         public List<GameObject> EnemyObjects
         {
-            get { return m_enemyObjects; }
+            get
+            {
+                return m_enemyObjects;
+            }
             set
             {
                 m_enemyObjects = value;
@@ -80,8 +82,14 @@ namespace DemonicCity.BattleScene
         /// <value>The enemies.</value>
         public List<Enemy> Enemies
         {
-            get { return m_enemies; }
-            set { m_enemies = value; }
+            get
+            {
+                return m_enemies;
+            }
+            set
+            {
+                m_enemies = value;
+            }
         }
 
         /// <summary>ステートマシン</summary>
@@ -110,26 +118,6 @@ namespace DemonicCity.BattleScene
         {
             m_StateMachine.m_Wave = StateMachine.Wave.FirstWave;
         }
-
-        /// <summary>
-        /// 次のウェーブがあるか判断し、あれば次のウェーブへ。なければバトル終了へ。
-        /// </summary>
-        //public void TryNextWave()
-        //{
-        //    if (m_StateMachine.m_Wave != StateMachine.Wave.LastWave)
-        //    {
-        //        m_StateMachine.m_Wave++;
-        //        // ==============================
-        //        // イベント呼び出し : StateMachine.NextWave
-        //        // ==============================
-        //        m_BehaviourByState.Invoke(StateMachine.State.NextWave);
-        //        return;
-        //    }
-        //    // ==============================
-        //    // イベント呼び出し : StateMachine.End
-        //    // ==============================
-        //    m_BehaviourByState.Invoke(StateMachine.State.Win);
-        //}
 
         private void Start()
         {
@@ -225,7 +213,6 @@ namespace DemonicCity.BattleScene
                 LastWave,
             }
 
-
             /// <summary>Pauseに遷移する前のステート</summary>
             public State m_StateBeforePause;
             /// <summary>遷移前のステート</summary>
@@ -235,7 +222,8 @@ namespace DemonicCity.BattleScene
             /// <summary>ウェーブ</summary>
             public Wave m_Wave;
 
-            public State PreviousState
+            /// <summary>現在のステートよりひとつ前のステートを返す.前のステートがPauseの場合はPauseステートに遷移する前のステートを返す</summary>
+            public State PreviousStateWithoutPause
             {
                 get
                 {
@@ -247,6 +235,7 @@ namespace DemonicCity.BattleScene
                 }
             }
 
+            /// <summary>現在のステートよりひとつ前のステートがPauseステートならtrue,そうでない場合false</summary>
             public bool PreviousStateIsPause
             {
                 get
@@ -254,7 +243,6 @@ namespace DemonicCity.BattleScene
                     return m_PreviousState == State.Pause;
                 }
             }
-
             #endregion
         }
     }

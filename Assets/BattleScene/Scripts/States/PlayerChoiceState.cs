@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
     public class PlayerChoiceState : StatesBehaviour
     {
         /// <summary>チュートリアル画面に表示する項目リスト</summary>
-         List<Subject> targetTutorialsList = new List<Subject>
+        readonly List<Subject> targetTutorialsList = new List<Subject>
         {
             Subject.AboutPanels,
             Subject.AboutAttack,
@@ -20,6 +20,9 @@ namespace DemonicCity.BattleScene
             Subject.CompletePanels,
             Subject.FirstPanelOpen,
         };
+
+        Progress progress;
+        Magia magia;
 
         /// <summary>
         /// Start this instance.a
@@ -45,13 +48,17 @@ namespace DemonicCity.BattleScene
                 m_panelFrameManager.MovingCenter();
 
                 // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
-                var progress = Progress.Instance;
+                 progress = Progress.Instance;
                 var tutorialFlag = progress.TutorialProgressInBattleScene;
                 if (targetTutorials == (tutorialFlag & targetTutorials))
                 {
                     BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
                     progress.SetTutorialProgress(targetTutorials, false);
                 }
+
+                progress = Progress.Instance;
+                magia = Magia.Instance;
+                
 
 
                 // ==============================

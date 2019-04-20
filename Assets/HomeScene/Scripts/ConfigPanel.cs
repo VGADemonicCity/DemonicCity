@@ -23,7 +23,8 @@ namespace DemonicCity
         void DataReset()
         {
             Debug.Log("DataReset");
-            //データをリセットする処理
+            Progress.Instance.Clear();
+            Magia.Instance.Clear();
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title);
         }
 

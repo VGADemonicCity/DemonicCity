@@ -96,7 +96,8 @@ namespace DemonicCity
             }
             else if (scene.name == battle)
             {
-
+                Debug.Log("Battle");
+                StopWithFade(SoundTag.BGM);
             }
             else
             {
@@ -371,8 +372,15 @@ namespace DemonicCity
         }
 
 
-
-
+        /// <summary>
+        /// 全AudioSource再生停止
+        /// </summary>
+        void StopWithFade()
+        {
+            BgmSources.ForEach(x => x.StopWithFadeOut());
+            SESources.ForEach(x => x.StopWithFadeOut());
+            VoiceSources.ForEach(x => x.StopWithFadeOut());
+        }
 
         /// <summary>
         /// AudioSourceごとに再生停止
@@ -380,7 +388,20 @@ namespace DemonicCity
         /// <param name="tag">停止したいAudioSourceのTag</param>
         public void StopWithFade(SoundTag tag)
         {
-            PlayWithFade(tag, null);
+            switch (tag)
+            {
+                case SoundTag.BGM:
+                    BgmSources.ForEach(x => x.StopWithFadeOut());
+                    break;
+                case SoundTag.SE:
+                    SESources.ForEach(x => x.StopWithFadeOut());
+                    break;
+                case SoundTag.Voice:
+                    VoiceSources.ForEach(x => x.StopWithFadeOut());
+                    break;
+                default:
+                    break;
+            }
         }
 
 

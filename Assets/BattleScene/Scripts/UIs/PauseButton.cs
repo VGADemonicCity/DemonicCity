@@ -18,6 +18,8 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button backToHomeButton;
         /// <summary>Button for restarting</summary>
         [SerializeField] Button restartingButton;
+        /// <summary>Button for resume battle</summary>
+        [SerializeField] Button resumeButton;
 
         List<PopupSystemMaterial> ButtonEvents;
 
@@ -28,6 +30,7 @@ namespace DemonicCity.BattleScene
             ButtonEvents = new List<PopupSystemMaterial> {
                     new PopupSystemMaterial(BackToHomeScene,backToHomeButton.gameObject.name,true),
                     new PopupSystemMaterial(RestartingBattleScene,restartingButton.gameObject.name,true),
+                    new PopupSystemMaterial(Resume,resumeButton.gameObject.name,true),
             };
         }
 
@@ -54,6 +57,7 @@ namespace DemonicCity.BattleScene
             SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, 1f);
         }
+
         /// <summary>
         /// バトルをリスタートする
         /// </summary>
@@ -62,12 +66,13 @@ namespace DemonicCity.BattleScene
             SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Battle, 1f);
         }
+
         /// <summary>
-        /// バトルを再開する
+        /// pauseボタンを閉じてバトルを再開する
         /// </summary>
-        void Resumes()
+        void Resume()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
         }
     }
 }
