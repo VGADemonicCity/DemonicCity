@@ -300,6 +300,8 @@ namespace DemonicCity.HomeScene
         }
         public void CharacterSpeak(List<AudioClip> clips)
         {
+            SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.Voice, clips[Random.Range(0, clips.Count)]);
+
             Debug.Log("Speak!");
         }
 

@@ -122,8 +122,6 @@ namespace DemonicCity.StrengthenScene
         {
             GetGameObjects();
             ResetStatus();
-            Debug.Log(magia.MyPassiveSkill);
-            Debug.Log("レベル" + magia.Stats.Level);
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {

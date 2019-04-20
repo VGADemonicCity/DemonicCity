@@ -30,6 +30,11 @@ namespace DemonicCity.BattleScene
             return skill.length;
         }
 
+        public void PlayCompleteSE()
+        {
+            GetComponent<AudioSource>().Play();
+        }
+
         /// <summary>
         /// パネルコンプリート時のアニメーション再生し,プレイヤーの攻撃ステートへ遷移
         /// </summary>

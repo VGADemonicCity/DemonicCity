@@ -49,33 +49,44 @@ namespace DemonicCity.HomeScene
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (gesture == TouchGestureDetector.Gesture.Click
-                && !IsPopUp)
+                if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log("Click");
                     GameObject hitObj = null;
-                    if (touchInfo.HitDetection(out hitObj, returnObj))
+                    if (IsPopUp)
                     {
-                        CreditChange(false);
+                        if (touchInfo.HitDetection(out hitObj, returnObj))
+                        {
+                            CreditChange(false);
+                        }
                     }
-                    else if (touchInfo.HitDetection(out hitObj, configBtn))
+                    else
                     {
-                        ConfigOpen();
+                        if (touchInfo.HitDetection(out hitObj, configBtn))
+                        {
+                            ConfigOpen();
+                        }
+                        else if (touchInfo.HitDetection(out hitObj, CreditIcon))
+                        {
+                            CreditChange(true);
+                        }
+                        else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
+                        {
+                            SceneTrans();
+                        }
                     }
-                    else if (touchInfo.HitDetection(out hitObj, CreditIcon))
-                    {
-                        CreditChange(true);
-                    }
-                    else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
-                    {
-                        ToHome();
-                    }
-                    //Debug.Log(gesture);
                 }
             });
         }
-        public void ToHome()
+        public void SceneTrans()
         {
+            Progress progress = Progress.Instance;
+            if (progress.MyStoryProgress == 0)
+            {
+                progress.ThisStoryProgress = Progress.StoryProgress.Prologue;
+                progress.ThisQuestProgress = Progress.QuestProgress.Prologue;
+                sceneFader.FadeOut(SceneFader.SceneTitle.Story);
+                return;
+            }
             sceneFader.FadeOut(SceneFader.SceneTitle.Home);
         }
 

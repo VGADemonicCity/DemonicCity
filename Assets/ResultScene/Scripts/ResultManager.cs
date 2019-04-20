@@ -138,20 +138,20 @@ namespace DemonicCity.ResultScene
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     tapCount++;
-                    Debug.Log("uds");
+
                     if (isCalculation)
                     {
-                        if (tapCount == 1)
+                        if (tapCount == 1 && !isCalculation)
                         {
                             isAnimation = true;
                         }
-                        else if (tapCount == 2 && isAnimation)//演出スキップ
+                        else if (tapCount == 2 && isAnimation && !isCalculation)//演出スキップ
                         {
                             ReflectionAfterStatus();
                             nextLevelText.text = "";
                             isAnimation = false;
                         }
-                        else if ((tapCount == 3 && !isAnimation) || (tapCount == 2 && isAnimation))//スキップした場合||スキップしなかった場合
+                        else if ((tapCount == 3 && !isAnimation && !isCalculation) || (tapCount == 2 && isAnimation && !isCalculation))//スキップした場合||スキップしなかった場合
                         {
                             gaugeBackGround.sprite = defaultGaugeSprite;
 
@@ -170,7 +170,7 @@ namespace DemonicCity.ResultScene
                                 //  maxLevelImage.SetActive(true);
                             }
                         }
-                        else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
+                        else if ((tapCount == 4 && !isCalculation) || (tapCount == 3 && !isCalculation) || (tapCount == 2 && !isCalculation))
                         {
                             SavableSingletonBase<Magia>.Instance.Save();
                             //バトル後の会話シーンへ遷移
@@ -432,7 +432,7 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            destructionCount = 50000;//debug
+           // destructionCount = 50000;//debug
             destructionCountText.text = destructionCount.ToString();
 
             getStatusPointText.text = 0.ToString();
