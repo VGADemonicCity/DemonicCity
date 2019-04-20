@@ -178,7 +178,18 @@ namespace DemonicCity.ResultScene
                     }
                     else if (tapCount == 4 || tapCount == 3 || tapCount == 2)
                     {
-                        SavableSingletonBase<Magia>.Instance.Save();
+                        Debug.Log(" Level  of Instance before saving is " + Magia.Instance.Stats.Level);
+                        Debug.Log("Level  before saving is " + magia.Stats.Level);
+                        Debug.Log("before" + (int)magia.MyPassiveSkill);
+                        Debug.Log("before instance "+ (int)Magia.Instance.MyPassiveSkill);
+                        var magiaInstance = Magia.Instance;
+                        magiaInstance = magia;
+                        magia.Save();
+                        Debug.Log("Level  after saving is " + magia.Stats.Level);
+                        Debug.Log(" Level  of Instance after saving is " + Magia.Instance.Stats.Level);
+                        Debug.Log("after" + (int)magia.MyPassiveSkill);
+                        Debug.Log("after instance " + (int)Magia.Instance.MyPassiveSkill);
+
                         Instantiate(toNextStoryPrefab, transform);
                     }
                 }

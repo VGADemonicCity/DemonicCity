@@ -23,14 +23,12 @@ namespace DemonicCity
             {
                 if (SceneManager.GetActiveScene().name != "Battle")
                 {
-                    var saveData = SaveData.Instance;
-                    return saveData.magia.m_passiveSkill;
+                    return Instance.m_passiveSkill;
                 }
 
                 if (!BattleDebugger.Instance.LoadStatusFromInspector)
                 {
-                    var saveData = SaveData.Instance;
-                    return saveData.magia.m_passiveSkill;
+                    return Instance.m_passiveSkill;
                 }
                 return m_passiveSkill;
             }
@@ -46,11 +44,6 @@ namespace DemonicCity
         {
             get
             {
-                if (m_stats == null)
-                {
-                    var saveData = SaveData.Instance;
-                    m_stats = saveData.magia.m_stats;
-                }
                 return m_stats;
             }
             set { m_stats = value; }
