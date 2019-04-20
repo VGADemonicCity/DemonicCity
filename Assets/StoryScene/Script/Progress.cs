@@ -26,7 +26,6 @@ namespace DemonicCity
             OpenFirstPanel,
             OpenedPanel,
             MoreOpenPanel,
-
         }
 
         /// <summary>ストーリーの進行度</summary>
@@ -80,7 +79,7 @@ namespace DemonicCity
         }
 
         /// <summary>ストーリーの進行度</summary>
-        [SerializeField] StoryProgress storyProgress = StoryProgress.Ixmagina;
+        [SerializeField] StoryProgress storyProgress = 0;
 
         /// <summary>現在進行しているクエスト</summary>
         [SerializeField] StoryProgress thisStoryProgress = StoryProgress.Prologue;
