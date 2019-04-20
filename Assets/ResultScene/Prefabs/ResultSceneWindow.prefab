@@ -800,7 +800,7 @@ GameObject:
   - component: {fileID: 222240766170991676}
   - component: {fileID: 114183924131519036}
   m_Layer: 5
-  m_Name: StatusPointText
+  m_Name: GetStatusPointText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4457,6 +4457,23 @@ MonoBehaviour:
   levelUpImage: {fileID: 1592571030391374}
   levelMaxImage: {fileID: 1998779644654090}
   skillMasterdMessageWindow: {fileID: 1264278445844142}
+  currentLevelText: {fileID: 114366228568437992}
+  nextLevelText: {fileID: 114864819855511066}
+  beforeHpText: {fileID: 1824764692583328}
+  beforeAttackText: {fileID: 1272874953511564}
+  beforeDefenceText: {fileID: 1174418678005692}
+  afterHpText: {fileID: 114945461941934918}
+  afterAttackText: {fileID: 114252107463357802}
+  afterDefenseText: {fileID: 114600643119804668}
+  destructionCountText: {fileID: 114161214726979936}
+  needDestructionCountText: {fileID: 114261225163545706}
+  getStatusPointText: {fileID: 114183924131519036}
+  rightArrows:
+  - {fileID: 1896305208509116}
+  - {fileID: 1756310920664450}
+  - {fileID: 1472663744156638}
+  experienceGauge: {fileID: 114485438059140558}
+  gaugeBackGround: {fileID: 114799758531032942}
   toNextWindow: {fileID: 1338296239478280, guid: 11806aa1acb1e1b45a987ffeb6e11495,
     type: 2}
   gaugeMoveSpeed: 0.1

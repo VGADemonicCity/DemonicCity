@@ -10,11 +10,14 @@ namespace DemonicCity.StrengthenScene
 {
     public class Strengthen_Part1 : MonoBehaviour
     {
-        /// <summary>Magiaクラスのインスタンス</summary>
+        /// <summary>ちゃんマギのインスタンス</summary>
         Magia magia;
         /// <summary>TouchGestureDetectorクラスのインスタンス</summary>
         TouchGestureDetector touchGestureDetector;
+        /// <summary>Progressクラスのインスタンス</summary>
+        Progress progress;
 
+        /// <summary>ポップアップシステム</summary>
         [SerializeField] private TutorialsPopper popupSystem;
 
         /// <summary>現在の体力</summary>
@@ -23,6 +26,8 @@ namespace DemonicCity.StrengthenScene
         private int currentAttack;
         /// <summary>現在の防御力</summary>
         private int currentDefence;
+        /// <summary>魔力値を200振り分けたときの固有ステータスの最大値</summary>
+        private const int maxUniquePoint = 200;
 
         /// <summary>変動後の体力</summary>
         private int updatedHitPoint;
@@ -45,7 +50,7 @@ namespace DemonicCity.StrengthenScene
         private int dignity;
 
         /// <summary>割り振りポイント(魔力値)</summary>
-        private int statusPoint;
+        private int MyStatusPoint;
         /// <summary>割り振られた魅力値</summary>
         private int addCharm;
         /// <summary>割り振られた耐久値</summary>
@@ -60,15 +65,15 @@ namespace DemonicCity.StrengthenScene
         private int addDignity;
 
         /// <summary>現在の基礎ステータステキスト</summary>
-        TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] private TextMeshProUGUI[] currentBasicStatusTexts = new TextMeshProUGUI[3];
         /// <summary>変動後の基礎ステータステキスト</summary>
-        TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
+        [SerializeField] private TextMeshProUGUI[] updatedBasicStatusTexts = new TextMeshProUGUI[3];
         /// <summary>現在の固有ステータステキスト</summary>
-        TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
+        [SerializeField] private TextMeshProUGUI[] currentUniqueStatusTexts = new TextMeshProUGUI[6];
         /// <summary>割り振った固有ステータステキスト</summary>
-        TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
+        [SerializeField] private TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
         /// <summary>割り振りポイントテキスト(魔力値)</summary>
-        TextMeshProUGUI statusPointText;
+        [SerializeField] private TextMeshProUGUI MystatusPointText;
 
         /// <summary>ステータス確定前のメッセージウィンドウ</summary>
         [SerializeField] private GameObject confirmMessageWindow;
@@ -81,20 +86,20 @@ namespace DemonicCity.StrengthenScene
         /// <summary>各スキル名</summary>
         private GameObject[] skillNameTexts;
         /// <summary>各スキルの説明</summary>
-        private GameObject[] skillDescriptionTexts = null;
+        [SerializeField] private GameObject[] skillDescriptionTexts = null;
 
-        /// <summary>ポップアップウィンドウの表示/非表示</summary>
-        private bool activePopUpWindowFlag = false;
         /// <summary>スキル説明テキストの表示/非表示</summary>
         private int activeSkillDescriptionText;
+
         private bool setActiveSkillDescriptionText = false;
+        /// <summary>ポップアップウィンドウの表示/非表示</summary>
+        private bool activePopUpWindowFlag = false;
         /// <summary>確定/中止ボタンの表示/非表示</summary>
-        private bool changedStatusFlag = false;
-
+        private bool changedStatus = false;
         /// <summary>シーンがロードされたか</summary>
-        private bool sceneLoaded = false;
-        Progress progress;
+        private bool isSceneLoaded = false;
 
+        /// <summary>アニメーションステート名</summary>
         public enum PopUpAnimation
         {
             Close_PopUpWindow
@@ -117,9 +122,43 @@ namespace DemonicCity.StrengthenScene
             window.SetActive(false);
         }
 
+        //public enum ButtonName
+        //{
+        //    BackToHomeSceneButton,
+        //    ShowSkillButton,
+        //    BackToAllocationWindow,
+        //    DevilsFist,
+        //    HighConcentrationMagicalAbsorption,
+        //    SelfRegeneration,
+        //    ExplosiveFlamePillar,
+        //    CrimsonBarrier,
+        //    DevilsFistInfernoType,
+        //    BraveHeartsIncarnation,
+        //    GreatCrimsonBarrier,
+        //    InfernosFist,
+        //    SatansCell,
+        //    AmaterasuIncanation,
+        //    AmaterasuInferno,
+        //    AmaterasuFlameWall,
+        //    AllSkill,
+        //    SuzakuFlameFist,
+        //    DevilsEye,
+
+        //    AddCharmButton,
+        //    AddDignityButton,
+        //    AddMuscularStrengthButton,
+        //    AddSenseButton,
+        //    AddDurabilityButton,
+        //    AddKnowledgeButton,
+
+        //    ConfirmButton,
+        //    ResetButton,
+        //    YesConfirm,
+        //    No,
+        //}
+
         private void Start()
         {
-            GetGameObjects();
             ResetStatus();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
@@ -141,12 +180,6 @@ namespace DemonicCity.StrengthenScene
                                 if (!activePopUpWindowFlag)
                                 {
                                     skillListWindow.SetActive(true);
-
-                                    skillDescriptionTexts = GameObject.FindGameObjectsWithTag("SkillDescriptionText");
-                                    for (int i = 0; i < skillDescriptionTexts.Length; i++)
-                                    {
-                                        skillDescriptionTexts[i].SetActive(false);
-                                    }
                                     activePopUpWindowFlag = true;
                                 }
                                 break;
@@ -226,7 +259,6 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             //ここまで各スキル名の処理
-
                             case "AddCharmButton":
                                 ChangeUniqueStatus(ref charm, ref addCharm, ref addUniqueStatusTexts[0]);
                                 break;
@@ -292,14 +324,13 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
-
             if (!progress.TutorialCheck(Progress.TutorialFlag.Strengthen))
             {
                 popupSystem.Popup();
                 progress.SetTutorialProgress(Progress.TutorialFlag.Strengthen, true);
             }
 
-            if (changedStatusFlag)
+            if (changedStatus)
             {
                 confirmAndResetButtons.SetActive(true);
             }
@@ -307,7 +338,6 @@ namespace DemonicCity.StrengthenScene
             {
                 StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
             }
-
         }
 
         /// <summary>スキルの説明テキストを表示/非表示</summary>
@@ -331,10 +361,12 @@ namespace DemonicCity.StrengthenScene
         /// <param name="addStatus">ステータスの増減判定</param>
         private void ChangeUniqueStatus(ref int uniqueStatus, ref int addUniqueStatus, ref TextMeshProUGUI uniqueStatusText)
         {
-            if (uniqueStatus + addUniqueStatus < 200)
+            if (uniqueStatus + addUniqueStatus < maxUniquePoint)
             {
                 addUniqueStatus += AddStatusPoint(addUniqueStatus);
-                if (statusPoint >= 0)
+                MystatusPointText.text = MyStatusPoint.ToString();
+
+                if (MyStatusPoint >= 0)
                 {
                     uniqueStatusText.text = "+" + addUniqueStatus.ToString();
                     //固有ステータスを基礎ステータスに変換
@@ -346,7 +378,7 @@ namespace DemonicCity.StrengthenScene
                     updatedBasicStatusTexts[1].text = updatedAttack.ToString();
                     updatedBasicStatusTexts[2].text = updatedDefence.ToString();
 
-                    changedStatusFlag = true;
+                    changedStatus = true;
                 }
             }
         }
@@ -372,7 +404,7 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            statusPoint = magia.AllocationPoint;
+            MyStatusPoint = magia.AllocationPoint;
             // statusPoint = 300;//debug
 
             updatedBasicStatusTexts[0].text = currentHp.ToString();
@@ -380,24 +412,29 @@ namespace DemonicCity.StrengthenScene
             updatedBasicStatusTexts[2].text = currentDefence.ToString();
 
             UpdateText();
-            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            for (int index = 0; index < updatedBasicStatusTexts.Length; index++)
             {
-                updatedBasicStatusTexts[i].text = "";
+                updatedBasicStatusTexts[index].text = "";
             }
 
-            for (int i = 0; i < addUniqueStatusTexts.Length; i++)
+            for (int index = 0; index < addUniqueStatusTexts.Length; index++)
             {
-                addUniqueStatusTexts[i].text = "";
+                addUniqueStatusTexts[index].text = "";
             }
 
-            if (!sceneLoaded)
+            if (!isSceneLoaded)
             {
+                for (int i = 0; i < skillDescriptionTexts.Length; i++)
+                {
+                    skillDescriptionTexts[i].SetActive(false);
+                }
+
                 skillListWindow.SetActive(false);
                 resetMessageWindow.SetActive(false);
                 confirmMessageWindow.SetActive(false);
                 confirmAndResetButtons.SetActive(false);
 
-                sceneLoaded = true;
+                isSceneLoaded = true;
             }
 
             StartCoroutine(ClosePopUpAnimation(skillListWindow));
@@ -406,7 +443,7 @@ namespace DemonicCity.StrengthenScene
             StartCoroutine(ClosePopUpAnimation(confirmAndResetButtons));
 
             activePopUpWindowFlag = false;
-            changedStatusFlag = false;
+            changedStatus = false;
         }
 
         /// <summary>変更したステータスを確定する</summary>
@@ -439,39 +476,38 @@ namespace DemonicCity.StrengthenScene
             magia.Stats.Sense = sense;
             magia.Stats.Durability = durability;
             magia.Stats.Knowledge = knowledge;
-            magia.AllocationPoint = statusPoint;
+            magia.AllocationPoint = MyStatusPoint;
 
             SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
-            for (int i = 0; i < updatedBasicStatusTexts.Length; i++)
+            for (int index = 0; index < updatedBasicStatusTexts.Length; index++)
             {
-                updatedBasicStatusTexts[i].text = "";
+                updatedBasicStatusTexts[index].text = "";
             }
 
-            for (int i = 0; i < addUniqueStatusTexts.Length; i++)
+            for (int index = 0; index < addUniqueStatusTexts.Length; index++)
             {
-                addUniqueStatusTexts[i].text = "";
+                addUniqueStatusTexts[index].text = "";
             }
             StartCoroutine(ClosePopUpAnimation(confirmMessageWindow));
             activePopUpWindowFlag = false;
-            changedStatusFlag = false;
+            changedStatus = false;
         }
 
         /// <summary>割り振りポイント-1、固有ステータスポイント+1</summary>
         /// <param name="uniqueStatus">固有ステータス</param>
         private int AddStatusPoint(int uniqueStatus)
         {
-            if (statusPoint > 0)
+            if (MyStatusPoint > 0)
             {
-                statusPoint -= 1;
-                statusPointText.text = statusPoint.ToString();
+                MyStatusPoint -= 1;
                 uniqueStatus = 1;
             }
             else
             {
                 uniqueStatus = 0;
-                statusPoint = 0;
+                MyStatusPoint = 0;
             }
             return uniqueStatus;
         }
@@ -497,37 +533,7 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[4].text = addDurability.ToString();
             addUniqueStatusTexts[5].text = addKnowledge.ToString();
 
-            statusPointText.text = statusPoint.ToString();
-        }
-
-        /// <summary>シーン上にあるゲームオブジェクトを取得</summary>
-        private void GetGameObjects()
-        {
-            currentBasicStatusTexts[0] = GameObject.Find("CurrentHpText").GetComponent<TextMeshProUGUI>();
-            currentBasicStatusTexts[1] = GameObject.Find("CurrentAttackText").GetComponent<TextMeshProUGUI>();
-            currentBasicStatusTexts[2] = GameObject.Find("CurrentDefenceText").GetComponent<TextMeshProUGUI>();
-
-            updatedBasicStatusTexts[0] = GameObject.Find("UpdatedHpText").GetComponent<TextMeshProUGUI>();
-            updatedBasicStatusTexts[1] = GameObject.Find("UpdatedAttackText").GetComponent<TextMeshProUGUI>();
-            updatedBasicStatusTexts[2] = GameObject.Find("UpdatedDefenceText").GetComponent<TextMeshProUGUI>();
-
-            currentUniqueStatusTexts[0] = GameObject.Find("CurrentCharmText").GetComponent<TextMeshProUGUI>();
-            currentUniqueStatusTexts[1] = GameObject.Find("CurrentDignityText").GetComponent<TextMeshProUGUI>();
-            currentUniqueStatusTexts[2] = GameObject.Find("CurrentMuscularStrengthText").GetComponent<TextMeshProUGUI>();
-            currentUniqueStatusTexts[3] = GameObject.Find("CurrentSenseText").GetComponent<TextMeshProUGUI>();
-            currentUniqueStatusTexts[4] = GameObject.Find("CurrentDurabilityText").GetComponent<TextMeshProUGUI>();
-            currentUniqueStatusTexts[5] = GameObject.Find("CurrentKnowledgeText").GetComponent<TextMeshProUGUI>();
-
-
-            addUniqueStatusTexts[0] = GameObject.Find("AddCharmText").GetComponent<TextMeshProUGUI>();
-            addUniqueStatusTexts[1] = GameObject.Find("AddDignityText").GetComponent<TextMeshProUGUI>();
-            addUniqueStatusTexts[2] = GameObject.Find("AddMuscularStrengthText").GetComponent<TextMeshProUGUI>();
-            addUniqueStatusTexts[3] = GameObject.Find("AddSenseText").GetComponent<TextMeshProUGUI>();
-            addUniqueStatusTexts[4] = GameObject.Find("AddDurabilityText").GetComponent<TextMeshProUGUI>();
-            addUniqueStatusTexts[5] = GameObject.Find("AddKnowledgeText").GetComponent<TextMeshProUGUI>();
-
-            statusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
-
+            MystatusPointText.text = MyStatusPoint.ToString();
         }
     }
 }
