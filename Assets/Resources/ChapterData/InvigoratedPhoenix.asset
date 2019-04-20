@@ -11,19 +11,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2e97f82d9d4148428c590a122da32f0, type: 3}
   m_Name: InvigoratedPhoenix
   m_EditorClassIdentifier: 
-  enemiesIds: 000000000200000005000000
+  enemiesIds: 110000001d00000023000000
   storyProgress: 2048
   chapterTitle: "\u507D\u308A\u306E\u4EEE\u9762"
   isBattle: 1
   isStory: 1
   BackGround: {fileID: 0}
   BattleStage:
-  - {fileID: 21300000, guid: 608d251ce1f080a4e8b2492ee8a835d8, type: 3}
-  - {fileID: 21300000, guid: 1c172f3ee4d64eb4c97641f5c6a153a7, type: 3}
-  - {fileID: 21300000, guid: 0211ef43a62ac3442a22f14e3cf6ecbb, type: 3}
+  - {fileID: 21300000, guid: 775b6470d1a458741800605469e7afab, type: 3}
+  - {fileID: 21300000, guid: 8e56e02b1b44aad4b86819a15736deb1, type: 3}
+  - {fileID: 21300000, guid: af80f5a79bb3d15438ed1f09e318ceab, type: 3}
   levelRange: 640000006d000000
-  StandardBgm: {fileID: 8300000, guid: 199219655fef6ab449d41c24d36dd905, type: 3}
-  BossBgm: {fileID: 8300000, guid: 499f0d32b4cc87a40b05e458f4070e9b, type: 3}
+  StandardBgm: {fileID: 8300000, guid: be73d71fb47ed0e42b8168ccd0dc7d37, type: 3}
+  BossBgm: {fileID: 8300000, guid: 2f8717bf9405c6f47aa5ff251ddec8f7, type: 3}
   prologue: {fileID: 11400000, guid: e62b34b93490c9f4f83c8d358f27c074, type: 2}
   epilogue: {fileID: 11400000, guid: 5e6cef4195c83bb40baa053c37186b91, type: 2}
   test: {fileID: 11400000, guid: 709983b5b21e1ca4ea8bde3d85ba704a, type: 2}
