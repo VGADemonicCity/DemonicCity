@@ -417,7 +417,7 @@ namespace DemonicCity.ResultScene
         private void ReflectionBeforeStatus()
         {
             beforeStatus = magia.Stats;
-
+            Debug.Log("Called");
             currentLevelText.text = beforeStatus.Level.ToString();
             beforeHpText.GetComponent<TextMeshProUGUI>().text = beforeStatus.HitPoint.ToString();
             beforeAttackText.GetComponent<TextMeshProUGUI>().text = beforeStatus.Attack.ToString();
