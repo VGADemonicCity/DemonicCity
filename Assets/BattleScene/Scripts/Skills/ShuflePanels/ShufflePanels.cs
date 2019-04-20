@@ -118,7 +118,7 @@ namespace DemonicCity.BattleScene
         void Activate()
         {
             skillAnim.SetTrigger("Activate");
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
         }
 
         /// <summary>
@@ -126,7 +126,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Cancel()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
         }
 
         public void OnCompleteConditions()
@@ -196,7 +196,7 @@ namespace DemonicCity.BattleScene
 
             m_sensor.enabled = false; // colliderをdisableにする
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousState); // stateを元に戻す       
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause); // stateを元に戻す       
         }
 
         /// <summary>
