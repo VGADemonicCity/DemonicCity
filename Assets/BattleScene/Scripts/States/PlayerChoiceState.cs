@@ -15,6 +15,7 @@ namespace DemonicCity.BattleScene
         readonly List<Subject> targetTutorialsList = new List<Subject>
         {
             Subject.AboutPanels,
+            Subject.AboutPanelFrame,
             Subject.AboutAttack,
             Subject.AboutPause,
             Subject.CompletePanels,
