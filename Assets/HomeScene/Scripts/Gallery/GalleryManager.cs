@@ -10,9 +10,9 @@ namespace DemonicCity.HomeScene
     {
         public enum ItemTag
         {
-            TestItem,
+            //TestItem,
 
-            MagiaHome,
+            MagiaHome=1,
             Getia,
             Demons,
             GehennaClown,
@@ -21,9 +21,9 @@ namespace DemonicCity.HomeScene
             TransPort,
 
 
-            TestPerson,
+            //TestPerson,
 
-            Magia,
+            Magia=9,
             Ixmagina,
             Phoenix,
             InPhoenix,

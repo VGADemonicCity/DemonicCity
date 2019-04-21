@@ -21,19 +21,14 @@ namespace DemonicCity
         {
             get
             {
-                if (SceneManager.GetActiveScene().name != "Battle")
-                {
-                    return Instance.m_passiveSkill;
-                }
-
-                if (!BattleDebugger.Instance.LoadStatusFromInspector)
-                {
-                    return Instance.m_passiveSkill;
-                }
                 return m_passiveSkill;
             }
-            set { m_passiveSkill = value; }
+            set
+            {
+                m_passiveSkill = value;
+            }
         }
+
         /// <summary>初期レベルを1としたときの最大レベルを返す</summary>
         public int MaxLevel
         {

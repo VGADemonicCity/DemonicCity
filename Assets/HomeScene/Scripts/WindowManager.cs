@@ -16,6 +16,7 @@ namespace DemonicCity.HomeScene
         public TouchGestureDetector touchGestureDetector;
         SceneFader sceneFader;
         //Color windowColor = new Color(1, 1, 1, 0.9f);
+        [SerializeField] TutorialsPopper tutorial;
         [SerializeField] GameObject[] parents = new GameObject[(int)Window.Last];
         [SerializeField] GameObject[] windowObjects = new GameObject[(int)Window.Last];
         GameObject[] windowInstance = new GameObject[(int)Window.Last];
@@ -33,6 +34,14 @@ namespace DemonicCity.HomeScene
         Window touchedWindow = Window.Last;
         void Start()
         {
+            ///チュートリアル終了か同課の確認
+            Progress progress = Progress.Instance;
+            if (progress.TutorialCheck(Progress.TutorialFlag.Home))
+            {
+                tutorial.Popup();
+                progress.SetTutorialProgress(Progress.TutorialFlag.Home, true);
+            }
+
             //Debug.Log("Start");
 
             //touchGestureDetector = GetComponent<TouchGestureDetector>();

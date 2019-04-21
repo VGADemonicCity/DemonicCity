@@ -12,7 +12,7 @@ namespace DemonicCity
             GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
                 Debug.Log("aaa");
-                SoundManager.Instance.PlayWithFade(SoundAsset.SETag.PositiveButton);
+                SoundManager.Instance.PlayWithFade(SoundAsset.SETag.NegativeButton);
             });
             //TouchGestureDetector.Instance.onGestureDetected.AddListener((gesture, touchInfo) =>
             //{

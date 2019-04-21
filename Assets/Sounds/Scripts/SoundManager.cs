@@ -96,7 +96,7 @@ namespace DemonicCity
             }
             else if (scene.name == battle)
             {
-                Debug.Log("Battle");
+                Debug.LogWarning("Battle");
                 StopWithFade(SoundTag.BGM);
             }
             else
@@ -175,47 +175,65 @@ namespace DemonicCity
             }
             return true;
         }
-        public void SetVol(string key, float vol)
-        {
-            //float dec = vol;
-            //float dec = 20.0f * Mathf.Log10(vol);
-            //if (float.IsNegativeInfinity(dec))
-            //{
-            //    dec = -96f;
-            //}
-            mixer.SetFloat(key, vol);
-        }
+        //public void SetVol(string key, float vol)
+        //{
+        //    //float dec = vol;
+        //    //float dec = 20.0f * Mathf.Log10(vol);
+        //    //if (float.IsNegativeInfinity(dec))
+        //    //{
+        //    //    dec = -96f;
+        //    //}
+        //    if (key == se)
+        //    {
+        //        mixer.SetFloat(key, SeVol);
+        //    }
+        //    else
+        //    {
+        //        mixer.SetFloat(key, vol);
+        //    }
+        //}
         float muteVol = -80f;
         float defVol = 0f;
-        public void SwitchVol(string key, bool isOn)
+        float SeVol = -15f;
+        public void SwitchVol(SoundTag tag, bool isOn)
         {
+            string key = keys[tag];
             if (isOn)
             {
-                mixer.SetFloat(key, defVol);
+                if (tag == SoundTag.SE)
+                {
+                    mixer.SetFloat(key, SeVol);
+                }
+                else
+                {
+                    mixer.SetFloat(key, defVol);
+                }
             }
             else
             {
                 mixer.SetFloat(key, muteVol);
             }
         }
-        public void SwitchVol(SoundTag tag, bool isOn)
-        {
-            if (isOn)
-            {
-                mixer.SetFloat(keys[tag], defVol);
-            }
-            else
-            {
-                mixer.SetFloat(keys[tag], muteVol);
-            }
-        }
+        //public void SwitchVol(SoundTag tag, bool isOn)
+        //{
+        //    if (isOn)
+        //    {
+        //        mixer.SetFloat(keys[tag], defVol);
+        //    }
+        //    else
+        //    {
+        //        mixer.SetFloat(keys[tag], muteVol);
+        //    }
+        //}
 
 
-        public readonly string master = "MasterVol";
-        public readonly string bgm = "BGMVol";
-        public readonly string voice = "VoiceVol";
-        public readonly string se = "SEVol";
+        //public readonly string master = "MasterVol";
+        //public readonly string bgm = "BGMVol";
+        //public readonly string voice = "VoiceVol";
+        //public readonly string se = "SEVol";
         public readonly string volKey = "volKey";
+
+
         Dictionary<SoundTag, string> keys = new Dictionary<SoundTag, string>()
         {
             {SoundTag.BGM,"BGMVol" },
@@ -238,7 +256,7 @@ namespace DemonicCity
 
         public void SaveVol()
         {
-            string s = JsonUtility.ToJson(new Vols(GetVol(master), GetVol(bgm), GetVol(se), GetVol(voice)));
+            string s = JsonUtility.ToJson(new Vols(GetVol(keys[SoundTag.Master]), GetVol(keys[SoundTag.BGM]), GetVol(keys[SoundTag.SE]), GetVol(keys[SoundTag.Voice])));
             PlayerPrefs.SetString(volKey, s);
         }
 
@@ -253,10 +271,10 @@ namespace DemonicCity
             //SetVol(bgm, vs.bgm);
             //SetVol(volKey, vs.voice);
             //SetVol(se, vs.se);            
-            SwitchVol(master, vs.vol[(int)SoundTag.Master]);
-            SwitchVol(bgm, vs.vol[(int)SoundTag.BGM]);
-            SwitchVol(se, vs.vol[(int)SoundTag.SE]);
-            SwitchVol(voice, vs.vol[(int)SoundTag.Voice]);
+            SwitchVol(SoundTag.Master, vs.vol[(int)SoundTag.Master]);
+            SwitchVol(SoundTag.BGM, vs.vol[(int)SoundTag.BGM]);
+            SwitchVol(SoundTag.SE, vs.vol[(int)SoundTag.SE]);
+            SwitchVol(SoundTag.Voice, vs.vol[(int)SoundTag.Voice]);
         }
 
         [System.Serializable]
@@ -377,9 +395,9 @@ namespace DemonicCity
         /// </summary>
         void StopWithFade()
         {
-            BgmSources.ForEach(x => x.StopWithFadeOut());
-            SESources.ForEach(x => x.StopWithFadeOut());
-            VoiceSources.ForEach(x => x.StopWithFadeOut());
+            BgmSources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
+            SESources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
+            VoiceSources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
         }
 
         /// <summary>
@@ -391,13 +409,13 @@ namespace DemonicCity
             switch (tag)
             {
                 case SoundTag.BGM:
-                    BgmSources.ForEach(x => x.StopWithFadeOut());
+                    BgmSources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
                     break;
                 case SoundTag.SE:
-                    SESources.ForEach(x => x.StopWithFadeOut());
+                    SESources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
                     break;
                 case SoundTag.Voice:
-                    VoiceSources.ForEach(x => x.StopWithFadeOut());
+                    VoiceSources.ForEach(x => StartCoroutine(x.StopWithFadeOut()));
                     break;
                 default:
                     break;
