@@ -59,6 +59,10 @@ namespace DemonicCity.StoryScene
         }
         void Start()
         {
+            if (progress.ThisQuestProgress == Progress.QuestProgress.Battle)
+            {
+                progress.ThisQuestProgress = Progress.QuestProgress.Epilogue;
+            }
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
                 if (gesture == TouchGestureDetector.Gesture.Click)
