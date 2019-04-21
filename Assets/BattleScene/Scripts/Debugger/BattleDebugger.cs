@@ -62,11 +62,13 @@ namespace DemonicCity.BattleScene.Debugger
         PanelManager m_panelManager;
         /// <summary></summary>
         BattleManager m_battleManager;
+        Magia magia;
 
         private void Awake()
         {
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+            magia = Magia.Instance;
 
             // パネルを開く枚数の初期値を指定
             OpenPanelQuantity = 24;
@@ -194,7 +196,6 @@ namespace DemonicCity.BattleScene.Debugger
         /// <param name="passiveSkills"></param>
         public void SetPassiveSkillFromLevel(List<Skill.PassiveSkill> passiveSkills)
         {
-            var magia = Magia.Instance;
             magia.MyPassiveSkill = Magia.PassiveSkill.Invalid;
             passiveSkills.ForEach(skill =>
             {
@@ -207,11 +208,12 @@ namespace DemonicCity.BattleScene.Debugger
 
         List<Magia.PassiveSkill> DetectAvailableSkills()
         {
+            magia = Magia.Instance;
             var result = new List<Magia.PassiveSkill>();
             var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>().ToList();
             skills.ForEach(skill =>
             {
-                if (skill.GetPassiveSkill == (Magia.Instance.MyPassiveSkill & skill.GetPassiveSkill))
+                if (skill.GetPassiveSkill == (magia.MyPassiveSkill & skill.GetPassiveSkill))
                 {
                     result.Add(skill.GetPassiveSkill);
                 }
