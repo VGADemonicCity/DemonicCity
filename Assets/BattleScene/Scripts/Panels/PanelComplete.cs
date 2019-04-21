@@ -44,7 +44,7 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         public IEnumerator PlayPanelCompleteSkillAnimation()
         {
-            if (!isSkipEffect)
+            if (!Debugger.BattleDebugger.Instance.EffectSkip)
             {
                 yield return new WaitForSeconds(CuttingIn());
                 yield return new WaitForSeconds(PlaySkillAnimation());
