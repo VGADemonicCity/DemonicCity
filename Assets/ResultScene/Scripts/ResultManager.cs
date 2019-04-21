@@ -173,6 +173,8 @@ namespace DemonicCity.ResultScene
                         }
                         else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
                         {
+                            progress.QuestClear();
+                            SavableSingletonBase<Progress>.Instance.Save();
                             SavableSingletonBase<Magia>.Instance.Save();
                             if (ChapterManager.Instance.GetChapter().isStory)
                             {
@@ -186,6 +188,8 @@ namespace DemonicCity.ResultScene
                     }
                     else
                     {
+                        progress.QuestClear();
+                        SavableSingletonBase<Progress>.Instance.Save();
                         SavableSingletonBase<Magia>.Instance.Save();
 
                         if (ChapterManager.Instance.GetChapter().isStory)
