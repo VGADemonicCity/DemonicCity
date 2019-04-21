@@ -32,7 +32,7 @@ namespace DemonicCity
 
         void AdjustmentRatio()
         {
-            var camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Camera>();
+            var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
             // 理想の画面の比率
             float targetRatio = widthRatio / heightRatio;

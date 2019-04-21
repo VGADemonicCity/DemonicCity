@@ -463,86 +463,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 114542386805354352, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: uniqueSkillAnimator
-      value: 
-      objectReference: {fileID: 1583049631}
-    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: resultWindow
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_enemiesMover
-      value: 
-      objectReference: {fileID: 101201305}
-    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: backgroundCtrl
-      value: 
-      objectReference: {fileID: 251476821}
-    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: waveTitle
-      value: 
-      objectReference: {fileID: 853279310}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_enemiesMover
-      value: 
-      objectReference: {fileID: 101201305}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: waveTitle
-      value: 
-      objectReference: {fileID: 853279310}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_panelFrame
-      value: 
-      objectReference: {fileID: 37631616}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_shufflePanels
-      value: 
-      objectReference: {fileID: 849036633}
-    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: buffAnimator
-      value: 
-      objectReference: {fileID: 1547031150}
-    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 2074404320}
-    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: magiaAnimator
-      value: 
-      objectReference: {fileID: 878212109}
-    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: buffTextBox
-      value: 
-      objectReference: {fileID: 1069575819}
-    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_CoordinateForSpawn
-      value: 
-      objectReference: {fileID: 101201306}
-    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 2074404320}
-    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_uniqueSkillGauge
-      value: 
-      objectReference: {fileID: 2074404321}
     - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_uniqueSkillGauge
@@ -558,39 +478,86 @@ Prefab:
       propertyPath: destructionCounterBox
       value: 
       objectReference: {fileID: 695645745}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: additionalStatus.Charm
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_uniqueSkillGauge
+      value: 
+      objectReference: {fileID: 2074404321}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: targetStory
-      value: 2048
-      objectReference: {fileID: 0}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_CoordinateForSpawn
+      value: 
+      objectReference: {fileID: 101201306}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: magiaAnimator
+      value: 
+      objectReference: {fileID: 878212109}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: buffTextBox
+      value: 
+      objectReference: {fileID: 1069575819}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 2074404320}
+    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: buffAnimator
+      value: 
+      objectReference: {fileID: 1547031150}
     - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_waitTime
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_panelFrame
+      value: 
+      objectReference: {fileID: 37631616}
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: useTargetStory
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+      propertyPath: m_shufflePanels
+      value: 
+      objectReference: {fileID: 849036633}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: LoadStatusFromInspector
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4887146168630968, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4410256117347438, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
+      propertyPath: m_enemiesMover
+      value: 
+      objectReference: {fileID: 101201305}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: waveTitle
+      value: 
+      objectReference: {fileID: 853279310}
+    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_enemiesMover
+      value: 
+      objectReference: {fileID: 101201305}
+    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: backgroundCtrl
+      value: 
+      objectReference: {fileID: 251476821}
+    - target: {fileID: 114947920586921256, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: waveTitle
+      value: 
+      objectReference: {fileID: 853279310}
+    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: resultWindow
+      value: 
+      objectReference: {fileID: 455276447}
+    - target: {fileID: 114542386805354352, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: uniqueSkillAnimator
+      value: 
+      objectReference: {fileID: 1583049631}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
@@ -1293,6 +1260,11 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 902876c534cac644cbf5c623da639ede, type: 2}
   m_IsPrefabAsset: 0
+--- !u!1 &455276447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1429422743416864, guid: 902876c534cac644cbf5c623da639ede,
+    type: 2}
+  m_PrefabInternal: {fileID: 369965004}
 --- !u!1001 &462029565
 Prefab:
   m_ObjectHideFlags: 0
