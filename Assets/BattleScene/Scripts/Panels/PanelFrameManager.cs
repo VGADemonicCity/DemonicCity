@@ -19,11 +19,21 @@ namespace DemonicCity.BattleScene
         Left = 4,
     }
 
+
     /// <summary>
     /// PanelFrameManager
     /// </summary>
     public class PanelFrameManager : MonoSingleton<PanelFrameManager>
     {
+        /// <summary>PanelFrameがどこにいるかの状態を取得する</summary>
+        public FramePosition GetPanelFramePosition
+        {
+            get
+            {
+                return m_framePosition;
+            }
+        }
+
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float m_waitTime = 1f;
         /// <summary>フレームの位置を表すenum</summary>
@@ -110,7 +120,7 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         public IEnumerator MovingFrame(FramePosition framePosition)
         {
-            if(isMoving)
+            if (isMoving)
             {
                 yield break;
             }
