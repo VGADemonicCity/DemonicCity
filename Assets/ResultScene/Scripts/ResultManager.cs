@@ -118,6 +118,10 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
+           
+            //クリアフラグを立てる
+            progress.QuestClear();
+            SavableSingletonBase<Progress>.Instance.Save();
 
             NotActiveObjects();
 
@@ -133,6 +137,9 @@ namespace DemonicCity.ResultScene
 
                 isCalculation = false;
             }
+            
+            //ステータスをセーブ
+            SavableSingletonBase<Magia>.Instance.Save();
 
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -173,25 +180,18 @@ namespace DemonicCity.ResultScene
                         }
                         else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
                         {
-                            progress.QuestClear();
-                            SavableSingletonBase<Progress>.Instance.Save();
-                            SavableSingletonBase<Magia>.Instance.Save();
-                            if (ChapterManager.Instance.GetChapter().isStory)
+                            if (ChapterManager.Instance.GetChapter().isStory)//会話シーンがあれば
                             {
-                                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
+                                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);//会話シーンへ
                             }
                             else
                             {
-                                Instantiate(toNextWindow);
+                                Instantiate(toNextWindow);//ホーム画面か次の章へ
                             }
                         }
                     }
                     else
                     {
-                        progress.QuestClear();
-                        SavableSingletonBase<Progress>.Instance.Save();
-                        SavableSingletonBase<Magia>.Instance.Save();
-
                         if (ChapterManager.Instance.GetChapter().isStory)
                         {
                             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
