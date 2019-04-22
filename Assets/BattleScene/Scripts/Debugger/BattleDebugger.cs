@@ -96,7 +96,7 @@ namespace DemonicCity.BattleScene.Debugger
                     return;
                 }
 
-                magiaStatus = magia.Stats;
+                magiaStatus = m_battleManager.m_MagiaStats;
                 currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
                 magiaAvailableSkills = DetectAvailableSkills();
 
