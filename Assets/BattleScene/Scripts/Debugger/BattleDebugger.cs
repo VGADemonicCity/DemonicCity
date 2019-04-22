@@ -14,14 +14,14 @@ namespace DemonicCity.BattleScene.Debugger
         public bool DisplayPanels { get { return DebuggingFlag.DisplayPanels == (Flag & DebuggingFlag.DisplayPanels); } }
         /// <summary></summary>
         public bool EffectSkip { get { return DebuggingFlag.SkipEffect == (Flag & DebuggingFlag.SkipEffect); } }
-        /// <summary>パネルを開く枚数</summary>
-        public int OpenPanelQuantity { get; set; }
-        /// <summary>Debug用フラグ</summary>
-        public DebuggingFlag Flag { get; set; }
         /// <summary>Inspectorで指定したストーリーを呼び出すかどうか</summary>
         public bool UseTargetStory { get { return useTargetStory; } set { useTargetStory = value; } }
         /// <summary>指定された任意のストーリー</summary>
         public Progress.StoryProgress TargetStory { get { return targetStory; } set { targetStory = value; } }
+        /// <summary>パネルを開く枚数</summary>
+        public int OpenPanelQuantity { get; set; }
+        /// <summary>Debug用フラグ</summary>
+        public DebuggingFlag Flag { get; set; }
 
 
 
@@ -96,7 +96,7 @@ namespace DemonicCity.BattleScene.Debugger
                     return;
                 }
 
-                magiaStatus = m_battleManager.m_MagiaStats;
+                magiaStatus = magia.Stats;
                 currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
                 magiaAvailableSkills = DetectAvailableSkills();
 
@@ -208,7 +208,6 @@ namespace DemonicCity.BattleScene.Debugger
 
         List<Magia.PassiveSkill> DetectAvailableSkills()
         {
-            magia = Magia.Instance;
             var result = new List<Magia.PassiveSkill>();
             var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>().ToList();
             skills.ForEach(skill =>
