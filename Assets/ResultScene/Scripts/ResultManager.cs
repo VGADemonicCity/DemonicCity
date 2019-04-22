@@ -99,7 +99,7 @@ namespace DemonicCity.ResultScene
         int totalExperience = 0;
         int myExperience = 0;
         [SerializeField] private GameObject toNextWindow = null;
-
+        [SerializeField] private Transform backGround = null;
         [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private bool isCalculation = true;
@@ -145,10 +145,11 @@ namespace DemonicCity.ResultScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
-                    tapCount++;
 
                     if (isCalculation)
                     {
+                          tapCount++;
+
                         if (tapCount == 1)
                         {
                             isAnimation = true;
@@ -172,13 +173,11 @@ namespace DemonicCity.ResultScene
                             {
                                 magia.Stats.Level = maxLevel;
                                 experienceGauge.value = experienceGauge.maxValue;
-                                needDestructionCountText.text = 0.ToString();
-                                //  levelUpImage.SetActive(false);
+                                needDestructionCountText.text = "0";
                                 StartCoroutine(ClosePopUpAnimation(levelUpImage));
-                                //  maxLevelImage.SetActive(true);
                             }
                         }
-                        else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
+                        else if (tapCount == 4 || tapCount == 3 || tapCount == 2)
                         {
                             if (ChapterManager.Instance.GetChapter().isStory)//会話シーンがあれば
                             {
@@ -186,7 +185,7 @@ namespace DemonicCity.ResultScene
                             }
                             else
                             {
-                                Instantiate(toNextWindow);//ホーム画面か次の章へ
+                                Instantiate(toNextWindow,backGround);//ホーム画面か次の章へ
                             }
                         }
                     }
@@ -198,7 +197,7 @@ namespace DemonicCity.ResultScene
                         }
                         else
                         {
-                            Instantiate(toNextWindow);
+                            Instantiate(toNextWindow,backGround);
                         }
                     }
                 }
