@@ -103,7 +103,6 @@ namespace DemonicCity.ResultScene
         [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private bool isCalculation = true;
-        [SerializeField] private Transform backGround = null;
 
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
@@ -119,7 +118,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
-
+           
             //クリアフラグを立てる
             progress.QuestClear();
             SavableSingletonBase<Progress>.Instance.Save();
@@ -138,7 +137,7 @@ namespace DemonicCity.ResultScene
 
                 isCalculation = false;
             }
-
+            
             //ステータスをセーブ
             SavableSingletonBase<Magia>.Instance.Save();
 
@@ -146,11 +145,10 @@ namespace DemonicCity.ResultScene
             {
                 if (gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
+                    tapCount++;
 
                     if (isCalculation)
                     {
-                        tapCount++;
-
                         if (tapCount == 1)
                         {
                             isAnimation = true;
@@ -175,18 +173,20 @@ namespace DemonicCity.ResultScene
                                 magia.Stats.Level = maxLevel;
                                 experienceGauge.value = experienceGauge.maxValue;
                                 needDestructionCountText.text = 0.ToString();
+                                //  levelUpImage.SetActive(false);
                                 StartCoroutine(ClosePopUpAnimation(levelUpImage));
+                                //  maxLevelImage.SetActive(true);
                             }
                         }
                         else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
                         {
-                            if (ChapterManager.Instance.GetChapter().isStory)//バトル後の会話シーンがあれば
+                            if (ChapterManager.Instance.GetChapter().isStory)//会話シーンがあれば
                             {
                                 SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);//会話シーンへ
                             }
                             else
                             {
-                                Instantiate(toNextWindow, backGround);//ホーム画面か次の章へ
+                                Instantiate(toNextWindow);//ホーム画面か次の章へ
                             }
                         }
                     }
@@ -198,7 +198,7 @@ namespace DemonicCity.ResultScene
                         }
                         else
                         {
-                            Instantiate(toNextWindow, backGround);
+                            Instantiate(toNextWindow);
                         }
                     }
                 }
