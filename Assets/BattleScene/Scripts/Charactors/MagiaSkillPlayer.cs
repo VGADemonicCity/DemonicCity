@@ -11,6 +11,7 @@ namespace DemonicCity.BattleScene
         AudioSource audioSource;
         // Scriptable object
         [SerializeField] List<AudioClip> magiaSkillClips;
+        [SerializeField] PlayerAttackState playerAttackState;
 
         private void Awake()
         {
@@ -23,6 +24,16 @@ namespace DemonicCity.BattleScene
             var targetClip = magiaSkillClips.Find(clip => clip.name == skill.ToString());
             // skillのenumに応じてclipを切り替え,再生する
             audioSource.PlayOneShot(targetClip);
+        }
+
+        public void PlaySkillVoice()
+        {
+            playerAttackState.PlaySkillVoice();
+        }
+
+        public void StopVoice()
+        {
+            playerAttackState.StopVoice();
         }
     }
 }
