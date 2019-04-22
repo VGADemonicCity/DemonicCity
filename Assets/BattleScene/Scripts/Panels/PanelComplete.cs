@@ -11,6 +11,10 @@ namespace DemonicCity.BattleScene
     {
         [SerializeField] AnimationClip cutIn;
         [SerializeField] AnimationClip skill;
+        [SerializeField] AudioClip cutinVoice;
+        [SerializeField] AudioClip skillActivatingVoice;
+
+        SoundManager soundManager;
 
         Animator animator;
         bool isSkipEffect;
