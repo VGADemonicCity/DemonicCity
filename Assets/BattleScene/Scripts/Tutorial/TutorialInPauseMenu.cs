@@ -95,14 +95,6 @@ namespace DemonicCity.BattleScene
         /// <summary>ダブルタップ判定タイムリミット</summary>
         [SerializeField] float countTimeLimit;
 
-        int myIndex = 0;
-        float spacing = 0f;
-        Vector3 vec = new Vector3();
-        int targetIndex;
-        Image currentImage;
-        int doubleTapCounter;
-        float startTime;
-        bool isFullScreen;
 
         /// <summary>現在タッチしている対象</summary>
         TouchGestureDetector.TouchInfo touchInfoOnTouchBegin;
@@ -110,6 +102,17 @@ namespace DemonicCity.BattleScene
         TutorialItems.TutorialItem currentItem;
         /// <summary>生成されたチュートリアル画像のリスト</summary>
         List<Image> popupedTutorialImages = new List<Image>();
+        Vector3 vec = new Vector3();
+        Image currentImage;
+
+        int myIndex = 0;
+        float spacing = 0f;
+        int targetIndex;
+        int doubleTapCounter;
+        float startTime;
+        bool isFullScreen;
+        bool isPlayingTutorialAnimation;
+
 
 
 
@@ -180,8 +183,6 @@ namespace DemonicCity.BattleScene
                     default:
                         break;
                 }
-
-
             });
         }
 
@@ -219,7 +220,15 @@ namespace DemonicCity.BattleScene
             else
             {
                 isFullScreen = true;
-                iTween.ValueTo(gameObject, iTween.Hash("from", ImageSize, "to", FullScreenSize, "time", fadingTime, "onupdatetarget", gameObject, "onupdate", "SyncImageSize", "ignoretimescale", true));
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", ImageSize,
+                    "to", FullScreenSize,
+                    "time", fadingTime,
+                    "onstart", "OnStartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdatetarget", gameObject,
+                    "onupdate", "SyncImageSize",
+                    "ignoretimescale", true));
                 iTween.ValueTo(gameObject, iTween.Hash("from", 127f, "to", 0f, "time", fadingTime, "onupdatetarget", gameObject, "onupdate", "SyncMaskPosition", "ignoretimescale", true));
 
                 popupedTutorialImages.ForEach(image =>
@@ -239,6 +248,16 @@ namespace DemonicCity.BattleScene
                 // ボイスが存在したら再生
                 TryPlayVoice();
             }
+        }
+
+        void OnstartTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = true;
+        }
+
+        void OnCompleteTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = false;
         }
 
         void OnFlick(TouchGestureDetector.Gesture gesture, TouchGestureDetector.TouchInfo touchInfo)

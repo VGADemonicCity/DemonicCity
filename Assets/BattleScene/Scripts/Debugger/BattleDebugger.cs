@@ -14,14 +14,14 @@ namespace DemonicCity.BattleScene.Debugger
         public bool DisplayPanels { get { return DebuggingFlag.DisplayPanels == (Flag & DebuggingFlag.DisplayPanels); } }
         /// <summary></summary>
         public bool EffectSkip { get { return DebuggingFlag.SkipEffect == (Flag & DebuggingFlag.SkipEffect); } }
-        /// <summary>パネルを開く枚数</summary>
-        public int OpenPanelQuantity { get; set; }
-        /// <summary>Debug用フラグ</summary>
-        public DebuggingFlag Flag { get; set; }
         /// <summary>Inspectorで指定したストーリーを呼び出すかどうか</summary>
         public bool UseTargetStory { get { return useTargetStory; } set { useTargetStory = value; } }
         /// <summary>指定された任意のストーリー</summary>
         public Progress.StoryProgress TargetStory { get { return targetStory; } set { targetStory = value; } }
+        /// <summary>パネルを開く枚数</summary>
+        public int OpenPanelQuantity { get; set; }
+        /// <summary>Debug用フラグ</summary>
+        public DebuggingFlag Flag { get; set; }
 
 
 
@@ -62,11 +62,13 @@ namespace DemonicCity.BattleScene.Debugger
         PanelManager m_panelManager;
         /// <summary></summary>
         BattleManager m_battleManager;
+        Magia magia;
 
         private void Awake()
         {
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+            magia = Magia.Instance;
 
             // パネルを開く枚数の初期値を指定
             OpenPanelQuantity = 24;
@@ -194,7 +196,6 @@ namespace DemonicCity.BattleScene.Debugger
         /// <param name="passiveSkills"></param>
         public void SetPassiveSkillFromLevel(List<Skill.PassiveSkill> passiveSkills)
         {
-            var magia = Magia.Instance;
             magia.MyPassiveSkill = Magia.PassiveSkill.Invalid;
             passiveSkills.ForEach(skill =>
             {
@@ -211,7 +212,7 @@ namespace DemonicCity.BattleScene.Debugger
             var skills = BattleManager.Instance.GetComponentsInChildren<Skill.PassiveSkill>().ToList();
             skills.ForEach(skill =>
             {
-                if (skill.GetPassiveSkill == (Magia.Instance.MyPassiveSkill & skill.GetPassiveSkill))
+                if (skill.GetPassiveSkill == (magia.MyPassiveSkill & skill.GetPassiveSkill))
                 {
                     result.Add(skill.GetPassiveSkill);
                 }
