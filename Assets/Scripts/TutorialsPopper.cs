@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 namespace DemonicCity
 {
+    [RequireComponent(typeof(PopupSystem))]
     public class TutorialsPopper : MonoBehaviour
     {
 

@@ -176,7 +176,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4691038718456576}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4596012782248328
 Transform:
@@ -218,8 +218,8 @@ Transform:
   - {fileID: 4293241256990584}
   - {fileID: 4883720955422510}
   - {fileID: 4596012782248328}
-  - {fileID: 4887146168630968}
   - {fileID: 4410256117347438}
+  - {fileID: 4887146168630968}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -247,7 +247,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4691038718456576}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &61020726325893518
 BoxCollider2D:
@@ -588,7 +588,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 1
-  targetStory: 16
+  targetStory: 128
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -612,7 +612,7 @@ MonoBehaviour:
     HitPoint: 0
     Attack: 0
     Defense: 0
-  LoadStatusFromInspector: 1
+  LoadStatusFromInspector: 0
   TargetMagiaLevel: 38
   addStatus: 0
   additionalStatus:

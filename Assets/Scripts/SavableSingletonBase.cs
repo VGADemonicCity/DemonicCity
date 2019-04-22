@@ -24,6 +24,10 @@ namespace DemonicCity
         {
             get
             {
+                if (m_instance != null)
+                {
+                    return m_instance;
+                }
                 var json = File.Exists(GetSavePath()) ? File.ReadAllText(GetSavePath()) : "";
                 if (string.IsNullOrEmpty(json))
                 {

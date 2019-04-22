@@ -94,7 +94,7 @@ namespace DemonicCity.BattleScene
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
             targetItems = tutorialObject.Items.FindAll(( item) => item.subject == (item.subject & subject));
-            //targetItems = targetItems.OrderBy(item => item.subject).ToList();
+            targetItems = targetItems.OrderBy(item => item.subject).ToList();
             var imageSize = new Vector2(width, height);
             float xPos = 0;
             targetItems.ForEach(item =>
@@ -243,19 +243,20 @@ namespace DemonicCity.BattleScene
     public enum Subject
     {
         AboutPanels = 1,
-        AboutAttack = 2,
-        AboutPause = 4,
-        CompletePanels = 8,
-        FirstPanelOpen = 16,
-        UniqueSkillAccumulated = 32,
-        UsedUniqueSkill = 64,
-        AboutUniqueSkills = 128,
-        AboutTeleportSkill = 256,
-        AboutTeleportSkill_2 = 512,
-        AboutTeleportSkill_3 = 1024,
-        FirstPanelOpen_2 = 2048,
-        FirstPanelOpen_3 = 4096,
-        FirstPanelOpen_4 = 8192,
-        AllFlag = 16383,
+        AboutPanelFrame = 2,
+        AboutAttack = 4,
+        AboutPause = 8,
+        CompletePanels = 16,
+        FirstPanelOpen = 32,
+        UniqueSkillAccumulated = 64,
+        UsedUniqueSkill = 128,
+        AboutUniqueSkills = 256,
+        AboutTeleportSkill = 512,
+        AboutTeleportSkill_2 = 1024,
+        AboutTeleportSkill_3 = 2048,
+        FirstPanelOpen_2 = 4096,
+        FirstPanelOpen_3 = 8192,
+        FirstPanelOpen_4 = 16384,
+        AllFlag = 32767,
     }
 }

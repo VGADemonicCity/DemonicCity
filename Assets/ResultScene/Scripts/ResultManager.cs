@@ -12,6 +12,9 @@ namespace DemonicCity.ResultScene
 {
     public class ResultManager : MonoBehaviour
     {
+        /// <summary>ちゃんマギの最大レベル</summary>
+        private const int maxLevel = 200;
+
         Magia magia;
         PanelCounter panelCounter;
         TouchGestureDetector touchGestureDetector;
@@ -26,23 +29,18 @@ namespace DemonicCity.ResultScene
         /// <summary></summary>
         LevelTextAnimation levelTextAnimation;
 
-        /// <summary>ちゃんマギの最大レベル</summary>
-        private const int maxLevel = 200;
-
         /// <summary>経験値ゲージの枠画像</summary>
         [SerializeField] private Sprite defaultGaugeSprite = null;
 
         /// <summary>レベルアップしたときの経験値ゲージの枠画像</summary>
         [SerializeField] private Sprite levelUpGaugeSprite = null;
 
+        /// <summary>1レベルアップごとに格納する各パラメータ</summary>
         List<int> levelDifference = new List<int>();
         List<int> hpDifference = new List<int>();
         List<int> attackDifference = new List<int>();
         List<int> defenceDifference = new List<int>();
         List<int> statusPointDifferences = new List<int>();
-
-        /// <summary>獲得した総魔力値</summary>
-        private int getStatusPoint = 0;
 
         /// <summary>各レベルで必要な総経験値</summary>
         List<int> requiredExperiences = new List<int>();
@@ -54,12 +52,14 @@ namespace DemonicCity.ResultScene
         /// <summary>画面をタップした回数</summary>
         private int tapCount = 0;
 
+        /// <summary>獲得した総魔力値</summary>
+        private int getStatusPoint = 0;
+
         /// <summary>レベルアップの画像</summary>
         [SerializeField] private GameObject levelUpImage = null;
 
         /// <summary>最大レベルの画像</summary>
         [SerializeField] private GameObject levelMaxImage = null;
-
 
         /// <summary>スキル習得通知ウィンドウ</summary>
         [SerializeField] private GameObject skillMasterdMessageWindow = null;
@@ -71,23 +71,23 @@ namespace DemonicCity.ResultScene
         /// <summary>スキル名</summary>
         private string skillName;
 
-        private TextMeshProUGUI currentLevelText = null;
-        private TextMeshProUGUI nextLevelText = null;
-        private GameObject beforeHpText = null;
-        private GameObject beforeAttackText = null;
-        private GameObject beforeDefenceText = null;
-        private TextMeshProUGUI afterHpText = null;
-        private TextMeshProUGUI afterAttackText = null;
-        private TextMeshProUGUI afterDefenseText = null;
+        [SerializeField] private TextMeshProUGUI currentLevelText = null;
+        [SerializeField] private TextMeshProUGUI nextLevelText = null;
+        [SerializeField] private GameObject beforeHpText = null;
+        [SerializeField] private GameObject beforeAttackText = null;
+        [SerializeField] private GameObject beforeDefenceText = null;
+        [SerializeField] private TextMeshProUGUI afterHpText = null;
+        [SerializeField] private TextMeshProUGUI afterAttackText = null;
+        [SerializeField] private TextMeshProUGUI afterDefenseText = null;
 
-        private TextMeshProUGUI destructionCountText = null;
-        private TextMeshProUGUI needDestructionCountText = null;
-        private TextMeshProUGUI getStatusPointText = null;
+        [SerializeField] private TextMeshProUGUI destructionCountText = null;
+        [SerializeField] private TextMeshProUGUI needDestructionCountText = null;
+        [SerializeField] private TextMeshProUGUI getStatusPointText = null;
 
-        private GameObject[] rightArrows = null;
+        [SerializeField] private GameObject[] rightArrows = null;
 
-        private Slider experienceGauge = null;
-        private Image gaugeBackGround = null;
+        [SerializeField] private Slider experienceGauge = null;
+        [SerializeField] private Image gaugeBackGround = null;
 
 
         private float addAmount = 0;
@@ -119,7 +119,7 @@ namespace DemonicCity.ResultScene
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
 
-            GetGameObjects();
+            NotActiveObjects();
 
             ReflectionBeforeStatus();
 
@@ -173,6 +173,8 @@ namespace DemonicCity.ResultScene
                         }
                         else if ((tapCount == 4) || (tapCount == 3) || (tapCount == 2))
                         {
+                            progress.QuestClear();
+                            SavableSingletonBase<Progress>.Instance.Save();
                             SavableSingletonBase<Magia>.Instance.Save();
                             if (ChapterManager.Instance.GetChapter().isStory)
                             {
@@ -186,6 +188,8 @@ namespace DemonicCity.ResultScene
                     }
                     else
                     {
+                        progress.QuestClear();
+                        SavableSingletonBase<Progress>.Instance.Save();
                         SavableSingletonBase<Magia>.Instance.Save();
 
                         if (ChapterManager.Instance.GetChapter().isStory)
@@ -286,10 +290,10 @@ namespace DemonicCity.ResultScene
             for (int i = 0; i < masterdSkillNames.Count; i++)
             {
                 masterdSkillNameText[i].SetActive(true);
-                masterdSkillNameText[i].GetComponent<TextMeshProUGUI>().text = masterdSkillNames[i];//習得したスキルを全て表示
+                //習得したスキルを全て表示
+                masterdSkillNameText[i].GetComponent<TextMeshProUGUI>().text = masterdSkillNames[i];
             }
             yield return new WaitForSeconds(5f);
-            // StartCoroutine(ClosePopUpAnimation(skillMasterdMessageWindow));
         }
 
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
@@ -334,7 +338,8 @@ namespace DemonicCity.ResultScene
                     {
                         if (levelDifference[i] == skillMasterdLevelList[a])//一致した場合、そのレベルに応じたスキルを習得したと判定する
                         {
-                            masterdSkillNames.Add(GetSkillName(skillMasterdLevelList[a]));
+                            string name = GetSkillName(skillMasterdLevelList[a]);
+                            masterdSkillNames.Add(name);
                         }
                     }
                 }
@@ -387,7 +392,6 @@ namespace DemonicCity.ResultScene
                     StartCoroutine(ClosePopUpAnimation(levelUpImage));
                     levelMaxImage.SetActive(true);
                     isAnimation = false;
-                    //gaugeBackGround.sprite = defaultGaugeSprite;
                 }
 
                 index++;
@@ -396,12 +400,10 @@ namespace DemonicCity.ResultScene
                 {
                     StartCoroutine(GaugeAnimation());
                     gaugeBackGround.sprite = defaultGaugeSprite;
-
                 }
             }
         }
         /// <summary>レベルアップしたあとの残りの経験値を足すアニメーション</summary>
-        /// <returns></returns>
         IEnumerator GaugeAnimation()
         {
             experienceGauge.maxValue = requiredExperiences.Last();
@@ -521,30 +523,17 @@ namespace DemonicCity.ResultScene
 
         }
 
-        /// <summary>シーン上にあるゲームオブジェクトを取得</summary>
-        private void GetGameObjects()
+        /// <summary>オブジェクトを無効にする</summary>
+        private void NotActiveObjects()
         {
             levelUpImage.SetActive(false);
             levelMaxImage.SetActive(false);
 
-            rightArrows = GameObject.FindGameObjectsWithTag("RightArrow");
             for (int i = 0; i < rightArrows.Length; i++)
             {
                 rightArrows[i].SetActive(false);
             }
-            currentLevelText = GameObject.Find("CurrentLevelText").GetComponent<TextMeshProUGUI>();
-            nextLevelText = GameObject.Find("NextLevelText").GetComponent<TextMeshProUGUI>();
             nextLevelText.text = "";
-            beforeHpText = GameObject.Find("BeforeHpText");
-            beforeAttackText = GameObject.Find("BeforeAttackText");
-            beforeDefenceText = GameObject.Find("BeforeDefenseText");
-            afterHpText = GameObject.Find("AfterHpText").GetComponent<TextMeshProUGUI>();
-            afterAttackText = GameObject.Find("AfterAttackText").GetComponent<TextMeshProUGUI>();
-            afterDefenseText = GameObject.Find("AfterDefenseText").GetComponent<TextMeshProUGUI>();
-            destructionCountText = GameObject.Find("DestructionCountText").GetComponent<TextMeshProUGUI>();
-            needDestructionCountText = GameObject.Find("NeedDestructionCountText").GetComponent<TextMeshProUGUI>();
-            getStatusPointText = GameObject.Find("StatusPointText").GetComponent<TextMeshProUGUI>();
-            experienceGauge = GameObject.Find("ExperienceGauge").GetComponent<Slider>();
             levelTextAnimation = FindObjectOfType<LevelTextAnimation>();
             masterdSkillNameText = GameObject.FindGameObjectsWithTag("MasterdSkillName");
             for (int i = 0; i < masterdSkillNameText.Length; i++)
@@ -552,10 +541,6 @@ namespace DemonicCity.ResultScene
                 masterdSkillNameText[i].SetActive(false);
             }
             skillMasterdMessageWindow.SetActive(false);
-
-            gaugeBackGround = GameObject.Find("GaugeBackGround").GetComponent<Image>();
-
         }
-
     }
 }
