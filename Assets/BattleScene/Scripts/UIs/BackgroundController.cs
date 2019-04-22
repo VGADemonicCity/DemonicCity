@@ -46,6 +46,12 @@ namespace DemonicCity.BattleScene
             var chapter = ChapterManager.Instance.GetChapter();
             //chapter = ChapterManager.Instance.GetChapter(Progress.StoryProgress.Nafla);
 
+                        var debugger = Debugger.BattleDebugger.Instance;
+            if (debugger.UseTargetStory)
+            {
+                chapter = ChapterManager.Instance.GetChapter(debugger.TargetStory);
+            }
+
             // ステージ画像を設定
             firstWaveBattleStage.sprite = chapter.BattleStage[0];
             secondWaveBattleStage.sprite = chapter.BattleStage[1];
