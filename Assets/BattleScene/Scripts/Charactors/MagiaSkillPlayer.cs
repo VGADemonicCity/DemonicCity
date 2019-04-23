@@ -31,6 +31,11 @@ namespace DemonicCity.BattleScene
             playerAttackState.PlaySkillVoice();
         }
 
+        public void PlaySkillSE()
+        {
+            playerAttackState.PlaySkillSE();
+        }
+
         public void StopVoice()
         {
             playerAttackState.StopVoice();
