@@ -59,14 +59,16 @@ namespace DemonicCity.BattleScene
         IEnumerator Drawing()
         {
             var changePerFrame = changeRatio * Time.deltaTime * m_drawSpeed;
-            var remainingProgress = changeRatio; // 変動させる比率がプラス(ダメージ)ならそのまま、マイナス(回復)なら引数がマイナスなので符合を逆にして代入
             var changeValue = changePerFrame;
+            var remainingProgress = changeRatio; // 変動させる比率がプラス(ダメージ)ならそのまま、マイナス(回復)なら引数がマイナスなので符合を逆にして代入
+
+            if (m_image.fillAmount - targetRatio < 0)
+            {
+                remainingProgress = -remainingProgress;
+                changeValue = -changeValue;
+            }
             while (remainingProgress > 0)
             {
-                if (m_image.fillAmount - targetRatio < 0)
-                {
-                    changeValue = -changeValue;
-                }
                 m_image.fillAmount -= changePerFrame;
                 remainingProgress -= changeValue;
                 yield return null; // 1frame待つ
