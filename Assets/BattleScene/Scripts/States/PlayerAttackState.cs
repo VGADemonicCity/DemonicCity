@@ -12,15 +12,8 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerAttackState : StatesBehaviour
     {
-        [System.Serializable]
-        public class MagiaSkillVoiceMaterial
-        {
-            public AudioClip Clip;
-            public Magia.PassiveSkill skillTag;
-        }
-
         /// <summary>マギアのスキルごとの音声素材</summary>
-        [SerializeField] List<MagiaSkillVoiceMaterial> voiceMaterials;
+        [SerializeField] MagiaSkillAudioMaterials audioMaterials;
         /// <summary>Animator of magia</summary>
         [SerializeField] Animator magiaAnimator;
         /// <summary>攻撃アニメーションの途中からゲージの減少処理を挟む為の調整係数</summary>
@@ -30,7 +23,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] float waitTime = .5f;
 
         /// <summary>再生対象の音声素材</summary>
-        MagiaSkillVoiceMaterial targetMaterial;
+        MagiaSkillAudioMaterials.MagiaSkillAudioMaterial targetMaterial;
 
         /// <summary>
         /// Start this instance.
@@ -83,7 +76,16 @@ namespace DemonicCity.BattleScene
         public void PlaySkillVoice()
         {
             Debug.Log(targetMaterial.skillTag.ToString());
-            m_soundManager.PlayWithFade(SoundManager.SoundTag.Voice, targetMaterial.Clip);
+            m_soundManager.PlayWithFade(SoundManager.SoundTag.Voice, targetMaterial.VoiceClip);
+        }
+
+        /// <summary>
+        /// スキルSEを再生
+        /// </summary>
+        public void PlaySkillSE()
+        {
+            Debug.Log(targetMaterial.skillTag.ToString());
+            m_soundManager.PlayWithFade(SoundManager.SoundTag.SE, targetMaterial.SEClip);
         }
 
         /// <summary>
@@ -114,7 +116,7 @@ namespace DemonicCity.BattleScene
                     }
 
                     // スキルタグと同じタグを抽出して,適切な音声が再生される様にする
-                    foreach (var material in voiceMaterials)
+                    foreach (var material in audioMaterials.Materials)
                     {
                         if (material.skillTag == skill.GetPassiveSkill)
                         {
