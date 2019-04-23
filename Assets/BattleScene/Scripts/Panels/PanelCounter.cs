@@ -211,7 +211,8 @@ namespace DemonicCity.BattleScene
             m_uniqueSkillGauge.Sync(); // 固有スキルゲージに同期
 
             // パネルコンプリート
-            if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice)
+            if (PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels
+                && m_battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice)
             {
                 attackButtonProcess.ButtonClose();
                 StartCoroutine(panelComplete.PlayPanelCompleteSkillAnimation());
@@ -223,7 +224,7 @@ namespace DemonicCity.BattleScene
             // Inspectorで指定したフラグをここで代入する
             var targetTutorials = new Subject();
             targetTutorials = targetTutorials | item;
-            if(targetTutorials == 0)
+            if (targetTutorials == 0)
             {
                 return;
             }
