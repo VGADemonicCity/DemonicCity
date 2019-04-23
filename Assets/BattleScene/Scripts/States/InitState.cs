@@ -17,6 +17,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] EnemiesMover m_enemiesMover;
         /// <summary>animator of wave title</summary>
         [SerializeField] WaveTitle waveTitle;
+        [SerializeField] MagiaAudioPlayer magiaAudioPlayer;
 
         /// <summary>章情報に基づき敵のインスタンスを生成する工場</summary>
         EnemiesFactory m_enemiesFactory;
@@ -49,7 +50,11 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(firstWaitTime);
             // 敵を動かす
             var waitTime = m_enemiesMover.Moving();
-            //yield return new WaitForSeconds(waitTime);
+            yield return new WaitForSeconds(waitTime);
+
+            
+            waitTime = magiaAudioPlayer.PlayBattleStartVoice();
+            yield return new WaitForSeconds(waitTime);
 
             // Waveタイトルのアニメーションを再生した後,ステートを遷移させる
             waitTime = waveTitle.Play();
@@ -62,6 +67,11 @@ namespace DemonicCity.BattleScene
             // ==============================
             m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
 
+        }
+
+        float PlayMagiaStartVoice()
+        {
+            return 1f;
         }
 
         /// <summary>
@@ -112,7 +122,7 @@ namespace DemonicCity.BattleScene
         void SpawnEnemies()
         {
             m_enemiesFactory = EnemiesFactory.Instance;
-            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter);　
+            m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter);
 
             // 敵を1体生成する度にm_spawnSpacingValue分座標をずらして生成する
             // 生成した敵オブジェクトにアタッチされているEnemyコンポーネントをBattleManagerのリストに格納する

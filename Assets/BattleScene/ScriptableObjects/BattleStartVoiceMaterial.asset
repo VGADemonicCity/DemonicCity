@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0d90a9c06a67d240a0f9c9057a0696c, type: 3}
+  m_Name: BattleStartVoiceMaterial
+  m_EditorClassIdentifier: 
+  Materials:
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 2
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 4
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 8
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 16
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 32
+  - VoiceClip: {fileID: 8300000, guid: 1076038acbadb794a828a9f1e0399d64, type: 3}
+    StoryIdentifier: 64
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 128
+  - VoiceClip: {fileID: 8300000, guid: d942de169cf30cc4b90febea2365a678, type: 3}
+    StoryIdentifier: 256
+  - VoiceClip: {fileID: 8300000, guid: f4966b6be0e68534e8938fa0a0580faa, type: 3}
+    StoryIdentifier: 512
+  - VoiceClip: {fileID: 8300000, guid: 37dfa089b55cce542b039191d07502f4, type: 3}
+    StoryIdentifier: 1024
+  - VoiceClip: {fileID: 8300000, guid: 274e5afc84ec0db45bd20d00b968ce09, type: 3}
+    StoryIdentifier: 2048
+  - VoiceClip: {fileID: 8300000, guid: 6d29657c078f2294da06cbf4469d42f9, type: 3}
+    StoryIdentifier: 4096

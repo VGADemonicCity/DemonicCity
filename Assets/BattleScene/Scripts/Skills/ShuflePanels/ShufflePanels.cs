@@ -146,9 +146,7 @@ namespace DemonicCity.BattleScene
                 BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
                 progress.SetTutorialProgress(targetTutorials, false);
             }
-
         }
-
 
         /// <summary>
         /// 現在画面に表示されている3*3のパネルを全て非表示の状態に戻して、その3*3のパネル内でまたシャッフルさせる
@@ -172,6 +170,7 @@ namespace DemonicCity.BattleScene
             m_sensor.enabled = true; // colliderをactiveにする
             var results = new Collider2D[9]; // 結果を受け取るための配列
             m_sensor.OverlapCollider(new ContactFilter2D(), results); // 設定したcolliderと重なっているcolliderを検出し配列に代入する
+            m_sensor.enabled = false; // colliderをdisableにする
 
             var panelList = new List<Panel>(); // colliderに検出されたオブジェクトのPanelの参照リスト
             var panelTypes = new List<PanelType>(); // colliderに検出されたパネルのPanelTypeをリストで格納
@@ -194,7 +193,6 @@ namespace DemonicCity.BattleScene
                 yield return new WaitForSeconds(intervalForEachRotation);
             }
 
-            m_sensor.enabled = false; // colliderをdisableにする
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
             battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause); // stateを元に戻す       
         }

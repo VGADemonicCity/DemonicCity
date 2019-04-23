@@ -15,6 +15,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] BackgroundController backgroundCtrl;
         /// <summary>animator of wave title</summary>
         [SerializeField] WaveTitle waveTitle;
+        [SerializeField] MagiaAudioPlayer magiaAudioPlayer;
 
 
         /// <summary>
@@ -38,10 +39,24 @@ namespace DemonicCity.BattleScene
             m_battleManager.CurrentEnemy.Stats.Init(m_battleManager.CurrentEnemy.Stats); //バトル開始直前の 敵のステータスの初期値を保存
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.HitPoint); // 敵のHP最大値をGaugeに登録する
             StartCoroutine(m_enemyHPGauge.FullGameDrawing()); // ゲージを最大に戻す
-            m_enemiesMover.Moving(); // 待機させている次の敵を最前面迄動かす
             backgroundCtrl.FadingImageOfTheStage(); // ステージ背景を遷移させるアニメーション再生
 
-            var waitTime = waveTitle.Play();
+            // 待機させている次の敵を最前面迄動かす
+            var waitTime = m_enemiesMover.Moving();
+            yield return new WaitForSeconds(waitTime);
+
+            // LastWaveの時章に応じたマギアの音声を再生する
+            switch (m_battleManager.m_StateMachine.m_Wave)
+            {
+                case BattleManager.StateMachine.Wave.LastWave:
+                    waitTime = magiaAudioPlayer.PlayBattleBossVoice(m_chapter);
+                    yield return new WaitForSeconds(waitTime);
+                    break;
+                default:
+                    break;
+            }
+
+            waitTime = waveTitle.Play();
             // 指定秒数分遅延させる
             yield return new WaitForSeconds(waitTime);
 
