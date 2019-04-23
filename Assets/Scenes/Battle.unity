@@ -447,6 +447,16 @@ Prefab:
       propertyPath: buffTextBox
       value: 
       objectReference: {fileID: 1069575819}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: targetStory
+      value: 256
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: useTargetStory
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
@@ -1811,52 +1821,6 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fa738a77ad284e948f574c8f5f77b36, type: 2}
-  m_IsPrefabAsset: 0
---- !u!1001 &1879557503
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -1.704883
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.557
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4866127432364854, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_RootOrder
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 1327912409227080, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e9fcb7a68b5274368a0aa2d3efe59521, type: 2}
   m_IsPrefabAsset: 0
 --- !u!1001 &1886294268
 Prefab:
