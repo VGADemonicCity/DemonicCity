@@ -1212,6 +1212,36 @@ Prefab:
       propertyPath: playerAttackState
       value: 
       objectReference: {fileID: 1300227668}
+    - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 212855388399127266, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 2.56
+      objectReference: {fileID: 0}
+    - target: {fileID: 212672634989736864, guid: 8fbb58dc8140d4b9eb58bfc791298650,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.56
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8fbb58dc8140d4b9eb58bfc791298650, type: 2}
   m_IsPrefabAsset: 0
