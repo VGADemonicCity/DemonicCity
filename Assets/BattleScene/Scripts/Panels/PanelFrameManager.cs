@@ -34,6 +34,14 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        public bool isMovable
+        {
+            get
+            {
+                return true;
+            }
+        }
+
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float m_waitTime = 1f;
         /// <summary>フレームの位置を表すenum</summary>
@@ -57,7 +65,7 @@ namespace DemonicCity.BattleScene
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (isMoving || BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice) // 枠移動中の時は終了
+                if (isMoving || BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice || !isMovable) // 枠移動中の時は終了
                 {
                     return;
                 }
