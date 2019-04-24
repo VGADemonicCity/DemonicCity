@@ -67,6 +67,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void ResetPanel()
         {
+            Debug.Log(m_panelType);
             m_spriteRender.sprite = m_panelTextures[(int)PanelType.Default]; // パネルのtextureをDefaultに戻す
             IsOpened = false; //フラグリセット
         }

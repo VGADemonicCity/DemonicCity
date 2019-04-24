@@ -197,6 +197,8 @@ namespace DemonicCity.BattleScene
                 Lose,
                 /// <summary>次のWaveに遷移する時</summary>
                 NextWave,
+                /// <summary>デバッグ画面表示時</summary>
+                Debugging,
             }
 
             /// <summary>
@@ -243,6 +245,17 @@ namespace DemonicCity.BattleScene
                     return m_PreviousState == State.Pause;
                 }
             }
+            /// <summary>現在のステートよりひとつ前のステートがDebuggingステートならtrue,そうでない場合false</summary>
+            public bool PreviousStateIsDebugging
+            {
+                get
+                {
+                    return m_PreviousState == State.Debugging;
+                }
+            }
+
+
+
             #endregion
         }
     }

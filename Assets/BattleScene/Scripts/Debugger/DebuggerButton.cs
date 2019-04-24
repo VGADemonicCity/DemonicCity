@@ -53,10 +53,11 @@ namespace DemonicCity.BattleScene.Debugger
         {
             if (battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Pause
                 && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init
-                && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Win)
+                && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Win
+                && battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Debugging)
             {
                 // pauseステートに遷移し,各要素をポップアップ後イベント登録
-                battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
+                battleManager.SetStateMachine(BattleManager.StateMachine.State.Debugging);
                 popupSystem.Popup();
                 popupSystem.SubscribeButton(buttonMaterial);
                 popupSystem.SubscribeSlider(sliderMaterial);

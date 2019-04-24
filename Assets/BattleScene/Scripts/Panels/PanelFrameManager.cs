@@ -68,15 +68,6 @@ namespace DemonicCity.BattleScene
                     return;
                 }
 
-                if(!isSkillActivating)
-                {
-                    Debug.Log("falseだお");
-                    return;
-                }
-                else
-                {
-                    Debug.Log("trueだお");
-                }
                 switch (gesture) // タッチ情報が左右のフリックだったら
                 {
                     case TouchGestureDetector.Gesture.FlickLeftToRight: // 右フリックの時,枠が左にいないときはひとつ左に動かす

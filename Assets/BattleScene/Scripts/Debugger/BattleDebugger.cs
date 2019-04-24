@@ -91,7 +91,7 @@ namespace DemonicCity.BattleScene.Debugger
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerChoice)
+                if (state != BattleManager.StateMachine.State.PlayerChoice || m_battleManager.m_StateMachine.m_PreviousState != BattleManager.StateMachine.State.Debugging)
                 {
                     return;
                 }
