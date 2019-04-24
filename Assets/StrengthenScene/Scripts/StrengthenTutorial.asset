@@ -13,14 +13,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Items:
   - Sprite: {fileID: 21300000, guid: c02d9cd492343e048b50e2e7cacedc76, type: 3}
-    VoiceClip: {fileID: 0}
     useVoice: 1
+    VoiceClip: {fileID: 0}
+    subject: 0
   - Sprite: {fileID: 21300000, guid: 24daf45c4c3ddf84498649d0c0019408, type: 3}
-    VoiceClip: {fileID: 0}
     useVoice: 1
+    VoiceClip: {fileID: 8300000, guid: 26ca26c9ded793c48a66169287980e53, type: 3}
+    subject: 0
   - Sprite: {fileID: 21300000, guid: 4ab4e6d36a68a0e42a473c525de9c644, type: 3}
-    VoiceClip: {fileID: 0}
     useVoice: 1
-  - Sprite: {fileID: 21300000, guid: 1d17eb2af94e8934abe637c0d5ee9151, type: 3}
-    VoiceClip: {fileID: 0}
-    useVoice: 1
+    VoiceClip: {fileID: 8300000, guid: 1b9c71b95ea4f224f99b5babe32eb285, type: 3}
+    subject: 0
