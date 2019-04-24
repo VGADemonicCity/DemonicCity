@@ -62,6 +62,8 @@ namespace DemonicCity.BattleScene
         BattleManager battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter panelCounter;
+        /// <summary>PanelFrameManagerの参照</summary>
+        PanelFrameManager panelFrameManager;
 
         [Header("Parameters")]
         [SerializeField] float panelRotateTime = 1f;
@@ -79,6 +81,7 @@ namespace DemonicCity.BattleScene
         {
             panelCounter = PanelCounter.Instance; // PannelCounterの参照取得
             battleManager = BattleManager.Instance;
+            panelFrameManager = PanelFrameManager.Instance;
         }
 
         /// <summary>
@@ -119,6 +122,7 @@ namespace DemonicCity.BattleScene
         {
             skillAnim.SetTrigger("Activate");
             battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
+            panelFrameManager.isSkillActivating = false;
         }
 
         /// <summary>
@@ -195,6 +199,7 @@ namespace DemonicCity.BattleScene
 
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
             battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause); // stateを元に戻す       
+            panelFrameManager.isSkillActivating = true;
         }
 
         /// <summary>

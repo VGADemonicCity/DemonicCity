@@ -34,13 +34,7 @@ namespace DemonicCity.BattleScene
             }
         }
 
-        public bool isMovable
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public bool isSkillActivating { get; set; }
 
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float m_waitTime = 1f;
@@ -55,19 +49,33 @@ namespace DemonicCity.BattleScene
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
+        BattleManager battleManager;
         /// <summary>パネル枠が動いている最中はフラグ</summary>
         bool isMoving;
 
         public void Start()
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            battleManager = BattleManager.Instance;
+            isSkillActivating = true;
 
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (isMoving || BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice || !isMovable) // 枠移動中の時は終了
+
+                if (isMoving || battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice ) // 枠移動中の時は終了
                 {
                     return;
+                }
+
+                if(!isSkillActivating)
+                {
+                    Debug.Log("falseだお");
+                    return;
+                }
+                else
+                {
+                    Debug.Log("trueだお");
                 }
                 switch (gesture) // タッチ情報が左右のフリックだったら
                 {
