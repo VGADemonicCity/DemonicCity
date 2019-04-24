@@ -89,6 +89,9 @@ namespace DemonicCity.ResultScene
         [SerializeField] private Slider experienceGauge = null;
         [SerializeField] private Image gaugeBackGround = null;
 
+        [SerializeField] private GameObject toNextWindow = null;
+        [SerializeField] private Transform backGround = null;
+        [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private float addAmount = 0;
         private bool isAnimation = false;
@@ -98,11 +101,9 @@ namespace DemonicCity.ResultScene
 
         int totalExperience = 0;
         int myExperience = 0;
-        [SerializeField] private GameObject toNextWindow = null;
-        [SerializeField] private Transform backGround = null;
-        [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private bool isCalculation = true;
+        private bool isPopup = false;
 
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
@@ -183,9 +184,11 @@ namespace DemonicCity.ResultScene
                             {
                                 SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);//会話シーンへ
                             }
-                            else
+                            else if(!isPopup && !ChapterManager.Instance.GetChapter().isStory)
                             {
                                 Instantiate(toNextWindow,backGround);//ホーム画面か次の章へ
+                                isPopup = true;
+
                             }
                         }
                     }
@@ -195,9 +198,10 @@ namespace DemonicCity.ResultScene
                         {
                             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
                         }
-                        else
+                        else if (!isPopup && !ChapterManager.Instance.GetChapter().isStory)
                         {
-                            Instantiate(toNextWindow,backGround);
+                            Instantiate(toNextWindow, backGround);//ホーム画面か次の章へ
+                            isPopup = true;
                         }
                     }
                 }
@@ -446,7 +450,7 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            // destructionCount = 50000;//debug
+            //destructionCount = 50000;//debug
             destructionCountText.text = destructionCount.ToString();
 
             getStatusPointText.text = 0.ToString();
