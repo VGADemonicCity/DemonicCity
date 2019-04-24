@@ -38,6 +38,7 @@ namespace DemonicCity.BattleScene
             }
         }
 
+
         /// <summary>表示させるチュートリアルの素材群</summary>
         [SerializeField] TutorialItems tutorialObject;
         /// <summary>次へボタン</summary>
@@ -62,6 +63,7 @@ namespace DemonicCity.BattleScene
         Button popupedToNextButton;
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
+        TutorialInPauseMenu tutorialInPauseMenu;
 
 
         const int width = 1080;
@@ -69,8 +71,8 @@ namespace DemonicCity.BattleScene
 
         public void TestPopup()
         {
-            if(BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.Init )
-            Popup(Subject.AboutAttack | Subject.CompletePanels);
+            if (BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
+                Popup(Subject.AboutAttack | Subject.CompletePanels);
         }
 
         private void Start()
@@ -80,7 +82,7 @@ namespace DemonicCity.BattleScene
             popupMaterials = new List<PopupSystemMaterial>()
             {
                 new PopupSystemMaterial(OnPushNextButton,toNextButton.gameObject.name,false),
-                new PopupSystemMaterial(OnPushOk, closeButton.gameObject.name, true),
+                new PopupSystemMaterial(OnPushClose, closeButton.gameObject.name, false),
             };
         }
 
@@ -93,7 +95,7 @@ namespace DemonicCity.BattleScene
             BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.Pause);
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
-            targetItems = tutorialObject.Items.FindAll(( item) => item.subject == (item.subject & subject));
+            targetItems = tutorialObject.Items.FindAll((item) => item.subject == (item.subject & subject));
             targetItems = targetItems.OrderBy(item => item.subject).ToList();
             var imageSize = new Vector2(width, height);
             float xPos = 0;
@@ -116,12 +118,13 @@ namespace DemonicCity.BattleScene
             // on pupuped.
             if (targetItems[0] != null)
             {
-            currentItem = targetItems[0];
+                currentItem = targetItems[0];
             }
             popupedToNextButton = GameObject.Find(toNextButton.gameObject.name).GetComponent<Button>();
             popupedCloseButton = GameObject.Find(closeButton.gameObject.name).GetComponent<Button>();
             tutorialImagesParent = popupSystem.popupedObject.transform.GetChild(0).gameObject;
             OnChangeItem();
+            tutorialInPauseMenu = popupSystem.popupedObject.GetComponent<TutorialInPauseMenu>();
         }
 
         /// <summary>
@@ -152,7 +155,7 @@ namespace DemonicCity.BattleScene
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime,"ignoretimescale",true));
+                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime, "ignoretimescale", true));
                     break;
                 case Index.Previous:
                     iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
@@ -185,12 +188,16 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
-        /// Okボタンへのイベントハンドラ
+        /// Closeボタンへのイベントハンドラ
         /// </summary>
-        void OnPushOk()
+        void OnPushClose()
         {
-            var battleManager = BattleManager.Instance;
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
+            if (!tutorialInPauseMenu.isPlayingTutorialAnimation)
+            {
+                var battleManager = BattleManager.Instance;
+                battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+                Destroy(popupSystem.popupedObject.transform.parent);
+            }
         }
 
         /// <summary>
