@@ -136,7 +136,7 @@ namespace DemonicCity.BattleScene
         {
             // ステート遷移前のステートを保存 
             m_StateMachine.m_PreviousState = m_StateMachine.m_State;
-            if (state == StateMachine.State.Pause) // 遷移先がPauseステートの時保存
+            if (state == StateMachine.State.Pause|| state == StateMachine.State.Debugging) // 遷移先がPauseステートの時保存
             {
                 m_StateMachine.m_StateBeforePause = m_StateMachine.m_State;
             }
@@ -197,6 +197,8 @@ namespace DemonicCity.BattleScene
                 Lose,
                 /// <summary>次のWaveに遷移する時</summary>
                 NextWave,
+                /// <summary>デバッグ画面表示時</summary>
+                Debugging,
             }
 
             /// <summary>
@@ -222,12 +224,12 @@ namespace DemonicCity.BattleScene
             /// <summary>ウェーブ</summary>
             public Wave m_Wave;
 
-            /// <summary>現在のステートよりひとつ前のステートを返す.前のステートがPauseの場合はPauseステートに遷移する前のステートを返す</summary>
-            public State PreviousStateWithoutPause
+            /// <summary>現在のステートよりひとつ前のステートを返す.前のステートがPause,Debuggingの場合はPause,Debuggingステートに遷移する前のステートを返す</summary>
+            public State PreviousStateWithoutPauseAndDebugging
             {
                 get
                 {
-                    if (m_PreviousState == State.Pause)
+                    if (m_PreviousState == State.Pause || m_PreviousState == State.Debugging)
                     {
                         return m_StateBeforePause;
                     }
@@ -243,6 +245,17 @@ namespace DemonicCity.BattleScene
                     return m_PreviousState == State.Pause;
                 }
             }
+            /// <summary>現在のステートよりひとつ前のステートがDebuggingステートならtrue,そうでない場合false</summary>
+            public bool PreviousStateIsDebugging
+            {
+                get
+                {
+                    return m_PreviousState == State.Debugging;
+                }
+            }
+
+
+
             #endregion
         }
     }

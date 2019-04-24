@@ -62,6 +62,8 @@ namespace DemonicCity.BattleScene
         BattleManager battleManager;
         /// <summary>PanelCounterの参照</summary>
         PanelCounter panelCounter;
+        /// <summary>PanelFrameManagerの参照</summary>
+        PanelFrameManager panelFrameManager;
 
         [Header("Parameters")]
         [SerializeField] float panelRotateTime = 1f;
@@ -79,6 +81,7 @@ namespace DemonicCity.BattleScene
         {
             panelCounter = PanelCounter.Instance; // PannelCounterの参照取得
             battleManager = BattleManager.Instance;
+            panelFrameManager = PanelFrameManager.Instance;
         }
 
         /// <summary>
@@ -100,7 +103,7 @@ namespace DemonicCity.BattleScene
                     {
                         return;
                     }
-                    battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
+                    battleManager.SetStateMachine(BattleManager.StateMachine.State.Debugging);
                     popupSystem.Popup();
                     popupSystem.SubscribeButton(new PopupSystemMaterial(Activate, PositiveButton.gameObject.name, true));
                     popupSystem.SubscribeButton(new PopupSystemMaterial(Cancel, NegativeButton.gameObject.name, true));
@@ -118,7 +121,7 @@ namespace DemonicCity.BattleScene
         void Activate()
         {
             skillAnim.SetTrigger("Activate");
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
+            panelFrameManager.isSkillActivating = false;
         }
 
         /// <summary>
@@ -126,7 +129,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Cancel()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
         }
 
         public void OnCompleteConditions()
@@ -194,7 +197,8 @@ namespace DemonicCity.BattleScene
             }
 
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPause); // stateを元に戻す       
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging); // stateを元に戻す       
+            panelFrameManager.isSkillActivating = true;
         }
 
         /// <summary>
