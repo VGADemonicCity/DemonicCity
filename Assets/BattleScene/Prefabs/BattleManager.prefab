@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 1
-  targetStory: 4096
+  targetStory: 16
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -644,7 +644,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 1
-  TargetMagiaLevel: 200
+  TargetMagiaLevel: 34
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -969,7 +969,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff8da14bd824437cb830b1d2d613157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 31
+  m_levelCondition: 300
   m_countCondition: 16
   m_passiveSkill: 8
   m_timing: 0
