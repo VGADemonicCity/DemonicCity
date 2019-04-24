@@ -196,7 +196,7 @@ namespace DemonicCity.BattleScene
             // =====================
             if (m_battleManager.CurrentEnemy.Stats.HitPoint > 0) // 敵のHPが1以上だったら敵の攻撃ステートに遷移
             {
-                if (m_battleManager.m_StateMachine.PreviousStateWithoutPause == BattleManager.StateMachine.State.EnemyAttack)
+                if (m_battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging == BattleManager.StateMachine.State.EnemyAttack)
                 {
                     // =============================
                     // イベント呼び出し : StateMachine.PlayerChoice

@@ -78,6 +78,8 @@ namespace DemonicCity.BattleScene
                 }
             }
         }
+
+        public bool isPlayingTutorialAnimation { get; set; }
         #endregion
 
         #region Variables
@@ -111,10 +113,6 @@ namespace DemonicCity.BattleScene
         int doubleTapCounter;
         float startTime;
         bool isFullScreen;
-        bool isPlayingTutorialAnimation;
-
-
-
 
         const float width = 424f;
         const float height = 837.4f;
@@ -148,42 +146,48 @@ namespace DemonicCity.BattleScene
             // 最初の画像を表示した時用のコールバック
             OnChangeItem();
 
+            TouchGestureDetector.Instance.onGestureDetected.AddListener(TouchGestureEvent);
+        }
 
-            TouchGestureDetector.Instance.onGestureDetected.AddListener((gesture, touchInfo) =>
+        private void OnDisable()
+        {
+            TouchGestureDetector.Instance.onGestureDetected.RemoveListener(TouchGestureEvent);
+        }
+
+        void TouchGestureEvent(TouchGestureDetector.Gesture gesture,TouchGestureDetector.TouchInfo touchInfo)
+        {
+            switch (gesture)
             {
-                switch (gesture)
-                {
-                    case TouchGestureDetector.Gesture.TouchBegin:
-                        touchInfoOnTouchBegin = touchInfo;
-                        if (doubleTapCounter == 0)
-                        {
-                            startTime = Time.realtimeSinceStartup;
-                        }
-                        doubleTapCounter++;
+                case TouchGestureDetector.Gesture.TouchBegin:
+                    touchInfoOnTouchBegin = touchInfo;
+                    if (doubleTapCounter == 0)
+                    {
+                        startTime = Time.realtimeSinceStartup;
+                    }
+                    doubleTapCounter++;
 
-                        // 時間内に二回タップしたらコールバック
-                        if (ElapsedTime < countTimeLimit)
+                    // 時間内に二回タップしたらコールバック
+                    if (ElapsedTime < countTimeLimit)
+                    {
+                        if (doubleTapCounter == 2)
                         {
-                            if (doubleTapCounter == 2)
-                            {
-                                //callback
-                                OnDoubleTap();
-                                doubleTapCounter = 0;
-                            }
-                        }
-                        else
-                        {
+                            //callback
+                            OnDoubleTap();
                             doubleTapCounter = 0;
                         }
-                        break;
-                    case TouchGestureDetector.Gesture.FlickLeftToRight:
-                    case TouchGestureDetector.Gesture.FlickRightToLeft:
-                        OnFlick(gesture, touchInfoOnTouchBegin);
-                        break;
-                    default:
-                        break;
-                }
-            });
+                    }
+                    else
+                    {
+                        doubleTapCounter = 0;
+                    }
+                    break;
+                case TouchGestureDetector.Gesture.FlickLeftToRight:
+                case TouchGestureDetector.Gesture.FlickRightToLeft:
+                    OnFlick(gesture, touchInfoOnTouchBegin);
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -197,15 +201,35 @@ namespace DemonicCity.BattleScene
             if (isFullScreen)
             {
                 isFullScreen = false;
-                iTween.ValueTo(gameObject, iTween.Hash("from", FullScreenSize, "to", ImageSize, "time", fadingTime, "onupdatetarget", gameObject, "onupdate", "SyncImageSize", "ignoretimescale", true));
-                iTween.ValueTo(gameObject, iTween.Hash("from", 0, "to", 127f, "time", fadingTime, "onupdatetarget", gameObject, "onupdate", "SyncMaskPosition", "ignoretimescale", true));
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", FullScreenSize,
+                    "to", ImageSize,
+                    "time", fadingTime,
+                    "onstart", "OnstartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdate", "SyncImageSize",
+                    "onupdatetarget", gameObject,
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
+                    "ignoretimescale", true));
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", 0,
+                    "to", 127f,
+                    "time", fadingTime,
+                    "onupdatetarget", gameObject,
+                    "onupdate", "SyncMaskPosition",
+                    "ignoretimescale", true));
 
                 popupedTutorialImages.ForEach(image =>
                 {
                     myIndex = popupedTutorialImages.IndexOf(image);
                     spacing = width * -(targetIndex - myIndex);
                     vec = new Vector3(spacing, 0);
-                    iTween.MoveTo(image.gameObject, iTween.Hash("position", vec, "time", fadingTime, "islocal", true, "ignoretimescale", true));
+                    iTween.MoveTo(image.gameObject, iTween.Hash(
+                        "position", vec,
+                        "time", fadingTime,
+                        "islocal", true,
+                        "ignoretimescale", true));
                 });
 
                 currentImage = popupedTutorialImages.Find(i => i.sprite.name == currentItem.Sprite.name);
@@ -228,15 +252,36 @@ namespace DemonicCity.BattleScene
                     "onstarttarget", gameObject,
                     "onupdatetarget", gameObject,
                     "onupdate", "SyncImageSize",
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
                     "ignoretimescale", true));
-                iTween.ValueTo(gameObject, iTween.Hash("from", 127f, "to", 0f, "time", fadingTime, "onupdatetarget", gameObject, "onupdate", "SyncMaskPosition", "ignoretimescale", true));
+
+                iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", 127f,
+                    "to", 0f,
+                    "time", fadingTime,
+                    "onstart", "OnStartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdate", "SyncMaskPosition",
+                    "onupdatetarget", gameObject,
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
+                    "ignoretimescale", true));
 
                 popupedTutorialImages.ForEach(image =>
                 {
                     myIndex = popupedTutorialImages.IndexOf(image);
                     spacing = FullScreenSize.x * -(targetIndex - myIndex);
                     vec = new Vector3(spacing, 0);
-                    iTween.MoveTo(image.gameObject, iTween.Hash("position", vec, "time", fadingTime, "islocal", true, "ignoretimescale", true));
+                    iTween.MoveTo(image.gameObject, iTween.Hash(
+                        "position", vec,
+                        "time", fadingTime,
+                        "onstart", "OnStartTutorialWindowAnimation",
+                        "onstarttarget", gameObject,
+                        "oncomplete", "OnCompleteTutorialWindowAnimation",
+                        "oncompletetarget", gameObject,
+                        "islocal", true,
+                        "ignoretimescale", true));
                 });
 
                 currentImage = popupedTutorialImages.Find(i => i.sprite.name == currentItem.Sprite.name);
@@ -323,11 +368,31 @@ namespace DemonicCity.BattleScene
             {
                 case Index.Next:
                     toPosition = tutorialImagesParent.transform.localPosition + new Vector3(-amount, 0, 0);
-                    iTween.ValueTo(gameObject, iTween.Hash("from", fromPosition, "to", toPosition, "time", fadingTime, "onupdate", "SyncPosition", "onupdatetarget", gameObject, "ignoretimescale", true));
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "from", fromPosition,
+                        "to", toPosition,
+                        "time", fadingTime,
+                        "onstart", "OnStartTutorialWindowAnimation",
+                        "onstarttarget", gameObject,
+                        "onupdate", "SyncPosition",
+                        "onupdatetarget", gameObject,
+                        "oncomplete", "OnCompleteTutorialWindowAnimation",
+                        "oncompletetarget", gameObject,
+                        "ignoretimescale", true));
                     break;
                 case Index.Previous:
                     toPosition = tutorialImagesParent.transform.localPosition + new Vector3(+amount, 0, 0);
-                    iTween.ValueTo(gameObject, iTween.Hash("from", fromPosition, "to", toPosition, "time", fadingTime, "onupdate", "SyncPosition", "onupdatetarget", gameObject, "ignoretimescale", true));
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "from", fromPosition,
+                        "to", toPosition,
+                        "time", fadingTime,
+                        "onstart", "OnStartTutorialWindowAnimation",
+                        "onstarttarget", gameObject,
+                        "onupdate", "SyncPosition",
+                        "onupdatetarget", gameObject,
+                        "oncomplete", "OnCompleteTutorialWindowAnimation",
+                        "oncompletetarget", gameObject,
+                        "ignoretimescale", true));
                     break;
                 case Index.Last:
                     break;
@@ -347,7 +412,17 @@ namespace DemonicCity.BattleScene
             popupedTutorialImages.ForEach(image =>
             {
 #if true
-                iTween.ValueTo(image.gameObject, iTween.Hash("from", Color.white, "to", Color.clear, "time", 1f, "onupdatetarget", gameObject, "onupdate", "SyncImageColor", "ignoretimescale", true));
+                iTween.ValueTo(image.gameObject, iTween.Hash(
+                    "from", Color.white,
+                    "to", Color.clear,
+                    "time", 1f,
+                    "onstart", "OnStartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdate", "SyncImageColor",
+                    "onupdatetarget", gameObject,
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
+                    "ignoretimescale", true));
 #else
                 if (image.sprite.name == currentItem.Sprite.name)
                 {
