@@ -12,6 +12,8 @@ namespace DemonicCity.BattleScene
     /// </summary>
     public class PlayerAttackState : StatesBehaviour
     {
+        /// <summary>マギアのスキルごとの音声素材</summary>
+        [SerializeField] MagiaSkillAudioMaterials audioMaterials;
         /// <summary>Animator of magia</summary>
         [SerializeField] Animator magiaAnimator;
         /// <summary>攻撃アニメーションの途中からゲージの減少処理を挟む為の調整係数</summary>
@@ -20,6 +22,9 @@ namespace DemonicCity.BattleScene
         [SerializeField] BuffTextBox buffTextBox;
         [SerializeField] float waitTime = .5f;
 
+        /// <summary>再生対象の音声素材</summary>
+        MagiaSkillAudioMaterials.MagiaSkillAudioMaterial targetMaterial;
+
         /// <summary>
         /// Start this instance.
         /// </summary>
@@ -27,7 +32,8 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがPlayerAttack以外の時は処理終了
+                // StateがPlayerAttack以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerAttack || m_battleManager.m_StateMachine.PreviousStateIsPause)
                 {
                     return;
                 }
@@ -48,7 +54,8 @@ namespace DemonicCity.BattleScene
                 // =====================
                 // イベント呼び出し : SkillJudger,強化
                 // =====================
-                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount); // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                // SkillManagerのイベントを呼び出してPassiveSkillをステータスに反映させる
+                m_skillManager.m_skillJudger.Invoke(m_magia.MyPassiveSkill, SkillManager.Timing.Enhancement, m_panelCounter.DestructionCount);
                 StartCoroutine(ActivateSkill(false)); // 強化の演出開始
             });
         }
@@ -64,6 +71,32 @@ namespace DemonicCity.BattleScene
         }
 
         /// <summary>
+        /// スキル音声を再生
+        /// </summary>
+        public void PlaySkillVoice()
+        {
+            Debug.Log(targetMaterial.skillTag.ToString());
+            m_soundManager.PlayWithFade(SoundManager.SoundTag.Voice, targetMaterial.VoiceClip);
+        }
+
+        /// <summary>
+        /// スキルSEを再生
+        /// </summary>
+        public void PlaySkillSE()
+        {
+            Debug.Log(targetMaterial.skillTag.ToString());
+            m_soundManager.PlayWithFade(SoundManager.SoundTag.SE, targetMaterial.SEClip);
+        }
+
+        /// <summary>
+        /// 音声を停止
+        /// </summary>
+        public void StopVoice()
+        {
+            m_soundManager.StopWithFade(SoundManager.SoundTag.Voice);
+        }
+
+        /// <summary>
         /// 発動可能なスキルのアニメーションを行う<see langword="true"/>is Attack animation, and <see langword="false"/>is Enhance animation.
         /// </summary>
         /// <param name="isAttack">攻撃演出かどうか</param>
@@ -72,7 +105,6 @@ namespace DemonicCity.BattleScene
         {
             var passiveSkills = m_battleManager.GetComponentsInChildren<PassiveSkill>().ToList();
             var isSkip = Debugger.BattleDebugger.Instance.EffectSkip;
-
             // 各スキルコンポーネントを取得して,コンポーネントがスキル発動可能フラグを建てている,SkipFlagが建っていない場合,発動アニメーションを行う
             foreach (var skill in passiveSkills)
             {
@@ -82,6 +114,17 @@ namespace DemonicCity.BattleScene
                     {
                         continue;
                     }
+
+                    // スキルタグと同じタグを抽出して,適切な音声が再生される様にする
+                    foreach (var material in audioMaterials.Materials)
+                    {
+                        if (material.skillTag == skill.GetPassiveSkill)
+                        {
+                            targetMaterial = material;
+                            break;
+                        }
+                    }
+
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);

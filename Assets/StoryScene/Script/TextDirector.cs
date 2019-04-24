@@ -242,11 +242,13 @@ namespace DemonicCity.StoryScene
                     if (tmp != null)
                     {
                         StartCoroutine(MoveObject(characters.Find(item => item.GetComponent<FaceChanger>().charName == tmp.name), targetPositions[(int)tmp.posTag], moveTime, false));
-                        leaveCharName = tmp.name;
+                        textManager.talker[(int)posTag] = tmp.name;
+                        //leaveCharName = tmp.name;
                     }
                     else
                     {
-                        leaveCharName = CharName.None;
+                        textManager.talker[(int)posTag] = CharName.None;
+                        //leaveCharName = CharName.None;
                     }
                     if (posTag == PositionTag.Center)
                     {
@@ -271,9 +273,9 @@ namespace DemonicCity.StoryScene
 
             }
         }
-        void Coloring(Color color)
+        void Coloring(Color color, bool toNext = true)
         {
-            StartCoroutine(ChangeColor(blackOut, color, 0.5f));
+            StartCoroutine(ChangeColor(blackOut, color, 0.5f, toNext));
         }
         void Clear()
         {
@@ -405,15 +407,25 @@ namespace DemonicCity.StoryScene
 
         public void PopWindow(string content)
         {
-            textManager.TextClear();
+            Coloring(Color.black, false);
             WindowTag windowTag;
             if (EnumCommon.TryParse(content, out windowTag))
             {
-                popCanvas.gameObject.SetActive(true);
-                Instantiate(popWindows[(int)windowTag], popCanvas);
+                StartCoroutine(WaitPopWindow(windowTag));
             }
-            EndStaging();
         }
+        IEnumerator WaitPopWindow(WindowTag windowTag)
+        {
+            yield return new WaitWhile(() => textManager.isStaging);
+            textManager.isStaging = true;
+            textManager.TextClear();
+
+            popCanvas.gameObject.SetActive(true);
+            Instantiate(popWindows[(int)windowTag], popCanvas);
+
+            //EndStaging();
+        }
+
         public void PopWindow(WindowTag windowTag)
         {
             popCanvas.gameObject.SetActive(true);
@@ -510,7 +522,7 @@ namespace DemonicCity.StoryScene
                 fromColor.b += diffB * Time.deltaTime / time;
                 fromColor.a += diffA * Time.deltaTime / time;
                 targetObject.GetComponent<Image>().color = fromColor;
-                Debug.Log(fromColor);
+                //Debug.Log(fromColor);
                 yield return null;
             }
             Debug.Log("end");

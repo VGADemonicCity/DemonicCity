@@ -7,6 +7,7 @@ namespace DemonicCity.BattleScene
     public class WinState : StatesBehaviour
     {
         [SerializeField] GameObject resultWindow;
+        [SerializeField] MagiaAudioPlayer magiaAudioPlayer;
 
         /// <summary>
         /// Start this instance.
@@ -25,16 +26,31 @@ namespace DemonicCity.BattleScene
                 //=======================
                 //Resultのポップアップ等の処理を書く予定
                 //=======================
-
-                // TODO: 適正レベルに応じて総街破壊数に倍率処理を入れる
-
-
                 m_panelCounter.TotalDestructionCount = GetExpForRatio(m_panelCounter.TotalDestructionCount);
 
+                StartCoroutine(ProcessingWinAnimation());
 
-                // りょうくんのリザルト画面呼び出し
-                resultWindow.SetActive(true);
             });
+        }
+
+        /// <summary>
+        /// アニメーションや音声などの非同期処理を終えてからリザルト画面を呼び出す
+        /// </summary>
+        /// <returns></returns>
+        IEnumerator ProcessingWinAnimation()
+        {
+            float waitTime;
+            switch (m_chapter.storyProgress)
+            {
+                case Progress.StoryProgress.Ixmagina:
+                    waitTime = magiaAudioPlayer.PlayVoiceInTheIxmagina();
+                    yield return new WaitForSeconds(waitTime);
+                    break;
+                default:
+                    break;
+            }
+            // りょうくんのリザルト画面呼び出し
+            resultWindow.SetActive(true);
         }
 
 

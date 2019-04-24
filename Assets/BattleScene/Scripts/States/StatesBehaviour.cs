@@ -36,6 +36,8 @@ namespace DemonicCity.BattleScene
         protected SpriteRenderer m_background;
         /// <summary>その章で使うChapterクラス</summary>
         protected Chapter m_chapter;
+        /// <summary>sound manager</summary>
+        protected SoundManager m_soundManager;
 
         /// <summary>
         /// Awake this instance.
@@ -43,11 +45,12 @@ namespace DemonicCity.BattleScene
         protected virtual void Awake()
         {
             m_magia = Magia.Instance; // Magiaの参照取得
-            m_gameManager = GameManager.Instance; // Magiaの参照取得
             m_skillManager = SkillManager.Instance; // SkillManagerの参照取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
             m_panelManager = PanelManager.Instance; // PanelManagerの参照取得
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得
+            m_gameManager = GameManager.Instance; // Magiaの参照取得
+            m_soundManager = SoundManager.Instance;
             m_panelFrameManager = PanelFrameManager.Instance; // PanelFrameManagerの参照取得
             m_magiaHPGauge = GameObject.Find("MagiaHPGauge").GetComponentInChildren<HitPointGauge>();
             m_enemyHPGauge = GameObject.Find("EnemyHPGauge").GetComponentInChildren<HitPointGauge>();

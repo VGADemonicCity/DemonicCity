@@ -152,6 +152,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1670894891924112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4880825103021462}
+  - component: {fileID: 212364808002110570}
+  - component: {fileID: 114785653873603552}
+  m_Layer: 0
+  m_Name: MagicCircle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4293241256990584
 Transform:
   m_ObjectHideFlags: 1
@@ -220,9 +237,23 @@ Transform:
   - {fileID: 4596012782248328}
   - {fileID: 4410256117347438}
   - {fileID: 4887146168630968}
+  - {fileID: 4880825103021462}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4880825103021462
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670894891924112}
+  m_LocalRotation: {x: 0.20356739, y: 0.5433952, z: -0.7626613, w: 0.28570932}
+  m_LocalPosition: {x: -1.98, y: -1.95, z: 0}
+  m_LocalScale: {x: 0.11551407, y: 0.11551407, z: 0.11551404}
+  m_Children: []
+  m_Father: {fileID: 4691038718456576}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 70.94, y: 0, z: 941.074}
 --- !u!4 &4883720955422510
 Transform:
   m_ObjectHideFlags: 1
@@ -588,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 1
-  targetStory: 128
+  targetStory: 16
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -612,8 +643,8 @@ MonoBehaviour:
     HitPoint: 0
     Attack: 0
     Defense: 0
-  LoadStatusFromInspector: 0
-  TargetMagiaLevel: 38
+  LoadStatusFromInspector: 1
+  TargetMagiaLevel: 34
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -668,6 +699,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c358759b966a4e6e82ec6acd2137326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioMaterials: {fileID: 11400000, guid: d0bdc98440aa1274dbbf67919179b211, type: 2}
   magiaAnimator: {fileID: 0}
   adjustmentCoefficent: 0.5
   buffTextBox: {fileID: 0}
@@ -854,6 +886,18 @@ MonoBehaviour:
   m_timing: 1
   enhanceType: 0
   m_incease: 0.015
+--- !u!114 &114785653873603552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670894891924112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3e77aed322bb4abc90f88769620cacb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_angle: 100
 --- !u!114 &114844704490148818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -867,6 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_enemiesMover: {fileID: 0}
   waveTitle: {fileID: 0}
+  magiaAudioPlayer: {fileID: 0}
   firstWaitTime: 2
 --- !u!114 &114901776095078312
 MonoBehaviour:
@@ -899,6 +944,7 @@ MonoBehaviour:
   m_enemiesMover: {fileID: 0}
   backgroundCtrl: {fileID: 0}
   waveTitle: {fileID: 0}
+  magiaAudioPlayer: {fileID: 0}
 --- !u!114 &114949723133331002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -911,6 +957,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resultWindow: {fileID: 0}
+  magiaAudioPlayer: {fileID: 0}
 --- !u!114 &114974920874610500
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -922,9 +969,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff8da14bd824437cb830b1d2d613157, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 31
+  m_levelCondition: 300
   m_countCondition: 16
   m_passiveSkill: 8
   m_timing: 0
   enhanceType: 0
   m_incease: 0.5
+--- !u!212 &212364808002110570
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1670894891924112}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 469756773
+  m_SortingLayer: 7
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: b9c808fbd633e2d4e8d7428ebeab15c4, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 14.21, y: 16.16}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0

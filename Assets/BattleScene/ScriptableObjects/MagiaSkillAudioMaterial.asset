@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f052aea0ad2f4bb4cb99ace4e94a8254, type: 3}
+  m_Name: MagiaSkillAudioMaterial
+  m_EditorClassIdentifier: 
+  Materials:
+  - VoiceClip: {fileID: 8300000, guid: 27f30723f42e8ce4abe56f9e7a3ca21c, type: 3}
+    SEClip: {fileID: 8300000, guid: 1c9c5b17c2a01a04698061471eb01275, type: 3}
+    skillTag: 1
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: f6e7d3352e0e55547a3717f88bf9563c, type: 3}
+    skillTag: 2
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: 6f0138b4d858e8f4cbee2d53a0bd56fe, type: 3}
+    skillTag: 4
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: e9c6004921d2e9f49b7f20729f3f8636, type: 3}
+    skillTag: 8
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: e2fff8f216f78cb4ba5794bceac74067, type: 3}
+    skillTag: 16
+  - VoiceClip: {fileID: 8300000, guid: 944be77fb94bc044caae6a1540fa5593, type: 3}
+    SEClip: {fileID: 8300000, guid: 99fc6d33ec3ff064d9d041d90b111bfa, type: 3}
+    skillTag: 32
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: 5557a6ce4fc8a024c80e08a38ef25e40, type: 3}
+    skillTag: 64
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: af6771cdd18ef764781bc4f13e96f251, type: 3}
+    skillTag: 128
+  - VoiceClip: {fileID: 8300000, guid: 68095d9a11bb86548862d83a3dc5a408, type: 3}
+    SEClip: {fileID: 8300000, guid: 015cd91794e3f9c49a9eda73c37d189b, type: 3}
+    skillTag: 256
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: 6433aadbed06c0c4f9548779228b385e, type: 3}
+    skillTag: 512
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: b2fec2690ebee3545a812db84e201194, type: 3}
+    skillTag: 1024
+  - VoiceClip: {fileID: 8300000, guid: fea477066ce5b1f4bb20916e114cc7d6, type: 3}
+    SEClip: {fileID: 8300000, guid: 8f298ce146b45374db95ceddac7e865f, type: 3}
+    skillTag: 2048
+  - VoiceClip: {fileID: 0}
+    SEClip: {fileID: 8300000, guid: 39423aba86e259144a3b2b03a6bfb238, type: 3}
+    skillTag: 4096

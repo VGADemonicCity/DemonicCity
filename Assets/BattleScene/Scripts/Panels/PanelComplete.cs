@@ -12,9 +12,11 @@ namespace DemonicCity.BattleScene
         [SerializeField] AnimationClip cutIn;
         [SerializeField] AnimationClip skill;
         [SerializeField] AudioClip cutinVoice;
+        [SerializeField] AudioClip skillActivatingSE;
         [SerializeField] AudioClip skillActivatingVoice;
 
         SoundManager soundManager;
+
 
         Animator animator;
         bool isSkipEffect;
@@ -23,23 +25,64 @@ namespace DemonicCity.BattleScene
         {
             animator = GetComponent<Animator>();
             isSkipEffect = Debugger.BattleDebugger.Instance.EffectSkip;
+            soundManager = SoundManager.Instance;
         }
 
+        /// <summary>
+        /// カットインアニメーション再生
+        /// </summary>
+        /// <returns></returns>
         float CuttingIn()
         {
             animator.CrossFadeInFixedTime(cutIn.name, 0f);
             return cutIn.length;
         }
 
+        /// <summary>
+        /// 朱雀炎掌スキルアニメーション再生
+        /// </summary>
+        /// <returns></returns>
         float PlaySkillAnimation()
         {
             animator.CrossFadeInFixedTime(skill.name, 0);
             return skill.length;
         }
 
-        public void PlayCompleteSE()
+        /// <summary>
+        /// 朱雀炎掌のSE再生
+        /// </summary>
+        /// <returns></returns>
+        public void PlayPerfectSkillVoice()
         {
-            GetComponent<AudioSource>().Play();
+            soundManager.PlayWithFade(SoundManager.SoundTag.Voice, skillActivatingVoice);
+        }
+
+        /// <summary>
+        /// 朱雀炎掌発動時のvoice再生
+        /// </summary>
+        /// <returns></returns>
+        public void PlayPerfectSkillSE()
+        {
+            soundManager.PlayWithFade(SoundManager.SoundTag.SE, skillActivatingSE);
+        }
+
+        /// <summary>
+        /// カットイン時のvoice再生
+        /// </summary>
+        /// <returns></returns>
+        public void PlayCutInVoice()
+        {
+            soundManager.PlayWithFade(SoundManager.SoundTag.Voice, cutinVoice);
+        }
+
+        public void StopSE()
+        {
+            soundManager.StopWithFade(SoundManager.SoundTag.SE);
+        }
+
+        public void StopVoice()
+        {
+            soundManager.StopWithFade(SoundManager.SoundTag.Voice);
         }
 
         /// <summary>

@@ -160,6 +160,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7fd94802bb0dd6b42b1fda22ff5b1439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttackState: {fileID: 0}
+  battleStartVoiceMaterials: {fileID: 11400000, guid: c77debca4c1978d4bb55c1c812622a96,
+    type: 2}
+  AfterEliminatedVoiceInIxMagina: {fileID: 8300000, guid: ea898bc68c676384a8604c31ee6e0040,
+    type: 3}
 --- !u!212 &212065876388743840
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -246,7 +251,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 6.5, y: 2}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -292,7 +297,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 2.56, y: 2.56}
+  m_Size: {x: 1.92, y: 1.92}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
