@@ -66,7 +66,7 @@ namespace DemonicCity.ResultScene
         private GameObject[] masterdSkillNameText = null;
 
         /// <summary>各スキルを習得するレベル</summary>
-        private int[] skillMasterdLevelList = { 1, 11, 23, 31, 44, 58, 70, 82, 100, 111, 136, 160, 181, 198 };
+        private int[] skillMasterdLevelList = { 1, 11, 23, 44, 58, 70, 82, 100, 111, 136, 160, 181, 198 };
 
         /// <summary>スキル名</summary>
         private string skillName;
@@ -225,10 +225,10 @@ namespace DemonicCity.ResultScene
                     skillName = "自己再生";
                     magia.MyPassiveSkill |= Magia.PassiveSkill.SelfRegeneration;
                     break;
-                case 31:
-                    skillName = "爆炎熱風柱";
-                    magia.MyPassiveSkill |= Magia.PassiveSkill.ExplosiveFlamePillar;
-                    break;
+                //case 31:
+                //    skillName = "爆炎熱風柱";
+                //    magia.MyPassiveSkill |= Magia.PassiveSkill.ExplosiveFlamePillar;
+                //    break;
                 case 44:
                     skillName = "紅蓮障壁";
                     magia.MyPassiveSkill |= Magia.PassiveSkill.CrimsonBarrier;
@@ -270,7 +270,6 @@ namespace DemonicCity.ResultScene
                     magia.MyPassiveSkill |= Magia.PassiveSkill.AllSkill;
                     break;
             }
-            Debug.Log(magia.MyPassiveSkill + "を習得した！");
             return skillName;
         }
 
@@ -330,7 +329,6 @@ namespace DemonicCity.ResultScene
                     getTotalStatusPoint += getStatusPoint;
                     statusPointDifferences.Add(getTotalStatusPoint);
                     requiredToNextLevelTotalExperience = GetRequiredTotalExperience(magia.Stats.Level);
-                    Debug.Log(requiredToNextLevelTotalExperience);
                     requiredExperiences.Add(requiredToNextLevelTotalExperience);
                 }
                 magia.MyExperience = totalExperience;
