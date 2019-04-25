@@ -435,7 +435,17 @@ namespace DemonicCity.StoryScene
 
         void Quake()
         {
-            StartCoroutine(QuakeObject(Camera.main.transform, 1f, 0.1f));
+            if (isQuake)
+            {
+                isQuake = false;
+            }
+            else
+            {
+                isQuake = true;
+                StartCoroutine(QuakeObject(Camera.main.transform, 1f, 0.1f));
+            }
+
+            EndStaging();
         }
 
 
@@ -450,25 +460,24 @@ namespace DemonicCity.StoryScene
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
         }
 
+
+        bool isQuake = false;
         IEnumerator QuakeObject(Transform targetObj, float lim, float deflection)
         {
             Vector3 originPos = targetObj.localPosition;
-            float time = 0f;
 
-            while (time < lim)
+            while (isQuake)
             {
                 float x = originPos.x + UnityEngine.Random.Range(-1f, 1f) * deflection;
                 float y = originPos.y + UnityEngine.Random.Range(-1f, 1f) * deflection;
 
                 targetObj.localPosition = new Vector3(x, y, originPos.z);
 
-                time += Time.deltaTime;
 
                 yield return null;
             }
             targetObj.localPosition = originPos;
 
-            EndStaging();
 
         }
 

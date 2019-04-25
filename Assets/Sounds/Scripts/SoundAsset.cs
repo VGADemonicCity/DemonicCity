@@ -20,6 +20,7 @@ namespace DemonicCity
             BattleCStd,
             BattleCBoss,
             ThemaInst,
+            ThemeSong,
         }
 
         public enum SETag

@@ -36,7 +36,7 @@ namespace DemonicCity.HomeScene
         {
             ///チュートリアル終了か同課の確認
             Progress progress = Progress.Instance;
-            if (progress.TutorialCheck(Progress.TutorialFlag.Home))
+            if (!progress.TutorialCheck(Progress.TutorialFlag.Home))
             {
                 tutorial.Popup();
                 progress.SetTutorialProgress(Progress.TutorialFlag.Home, true);
