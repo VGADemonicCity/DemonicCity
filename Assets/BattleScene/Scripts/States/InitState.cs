@@ -80,15 +80,7 @@ namespace DemonicCity.BattleScene
         void Initialize()
         {
             var debugger = Debugger.BattleDebugger.Instance;
-            if (debugger.UseTargetStory)
-            {
-                m_chapter = ChapterManager.Instance.GetChapter(debugger.TargetStory);
-            }
-            else
-            {
-                // その章のChapterを取得
-                m_chapter = ChapterManager.Instance.GetChapter();
-            }
+
             Debug.Log(m_chapter.name);
             Debug.Log(m_chapter.chapterTitle);
 
@@ -121,6 +113,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void SpawnEnemies()
         {
+            Debug.Log(m_chapter.enemiesIds.Count);
             m_enemiesFactory = EnemiesFactory.Instance;
             m_battleManager.EnemyObjects = m_enemiesFactory.Create(m_chapter);
 
