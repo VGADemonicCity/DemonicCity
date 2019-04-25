@@ -190,6 +190,8 @@ namespace DemonicCity.BattleScene
             }
         }
 
+
+
         /// <summary>
         /// ダブルタップを検知した時
         /// </summary>

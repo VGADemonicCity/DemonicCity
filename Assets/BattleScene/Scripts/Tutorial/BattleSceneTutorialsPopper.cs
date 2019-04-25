@@ -192,12 +192,16 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void OnPushClose()
         {
-            if (!tutorialInPauseMenu.isPlayingTutorialAnimation)
+            if (tutorialInPauseMenu != null)
             {
-                var battleManager = BattleManager.Instance;
-                battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
-                Destroy(popupSystem.popupedObject.transform.parent);
+                if (tutorialInPauseMenu.isPlayingTutorialAnimation)
+                {
+                    return;
+                }
             }
+            var battleManager = BattleManager.Instance;
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+            Destroy(popupSystem.popupedObject.transform.parent.gameObject);
         }
 
         /// <summary>

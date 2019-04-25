@@ -205,57 +205,57 @@ namespace DemonicCity.StrengthenScene
                                 SkillDescriptionManager(2);
                                 activeSkillDescriptionText = 2;
                                 break;
-                            case "ExplosiveFlamePillar":
+                            //case "ExplosiveFlamePillar":
+                            //    SkillDescriptionManager(3);
+                            //    activeSkillDescriptionText = 3;
+                             //   break;
+                            case "CrimsonBarrier":
                                 SkillDescriptionManager(3);
                                 activeSkillDescriptionText = 3;
                                 break;
-                            case "CrimsonBarrier":
+                            case "DevilsFistInfernoType":
                                 SkillDescriptionManager(4);
                                 activeSkillDescriptionText = 4;
                                 break;
-                            case "DevilsFistInfernoType":
+                            case "BraveHeartsIncarnation":
                                 SkillDescriptionManager(5);
                                 activeSkillDescriptionText = 5;
                                 break;
-                            case "BraveHeartsIncarnation":
+                            case "GreatCrimsonBarrier":
                                 SkillDescriptionManager(6);
                                 activeSkillDescriptionText = 6;
                                 break;
-                            case "GreatCrimsonBarrier":
+                            case "InfernosFist":
                                 SkillDescriptionManager(7);
                                 activeSkillDescriptionText = 7;
                                 break;
-                            case "InfernosFist":
+                            case "SatansCell":
                                 SkillDescriptionManager(8);
                                 activeSkillDescriptionText = 8;
                                 break;
-                            case "SatansCell":
+                            case "AmaterasuIncanation":
                                 SkillDescriptionManager(9);
                                 activeSkillDescriptionText = 9;
                                 break;
-                            case "AmaterasuIncanation":
+                            case "AmaterasuInferno":
                                 SkillDescriptionManager(10);
                                 activeSkillDescriptionText = 10;
                                 break;
-                            case "AmaterasuInferno":
+                            case "AmaterasuFlameWall":
                                 SkillDescriptionManager(11);
                                 activeSkillDescriptionText = 11;
                                 break;
-                            case "AmaterasuFlameWall":
+                            case "AllSkill":
                                 SkillDescriptionManager(12);
                                 activeSkillDescriptionText = 12;
                                 break;
-                            case "AllSkill":
+                            case "SuzakuFlameFist":
                                 SkillDescriptionManager(13);
                                 activeSkillDescriptionText = 13;
                                 break;
-                            case "SuzakuFlameFist":
+                            case "DevilsEye":
                                 SkillDescriptionManager(14);
                                 activeSkillDescriptionText = 14;
-                                break;
-                            case "DevilsEye":
-                                SkillDescriptionManager(15);
-                                activeSkillDescriptionText = 15;
                                 break;
 
                             //ここまで各スキル名の処理
