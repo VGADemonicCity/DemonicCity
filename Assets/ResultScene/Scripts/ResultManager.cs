@@ -119,7 +119,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
-           
+
             //クリアフラグを立てる
             progress.QuestClear();
             SavableSingletonBase<Progress>.Instance.Save();
@@ -138,7 +138,7 @@ namespace DemonicCity.ResultScene
 
                 isCalculation = false;
             }
-            
+
             //ステータスをセーブ
             SavableSingletonBase<Magia>.Instance.Save();
 
@@ -149,7 +149,7 @@ namespace DemonicCity.ResultScene
 
                     if (isCalculation)
                     {
-                          tapCount++;
+                        tapCount++;
 
                         if (tapCount == 1)
                         {
@@ -184,9 +184,9 @@ namespace DemonicCity.ResultScene
                             {
                                 SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);//会話シーンへ
                             }
-                            else if(!isPopup && !ChapterManager.Instance.GetChapter().isStory)
+                            else if (!isPopup && !ChapterManager.Instance.GetChapter().isStory)
                             {
-                                Instantiate(toNextWindow,backGround);//ホーム画面か次の章へ
+                                Instantiate(toNextWindow, backGround);//ホーム画面か次の章へ
                                 isPopup = true;
 
                             }
@@ -329,7 +329,8 @@ namespace DemonicCity.ResultScene
                     defenceDifference.Add(magia.Stats.Defense);
                     getTotalStatusPoint += getStatusPoint;
                     statusPointDifferences.Add(getTotalStatusPoint);
-                    requiredToNextLevelTotalExperience = magia.Stats.Level + 5;
+                    requiredToNextLevelTotalExperience = GetRequiredTotalExperience(magia.Stats.Level);
+                    Debug.Log(requiredToNextLevelTotalExperience);
                     requiredExperiences.Add(requiredToNextLevelTotalExperience);
                 }
                 magia.MyExperience = totalExperience;
@@ -347,6 +348,33 @@ namespace DemonicCity.ResultScene
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// レベルに応じた必要な総経験値を返す
+        /// </summary>
+        private int GetRequiredTotalExperience(int currentLevel)
+        {
+            int requiredExp = 0;
+
+            if (1 <= currentLevel && currentLevel <= 30)
+            {
+                requiredExp = 5;
+            }
+            else if (31 <= currentLevel && currentLevel <= 80)
+            {
+                requiredExp = 10;
+            }
+            else if (81 <= currentLevel && currentLevel <= 140)
+            {
+                requiredExp = 15;
+            }
+            else if (141 <= currentLevel && currentLevel <= 200)
+            {
+                requiredExp = 20;
+            }
+
+            return requiredExp;
         }
 
         /// <summary>レベルアップするときの演出</summary>
@@ -455,7 +483,7 @@ namespace DemonicCity.ResultScene
 
             getStatusPointText.text = 0.ToString();
 
-            requiredToNextLevelTotalExperience = beforeStatus.Level + 5;
+            requiredToNextLevelTotalExperience = GetRequiredTotalExperience(beforeStatus.Level);
             experienceGauge.maxValue = requiredToNextLevelTotalExperience;
             myExperience = magia.MyExperience;
             experienceGauge.value = myExperience;
