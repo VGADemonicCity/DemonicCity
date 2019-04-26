@@ -14,16 +14,6 @@ MonoBehaviour:
   texts:
   - charName: System
     cName: 12
-    sentence: Clear
-    face: 
-    faceIndex: 0
-    unknown: 
-    isUnknown: 0
-    stage: 
-    stageTag: 0
-    voiceData: {fileID: 0}
-  - charName: System
-    cName: 12
     sentence: Appear:Magia:Ally
     face: 
     faceIndex: 0
@@ -51,7 +41,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c46aa5f8192b2d54a80b454bb0283a43, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u2026\u2026\u8AB0?"
@@ -61,7 +51,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: fe5bfc4980510654bb5c49e05ae61fbd, type: 3}
   - charName: InvigoratedPhoenix
     cName: 7
     sentence: "\u304A\u3063\u3068\u3001\u3053\u3044\u3064\u306E\u4F53\u306E\u307E\u307E\u3060"
@@ -71,7 +61,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: b8cc82661b0de42438d5efaa0abc33ac, type: 3}
   - charName: System
     cName: 12
     sentence: Coloring:#000000
@@ -121,7 +111,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 1c43bd081a3da904ebf679407161f13e, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u2026\u2026\u3042\u305F\u3057?"
@@ -131,7 +121,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 7a7fa720da7a98641a67b5551741acad, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u5F85\u3063\u3066\u3044\u305F\u305E\u3001\u5668\u3088"
@@ -141,7 +131,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 2910ef830546ebd43a96062ba0e71b86, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u5668?\u3000\u4F55\u306E\u8A71?"
@@ -151,7 +141,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 653edcba0307f6041a31476bc0b02d44, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u4F55\u3067\u3042\u305F\u3057\u3068\u540C\u3058\u59FF\u3092\u3057\u3066\u3044\u308B\u306E?"
@@ -161,7 +151,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 036998e2d8c52b246beda6e37986ef7a, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u2026\u2026\u306A\u308B\u307B\u3069"
@@ -171,7 +161,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 8fbcacbdf66b44f40926000d1c530d6c, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u9577\u3044\u6642\u9593\u96E2\u308C\u305F\u305B\u3044\u3067\u65B0\u305F\u306A\u7CBE\u795E\u304C\u5BBF\u3063\u305F\u3063\u3066\u3044\u3046\u3053\u3068\u304B"
@@ -181,7 +171,7 @@ MonoBehaviour:
     isUnknown: 1
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 449f4bdaf0b81da4e883d7e3264401ef, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u306F\u30A4\u30AF\u30B9\u30DE\u30AE\u30CA\u3002\u5148\u4EE3\u9B54\u738B\u3060\u3063\u305F\u8005\u3060"
@@ -191,7 +181,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 9347952a5fa81da43bcef30f41f91a48, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3061\u306A\u307F\u306B\u4FFA\u69D8\u306F\u9B54\u529B\u3055\u3048\u3042\u308C\u3070\u3001\u3042\u3089\u3086\u308B\u3082\u306E\u306B\u5909\u8EAB\u3067\u304D\u308B"
@@ -211,7 +201,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 7633a44b2b8384b42a2826d3bdab3dc7, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u30AF\u30C3\u30AF\u30C3\u30AF\u30C3"
@@ -221,7 +211,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: a824afdcfa237d34cb04766f02c20f90, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u305D\u306E\u59FF\u3060\u3068\u89AA\u5B50\u306B\u601D\u3046\u306E\u306F\u3057\u3087\u3046\u304C\u306D\u3047\u3088\u306A"
@@ -231,7 +221,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 4cdebb58189212941a9cab559966247f, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u3068\u304A\u524D\u306F\u4E00\u3064\u306E\u5B58\u5728\u3060\u3063\u305F\u306E\u3055"
@@ -241,7 +231,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: e2442ca38ab59994fbcd13a17416a1e5, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3064\u307E\u308A\u3001\u305D\u306E\u4F53\u306E\u672C\u6765\u306E\u6301\u3061\u4E3B\u3055"
@@ -251,7 +241,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 75c8e48815b37a241b42550661d46ec1, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u2026\u2026\u2026\u2026"
@@ -261,7 +251,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: e8a5edfc0b8cad845a23bd92c1ca329c, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u305F\u3057\u304C\u2026\u2026\u9B54\u738B\u3060\u3063\u305F?\u3000\u3044\u3084\u3001\u9055\u3046\u305D\u3046\u3058\u3083\u306A\u3044\u2026\u2026"
@@ -271,7 +261,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 13df1ad3bc348af46a1665701c08a11c, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u305F\u3057\u304C\u507D\u7269\u2026\u2026?"
@@ -281,7 +271,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 57724d1ec3764d4439cc697aa6044b3a, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u3001\u3042\u305F\u3057\u306F\u2026\u2026\u3042\u305F\u3057\u3058\u3083\u306A\u304B\u3063\u305F?"
@@ -291,7 +281,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c0903decce9a6784e9fcfa1eef8f0324, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3069\u3046\u3057\u3066\u2026\u2026\u3042\u305F\u3057\u306F\u2026\u2026"
@@ -301,7 +291,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 6daeb9226fc39d54682acbc9352c6149, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u843D\u3061\u7740\u3051"
@@ -311,7 +301,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 93c38f1947c05ee46b31ce45b6a82524, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u30C3!?"
@@ -321,7 +311,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: e9372b5774120e240b12392740dc23f5, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u304A\u524D\u306E\u304A\u304B\u3052\u3067\u8A08\u753B\u306F\u304B\u306A\u308A\u9032\u3093\u3060"
@@ -331,7 +321,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: bccd8a9c11eb9ac4aa10cb975c183496, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u8A08\u753B?\u3000\u4E00\u4F53\u305D\u308C\u304C\u306A\u3093\u3060\u3063\u3066\u8A00\u3046\u306E\u3088!"
@@ -341,7 +331,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 4807814ce3de2834592478d72ba8e128, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u6559\u3048\u3066\u3084\u308D\u3046"
@@ -361,7 +351,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 511c259e34b23374e81147f3649ccd5f, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3082\u3063\u3068\u9AD8\u307F\u3092\u76EE\u6307\u3059\u306B\u306F\u3082\u3063\u3068\u591A\u304F\u306E\u9B54\u529B\u304C\u5FC5\u8981\u3060\u3063\u305F"
@@ -371,7 +361,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c8dbc928f849faa4791a05fd96a2fa55, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u305D\u308C\u304C\u3053\u306E\u8A08\u753B\u306E\u59CB\u307E\u308A\u3060"
@@ -381,7 +371,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: d284b28e35492f54c93384a6afc92a18, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3060\u304C\u30D0\u30A2\u30EB\u306E\u3088\u3046\u306A\u5F37\u8005\u304B\u3089\u9B54\u529B\u3092\u596A\u3046\u306E\u306F\u96E3\u3057\u3044"
@@ -391,7 +381,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 134b54c8849d5e2498dbfd8465d2dd42, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u305D\u3053\u3067\u3001\u3042\u3048\u3066\u88CF\u5207\u3089\u305B\u305F"
@@ -401,7 +391,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: d4d7b9f961d73314ca6315cb21b5f6eb, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u306F\u30D0\u30A2\u30EB\u306B\u3084\u3089\u308C\u305F\u6642\u306B\u7CBE\u795E\u3092\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u306B\u79FB\u3057\u305F"
@@ -411,7 +401,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 990cdc3e986173f4ab1d565d60f4d7bc, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4F53\u306F\u30D5\u30A3\u30CB\u30AF\u30B9\u304C\u4FDD\u8B77\u3092\u3059\u308B"
@@ -421,7 +411,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 14361bcf16a9cb346ae75ee869e8f1b6, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u76EE\u899A\u3081\u305F\u4F53\u306F\u30D5\u30A3\u30CB\u30AF\u30B9\u306B\u3088\u3063\u3066\u5C0E\u304B\u308C\u3001\u30D0\u30A2\u30EB\u3068\u6226\u3044"
@@ -431,7 +421,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 161bf95e3ac844e4abc6820e0960bc5f, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u306F\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u3092\u901A\u3057\u3066\u7CBE\u795E\u3067\u30D0\u30A2\u30EB\u3092\u4E57\u3063\u53D6\u308D\u3046\u3068\u3059\u308B"
@@ -441,7 +431,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ff6fabf8338b6724db5a330dad82eab5, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3064\u307E\u308A\u4F53\u3068\u7CBE\u795E\u306E\u4E21\u65B9\u3092\u4F7F\u3063\u3066\u30D0\u30A2\u30EB\u3092\u5012\u3059\u4F5C\u6226\u3060\u3063\u305F\u308F\u3051\u3088"
@@ -451,7 +441,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: e274c153797a3564cacb3a2a2f19e443, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u7D50\u5C40\u3001\u3042\u306E\u5AC9\u59AC\u6DF1\u3044\u30D0\u30AB\u5973\u304C\u88CF\u5207\u3063\u305F\u305B\u3044\u3067\u8A08\u753B\u304C\u5909\u66F4\u306B\u306A\u3063\u305F\u304C\u306A"
@@ -461,7 +451,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ee460b804ec2b1f45a2cf8b7029bf6ae, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u2026\u2026\u624B\u306B\u5165\u308C\u3089\u308C\u305F\u306E\u306F\u30D5\u30A3\u30CB\u30AF\u30B9\u306E\u9B54\u529B\u3060\u3051\u3063\u3066\u3053\u3068?"
@@ -471,7 +461,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: cebfadb2319a69946b98646c206dc710, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u77E5\u3063\u3066\u3044\u308B\u304B?\u3000\u6D88\u6EC5\u3057\u305F\u9B54\u65CF\u306E\u9B54\u529B\u306F\u5927\u5730\u306B\u9084\u308B\u3093\u3060\u305E"
@@ -481,7 +471,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 57eff00f6a866264086a68a8842eac0f, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u307E\u3055\u304B!?"
@@ -491,7 +481,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: d28710295655a584192f3358b8231e0a, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u304A\u524D\u304C\u3053\u3053\u307E\u3067\u6765\u308B\u307E\u3067\u305F\u304F\u3055\u3093\u6BBA\u3057\u305F\u308D?"
@@ -501,7 +491,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 241a4d618dabdf048b7fffdee8975395, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u304A\u304B\u3052\u3067\u3053\u306E\u9B54\u754C\u306E\u5927\u5730\u306B\u306F\u5927\u91CF\u306E\u9B54\u529B\u304C\u6E9C\u307E\u3063\u3066\u3044\u308B"
@@ -511,7 +501,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 54192c8b1481c8445a8fd3d809dcf13a, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u306F\u5927\u5730\u3068\u7E4B\u304C\u3063\u3066\u3044\u308B"
@@ -521,7 +511,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 0f7a9974faa2d49439feef4a5d741cf6, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u3068\u540C\u5316\u3057\u305F\u4FFA\u69D8\u306F\u305D\u306E\u9B54\u529B\u3092\u5438\u53CE\u3067\u304D\u308B\u306E\u3055"
@@ -531,7 +521,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: f7e589ccedc2ac24bb18c9b9f7752648, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u305D\u306E\u9B54\u529B\u3092\u624B\u306B\u5165\u308C\u3066\u4F55\u3092\u76EE\u6307\u3059\u3064\u3082\u308A?"
@@ -541,7 +531,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: b23b0f49a4be7ed4984424eee652c596, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u306F\u795E\u3092\u2026\u2026\u9B54\u795E\u3092\u76EE\u6307\u3059!"
@@ -551,7 +541,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: bb640e80bcdcbb5489494cb4fd3b6eac, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u305D\u3093\u306A\u3053\u3068\u306E\u305F\u3081\u306B\u2026\u2026!"
@@ -561,7 +551,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 7df6fa0fdf8a8b74aaac15f811242bb7, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3060\u304C\u5438\u53CE\u3059\u308B\u9B54\u529B\u306F\u81A8\u5927\u3060"
@@ -571,7 +561,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 8d5408ddf63b3a64a87a3923150a3b93, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u30D5\u30A3\u30CB\u30AF\u30B9\u306E\u4F53\u3058\u3083\u3042\u9650\u754C\u304C\u3042\u308B"
@@ -581,7 +571,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: fe9fa042a2781a542abd3b0e5844b6ab, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u305D\u308C\u306B\u8010\u3048\u3089\u308C\u308B\u4F53\u306F\u3001\u305D\u306E\u4F53\u3057\u304B\u3044\u306A\u3044\u3093\u3060\u3088"
@@ -591,7 +581,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: b57bcfe808f2fa94282a67ef41417716, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u4F55\u3067\u2026\u2026\u4F55\u3067\u3088\u2026\u2026"
@@ -601,7 +591,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 1581ec47e72febb4cb58d51e4a5c70f8, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u305F\u3057\u306F\u3001\u304A\u7236\u69D8\u306E\u305F\u3081\u306B\u9811\u5F35\u3063\u3066\u304D\u305F\u306E\u306B\u2026\u2026"
@@ -611,7 +601,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 37eb16d99948c714e809b0c1643ae360, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u65B0\u3057\u304F\u751F\u307E\u308C\u305F\u304A\u524D\u306F\u3042\u308B\u610F\u5473\u3001\u4FFA\u69D8\u306E\u5B50\u3060\u306A"
@@ -621,7 +611,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 83def0c947303cc4e850c9a49d772df2, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u826F\u304F\u9811\u5F35\u3063\u3066\u304F\u308C\u305F\u3002\u5F8C\u306F\u3086\u3063\u304F\u308A\u4F11\u3081"
@@ -631,7 +621,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 2eee953b738878f4da3379deda63a722, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4FFA\u69D8\u306E\u4E2D\u3067\u306A"
@@ -641,7 +631,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: cb96ce4a36d196b439590c575e553e76, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u65AD\u308B!"
@@ -651,7 +641,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 3aafc20bde2be8f45aeab03aa63829c6, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u305D\u3093\u306A\u3053\u3068\u306E\u305F\u3081\u306B\u3042\u305F\u3057\u306F\u81EA\u5206\u3092\u6368\u3066\u3089\u308C\u306A\u3044!"
@@ -661,7 +651,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 2c48b03b46de6b846abf9f2a2a0d8f67, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u672C\u5F53\u306B\u4FFA\u69D8\u306E\u4F53\u304B?"
@@ -671,7 +661,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: f8d8c1d823eb7f743817c317d965f022, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u201D\u529B\u201D\u304C\u3042\u308B\u306E\u3060!\u3000\u5168\u3066\u304C\u6B32\u3057\u304F\u306A\u308B\u306B\u6C7A\u307E\u3063\u3066\u3044\u308B\u3060\u308D\u3046!"
@@ -681,7 +671,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c8aca4826bd0a614ebde6a357b2ae23c, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u9B54\u529B\u304C\u6B32\u3057\u3044!"
@@ -691,7 +681,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: db26c0ce7e4a2df46a84371f303c9122, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u306A\u305C\u306A\u3089\u6B32\u3057\u3044\u304B\u3089!"
@@ -701,7 +691,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 1625f4a45a7806e4cbdbf4f7e7b034be, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u4E16\u754C\u304C\u6B32\u3057\u3044!"
@@ -711,7 +701,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 0be679d2f656d3545a3749311deab691, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3060\u3063\u3066\u4FFA\u69D8\u306E\u30E2\u30CE\u3060\u304B\u3089!"
@@ -721,7 +711,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ba4b3904980a7db41849017ff8c72753, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3060\u304B\u3089\u305D\u306E\u4F53\u3092\u3088\u3053\u305B\u3047!"
@@ -731,7 +721,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 9dce330c299a0dd45a6d52eb196268a6, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u601D\u3048\u3070\u3001\u3042\u305F\u3057\u306F\u675F\u7E1B\u3055\u308C\u3066\u3070\u304B\u308A\u3060\u3063\u305F"
@@ -741,7 +731,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: a35cabea0375ff24da4d92d96b902b35, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u5BDD\u3066\u3082\u899A\u3081\u3066\u3082\u304A\u7236\u69D8\u306E\u3001\u3044\u3084\u3001\u81EA\u5206\u81EA\u8EAB\u306E\u57F7\u5FF5\u304C"
@@ -751,7 +741,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 3a49f06b3f24c5c46b5b1ca3fed2ca61, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3044\u3064\u3082\u4ED8\u304D\u7E8F\u3063\u3066\u3044\u305F"
@@ -761,7 +751,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ea64a0f6f3fc39446a9ba0b38c5e2d3d, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3044\u3044\u52A0\u6E1B\u3001\u89E3\u653E\u3055\u305B\u3066"
@@ -771,7 +761,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 29f54dbd5fd555346a76c4439f9aa731, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u305F\u3057\u306F\u2026\u2026\u30DE\u30AE\u30A2\u3060!"
@@ -781,7 +771,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: d408e35eb5d3ef84fbbc5b5b03e3cf44, type: 3}
   - charName: SysTem
     cName: 12
     sentence: SceneTrans:Battle

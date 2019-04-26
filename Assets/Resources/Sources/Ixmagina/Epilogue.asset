@@ -32,16 +32,6 @@ MonoBehaviour:
     stage: 
     stageTag: 0
     voiceData: {fileID: 0}
-  - charName: System
-    cName: 12
-    sentence: Clear
-    face: 
-    faceIndex: 0
-    unknown: 
-    isUnknown: 1
-    stage: 
-    stageTag: 0
-    voiceData: {fileID: 0}
   - charName: Ixmagina
     cName: 9
     sentence: "\u30AF\u3001\u30AF\u30BD\u2026\u2026!"
@@ -51,7 +41,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ad9a96aa05b289d4fb08d85aef7896e3, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u3053\u306E\u8089\u4F53\u3067\u306F\u3001\u529B\u304C\u8DB3\u308A\u3093\u2026\u2026!"
@@ -61,7 +51,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: f0b221d5ee2d4f241b159de299817975, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u304A\u524D\u3088\u308A\u3001\u3042\u305F\u3057\u306E\u65B9\u304C\u5F37\u304B\u3063\u305F"
@@ -71,7 +61,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 83d91421334c45f4f92f52fbb6c682f4, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u305D\u308C\u3060\u3051\u3088"
@@ -81,7 +71,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 71dae8e20ea2c504bba334349acdb8ed, type: 3}
   - charName: Ixmagina
     cName: 9
     sentence: "\u304C\u3041\u3042\u3042\u3042\u3042\u3042\u3042\u3042!"
@@ -91,7 +81,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 1fff49ef9784a3f47bf7e2346d7ec4c1, type: 3}
   - charName: System
     cName: 12
     sentence: Leave:Ixmagina
@@ -111,7 +101,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 3dd6755af2af4ec4990398b5ba0794f6, type: 3}
   - charName: System
     cName: 12
     sentence: Item:Appear:Clown
@@ -131,7 +121,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 0dcc2303007a82b4eb824105cce03683, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3053\u308C\u306F\u3044\u3089\u306A\u3044\u304B\u306A"
@@ -141,7 +131,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 4f2d6060a40dfcd458e17af38b01a435, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3055\u3066\u3001\u3053\u308C\u304B\u3089\u3069\u3046\u3057\u3088\u3046"
@@ -151,7 +141,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c36ba519adf644b49bbaaf0055993d4b, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3042\u305F\u3057\u306E\u7F6A\u306F\u3053\u308C\u3067\u62ED\u3044\u5207\u308C\u305F\u308F\u3051\u3058\u3083\u306A\u3044\u3057"
@@ -161,7 +151,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 414e29689c4ef1643add08ff288fe4f1, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u7F6A\u6EC5\u307C\u3057\u306E\u65C5\u306B\u51FA\u3088\u3046\u2015\u2015"
@@ -171,7 +161,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 24f325611b3737a4bacad7965a3049cd, type: 3}
   - charName: System
     cName: 12
     sentence: Quake
@@ -191,7 +181,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: c7d2c4fff40702b4386aac148496d606, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u201D\u30B2\u30D8\u30CA\u30AF\u30E9\u30A6\u30F3\u201D\u304C\u66B4\u8D70\u3057\u3066\u308B!?"
@@ -201,7 +191,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: b650868b293e2c048a1d13eeab6a6d60, type: 3}
   - charName: System
     cName: 12
     sentence: Coloring:#000000
@@ -221,7 +211,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: af5cd06bf413f0d469d6d9b2be847899, type: 3}
   - charName: System
     cName: 12
     sentence: Item:Leave:Clown
@@ -234,7 +224,7 @@ MonoBehaviour:
     voiceData: {fileID: 0}
   - charName: System
     cName: 12
-    sentence: Quake
+    sentence: "\u63FA\u308C\u53CE\u307E\u308B"
     face: 
     faceIndex: 0
     unknown: 
@@ -281,7 +271,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 2aaa05158f0193f418686cdcf088cb25, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u3069\u3046\u306A\u3063\u305F\u306E?"
@@ -291,7 +281,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 71aa3d18900605d47b10fd1e1c46acd9, type: 3}
   - charName: Magia
     cName: 0
     sentence: "!?\u3000\u7A7A\u304C\u2026\u2026"
@@ -301,7 +291,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 0f1799f448af04b4694b2bb75ce58cda, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u4E00\u4F53\u4F55\u304C\u8D77\u3053\u308D\u3046\u3068\u3057\u3066\u3044\u308B\u306E\u2026\u2026?"
@@ -311,7 +301,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 108574ec5671ae44b8ec56b9a61839d7, type: 3}
   - charName: System
     cName: 12
     sentence: Coloring:#000000
@@ -324,7 +314,7 @@ MonoBehaviour:
     voiceData: {fileID: 0}
   - charName: System
     cName: 12
-    sentence: SceneTrans:EndCredit
+    sentence: SceneTrans:StaffCredit
     face: 
     faceIndex: 0
     unknown: 
