@@ -24,6 +24,14 @@ namespace DemonicCity
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
 
+        private void Awake()
+        {
+            SceneManager.sceneLoaded += (scene, mode) =>
+            {
+                TouchGestureDetector.Instance.onGestureDetected.RemoveAllListeners();
+            };
+        }
+
         /// <summary>
         /// 初期化
         /// </summary>
@@ -68,6 +76,8 @@ namespace DemonicCity
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
         public void FadeOut(SceneTitle sceneTitle, float fadeTime = 1f, FadeColor color = FadeColor.Black)
         {
+            TouchGestureDetector.Instance.onGestureDetected.RemoveAllListeners();
+
             if (fadeTime != 1f)
             {
                 m_fadeTime = fadeTime;
