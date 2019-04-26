@@ -412,11 +412,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 70
-  m_countCondition: 24
+  m_countCondition: 21
   m_passiveSkill: 64
   m_timing: 0
   enhanceType: 4
-  m_incease: 0.05
+  m_incease: 0.01
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -492,7 +492,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 111
-  m_countCondition: 32
+  m_countCondition: 30
   m_passiveSkill: 512
   m_timing: 0
   enhanceType: 3
@@ -549,8 +549,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfa60838c2a24796afd1e328078d815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 44
-  m_countCondition: 19
+  m_levelCondition: 40
+  m_countCondition: 16
   m_passiveSkill: 16
   m_timing: 0
   enhanceType: 2
@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 1
-  targetStory: 16
+  targetStory: 256
   magiaAvailableSkills: 
   magiaStatus:
     Level: 0
@@ -643,8 +643,8 @@ MonoBehaviour:
     HitPoint: 0
     Attack: 0
     Defense: 0
-  LoadStatusFromInspector: 1
-  TargetMagiaLevel: 34
+  LoadStatusFromInspector: 0
+  TargetMagiaLevel: 55
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 100
-  m_countCondition: 30
+  m_countCondition: 27
   m_passiveSkill: 256
   m_timing: 1
   enhanceType: 0
@@ -733,7 +733,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 136
-  m_countCondition: 34
+  m_countCondition: 32
   m_passiveSkill: 1024
   m_timing: 0
   enhanceType: 4
@@ -830,7 +830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 82
-  m_countCondition: 27
+  m_countCondition: 25
   m_passiveSkill: 128
   m_timing: 0
   enhanceType: 2
@@ -864,7 +864,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 160
-  m_countCondition: 35
+  m_countCondition: 33
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
@@ -880,12 +880,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785573e7e4dbb45998f203c666be7f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 58
-  m_countCondition: 21
+  m_levelCondition: 55
+  m_countCondition: 18
   m_passiveSkill: 32
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.015
+  m_incease: 0.02
 --- !u!114 &114785653873603552
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -925,7 +925,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 181
-  m_countCondition: 36
+  m_countCondition: 35
   m_passiveSkill: 4096
   m_timing: 0
   enhanceType: 2
@@ -964,7 +964,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1192228181428470}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8ff8da14bd824437cb830b1d2d613157, type: 3}
   m_Name: 
