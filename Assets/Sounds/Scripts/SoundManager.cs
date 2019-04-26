@@ -40,6 +40,7 @@ namespace DemonicCity
         [SerializeField] string title = "Title";
         [SerializeField] string battle = "Battle";
         [SerializeField] string story = "Story";
+        [SerializeField] string endCredit = "EndCredit";
 
         public EnemySkillSEAsset enemySkillSE;
         public SkillSEAsset magiaSkillSE;
@@ -77,7 +78,7 @@ namespace DemonicCity
         void BGMCheck(Scene scene, LoadSceneMode mode)
         {
             LoadVol();
-
+            StopWithFade(SoundTag.Voice);
             if (CurrentVol.vol[0])
             {
                 if (scene.name == story)
@@ -96,12 +97,14 @@ namespace DemonicCity
             }
             else if (scene.name == battle)
             {
-                Debug.LogWarning("Battle");
                 StopWithFade(SoundTag.BGM);
+            }
+            else if (scene.name == endCredit)
+            {
+                PlayWithFade(SoundAsset.BGMTag.ThemeSong);
             }
             else
             {
-
                 PlayWithFade(SoundAsset.BGMTag.Home);
             }
 

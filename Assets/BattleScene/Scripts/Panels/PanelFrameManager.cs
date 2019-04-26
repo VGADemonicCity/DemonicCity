@@ -34,6 +34,8 @@ namespace DemonicCity.BattleScene
             }
         }
 
+        public bool isSkillActivating { get; set; }
+
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float m_waitTime = 1f;
         /// <summary>フレームの位置を表すenum</summary>
@@ -47,20 +49,25 @@ namespace DemonicCity.BattleScene
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
+        BattleManager battleManager;
         /// <summary>パネル枠が動いている最中はフラグ</summary>
         bool isMoving;
 
         public void Start()
         {
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
+            battleManager = BattleManager.Instance;
+            isSkillActivating = true;
 
             // UnityEvent機能を使ってメソッドを登録する
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
-                if (isMoving || BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice) // 枠移動中の時は終了
+
+                if (isMoving || battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice ) // 枠移動中の時は終了
                 {
                     return;
                 }
+
                 switch (gesture) // タッチ情報が左右のフリックだったら
                 {
                     case TouchGestureDetector.Gesture.FlickLeftToRight: // 右フリックの時,枠が左にいないときはひとつ左に動かす

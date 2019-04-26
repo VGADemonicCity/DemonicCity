@@ -66,7 +66,7 @@ namespace DemonicCity.ResultScene
         private GameObject[] masterdSkillNameText = null;
 
         /// <summary>各スキルを習得するレベル</summary>
-        private int[] skillMasterdLevelList = { 1, 11, 23, 31, 44, 58, 70, 82, 100, 111, 136, 160, 181, 198 };
+        private int[] skillMasterdLevelList = { 1, 11, 23, 44, 58, 70, 82, 100, 111, 136, 160, 181, 198 };
 
         /// <summary>スキル名</summary>
         private string skillName;
@@ -89,6 +89,9 @@ namespace DemonicCity.ResultScene
         [SerializeField] private Slider experienceGauge = null;
         [SerializeField] private Image gaugeBackGround = null;
 
+        [SerializeField] private GameObject toNextWindow = null;
+        [SerializeField] private Transform backGround = null;
+        [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private float addAmount = 0;
         private bool isAnimation = false;
@@ -98,11 +101,9 @@ namespace DemonicCity.ResultScene
 
         int totalExperience = 0;
         int myExperience = 0;
-        [SerializeField] private GameObject toNextWindow = null;
-        [SerializeField] private Transform backGround = null;
-        [SerializeField] private float gaugeMoveSpeed = 0.05f;
 
         private bool isCalculation = true;
+        private bool isPopup = false;
 
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
@@ -118,7 +119,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
-           
+
             //クリアフラグを立てる
             progress.QuestClear();
             SavableSingletonBase<Progress>.Instance.Save();
@@ -137,7 +138,7 @@ namespace DemonicCity.ResultScene
 
                 isCalculation = false;
             }
-            
+
             //ステータスをセーブ
             SavableSingletonBase<Magia>.Instance.Save();
 
@@ -148,7 +149,7 @@ namespace DemonicCity.ResultScene
 
                     if (isCalculation)
                     {
-                          tapCount++;
+                        tapCount++;
 
                         if (tapCount == 1)
                         {
@@ -183,9 +184,11 @@ namespace DemonicCity.ResultScene
                             {
                                 SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);//会話シーンへ
                             }
-                            else
+                            else if (!isPopup && !ChapterManager.Instance.GetChapter().isStory)
                             {
-                                Instantiate(toNextWindow,backGround);//ホーム画面か次の章へ
+                                Instantiate(toNextWindow, backGround);//ホーム画面か次の章へ
+                                isPopup = true;
+
                             }
                         }
                     }
@@ -195,9 +198,10 @@ namespace DemonicCity.ResultScene
                         {
                             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Story);
                         }
-                        else
+                        else if (!isPopup && !ChapterManager.Instance.GetChapter().isStory)
                         {
-                            Instantiate(toNextWindow,backGround);
+                            Instantiate(toNextWindow, backGround);//ホーム画面か次の章へ
+                            isPopup = true;
                         }
                     }
                 }
@@ -221,10 +225,10 @@ namespace DemonicCity.ResultScene
                     skillName = "自己再生";
                     magia.MyPassiveSkill |= Magia.PassiveSkill.SelfRegeneration;
                     break;
-                case 31:
-                    skillName = "爆炎熱風柱";
-                    magia.MyPassiveSkill |= Magia.PassiveSkill.ExplosiveFlamePillar;
-                    break;
+                //case 31:
+                //    skillName = "爆炎熱風柱";
+                //    magia.MyPassiveSkill |= Magia.PassiveSkill.ExplosiveFlamePillar;
+                //    break;
                 case 44:
                     skillName = "紅蓮障壁";
                     magia.MyPassiveSkill |= Magia.PassiveSkill.CrimsonBarrier;
@@ -266,7 +270,6 @@ namespace DemonicCity.ResultScene
                     magia.MyPassiveSkill |= Magia.PassiveSkill.AllSkill;
                     break;
             }
-            Debug.Log(magia.MyPassiveSkill + "を習得した！");
             return skillName;
         }
 
@@ -325,7 +328,7 @@ namespace DemonicCity.ResultScene
                     defenceDifference.Add(magia.Stats.Defense);
                     getTotalStatusPoint += getStatusPoint;
                     statusPointDifferences.Add(getTotalStatusPoint);
-                    requiredToNextLevelTotalExperience = magia.Stats.Level + 5;
+                    requiredToNextLevelTotalExperience = GetRequiredTotalExperience(magia.Stats.Level);
                     requiredExperiences.Add(requiredToNextLevelTotalExperience);
                 }
                 magia.MyExperience = totalExperience;
@@ -343,6 +346,33 @@ namespace DemonicCity.ResultScene
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// レベルに応じた必要な総経験値を返す
+        /// </summary>
+        private int GetRequiredTotalExperience(int currentLevel)
+        {
+            int requiredExp = 0;
+
+            if (1 <= currentLevel && currentLevel <= 30)
+            {
+                requiredExp = 5;
+            }
+            else if (31 <= currentLevel && currentLevel <= 80)
+            {
+                requiredExp = 10;
+            }
+            else if (81 <= currentLevel && currentLevel <= 140)
+            {
+                requiredExp = 15;
+            }
+            else if (141 <= currentLevel && currentLevel <= 200)
+            {
+                requiredExp = 20;
+            }
+
+            return requiredExp;
         }
 
         /// <summary>レベルアップするときの演出</summary>
@@ -446,12 +476,12 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            // destructionCount = 50000;//debug
+            //destructionCount = 50000;//debug
             destructionCountText.text = destructionCount.ToString();
 
             getStatusPointText.text = 0.ToString();
 
-            requiredToNextLevelTotalExperience = beforeStatus.Level + 5;
+            requiredToNextLevelTotalExperience = GetRequiredTotalExperience(beforeStatus.Level);
             experienceGauge.maxValue = requiredToNextLevelTotalExperience;
             myExperience = magia.MyExperience;
             experienceGauge.value = myExperience;

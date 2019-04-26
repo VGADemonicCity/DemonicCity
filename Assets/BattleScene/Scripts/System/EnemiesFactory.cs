@@ -11,9 +11,6 @@ namespace DemonicCity
     /// </summary>
     public class EnemiesFactory : SingletonBase<EnemiesFactory>
     {
-        /// <summary>バトルに登場させる敵オブジェクトのリスト</summary>
-        List<GameObject> enemies = new List<GameObject>();
-
         /// <summary>
         /// Chapterクラスに設定されているIdを元にそのチャプターで登場する敵オブジェクトをIdの順番通りにリストにして返す
         /// </summary>
@@ -21,6 +18,7 @@ namespace DemonicCity
         /// <param name="chapter">Chapter.</param>
         public List<GameObject> Create(Chapter chapter)
         {
+            var enemies = new List<GameObject>();
             chapter.enemiesIds.ForEach((enemyId) =>
             {
                 enemies.Add(Resources.Load<GameObject>(enemyId.ToString()));

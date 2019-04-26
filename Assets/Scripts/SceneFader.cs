@@ -149,6 +149,7 @@ namespace DemonicCity
             Home,
             StorySelect,
             Strengthen,
+            EndCredit,
         }
 
         /// <summary>
