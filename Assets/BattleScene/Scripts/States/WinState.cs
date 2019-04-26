@@ -17,7 +17,7 @@ namespace DemonicCity.BattleScene
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
 
-                if (state != BattleManager.StateMachine.State.Win || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがWin以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.Win || m_battleManager.m_StateMachine.PreviousStateIsDebugging || m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがWin以外の時は処理終了
                 {
                     return;
                 }
