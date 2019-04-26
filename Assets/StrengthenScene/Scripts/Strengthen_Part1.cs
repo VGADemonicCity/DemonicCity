@@ -26,7 +26,7 @@ namespace DemonicCity.StrengthenScene
         private int currentAttack;
         /// <summary>現在の防御力</summary>
         private int currentDefence;
-        /// <summary>魔力値を200振り分けたときの固有ステータスの最大値</summary>
+        /// <summary>魔力値を全て振り分けたときの最大値</summary>
         private const int maxUniquePoint = 200;
 
         /// <summary>変動後の体力</summary>
@@ -117,67 +117,32 @@ namespace DemonicCity.StrengthenScene
         /// <summary>ウィンドウが閉じるときのアニメーション処理</summary>
         private IEnumerator ClosePopUpAnimation(GameObject window)
         {
-            window.GetComponent<Animator>().CrossFadeInFixedTime(PopUpAnimation.Close_PopUpWindow.ToString(), 0);
+            window.GetComponent<Animator>().CrossFadeInFixedTime(PopUpAnimation.Close_PopUpWindow.ToString(),0);
             yield return new WaitForSeconds(0.5f);
             window.SetActive(false);
         }
-
-        //public enum ButtonName
-        //{
-        //    BackToHomeSceneButton,
-        //    ShowSkillButton,
-        //    BackToAllocationWindow,
-        //    DevilsFist,
-        //    HighConcentrationMagicalAbsorption,
-        //    SelfRegeneration,
-        //    ExplosiveFlamePillar,
-        //    CrimsonBarrier,
-        //    DevilsFistInfernoType,
-        //    BraveHeartsIncarnation,
-        //    GreatCrimsonBarrier,
-        //    InfernosFist,
-        //    SatansCell,
-        //    AmaterasuIncanation,
-        //    AmaterasuInferno,
-        //    AmaterasuFlameWall,
-        //    AllSkill,
-        //    SuzakuFlameFist,
-        //    DevilsEye,
-
-        //    AddCharmButton,
-        //    AddDignityButton,
-        //    AddMuscularStrengthButton,
-        //    AddSenseButton,
-        //    AddDurabilityButton,
-        //    AddKnowledgeButton,
-
-        //    ConfirmButton,
-        //    ResetButton,
-        //    YesConfirm,
-        //    No,
-        //}
 
         private void Start()
         {
             ResetStatus();
 
-            touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
+            touchGestureDetector.onGestureDetected.AddListener((gesture,touchInfo) =>
             {
-                if (gesture == TouchGestureDetector.Gesture.TouchBegin)
+                if(gesture == TouchGestureDetector.Gesture.TouchBegin)
                 {
                     GameObject button;
                     touchInfo.HitDetection(out button);
 
-                    if (button != null)
+                    if(button != null)
                     {
-                        switch (button.name)
+                        switch(button.name)
                         {
                             case "BackToHomeSceneButton":
                                 Destroy(gameObject);
                                 break;
 
                             case "ShowSkillButton":
-                                if (!activePopUpWindowFlag)
+                                if(!activePopUpWindowFlag)
                                 {
                                     skillListWindow.SetActive(true);
                                     activePopUpWindowFlag = true;
@@ -185,7 +150,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "BackToAllocationWindow":
-                                if (activePopUpWindowFlag)
+                                if(activePopUpWindowFlag)
                                 {
                                     StartCoroutine(ClosePopUpAnimation(skillListWindow));
                                     activePopUpWindowFlag = false;
@@ -208,7 +173,7 @@ namespace DemonicCity.StrengthenScene
                             //case "ExplosiveFlamePillar":
                             //    SkillDescriptionManager(3);
                             //    activeSkillDescriptionText = 3;
-                             //   break;
+                            //   break;
                             case "CrimsonBarrier":
                                 SkillDescriptionManager(3);
                                 activeSkillDescriptionText = 3;
@@ -260,31 +225,31 @@ namespace DemonicCity.StrengthenScene
 
                             //ここまで各スキル名の処理
                             case "AddCharmButton":
-                                ChangeUniqueStatus(ref charm, ref addCharm, ref addUniqueStatusTexts[0]);
+                                ChangeUniqueStatus(ref charm,ref addCharm,ref addUniqueStatusTexts[0]);
                                 break;
 
                             case "AddDignityButton":
-                                ChangeUniqueStatus(ref dignity, ref addDignity, ref addUniqueStatusTexts[1]);
+                                ChangeUniqueStatus(ref dignity,ref addDignity,ref addUniqueStatusTexts[1]);
                                 break;
 
                             case "AddMuscularStrengthButton":
-                                ChangeUniqueStatus(ref muscularStrength, ref addMuscularStrength, ref addUniqueStatusTexts[2]);
+                                ChangeUniqueStatus(ref muscularStrength,ref addMuscularStrength,ref addUniqueStatusTexts[2]);
                                 break;
 
                             case "AddSenseButton":
-                                ChangeUniqueStatus(ref sense, ref addSense, ref addUniqueStatusTexts[3]);
+                                ChangeUniqueStatus(ref sense,ref addSense,ref addUniqueStatusTexts[3]);
                                 break;
 
                             case "AddDurabilityButton":
-                                ChangeUniqueStatus(ref durability, ref addDurability, ref addUniqueStatusTexts[4]);
+                                ChangeUniqueStatus(ref durability,ref addDurability,ref addUniqueStatusTexts[4]);
                                 break;
 
                             case "AddKnowledgeButton":
-                                ChangeUniqueStatus(ref knowledge, ref addKnowledge, ref addUniqueStatusTexts[5]);
+                                ChangeUniqueStatus(ref knowledge,ref addKnowledge,ref addUniqueStatusTexts[5]);
                                 break;
 
                             case "ConfirmButton":
-                                if (!activePopUpWindowFlag)
+                                if(!activePopUpWindowFlag)
                                 {
                                     confirmMessageWindow.SetActive(true);
                                     activePopUpWindowFlag = true;
@@ -292,7 +257,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "ResetButton":
-                                if (!activePopUpWindowFlag)
+                                if(!activePopUpWindowFlag)
                                 {
                                     resetMessageWindow.SetActive(true);
                                     activePopUpWindowFlag = true;
@@ -308,7 +273,7 @@ namespace DemonicCity.StrengthenScene
                                 break;
 
                             case "No":
-                                if (activePopUpWindowFlag)
+                                if(activePopUpWindowFlag)
                                 {
                                     StartCoroutine(ClosePopUpAnimation(confirmMessageWindow));
                                     StartCoroutine(ClosePopUpAnimation(resetMessageWindow));
@@ -324,13 +289,13 @@ namespace DemonicCity.StrengthenScene
 
         private void Update()
         {
-            if (!progress.TutorialCheck(Progress.TutorialFlag.Strengthen))
+            if(!progress.TutorialCheck(Progress.TutorialFlag.Strengthen))
             {
                 popupSystem.Popup();
-                progress.SetTutorialProgress(Progress.TutorialFlag.Strengthen, true);
+                progress.SetTutorialProgress(Progress.TutorialFlag.Strengthen,true);
             }
 
-            if (changedStatus)
+            if(changedStatus)
             {
                 confirmAndResetButtons.SetActive(true);
             }
@@ -343,12 +308,12 @@ namespace DemonicCity.StrengthenScene
         /// <summary>スキルの説明テキストを表示/非表示</summary>
         private void SkillDescriptionManager(int index)
         {
-            if (activeSkillDescriptionText == index && !setActiveSkillDescriptionText)
+            if(activeSkillDescriptionText == index && !setActiveSkillDescriptionText)
             {
                 skillDescriptionTexts[index].SetActive(true);
                 setActiveSkillDescriptionText = true;
             }
-            else if (activeSkillDescriptionText == index && setActiveSkillDescriptionText)
+            else if(activeSkillDescriptionText == index && setActiveSkillDescriptionText)
             {
                 StartCoroutine(ClosePopUpAnimation(skillDescriptionTexts[index]));
                 setActiveSkillDescriptionText = false;
@@ -359,16 +324,20 @@ namespace DemonicCity.StrengthenScene
         /// <param name="addUniqueStatus">固有ステータス</param>
         /// <param name="uniqueStatusText">固有ステータスのテキスト</param>
         /// <param name="addStatus">ステータスの増減判定</param>
-        private void ChangeUniqueStatus(ref int uniqueStatus, ref int addUniqueStatus, ref TextMeshProUGUI uniqueStatusText)
+        private void ChangeUniqueStatus(ref int uniqueStatus,ref int addUniqueStatus,ref TextMeshProUGUI uniqueStatusText)
         {
-            if (uniqueStatus + addUniqueStatus < maxUniquePoint)
+            if(uniqueStatus + addUniqueStatus < maxUniquePoint)
             {
                 addUniqueStatus += AddStatusPoint(addUniqueStatus);
                 MystatusPointText.text = MyStatusPoint.ToString();
 
-                if (MyStatusPoint >= 0)
+                if(MyStatusPoint >= 0)
                 {
-                    uniqueStatusText.text = "+" + addUniqueStatus.ToString();
+                    if(addUniqueStatus > 0)
+                    {
+                        uniqueStatusText.text = "+" + addUniqueStatus.ToString();
+                    }
+
                     //固有ステータスを基礎ステータスに変換
                     updatedHitPoint = currentHp + (addCharm * 50) + (addDignity * 50);
                     updatedAttack = currentAttack + (addSense * 5) + (addMuscularStrength * 5);
@@ -412,19 +381,19 @@ namespace DemonicCity.StrengthenScene
             updatedBasicStatusTexts[2].text = currentDefence.ToString();
 
             UpdateText();
-            for (int index = 0; index < updatedBasicStatusTexts.Length; index++)
+            for(int index = 0; index < updatedBasicStatusTexts.Length; index++)
             {
                 updatedBasicStatusTexts[index].text = "";
             }
 
-            for (int index = 0; index < addUniqueStatusTexts.Length; index++)
+            for(int index = 0; index < addUniqueStatusTexts.Length; index++)
             {
                 addUniqueStatusTexts[index].text = "";
             }
 
-            if (!isSceneLoaded)
+            if(!isSceneLoaded)
             {
-                for (int i = 0; i < skillDescriptionTexts.Length; i++)
+                for(int i = 0; i < skillDescriptionTexts.Length; i++)
                 {
                     skillDescriptionTexts[i].SetActive(false);
                 }
@@ -481,12 +450,12 @@ namespace DemonicCity.StrengthenScene
             SavableSingletonBase<Magia>.Instance.Save();
 
             UpdateText();
-            for (int index = 0; index < updatedBasicStatusTexts.Length; index++)
+            for(int index = 0; index < updatedBasicStatusTexts.Length; index++)
             {
                 updatedBasicStatusTexts[index].text = "";
             }
 
-            for (int index = 0; index < addUniqueStatusTexts.Length; index++)
+            for(int index = 0; index < addUniqueStatusTexts.Length; index++)
             {
                 addUniqueStatusTexts[index].text = "";
             }
@@ -499,7 +468,7 @@ namespace DemonicCity.StrengthenScene
         /// <param name="uniqueStatus">固有ステータス</param>
         private int AddStatusPoint(int uniqueStatus)
         {
-            if (MyStatusPoint > 0)
+            if(MyStatusPoint > 0)
             {
                 MyStatusPoint -= 1;
                 uniqueStatus = 1;
