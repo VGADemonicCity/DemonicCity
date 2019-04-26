@@ -22,6 +22,7 @@ namespace DemonicCity.BattleScene.Debugger
         public int OpenPanelQuantity { get; set; }
         /// <summary>Debug用フラグ</summary>
         public DebuggingFlag Flag { get; set; }
+        public bool IsExecutable { get; set; }
 
 
 
@@ -63,7 +64,6 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary></summary>
         BattleManager m_battleManager;
         Magia magia;
-        bool alreadyCalled;
 
         private void Awake()
         {
@@ -118,16 +118,15 @@ namespace DemonicCity.BattleScene.Debugger
                 }
 
                 // 以下はPlayerChoiceのイベントが発行された最初の一回だけ呼ばれる様にする
-                if (m_battleManager.m_StateMachine.m_PreviousState != BattleManager.StateMachine.State.Debugging
-                && m_battleManager.m_StateMachine.m_PreviousState != BattleManager.StateMachine.State.Pause)
+                if (!m_battleManager.m_StateMachine.PreviousStateIsDebugging && !m_battleManager.m_StateMachine.PreviousStateIsPause)
                 {
-                    alreadyCalled = false;
+                    IsExecutable = true;
                 }
-                if (alreadyCalled)
+                if (!IsExecutable)
                 {
                     return;
                 }
-                alreadyCalled = true;
+                IsExecutable = false;
 
                 magiaStatus = m_battleManager.m_MagiaStats;
                 currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
@@ -137,6 +136,7 @@ namespace DemonicCity.BattleScene.Debugger
                 {
                     // 設定された枚数パネルを引いた後敵パネルを引く
                     StartCoroutine(OpenAllPanelsExceptEnemyPanels());
+                    Debug.Log("aaaaaaaaaaaa");
                 }
             });
         }

@@ -111,6 +111,7 @@ namespace DemonicCity.BattleScene.Debugger
             if (changedValue)
             {
                 battleDebugger.Flag |= BattleDebugger.DebuggingFlag.AutoPlay;
+                battleDebugger.IsExecutable = true;
             }
             else if (BattleDebugger.DebuggingFlag.AutoPlay == (battleDebugger.Flag & BattleDebugger.DebuggingFlag.AutoPlay))
             {
