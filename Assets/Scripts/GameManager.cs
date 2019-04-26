@@ -54,7 +54,7 @@ namespace DemonicCity
             // set the desired aspect ratio (the values in this example are
             // hard-coded for 16:9, but you could make them into public
             // variables instead so you can set them at design time)
-            float targetaspect = 16.0f / 9.0f;
+            float targetaspect = 9.0f / 16.0f;
 
             // determine the game window's current aspect ratio
 
@@ -66,7 +66,8 @@ namespace DemonicCity
 
             // obtain camera component so we can modify its viewport
 
-            Camera camera = GetComponent<Camera>();
+            var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+            //Camera camera = GetComponent<Camera>();
 
             // if scaled height is less than current height, add letterbox
 

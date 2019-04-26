@@ -17,7 +17,7 @@ namespace DemonicCity.BattleScene
 
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                if (state == BattleManager.StateMachine.State.Pause)
+                if (state == BattleManager.StateMachine.State.Pause || state == BattleManager.StateMachine.State.Debugging)
                 {
                     Time.timeScale = 0f;
                 }
