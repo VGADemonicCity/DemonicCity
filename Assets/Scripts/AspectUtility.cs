@@ -8,11 +8,14 @@ public class AspectUtility : MonoBehaviour
     void Awake()
     {
         // カメラを検索します。
-        Camera camera = GetComponent<Camera>();
+        Camera camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
         // 指定された比率からサイズを出します。
         Rect rect = calcAspect(m_x_aspect, m_y_aspect);
         // カメラの比率を変更します。
         camera.rect = rect;
+
+        Debug.Log(rect);
+        Debug.Log(camera.rect);
     }
     // アスペクト比計算
     public Rect calcAspect(float width, float height)
@@ -23,18 +26,18 @@ public class AspectUtility : MonoBehaviour
         Rect rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
         if (1.0f > scale_height)
         {
-            rect.x = 0;
-            rect.y = (1.0f - scale_height) / 2.0f;
-            rect.width = 1.0f;
+            rect.x = 0f;
+            rect.y = (1f - scale_height) / 2.0f;
+            rect.width = 1f;
             rect.height = scale_height;
         }
         else
         {
-            float scale_width = 1.0f / scale_height;
-            rect.x = (1.0f - scale_width) / 2.0f;
-            rect.y = 0.0f;
+            float scale_width = 1f / scale_height;
+            rect.x = (1f - scale_width) / 2f;
+            rect.y = 0f;
             rect.width = scale_width;
-            rect.height = 1.0f;
+            rect.height = 1f;
         }
         return rect;
     }

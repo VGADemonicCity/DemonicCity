@@ -99,6 +99,7 @@ namespace DemonicCity.BattleScene
                 && IsActivatable
                 && !PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
                 {
+                    Debug.Log(hitResult.gameObject.name);
                     if (hitResult.tag != "ShufflePanels")
                     {
                         return;

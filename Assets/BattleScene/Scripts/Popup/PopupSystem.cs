@@ -23,7 +23,7 @@ namespace DemonicCity
         [SerializeField] float scalingTime = 1f;
         [SerializeField] int sortingOrder = 100;
 
-
+        readonly Vector2 targetResolution = new Vector2(1080, 1920);
 
         /// <summary>
         /// UIに配置されているボタンに対してイベントハンドラを登録する
@@ -90,7 +90,11 @@ namespace DemonicCity
             canvasObject = new GameObject("PopupCanvas");
             canvas = canvasObject.AddComponent<Canvas>();
             canvasObject.AddComponent<GraphicRaycaster>();
+            canvasObject.AddComponent<CanvasScaler>();
             canvas.renderMode = RenderMode.ScreenSpaceOverlay;
+            var canvasScaler = canvas.GetComponent<CanvasScaler>();
+            canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+            canvasScaler.referenceResolution = targetResolution;
 
             // 最前面に来る様適当なSortingOderに設定する
             canvas.sortingOrder = sortingOrder;

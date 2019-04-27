@@ -26,6 +26,7 @@ namespace DemonicCity
                 m_sceneFader.FadeIn(); // SceneLoad時の画面演出
                 Time.timeScale = 1f;
                 // 解像度を調整する
+                //AdjustmentRatio();
             });
         }
 
