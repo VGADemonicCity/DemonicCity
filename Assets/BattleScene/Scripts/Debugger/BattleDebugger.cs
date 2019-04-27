@@ -22,6 +22,7 @@ namespace DemonicCity.BattleScene.Debugger
         public int OpenPanelQuantity { get; set; }
         /// <summary>Debug用フラグ</summary>
         public DebuggingFlag Flag { get; set; }
+        public bool IsExecutable { get; set; }
 
 
 
@@ -91,23 +92,12 @@ namespace DemonicCity.BattleScene.Debugger
         {
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerChoice || m_battleManager.m_StateMachine.m_PreviousState != BattleManager.StateMachine.State.Debugging)
+                if (state != BattleManager.StateMachine.State.PlayerChoice)
                 {
                     return;
                 }
 
-                magiaStatus = m_battleManager.m_MagiaStats;
-                currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
-                magiaAvailableSkills = DetectAvailableSkills();
-
-                if (AutoPlay) // PlayerChoice以外,debugフラグがオフの時は何もしない
-                {
-                    // 設定された枚数パネルを引いた後敵パネルを引く
-                    OpenAllPanelsExceptEnemyPanels();
-                    var enemyPanel = m_panelManager.PanelsInTheScene.Find(panel => panel.MyPanelType == PanelType.Enemy);
-                    m_panelManager.PanelProcessing(enemyPanel);
-                }
-
+                // パネルの可視化切り替え処理
                 var panelManager = PanelManager.Instance;
                 if (DisplayPanels && m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
                 {
@@ -126,25 +116,84 @@ namespace DemonicCity.BattleScene.Debugger
                         }
                     });
                 }
+
+                // 以下はPlayerChoiceのイベントが発行された最初の一回だけ呼ばれる様にする
+                if (!m_battleManager.m_StateMachine.PreviousStateIsDebugging && !m_battleManager.m_StateMachine.PreviousStateIsPause)
+                {
+                    IsExecutable = true;
+                }
+                if (!IsExecutable)
+                {
+                    return;
+                }
+                IsExecutable = false;
+
+                magiaStatus = m_battleManager.m_MagiaStats;
+                currentEnemyStatus = m_battleManager.CurrentEnemy.Stats;
+                magiaAvailableSkills = DetectAvailableSkills();
+
+                if (AutoPlay) // PlayerChoice以外,debugフラグがオフの時は何もしない
+                {
+                    // 設定された枚数パネルを引いた後敵パネルを引く
+                    StartCoroutine(OpenAllPanelsExceptEnemyPanels());
+                    Debug.Log("aaaaaaaaaaaa");
+                }
             });
         }
 
+        public void PlayOpenAllPanelWithoutEnemyPanels()
+        {
+            StartCoroutine(OpenAllPanelsWithoutEnemyPanels());
+        }
+
         /// <summary>
-        /// 敵パネル以外の全てのパネルを開く
+        /// 自動でアニメーション秒数に合わせて指定枚数パネルを引く
         /// </summary>
-        public void OpenAllPanelsExceptEnemyPanels()
+        public IEnumerator OpenAllPanelsExceptEnemyPanels()
         {
             if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice)
             {
-                return;
+                yield break;
             }
 
             var openCount = 0;
             var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
             var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());
+            float waitTime;
             foreach (var panel in orderedPanels)
             {
-                m_panelManager.PanelProcessing(panel);
+                waitTime = m_panelManager.PanelProcessing(panel);
+                yield return new WaitForSeconds(waitTime);
+
+                openCount++;
+                if (openCount >= OpenPanelQuantity)
+                {
+                    break;
+                }
+            }
+
+            if (!m_panelManager.IsOpenedAllPanelsExceptEnemyPanels)
+            {
+                var enemyPanel = m_panelManager.PanelsInTheScene.Find(panel => panel.MyPanelType == PanelType.Enemy);
+                m_panelManager.PanelProcessing(enemyPanel);
+            }
+        }
+
+        public IEnumerator OpenAllPanelsWithoutEnemyPanels()
+        {
+            if (m_battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice)
+            {
+                yield break;
+            }
+
+            var openCount = 0;
+            var panels = m_panelManager.PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy && !panel.IsOpened);
+            var orderedPanels = panels.OrderBy(panel => Guid.NewGuid());
+            float waitTime;
+            foreach (var panel in orderedPanels)
+            {
+                waitTime = m_panelManager.PanelProcessing(panel);
+                yield return new WaitForSeconds(waitTime);
 
                 openCount++;
                 if (openCount >= OpenPanelQuantity)
@@ -153,6 +202,7 @@ namespace DemonicCity.BattleScene.Debugger
                 }
             }
         }
+
 
         /// <summary>
         /// Debug用のステータス取得

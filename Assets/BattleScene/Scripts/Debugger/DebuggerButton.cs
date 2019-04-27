@@ -17,10 +17,11 @@ namespace DemonicCity.BattleScene.Debugger
         [SerializeField] Toggle skipEffectToggle;
         [SerializeField] Toggle displayPanelsToggle;
         [SerializeField] Slider openPanelQuantitySlider;
+        [SerializeField] Slider panelAnimTimeSlider;
 
         List<PopupSystemMaterial> toggleMaterials;
         PopupSystemMaterial buttonMaterial;
-        PopupSystemMaterial sliderMaterial;
+        List<PopupSystemMaterial> sliderMaterials;
 
         private void Awake()
         {
@@ -29,7 +30,10 @@ namespace DemonicCity.BattleScene.Debugger
             popupSystem = GetComponent<PopupSystem>();
 
             buttonMaterial = new PopupSystemMaterial(Close, closeButton.gameObject.name, true);
-            sliderMaterial = new PopupSystemMaterial(OnChangedValueOfOpenPanels, openPanelQuantitySlider.gameObject.name);
+            sliderMaterials = new List<PopupSystemMaterial> {
+                new PopupSystemMaterial(OnChangedValueOfOpenPanels, openPanelQuantitySlider.gameObject.name),
+                new PopupSystemMaterial(OnChangedValueOfPanelAnimTime, panelAnimTimeSlider.gameObject.name),
+            };
             toggleMaterials = new List<PopupSystemMaterial>
             {
                 new PopupSystemMaterial(OnChangedValueOfAutoPlay,autoPlayToggle.gameObject.name),
@@ -60,8 +64,8 @@ namespace DemonicCity.BattleScene.Debugger
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.Debugging);
                 popupSystem.Popup();
                 popupSystem.SubscribeButton(buttonMaterial);
-                popupSystem.SubscribeSlider(sliderMaterial);
                 toggleMaterials.ForEach(material => popupSystem.SubscribeToggle(material));
+                sliderMaterials.ForEach(material => popupSystem.SubscribeSlider(material));
 
                 // 各要素を適切に初期化
                 var toggles = popupSystem.popupedObject.GetComponentsInChildren<Toggle>().ToList();
@@ -89,8 +93,11 @@ namespace DemonicCity.BattleScene.Debugger
                         }
                     }
 
-                    var slider = popupSystem.popupedObject.GetComponentInChildren<Slider>();
+                    var slider = GameObject.Find("OpenPanelsSlider").GetComponentInChildren<Slider>();
                     slider.value = battleDebugger.OpenPanelQuantity;
+
+                    slider = GameObject.Find("PanelAnimTimeSlider").GetComponentInChildren<Slider>();
+                    slider.value = PanelManager.Instance.PanelAnimTime;
                 });
             }
         }
@@ -104,6 +111,7 @@ namespace DemonicCity.BattleScene.Debugger
             if (changedValue)
             {
                 battleDebugger.Flag |= BattleDebugger.DebuggingFlag.AutoPlay;
+                battleDebugger.IsExecutable = true;
             }
             else if (BattleDebugger.DebuggingFlag.AutoPlay == (battleDebugger.Flag & BattleDebugger.DebuggingFlag.AutoPlay))
             {
@@ -151,6 +159,13 @@ namespace DemonicCity.BattleScene.Debugger
         {
             battleDebugger.OpenPanelQuantity = (int)changedValue;
             var textBox = GameObject.Find("Counter").GetComponent<Text>();
+            textBox.text = changedValue.ToString();
+        }
+
+        void OnChangedValueOfPanelAnimTime(float changedValue)
+        {
+            PanelManager.Instance.PanelAnimTime = changedValue;
+            var textBox = GameObject.Find("AnimSpeed").GetComponent<Text>();
             textBox.text = changedValue.ToString();
         }
     }

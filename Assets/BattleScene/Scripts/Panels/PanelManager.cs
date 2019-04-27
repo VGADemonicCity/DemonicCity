@@ -19,8 +19,8 @@ namespace DemonicCity.BattleScene
         /// <summary>Scene上に存在する全てのパネルのリスト</summary>
         public List<Panel> PanelsInTheScene { get; set; }
         /// <summary>Scene上に存在する敵以外のパネル</summary>
-        public List<Panel> AllPanelsExceptEnemyPanels { get{return  PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy);  } }
-        public float ProcesssingTimeOfOpenPanel{ get { return m_waitTime; } }
+        public List<Panel> AllPanelsExceptEnemyPanels { get { return PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy); } }
+        public float ProcesssingTimeOfOpenPanel { get { return m_waitTime; } }
         /// <summary>Scene上に存在する敵以外のパネルが全てオープンされていたらTrueを返す</summary>
         public bool IsOpenedAllPanelsExceptEnemyPanels
         {
@@ -31,11 +31,22 @@ namespace DemonicCity.BattleScene
                 return opendPanels == allPanelsExceptEnemyPanels;
             }
         }
+        public float PanelAnimTime
+        {
+            get
+            {
+                return m_waitTime;
+            }
+            set
+            {
+                m_waitTime = value;
+            }
+        }
 
         /// <summary>パネル枠。全てのパネルの親にする。</summary>
         [SerializeField] GameObject m_panelFrame;
         /// <summary>パネルを回転させる時間</summary>
-        [SerializeField] float m_waitTime = 3f;
+        [SerializeField] float m_waitTime;
         /// <summary>colliderを検出する為のcollider</summary>
         [SerializeField] BoxCollider2D m_sensor;
         /// <summary>範囲指定をする最小値のvector</summary>
@@ -140,19 +151,20 @@ namespace DemonicCity.BattleScene
         {
             base.OnInitialize();
             Debug.Log("on initialize");
-            
+
         }
 
         /// <summary>
-        /// Panelをタッチした時の処理
+        /// Panelをタッチした時の処理(処理に掛ける時間を返す)
         /// </summary>
         /// <param name="panel"></param>
-        public void PanelProcessing(Panel panel)
+        public float PanelProcessing(Panel panel)
         {
             m_isPanelProcessing = true; // フラグを建てる
             panel.Open(m_waitTime); // panelを開く
             m_panelsAfterOpened.Add(panel); // 開いたオブジェクトを登録
             StartCoroutine(PanelWait(panel)); // パネル処理時止める。PanelCounterにパネルを渡す為に引数に入れる
+            return m_waitTime;
         }
 
         /// <summary>

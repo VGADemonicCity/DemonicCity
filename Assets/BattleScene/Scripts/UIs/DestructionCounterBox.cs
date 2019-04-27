@@ -27,7 +27,7 @@ namespace DemonicCity.BattleScene
             var battleManager = BattleManager.Instance;
             battleManager.m_BehaviourByState.AddListener(state =>
             {
-                if (state == BattleManager.StateMachine.State.PlayerChoice && !battleManager.m_StateMachine.PreviousStateIsPause)
+                if (state == BattleManager.StateMachine.State.PlayerChoice && !battleManager.m_StateMachine.PreviousStateIsPause || battleManager.m_StateMachine.PreviousStateIsDebugging)
                 {
                     Initialize();
                 }
