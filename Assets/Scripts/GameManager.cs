@@ -26,26 +26,27 @@ namespace DemonicCity
                 m_sceneFader.FadeIn(); // SceneLoad時の画面演出
                 Time.timeScale = 1f;
                 // 解像度を調整する
-                AdjustmentRatio();
             });
         }
 
-        void AdjustmentRatio()
-        {
-            var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        //void AdjustmentRatio()
+        //{
+        //    var camera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
-            // 理想の画面の比率
-            float targetRatio = widthRatio / heightRatio;
-            // 現在の画面の比率
-            float currentRatio = Screen.width / Screen.height;
-            // 理想と現在の比率
-            float ratio = targetRatio / currentRatio;
+        //    // 理想の画面の比率
+        //    float targetRatio = widthRatio / heightRatio;
+        //    // 現在の画面の比率
+        //    float currentRatio = Screen.width / Screen.height;
+        //    // 理想と現在の比率
+        //    float ratio = targetRatio / currentRatio;
 
-            //カメラの描画開始位置をX座標にどのくらいずらすか
-            float rectX = (1.0f - ratio) / 2f;
-            //カメラの描画開始位置と表示領域の設定
-            camera.rect = new Rect(rectX, 0f, ratio, 1f);
-        }
+        //    //カメラの描画開始位置をX座標にどのくらいずらすか
+        //    float rectX = (1.0f - ratio) / 2f;
+        //    //カメラの描画開始位置と表示領域の設定
+        //    camera.rect = new Rect(rectX, 0f, ratio, 1f);
+        //}
+
+
 
         /// <summary>
         /// 作ったゲームオブジェクトをシーン遷移しても壊されない様にする
