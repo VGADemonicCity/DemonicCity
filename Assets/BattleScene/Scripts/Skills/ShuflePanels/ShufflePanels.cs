@@ -103,7 +103,7 @@ namespace DemonicCity.BattleScene
                     {
                         return;
                     }
-                    battleManager.SetStateMachine(BattleManager.StateMachine.State.Debugging);
+                    battleManager.SetStateMachine(BattleManager.StateMachine.State.Pause);
                     popupSystem.Popup();
                     popupSystem.SubscribeButton(new PopupSystemMaterial(Activate, PositiveButton.gameObject.name, true));
                     popupSystem.SubscribeButton(new PopupSystemMaterial(Cancel, NegativeButton.gameObject.name, true));
@@ -120,7 +120,9 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Activate()
         {
-            skillAnim.SetTrigger("Activate");
+            //skillAnim.SetTrigger("Activate");
+            Time.timeScale = 1;
+            skillAnim.CrossFadeInFixedTime("TransitionSkill",0);
             panelFrameManager.isSkillActivating = false;
         }
 
@@ -193,7 +195,7 @@ namespace DemonicCity.BattleScene
                 panel.ResetPanel(); // パネルを引いていない状態に戻す
                 panel.Rotate(rotateAxis.ToString(), panelRotateTime);
                 count++; // カウントアップ
-                yield return new WaitForSeconds(intervalForEachRotation);
+                yield return new WaitForSecondsRealtime(intervalForEachRotation);
             }
 
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
