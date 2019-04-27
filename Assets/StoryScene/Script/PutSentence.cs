@@ -26,6 +26,8 @@ namespace DemonicCity.StoryScene
         IEnumerator feedCoroutine;
         public bool End { get { return end; } set { end = value; } }
 
+        SoundManager soundM;
+
         void Awake()
         {
             Init();
@@ -34,7 +36,7 @@ namespace DemonicCity.StoryScene
         public void Init()
         {
             text.text = "";
-
+            soundM = SoundManager.Instance;
         }
 
 
@@ -60,14 +62,14 @@ namespace DemonicCity.StoryScene
             End = true;
         }
         /// <summary>コルーチンを開始</summary>
-        public void CallSentence(string s)
+        public void CallSentence(string s, AudioClip clip)
         {
             if (End)
             {
+                PlayVoice(clip);
                 feedCoroutine = SentenceFeed(s);
                 StartCoroutine(feedCoroutine);
                 End = false;
-
             }
             else
             {
@@ -75,6 +77,13 @@ namespace DemonicCity.StoryScene
             }
         }
 
+        void PlayVoice(AudioClip clip)
+        {
+            if (clip != null)
+            {
+                soundM.PlayWithFade(SoundManager.SoundTag.Voice, clip);
+            }
+        }
 
     }
 }

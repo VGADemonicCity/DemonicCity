@@ -84,15 +84,6 @@ namespace DemonicCity.StoryScene
 
         void Update()
         {
-            bool isAuto = false;
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                isAuto = true;
-            }
-            if (isAuto)
-            {
-                TextsDraw();
-            }
         }
 
 
@@ -100,13 +91,14 @@ namespace DemonicCity.StoryScene
         {
             yield return new WaitWhile(() => !DrawEnd);
             textIndex += 1;
-            if (DivideTexts(texts[textIndex]))
+            TextStorage currentText = texts[textIndex];
+            if (DivideTexts(currentText))
             {
-                putSentence.CallSentence(texts[textIndex].sentence);
+                putSentence.CallSentence(currentText.sentence, currentText.voiceData);
             }
             else
             {
-                director.Staging(texts[textIndex].sentence);
+                director.Staging(currentText.sentence);
             }
         }
 
@@ -122,15 +114,14 @@ namespace DemonicCity.StoryScene
                 {
                     textIndex += 1;
                 }
-                TextStorage thisText = texts[textIndex];
-                if (DivideTexts(thisText))
+                TextStorage currentText = texts[textIndex];
+                if (DivideTexts(currentText))
                 {
-                    putSentence.CallSentence(thisText.sentence);
-                    PlayVoice();
+                    putSentence.CallSentence(currentText.sentence, currentText.voiceData);
                 }
                 else
                 {
-                    director.Staging(thisText.sentence);
+                    director.Staging(currentText.sentence);
                 }
 
             }
@@ -147,7 +138,7 @@ namespace DemonicCity.StoryScene
             {
                 if (DivideTexts(texts[textIndex]))
                 {
-                    putSentence.CallSentence(texts[textIndex].sentence);
+                    putSentence.CallSentence(texts[textIndex].sentence, texts[textIndex].voiceData);
                 }
                 else
                 {
@@ -294,13 +285,7 @@ namespace DemonicCity.StoryScene
         }
 
 
-        void PlayVoice()
-        {
-            if (texts[textIndex].voiceData != null)
-            {
-                soundM.PlayWithFade(SoundManager.SoundTag.Voice, texts[textIndex].voiceData);
-            }
-        }
+
 
         /// <summary>
         /// 現在のシナリオの最終行(シーン遷移などのはず)に飛ぶ
