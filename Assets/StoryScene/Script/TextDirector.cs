@@ -428,8 +428,8 @@ namespace DemonicCity.StoryScene
 
         public void PopWindow(WindowTag windowTag)
         {
-            popCanvas.gameObject.SetActive(true);
-            Instantiate(popWindows[(int)windowTag], popCanvas);
+            Coloring(Color.black, false);
+            StartCoroutine(WaitPopWindow(windowTag));
         }
 
 
@@ -457,7 +457,10 @@ namespace DemonicCity.StoryScene
             {
                 Progress.Instance.MyStoryProgress = Progress.Instance.MyStoryProgress | story;
             }
-            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+            //SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+
+            PopWindow(WindowTag.ToNext);
+
         }
 
 
