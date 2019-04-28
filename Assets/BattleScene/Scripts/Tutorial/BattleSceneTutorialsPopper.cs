@@ -37,6 +37,7 @@ namespace DemonicCity.BattleScene
                 return null;
             }
         }
+        public bool isPlayingTutorialAnimation { get; set; }
 
 
         /// <summary>表示させるチュートリアルの素材群</summary>
@@ -46,7 +47,7 @@ namespace DemonicCity.BattleScene
         /// <summary>閉じるボタン</summary>
         [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
-        [SerializeField] float fadingTime = .5f;
+        [SerializeField] float fadingTime = .1f;
         [SerializeField] AudioSource audioSource;
 
         /// <summary>popup system</summary>
@@ -64,7 +65,8 @@ namespace DemonicCity.BattleScene
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
         TutorialInPauseMenu tutorialInPauseMenu;
-
+        /// <summary>一時的にVector3を保存しておく箱</summary>
+        Vector3 vectorBuffer = new Vector3();
 
         const int width = 1080;
         const int height = 1920;
@@ -106,7 +108,7 @@ namespace DemonicCity.BattleScene
                 var image = go.AddComponent<Image>();
                 image.sprite = item.Sprite;
                 image.rectTransform.sizeDelta = imageSize;
-                image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
+                image.rectTransform.localPosition = new Vector2(xPos, 0);
                 xPos += width;
                 image.rectTransform.localScale = Vector2.one;
             });
@@ -152,13 +154,42 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void FadingImage(Index index)
         {
+            var fromPosition = tutorialImagesParent.transform.localPosition;
+            Vector3 toPosition;
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime, "ignoretimescale", true));
+                    toPosition = tutorialImagesParent.transform.localPosition + new Vector3(-width, 0, 0);
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "from", fromPosition,
+                        "to", toPosition,
+                        "time", fadingTime,
+                        "onstart", "OnStartTutorialWindowAnimation",
+                        "onstarttarget", gameObject,
+                        "onupdate", "SyncPosition",
+                        "onupdatetarget", gameObject,
+                        "oncomplete", "OnCompleteTutorialWindowAnimation",
+                        "oncompletetarget", gameObject,
+                        "ignoretimescale", true));
+                    //tutorialImagesParent.transform.localPosition += new Vector3(-width, 0, 0);
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
+                    toPosition = tutorialImagesParent.transform.localPosition + new Vector3(+width, 0, 0);
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", fromPosition,
+                    "to", toPosition,
+                    "time", fadingTime,
+                    "onupdate", "SyncPosition",
+                    "onupdatetarget", gameObject,
+                    "onstart", "OnStartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdate", "SyncPosition",
+                    "onupdatetarget", gameObject,
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
+                    "ignoretimescale", true));
+                    //tutorialImagesParent.transform.localPosition += new Vector3(width, 0, 0);
+
                     break;
                 case Index.Last:
                     break;
@@ -166,6 +197,9 @@ namespace DemonicCity.BattleScene
                     break;
             }
         }
+
+
+
 
         /// <summary>
         /// Itemを適切な要素へ変更する
@@ -199,6 +233,11 @@ namespace DemonicCity.BattleScene
                     return;
                 }
             }
+            if (isPlayingTutorialAnimation)
+            {
+                return;
+            }
+
             var battleManager = BattleManager.Instance;
             battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
             Destroy(popupSystem.popupedObject.transform.parent.gameObject);
@@ -209,6 +248,10 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void OnPushNextButton()
         {
+            if (isPlayingTutorialAnimation)
+            {
+                return;
+            }
             ChangeItem(Index.Next);
             FadingImage(Index.Next);
             OnChangeItem();
@@ -248,6 +291,24 @@ namespace DemonicCity.BattleScene
                     throw new System.ArgumentException("Directionが適切に指定されていません.");
             }
         }
+
+        #region iTweenAnimateMethods
+        void OnstartTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = true;
+        }
+
+        void OnCompleteTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = false;
+        }
+
+
+        void SyncPosition(Vector3 nextPosition)
+        {
+            tutorialImagesParent.transform.localPosition = nextPosition;
+        }
+        #endregion
     }
 
     [Flags]

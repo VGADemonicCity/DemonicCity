@@ -36,6 +36,7 @@ namespace DemonicCity
                 return null;
             }
         }
+        public bool isPlayingTutorialAnimation { get; set; }
 
 
 
@@ -77,7 +78,7 @@ namespace DemonicCity
             {
                 new PopupSystemMaterial(OnPushNextButton,toNextButton.gameObject.name,false),
                 new PopupSystemMaterial(OnPushPreviousButton,toPreviousButton.gameObject.name,false),
-                new PopupSystemMaterial(Close,closeButton.gameObject.name,true),
+                new PopupSystemMaterial(Close,closeButton.gameObject.name,false),
             };
         }
 
@@ -97,7 +98,7 @@ namespace DemonicCity
                 var image = go.AddComponent<Image>();
                 image.sprite = item.Sprite;
                 image.rectTransform.sizeDelta = imageSize;
-                image.rectTransform.position = new Vector2(xPos + (width * 0.5f), 0);
+                image.rectTransform.localPosition = new Vector2(xPos, 0);
                 xPos += width;
                 image.rectTransform.localScale = Vector2.one;
             });
@@ -124,14 +125,42 @@ namespace DemonicCity
         /// </summary>
         void FadingImage(Index index)
         {
-
+            var fromPosition = tutorialImagesParent.transform.localPosition;
+            Vector3 toPosition;
             switch (index)
             {
                 case Index.Next:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(-width, 0), "time", fadingTime, "ignoretimescale", true));
+                    toPosition = tutorialImagesParent.transform.localPosition + new Vector3(-width, 0, 0);
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                        "from", fromPosition,
+                        "to", toPosition,
+                        "time", fadingTime,
+                        "onstart", "OnStartTutorialWindowAnimation",
+                        "onstarttarget", gameObject,
+                        "onupdate", "SyncPosition",
+                        "onupdatetarget", gameObject,
+                        "oncomplete", "OnCompleteTutorialWindowAnimation",
+                        "oncompletetarget", gameObject,
+                        "ignoretimescale", true));
+                    //tutorialImagesParent.transform.localPosition += new Vector3(-width, 0, 0);
                     break;
                 case Index.Previous:
-                    iTween.MoveBy(tutorialImagesParent, iTween.Hash("amount", new Vector3(width, 0), "time", fadingTime, "ignoretimescale", true));
+                    toPosition = tutorialImagesParent.transform.localPosition + new Vector3(+width, 0, 0);
+                    iTween.ValueTo(gameObject, iTween.Hash(
+                    "from", fromPosition,
+                    "to", toPosition,
+                    "time", fadingTime,
+                    "onupdate", "SyncPosition",
+                    "onupdatetarget", gameObject,
+                    "onstart", "OnStartTutorialWindowAnimation",
+                    "onstarttarget", gameObject,
+                    "onupdate", "SyncPosition",
+                    "onupdatetarget", gameObject,
+                    "oncomplete", "OnCompleteTutorialWindowAnimation",
+                    "oncompletetarget", gameObject,
+                    "ignoretimescale", true));
+                    //tutorialImagesParent.transform.localPosition += new Vector3(width, 0, 0);
+
                     break;
                 case Index.Last:
                     break;
@@ -140,16 +169,31 @@ namespace DemonicCity
             }
         }
 
+        void SyncPosition(Vector3 nextPosition)
+        {
+            tutorialImagesParent.transform.localPosition = nextPosition;
+        }
+
         /// <summary>
         /// 閉じるボタンのイベントハンドラ
         /// </summary>
-        protected virtual void Close() { }
+        protected virtual void Close() {
+            if(isPlayingTutorialAnimation)
+            {
+                return;
+            }
+            popupSystem.Close();
+        }
 
         /// <summary>
         /// 次へボタンのイベントハンドラ
         /// </summary>
         void OnPushNextButton()
         {
+            if (isPlayingTutorialAnimation)
+            {
+                return;
+            }
             ChangeItem(Index.Next);
             FadingImage(Index.Next);
             OnChangeItem();
@@ -160,6 +204,10 @@ namespace DemonicCity
         /// </summary>
         void OnPushPreviousButton()
         {
+            if (isPlayingTutorialAnimation)
+            {
+                return;
+            }
             ChangeItem(Index.Previous);
             FadingImage(Index.Previous);
             OnChangeItem();
@@ -249,6 +297,16 @@ namespace DemonicCity
                 default:
                     throw new System.ArgumentException("Directionが適切に指定されていません.");
             }
+        }
+
+        void OnstartTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = true;
+        }
+
+        void OnCompleteTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = false;
         }
 
         ///// <summary>
