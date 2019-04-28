@@ -44,9 +44,10 @@ namespace DemonicCity
         public void Submit(bool isOn)
         {
             Select(isOn);
+            //soundM.LoadVol();
             soundM.SwitchVol(tag, isOn);
             soundM.SaveVol();
         }
-        
+
     }
 }

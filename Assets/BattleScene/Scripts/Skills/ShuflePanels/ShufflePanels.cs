@@ -132,7 +132,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Cancel()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutSpecialStates);
         }
 
         public void OnCompleteConditions()
@@ -200,7 +200,7 @@ namespace DemonicCity.BattleScene
             }
 
             panelCounter.ResetShuffleSkillCounter(); // カウンターをリセット
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging); // stateを元に戻す       
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutSpecialStates); // stateを元に戻す       
             panelFrameManager.isSkillActivating = true;
         }
 

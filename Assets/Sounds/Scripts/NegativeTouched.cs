@@ -11,7 +11,7 @@ namespace DemonicCity
         {
             GetComponent<UnityEngine.UI.Button>().onClick.AddListener(() =>
             {
-                Debug.Log("aaa");
+                //Debug.Log("aaa");
                 SoundManager.Instance.PlayWithFade(SoundAsset.SETag.NegativeButton);
             });
 

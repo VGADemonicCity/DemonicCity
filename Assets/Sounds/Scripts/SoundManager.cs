@@ -24,6 +24,18 @@ namespace DemonicCity
         List<AudioSource> SESources = new List<AudioSource>();
         List<AudioSource> VoiceSources = new List<AudioSource>();
 
+        Dictionary<SoundTag, List<AudioSource>> AudioSources
+        {
+            get
+            {
+                Dictionary<SoundTag, List<AudioSource>> tmp = new Dictionary<SoundTag, List<AudioSource>>();
+                tmp.Add(SoundTag.BGM, BgmSources);
+                tmp.Add(SoundTag.SE, SESources);
+                tmp.Add(SoundTag.Voice, VoiceSources);
+                return tmp;
+            }
+        }
+
 
         SoundAsset GetBgmAsset { get { return sounds[(int)SoundTag.BGM]; } }
         SoundAsset GetSEAsset { get { return sounds[(int)SoundTag.SE]; } }
@@ -45,6 +57,9 @@ namespace DemonicCity
         public EnemySkillSEAsset enemySkillSE;
         public SkillSEAsset magiaSkillSE;
 
+
+
+        [SerializeField] SnapAsset snapData;
 
         //SceneFader fader;
 
@@ -75,44 +90,71 @@ namespace DemonicCity
             Init();
         }
 
-        void BGMCheck(Scene scene, LoadSceneMode mode)
+        void BGMCheck(Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
         {
-            LoadVol();
-            StopWithFade(SoundTag.Voice);
-            if (CurrentVol.vol[0])
+
+            SceneFader.SceneTitle sceneTitle;
+
+            if (EnumCommon.TryParse(scene.name, out sceneTitle))
             {
-                if (scene.name == story)
+                //Debug.Log(snapData.SceneSnaps[sceneTitle].name);
+                snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
+                LoadVol();
+                StopWithFade(SoundTag.Voice);
+                switch (sceneTitle)
                 {
-                    mixer.SetFloat(keys[SoundTag.BGM], storyVol);
-                }
-                else
-                {
-                    mixer.SetFloat(keys[SoundTag.BGM], defVol);
+                    case SceneFader.SceneTitle.Battle:
+                        StopWithFade(SoundTag.BGM);
+                        break;
+                    case SceneFader.SceneTitle.Title:
+                        PlayWithFade(SoundAsset.BGMTag.Title);
+                        break;
+                    case SceneFader.SceneTitle.EndCredit:
+                        PlayWithFade(SoundAsset.BGMTag.ThemeSong);
+                        break;
+                    default:
+                        PlayWithFade(SoundAsset.BGMTag.Home);
+                        break;
                 }
 
             }
-            if (scene.name == title)
-            {
-                PlayWithFade(SoundAsset.BGMTag.Title);
-            }
-            else if (scene.name == battle)
-            {
-                StopWithFade(SoundTag.BGM);
-            }
-            else if (scene.name == endCredit)
-            {
-                PlayWithFade(SoundAsset.BGMTag.ThemeSong);
-            }
-            else
-            {
-                PlayWithFade(SoundAsset.BGMTag.Home);
-            }
 
+
+            //if (CurrentVol.vol[0])
+            //{
+            //    if (scene.name == story)
+            //    {
+            //        mixer.SetFloat(keys[SoundTag.BGM], storyVol);
+            //    }
+            //    else
+            //    {
+            //        mixer.SetFloat(keys[SoundTag.BGM], defVol);
+            //    }
+
+            //}
+
+            //if (scene.name == title)
+            //{
+            //    PlayWithFade(SoundAsset.BGMTag.Title);
+            //}
+            //else if (scene.name == battle)
+            //{
+            //    StopWithFade(SoundTag.BGM);
+            //}
+            //else if (scene.name == endCredit)
+            //{
+            //    PlayWithFade(SoundAsset.BGMTag.ThemeSong);
+            //}
+            //else
+            //{
+            //    PlayWithFade(SoundAsset.BGMTag.Home);
+            //}
 
         }
 
         public void Init()
         {
+
             //fader = SceneFader.Instance;
             LoadVol();
 
@@ -152,6 +194,8 @@ namespace DemonicCity
                 }
             }
 
+            BGMCheck(SceneManager.GetActiveScene());
+
         }
 
 
@@ -166,17 +210,25 @@ namespace DemonicCity
         //    return dec;
         //    //Mathf.Pow(10f, dec / 20f);
         //}
-        bool GetVol(string key)
+        bool GetVol(SoundTag tag)
         {
-            float vol;
-            if (mixer.GetFloat(key, out vol))
+            if (tag == SoundTag.Master)
             {
-                if (vol <= -70f)
-                {
-                    return false;
-                }
+                return true;
             }
-            return true;
+
+            return !AudioSources[tag][0].mute;
+
+
+            //float vol;
+            //if (mixer.GetFloat(key, out vol))
+            //{
+            //    if (vol <= -70f)
+            //    {
+            //        return false;
+            //    }
+            //}
+            //return true;
         }
         //public void SetVol(string key, float vol)
         //{
@@ -195,27 +247,48 @@ namespace DemonicCity
         //        mixer.SetFloat(key, vol);
         //    }
         //}
-        float muteVol = -80f;
-        float defVol = 0f;
-        float SeVol = -15f;
+        //float muteVol = -80f;
+        //float defVol = 0f;
+        //float SeVol = -15f;
         public void SwitchVol(SoundTag tag, bool isOn)
         {
-            string key = keys[tag];
-            if (isOn)
-            {
-                if (tag == SoundTag.SE)
-                {
-                    mixer.SetFloat(key, SeVol);
-                }
-                else
-                {
-                    mixer.SetFloat(key, defVol);
-                }
-            }
-            else
-            {
-                mixer.SetFloat(key, muteVol);
-            }
+            //Vols tmp = CurrentVol;
+            //tmp.vol[(int)tag] = isOn;
+            MuteAudioSource(tag, !isOn);
+            //string key = keys[tag];
+            //if (isOn)
+            //{
+            //    if (tag == SoundTag.SE)
+            //    {
+            //        mixer.SetFloat(key, SeVol);
+            //    }
+            //    else
+            //    {
+            //        mixer.SetFloat(key, defVol);
+            //    }
+            //}
+            //else
+            //{
+            //    mixer.SetFloat(key, muteVol);
+            //}
+        }
+        public void SwitchVol(SceneFader.SceneTitle sceneTitle, Vols vols)
+        {
+            snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
+
+            bool[] tmpVol = vols.vol;
+
+            MuteAudioSource(SoundTag.BGM, !tmpVol[(int)SoundTag.BGM]);
+            MuteAudioSource(SoundTag.SE, !tmpVol[(int)SoundTag.SE]);
+            MuteAudioSource(SoundTag.Voice, !tmpVol[(int)SoundTag.Voice]);
+            //for (int index = 0; index < tmpVol.Count(); index++)
+            //{
+
+            //    if (!tmpVol[index])
+            //    {
+            //mixer.SetFloat(keys[(SoundTag)index], muteVol);
+            //    }
+            //}
         }
         //public void SwitchVol(SoundTag tag, bool isOn)
         //{
@@ -259,11 +332,11 @@ namespace DemonicCity
 
         public void SaveVol()
         {
-            string s = JsonUtility.ToJson(new Vols(GetVol(keys[SoundTag.Master]), GetVol(keys[SoundTag.BGM]), GetVol(keys[SoundTag.SE]), GetVol(keys[SoundTag.Voice])));
+            string s = JsonUtility.ToJson(new Vols(GetVol(SoundTag.Master), GetVol(SoundTag.BGM), GetVol(SoundTag.SE), GetVol(SoundTag.Voice)));
             PlayerPrefs.SetString(volKey, s);
         }
 
-        void LoadVol()
+        public void LoadVol()
         {
             Vols vs = JsonUtility.FromJson<Vols>(PlayerPrefs.GetString(volKey));
             if (vs == null)
@@ -274,11 +347,18 @@ namespace DemonicCity
             //SetVol(bgm, vs.bgm);
             //SetVol(volKey, vs.voice);
             //SetVol(se, vs.se);            
-            SwitchVol(SoundTag.Master, vs.vol[(int)SoundTag.Master]);
-            SwitchVol(SoundTag.BGM, vs.vol[(int)SoundTag.BGM]);
-            SwitchVol(SoundTag.SE, vs.vol[(int)SoundTag.SE]);
-            SwitchVol(SoundTag.Voice, vs.vol[(int)SoundTag.Voice]);
+            SceneFader.SceneTitle sceneTitle;
+            if (EnumCommon.TryParse(SceneManager.GetActiveScene().name, out sceneTitle))
+            {
+                snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
+                SwitchVol(sceneTitle, vs);
+            }
+            //SwitchVol(SoundTag.Master, vs.vol[(int)SoundTag.Master]);
+            //SwitchVol(SoundTag.BGM, vs.vol[(int)SoundTag.BGM]);
+            //SwitchVol(SoundTag.SE, vs.vol[(int)SoundTag.SE]);
+            //SwitchVol(SoundTag.Voice, vs.vol[(int)SoundTag.Voice]);
         }
+
 
         [System.Serializable]
         public class Vols
@@ -425,6 +505,47 @@ namespace DemonicCity
             }
         }
 
+        public void MuteAudioSource(SoundTag tag, bool isMute)
+        {
+            List<AudioSource> tmpSource = new List<AudioSource>();
+            switch (tag)
+            {
+                case SoundTag.BGM:
+                    tmpSource = BgmSources;
+                    break;
+                case SoundTag.SE:
+                    tmpSource = SESources;
+                    break;
+                case SoundTag.Voice:
+                    tmpSource = VoiceSources;
+                    break;
+                default:
+                    break;
+            }
+            foreach (AudioSource item in tmpSource)
+            {
+                item.mute = isMute;
+            }
+        }
+
+
+        public void AddAudioSource(SoundTag tag, AudioSource source)
+        {
+            switch (tag)
+            {
+                case SoundTag.BGM:
+                    BgmSources.Add(source);
+                    break;
+                case SoundTag.SE:
+                    SESources.Add(source);
+                    break;
+                case SoundTag.Voice:
+                    VoiceSources.Add(source);
+                    break;
+                default:
+                    break;
+            }
+        }
 
     }
 }

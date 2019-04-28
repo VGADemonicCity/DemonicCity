@@ -199,6 +199,8 @@ namespace DemonicCity.BattleScene
                 NextWave,
                 /// <summary>デバッグ画面表示時</summary>
                 Debugging,
+                /// <summary>Tutorials時</summary>
+                Tutorial,
             }
 
             /// <summary>
@@ -225,11 +227,11 @@ namespace DemonicCity.BattleScene
             public Wave m_Wave;
 
             /// <summary>現在のステートよりひとつ前のステートを返す.前のステートがPause,Debuggingの場合はPause,Debuggingステートに遷移する前のステートを返す</summary>
-            public State PreviousStateWithoutPauseAndDebugging
+            public State PreviousStateWithoutSpecialStates
             {
                 get
                 {
-                    if (m_PreviousState == State.Pause || m_PreviousState == State.Debugging)
+                    if (m_PreviousState == State.Pause || m_PreviousState == State.Debugging || m_PreviousState == State.Tutorial)
                     {
                         return m_StateBeforePause;
                     }
@@ -251,6 +253,14 @@ namespace DemonicCity.BattleScene
                 get
                 {
                     return m_PreviousState == State.Debugging;
+                }
+            }
+            /// <summary>現在のステートよりひとつ前のステートがPauseステートならtrue,そうでない場合false</summary>
+            public bool PreviousStateIsTutorial
+            {
+                get
+                {
+                    return m_PreviousState == State.Tutorial;
                 }
             }
 

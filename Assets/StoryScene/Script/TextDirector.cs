@@ -96,7 +96,7 @@ namespace DemonicCity.StoryScene
 
                 return;
             }
-            Debug.Log(type);
+            //Debug.Log(type);
             switch (type)
             {
                 case StageType.SceneTrans:
@@ -185,7 +185,7 @@ namespace DemonicCity.StoryScene
                 GameObject appearCharObj = characters.Find(item => item.GetComponent<FaceChanger>().charName == charName);
                 appearCharObj.transform.localPosition = startPositions[(int)posTag];
 
-                Debug.Log(charName + ":" + posTag + ":" + appearCharObj.name);
+                //Debug.Log(charName + ":" + posTag + ":" + appearCharObj.name);
 
                 if (textManager.talker[(int)posTag] == CharName.None)
                 {
@@ -537,7 +537,7 @@ namespace DemonicCity.StoryScene
                 //Debug.Log(fromColor);
                 yield return null;
             }
-            Debug.Log("end");
+            //Debug.Log("end");
             targetObject.GetComponent<Image>().color = toColor;
             if (isNext)
             {

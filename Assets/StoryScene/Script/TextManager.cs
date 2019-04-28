@@ -69,8 +69,9 @@ namespace DemonicCity.StoryScene
                 {
                     GameObject hit;
                     touchInfo.HitDetection(out hit);
-                    if (hit.tag != buttonTag
-                        && !isStaging)
+                    if (!isStaging &&
+                    (hit == null
+                    || hit.tag != buttonTag))
                     {
                         TextsDraw();
                     }
@@ -171,7 +172,7 @@ namespace DemonicCity.StoryScene
             }
             else if (storage.cName != CharName.None)
             {
-                Debug.Log(storage.faceIndex);
+                //Debug.Log(storage.faceIndex);
                 foreach (FaceChanger item in faceChangers)
                 {
                     if (item.charName == storage.cName)
