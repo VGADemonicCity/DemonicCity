@@ -12,7 +12,7 @@ namespace DemonicCity.HomeScene
         {
             //TestItem,
 
-            MagiaHome=1,
+            MagiaHome = 1,
             Getia,
             Demons,
             GehennaClown,
@@ -23,7 +23,7 @@ namespace DemonicCity.HomeScene
 
             //TestPerson,
 
-            Magia=9,
+            Magia = 9,
             Ixmagina,
             Phoenix,
             InPhoenix,
@@ -477,6 +477,10 @@ namespace DemonicCity.HomeScene
             currentIndex -= 1;
             while (currentIndex != index)
             {
+                if (currentIndex < 0)
+                {
+                    currentIndex = 0;
+                }
                 if (CheckContent(items[currentIndex]))
                 {
                     return items[currentIndex];
