@@ -2,7 +2,6 @@
 using System.Collections;
 public class AspectUtility : MonoBehaviour
 {
-    // 縦横比です。インスペクタから修正します。
     public float m_x_aspect = 4.0f;
     public float m_y_aspect = 3.0f;
     void Awake()
@@ -13,9 +12,6 @@ public class AspectUtility : MonoBehaviour
         Rect rect = calcAspect(m_x_aspect, m_y_aspect);
         // カメラの比率を変更します。
         camera.rect = rect;
-
-        Debug.Log(rect);
-        Debug.Log(camera.rect);
     }
     // アスペクト比計算
     public Rect calcAspect(float width, float height)
