@@ -473,6 +473,21 @@ Prefab:
       propertyPath: fadingTime
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: TargetMagiaLevel
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: LoadStatusFromInspector
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: buffTextBox
+      value: 
+      objectReference: {fileID: 1767759945}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
@@ -1405,7 +1420,7 @@ Prefab:
     - target: {fileID: 224768099560882938, guid: 1ae23622a7b909f468411b183d0d393c,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0.00012207031
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1372210358693784, guid: 1ae23622a7b909f468411b183d0d393c, type: 2}
       propertyPath: m_IsActive
@@ -1942,6 +1957,12 @@ Prefab:
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
   m_IsPrefabAsset: 0
+--- !u!114 &1767759945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 114829807726434022, guid: c78ebd9c2baf2754fb05c664d301f86d,
+    type: 2}
+  m_PrefabInternal: {fileID: 1690210347}
+  m_Script: {fileID: 11500000, guid: e109074d10585b34fa884320ad53f060, type: 3}
 --- !u!1001 &1802063877
 Prefab:
   m_ObjectHideFlags: 0

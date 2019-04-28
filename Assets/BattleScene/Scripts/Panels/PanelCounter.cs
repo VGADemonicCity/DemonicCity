@@ -199,9 +199,11 @@ namespace DemonicCity.BattleScene
                     // =========================================
                     // イベント呼び出し : StateMachine.EnemyAttack
                     // =========================================
-                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                     // 条件に沿って適切なチュートリアルを表示する
-                    TryDisplayTutorials(enemyPanelOpen);
+                    if (!TryDisplayTutorials(enemyPanelOpen))
+                    {
+                        m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
+                    }
                     break;
             }
             m_totalPanelCount++; // 全てのパネルカウントアップ
@@ -219,16 +221,15 @@ namespace DemonicCity.BattleScene
             }
         }
 
-        void TryDisplayTutorials(Subject item)
+        bool TryDisplayTutorials(Subject item)
         {
             // Inspectorで指定したフラグをここで代入する
             var targetTutorials = new Subject();
             targetTutorials = targetTutorials | item;
             if (targetTutorials == 0)
             {
-                return;
+                return false;
             }
-
             // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
             var progress = Progress.Instance;
             var tutorialFlag = progress.TutorialProgressInBattleScene;
@@ -236,7 +237,9 @@ namespace DemonicCity.BattleScene
             {
                 BattleSceneTutorialsPopper.Instance.Popup(targetTutorials);
                 progress.SetTutorialProgress(targetTutorials, false);
+            return true;
             }
+            return false;
         }
     }
 }
