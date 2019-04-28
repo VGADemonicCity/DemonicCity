@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 public class AspectUtility : MonoBehaviour
 {
     Camera targetCamera;
-    public float m_x_aspect = 4.0f;
-    public float m_y_aspect = 3.0f;
+    public float m_x_aspect = 6.0f;
+    public float m_y_aspect = 16.0f;
     void Awake()
     {
         SceneManager.sceneLoaded += (scene, mode) =>
