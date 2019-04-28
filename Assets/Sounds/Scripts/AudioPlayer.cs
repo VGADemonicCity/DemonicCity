@@ -29,7 +29,7 @@ namespace DemonicCity
                 yield break;
             }
 
-            Debug.Log(source.name + "Play");
+            //Debug.Log(source.name + "Play");
             source.Play(clip);
 
             while (source.volume < 1f)
@@ -65,7 +65,7 @@ namespace DemonicCity
                 {
                     source.volume = 0f;
                     source.Stop();
-                    Debug.LogWarning(source.name + "Stop");
+                    //Debug.LogWarning(source.name + "Stop");
                 }
                 else
                 {

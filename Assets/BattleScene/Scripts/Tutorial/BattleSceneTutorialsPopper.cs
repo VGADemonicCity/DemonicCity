@@ -48,7 +48,6 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .1f;
-        [SerializeField] AudioSource audioSource;
 
         /// <summary>popup system</summary>
         PopupSystem popupSystem;
@@ -96,7 +95,7 @@ namespace DemonicCity.BattleScene
         public void Popup(Subject subject)
         {
             targetSubject = subject;
-            BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.Pause);
+            BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.Tutorial);
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
             targetItems = tutorialObject.Items.FindAll((item) => item.subject == (item.subject & subject));
@@ -242,10 +241,11 @@ namespace DemonicCity.BattleScene
             var battleManager = BattleManager.Instance;
             if(targetSubject == Subject.FirstPanelOpen_4)
             {
+                Debug.Log("called enemy atack statement");
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
             }
 
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+            battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
             Destroy(popupSystem.popupedObject.transform.parent.gameObject);
         }
 
