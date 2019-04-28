@@ -65,7 +65,7 @@ namespace DemonicCity
                 {
                     source.volume = 0f;
                     source.Stop();
-                    Debug.LogWarning(source.name + "Stop");
+                    //Debug.LogWarning(source.name + "Stop");
                 }
                 else
                 {

@@ -454,6 +454,10 @@ namespace DemonicCity.HomeScene
             currentIndex -= 1;
             while (currentIndex != index)
             {
+                if (currentIndex < 0)
+                {
+                    currentIndex = 0;
+                }
                 if (CheckContent(people[currentIndex]))
                 {
                     return people[currentIndex];
