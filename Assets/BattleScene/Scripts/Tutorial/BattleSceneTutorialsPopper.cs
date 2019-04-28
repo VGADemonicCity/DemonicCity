@@ -67,6 +67,7 @@ namespace DemonicCity.BattleScene
         TutorialInPauseMenu tutorialInPauseMenu;
         /// <summary>一時的にVector3を保存しておく箱</summary>
         Vector3 vectorBuffer = new Vector3();
+        Subject targetSubject = new Subject();
 
         const int width = 1080;
         const int height = 1920;
@@ -94,6 +95,7 @@ namespace DemonicCity.BattleScene
         /// <param name="subject"></param>
         public void Popup(Subject subject)
         {
+            targetSubject = subject;
             BattleManager.Instance.SetStateMachine(BattleManager.StateMachine.State.Pause);
             popupSystem.Popup();
             popupMaterials.ForEach(material => popupSystem.SubscribeButton(material));
@@ -237,8 +239,12 @@ namespace DemonicCity.BattleScene
             {
                 return;
             }
-
             var battleManager = BattleManager.Instance;
+            if(targetSubject == Subject.FirstPanelOpen_4)
+            {
+                battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
+            }
+
             battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
             Destroy(popupSystem.popupedObject.transform.parent.gameObject);
         }
