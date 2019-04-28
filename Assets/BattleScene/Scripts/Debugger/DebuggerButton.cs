@@ -47,7 +47,7 @@ namespace DemonicCity.BattleScene.Debugger
         /// </summary>
         void Close()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutSpecialStates);
         }
 
         /// <summary>

@@ -72,7 +72,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         void Resume()
         {
-            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutPauseAndDebugging);
+            battleManager.SetStateMachine(battleManager.m_StateMachine.PreviousStateWithoutSpecialStates);
         }
     }
 }
