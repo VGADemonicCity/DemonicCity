@@ -380,7 +380,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップするときの演出</summary>
         private void LevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * levelDifference[0];
+            addAmount = gaugeMoveSpeed * levelDifference[index];
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -487,9 +487,7 @@ namespace DemonicCity.ResultScene
             if(beforeStatus.Level <= recommendationMinLevel)
             {
                 float temporary = destructionCount * 1.5f;
-                Debug.Log(temporary);
                 destructionCount = Mathf.CeilToInt(temporary);
-                Debug.Log(destructionCount);
             }
           
             //適正レベル以上だったら
