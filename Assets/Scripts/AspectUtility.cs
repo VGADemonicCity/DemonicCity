@@ -19,6 +19,18 @@ public class AspectUtility : MonoBehaviour
             targetCamera.rect = rect;
         };
     }
+
+    private void LateUpdate()
+    {
+        // カメラを検索します。
+        targetCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+        // 指定された比率からサイズを出します。
+        Rect rect = calcAspect(m_x_aspect, m_y_aspect);
+        // カメラの比率を変更します。
+        targetCamera.rect = rect;
+}
+
+
     // アスペクト比計算
     public Rect calcAspect(float width, float height)
     {
