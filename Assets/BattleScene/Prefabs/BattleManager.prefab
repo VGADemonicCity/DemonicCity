@@ -644,7 +644,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 0
-  TargetMagiaLevel: 1
+  TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -786,7 +786,7 @@ MonoBehaviour:
     type: 2}
   closeButton: {fileID: 114467923459272970, guid: 1ae23622a7b909f468411b183d0d393c,
     type: 2}
-  fadingTime: 0.5
+  fadingTime: 0.1
   audioSource: {fileID: 82125522089787304}
 --- !u!114 &114574456638883488
 MonoBehaviour:

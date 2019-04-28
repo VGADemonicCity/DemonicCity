@@ -378,11 +378,26 @@ Prefab:
       propertyPath: destructionCounterBox
       value: 
       objectReference: {fileID: 2027437888}
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_uniqueSkillGauge
+      value: 
+      objectReference: {fileID: 881457497}
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 180859255}
     - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_CoordinateForSpawn
       value: 
       objectReference: {fileID: 101201306}
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 180859255}
     - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: buffAnimator
@@ -453,36 +468,6 @@ Prefab:
       propertyPath: magiaAnimator
       value: 
       objectReference: {fileID: 878212109}
-    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 180859255}
-    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_uniqueSkillGauge
-      value: 
-      objectReference: {fileID: 881457497}
-    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_magiaHPGauge
-      value: 
-      objectReference: {fileID: 180859255}
-    - target: {fileID: 114551629130621486, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: fadingTime
-      value: 0.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: TargetMagiaLevel
-      value: 200
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: LoadStatusFromInspector
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: buffTextBox
