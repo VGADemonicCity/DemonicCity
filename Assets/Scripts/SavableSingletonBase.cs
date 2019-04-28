@@ -42,6 +42,8 @@ namespace DemonicCity
             }
         }
 
+        SavableSingletonBase() { }
+
         /// <summary>
         /// serializableなクラスをJsonに書き出す
         /// </summary>

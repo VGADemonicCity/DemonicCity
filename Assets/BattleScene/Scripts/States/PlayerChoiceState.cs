@@ -39,7 +39,10 @@ namespace DemonicCity.BattleScene
 
             m_battleManager.m_BehaviourByState.AddListener((state) => // ステートマシンにイベント登録
             {
-                if (state != BattleManager.StateMachine.State.PlayerChoice || m_battleManager.m_StateMachine.PreviousStateIsDebugging  ||   m_battleManager.m_StateMachine.PreviousStateIsPause) // StateがPlayerChoice以外の時は処理終了
+                if (state != BattleManager.StateMachine.State.PlayerChoice
+                || m_battleManager.m_StateMachine.PreviousStateIsDebugging
+                || m_battleManager.m_StateMachine.PreviousStateIsPause
+                || m_battleManager.m_StateMachine.PreviousStateIsTutorial) // StateがPlayerChoice以外の時は処理終了
                 {
                     return;
                 }
@@ -49,7 +52,7 @@ namespace DemonicCity.BattleScene
                 m_panelFrameManager.MovingCenter();
 
                 // Tutorialのフラグが立っていた時のみチュートリアルを再生しフラグを下げ二度と呼ばれないようにする
-                 progress = Progress.Instance;
+                progress = Progress.Instance;
                 var tutorialFlag = progress.TutorialProgressInBattleScene;
                 if (targetTutorials == (tutorialFlag & targetTutorials))
                 {
@@ -59,7 +62,7 @@ namespace DemonicCity.BattleScene
 
                 progress = Progress.Instance;
                 magia = Magia.Instance;
-                
+
 
 
                 // ==============================

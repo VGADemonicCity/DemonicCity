@@ -41,6 +41,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] Animator skillAnimator;
         /// <summary>Required time for destruction</summary>
         [SerializeField] float m_destroyingTime = 3f;
+        [SerializeField] AudioClip clip;
 
         /// <summary>BattleManagerの参照</summary>
         BattleManager m_battleManager;
@@ -111,7 +112,7 @@ namespace DemonicCity.BattleScene
 
         public void PlayAttackSE()
         {
-            GetComponent<AudioSource>().Play();
+            SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.SE, clip);
         }
     }
 }
