@@ -380,7 +380,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップするときの演出</summary>
         private void LevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * levelDifference[index];
+            addAmount = gaugeMoveSpeed * levelDifference.Count;
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -390,7 +390,14 @@ namespace DemonicCity.ResultScene
 
 
                 experienceGauge.value = 0;
-                experienceGauge.maxValue = requiredExperiences[index];
+                if(requiredExperiences.Count > 0)
+                {
+                    experienceGauge.maxValue = requiredExperiences[index];
+                }
+                else
+                {
+                    experienceGauge.maxValue = GetRequiredTotalExperience(magia.Stats.Level);
+                }
 
                 levelUpImage.SetActive(true);
 
@@ -412,7 +419,7 @@ namespace DemonicCity.ResultScene
                     rightArrows[i].SetActive(true);
                 }
 
-                addAmount = gaugeMoveSpeed * levelDifference[index];
+                addAmount = gaugeMoveSpeed * levelDifference.Count;
 
                 if(levelDifference[index] >= maxLevel)//レベルアップ中に最大レベルに達したら
                 {
