@@ -77,7 +77,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void PlaySkillVoice()
         {
-            Debug.Log(targetMaterial.skillTag.ToString());
             m_soundManager.PlayWithFade(SoundManager.SoundTag.Voice, targetMaterial.VoiceClip);
         }
 
@@ -86,7 +85,6 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void PlaySkillSE()
         {
-            Debug.Log(targetMaterial.skillTag.ToString());
             m_soundManager.PlayWithFade(SoundManager.SoundTag.SE, targetMaterial.SEClip);
         }
 
