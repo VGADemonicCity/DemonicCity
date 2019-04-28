@@ -62,7 +62,7 @@ namespace DemonicCity.BattleScene
         {
             m_battleManager = BattleManager.Instance; // BattleManagerの参照取得;
             m_uniqueSkillManager = UniqueSkillManager.Instance; // 参照取得
-            m_effectAnimator = GetComponentInChildren<Animator>();
+            //m_effectAnimator = GetComponentInChildren<Animator>();
 
 
             m_battleManager.m_BehaviourByState.AddListener((state) =>
@@ -104,7 +104,7 @@ namespace DemonicCity.BattleScene
         public void OnConditionCompleted()
         {
             // =============条件を満たした時の任意の処理や演出を実装する=============
-            m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
+            //m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
             m_uniqueSkillManager.OnConditionCompleted();
         }
 

@@ -148,6 +148,15 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
             m_framePosition = framePosition; // panelFrameの位置情報を更新する
             isMoving = false;
+            OnMovingFrame();
+        }
+
+        void OnMovingFrame()
+        {
+            foreach (var panel in PanelManager.Instance.PanelsInTheScene)
+            {
+                panel.CheckActivatableCollider();
+            }
         }
     }
 }

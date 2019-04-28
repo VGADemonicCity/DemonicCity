@@ -136,7 +136,6 @@ namespace DemonicCity.BattleScene.Debugger
                 {
                     // 設定された枚数パネルを引いた後敵パネルを引く
                     StartCoroutine(OpenAllPanelsExceptEnemyPanels());
-                    Debug.Log("aaaaaaaaaaaa");
                 }
             });
         }

@@ -50,15 +50,21 @@ namespace DemonicCity.BattleScene
         [SerializeField] Sprite[] m_panelTextures;
         /// <summary>時点から何度回転するか</summary>
         [SerializeField] float m_rotationDegrees = 1440f;
-        /// <summary>パネルのコライダー</summary>
-        public CircleCollider2D m_collider2d;
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
         SpriteRenderer m_spriteRender;
+        /// <summary>パネルのコライダー</summary>
+        public CircleCollider2D myCollider;
+
+        /// <summary>Colliderを有効にする座標の最小値</summary>
+        readonly Vector3 enableMinimumPosition = new Vector3(-1.0f, -5.5f, 0.0f);
+        /// <summary>Colliderを有効にする座標の最大値</summary>
+        readonly Vector3 enableMaximumPosition = new Vector3(2.7f, -1.7f, 0.0f);
+
 
         void Awake()
         {
             m_spriteRender = GetComponent<SpriteRenderer>(); // SpriteREndererコンポーネントの参照
-            m_collider2d = GetComponent<CircleCollider2D>(); //  Collier2Dコンポーネントの参照
+            myCollider = GetComponent<CircleCollider2D>(); //  Collier2Dコンポーネントの参照
 
         }
 
@@ -75,13 +81,13 @@ namespace DemonicCity.BattleScene
         /// 回転してパネルの中身を見せる
         /// </summary>
         /// <param name="waitTime">Wait time.</param>
-        public void Open(float waitTime, Sprite  sprite = null)
+        public void Open(float waitTime, Sprite sprite = null)
         {
             if (IsOpened) // パネルが既に開かれているならメソッド終了
             {
                 return;
             }
-            StartCoroutine(Processing(waitTime,sprite));
+            StartCoroutine(Processing(waitTime, sprite));
         }
 
         //選択されたら一回だけ演出を出してパネルの中身を表示する
@@ -89,7 +95,7 @@ namespace DemonicCity.BattleScene
         {
             IsOpened = true; // 一回呼ばれたらtrueにする迄呼ばれない様にする
             // オープン前のSE再生
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel); 
+            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.BeforeOpenPanel);
             Rotate(gameObject, 'y', waitTime); // 回転させて3秒間立ったら止めて中身表示
             yield return new WaitForSeconds(waitTime);
             ChangingTexture(sprite); // PanelTypeに合わせてtextureを変える
@@ -106,15 +112,41 @@ namespace DemonicCity.BattleScene
                     SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedTriple);
                     break;
                 case PanelType.Enemy:
-            SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedEnemeyPanel);
+                    SoundManager.Instance.PlayWithFade(SoundAsset.SETag.AfterOpenedEnemeyPanel);
                     break;
                 default:
                     break;
             }
         }
 
+        /// <summary>
+        /// パネルがパネルフレームに収まる座標に存在する場合のみColliderを有効にしそれ以外の時は無効にする
+        /// </summary>
+        /// <param name="position"></param>
+        public void CheckActivatableCollider()
+        {
+            // 指定最小座標より大きいか
+            var isGreaterThan = 
+                gameObject.transform.position.x > enableMinimumPosition.x
+                && gameObject.transform.position.y > enableMinimumPosition.y;
+            // 指定最大座標より小さいか
+            var isLessThan =
+                gameObject.transform.position.x <= enableMaximumPosition.x
+                && gameObject.transform.position.y <= enableMaximumPosition.y;
+
+            // 指定範囲内に自分自身(Panel)が存在する場合有効
+            if (isGreaterThan && isLessThan)
+            {
+                myCollider.enabled = true;
+            }
+            else
+            {
+                myCollider.enabled = false;
+            }
+        }
+
         /// <summary>スプライトを変更させる : Changing sprite</summary>
-        public  void ChangingTexture(Sprite sprite = null)
+        public void ChangingTexture(Sprite sprite = null)
         {
             var displaySprite = m_panelTextures[(int)MyPanelType];
             if (sprite != null)
