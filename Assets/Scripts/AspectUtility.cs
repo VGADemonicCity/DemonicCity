@@ -11,8 +11,6 @@ public class AspectUtility : MonoBehaviour
     {
         SceneManager.sceneLoaded += (scene, mode) =>
         {
-            Debug.Log("Called AspectUtility");
-
             // カメラを検索します。
             targetCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
             // 指定された比率からサイズを出します。
@@ -20,8 +18,6 @@ public class AspectUtility : MonoBehaviour
             // カメラの比率を変更します。
             targetCamera.rect = rect;
         };
-
-
     }
     // アスペクト比計算
     public Rect calcAspect(float width, float height)
