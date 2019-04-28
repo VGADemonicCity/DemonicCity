@@ -1,17 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
+
 public class AspectUtility : MonoBehaviour
 {
+    Camera targetCamera;
     public float m_x_aspect = 4.0f;
     public float m_y_aspect = 3.0f;
     void Awake()
     {
-        // カメラを検索します。
-        Camera camera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
-        // 指定された比率からサイズを出します。
-        Rect rect = calcAspect(m_x_aspect, m_y_aspect);
-        // カメラの比率を変更します。
-        camera.rect = rect;
+        SceneManager.sceneLoaded += (scene, mode) =>
+        {
+            Debug.Log("Called AspectUtility");
+
+            // カメラを検索します。
+            targetCamera = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();
+            // 指定された比率からサイズを出します。
+            Rect rect = calcAspect(m_x_aspect, m_y_aspect);
+            // カメラの比率を変更します。
+            targetCamera.rect = rect;
+        };
+
+
     }
     // アスペクト比計算
     public Rect calcAspect(float width, float height)
