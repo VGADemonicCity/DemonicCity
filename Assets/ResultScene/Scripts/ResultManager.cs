@@ -71,6 +71,8 @@ namespace DemonicCity.ResultScene
         /// <summary>スキル名</summary>
         private string skillName;
 
+        private ChapterManager chapterManager;
+
         [SerializeField] private TextMeshProUGUI currentLevelText = null;
         [SerializeField] private TextMeshProUGUI nextLevelText = null;
         [SerializeField] private GameObject beforeHpText = null;
@@ -110,6 +112,7 @@ namespace DemonicCity.ResultScene
 
         private void Awake()
         {
+            chapterManager = ChapterManager.Instance;
             magia = Magia.Instance;
             panelCounter = PanelCounter.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
@@ -119,7 +122,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
-
+          
             //クリアフラグを立てる
             progress.QuestClear();
             SavableSingletonBase<Progress>.Instance.Save();
@@ -329,7 +332,7 @@ namespace DemonicCity.ResultScene
                     requiredToNextLevelTotalExperience = GetRequiredTotalExperience(magia.Stats.Level);
                     requiredExperiences.Add(requiredToNextLevelTotalExperience);
                 }
-                
+
                 magia.MyExperience = totalExperience;
 
                 //レベルアップした際のレベルとスキルを習得するレベルを照合
@@ -377,7 +380,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップするときの演出</summary>
         private void LevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * levelDifference[0];
+            addAmount = gaugeMoveSpeed * levelDifference[index];
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -475,7 +478,23 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
+            int recommendationMinLevel = chapterManager.GetChapter().levelRange[0];
+            int recommendationMaxLevel = chapterManager.GetChapter().levelRange[1];
+
             //destructionCount = 50000;//debug
+           
+            //適正レベル以下だったら
+            if(beforeStatus.Level <= recommendationMinLevel)
+            {
+                float temporary = destructionCount * 1.5f;
+                destructionCount = Mathf.CeilToInt(temporary);
+            }
+          
+            //適正レベル以上だったら
+            else if(beforeStatus.Level >= recommendationMaxLevel)
+            {
+                destructionCount = 0;
+            }
             destructionCountText.text = destructionCount.ToString();
 
             getStatusPointText.text = "0";
@@ -487,7 +506,7 @@ namespace DemonicCity.ResultScene
 
             needDestructionCountText.text = (requiredToNextLevelTotalExperience - myExperience).ToString();
 
-            if(beforeStatus.Level == maxLevel)
+            if(beforeStatus.Level == recommendationMaxLevel)
             {
                 needDestructionCountText.text = "0";
                 levelMaxImage.SetActive(true);
