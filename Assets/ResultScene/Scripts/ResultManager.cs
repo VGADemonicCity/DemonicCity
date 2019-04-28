@@ -380,7 +380,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップするときの演出</summary>
         private void LevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * levelDifference[index];
+            addAmount = gaugeMoveSpeed;
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -390,7 +390,14 @@ namespace DemonicCity.ResultScene
 
 
                 experienceGauge.value = 0;
-                experienceGauge.maxValue = requiredExperiences[index];
+                if(requiredExperiences.Count > 0)
+                {
+                    experienceGauge.maxValue = requiredExperiences[index];
+                }
+                else
+                {
+                    experienceGauge.maxValue = GetRequiredTotalExperience(magia.Stats.Level);
+                }
 
                 levelUpImage.SetActive(true);
 
@@ -412,7 +419,7 @@ namespace DemonicCity.ResultScene
                     rightArrows[i].SetActive(true);
                 }
 
-                addAmount = gaugeMoveSpeed * levelDifference[index];
+                addAmount = gaugeMoveSpeed;
 
                 if(levelDifference[index] >= maxLevel)//レベルアップ中に最大レベルに達したら
                 {
@@ -453,7 +460,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップしないときの演出</summary>
         private void NotLevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * magia.Stats.Level;
+            addAmount = gaugeMoveSpeed;
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -481,7 +488,7 @@ namespace DemonicCity.ResultScene
             int recommendationMinLevel = chapterManager.GetChapter().levelRange[0];
             int recommendationMaxLevel = chapterManager.GetChapter().levelRange[1];
 
-            //destructionCount = 50000;//debug
+            //destructionCount = 300;//debug
            
             //適正レベル以下だったら
             if(beforeStatus.Level <= recommendationMinLevel)
