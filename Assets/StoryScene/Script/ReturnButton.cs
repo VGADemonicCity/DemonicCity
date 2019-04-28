@@ -29,9 +29,9 @@ namespace DemonicCity.StorySelectScene
                     case TouchGestureDetector.Gesture.Click:
                         if (touchInfo.HitDetection(out endObject))
                         {
-                            Debug.Log(beginObject.GetHashCode());
-                            Debug.Log(gameObject.GetHashCode());
-                            Debug.Log(endObject.GetHashCode());
+                            //Debug.Log(beginObject.GetHashCode());
+                            //Debug.Log(gameObject.GetHashCode());
+                            //Debug.Log(endObject.GetHashCode());
 
                             if (beginObject == endObject
                             && beginObject == gameObject)

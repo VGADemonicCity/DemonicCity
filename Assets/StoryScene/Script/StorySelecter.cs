@@ -53,7 +53,7 @@ namespace DemonicCity.StorySelectScene
         public void ToStory(Progress.StoryProgress chapter)
         {
             Progress progress = Progress.Instance;
-            Debug.Log(chapter.ToString());
+            //Debug.Log(chapter.ToString());
             progress.ThisStoryProgress = chapter;
             Chapter thisChapter = ChapterManager.Instance.GetChapter();
             if (thisChapter.isStory)

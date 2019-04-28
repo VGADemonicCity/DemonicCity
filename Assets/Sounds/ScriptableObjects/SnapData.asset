@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 887c85f0d2954ef479f68d4b90c36544, type: 3}
+  m_Name: SnapData
+  m_EditorClassIdentifier: 
+  interval: 0
+  snaps:
+  - sceneTitle: 1
+    snap: {fileID: 24500006, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 3
+    snap: {fileID: 24500006, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 5
+    snap: {fileID: 24500006, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 4
+    snap: {fileID: 24500006, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 2
+    snap: {fileID: 245452163712804804, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 0
+    snap: {fileID: 245786599194714254, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
+  - sceneTitle: 6
+    snap: {fileID: 24500006, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
