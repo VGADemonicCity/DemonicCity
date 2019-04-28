@@ -169,6 +169,8 @@ namespace DemonicCity
             }
         }
 
+
+
         void SyncPosition(Vector3 nextPosition)
         {
             tutorialImagesParent.transform.localPosition = nextPosition;

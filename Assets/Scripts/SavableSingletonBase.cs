@@ -42,7 +42,7 @@ namespace DemonicCity
             }
         }
 
-        SavableSingletonBase() { }
+        protected SavableSingletonBase() { }
 
         /// <summary>
         /// serializableなクラスをJsonに書き出す
