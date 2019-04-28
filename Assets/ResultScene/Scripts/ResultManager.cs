@@ -380,7 +380,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップするときの演出</summary>
         private void LevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * levelDifference.Count;
+            addAmount = gaugeMoveSpeed;
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -419,7 +419,7 @@ namespace DemonicCity.ResultScene
                     rightArrows[i].SetActive(true);
                 }
 
-                addAmount = gaugeMoveSpeed * levelDifference.Count;
+                addAmount = gaugeMoveSpeed;
 
                 if(levelDifference[index] >= maxLevel)//レベルアップ中に最大レベルに達したら
                 {
@@ -460,7 +460,7 @@ namespace DemonicCity.ResultScene
         /// <summary>レベルアップしないときの演出</summary>
         private void NotLevelUpPerformance()
         {
-            addAmount = gaugeMoveSpeed * magia.Stats.Level;
+            addAmount = gaugeMoveSpeed;
             experienceGauge.value += addAmount;
             needDestructionCountText.text = (experienceGauge.maxValue - experienceGauge.value).ToString("f0");
 
@@ -488,7 +488,7 @@ namespace DemonicCity.ResultScene
             int recommendationMinLevel = chapterManager.GetChapter().levelRange[0];
             int recommendationMaxLevel = chapterManager.GetChapter().levelRange[1];
 
-            //destructionCount = 50000;//debug
+            //destructionCount = 300;//debug
            
             //適正レベル以下だったら
             if(beforeStatus.Level <= recommendationMinLevel)
