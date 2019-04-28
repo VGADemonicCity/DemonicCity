@@ -136,9 +136,9 @@ namespace DemonicCity.BattleScene
         {
             // ステート遷移前のステートを保存 
             m_StateMachine.m_PreviousState = m_StateMachine.m_State;
-            if (state == StateMachine.State.Pause|| state == StateMachine.State.Debugging) // 遷移先がPauseステートの時保存
+            if (state == StateMachine.State.Pause|| state == StateMachine.State.Debugging || state == StateMachine.State.Tutorial) // 遷移先がPauseステートの時保存
             {
-                m_StateMachine.m_StateBeforePause = m_StateMachine.m_State;
+                m_StateMachine.m_StateBeforeWithoutSpecialState = m_StateMachine.m_State;
             }
             m_StateMachine.m_State = state; // stateをセット
 
@@ -218,7 +218,7 @@ namespace DemonicCity.BattleScene
             }
 
             /// <summary>Pauseに遷移する前のステート</summary>
-            public State m_StateBeforePause;
+            public State m_StateBeforeWithoutSpecialState;
             /// <summary>遷移前のステート</summary>
             public State m_PreviousState;
             /// <summary>ステート</summary>
@@ -233,7 +233,7 @@ namespace DemonicCity.BattleScene
                 {
                     if (m_PreviousState == State.Pause || m_PreviousState == State.Debugging || m_PreviousState == State.Tutorial)
                     {
-                        return m_StateBeforePause;
+                        return m_StateBeforeWithoutSpecialState;
                     }
                     return m_PreviousState;
                 }
