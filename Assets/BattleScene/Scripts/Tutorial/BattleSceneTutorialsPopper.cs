@@ -241,8 +241,6 @@ namespace DemonicCity.BattleScene
             var battleManager = BattleManager.Instance;
             if (targetSubject == Subject.FirstPanelOpen_4)
             {
-                Debug.Log(battleManager.m_StateMachine.m_State+"stateeeeeeeeeeeeeeeeeeeeeeee");
-                Debug.Log(battleManager.m_StateMachine.PreviousStateWithoutSpecialStates+ "stateeeeeeeeeeeeeeeeeeeeeeee");
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
             }
             else
