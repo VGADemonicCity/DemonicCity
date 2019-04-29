@@ -128,7 +128,6 @@ GameObject:
   - component: {fileID: 4410256117347438}
   - component: {fileID: 114187487230617858}
   - component: {fileID: 114551629130621486}
-  - component: {fileID: 82125522089787304}
   m_Layer: 0
   m_Name: BattleTutorialPopper
   m_TagString: Untagged
@@ -305,101 +304,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 3.8, y: 3.8}
   m_EdgeRadius: 0
---- !u!82 &82125522089787304
-AudioSource:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1339054993674988}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!114 &114015538082176046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -415,8 +319,8 @@ MonoBehaviour:
   m_countCondition: 21
   m_passiveSkill: 64
   m_timing: 0
-  enhanceType: 4
-  m_incease: 0.01
+  enhanceType: 1
+  m_incease: 0.05
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -496,7 +400,7 @@ MonoBehaviour:
   m_passiveSkill: 512
   m_timing: 0
   enhanceType: 3
-  m_incease: 0.02
+  m_incease: 0.01
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
 MonoBehaviour:
@@ -549,7 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfa60838c2a24796afd1e328078d815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 40
+  m_levelCondition: 39
   m_countCondition: 16
   m_passiveSkill: 16
   m_timing: 0
@@ -605,8 +509,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59ca2b3cd7582f44bb29ea5f8a2f73bc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mixer: {fileID: 24100000, guid: 44b8a4f4011181f45b301e2d30e64e36, type: 2}
-  volumeInThePause: -20
 --- !u!114 &114332594962796498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -644,7 +546,7 @@ MonoBehaviour:
     Attack: 0
     Defense: 0
   LoadStatusFromInspector: 0
-  TargetMagiaLevel: 200
+  TargetMagiaLevel: 1
   addStatus: 0
   additionalStatus:
     Level: 0
@@ -687,7 +589,7 @@ MonoBehaviour:
   m_passiveSkill: 256
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.02
+  m_incease: 0.1
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,8 +638,8 @@ MonoBehaviour:
   m_countCondition: 32
   m_passiveSkill: 1024
   m_timing: 0
-  enhanceType: 4
-  m_incease: 0.01
+  enhanceType: 1
+  m_incease: 0.1
 --- !u!114 &114496166160569242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -750,7 +652,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 23
-  m_countCondition: 14
+  m_countCondition: 13
   m_passiveSkill: 4
   m_timing: 0
   enhanceType: 3
@@ -787,7 +689,6 @@ MonoBehaviour:
   closeButton: {fileID: 114467923459272970, guid: 1ae23622a7b909f468411b183d0d393c,
     type: 2}
   fadingTime: 0.1
-  audioSource: {fileID: 82125522089787304}
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -834,7 +735,7 @@ MonoBehaviour:
   m_passiveSkill: 128
   m_timing: 0
   enhanceType: 2
-  m_incease: 0.1
+  m_incease: 0.5
 --- !u!114 &114676999750379174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -847,7 +748,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 11
-  m_countCondition: 11
+  m_countCondition: 8
   m_passiveSkill: 2
   m_timing: 0
   enhanceType: 4
@@ -868,7 +769,7 @@ MonoBehaviour:
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.05
+  m_incease: 0.5
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -885,7 +786,7 @@ MonoBehaviour:
   m_passiveSkill: 32
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.02
+  m_incease: 0.05
 --- !u!114 &114785653873603552
 MonoBehaviour:
   m_ObjectHideFlags: 1
