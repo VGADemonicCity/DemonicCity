@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DemonicCity.HomeScene
 {
@@ -9,7 +10,7 @@ namespace DemonicCity.HomeScene
         TouchGestureDetector touchGestureDetector;
         SceneFader sceneFader;
 
-        [SerializeField] SpriteRenderer touchText;
+        [SerializeField] Image touchText;
         [SerializeField] GameObject configBtn;
         [SerializeField] GameObject CreditIcon;
         [SerializeField] Transform parent;
@@ -111,7 +112,7 @@ namespace DemonicCity.HomeScene
             StartCoroutine(ChangeScale(creditOpened));
         }
 
-        IEnumerator FlashObject(SpriteRenderer targetRenderer)
+        IEnumerator FlashObject(Image targetRenderer)
         {
             Color origin = targetRenderer.color;
             //1フレーム辺りのangleの増加量
