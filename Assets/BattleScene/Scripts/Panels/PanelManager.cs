@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEngine;
 using DemonicCity.BattleScene.Skill;
 using DemonicCity.Debugger;
+using UnityEngine.EventSystems;
 
 namespace DemonicCity.BattleScene
 {
@@ -21,6 +22,10 @@ namespace DemonicCity.BattleScene
         /// <summary>Scene上に存在する敵以外のパネル</summary>
         public List<Panel> AllPanelsExceptEnemyPanels { get { return PanelsInTheScene.FindAll(panel => panel.MyPanelType != PanelType.Enemy); } }
         public float ProcesssingTimeOfOpenPanel { get { return m_waitTime; } }
+        /// <summary>範囲指定をする最小値のvector</summary>
+        public Vector3 EnableMinimumPosition { get { return enableMinimumPosition; } }
+        /// <summary>範囲指定をする最大値のvector</summary>
+        public Vector3 EnableMaximumPosition { get { return enableMaximumPosition; } }
         /// <summary>Scene上に存在する敵以外のパネルが全てオープンされていたらTrueを返す</summary>
         public bool IsOpenedAllPanelsExceptEnemyPanels
         {
@@ -49,10 +54,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] float m_waitTime;
         /// <summary>colliderを検出する為のcollider</summary>
         [SerializeField] BoxCollider2D m_sensor;
-        /// <summary>範囲指定をする最小値のvector</summary>
-        [SerializeField] Vector2 m_VecMin;
-        /// <summary>範囲指定をする最大値のvector</summary>
-        [SerializeField] Vector2 m_VecMax;
+
         /// <summary>ShufflePanelsの参照</summary>
         [SerializeField] ShufflePanels m_shufflePanels;
 
@@ -72,6 +74,21 @@ namespace DemonicCity.BattleScene
         /// <summary>パネル座標の行列</summary>
         float[][] m_panelPosMatlix;
 
+        /// <summary>１パネル枠に存在するパネル数(3*3)</summary>
+        const int MatrixValueInGroup = 3;
+        /// <summary>Panel grounpの総数</summary>
+        const int groupMembers = 3;
+        /// <summary>each Panels Spacing on group position</summary>
+        const float eachPanelsSpacingOnGroup = 230f;
+        /// <summary>x axis of local position of each spacing on group</summary>
+        const float eachSpacingOnGroupPosition = 730f;
+        /// <summary>local position of first instantiate panel</summary>
+        readonly Vector2 initialPanelLocalPosition = new Vector2(-967f, -364f);
+        /// <summary>Colliderを有効にする座標の最小値</summary>
+        readonly Vector3 enableMinimumPosition = new Vector3(-172f, -952f, 0.0f);
+        /// <summary>Colliderを有効にする座標の最大値</summary>
+        readonly Vector3 enableMaximumPosition = new Vector3(496f, -255f, 0.0f);
+
         /// <summary>
         /// Awake this instance.
         /// </summary>
@@ -80,20 +97,9 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
-            m_panelPrefab = Resources.Load<GameObject>("Battle_Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
-            m_panelPosMatlix = new float[2][]; // パネル座標のジャグ配列
-            m_panelPosMatlix[0] = new[] { -2.43f, -3.63f, -4.83f }; //列
-            m_panelPosMatlix[1] = new[] { -4.155f, -2.955f, -1.755f, -0.355f, .845f, 2.045f, 3.445f, 4.645f, 5.845f }; //行
+            m_panelPrefab = Resources.Load<GameObject>("Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<Panel>();
-
-            for (int i = 0; i < m_panelPosMatlix[0].Length; i++) // 列のfor文。行×列=27個のパネル座標を追加する
-            {
-                for (int j = 0; j < m_panelPosMatlix[1].Length; j++) // 行のfor文
-                {
-                    m_panelPositions.Add(new Vector3(m_panelPosMatlix[1][j], m_panelPosMatlix[0][i], 0f)); // リストに追加
-                }
-            }
         }
 
 
@@ -133,7 +139,7 @@ namespace DemonicCity.BattleScene
             switch (hitResult.tag)
             {
                 case "Panel":
-                    if (!IsWithinRange(hitResult.transform.position, m_VecMin, m_VecMax)) // 画面に表示されているパネル枠以外の座標だった場合終了
+                    if (!IsWithinRange(hitResult.transform.position, EnableMinimumPosition, EnableMaximumPosition)) // 画面に表示されているパネル枠以外の座標だった場合終了
                     {
                         return;
                     }
@@ -188,17 +194,27 @@ namespace DemonicCity.BattleScene
             {
                 PanelsInTheScene = new List<Panel>(); // パネルを開く前のリスト
                 PanelType[] panelAllocations = GetRandomPanels(); // パネルの数分PanelTypeのenum値を適切にランダム配分させたリスト
-                // パネルを生成後PanelTypeを適切に割り振る. m_panelAllocationsとm_panelPositionsの要素数は一緒になっていなければおかしいので同時に条件分岐をとる
-                for (int i = 0; i < panelAllocations.Length && i < m_panelPositions.Count; i++)
-                {
-                    //PanelPrefabのインスタンスを生成して、そのゲームオブジェクトの参照を代入する
-                    GameObject panelObject = Instantiate(m_panelPrefab, m_panelPositions[i], Quaternion.identity, m_panelFrame.transform);
-                    Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
-                    panel.MyPanelType = panelAllocations[i]; // パネルタイプを割り当てる
-                    panel.MyFramePosition = DetectFramePosition(i); // パネルの位置を特定して代入
+                Vector3 pos;
+                int totalIndex = 0;
 
-                    // パネルをリストに入れる
-                    PanelsInTheScene.Add(panel);
+                for (int groupIndex = 0; groupIndex < groupMembers; groupIndex++)
+                {
+                    for (int indexXAxis = 0; indexXAxis < MatrixValueInGroup; indexXAxis++)
+                    {
+                        for (int indexYAxis = 0; indexYAxis < MatrixValueInGroup; indexYAxis++)
+                        {
+                            pos = new Vector3(
+                            initialPanelLocalPosition.x + (eachPanelsSpacingOnGroup * indexXAxis) + (eachSpacingOnGroupPosition * groupIndex),
+                            initialPanelLocalPosition.y - (eachPanelsSpacingOnGroup * indexYAxis),
+                            0f); // リストに追加
+                            var panelObject = Instantiate(m_panelPrefab, pos, Quaternion.identity, m_panelFrame.transform);
+                            Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
+                            panel.MyPanelType = panelAllocations[totalIndex]; // パネルタイプを割り当てる
+                            panel.MyFramePosition = DetectFramePosition(totalIndex); // パネルの位置を特定して代入
+                            PanelsInTheScene.Add(panel);
+                            totalIndex++;
+                        }
+                    }
                 }
             }
         }

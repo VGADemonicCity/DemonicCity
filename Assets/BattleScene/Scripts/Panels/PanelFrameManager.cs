@@ -41,11 +41,11 @@ namespace DemonicCity.BattleScene
         /// <summary>フレームの位置を表すenum</summary>
         [SerializeField] FramePosition m_framePosition = FramePosition.Center;
         /// <summary>PanelFrameがフリックで動ける座標</summary>
-        Vector2[] m_framePositions = new Vector2[]
+        float[] m_framePositions = new float[]
         {
-            new Vector2(-2.986255f,-3.62f), // 左
-            new Vector2(0.8450003f,-3.62f), // 真ん中
-            new Vector2(4.676255f,-3.62f), // 右
+            -730, // 左
+            0, // 真ん中
+            730, // 右
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -136,13 +136,13 @@ namespace DemonicCity.BattleScene
             switch (framePosition)
             {
                 case FramePosition.Right:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[0].x));
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[0]));
                     break;
                 case FramePosition.Center:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[1].x));
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[1]));
                     break;
                 case FramePosition.Left:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[2].x));
+                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[2]));
                     break;
             }
             yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
