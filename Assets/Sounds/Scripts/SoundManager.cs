@@ -90,6 +90,8 @@ namespace DemonicCity
             Init();
         }
 
+
+
         void BGMCheck(Scene scene, LoadSceneMode mode = LoadSceneMode.Single)
         {
 
@@ -107,9 +109,17 @@ namespace DemonicCity
                         StopWithFade(SoundTag.BGM);
                         break;
                     case SceneFader.SceneTitle.Title:
+                        foreach (AudioSource item in BgmSources)
+                        {
+                            item.loop = true;
+                        }
                         PlayWithFade(SoundAsset.BGMTag.Title);
                         break;
                     case SceneFader.SceneTitle.EndCredit:
+                        foreach (AudioSource item in BgmSources)
+                        {
+                            item.loop = false;
+                        }
                         PlayWithFade(SoundAsset.BGMTag.ThemeSong);
                         break;
                     default:

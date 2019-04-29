@@ -246,7 +246,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1670894891924112}
-  m_LocalRotation: {x: 0.20356739, y: 0.5433952, z: -0.7626613, w: 0.28570932}
+  m_LocalRotation: {x: 0.40855196, y: 0.41207018, z: -0.5783533, w: 0.57340294}
   m_LocalPosition: {x: -1.98, y: -1.95, z: 0}
   m_LocalScale: {x: 0.11551407, y: 0.11551407, z: 0.11551404}
   m_Children: []
@@ -320,7 +320,7 @@ MonoBehaviour:
   m_passiveSkill: 64
   m_timing: 0
   enhanceType: 1
-  m_incease: 0.05
+  m_incease: 0.02
 --- !u!114 &114017009472620254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -522,18 +522,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   useTargetStory: 0
   targetStory: 2
-  magiaAvailableSkills: 
+  magiaAvailableSkills: 010000000200000004000000100000002000000040000000
   magiaStatus:
-    Level: 0
+    Level: 78
     Durability: 0
     MuscularStrength: 0
     Knowledge: 0
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
+    HitPoint: 4150
+    Attack: 1115
+    Defense: 1115
   currentEnemyStatus:
     Level: 0
     Durability: 0
@@ -542,9 +542,9 @@ MonoBehaviour:
     Sense: 0
     Charm: 0
     Dignity: 0
-    HitPoint: 0
-    Attack: 0
-    Defense: 0
+    HitPoint: 5000
+    Attack: 2500
+    Defense: 300
   LoadStatusFromInspector: 0
   TargetMagiaLevel: 1
   addStatus: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   m_passiveSkill: 256
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.1
+  m_incease: 0.05
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -769,7 +769,7 @@ MonoBehaviour:
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.5
+  m_incease: 0.1
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -786,7 +786,7 @@ MonoBehaviour:
   m_passiveSkill: 32
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.05
+  m_incease: 0.03
 --- !u!114 &114785653873603552
 MonoBehaviour:
   m_ObjectHideFlags: 1
