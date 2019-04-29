@@ -19,10 +19,8 @@ namespace DemonicCity.BattleScene.Skill
         {
             Debug.Log("Activated the 心焔権現");
             m_attackBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.Attack * m_incease; // 街破壊数 * (攻撃力 * 任意の%)
-            m_defenseBuffer = m_panelCounter.DestructionCount * m_battleManager.m_MagiaStats.Temp.Defense * m_incease; // 街破壊数 * (防御力 * 任意の%)
             m_battleManager.m_MagiaStats.Attack += (int)m_attackBuffer; // intに変換
-            m_battleManager.m_MagiaStats.Defense += (int)m_defenseBuffer; // intに変換
-            buffText = string.Format("攻{0}\n防{1}", (int)m_attackBuffer, (int)m_defenseBuffer);
+            SetBuffText(EnhanceType.AttackBuff, (int)m_attackBuffer);
         }
 
         protected override void SkillDeactivate()
@@ -30,7 +28,6 @@ namespace DemonicCity.BattleScene.Skill
             base.SkillDeactivate();
             Debug.Log("Deactivated the 心焔権現");
             m_battleManager.m_MagiaStats.Attack -= (int)m_attackBuffer; // 変動値を元に戻す
-            m_battleManager.m_MagiaStats.Defense -= (int)m_defenseBuffer; // 変動値を元に戻す
         }
     }
 }
