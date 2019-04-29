@@ -119,6 +119,7 @@ namespace DemonicCity.StrengthenScene
         {
             window.GetComponent<Animator>().CrossFadeInFixedTime(PopUpAnimation.Close_PopUpWindow.ToString(),0);
             yield return new WaitForSeconds(0.5f);
+            window.GetComponent<Animator>().enabled = false;
             window.SetActive(false);
         }
 

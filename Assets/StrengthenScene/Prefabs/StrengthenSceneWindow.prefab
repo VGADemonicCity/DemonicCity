@@ -984,7 +984,6 @@ GameObject:
   - component: {fileID: 223268797416508280}
   - component: {fileID: 114280626883704166}
   - component: {fileID: 114791250163485190}
-  - component: {fileID: 114508258922270066}
   m_Layer: 5
   m_Name: StrengthenSceneWindow
   m_TagString: Untagged
@@ -1181,6 +1180,22 @@ GameObject:
   - component: {fileID: 114472163880000704}
   m_Layer: 13
   m_Name: Scrollbar Vertical
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1620617896667344
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224607078840542764}
+  - component: {fileID: 114344532432128840}
+  m_Layer: 5
+  m_Name: SceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4724,7 +4739,7 @@ MonoBehaviour:
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1080, y: 1920}
-  m_ScreenMatchMode: 0
+  m_ScreenMatchMode: 1
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
@@ -5072,6 +5087,61 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114344532432128840
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620617896667344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b2a8059e97e6034ea68f13490aa7545, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popupSystem: {fileID: 114492420233895502}
+  currentBasicStatusTexts:
+  - {fileID: 114570184604183238}
+  - {fileID: 114715895838386524}
+  - {fileID: 114728088948420436}
+  updatedBasicStatusTexts:
+  - {fileID: 114648618699796004}
+  - {fileID: 114331048384332172}
+  - {fileID: 114876413859937314}
+  currentUniqueStatusTexts:
+  - {fileID: 114936116843080698}
+  - {fileID: 114210875876368416}
+  - {fileID: 114529149084852528}
+  - {fileID: 114245562087163996}
+  - {fileID: 114182328783535744}
+  - {fileID: 114958360606326030}
+  addUniqueStatusTexts:
+  - {fileID: 114986528250587992}
+  - {fileID: 114044154413726878}
+  - {fileID: 114879320791657670}
+  - {fileID: 114782947115689998}
+  - {fileID: 114698619869328004}
+  - {fileID: 114689233270177978}
+  MystatusPointText: {fileID: 114483680206167526}
+  confirmMessageWindow: {fileID: 1886937551190370}
+  resetMessageWindow: {fileID: 1068351851739928}
+  confirmAndResetButtons: {fileID: 1756933400820928}
+  skillListWindow: {fileID: 1829750871584384}
+  skillDescriptionTexts:
+  - {fileID: 1834764465753710}
+  - {fileID: 1982185778896030}
+  - {fileID: 1645281695605752}
+  - {fileID: 1623396403190258}
+  - {fileID: 1025815020772154}
+  - {fileID: 1791648886183700}
+  - {fileID: 1016515059890264}
+  - {fileID: 1723291569885194}
+  - {fileID: 1857323534075828}
+  - {fileID: 1875126347887764}
+  - {fileID: 1781142203960794}
+  - {fileID: 1974846823669408}
+  - {fileID: 1134655228003960}
+  - {fileID: 1823647463259562}
+  - {fileID: 1838691146224958}
 --- !u!114 &114344970969161430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5925,61 +5995,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114508258922270066
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1537939738843736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b2a8059e97e6034ea68f13490aa7545, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  popupSystem: {fileID: 114492420233895502}
-  currentBasicStatusTexts:
-  - {fileID: 114570184604183238}
-  - {fileID: 114715895838386524}
-  - {fileID: 114728088948420436}
-  updatedBasicStatusTexts:
-  - {fileID: 114648618699796004}
-  - {fileID: 114331048384332172}
-  - {fileID: 114876413859937314}
-  currentUniqueStatusTexts:
-  - {fileID: 114936116843080698}
-  - {fileID: 114210875876368416}
-  - {fileID: 114529149084852528}
-  - {fileID: 114245562087163996}
-  - {fileID: 114182328783535744}
-  - {fileID: 114958360606326030}
-  addUniqueStatusTexts:
-  - {fileID: 114986528250587992}
-  - {fileID: 114044154413726878}
-  - {fileID: 114879320791657670}
-  - {fileID: 114782947115689998}
-  - {fileID: 114698619869328004}
-  - {fileID: 114689233270177978}
-  MystatusPointText: {fileID: 114483680206167526}
-  confirmMessageWindow: {fileID: 1886937551190370}
-  resetMessageWindow: {fileID: 1068351851739928}
-  confirmAndResetButtons: {fileID: 1756933400820928}
-  skillListWindow: {fileID: 1829750871584384}
-  skillDescriptionTexts:
-  - {fileID: 1834764465753710}
-  - {fileID: 1982185778896030}
-  - {fileID: 1645281695605752}
-  - {fileID: 1623396403190258}
-  - {fileID: 1025815020772154}
-  - {fileID: 1791648886183700}
-  - {fileID: 1016515059890264}
-  - {fileID: 1723291569885194}
-  - {fileID: 1857323534075828}
-  - {fileID: 1875126347887764}
-  - {fileID: 1781142203960794}
-  - {fileID: 1974846823669408}
-  - {fileID: 1134655228003960}
-  - {fileID: 1823647463259562}
-  - {fileID: 1838691146224958}
 --- !u!114 &114510669652087360
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -11782,6 +11797,24 @@ RectTransform:
   m_AnchoredPosition: {x: 203.15, y: 0}
   m_SizeDelta: {x: 406.3, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!224 &224607078840542764
+RectTransform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1620617896667344}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 224651776715093732}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224611489910814204
 RectTransform:
   m_ObjectHideFlags: 1
@@ -11906,6 +11939,7 @@ RectTransform:
   m_Children:
   - {fileID: 224504469518193994}
   - {fileID: 4581796377965238}
+  - {fileID: 224607078840542764}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
