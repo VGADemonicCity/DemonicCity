@@ -239,13 +239,14 @@ namespace DemonicCity.BattleScene
                 return;
             }
             var battleManager = BattleManager.Instance;
-            if(targetSubject == Subject.FirstPanelOpen_4)
+            if (targetSubject == Subject.FirstPanelOpen_4)
             {
-                Debug.Log("called enemy atack statement");
                 battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
             }
-
-            battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+            else
+            {
+                battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+            }
             Destroy(popupSystem.popupedObject.transform.parent.gameObject);
         }
 

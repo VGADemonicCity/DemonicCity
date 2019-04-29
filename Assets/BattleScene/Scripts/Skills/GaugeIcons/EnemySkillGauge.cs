@@ -33,7 +33,7 @@ namespace DemonicCity.BattleScene
                     m_halflyGaugeIcon.color = Color.clear;
                     m_fullyGaugeIcon.color = Color.white;
                     m_alphaChannel = value;
-                    m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
+                    //m_effectAnimator.SetTrigger(AnimParam.Activate.ToString());
                 }
             }
         }
