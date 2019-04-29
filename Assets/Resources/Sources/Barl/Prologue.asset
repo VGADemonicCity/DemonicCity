@@ -14,7 +14,7 @@ MonoBehaviour:
   texts:
   - charName: 
     cName: 11
-    sentence: "\u9B54\u754C\u30B2\u30FC\u30C6\u30A3\u30A2\u3000\u9B54\u738B\u57CE\uFF5E\u7389\u5EA7\u306E\u9593\uFF5E"
+    sentence: "\u9B54\u754C\u30B2\u30FC\u30C6\u30A3\u30A2\n\u9B54\u738B\u57CE\uFF5E\u7389\u5EA7\u306E\u9593\uFF5E"
     face: 
     faceIndex: 0
     unknown: 
@@ -321,7 +321,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: 6ebcab357dbd3474cb3ec8d85367817c, type: 3}
   - charName: Barl
     cName: 6
     sentence: "\u3053\u3044\u3064\u306F\u5091\u4F5C\u3060\u306A"
@@ -331,7 +331,7 @@ MonoBehaviour:
     isUnknown: 0
     stage: 
     stageTag: 0
-    voiceData: {fileID: 0}
+    voiceData: {fileID: 8300000, guid: ff440020dd845fb42be4b1224301080b, type: 3}
   - charName: Magia
     cName: 0
     sentence: "\u4F55\u3092\u8A00\u3063\u3066\u3044\u308B\u306E\u2026\u2026?"
