@@ -72,12 +72,6 @@ namespace DemonicCity.BattleScene
         const int width = 1080;
         const int height = 1920;
 
-        public void TestPopup()
-        {
-            if (BattleManager.Instance.m_StateMachine.m_State != BattleManager.StateMachine.State.Init)
-                Popup(Subject.AboutAttack | Subject.CompletePanels);
-        }
-
         private void Start()
         {
             popupSystem = GetComponent<PopupSystem>();
