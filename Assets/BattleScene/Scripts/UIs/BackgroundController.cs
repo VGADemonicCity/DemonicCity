@@ -9,11 +9,11 @@ namespace DemonicCity.BattleScene
     {
         /// <summary>1Waveのバトルステージ背景</summary>
         [Header("Conponents")]
-        [SerializeField] SpriteRenderer firstWaveBattleStage;
+        [SerializeField] Image firstWaveBattleStage;
         /// <summary>バトルステージ背景</summary>
-        [SerializeField] SpriteRenderer secondWaveBattleStage;
+        [SerializeField] Image secondWaveBattleStage;
         /// <summary>バトルステージ背景</summary>
-        [SerializeField] SpriteRenderer thirdWaveBattleStage;
+        [SerializeField] Image thirdWaveBattleStage;
         /// <summary>cityNameBoxのテキストコンポーネント</summary>
         Text cityNameTextBox;
 
