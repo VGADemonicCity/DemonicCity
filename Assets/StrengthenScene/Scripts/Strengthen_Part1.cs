@@ -171,10 +171,6 @@ namespace DemonicCity.StrengthenScene
                                 SkillDescriptionManager(2);
                                 activeSkillDescriptionText = 2;
                                 break;
-                            //case "ExplosiveFlamePillar":
-                            //    SkillDescriptionManager(3);
-                            //    activeSkillDescriptionText = 3;
-                            //   break;
                             case "CrimsonBarrier":
                                 SkillDescriptionManager(3);
                                 activeSkillDescriptionText = 3;
@@ -224,7 +220,7 @@ namespace DemonicCity.StrengthenScene
                                 activeSkillDescriptionText = 14;
                                 break;
 
-                            //ここまで各スキル名の処理
+                             //   ここまで各スキル名の処理
                             case "AddCharmButton":
                                 ChangeUniqueStatus(ref charm,ref addCharm,ref addUniqueStatusTexts[0]);
                                 break;
@@ -281,6 +277,42 @@ namespace DemonicCity.StrengthenScene
                                     activePopUpWindowFlag = false;
                                 }
                                 break;
+                        }
+                    }
+                }
+                if(gesture == TouchGestureDetector.Gesture.TouchStationary)
+                {
+                    GameObject addUniqueStatusButton;
+                    touchInfo.HitDetection(out addUniqueStatusButton);
+
+                    if(addUniqueStatusButton != null)
+                    {
+                        switch(addUniqueStatusButton.name)
+                        {
+                            case "AddCharmButton":
+                                ChangeUniqueStatus(ref charm,ref addCharm,ref addUniqueStatusTexts[0]);
+                                break;
+
+                            case "AddDignityButton":
+                                ChangeUniqueStatus(ref dignity,ref addDignity,ref addUniqueStatusTexts[1]);
+                                break;
+
+                            case "AddMuscularStrengthButton":
+                                ChangeUniqueStatus(ref muscularStrength,ref addMuscularStrength,ref addUniqueStatusTexts[2]);
+                                break;
+
+                            case "AddSenseButton":
+                                ChangeUniqueStatus(ref sense,ref addSense,ref addUniqueStatusTexts[3]);
+                                break;
+
+                            case "AddDurabilityButton":
+                                ChangeUniqueStatus(ref durability,ref addDurability,ref addUniqueStatusTexts[4]);
+                                break;
+
+                            case "AddKnowledgeButton":
+                                ChangeUniqueStatus(ref knowledge,ref addKnowledge,ref addUniqueStatusTexts[5]);
+                                break;
+
                         }
                     }
                 }
