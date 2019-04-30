@@ -95,6 +95,7 @@ namespace DemonicCity
             var canvasScaler = canvas.GetComponent<CanvasScaler>();
             canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
             canvasScaler.referenceResolution = targetResolution;
+            canvasScaler.screenMatchMode = CanvasScaler.ScreenMatchMode.Expand;
 
             // 最前面に来る様適当なSortingOderに設定する
             canvas.sortingOrder = sortingOrder;
