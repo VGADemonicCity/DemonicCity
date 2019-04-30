@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace DemonicCity.BattleScene
 {
@@ -51,21 +52,17 @@ namespace DemonicCity.BattleScene
         /// <summary>時点から何度回転するか</summary>
         [SerializeField] float m_rotationDegrees = 1440f;
         /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
-        SpriteRenderer m_spriteRender;
-        /// <summary>パネルのコライダー</summary>
-        public CircleCollider2D myCollider;
-
-        /// <summary>Colliderを有効にする座標の最小値</summary>
-        readonly Vector3 enableMinimumPosition = new Vector3(-1.0f, -5.5f, 0.0f);
-        /// <summary>Colliderを有効にする座標の最大値</summary>
-        readonly Vector3 enableMaximumPosition = new Vector3(2.7f, -1.7f, 0.0f);
-
+        Image myImage;
+        PanelManager panelManager;
 
         void Awake()
         {
-            m_spriteRender = GetComponent<SpriteRenderer>(); // SpriteREndererコンポーネントの参照
-            myCollider = GetComponent<CircleCollider2D>(); //  Collier2Dコンポーネントの参照
+            panelManager = PanelManager.Instance;
+        }
 
+        private void OnEnable()
+        {
+            myImage = GetComponent<Image>();
         }
 
         /// <summary>
@@ -73,7 +70,7 @@ namespace DemonicCity.BattleScene
         /// </summary>
         public void ResetPanel()
         {
-            m_spriteRender.sprite = m_panelTextures[(int)PanelType.Default]; // パネルのtextureをDefaultに戻す
+            myImage.sprite = m_panelTextures[(int)PanelType.Default]; // パネルのtextureをDefaultに戻す
             IsOpened = false; //フラグリセット
         }
 
@@ -123,26 +120,19 @@ namespace DemonicCity.BattleScene
         /// パネルがパネルフレームに収まる座標に存在する場合のみColliderを有効にしそれ以外の時は無効にする
         /// </summary>
         /// <param name="position"></param>
-        public void CheckActivatableCollider()
+        public bool CheckActivatablePanel()
         {
             // 指定最小座標より大きいか
             var isGreaterThan = 
-                gameObject.transform.position.x > enableMinimumPosition.x
-                && gameObject.transform.position.y > enableMinimumPosition.y;
+                gameObject.transform.position.x > panelManager.EnableMinimumPosition.x
+                && gameObject.transform.position.y > panelManager.EnableMinimumPosition.y;
             // 指定最大座標より小さいか
             var isLessThan =
-                gameObject.transform.position.x <= enableMaximumPosition.x
-                && gameObject.transform.position.y <= enableMaximumPosition.y;
+                gameObject.transform.position.x <= panelManager.EnableMaximumPosition.x
+                && gameObject.transform.position.y <= panelManager.EnableMaximumPosition.y;
 
             // 指定範囲内に自分自身(Panel)が存在する場合有効
-            if (isGreaterThan && isLessThan)
-            {
-                myCollider.enabled = true;
-            }
-            else
-            {
-                myCollider.enabled = false;
-            }
+            return isGreaterThan && isLessThan;
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>
@@ -154,7 +144,7 @@ namespace DemonicCity.BattleScene
                 displaySprite = sprite;
             }
 
-            m_spriteRender.sprite = displaySprite; //パネルタイプのenum値をキャストで渡す
+            myImage.sprite = displaySprite; //パネルタイプのenum値をキャストで渡す
         }
 
         /// <summary>
