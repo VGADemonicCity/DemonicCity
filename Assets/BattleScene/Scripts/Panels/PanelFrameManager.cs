@@ -138,7 +138,6 @@ namespace DemonicCity.BattleScene
                 yield break;
             }
             isMoving = true;
-            Debug.Log(framePosition + "動かす先のふれーむ");
             var toPos = new Vector3();
             switch (framePosition)
             {
@@ -166,7 +165,6 @@ namespace DemonicCity.BattleScene
                 ));
             yield return new WaitForSeconds(animationTime); // 移動してる間重複呼び出しを止める
             m_framePosition = framePosition; // panelFrameの位置情報を更新する
-            Debug.Log(m_framePosition + "動かした後のフレーム");
             isMoving = false;
             OnMovingFrame();
         }

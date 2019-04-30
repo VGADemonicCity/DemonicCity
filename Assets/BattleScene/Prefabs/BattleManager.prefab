@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useTargetStory: 1
+  useTargetStory: 0
   targetStory: 4096
   magiaAvailableSkills: 010000000200000004000000100000002000000040000000800000000001000000020000000400000008000000100000
   magiaStatus:
@@ -514,7 +514,7 @@ MonoBehaviour:
     HitPoint: 11000
     Attack: 6000
     Defense: 500
-  LoadStatusFromInspector: 1
+  LoadStatusFromInspector: 0
   TargetMagiaLevel: 200
   addStatus: 0
   additionalStatus:
@@ -657,7 +657,8 @@ MonoBehaviour:
     type: 2}
   closeButton: {fileID: 114467923459272970, guid: 1ae23622a7b909f468411b183d0d393c,
     type: 2}
-  fadingTime: 0.1
+  fadingTime: 0.5
+  easeType: 28
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
