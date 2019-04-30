@@ -98,7 +98,9 @@ namespace DemonicCity.StrengthenScene
         private bool changedStatus = false;
         /// <summary>シーンがロードされたか</summary>
         private bool isSceneLoaded = false;
-
+        [SerializeField] private GameObject canvas = null;
+        [SerializeField] private float allocationSpeed = 0.5f;
+        private bool stationary = false;
         /// <summary>アニメーションステート名</summary>
         public enum PopUpAnimation
         {
@@ -129,7 +131,7 @@ namespace DemonicCity.StrengthenScene
 
             touchGestureDetector.onGestureDetected.AddListener((gesture,touchInfo) =>
             {
-                if(gesture == TouchGestureDetector.Gesture.TouchBegin)
+                if(gesture == TouchGestureDetector.Gesture.TouchBegin && !stationary)
                 {
                     GameObject button;
                     touchInfo.HitDetection(out button);
@@ -139,7 +141,7 @@ namespace DemonicCity.StrengthenScene
                         switch(button.name)
                         {
                             case "BackToHomeSceneButton":
-                                Destroy(gameObject);
+                                Destroy(canvas);
                                 break;
 
                             case "ShowSkillButton":
@@ -220,7 +222,7 @@ namespace DemonicCity.StrengthenScene
                                 activeSkillDescriptionText = 14;
                                 break;
 
-                             //   ここまで各スキル名の処理
+                            //   ここまで各スキル名の処理
                             case "AddCharmButton":
                                 ChangeUniqueStatus(ref charm,ref addCharm,ref addUniqueStatusTexts[0]);
                                 break;
@@ -280,13 +282,15 @@ namespace DemonicCity.StrengthenScene
                         }
                     }
                 }
-                if(gesture == TouchGestureDetector.Gesture.TouchStationary)
+                else if(gesture == TouchGestureDetector.Gesture.TouchStationary)
                 {
+                    stationary = true;
                     GameObject addUniqueStatusButton;
                     touchInfo.HitDetection(out addUniqueStatusButton);
 
-                    if(addUniqueStatusButton != null)
+                    if(addUniqueStatusButton != null && stationary)
                     {
+
                         switch(addUniqueStatusButton.name)
                         {
                             case "AddCharmButton":
@@ -315,6 +319,7 @@ namespace DemonicCity.StrengthenScene
 
                         }
                     }
+                    stationary = false;
                 }
             });
         }
