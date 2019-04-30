@@ -48,6 +48,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .1f;
+        [SerializeField] iTween.EaseType easeType= iTween.EaseType.easeInOutBack;
 
         /// <summary>popup system</summary>
         PopupSystem popupSystem;
@@ -171,6 +172,7 @@ namespace DemonicCity.BattleScene
                         "onupdatetarget", gameObject,
                         "oncomplete", "OnCompleteTutorialWindowAnimation",
                         "oncompletetarget", gameObject,
+                        "easetype", easeType,
                         "ignoretimescale", true));
                     //tutorialImagesParent.transform.localPosition += new Vector3(-width, 0, 0);
                     break;
@@ -188,6 +190,7 @@ namespace DemonicCity.BattleScene
                     "onupdatetarget", gameObject,
                     "oncomplete", "OnCompleteTutorialWindowAnimation",
                     "oncompletetarget", gameObject,
+                    "easetype", easeType,
                     "ignoretimescale", true));
                     //tutorialImagesParent.transform.localPosition += new Vector3(width, 0, 0);
 
