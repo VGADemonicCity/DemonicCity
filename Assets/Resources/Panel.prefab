@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114332065716188336}
   m_Layer: 5
   m_Name: Panel
-  m_TagString: Untagged
+  m_TagString: Panel
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,7 +43,12 @@ MonoBehaviour:
   m_framePosition: 0
   m_panelType: 0
   m_isOpened: 0
-  m_panelTextures: []
+  m_panelTextures:
+  - {fileID: 21300000, guid: c76269d1fa4e5ff45865a8277145b68c, type: 3}
+  - {fileID: 21300000, guid: 0e756e43480a30342b01f553878007cb, type: 3}
+  - {fileID: 21300000, guid: 41dc11f5b1a24964c996ec8ec6005abb, type: 3}
+  - {fileID: 21300000, guid: 56089166f74d87b4fa75d0f7f04a175e, type: 3}
+  - {fileID: 21300000, guid: b33453e668c7bc541b71b2782f8fe0a0, type: 3}
   m_rotationDegrees: 1440
 --- !u!114 &114670146172605632
 MonoBehaviour:

@@ -52,9 +52,6 @@ namespace DemonicCity.BattleScene
         [SerializeField] GameObject m_panelFrame;
         /// <summary>パネルを回転させる時間</summary>
         [SerializeField] float m_waitTime;
-        /// <summary>colliderを検出する為のcollider</summary>
-        [SerializeField] BoxCollider2D m_sensor;
-
         /// <summary>ShufflePanelsの参照</summary>
         [SerializeField] ShufflePanels m_shufflePanels;
 
@@ -83,7 +80,7 @@ namespace DemonicCity.BattleScene
         /// <summary>x axis of local position of each spacing on group</summary>
         const float eachSpacingOnGroupPosition = 730f;
         /// <summary>local position of first instantiate panel</summary>
-        readonly Vector2 initialPanelLocalPosition = new Vector2(-967f, -364f);
+        readonly Vector2 initialPanelLocalPosition = new Vector2(-963f, 232.5f);
         /// <summary>Colliderを有効にする座標の最小値</summary>
         readonly Vector3 enableMinimumPosition = new Vector3(-172f, -952f, 0.0f);
         /// <summary>Colliderを有効にする座標の最大値</summary>
@@ -97,7 +94,7 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector = TouchGestureDetector.Instance; // shingleton,TouchGestureDetectorインスタンスの取得
             m_battleManager = BattleManager.Instance; // shingleton,BattleManagerインスタンスの取得
             m_panelCounter = PanelCounter.Instance; // PanelCounterの参照取得
-            m_panelPrefab = Resources.Load<GameObject>("Panel"); //Battle_PanelをResourcesフォルダに入れてシーン外から取得
+            m_panelPrefab = Resources.Load<GameObject>("Panel"); //PanelをResourcesフォルダに入れてシーン外から取得
             m_panelPositions = new List<Vector3>();
             m_panelsAfterOpened = new List<Panel>();
         }
@@ -139,12 +136,8 @@ namespace DemonicCity.BattleScene
             switch (hitResult.tag)
             {
                 case "Panel":
-                    if (!IsWithinRange(hitResult.transform.position, EnableMinimumPosition, EnableMaximumPosition)) // 画面に表示されているパネル枠以外の座標だった場合終了
-                    {
-                        return;
-                    }
                     var panel = hitResult.GetComponent<Panel>();
-                    if (panel.IsOpened == true) // 既に開かれているパネルなら終了
+                    if (panel.IsOpened == true || !panel.CheckActivatablePanel()) // 既に開かれているパネルなら終了
                     {
                         return;
                     }
@@ -157,7 +150,6 @@ namespace DemonicCity.BattleScene
         {
             base.OnInitialize();
             Debug.Log("on initialize");
-
         }
 
         /// <summary>
@@ -206,8 +198,9 @@ namespace DemonicCity.BattleScene
                             pos = new Vector3(
                             initialPanelLocalPosition.x + (eachPanelsSpacingOnGroup * indexXAxis) + (eachSpacingOnGroupPosition * groupIndex),
                             initialPanelLocalPosition.y - (eachPanelsSpacingOnGroup * indexYAxis),
-                            0f); // リストに追加
-                            var panelObject = Instantiate(m_panelPrefab, pos, Quaternion.identity, m_panelFrame.transform);
+                            0f); 
+                            var panelObject = Instantiate(m_panelPrefab, m_panelFrame.transform);
+                            panelObject.transform.localPosition = pos;
                             Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
                             panel.MyPanelType = panelAllocations[totalIndex]; // パネルタイプを割り当てる
                             panel.MyFramePosition = DetectFramePosition(totalIndex); // パネルの位置を特定して代入

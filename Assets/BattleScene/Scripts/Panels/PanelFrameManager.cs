@@ -38,14 +38,17 @@ namespace DemonicCity.BattleScene
 
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float m_waitTime = 1f;
+        /// <summary>枠移動の待ち時間</summary>
+        [SerializeField] float movingTime = .25f;
+
         /// <summary>フレームの位置を表すenum</summary>
         [SerializeField] FramePosition m_framePosition = FramePosition.Center;
         /// <summary>PanelFrameがフリックで動ける座標</summary>
-        float[] m_framePositions = new float[]
+        Vector3[] m_framePositions = new Vector3[]
         {
-            -730, // 左
-            0, // 真ん中
-            730, // 右
+            new Vector3(903.4f,-593.4f), // 左
+            new Vector3(173.4f,-593.4f), // 真ん中
+            new Vector3(-556.6f,-593.4f), // 右
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -63,9 +66,14 @@ namespace DemonicCity.BattleScene
             m_touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
 
-                if (isMoving || battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice ) // 枠移動中の時は終了
+                if (isMoving || battleManager.m_StateMachine.m_State != BattleManager.StateMachine.State.PlayerChoice) // 枠移動中の時は終了
                 {
                     return;
+                }
+
+                if(gesture == TouchGestureDetector.Gesture.TouchStationary)
+                {
+                    Debug.Log("Stationary");
                 }
 
                 switch (gesture) // タッチ情報が左右のフリックだったら
@@ -131,32 +139,68 @@ namespace DemonicCity.BattleScene
             {
                 yield break;
             }
-
-            isMoving = true;
+            Debug.Log(framePosition + "動かす先のふれーむ");
+            var toPos = new Vector3();
             switch (framePosition)
             {
                 case FramePosition.Right:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[0]));
+                    toPos = GetFramePosition(FramePosition.Right);
                     break;
                 case FramePosition.Center:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[1]));
+                    toPos = GetFramePosition(FramePosition.Center);
                     break;
                 case FramePosition.Left:
-                    iTween.MoveTo(gameObject, iTween.Hash(("x"), m_framePositions[2]));
+                    toPos = GetFramePosition(FramePosition.Left);
+                    break;
+                default:
                     break;
             }
+
+            iTween.ValueTo(gameObject, iTween.Hash(
+                "from", gameObject.transform.localPosition,
+                "to", toPos,
+                "time", movingTime,
+                "onupdate", "SyncPosition",
+                "onpudatetarget", gameObject,
+                "ignoretimescale", false
+                ));
             yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
             m_framePosition = framePosition; // panelFrameの位置情報を更新する
+            Debug.Log(m_framePosition + "動かした後のフレーム");
             isMoving = false;
             OnMovingFrame();
+        }
+
+        Vector3 GetFramePosition(FramePosition framePositionTag)
+        {
+            switch (framePositionTag)
+            {
+                case FramePosition.Right:
+                    return m_framePositions[2];
+                case FramePosition.Center:
+                    return m_framePositions[1];
+                case FramePosition.Left:
+                    return m_framePositions[0];
+                default:
+                    throw new ArgumentException();
+            }
         }
 
         void OnMovingFrame()
         {
             foreach (var panel in PanelManager.Instance.PanelsInTheScene)
             {
-                panel.CheckActivatableCollider();
+                panel.CheckActivatablePanel();
             }
         }
+
+        #region iTweenAnimationMethods
+
+        void SyncPosition(Vector3 vec)
+        {
+            gameObject.transform.localPosition = vec;
+        }
+
+        #endregion
     }
 }

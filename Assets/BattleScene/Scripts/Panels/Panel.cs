@@ -57,8 +57,12 @@ namespace DemonicCity.BattleScene
 
         void Awake()
         {
-            myImage = GetComponent<Image>();
             panelManager = PanelManager.Instance;
+        }
+
+        private void OnEnable()
+        {
+            myImage = GetComponent<Image>();
         }
 
         /// <summary>
@@ -116,7 +120,7 @@ namespace DemonicCity.BattleScene
         /// パネルがパネルフレームに収まる座標に存在する場合のみColliderを有効にしそれ以外の時は無効にする
         /// </summary>
         /// <param name="position"></param>
-        public void CheckActivatableCollider()
+        public bool CheckActivatablePanel()
         {
             // 指定最小座標より大きいか
             var isGreaterThan = 
@@ -128,12 +132,7 @@ namespace DemonicCity.BattleScene
                 && gameObject.transform.position.y <= panelManager.EnableMaximumPosition.y;
 
             // 指定範囲内に自分自身(Panel)が存在する場合有効
-            if (isGreaterThan && isLessThan)
-            {
-            }
-            else
-            {
-            }
+            return isGreaterThan && isLessThan;
         }
 
         /// <summary>スプライトを変更させる : Changing sprite</summary>

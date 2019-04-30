@@ -123,7 +123,7 @@ namespace DemonicCity.BattleScene
         {
             //skillAnim.SetTrigger("Activate");
             Time.timeScale = 1;
-            skillAnim.CrossFadeInFixedTime("TransitionSkill",0);
+            skillAnim.CrossFadeInFixedTime("TransitionSkill", 0);
             panelFrameManager.isSkillActivating = false;
         }
 
@@ -173,29 +173,12 @@ namespace DemonicCity.BattleScene
         /// <returns></returns>
         IEnumerator SkillActivate()
         {
-            m_sensor.enabled = true; // colliderをactiveにする
-            var results = new Collider2D[9]; // 結果を受け取るための配列
-            m_sensor.OverlapCollider(new ContactFilter2D(), results); // 設定したcolliderと重なっているcolliderを検出し配列に代入する
-            m_sensor.enabled = false; // colliderをdisableにする
-
-            var panelList = new List<Panel>(); // colliderに検出されたオブジェクトのPanelの参照リスト
-            var panelTypes = new List<PanelType>(); // colliderに検出されたパネルのPanelTypeをリストで格納
-            foreach (var panel in results) // colliderに検出されたパネルとそのPanelTypeを全てリストに格納する
+            // この処理を呼び出した時に画面上のパネル枠の中にいるパネルをリストに入れる
+            var targetPanels = PanelManager.Instance.PanelsInTheScene.FindAll(panel =>panel.CheckActivatablePanel());
+            targetPanels.OrderBy(panel => panel.MyPanelType);
+            foreach (var panel in targetPanels) // colliderに検出されたパネルとそのPanelTypeを全てリストに格納する
             {
-                var panelObject = panel.gameObject.GetComponent<Panel>(); // Panelの参照取得
-                panelList.Add(panelObject); // Panelをリストに追加
-                panelTypes.Add(panelObject.MyPanelType); // PanelTypeをリストに追加
-            }
-
-            var result = panelTypes.OrderBy((panelType) => Guid.NewGuid()).ToArray(); // Guid配列に変換、OrderByでアルファベット順に並び替える
-            var count = 0; // ForEachに使うresult配列の要素指定用のカウンター
-
-            foreach (var panel in panelList)
-            {
-                panel.MyPanelType = result[count]; // PanelTypeの代入
                 panel.ResetPanel(); // パネルを引いていない状態に戻す
-                panel.Rotate(rotateAxis.ToString(), panelRotateTime);
-                count++; // カウントアップ
                 yield return new WaitForSecondsRealtime(intervalForEachRotation);
             }
 

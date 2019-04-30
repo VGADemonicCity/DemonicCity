@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114076971656575822}
   m_Layer: 8
   m_Name: Battle_Panel
-  m_TagString: Panel
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -78,7 +78,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 56089166f74d87b4fa75d0f7f04a175e, type: 3}
   - {fileID: 21300000, guid: b33453e668c7bc541b71b2782f8fe0a0, type: 3}
   m_rotationDegrees: 1440
-  m_collider2d: {fileID: 0}
 --- !u!212 &212466524483284848
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -112,7 +111,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 234603309
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b33453e668c7bc541b71b2782f8fe0a0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
