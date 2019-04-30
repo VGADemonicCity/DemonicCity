@@ -93,7 +93,7 @@ namespace DemonicCity.HomeScene
 
         void ConfigOpen()
         {
-            Debug.Log("Open");
+            //Debug.Log("Open");
             IsPopUp = true;
             parent.gameObject.SetActive(true);
             if (Config)

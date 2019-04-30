@@ -100,7 +100,7 @@ namespace DemonicCity.HomeScene
                 }
                 else if (gesture == TouchGestureDetector.Gesture.Click)
                 {
-                    Debug.Log(touchInfo.Diff + " : " + scrollLim);
+                    //Debug.Log(touchInfo.Diff + " : " + scrollLim);
                     if (touchInfo.Diff.x < -scrollLim)
                     {
                         Scroll(true, -1f);

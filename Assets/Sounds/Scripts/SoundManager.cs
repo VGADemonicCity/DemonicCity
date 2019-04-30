@@ -99,7 +99,7 @@ namespace DemonicCity
 
             if (EnumCommon.TryParse(scene.name, out sceneTitle))
             {
-                //Debug.Log(snapData.SceneSnaps[sceneTitle].name);
+                //Debug.LogWarning(snapData.SceneSnaps[sceneTitle].name);
                 snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
                 LoadVol();
                 StopWithFade(SoundTag.Voice);

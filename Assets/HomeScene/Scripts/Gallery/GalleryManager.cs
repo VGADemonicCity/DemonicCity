@@ -113,7 +113,7 @@ namespace DemonicCity.HomeScene
         }
         private void OnEnable()
         {
-            Debug.Log("Enabled");
+            //Debug.Log("Enabled");
             StartCoroutine(WaitInit());
             drawer.transform.parent.gameObject.SetActive(false);
         }
@@ -275,7 +275,7 @@ namespace DemonicCity.HomeScene
         // Use this for initialization
         void Start()
         {
-            Debug.Log("Start");
+            //Debug.Log("Start");
             //OnEnable();
         }
 
@@ -302,7 +302,7 @@ namespace DemonicCity.HomeScene
         {
             SoundManager.Instance.PlayWithFade(SoundManager.SoundTag.Voice, clips[Random.Range(0, clips.Count)]);
 
-            Debug.Log("Speak!");
+            //Debug.Log("Speak!");
         }
 
 
