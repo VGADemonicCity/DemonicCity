@@ -11,10 +11,18 @@ namespace DemonicCity
         [SerializeField] PopupSystem popupSystem;
         [SerializeField] Button positiveButton;
         [SerializeField] Button negativeButton;
+        [SerializeField] Button Btn;
 
-
+        void Start()
+        {
+            if (Btn == null)
+            {
+                Btn = GetComponent<Button>();
+            }
+        }
         public void OnPush()
         {
+            Btn.interactable = false;
             popupSystem.Popup();
             popupSystem.SubscribeButton(new PopupSystemMaterial(DataReset, "PositiveButton", true));
             popupSystem.SubscribeButton(new PopupSystemMaterial(Cancel, "NegativeButton", true));
@@ -30,7 +38,7 @@ namespace DemonicCity
 
         void Cancel()
         {
-
+            Btn.interactable = true;
         }
     }
 }

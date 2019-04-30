@@ -218,14 +218,14 @@ namespace DemonicCity.StoryScene
         bool DivideTexts()
         {
             TextStorage currentText = texts[textIndex];
-            Debug.Log(currentText.cName);
+            //Debug.Log(currentText.cName);
             if (currentText.cName == CharName.System)
             {
                 return false;
             }
             else if (currentText.cName != CharName.None)
             {
-                Debug.Log(currentText.faceIndex);
+                //Debug.Log(currentText.faceIndex);
                 faceChangers.Find(x => x.charName == currentText.cName).ChangeFace(currentText.faceIndex);
             }
 

@@ -139,7 +139,7 @@ namespace DemonicCity.StoryScene
 
         void StagingError(string s)
         {
-            Debug.Log("Error : " + s);
+            //Debug.Log("Error : " + s);
             EndStaging();
         }
 
