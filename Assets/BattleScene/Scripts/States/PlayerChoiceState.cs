@@ -62,21 +62,7 @@ namespace DemonicCity.BattleScene
 
                 progress = Progress.Instance;
                 magia = Magia.Instance;
-
-
-
-                // ==============================
-                // ここにプレイヤーターンが始まった時の処理を書く
-                // PlayerCoiceStateから遷移する処理はPanelCounterが敵パネルを認識してState遷移処理をさせている
-                // PlayerChoiceの時のinvokeはPanelCounter.PanelJudgerが行っている
-                // ==============================
-                StartCoroutine(Activate());
             });
-        }
-
-        IEnumerator Activate()
-        {
-            yield return null;
         }
     }
 }

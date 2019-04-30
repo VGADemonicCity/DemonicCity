@@ -39,8 +39,6 @@ namespace DemonicCity.BattleScene
             get { return conditions; }
         }
 
-        /// <summary>colliderを検出する為のcollider</summary>
-        [SerializeField] BoxCollider2D m_sensor;
         /// <summary>Conditionsのバッキングフィールド</summary>
         [SerializeField] int conditions = 30;
         /// <summary>Positive button</summary>
@@ -51,6 +49,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] PopupSystem popupSystem;
         /// <summary>Skill animator</summary>
         [SerializeField] Animator skillAnim;
+        [SerializeField] GameObject touchTarget;
         /// <summary>チュートリアル画面に表示する項目リスト</summary>
         List<Subject> targetTutorialsList = new List<Subject>{
             Subject.AboutTeleportSkill,
@@ -95,7 +94,7 @@ namespace DemonicCity.BattleScene
             {
                 if (gesture == TouchGestureDetector.Gesture.Click
                 && battleManager.m_StateMachine.m_State == BattleManager.StateMachine.State.PlayerChoice
-                && touchInfo.HitDetection(out hitResult)
+                && touchInfo.HitDetection(out hitResult,touchTarget)
                 && IsActivatable
                 && !PanelManager.Instance.IsOpenedAllPanelsExceptEnemyPanels)
                 {

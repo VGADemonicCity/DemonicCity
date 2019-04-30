@@ -37,18 +37,16 @@ namespace DemonicCity.BattleScene
         public bool isSkillActivating { get; set; }
 
         /// <summary>枠移動の待ち時間</summary>
-        [SerializeField] float m_waitTime = 1f;
-        /// <summary>枠移動の待ち時間</summary>
-        [SerializeField] float movingTime = .25f;
-
+        [SerializeField] float animationTime = 1f;
+        [SerializeField] iTween.EaseType easeType;
         /// <summary>フレームの位置を表すenum</summary>
         [SerializeField] FramePosition m_framePosition = FramePosition.Center;
         /// <summary>PanelFrameがフリックで動ける座標</summary>
         Vector3[] m_framePositions = new Vector3[]
         {
-            new Vector3(903.4f,-593.4f), // 左
-            new Vector3(173.4f,-593.4f), // 真ん中
-            new Vector3(-556.6f,-593.4f), // 右
+            new Vector3(-733.3f,0), // 左
+            new Vector3(0,0), // 真ん中
+            new Vector3(733.3f,0), // 右
         };
         /// <summary>TouchGestureDetectorの参照</summary>
         TouchGestureDetector m_touchGestureDetector;
@@ -71,7 +69,7 @@ namespace DemonicCity.BattleScene
                     return;
                 }
 
-                if(gesture == TouchGestureDetector.Gesture.TouchStationary)
+                if (gesture == TouchGestureDetector.Gesture.TouchStationary)
                 {
                     Debug.Log("Stationary");
                 }
@@ -139,6 +137,7 @@ namespace DemonicCity.BattleScene
             {
                 yield break;
             }
+            isMoving = true;
             Debug.Log(framePosition + "動かす先のふれーむ");
             var toPos = new Vector3();
             switch (framePosition)
@@ -159,12 +158,13 @@ namespace DemonicCity.BattleScene
             iTween.ValueTo(gameObject, iTween.Hash(
                 "from", gameObject.transform.localPosition,
                 "to", toPos,
-                "time", movingTime,
+                "time", animationTime,
+                "easetype", easeType,
                 "onupdate", "SyncPosition",
                 "onpudatetarget", gameObject,
                 "ignoretimescale", false
                 ));
-            yield return new WaitForSeconds(m_waitTime); // 移動してる間重複呼び出しを止める
+            yield return new WaitForSeconds(animationTime); // 移動してる間重複呼び出しを止める
             m_framePosition = framePosition; // panelFrameの位置情報を更新する
             Debug.Log(m_framePosition + "動かした後のフレーム");
             isMoving = false;
@@ -176,11 +176,11 @@ namespace DemonicCity.BattleScene
             switch (framePositionTag)
             {
                 case FramePosition.Right:
-                    return m_framePositions[2];
+                    return m_framePositions[0];
                 case FramePosition.Center:
                     return m_framePositions[1];
                 case FramePosition.Left:
-                    return m_framePositions[0];
+                    return m_framePositions[2];
                 default:
                     throw new ArgumentException();
             }

@@ -78,13 +78,13 @@ namespace DemonicCity.BattleScene
         /// <summary>each Panels Spacing on group position</summary>
         const float eachPanelsSpacingOnGroup = 230f;
         /// <summary>x axis of local position of each spacing on group</summary>
-        const float eachSpacingOnGroupPosition = 730f;
+        const float eachSpacingOnGroupPosition = 733.3f;
         /// <summary>local position of first instantiate panel</summary>
         readonly Vector2 initialPanelLocalPosition = new Vector2(-963f, 232.5f);
         /// <summary>Colliderを有効にする座標の最小値</summary>
-        readonly Vector3 enableMinimumPosition = new Vector3(-172f, -952f, 0.0f);
+        readonly Vector3 enableMinimumPosition = new Vector3(-334f, -333f, 0.0f);
         /// <summary>Colliderを有効にする座標の最大値</summary>
-        readonly Vector3 enableMaximumPosition = new Vector3(496f, -255f, 0.0f);
+        readonly Vector3 enableMaximumPosition = new Vector3(332f, 336f, 0.0f);
 
         /// <summary>
         /// Awake this instance.
@@ -198,7 +198,7 @@ namespace DemonicCity.BattleScene
                             pos = new Vector3(
                             initialPanelLocalPosition.x + (eachPanelsSpacingOnGroup * indexXAxis) + (eachSpacingOnGroupPosition * groupIndex),
                             initialPanelLocalPosition.y - (eachPanelsSpacingOnGroup * indexYAxis),
-                            0f); 
+                            0f);
                             var panelObject = Instantiate(m_panelPrefab, m_panelFrame.transform);
                             panelObject.transform.localPosition = pos;
                             Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
