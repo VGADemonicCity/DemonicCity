@@ -3935,7 +3935,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5909\u66F4\u3057\u305F\u30B9\u30C6\u30FC\u30BF\u30B9\u3092\n\u521D\u671F\u5316\u3057\u307E\u3059"
+  m_Text: "\u632F\u308A\u5206\u3051\u305F\u9B54\u529B\u5024\u3092\n\u521D\u671F\u5316\u3057\u307E\u3059"
 --- !u!114 &114182328783535744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5121,7 +5121,7 @@ MonoBehaviour:
   - {fileID: 114782947115689998}
   - {fileID: 114698619869328004}
   - {fileID: 114689233270177978}
-  MystatusPointText: {fileID: 114483680206167526}
+  mystatusPointText: {fileID: 114483680206167526}
   confirmMessageWindow: {fileID: 1886937551190370}
   resetMessageWindow: {fileID: 1068351851739928}
   confirmAndResetButtons: {fileID: 1756933400820928}
@@ -5143,7 +5143,6 @@ MonoBehaviour:
   - {fileID: 1823647463259562}
   - {fileID: 1838691146224958}
   canvas: {fileID: 1537939738843736}
-  allocationSpeed: 0.5
 --- !u!114 &114344970969161430
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5823,6 +5822,7 @@ MonoBehaviour:
   closeButton: {fileID: 114194886120063984, guid: 722083836e847a14ba87c2050c002487,
     type: 2}
   fadingTime: 0.5
+  easeType: 28
 --- !u!114 &114498412362017694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8967,7 +8967,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u5909\u66F4\u3057\u305F\u30B9\u30C6\u30FC\u30BF\u30B9\u3092\n\u78BA\u5B9A\u3057\u307E\u3059"
+  m_Text: "\u632F\u308A\u5206\u3051\u305F\u9B54\u529B\u5024\u3092\n\u78BA\u5B9A\u3057\u307E\u3059"
 --- !u!114 &114891649090382418
 MonoBehaviour:
   m_ObjectHideFlags: 1

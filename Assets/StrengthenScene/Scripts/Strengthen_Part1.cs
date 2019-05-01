@@ -5,6 +5,7 @@ using DemonicCity.BattleScene;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System.Collections;
+using System.Diagnostics;
 
 namespace DemonicCity.StrengthenScene
 {
@@ -50,7 +51,7 @@ namespace DemonicCity.StrengthenScene
         private int dignity;
 
         /// <summary>割り振りポイント(魔力値)</summary>
-        private int MyStatusPoint;
+        private int myStatusPoint;
         /// <summary>割り振られた魅力値</summary>
         private int addCharm;
         /// <summary>割り振られた耐久値</summary>
@@ -73,7 +74,7 @@ namespace DemonicCity.StrengthenScene
         /// <summary>割り振った固有ステータステキスト</summary>
         [SerializeField] private TextMeshProUGUI[] addUniqueStatusTexts = new TextMeshProUGUI[6];
         /// <summary>割り振りポイントテキスト(魔力値)</summary>
-        [SerializeField] private TextMeshProUGUI MystatusPointText;
+        [SerializeField] private TextMeshProUGUI mystatusPointText;
 
         /// <summary>ステータス確定前のメッセージウィンドウ</summary>
         [SerializeField] private GameObject confirmMessageWindow;
@@ -98,9 +99,22 @@ namespace DemonicCity.StrengthenScene
         private bool changedStatus = false;
         /// <summary>シーンがロードされたか</summary>
         private bool isSceneLoaded = false;
+
+        /// <summary>強化画面のCanvas</summary>
         [SerializeField] private GameObject canvas = null;
-        [SerializeField] private float allocationSpeed = 0.5f;
+
+        /// <summary>画面を押している間フラグを立てる</summary>
         private bool stationary = false;
+
+        public static class DebugLogger
+        {
+            [Conditional("UNITY_EDITOR")]
+            public static void Log(object o)
+            {
+                UnityEngine.Debug.Log(o);
+            }
+        }
+
         /// <summary>アニメーションステート名</summary>
         public enum PopUpAnimation
         {
@@ -367,9 +381,9 @@ namespace DemonicCity.StrengthenScene
             if(uniqueStatus + addUniqueStatus < maxUniquePoint)
             {
                 addUniqueStatus += AddStatusPoint(addUniqueStatus);
-                MystatusPointText.text = MyStatusPoint.ToString();
+                mystatusPointText.text = myStatusPoint.ToString();
 
-                if(MyStatusPoint >= 0 && addUniqueStatus > 0)
+                if(myStatusPoint >= 0 && addUniqueStatus > 0)
                 {
                     uniqueStatusText.text = "+" + addUniqueStatus.ToString();
 
@@ -408,7 +422,7 @@ namespace DemonicCity.StrengthenScene
             addSense = 0;
             addDurability = 0;
             addKnowledge = 0;
-            MyStatusPoint = magia.AllocationPoint;
+            myStatusPoint = magia.AllocationPoint;
             // statusPoint = 300;//debug
 
             updatedBasicStatusTexts[0].text = currentHp.ToString();
@@ -480,7 +494,7 @@ namespace DemonicCity.StrengthenScene
             magia.Stats.Sense = sense;
             magia.Stats.Durability = durability;
             magia.Stats.Knowledge = knowledge;
-            magia.AllocationPoint = MyStatusPoint;
+            magia.AllocationPoint = myStatusPoint;
 
             SavableSingletonBase<Magia>.Instance.Save();
 
@@ -503,15 +517,15 @@ namespace DemonicCity.StrengthenScene
         /// <param name="uniqueStatus">固有ステータス</param>
         private int AddStatusPoint(int uniqueStatus)
         {
-            if(MyStatusPoint > 0)
+            if(myStatusPoint > 0)
             {
-                MyStatusPoint -= 1;
+                myStatusPoint -= 1;
                 uniqueStatus = 1;
             }
             else
             {
                 uniqueStatus = 0;
-                MyStatusPoint = 0;
+                myStatusPoint = 0;
             }
             return uniqueStatus;
         }
@@ -537,7 +551,7 @@ namespace DemonicCity.StrengthenScene
             addUniqueStatusTexts[4].text = addDurability.ToString();
             addUniqueStatusTexts[5].text = addKnowledge.ToString();
 
-            MystatusPointText.text = MyStatusPoint.ToString();
+            mystatusPointText.text = myStatusPoint.ToString();
         }
     }
 }

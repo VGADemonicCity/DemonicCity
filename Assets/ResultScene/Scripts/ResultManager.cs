@@ -6,7 +6,7 @@ using DemonicCity.StrengthenScene;
 using UnityEngine.UI;
 using System.Linq;
 using System.Collections.Generic;
-
+using System.Diagnostics;
 
 namespace DemonicCity.ResultScene
 {
@@ -110,6 +110,15 @@ namespace DemonicCity.ResultScene
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
 
+        public static class DebugLogger
+        {
+            [Conditional("UNITY_EDITOR")]
+            public static void Log(object o)
+            {
+                UnityEngine.Debug.Log(o);
+            }
+        }
+
         private void Awake()
         {
             chapterManager = ChapterManager.Instance;
@@ -138,6 +147,10 @@ namespace DemonicCity.ResultScene
             }
             else
             {
+                levelMaxImage.SetActive(true);
+                gaugeBackGround.sprite = levelUpGaugeSprite;
+                experienceGauge.value = experienceGauge.maxValue;
+                needDestructionCountText.text = "0";
                 isCalculation = false;
             }
 
