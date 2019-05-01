@@ -285,13 +285,13 @@ namespace DemonicCity.StrengthenScene
                 else if(gesture == TouchGestureDetector.Gesture.TouchStationary)
                 {
                     stationary = true;
-                    GameObject addUniqueStatusButton;
-                    touchInfo.HitDetection(out addUniqueStatusButton);
+                    GameObject button;
+                    touchInfo.HitDetection(out button);
 
-                    if(addUniqueStatusButton != null && stationary)
+                    if(button != null && stationary)
                     {
 
-                        switch(addUniqueStatusButton.name)
+                        switch(button.name)
                         {
                             case "AddCharmButton":
                                 ChangeUniqueStatus(ref charm,ref addCharm,ref addUniqueStatusTexts[0]);
@@ -369,12 +369,9 @@ namespace DemonicCity.StrengthenScene
                 addUniqueStatus += AddStatusPoint(addUniqueStatus);
                 MystatusPointText.text = MyStatusPoint.ToString();
 
-                if(MyStatusPoint >= 0)
+                if(MyStatusPoint >= 0 && addUniqueStatus > 0)
                 {
-                    if(addUniqueStatus > 0)
-                    {
-                        uniqueStatusText.text = "+" + addUniqueStatus.ToString();
-                    }
+                    uniqueStatusText.text = "+" + addUniqueStatus.ToString();
 
                     //固有ステータスを基礎ステータスに変換
                     updatedHitPoint = currentHp + (addCharm * 50) + (addDignity * 50);
