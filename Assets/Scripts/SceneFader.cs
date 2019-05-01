@@ -54,6 +54,7 @@ namespace DemonicCity
 
             // 画面のサイズに合わせてImageのサイズ設定
             m_fadeImage.rectTransform.sizeDelta = new Vector2(Screen.width, Screen.height);
+            Debug.Log(m_fadeImage.rectTransform.sizeDelta);
         }
 
         /// <summary>

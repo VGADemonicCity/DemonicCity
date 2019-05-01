@@ -174,9 +174,10 @@ namespace DemonicCity.BattleScene
         {
             // この処理を呼び出した時に画面上のパネル枠の中にいるパネルをリストに入れる
             var targetPanels = PanelManager.Instance.PanelsInTheScene.FindAll(panel =>panel.CheckActivatablePanel());
-            targetPanels.OrderBy(panel => panel.MyPanelType);
-            foreach (var panel in targetPanels) // colliderに検出されたパネルとそのPanelTypeを全てリストに格納する
+            var orderedPanels = targetPanels.OrderBy(panel => Guid.NewGuid());
+            foreach (var panel in orderedPanels) // colliderに検出されたパネルとそのPanelTypeを全てリストに格納する
             {
+                panel.Rotate(rotateAxis.ToString(), panelRotateTime);
                 panel.ResetPanel(); // パネルを引いていない状態に戻す
                 yield return new WaitForSecondsRealtime(intervalForEachRotation);
             }

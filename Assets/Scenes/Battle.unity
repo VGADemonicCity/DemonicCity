@@ -1056,7 +1056,7 @@ Prefab:
     - target: {fileID: 224164052364739814, guid: c78ebd9c2baf2754fb05c664d301f86d,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 6.999939
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114181504918491420, guid: c78ebd9c2baf2754fb05c664d301f86d,
         type: 2}
@@ -1296,6 +1296,11 @@ Prefab:
       propertyPath: m_waitTime
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: useTargetStory
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
@@ -1407,6 +1412,11 @@ Prefab:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 735394537}
+    - target: {fileID: 114204314721255636, guid: 30ba83450f8437348993f24f683851f2,
+        type: 2}
+      propertyPath: conditions
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 30ba83450f8437348993f24f683851f2, type: 2}
   m_IsPrefabAsset: 0

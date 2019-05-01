@@ -82,9 +82,9 @@ namespace DemonicCity.BattleScene
         /// <summary>local position of first instantiate panel</summary>
         readonly Vector2 initialPanelLocalPosition = new Vector2(-963f, 232.5f);
         /// <summary>Colliderを有効にする座標の最小値</summary>
-        readonly Vector3 enableMinimumPosition = new Vector3(-334f, -333f, 0.0f);
+        readonly Vector3 enableMinimumPosition = new Vector3(-0.85f, -5.5f, 0.0f);
         /// <summary>Colliderを有効にする座標の最大値</summary>
-        readonly Vector3 enableMaximumPosition = new Vector3(332f, 336f, 0.0f);
+        readonly Vector3 enableMaximumPosition = new Vector3(2.6f, -2.4f, 0.0f);
 
         /// <summary>
         /// Awake this instance.
