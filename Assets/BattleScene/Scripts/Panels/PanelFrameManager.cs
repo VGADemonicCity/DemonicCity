@@ -35,6 +35,7 @@ namespace DemonicCity.BattleScene
         }
 
         public bool isSkillActivating { get; set; }
+        public float AnimationTime { get { return animationTime; } }
 
         /// <summary>枠移動の待ち時間</summary>
         [SerializeField] float animationTime = 1f;

@@ -658,7 +658,7 @@ MonoBehaviour:
   closeButton: {fileID: 114467923459272970, guid: 1ae23622a7b909f468411b183d0d393c,
     type: 2}
   fadingTime: 0.5
-  easeType: 28
+  easeType: 12
 --- !u!114 &114574456638883488
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelFrame: {fileID: 0}
-  m_waitTime: 0
+  m_waitTime: 0.2
   m_shufflePanels: {fileID: 0}
 --- !u!114 &114658799238253382
 MonoBehaviour:

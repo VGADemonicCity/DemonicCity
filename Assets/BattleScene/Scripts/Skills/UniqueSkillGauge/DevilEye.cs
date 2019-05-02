@@ -50,8 +50,9 @@ namespace DemonicCity.BattleScene
             yield return new WaitForSeconds(clipInfos[0].clip.length);
 
             var enemyPanel = m_panelManager.PanelsInTheScene.Find((panel) => panel.MyPanelType == PanelType.Enemy && !panel.IsOpened); // パネル枠の中から敵パネルを取得
-            enemyPanel.Open(m_processingTime, sealdEnemyPanel);// スキル発動時専用の敵パネルのスプライトを渡してそれに変える
             m_panelFrameManager.StartCoroutine(m_panelFrameManager.MovingFrame(enemyPanel.MyFramePosition)); // 敵パネルの位置情報の場所にパネルフレームを移動させる
+            yield return new WaitForSeconds(m_panelFrameManager.AnimationTime);
+            enemyPanel.Open(m_processingTime, sealdEnemyPanel);// スキル発動時専用の敵パネルのスプライトを渡してそれに変える
             enemyPanel.IsOpened = true;
             yield return new WaitForSeconds(m_processingTime);
             UniqueSkillManager.Instance.OnActivateSkill();

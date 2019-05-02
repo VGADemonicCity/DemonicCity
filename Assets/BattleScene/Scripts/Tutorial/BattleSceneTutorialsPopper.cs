@@ -48,7 +48,7 @@ namespace DemonicCity.BattleScene
         [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .1f;
-        [SerializeField] iTween.EaseType easeType= iTween.EaseType.easeInOutBack;
+        [SerializeField] iTween.EaseType easeType = iTween.EaseType.easeInOutBack;
 
         /// <summary>popup system</summary>
         PopupSystem popupSystem;
@@ -103,6 +103,7 @@ namespace DemonicCity.BattleScene
                 go.transform.parent = popupSystem.popupedObject.transform.GetChild(0);
                 var image = go.AddComponent<Image>();
                 image.sprite = item.Sprite;
+                Debug.Log(item.subject);
                 image.rectTransform.sizeDelta = imageSize;
                 image.rectTransform.localPosition = new Vector2(xPos, 0);
                 xPos += width;
@@ -297,7 +298,7 @@ namespace DemonicCity.BattleScene
         }
 
         #region iTweenAnimateMethods
-        void OnstartTutorialWindowAnimation()
+        void OnStartTutorialWindowAnimation()
         {
             isPlayingTutorialAnimation = true;
         }

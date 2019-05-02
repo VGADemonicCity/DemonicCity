@@ -133,7 +133,7 @@ namespace DemonicCity
                 case Index.Next:
                     toPosition = tutorialImagesParent.transform.localPosition + new Vector3(-width, 0, 0);
                     iTween.ValueTo(gameObject, iTween.Hash(
-                        "name", "MovingAnimation",
+                       "name", "MovingAnimation",
                         "from", fromPosition,
                         "to", toPosition,
                         "time", fadingTime,
@@ -158,8 +158,6 @@ namespace DemonicCity
                     "onupdatetarget", gameObject,
                     "onstart", "OnStartTutorialWindowAnimation",
                     "onstarttarget", gameObject,
-                    "onupdate", "SyncPosition",
-                    "onupdatetarget", gameObject,
                     "oncomplete", "OnCompleteTutorialWindowAnimation",
                     "oncompletetarget", gameObject,
                     "easetype", easeType,
@@ -175,6 +173,15 @@ namespace DemonicCity
         }
 
 
+        void OnStartTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = true;
+        }
+
+        void OnCompleteTutorialWindowAnimation()
+        {
+            isPlayingTutorialAnimation = false;
+        }
 
         void SyncPosition(Vector3 nextPosition)
         {
@@ -186,10 +193,7 @@ namespace DemonicCity
         /// </summary>
         protected virtual void Close()
         {
-            if (isPlayingTutorialAnimation)
-            {
-                return;
-            }
+ 
             iTween.StopByName("MovingAnimation");
             popupSystem.Close();
         }
@@ -201,6 +205,7 @@ namespace DemonicCity
         {
             if (isPlayingTutorialAnimation)
             {
+                Debug.Log("Next anim IsPlayingNow ");
                 return;
             }
             ChangeItem(Index.Next);
@@ -215,6 +220,7 @@ namespace DemonicCity
         {
             if (isPlayingTutorialAnimation)
             {
+                Debug.Log("Previous anim IsPlayingNow ");
                 return;
             }
             ChangeItem(Index.Previous);
@@ -308,15 +314,6 @@ namespace DemonicCity
             }
         }
 
-        void OnstartTutorialWindowAnimation()
-        {
-            isPlayingTutorialAnimation = true;
-        }
-
-        void OnCompleteTutorialWindowAnimation()
-        {
-            isPlayingTutorialAnimation = false;
-        }
 
         ///// <summary>
         ///// 指定した要素が存在するかどうか

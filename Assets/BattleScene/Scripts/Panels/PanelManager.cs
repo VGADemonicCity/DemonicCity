@@ -203,7 +203,7 @@ namespace DemonicCity.BattleScene
                             panelObject.transform.localPosition = pos;
                             Panel panel = panelObject.GetComponent<Panel>(); // ゲームオブジェクトにアタッチされているパネルコンポーネントの参照を代入
                             panel.MyPanelType = panelAllocations[totalIndex]; // パネルタイプを割り当てる
-                            panel.MyFramePosition = DetectFramePosition(totalIndex); // パネルの位置を特定して代入
+                            panel.MyFramePosition = DetectFramePosition(panel); // パネルの位置を特定して代入
                             PanelsInTheScene.Add(panel);
                             totalIndex++;
                         }
@@ -217,17 +217,20 @@ namespace DemonicCity.BattleScene
         /// </summary>
         /// <param name="index">パネルの配列要素位置</param>
         /// <returns>パネルの位置</returns>
-        private FramePosition DetectFramePosition(int index)
+        private FramePosition DetectFramePosition(Panel panel)
         {
-            if ((index >= 0 && index <= 2) || (index > 8 && index <= 11) || (index > 17 && index <= 20)) // EnemyPanelの位置が左の枠の時
+            var isLessThan = panel.transform.position.x < EnableMinimumPosition.x;
+            var isGreaterThan = panel.transform.position.x > EnableMaximumPosition.x;
+
+            if (isLessThan)
             {
                 return FramePosition.Left;
             }
-            else if ((index > 2 && index <= 5) || (index > 11 && index <= 14) || (index > 20 && index <= 23)) // EnemyPanelの位置が真ん中の枠の時
+            else if(!isLessThan && !isGreaterThan)
             {
                 return FramePosition.Center;
             }
-            else // EnemyPanelの位置が右の枠の時 , (index > 5 && index <= 8) || (index > 14 && index <= 17) || (index > 23 && index <= 26))
+            else 
             {
                 return FramePosition.Right;
             }

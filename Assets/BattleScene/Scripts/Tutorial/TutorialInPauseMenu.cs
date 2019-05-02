@@ -297,7 +297,7 @@ namespace DemonicCity.BattleScene
             }
         }
 
-        void OnstartTutorialWindowAnimation()
+        void OnStartTutorialWindowAnimation()
         {
             isPlayingTutorialAnimation = true;
         }
