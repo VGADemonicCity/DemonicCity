@@ -21,6 +21,7 @@ namespace DemonicCity.HomeScene
 
         WindowState Config { get; set; }
         bool isPop = false;
+        bool isInited = false;
 
         bool IsPopUp
         {
@@ -36,14 +37,29 @@ namespace DemonicCity.HomeScene
             }
         }
 
-        private void Awake()
+        void Awake()
         {
-            sceneFader = SceneFader.Instance;
-            touchGestureDetector = TouchGestureDetector.Instance;
         }
 
         void Start()
         {
+
+        }
+
+        void Update()
+        {
+            if (!isInited)
+            {
+                Initialize();
+                isInited = true;
+            }
+        }
+
+        void Initialize()
+        {
+            sceneFader = SceneFader.Instance;
+            touchGestureDetector = TouchGestureDetector.Instance;
+
             StartCoroutine(FlashObject(touchText));
 
             //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
@@ -78,6 +94,8 @@ namespace DemonicCity.HomeScene
                 }
             });
         }
+
+
         public void SceneTrans()
         {
             Progress progress = Progress.Instance;
