@@ -243,6 +243,8 @@ namespace DemonicCity
                 }
             }
 
+            public Vector2 LastPosition { get { return positions.Last(); } }
+
             /// <summary>経過時間</summary>
             /// <value>The elapsed time.</value>
             public float ElapsedTime
