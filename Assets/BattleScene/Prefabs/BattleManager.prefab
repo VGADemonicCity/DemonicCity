@@ -335,7 +335,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_uniqueSkillGauge: {fileID: 0}
-  m_condition: 25
+  m_condition: 27
   m_flag: 0
   m_popupSystem: {fileID: 114290885052486680}
 --- !u!114 &114187487230617858
@@ -490,7 +490,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   useTargetStory: 0
-  targetStory: 4096
+  targetStory: 2
   magiaAvailableSkills: 010000000200000004000000100000002000000040000000800000000001000000020000000400000008000000100000
   magiaStatus:
     Level: 200
