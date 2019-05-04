@@ -369,7 +369,7 @@ MonoBehaviour:
   m_passiveSkill: 512
   m_timing: 0
   enhanceType: 3
-  m_incease: 0.01
+  m_incease: 0.007
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
 MonoBehaviour:
@@ -489,8 +489,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5edea3068e34a4bd886150b74fab7629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  useTargetStory: 0
-  targetStory: 2
+  useTargetStory: 1
+  targetStory: 4096
   magiaAvailableSkills: 010000000200000004000000100000002000000040000000800000000001000000020000000400000008000000100000
   magiaStatus:
     Level: 200
@@ -514,17 +514,17 @@ MonoBehaviour:
     HitPoint: 11000
     Attack: 6000
     Defense: 500
-  LoadStatusFromInspector: 0
+  LoadStatusFromInspector: 1
   TargetMagiaLevel: 200
-  addStatus: 0
+  addStatus: 1
   additionalStatus:
     Level: 0
-    Durability: 0
-    MuscularStrength: 0
-    Knowledge: 0
-    Sense: 0
-    Charm: 0
-    Dignity: 0
+    Durability: 100
+    MuscularStrength: 100
+    Knowledge: 100
+    Sense: 100
+    Charm: 100
+    Dignity: 100
     HitPoint: 0
     Attack: 0
     Defense: 0
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_passiveSkill: 256
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.03
+  m_incease: 0.02
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -608,7 +608,7 @@ MonoBehaviour:
   m_passiveSkill: 1024
   m_timing: 0
   enhanceType: 1
-  m_incease: 0.1
+  m_incease: 0.03
 --- !u!114 &114496166160569242
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -736,7 +736,7 @@ MonoBehaviour:
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.05
+  m_incease: 0.03
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
