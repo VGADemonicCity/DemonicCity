@@ -889,7 +889,7 @@ MonoBehaviour:
   feedSprite: {fileID: 21300000, guid: e5fa08040f975f648a9644059a401621, type: 3}
   startTiming: 5
   feedingTime: 130
-  afterTime: 5
+  afterTime: 0
   AfterEvent:
     m_PersistentCalls:
       m_Calls:
@@ -1018,7 +1018,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4176315780028790, guid: 4a0441b3537514d9da44cf423458b792, type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1240809691848496, guid: 4a0441b3537514d9da44cf423458b792, type: 2}
       propertyPath: m_Layer
