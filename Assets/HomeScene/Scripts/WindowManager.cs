@@ -34,6 +34,21 @@ namespace DemonicCity.HomeScene
         Window touchedWindow = Window.Last;
         void Start()
         {
+
+
+        }
+
+        float waitTime = 0.5f;
+        IEnumerator WaitInit()
+        {
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            Initialize();
+        }
+
+
+        void Initialize()
+        {
             ///チュートリアル終了か同課の確認
             Progress progress = Progress.Instance;
             if (!progress.TutorialCheck(Progress.TutorialFlag.Home))
@@ -106,8 +121,8 @@ namespace DemonicCity.HomeScene
 
 
             });
-
         }
+
 
         // Update is called once per frame
         void Update()
