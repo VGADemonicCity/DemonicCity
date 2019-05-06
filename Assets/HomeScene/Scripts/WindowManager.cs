@@ -34,8 +34,7 @@ namespace DemonicCity.HomeScene
         Window touchedWindow = Window.Last;
         void Start()
         {
-
-
+            StartCoroutine(WaitInit());
         }
 
         float waitTime = 0.5f;
