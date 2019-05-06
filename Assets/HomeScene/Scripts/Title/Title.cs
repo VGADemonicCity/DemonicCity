@@ -50,9 +50,17 @@ namespace DemonicCity.HomeScene
         {
             if (!isInited)
             {
-                Initialize();
+                StartCoroutine(WaitInit());
                 isInited = true;
             }
+        }
+
+        [SerializeField] float waitTime = 2f;
+        IEnumerator WaitInit()
+        {
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            Initialize();
         }
 
         void Initialize()

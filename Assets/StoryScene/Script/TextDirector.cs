@@ -170,7 +170,7 @@ namespace DemonicCity.StoryScene
                         break;
                 }
                 Debug.Log(toScene);
-                fader.FadeOut(toScene, 0.5f);
+                fader.FadeOut(toScene);
             }
         }
 
