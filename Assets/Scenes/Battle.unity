@@ -1177,7 +1177,7 @@ Prefab:
     - target: {fileID: 224164052364739814, guid: c78ebd9c2baf2754fb05c664d301f86d,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 7
+      value: 7.000061
       objectReference: {fileID: 0}
     - target: {fileID: 114181504918491420, guid: c78ebd9c2baf2754fb05c664d301f86d,
         type: 2}
@@ -1366,6 +1366,21 @@ Prefab:
       propertyPath: buffTextBox
       value: 
       objectReference: {fileID: 1767759945}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: useTargetStory
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: LoadStatusFromInspector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: addStatus
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0

@@ -113,7 +113,7 @@ namespace DemonicCity
             m_alpha = 1f;
             while (m_alpha > 0f)
             {
-                m_alpha -= Time.fixedUnscaledDeltaTime * m_fadeTime;
+                m_alpha -= Time.unscaledDeltaTime * m_fadeTime;
                 m_fadeImage.color = new Color(fadingColor.r, fadingColor.g, fadingColor.b, m_alpha);
                 yield return null;
             }
@@ -134,7 +134,7 @@ namespace DemonicCity
 
             while (m_alpha < 1f)
             {
-                m_alpha += Time.fixedUnscaledDeltaTime * m_fadeTime;
+                m_alpha += Time.unscaledDeltaTime * m_fadeTime;
                 m_fadeImage.color = new Color(fadingColor.r, fadingColor.g, fadingColor.b, m_alpha);
                 yield return null;
             }
