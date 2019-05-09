@@ -193,7 +193,7 @@ namespace DemonicCity
         /// </summary>
         protected virtual void Close()
         {
-
+            Debug.Log("Called Close Method");
             iTween.StopByName("MovingAnimation");
             popupSystem.Close();
         }

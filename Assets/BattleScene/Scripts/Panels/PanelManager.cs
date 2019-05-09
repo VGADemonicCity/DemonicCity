@@ -137,7 +137,7 @@ namespace DemonicCity.BattleScene
             {
                 case "Panel":
                     var panel = hitResult.GetComponent<Panel>();
-                    if (panel.IsOpened == true || !panel.CheckActivatablePanel()) // 既に開かれているパネルなら終了
+                    if (panel.IsOpened == true || !panel.CheckActivatablePanel() || IsOpenedAllPanelsExceptEnemyPanels) // 既に開かれているパネルなら終了
                     {
                         return;
                     }

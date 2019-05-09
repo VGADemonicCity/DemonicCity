@@ -37,7 +37,7 @@ namespace DemonicCity.HomeScene
             StartCoroutine(WaitInit());
         }
 
-        float waitTime = 0.5f;
+        float waitTime = 1f;
         IEnumerator WaitInit()
         {
             yield return new WaitForSecondsRealtime(waitTime);

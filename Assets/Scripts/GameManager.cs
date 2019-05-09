@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System;
 
 namespace DemonicCity
 {
@@ -10,7 +11,6 @@ namespace DemonicCity
     /// </summary>
     public class GameManager : MonoSingleton<GameManager>
     {
-
         const float widthRatio = 9f;
         const float heightRatio = 16f;
 
