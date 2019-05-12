@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
@@ -45,7 +46,15 @@ namespace DemonicCity.HomeScene
             Initialize();
         }
 
-
+        void TutorialClose()
+        {
+            Button tutorialButton = GameObject.Find("CloseButton").GetComponent<Button>();
+            GameObject tutorialCanvas = GameObject.Find("PopupCanvas");
+            tutorialButton.onClick.AddListener(() =>
+            {
+                Destroy(tutorialCanvas);
+            });
+        }
         void Initialize()
         {
             ///チュートリアル終了か同課の確認
@@ -53,6 +62,7 @@ namespace DemonicCity.HomeScene
             if (!progress.TutorialCheck(Progress.TutorialFlag.Home))
             {
                 tutorial.Popup();
+                TutorialClose();
                 progress.SetTutorialProgress(Progress.TutorialFlag.Home, true);
             }
 

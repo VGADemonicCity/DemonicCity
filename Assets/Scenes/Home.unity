@@ -2078,7 +2078,7 @@ Prefab:
     - target: {fileID: 224714342794692412, guid: 0e3ec733186fce9459022b63d2028073,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 910.00006
+      value: 910
       objectReference: {fileID: 0}
     - target: {fileID: 224953526581556148, guid: 0e3ec733186fce9459022b63d2028073,
         type: 2}
@@ -2158,6 +2158,10 @@ Prefab:
     - target: {fileID: 1087728983058564, guid: 0e3ec733186fce9459022b63d2028073, type: 2}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1809985081013402, guid: 0e3ec733186fce9459022b63d2028073, type: 2}
+      propertyPath: m_Name
+      value: PopUpCanvas
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3ec733186fce9459022b63d2028073, type: 2}
