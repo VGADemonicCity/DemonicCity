@@ -61,14 +61,6 @@ namespace DemonicCity
 
         [SerializeField] SnapAsset snapData;
 
-        //SceneFader fader;
-
-
-        //private void Awake()
-        //{
-
-        //}
-
         // Use this for initialization
         void Start()
         {
@@ -99,7 +91,6 @@ namespace DemonicCity
 
             if (EnumCommon.TryParse(scene.name, out sceneTitle))
             {
-                //Debug.LogWarning(snapData.SceneSnaps[sceneTitle].name);
                 snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
                 LoadVol();
                 StopWithFade(SoundTag.Voice);
@@ -129,46 +120,12 @@ namespace DemonicCity
 
             }
 
-
-            //if (CurrentVol.vol[0])
-            //{
-            //    if (scene.name == story)
-            //    {
-            //        mixer.SetFloat(keys[SoundTag.BGM], storyVol);
-            //    }
-            //    else
-            //    {
-            //        mixer.SetFloat(keys[SoundTag.BGM], defVol);
-            //    }
-
-            //}
-
-            //if (scene.name == title)
-            //{
-            //    PlayWithFade(SoundAsset.BGMTag.Title);
-            //}
-            //else if (scene.name == battle)
-            //{
-            //    StopWithFade(SoundTag.BGM);
-            //}
-            //else if (scene.name == endCredit)
-            //{
-            //    PlayWithFade(SoundAsset.BGMTag.ThemeSong);
-            //}
-            //else
-            //{
-            //    PlayWithFade(SoundAsset.BGMTag.Home);
-            //}
-
         }
 
         public void Init()
         {
 
-            //fader = SceneFader.Instance;
             LoadVol();
-
-            //VolCheck(SceneManager.GetActiveScene(), LoadSceneMode.Single);
 
             SceneManager.sceneLoaded += BGMCheck;
 
@@ -213,13 +170,6 @@ namespace DemonicCity
 
 
 
-        //public float GetVol(string key)
-        //{
-        //    float dec;
-        //    mixer.GetFloat(key, out dec);
-        //    return dec;
-        //    //Mathf.Pow(10f, dec / 20f);
-        //}
         bool GetVol(SoundTag tag)
         {
             if (tag == SoundTag.Master)
@@ -229,58 +179,10 @@ namespace DemonicCity
 
             return !AudioSources[tag][0].mute;
 
-
-            //float vol;
-            //if (mixer.GetFloat(key, out vol))
-            //{
-            //    if (vol <= -70f)
-            //    {
-            //        return false;
-            //    }
-            //}
-            //return true;
         }
-        //public void SetVol(string key, float vol)
-        //{
-        //    //float dec = vol;
-        //    //float dec = 20.0f * Mathf.Log10(vol);
-        //    //if (float.IsNegativeInfinity(dec))
-        //    //{
-        //    //    dec = -96f;
-        //    //}
-        //    if (key == se)
-        //    {
-        //        mixer.SetFloat(key, SeVol);
-        //    }
-        //    else
-        //    {
-        //        mixer.SetFloat(key, vol);
-        //    }
-        //}
-        //float muteVol = -80f;
-        //float defVol = 0f;
-        //float SeVol = -15f;
         public void SwitchVol(SoundTag tag, bool isOn)
         {
-            //Vols tmp = CurrentVol;
-            //tmp.vol[(int)tag] = isOn;
             MuteAudioSource(tag, !isOn);
-            //string key = keys[tag];
-            //if (isOn)
-            //{
-            //    if (tag == SoundTag.SE)
-            //    {
-            //        mixer.SetFloat(key, SeVol);
-            //    }
-            //    else
-            //    {
-            //        mixer.SetFloat(key, defVol);
-            //    }
-            //}
-            //else
-            //{
-            //    mixer.SetFloat(key, muteVol);
-            //}
         }
         public void SwitchVol(SceneFader.SceneTitle sceneTitle, Vols vols)
         {
@@ -291,32 +193,7 @@ namespace DemonicCity
             MuteAudioSource(SoundTag.BGM, !tmpVol[(int)SoundTag.BGM]);
             MuteAudioSource(SoundTag.SE, !tmpVol[(int)SoundTag.SE]);
             MuteAudioSource(SoundTag.Voice, !tmpVol[(int)SoundTag.Voice]);
-            //for (int index = 0; index < tmpVol.Count(); index++)
-            //{
-
-            //    if (!tmpVol[index])
-            //    {
-            //mixer.SetFloat(keys[(SoundTag)index], muteVol);
-            //    }
-            //}
         }
-        //public void SwitchVol(SoundTag tag, bool isOn)
-        //{
-        //    if (isOn)
-        //    {
-        //        mixer.SetFloat(keys[tag], defVol);
-        //    }
-        //    else
-        //    {
-        //        mixer.SetFloat(keys[tag], muteVol);
-        //    }
-        //}
-
-
-        //public readonly string master = "MasterVol";
-        //public readonly string bgm = "BGMVol";
-        //public readonly string voice = "VoiceVol";
-        //public readonly string se = "SEVol";
         public readonly string volKey = "volKey";
 
 
@@ -353,20 +230,12 @@ namespace DemonicCity
             {
                 vs = new Vols();
             }
-            //SetVol(master, vs.master);
-            //SetVol(bgm, vs.bgm);
-            //SetVol(volKey, vs.voice);
-            //SetVol(se, vs.se);            
             SceneFader.SceneTitle sceneTitle;
             if (EnumCommon.TryParse(SceneManager.GetActiveScene().name, out sceneTitle))
             {
                 snapData.SceneSnaps[sceneTitle].TransitionTo(snapData.interval);
                 SwitchVol(sceneTitle, vs);
             }
-            //SwitchVol(SoundTag.Master, vs.vol[(int)SoundTag.Master]);
-            //SwitchVol(SoundTag.BGM, vs.vol[(int)SoundTag.BGM]);
-            //SwitchVol(SoundTag.SE, vs.vol[(int)SoundTag.SE]);
-            //SwitchVol(SoundTag.Voice, vs.vol[(int)SoundTag.Voice]);
         }
 
 
@@ -383,10 +252,6 @@ namespace DemonicCity
                 vol[1] = s;
                 vol[2] = v;
                 vol[3] = m;
-                //master = m;
-                //bgm = b;
-                //se = s;
-                //voice = v;
             }
             public Vols()
             {
@@ -394,20 +259,6 @@ namespace DemonicCity
             }
             public bool[] vol = new bool[4];
         }
-        //public class Vols
-        //{
-        //    public float master;
-        //    public float bgm;
-        //    public float voice;
-        //    public float se;
-        //    public Vols(float m, float b, float v, float s)
-        //    {
-        //        master = m;
-        //        bgm = b;
-        //        voice = v;
-        //        se = s;
-        //    }
-        //}
 
 
         void PlaySuport(List<AudioSource> list, AudioClip clip, float fade = 0.1f)
