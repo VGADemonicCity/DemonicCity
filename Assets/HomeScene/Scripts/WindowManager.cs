@@ -24,6 +24,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] GameObject[] buttonObjects = new GameObject[(int)Window.Last];
         GameObject hit;
         GameObject newPanel;
+        [SerializeField] TutoralClose tutorialCloser;
         //GameObject nowWindow;
         void Awake()
         {
@@ -48,12 +49,13 @@ namespace DemonicCity.HomeScene
 
         void TutorialClose()
         {
-            Button tutorialButton = GameObject.Find("CloseButton").GetComponent<Button>();
+            //Button tutorialButton = GameObject.Find("CloseButton").GetComponent<Button>();
             GameObject tutorialCanvas = GameObject.Find("PopupCanvas");
-            tutorialButton.onClick.AddListener(() =>
-            {
-                Destroy(tutorialCanvas);
-            });
+            //tutorialButton.onClick.AddListener(() =>
+            //{
+            //    Destroy(tutorialCanvas);
+            //});
+            tutorialCloser.Close(tutorialCanvas);
         }
         void Initialize()
         {

@@ -69,7 +69,7 @@ namespace DemonicCity.HomeScene
             touchGestureDetector = TouchGestureDetector.Instance;
 
             //Debug用にコメントアウト
-            //StartCoroutine(FlashObject(touchText));
+            StartCoroutine(FlashObject(touchText));
 
             //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();
 
