@@ -50,9 +50,17 @@ namespace DemonicCity.HomeScene
         {
             if (!isInited)
             {
-                Initialize();
+                StartCoroutine(WaitInit());
                 isInited = true;
             }
+        }
+
+        [SerializeField] float waitTime = 2f;
+        IEnumerator WaitInit()
+        {
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            Initialize();
         }
 
         void Initialize()
@@ -60,6 +68,7 @@ namespace DemonicCity.HomeScene
             sceneFader = SceneFader.Instance;
             touchGestureDetector = TouchGestureDetector.Instance;
 
+            //Debug用にコメントアウト
             StartCoroutine(FlashObject(touchText));
 
             //touchGestureDetector = GameObject.Find("DemonicCity.TouchGestureDetector").GetComponent<TouchGestureDetector>();

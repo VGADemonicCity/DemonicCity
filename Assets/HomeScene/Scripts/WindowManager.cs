@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 
@@ -23,6 +24,7 @@ namespace DemonicCity.HomeScene
         [SerializeField] GameObject[] buttonObjects = new GameObject[(int)Window.Last];
         GameObject hit;
         GameObject newPanel;
+        [SerializeField] TutoralClose tutorialCloser;
         //GameObject nowWindow;
         void Awake()
         {
@@ -34,11 +36,35 @@ namespace DemonicCity.HomeScene
         Window touchedWindow = Window.Last;
         void Start()
         {
+            StartCoroutine(WaitInit());
+        }
+
+        float waitTime = 1f;
+        IEnumerator WaitInit()
+        {
+            yield return new WaitForSecondsRealtime(waitTime);
+
+            Initialize();
+        }
+
+        void TutorialClose()
+        {
+            //Button tutorialButton = GameObject.Find("CloseButton").GetComponent<Button>();
+            GameObject tutorialCanvas = GameObject.Find("PopupCanvas");
+            //tutorialButton.onClick.AddListener(() =>
+            //{
+            //    Destroy(tutorialCanvas);
+            //});
+            tutorialCloser.Close(tutorialCanvas);
+        }
+        void Initialize()
+        {
             ///チュートリアル終了か同課の確認
             Progress progress = Progress.Instance;
             if (!progress.TutorialCheck(Progress.TutorialFlag.Home))
             {
                 tutorial.Popup();
+                TutorialClose();
                 progress.SetTutorialProgress(Progress.TutorialFlag.Home, true);
             }
 
@@ -106,8 +132,8 @@ namespace DemonicCity.HomeScene
 
 
             });
-
         }
+
 
         // Update is called once per frame
         void Update()

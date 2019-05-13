@@ -1219,6 +1219,14 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 800
       objectReference: {fileID: 0}
+    - target: {fileID: 1269800369818560, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1214525820591326, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c78ebd9c2baf2754fb05c664d301f86d, type: 2}
   m_IsPrefabAsset: 0
@@ -1366,6 +1374,21 @@ Prefab:
       propertyPath: buffTextBox
       value: 
       objectReference: {fileID: 1767759945}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: useTargetStory
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: LoadStatusFromInspector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: addStatus
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0

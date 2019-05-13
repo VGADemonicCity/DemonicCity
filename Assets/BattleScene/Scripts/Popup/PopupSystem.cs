@@ -121,6 +121,7 @@ namespace DemonicCity
         /// </summary>
         public void Close()
         {
+            Debug.Log("CloseButtonがpushされた");
             Destroy(canvasObject);
         }
     }

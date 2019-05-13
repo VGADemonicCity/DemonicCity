@@ -50,7 +50,6 @@ namespace DemonicCity
         [SerializeField] Button closeButton;
         /// <summary>itween animationに使う時間</summary>
         [SerializeField] float fadingTime = .5f;
-        [SerializeField] iTween.EaseType easeType = iTween.EaseType.easeInOutBack;
 
         /// <summary>popup system</summary>
         PopupSystem popupSystem;
@@ -66,6 +65,7 @@ namespace DemonicCity
         Button popupedToPreviousButton;
         /// <summary>閉じるボタン</summary>
         Button popupedCloseButton;
+        iTween.EaseType easeType = iTween.EaseType.easeInSine;
 
 
         const int width = 1080;
@@ -193,7 +193,7 @@ namespace DemonicCity
         /// </summary>
         protected virtual void Close()
         {
- 
+            Debug.Log("Called Close Method");
             iTween.StopByName("MovingAnimation");
             popupSystem.Close();
         }
