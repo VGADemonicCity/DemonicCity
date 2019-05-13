@@ -2442,10 +2442,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 1240809691848496, guid: 4a0441b3537514d9da44cf423458b792, type: 2}
-      propertyPath: m_Layer
-      value: 2
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a0441b3537514d9da44cf423458b792, type: 2}
   m_IsPrefabAsset: 0
@@ -2638,7 +2634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40b184570b89af740956a90232d517d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button: {fileID: 0}
+  obj: {fileID: 0}
 --- !u!222 &2038816369
 CanvasRenderer:
   m_ObjectHideFlags: 0

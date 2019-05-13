@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System;
 
 namespace DemonicCity
 {
@@ -175,11 +175,13 @@ namespace DemonicCity
 
         void OnStartTutorialWindowAnimation()
         {
+          Debug.Log("Trueにした");
             isPlayingTutorialAnimation = true;
         }
 
         void OnCompleteTutorialWindowAnimation()
         {
+            Debug.Log("falseにした");
             isPlayingTutorialAnimation = false;
         }
 
@@ -194,7 +196,10 @@ namespace DemonicCity
         protected virtual void Close()
         {
             Debug.Log("Called Close Method");
-            iTween.StopByName("MovingAnimation");
+            if (isPlayingTutorialAnimation)
+            {
+                iTween.StopByName("MovingAnimation");
+            }
             popupSystem.Close();
         }
 
