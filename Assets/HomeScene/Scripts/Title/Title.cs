@@ -78,26 +78,30 @@ namespace DemonicCity.HomeScene
                 if (gesture == TouchGestureDetector.Gesture.Click)
                 {
                     GameObject hitObj = null;
-                    if (IsPopUp)
+                    touchInfo.HitDetection(out hitObj);
+                    if (hitObj.tag != "Button")
                     {
-                        if (touchInfo.HitDetection(out hitObj, returnObj))
+                        if (IsPopUp)
                         {
-                            CreditChange(false);
+                            if (touchInfo.HitDetection(out hitObj, returnObj))
+                            {
+                                CreditChange(false);
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (touchInfo.HitDetection(out hitObj, configBtn))
+                        else
                         {
-                            ConfigOpen();
-                        }
-                        else if (touchInfo.HitDetection(out hitObj, CreditIcon))
-                        {
-                            CreditChange(true);
-                        }
-                        else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
-                        {
-                            SceneTrans();
+                            if (touchInfo.HitDetection(out hitObj, configBtn))
+                            {
+                                ConfigOpen();
+                            }
+                            else if (touchInfo.HitDetection(out hitObj, CreditIcon))
+                            {
+                                CreditChange(true);
+                            }
+                            else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
+                            {
+                                SceneTrans();
+                            }
                         }
                     }
                 }
