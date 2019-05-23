@@ -3,7 +3,6 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-
 namespace DemonicCity
 {
     /// <summary>
@@ -20,17 +19,12 @@ namespace DemonicCity
         /// <summary>m_fadeImadeのアルファ値</summary>
         private float m_alpha;
         /// <summary>フェーディング演出に掛ける時間</summary>
-        private float m_fadeTime = 1f;
+        private float m_fadeTime = .5f;
         /// <summary>遷移先のシーンタイトル</summary>
         private string m_nextSceneTitle;
 
-        private void Awake()
-        {
-            SceneManager.sceneLoaded += (scene, mode) =>
-            {
-                TouchGestureDetector.Instance.onGestureDetected.RemoveAllListeners();
-            };
-        }
+        public SceneTitle currentScene;
+
 
         /// <summary>
         /// 初期化
@@ -60,11 +54,15 @@ namespace DemonicCity
         /// <summary>
         /// フェードイン
         /// </summary>
-        public void FadeIn(float fadeTime = 1f)
+        public void FadeIn(float fadeTime = -1f)
         {
-            if (fadeTime != 1f)
+            if (fadeTime != -1f)
             {
                 m_fadeTime = fadeTime;
+            }
+            else
+            {
+                m_fadeTime = 1f;
             }
 
             StartCoroutine(FadingIn());
@@ -75,13 +73,16 @@ namespace DemonicCity
         /// </summary>
         /// <param name="sceneTitle">遷移先のシーンタイトル</param>
         /// <param name="fadeTime">フェーディング処理に掛ける時間</param>
-        public void FadeOut(SceneTitle sceneTitle, float fadeTime = 1f, FadeColor color = FadeColor.Black)
+        public void FadeOut(SceneTitle sceneTitle, float fadeTime = -1f, FadeColor color = FadeColor.Black)
         {
-            TouchGestureDetector.Instance.onGestureDetected.RemoveAllListeners();
 
-            if (fadeTime != 1f)
+            if (fadeTime != -1f)
             {
                 m_fadeTime = fadeTime;
+            }
+            else
+            {
+                m_fadeTime = 1f;
             }
 
             switch (color)
@@ -96,6 +97,7 @@ namespace DemonicCity
                     break;
             }
 
+            currentScene = sceneTitle;
             m_nextSceneTitle = sceneTitle.ToString();
             StartCoroutine(FadingOut());
         }
@@ -115,6 +117,10 @@ namespace DemonicCity
             {
                 m_alpha -= Time.unscaledDeltaTime * m_fadeTime;
                 m_fadeImage.color = new Color(fadingColor.r, fadingColor.g, fadingColor.b, m_alpha);
+                if (m_alpha < Mathf.Epsilon)
+                {
+                    break;
+                }
                 yield return null;
             }
             m_fadeCanvas.enabled = false;
