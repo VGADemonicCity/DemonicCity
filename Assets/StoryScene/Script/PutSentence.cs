@@ -81,10 +81,34 @@ namespace DemonicCity.StoryScene
         {
             if (clip != null)
             {
+                isVoice = true;
+                voiceEnd = false;
                 soundM.PlayWithFade(SoundManager.SoundTag.Voice, clip);
+                StartCoroutine(VoiceCheck(clip.length));
+            }
+            else
+            {
+                voiceEnd = true;
             }
         }
 
+        IEnumerator VoiceCheck(float length)
+        {
+            isVoice = false;
+            float voiceTime = 0;
+            while (voiceTime < length)
+            {
+                voiceTime += Time.deltaTime;
+                if (isVoice)
+                {
+                    yield break;
+                }
+                yield return null;
+            }
+            voiceEnd = true;
+        }
+        bool isVoice;
+        public bool voiceEnd = false;
     }
 }
 

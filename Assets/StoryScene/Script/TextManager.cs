@@ -34,6 +34,9 @@ namespace DemonicCity.StoryScene
         [SerializeField] TextDirector director;
         [SerializeField] PutSentence putSentence;
 
+        [SerializeField] Toggle autoToggle;
+        [SerializeField] Image mark;
+
         List<TextActor> actors = new List<TextActor>();
         List<TextStorage> texts = new List<TextStorage>();
         List<FaceChanger> faceChangers = new List<FaceChanger>();
@@ -46,7 +49,8 @@ namespace DemonicCity.StoryScene
 
         string unknownName = "???";
         string buttonTag = "Button";
-
+        [SerializeField] float waitTime = 1f;
+        public bool isAuto;
         public bool isStaging = false;
         int textIndex = 0;
         public bool DrawEnd { get { return !isStaging & putSentence.End; } }
@@ -85,8 +89,39 @@ namespace DemonicCity.StoryScene
 
         void Update()
         {
+            mark.gameObject.SetActive(putSentence.End);
+            if (isAuto && putSentence.End && putSentence.voiceEnd)
+            {
+                StartCoroutine(AutoCheck());
+            }
         }
 
+        IEnumerator AutoCheck()
+        {
+            float checkTime = 0f;
+            while (checkTime < waitTime)
+            {
+                checkTime += Time.deltaTime;
+
+                if (!(putSentence.voiceEnd && putSentence.End))
+                {
+                    yield break;
+                }
+
+                yield return null;
+            }
+
+
+            if (isAuto && putSentence.End)
+            {
+                TextsDraw();
+            }
+        }
+
+        public void Auto()
+        {
+            isAuto = autoToggle.isOn;
+        }
 
         public IEnumerator TextDraw()
         {
