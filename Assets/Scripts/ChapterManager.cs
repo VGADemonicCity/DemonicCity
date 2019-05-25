@@ -19,13 +19,13 @@ namespace DemonicCity
     //    }
     //}
     [Serializable]
-    public class ChapterManager : SingletonBase<ChapterManager>
+    public class ChapterManager : MonoSingleton<ChapterManager>
     {
         /// <summary>ストーリー進行度のインスタンスの参照</summary>
         Progress progress;
 
 
-        List<Chapter> chapters = new List<Chapter>();
+        [SerializeField] List<Chapter> chapters = new List<Chapter>();
 
 
         /// <summary>進行度と敵のIDを登録するList</summary>

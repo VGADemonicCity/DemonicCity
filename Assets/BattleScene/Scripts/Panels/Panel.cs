@@ -41,6 +41,7 @@ namespace DemonicCity.BattleScene
             set { m_framePosition = value; }
         }
 
+        BattleManager battleManager;
         /// <summary>パネルがいる枠の場所</summary>
         [SerializeField] FramePosition m_framePosition;
         /// <summary>パネルが持つパネルの種類情報</summary>
@@ -51,13 +52,30 @@ namespace DemonicCity.BattleScene
         [SerializeField] Sprite[] m_panelTextures;
         /// <summary>時点から何度回転するか</summary>
         [SerializeField] float m_rotationDegrees = 1440f;
-        /// <summary>同オブジェクトの SpriteRenderer の参照</summary>
+        /// <summary>同オブジェクトの Image の参照</summary>
         Image myImage;
         PanelManager panelManager;
 
         void Awake()
         {
             panelManager = PanelManager.Instance;
+            battleManager = BattleManager.Instance;
+        }
+
+        private void Start()
+        {
+            myImage.color = Color.gray;
+            battleManager.m_BehaviourByState.AddListener((state) =>
+            {
+                if(state != BattleManager.StateMachine.State.PlayerChoice)
+                {
+                    myImage.color = Color.gray;
+                }
+                else
+                {
+                    myImage.color = Color.white;
+                }
+            });
         }
 
         private void OnEnable()
@@ -123,7 +141,7 @@ namespace DemonicCity.BattleScene
         public bool CheckActivatablePanel()
         {
             // 指定最小座標より大きいか
-            var isGreaterThan = 
+            var isGreaterThan =
                 gameObject.transform.position.x > panelManager.EnableMinimumPosition.x
                 && gameObject.transform.position.y > panelManager.EnableMinimumPosition.y;
             // 指定最大座標より小さいか
