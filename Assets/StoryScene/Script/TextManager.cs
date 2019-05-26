@@ -103,7 +103,7 @@ namespace DemonicCity.StoryScene
             {
                 checkTime += Time.deltaTime;
 
-                if (!(putSentence.voiceEnd && putSentence.End))
+                if (!(isAuto && putSentence.voiceEnd && putSentence.End))
                 {
                     yield break;
                 }
@@ -112,7 +112,7 @@ namespace DemonicCity.StoryScene
             }
 
 
-            if (isAuto && putSentence.End)
+            if (putSentence.voiceEnd && isAuto && putSentence.End)
             {
                 TextsDraw();
             }

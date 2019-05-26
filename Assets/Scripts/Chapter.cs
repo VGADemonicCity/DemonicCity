@@ -37,6 +37,9 @@ namespace DemonicCity
         /// <summary>ボスのウェーブのBGM</summary>
         [Header("ボスのウェーブのBGM")]
         public AudioClip BossBgm;
+        /// <summary>ストーリーのBGM</summary>
+        [Header("ストーリーのBGM")]
+        public AudioClip StoryBgm;
 
         /// <summary>バトル前シナリオ</summary>
         [SerializeField] StoryScene.Scenario prologue;

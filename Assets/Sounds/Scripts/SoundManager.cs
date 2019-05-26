@@ -113,6 +113,8 @@ namespace DemonicCity
                         }
                         PlayWithFade(SoundAsset.BGMTag.ThemeSong);
                         break;
+                    case SceneFader.SceneTitle.Story:
+                        break;
                     default:
                         PlayWithFade(SoundAsset.BGMTag.Home);
                         break;

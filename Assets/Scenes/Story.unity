@@ -231,6 +231,11 @@ Prefab:
       propertyPath: m_AnchoredPosition.y
       value: 910.00006
       objectReference: {fileID: 0}
+    - target: {fileID: 224490217437808430, guid: 0e3ec733186fce9459022b63d2028073,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 206.80078
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3ec733186fce9459022b63d2028073, type: 2}
   m_IsPrefabAsset: 0
@@ -888,13 +893,13 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 607847361}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -0, z: 0.7071068, w: -0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 891811368}
   m_RootOrder: 12
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 270}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 275.38, y: -833.24}
@@ -919,7 +924,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 9ae21edbea387794bbe9d59f5973c2b0, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2306,6 +2311,7 @@ GameObject:
   - component: {fileID: 1750996254}
   - component: {fileID: 1750996255}
   - component: {fileID: 1750996256}
+  - component: {fileID: 1750996253}
   m_Layer: 0
   m_Name: Managers
   m_TagString: Untagged
@@ -2313,6 +2319,17 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1750996253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1750996252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44c6994fdfc2dc94d955355d956b4386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1750996254
 Transform:
   m_ObjectHideFlags: 0

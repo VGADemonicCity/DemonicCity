@@ -24,6 +24,7 @@ namespace DemonicCity.StoryScene
         //public bool onoff;
         /// <summary>コルーチンを保存する</summary>
         IEnumerator feedCoroutine;
+        Coroutine voiceCoroutine = null;
         public bool End { get { return end; } set { end = value; } }
 
         SoundManager soundM;
@@ -84,7 +85,11 @@ namespace DemonicCity.StoryScene
                 isVoice = true;
                 voiceEnd = false;
                 soundM.PlayWithFade(SoundManager.SoundTag.Voice, clip);
-                StartCoroutine(VoiceCheck(clip.length));
+                if (voiceCoroutine != null)
+                {
+                    StopCoroutine(voiceCoroutine);
+                }
+                voiceCoroutine = StartCoroutine(VoiceCheck(clip.length));
             }
             else
             {

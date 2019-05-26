@@ -79,31 +79,34 @@ namespace DemonicCity.HomeScene
                 {
                     GameObject hitObj = null;
                     touchInfo.HitDetection(out hitObj);
-                    if (hitObj.tag != "Button")
+                    Debug.Log(hitObj.name);
+
+                    Debug.Log("Hit");
+                    if (IsPopUp)
                     {
-                        if (IsPopUp)
+                        //if (touchInfo.HitDetection(out hitObj, returnObj))
+                        if (returnObj.name == hitObj.name)
                         {
-                            if (touchInfo.HitDetection(out hitObj, returnObj))
-                            {
-                                CreditChange(false);
-                            }
-                        }
-                        else
-                        {
-                            if (touchInfo.HitDetection(out hitObj, configBtn))
-                            {
-                                ConfigOpen();
-                            }
-                            else if (touchInfo.HitDetection(out hitObj, CreditIcon))
-                            {
-                                CreditChange(true);
-                            }
-                            else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
-                            {
-                                SceneTrans();
-                            }
+                            CreditChange(false);
                         }
                     }
+                    else
+                    {
+                        //if (touchInfo.HitDetection(out hitObj, configBtn))
+                        if (hitObj.name == configBtn.name)
+                        {
+                            ConfigOpen();
+                        }
+                        else if (hitObj == CreditIcon)
+                        {
+                            CreditChange(true);
+                        }
+                        else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
+                        {
+                            SceneTrans();
+                        }
+                    }
+
                 }
             });
         }
@@ -139,8 +142,10 @@ namespace DemonicCity.HomeScene
         public void CreditChange(bool isOpen)
         {
             creditOpened = isOpen;
-            isPop = true;
+            isPop = isOpen;
+
             StartCoroutine(ChangeScale(creditOpened));
+
         }
 
         IEnumerator FlashObject(Image targetRenderer)
@@ -188,6 +193,7 @@ namespace DemonicCity.HomeScene
         bool creditOpened = false;
         IEnumerator ChangeScale(bool isOpen)
         {
+            Debug.Log(isOpen);
             Vector3 targetScale = Vector3.one;
             if (isOpen)
             {
