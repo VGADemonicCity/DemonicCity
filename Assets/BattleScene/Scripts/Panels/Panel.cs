@@ -67,13 +67,13 @@ namespace DemonicCity.BattleScene
             myImage.color = Color.gray;
             battleManager.m_BehaviourByState.AddListener((state) =>
             {
-                if(state != BattleManager.StateMachine.State.PlayerChoice)
+                if (state == BattleManager.StateMachine.State.PlayerChoice)
                 {
-                    myImage.color = Color.gray;
+                    myImage.color = Color.white;
                 }
                 else
                 {
-                    myImage.color = Color.white;
+                    myImage.color = Color.gray;
                 }
             });
         }

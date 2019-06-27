@@ -140,7 +140,8 @@ namespace DemonicCity.BattleScene
             {
                 m_StateMachine.m_StateBeforeWithoutSpecialState = m_StateMachine.m_State;
             }
-            m_StateMachine.m_State = state; // stateをセット
+            m_StateMachine.
+                m_State = state; // stateをセット
 
             Debug.Log(state);
             // ==================================
