@@ -134,6 +134,7 @@ namespace DemonicCity.BattleScene
         /// <param name="state">State machine.</param>
         public void SetStateMachine(StateMachine.State state)
         {
+            Debug.Log($"{state}がよばれたお！！！");
             // ステート遷移前のステートを保存 
             m_StateMachine.m_PreviousState = m_StateMachine.m_State;
             if (state == StateMachine.State.Pause|| state == StateMachine.State.Debugging || state == StateMachine.State.Tutorial) // 遷移先がPauseステートの時保存

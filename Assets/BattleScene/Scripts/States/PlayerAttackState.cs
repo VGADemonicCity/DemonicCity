@@ -201,6 +201,7 @@ namespace DemonicCity.BattleScene
                     // =============================
                     // イベント呼び出し : StateMachine.PlayerChoice
                     // =============================
+                    yield return null;
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
                 }
                 else
@@ -208,6 +209,7 @@ namespace DemonicCity.BattleScene
                     // ==================================
                     // イベント呼び出し : StateMachine.EnemyAttack
                     // ==================================
+                    yield return null;
                     m_battleManager.SetStateMachine(BattleManager.StateMachine.State.EnemyAttack);
                 }
             }

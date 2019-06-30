@@ -12,7 +12,7 @@ namespace DemonicCity.BattleScene
         DoubleCity,
         TripleCity,
         Enemy,
-        Default
+        Default,
     }
 
     /// <summary>

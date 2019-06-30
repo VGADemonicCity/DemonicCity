@@ -117,11 +117,6 @@ namespace DemonicCity.BattleScene
             TransitionState();
         }
 
-        public void OnPlayerHpSync()
-        {
-            TransitionState();
-        }
-
         void TransitionState()
         {
             // ペナルティ処理の場合はプレイヤーの攻撃が後攻になっているのでプレイヤーの攻撃ターンに遷移する
