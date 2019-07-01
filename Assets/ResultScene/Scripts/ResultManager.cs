@@ -110,15 +110,6 @@ namespace DemonicCity.ResultScene
         /// <summary>現在のレベルからレベルアップするまでに必要とされる総経験値</summary>
         int requiredToNextLevelTotalExperience;
 
-        public static class DebugLogger
-        {
-            [Conditional("UNITY_EDITOR")]
-            public static void Log(object o)
-            {
-                UnityEngine.Debug.Log(o);
-            }
-        }
-
         private void Awake()
         {
             chapterManager = ChapterManager.Instance;
@@ -131,7 +122,7 @@ namespace DemonicCity.ResultScene
         private void Start()
         {
             //SavableSingletonBase<Magia>.Instance.Clear();//debug
-          
+
             //クリアフラグを立てる
             progress.QuestClear();
             SavableSingletonBase<Progress>.Instance.Save();
@@ -145,7 +136,7 @@ namespace DemonicCity.ResultScene
                 ResultCalculation();
                 afterStatus = magia.Stats;
             }
-            else
+            else if(beforeStatus.Level == maxLevel)
             {
                 levelMaxImage.SetActive(true);
                 gaugeBackGround.sprite = levelUpGaugeSprite;
@@ -498,22 +489,23 @@ namespace DemonicCity.ResultScene
             afterDefenseText.text = "";
 
             destructionCount = panelCounter.TotalDestructionCount;
-            int recommendationMinLevel = chapterManager.GetChapter().levelRange[0];
-            int recommendationMaxLevel = chapterManager.GetChapter().levelRange[1];
+            int recommendationMinLevel = chapterManager.GetChapter().levelRange[0];//最低適正レベル
+            int recommendationMaxLevel = chapterManager.GetChapter().levelRange[1];//最高適正レベル
 
             //destructionCount = 300;//debug
-           
+
             //適正レベル以下だったら
             if(beforeStatus.Level <= recommendationMinLevel)
             {
                 float temporary = destructionCount * 1.5f;
                 destructionCount = Mathf.CeilToInt(temporary);
             }
-          
             //適正レベル以上だったら
             else if(beforeStatus.Level >= recommendationMaxLevel)
             {
                 destructionCount = 0;
+                needDestructionCountText.text = "0";
+                isCalculation = false;
             }
             destructionCountText.text = destructionCount.ToString();
 
@@ -525,13 +517,6 @@ namespace DemonicCity.ResultScene
             experienceGauge.value = myExperience;
 
             needDestructionCountText.text = (requiredToNextLevelTotalExperience - myExperience).ToString();
-
-            if(beforeStatus.Level == recommendationMaxLevel)
-            {
-                needDestructionCountText.text = "0";
-                levelMaxImage.SetActive(true);
-                experienceGauge.value = experienceGauge.maxValue;
-            }
         }
 
         /// <summary>バトル後のステータスをテキストに反映する(演出スキップ)</summary>
