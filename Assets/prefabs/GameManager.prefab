@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 114273117215540916}
   - component: {fileID: 114754455947005482}
   - component: {fileID: 114314361017757916}
+  - component: {fileID: 114876843064721574}
   m_Layer: 2
   m_Name: GameManager
   m_TagString: Untagged
@@ -82,3 +83,28 @@ MonoBehaviour:
   m_minute: 0
   m_seconds: 0
   m_timeScale: 1
+--- !u!114 &114876843064721574
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1240809691848496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88a146f65acf9c44781b7a473076e822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chapters:
+  - {fileID: 11400000, guid: ffaf09423e614bf47ae89e02eedcdb54, type: 2}
+  - {fileID: 11400000, guid: 5ade302b734ee1a458c79e70eac1ab44, type: 2}
+  - {fileID: 11400000, guid: 6dd703c6ccb09c549b871acfe42fe4f5, type: 2}
+  - {fileID: 11400000, guid: 276226c3591b8d04c902ff5d0233b2ff, type: 2}
+  - {fileID: 11400000, guid: 892664adccba40a4588b82af09988325, type: 2}
+  - {fileID: 11400000, guid: 672079dc7ffd15f47afbe549cc8b5519, type: 2}
+  - {fileID: 11400000, guid: 18741ef894cdf7f4abc62796d2f9a663, type: 2}
+  - {fileID: 11400000, guid: 599c5bdac6b5f39439dd2d7ebfe9a27b, type: 2}
+  - {fileID: 11400000, guid: 3dbb77bf0ed526443a2a15a0cd3ccd72, type: 2}
+  - {fileID: 11400000, guid: 19c5f9f826b8bbe45867801a4b3ef014, type: 2}
+  - {fileID: 11400000, guid: 96d27647afda09841a996b57bdbe5170, type: 2}
+  - {fileID: 11400000, guid: 71e1d18a9c8e0834487cadf4e7d493f1, type: 2}
+  - {fileID: 11400000, guid: 37b06875085717d429c76f2fa8bc749b, type: 2}

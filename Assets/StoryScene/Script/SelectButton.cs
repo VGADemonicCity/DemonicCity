@@ -34,7 +34,7 @@ namespace DemonicCity.StorySelectScene
             chapterTag = chapter;
             chapterName = title;
         }
-        public void Initialize(Chapter chapter)
+        public void Initialize(Chapter chapter, bool isActive)
         {
             chapterTag = chapter.storyProgress;
             chapterName = chapter.chapterTitle;
@@ -46,17 +46,10 @@ namespace DemonicCity.StorySelectScene
             {
                 level.text = "推奨Lv. " + chapter.levelRange[0] + "～" + chapter.levelRange[1];
             }
-        }
+            //if (isActive) Debug.Log(chapterName);
+            gameObject.SetActive(isActive);
 
-        void Awake()
-        {
-            touchGestureDetector = TouchGestureDetector.Instance;
-            //progress = Progress.Instance;
-            toStories = new ToStories();
-        }
 
-        void Start()
-        {
             text.text = chapterName;
             touchGestureDetector.onGestureDetected.AddListener((gesture, touchInfo) =>
             {
@@ -73,8 +66,6 @@ namespace DemonicCity.StorySelectScene
                             {
                                 toStories.ToStory(chapterTag);
                             }
-
-
                         }
                         break;
 
@@ -83,8 +74,20 @@ namespace DemonicCity.StorySelectScene
                 }
                 //Debug.Log(beginObject+"" +endObject);
             });
+
         }
 
+        void Awake()
+        {
+            touchGestureDetector = TouchGestureDetector.Instance;
+            //progress = Progress.Instance;
+            toStories = new ToStories();
+        }
+
+        void Start()
+        {
+
+        }
 
     }
 }

@@ -13,6 +13,7 @@ namespace DemonicCity.StorySelectScene
         [SerializeField] ChapterManager chapterManager;
         [SerializeField] RectTransform parent;
         [SerializeField] GameObject SelectButton;
+        [SerializeField] List<SelectButton> selectButtons = new List<SelectButton>();
 
         void Awake()
         {
@@ -24,18 +25,17 @@ namespace DemonicCity.StorySelectScene
             MyStory = progress.MyStoryProgress;
 
             //progress.MyStoryProgress= Progress.StoryProgress.All;
-
             int progressCount = EnumCommon.GetLength<Story>() - 1;
             for (int i = progressCount - 1; 0 <= i; i--)
             {
+                int c = selectButtons.Count - i - 1;
+                Debug.Log($"{selectButtons.Count} : {c}");
+                SelectButton currentButton = selectButtons[c];
                 Story progressIndex = (Story)(1 << i);
                 Story previewIndex = (Story)((int)progressIndex / 2);
-                if ((previewIndex & MyStory) == previewIndex)
-                {
-                    GameObject newSelectButton = Instantiate(SelectButton, parent);
-                    newSelectButton.GetComponent<SelectButton>().Initialize(chapterManager.GetChapter(progressIndex));
-                }
+                currentButton.Initialize(chapterManager.GetChapter(progressIndex), (previewIndex & MyStory) == previewIndex);
             }
+
             //for (int i = (int)MyStory; i >= 1; i /= 2)
             //{
             //    GameObject newSelectButton = Instantiate(SelectButton, parent);
