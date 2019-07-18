@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using DemonicCity.StoryScene;
+using System.Linq;
 
 namespace DemonicCity.Loading
 {
     public class LoadAnimation : MonoBehaviour
     {
-        [SerializeField] Text text;
         [SerializeField] SpriteRenderer magia;
         [SerializeField] List<Sprite> magiaAnims = new List<Sprite>();
+        [SerializeField] TextActor magiaSource;
         int listCount;
         float fadeTime = 0.5f;
 
         // Use this for initialization
         void Start()
         {
+            magia.enabled = false;
+            magiaAnims = magiaSource.faces.ToList();
             listCount = magiaAnims.Count;
             //StartCoroutine(AsyncLoad(SceneFader.SceneTitle.Title));
         }
@@ -27,13 +31,14 @@ namespace DemonicCity.Loading
 
         }
 
-        public Coroutine StartLoadingAnimation(AsyncOperation asyncOperation)
+        public Coroutine StartLoadingAnimation(ref AsyncOperation asyncOperation)
         {
             return StartCoroutine(AsyncLoad(asyncOperation));
         }
 
         IEnumerator AsyncLoad(AsyncOperation asyncOperation)
         {
+            magia.enabled = true;
             //var asyncOperation = SceneManager.LoadSceneAsync(title.ToString());
             //asyncOperation.allowSceneActivation = false;
             int i = 0;

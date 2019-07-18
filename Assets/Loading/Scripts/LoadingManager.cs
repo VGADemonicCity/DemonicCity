@@ -16,7 +16,7 @@ namespace DemonicCity.Loading
         // Use this for initialization
         void Start()
         {
-
+            StartCoroutine(LoadProcess());
         }
 
         // Update is called once per frame
@@ -38,7 +38,7 @@ namespace DemonicCity.Loading
             Color origin = Color.black;
             while (0 < a)
             {
-                a -= Time.unscaledDeltaTime / fadeTime:
+                a -= Time.unscaledDeltaTime / fadeTime;
                 origin.a = a;
                 back.color = origin;
                 yield return null;
@@ -51,7 +51,7 @@ namespace DemonicCity.Loading
             Color origin = Color.clear;
             while (a < 1)
             {
-                a += Time.unscaledDeltaTime / fadeTime:
+                a += Time.unscaledDeltaTime / fadeTime;
                 origin.a = a;
                 back.color = origin;
                 yield return null;
@@ -63,17 +63,21 @@ namespace DemonicCity.Loading
             loadingText.text = $"0% is loaded...";
             var asyncOperation = SceneManager.LoadSceneAsync(nextScene.ToString());
             asyncOperation.allowSceneActivation = false;
-            loadAnimation.StartLoadingAnimation();
+            loadAnimation.StartLoadingAnimation(ref asyncOperation);
             while (asyncOperation.progress < 0.9f)
             {
                 //Debug.Log(asyncOperation.progress);
-                loadingText.text = $"{asyncOperation.progress}% is loaded...";
+                loadingText.text = $"{AsyncProgressToPercent(asyncOperation.progress)}% is loaded...";
                 yield return null;
             }
             asyncOperation.allowSceneActivation = true;
 
-            SceneManager.UnloadSceneAsync("LoadingScene");
+            SceneManager.UnloadSceneAsync("Loading");
         }
-
+        int AsyncProgressToPercent(float progress)
+        {
+            if (progress == 0f) return 0;
+            return (int)(progress / 0.009f);
+        }
     }
 }
