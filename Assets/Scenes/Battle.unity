@@ -1269,47 +1269,32 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_magiaHPGauge
+      value: 
+      objectReference: {fileID: 180859255}
+    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_uniqueSkillGauge
       value: 
       objectReference: {fileID: 881457497}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: panelComplete
+      propertyPath: m_magiaHPGauge
       value: 
-      objectReference: {fileID: 1429502534}
-    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 180859255}
+    - target: {fileID: 114542386805354352, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: destructionCounterBox
+      propertyPath: uniqueSkillAnimator
       value: 
-      objectReference: {fileID: 2027437888}
-    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 1583049631}
+    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_CoordinateForSpawn
+      propertyPath: resultWindow
       value: 
-      objectReference: {fileID: 101201306}
-    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: buffAnimator
-      value: 
-      objectReference: {fileID: 1547031150}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_panelFrame
-      value: 
-      objectReference: {fileID: 907141279}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_enemiesMover
-      value: 
-      objectReference: {fileID: 101201305}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: waveTitle
-      value: 
-      objectReference: {fileID: 853279310}
-    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 455276447}
+    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: magiaAudioPlayer
       value: 
@@ -1334,36 +1319,51 @@ Prefab:
       propertyPath: magiaAudioPlayer
       value: 
       objectReference: {fileID: 984339132}
-    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: resultWindow
+      propertyPath: m_enemiesMover
       value: 
-      objectReference: {fileID: 455276447}
-    - target: {fileID: 114949723133331002, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 101201305}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: waveTitle
+      value: 
+      objectReference: {fileID: 853279310}
+    - target: {fileID: 114844704490148818, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: magiaAudioPlayer
       value: 
       objectReference: {fileID: 984339132}
-    - target: {fileID: 114542386805354352, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: uniqueSkillAnimator
+      propertyPath: m_panelFrame
       value: 
-      objectReference: {fileID: 1583049631}
-    - target: {fileID: 114496166160569242, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 907141279}
+    - target: {fileID: 114574456638883488, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_magiaHPGauge
+      propertyPath: buffAnimator
       value: 
-      objectReference: {fileID: 180859255}
-    - target: {fileID: 114177336636838174, guid: a07f1697570ccc44a9fd394ba7915bba,
+      objectReference: {fileID: 1547031150}
+    - target: {fileID: 114294880535250120, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: m_CoordinateForSpawn
+      value: 
+      objectReference: {fileID: 101201306}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: m_uniqueSkillGauge
       value: 
       objectReference: {fileID: 881457497}
-    - target: {fileID: 114208943207490408, guid: a07f1697570ccc44a9fd394ba7915bba,
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
-      propertyPath: m_magiaHPGauge
+      propertyPath: panelComplete
       value: 
-      objectReference: {fileID: 180859255}
+      objectReference: {fileID: 1429502534}
+    - target: {fileID: 114024525100392670, guid: a07f1697570ccc44a9fd394ba7915bba,
+        type: 2}
+      propertyPath: destructionCounterBox
+      value: 
+      objectReference: {fileID: 2027437888}
     - target: {fileID: 114445989290795632, guid: a07f1697570ccc44a9fd394ba7915bba,
         type: 2}
       propertyPath: magiaAnimator
@@ -1374,26 +1374,6 @@ Prefab:
       propertyPath: buffTextBox
       value: 
       objectReference: {fileID: 1767759945}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: useTargetStory
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: LoadStatusFromInspector
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114332594962796498, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: addStatus
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 114637994177244260, guid: a07f1697570ccc44a9fd394ba7915bba,
-        type: 2}
-      propertyPath: m_waitTime
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a07f1697570ccc44a9fd394ba7915bba, type: 2}
   m_IsPrefabAsset: 0
