@@ -284,8 +284,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91d2894b6343445ff9416300487282cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 70
-  m_countCondition: 21
+  m_levelCondition: 59
+  m_countCondition: 19
   m_passiveSkill: 64
   m_timing: 0
   enhanceType: 1
@@ -364,12 +364,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3292d3ee0e444410bb62ec13ef202867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 111
+  m_levelCondition: 100
   m_countCondition: 30
   m_passiveSkill: 512
   m_timing: 0
   enhanceType: 3
-  m_incease: 0.007
+  m_incease: 0.01
   m_magiaHPGauge: {fileID: 0}
 --- !u!114 &114212980024678998
 MonoBehaviour:
@@ -422,8 +422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9dfa60838c2a24796afd1e328078d815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 39
-  m_countCondition: 16
+  m_levelCondition: 28
+  m_countCondition: 13
   m_passiveSkill: 16
   m_timing: 0
   enhanceType: 2
@@ -553,12 +553,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa08aac4f5664a608469d92bae02b47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 100
-  m_countCondition: 27
+  m_levelCondition: 92
+  m_countCondition: 25
   m_passiveSkill: 256
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.02
+  m_incease: 0.03
 --- !u!114 &114445989290795632
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -603,8 +603,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84baedb530b674a7faa10a6fceacbc81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 136
-  m_countCondition: 32
+  m_levelCondition: 123
+  m_countCondition: 27
   m_passiveSkill: 1024
   m_timing: 0
   enhanceType: 1
@@ -620,8 +620,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc495d98eba42450c854bb4f1b9ede44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 23
-  m_countCondition: 13
+  m_levelCondition: 12
+  m_countCondition: 11
   m_passiveSkill: 4
   m_timing: 0
   enhanceType: 3
@@ -638,7 +638,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00a030ab5a33b1441b91929fcf8679fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_processingTime: 3
+  m_processingTime: 1
   sealdEnemyPanel: {fileID: 21300000, guid: a11f64fe18bb034498b862d6c03109b2, type: 3}
   uniqueSkillAnimator: {fileID: 0}
 --- !u!114 &114551629130621486
@@ -684,7 +684,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_panelFrame: {fileID: 0}
-  m_waitTime: 0.2
+  m_waitTime: 0
   m_shufflePanels: {fileID: 0}
 --- !u!114 &114658799238253382
 MonoBehaviour:
@@ -697,12 +697,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdfdf3e44409645c6ae610fb57b54b8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 82
-  m_countCondition: 25
+  m_levelCondition: 71
+  m_countCondition: 21
   m_passiveSkill: 128
   m_timing: 0
   enhanceType: 2
-  m_incease: 0.1
+  m_incease: 0.2
 --- !u!114 &114676999750379174
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -714,12 +714,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0003a3e259e0845f4aa38671e70ca994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 11
-  m_countCondition: 8
+  m_levelCondition: 6
+  m_countCondition: 6
   m_passiveSkill: 2
   m_timing: 0
   enhanceType: 4
-  m_incease: 0.01
+  m_incease: 0.03
 --- !u!114 &114677235418965648
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -731,12 +731,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddaf68ab6045f4c3eb32500d439b72c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 160
-  m_countCondition: 33
+  m_levelCondition: 150
+  m_countCondition: 30
   m_passiveSkill: 2048
   m_timing: 1
   enhanceType: 0
-  m_incease: 0.03
+  m_incease: 0.05
 --- !u!114 &114697641580245106
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -748,8 +748,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 785573e7e4dbb45998f203c666be7f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_levelCondition: 55
-  m_countCondition: 18
+  m_levelCondition: 44
+  m_countCondition: 16
   m_passiveSkill: 32
   m_timing: 1
   enhanceType: 0
@@ -781,7 +781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_levelCondition: 181
-  m_countCondition: 35
+  m_countCondition: 33
   m_passiveSkill: 4096
   m_timing: 0
   enhanceType: 2
