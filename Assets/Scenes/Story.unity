@@ -1813,27 +1813,27 @@ Prefab:
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_text
-      value: 
+      value: "\u305D\u306E\u59FF\u3060\u3068\u89AA\u5B50\u306B\u601D\u3046\u306E\u306F\u3057\u3087\u3046\u304C\u306D\u3047\u3088\u306A"
       objectReference: {fileID: 0}
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_textInfo.characterCount
-      value: 0
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_textInfo.wordCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_textInfo.lineCount
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_textInfo.pageCount
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
@@ -1870,6 +1870,16 @@ Prefab:
       propertyPath: autoTime
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_lineSpacing
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a200ebd214bc76a47ae008546486ac2b, type: 2}
   m_IsPrefabAsset: 0
@@ -1890,7 +1900,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1549097289
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2614,12 +2624,12 @@ Prefab:
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_havePropertiesChanged
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
       propertyPath: m_isInputParsingRequired
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114726837909372240, guid: a200ebd214bc76a47ae008546486ac2b,
         type: 2}
@@ -2655,6 +2665,41 @@ Prefab:
     - target: {fileID: 1535930275268388, guid: a200ebd214bc76a47ae008546486ac2b, type: 2}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_text
+      value: "\u2026\u2026\u3054\u6B66\u904B\u3092\u3042\u3042\u3042\u3042\n\u3042\u3042\u3042\u3042\u3042\u3042"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_inputSource
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.characterCount
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.spaceCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.wordCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_textInfo.lineCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114184188178407522, guid: a200ebd214bc76a47ae008546486ac2b,
+        type: 2}
+      propertyPath: m_lineSpacing
+      value: 16.61
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a200ebd214bc76a47ae008546486ac2b, type: 2}
