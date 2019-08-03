@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:versionCode="1"
+    android:versionName="1.0"
+    android:installLocation="2"
+    android:compileSdkVersion="28"
+    android:compileSdkVersionCodename="9"
+    package="unity.ZukkyCOM.DemonicCity"
+    platformBuildVersionCode="1"
+    platformBuildVersionName="1065353216.000000">
+
+  <uses-sdk
+      android:minSdkVersion="25"
+      android:targetSdkVersion="28" />
+
+  <supports-screens
+      android:anyDensity="true"
+      android:smallScreens="true"
+      android:normalScreens="true"
+      android:largeScreens="true"
+      android:xlargeScreens="true" />
+
+  <uses-feature
+      android:glEsVersion="0x20000" />
+
+  <uses-feature
+      android:name="android.hardware.touchscreen"
+      android:required="false" />
+
+  <uses-feature
+      android:name="android.hardware.touchscreen.multitouch"
+      android:required="false" />
+
+  <uses-feature
+      android:name="android.hardware.touchscreen.multitouch.distinct"
+      android:required="false" />
+
+  <uses-permission
+      android:name="android.permission.GET_TASKS" />
+
+  <uses-permission
+      android:name="android.permission.ACCESS_WIFI_STATE" />
+
+  <uses-permission
+      android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+  <uses-permission
+      android:name="com.xiaomi.sdk.permission.PAYMENT" />
+
+  <uses-permission
+      android:name="android.permission.INTERNET" />
+
+  <uses-permission
+      android:name="com.xiaomi.permission.AUTH_SERVICE" />
+
+  <application
+      android:theme="@ref/0x7f060001"
+      android:label="@ref/0x7f050000"
+      android:icon="@ref/0x7f040000"
+      android:banner="@ref/0x7f010000"
+      android:isGame="true">
+
+    <activity
+        android:label="@ref/0x7f050000"
+        android:name="com.unity3d.player.UnityPlayerActivity"
+        android:launchMode="2"
+        android:screenOrientation="1"
+        android:configChanges="0x40003fff"
+        android:hardwareAccelerated="false">
+
+      <intent-filter>
+
+        <action
+            android:name="android.intent.action.MAIN" />
+
+        <category
+            android:name="android.intent.category.LAUNCHER" />
+
+        <category
+            android:name="android.intent.category.LEANBACK_LAUNCHER" />
+      </intent-filter>
+
+      <meta-data
+          android:name="unityplayer.UnityActivity"
+          android:value="true" />
+    </activity>
+
+    <meta-data
+        android:name="unity.build-id"
+        android:value="e3cb28cc-36db-44af-8505-33d6c86e435a" />
+
+    <meta-data
+        android:name="unity.splash-mode"
+        android:value="0" />
+
+    <meta-data
+        android:name="unity.splash-enable"
+        android:value="true" />
+
+    <activity
+        android:theme="@ref/0x01030010"
+        android:name="com.xiaomi.gamecenter.sdk.ui.MiActivity"
+        android:screenOrientation="3"
+        android:configChanges="0x480" />
+
+    <activity
+        android:theme="@ref/0x01030010"
+        android:name="com.xiaomi.gamecenter.sdk.ui.PayListActivity"
+        android:exported="true"
+        android:configChanges="0x480" />
+
+    <activity
+        android:theme="@ref/0x01030010"
+        android:name="com.xiaomi.gamecenter.alipay.HyAlipayActivity"
+        android:exported="true"
+        android:configChanges="0x480" />
+
+    <activity
+        android:theme="@ref/0x01030010"
+        android:name="com.xiaomi.account.openauth.AuthorizeActivity"
+        android:exported="true"
+        android:configChanges="0x480" />
+
+    <activity
+        android:theme="@ref/0x01030010"
+        android:name="com.xiaomi.gamecenter.wxwap.HyWxWappayActivity"
+        android:exported="true"
+        android:configChanges="0x480" />
+
+    <activity
+        android:name="com.alipay.sdk.app.H5PayActivity"
+        android:exported="false"
+        android:screenOrientation="3"
+        android:configChanges="0x4e0"
+        android:windowSoftInputMode="0x12" />
+  </application>
+</manifest>
