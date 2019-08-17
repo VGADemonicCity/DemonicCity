@@ -137,7 +137,7 @@ namespace DemonicCity.BattleScene
             Debug.Log($"{state}がよばれたお！！！");
             // ステート遷移前のステートを保存 
             m_StateMachine.m_PreviousState = m_StateMachine.m_State;
-            if (state == StateMachine.State.Pause|| state == StateMachine.State.Debugging || state == StateMachine.State.Tutorial) // 遷移先がPauseステートの時保存
+            if (state == StateMachine.State.Pause || state == StateMachine.State.Debugging || state == StateMachine.State.Tutorial) // 遷移先がPauseステートの時保存
             {
                 m_StateMachine.m_StateBeforeWithoutSpecialState = m_StateMachine.m_State;
             }
@@ -266,7 +266,10 @@ namespace DemonicCity.BattleScene
                 }
             }
 
-
+            public bool PreviousStateIsSpecialStates =>
+                m_PreviousState == State.Tutorial
+                || m_PreviousState == State.Debugging
+                || m_PreviousState == State.Pause;
 
             #endregion
         }
