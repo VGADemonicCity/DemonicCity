@@ -121,13 +121,15 @@ namespace DemonicCity.StoryScene
                     Item(contents);
                     break;
                 case StageType.PopWindow:
-                    PopWindow(contents[(int)StageTag.Target]);
+                    fader.FadeOut(SceneFader.SceneTitle.Title);
+                    //PopWindow(contents[(int)StageTag.Target]);
                     break;
                 case StageType.Quake:
                     Quake();
                     break;
                 case StageType.QuestClear:
-                    QuestClear(contents[(int)StageTag.Target]);
+                    fader.FadeOut(SceneFader.SceneTitle.Title);
+                    //QuestClear(contents[(int)StageTag.Target]);
                     break;
                 default:
                     break;

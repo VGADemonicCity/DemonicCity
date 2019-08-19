@@ -269,7 +269,7 @@ namespace DemonicCity.HomeScene
 
         public void GalleryClose()
         {
-            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home);
+            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title);
         }
 
         // Use this for initialization

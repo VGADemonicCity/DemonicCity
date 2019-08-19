@@ -19,7 +19,7 @@ namespace DemonicCity.BattleScene
                     return;
                 }
                 Debug.Log("Lose state called.");
-                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, fadingTime);
+                SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title, fadingTime);
             });
         }
     }

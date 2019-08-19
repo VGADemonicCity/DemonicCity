@@ -47,6 +47,23 @@ namespace DemonicCity.StorySelectScene
                 level.text = "推奨Lv. " + chapter.levelRange[0] + "～" + chapter.levelRange[1];
             }
             //if (isActive) Debug.Log(chapterName);
+
+            ///ForTGS
+            switch (chapter.storyProgress)
+            {
+                case Progress.StoryProgress.Nafla:
+                    level.text = "EASY";
+                    break;
+                case Progress.StoryProgress.Amon:
+                    level.text = "NORMAL";
+                    break;
+                case Progress.StoryProgress.Faulus:
+                    level.text = "HARD";
+                    break;
+                default:
+                    break;
+            }
+
             gameObject.SetActive(isActive);
 
 
@@ -74,6 +91,7 @@ namespace DemonicCity.StorySelectScene
                 }
                 //Debug.Log(beginObject+"" +endObject);
             });
+
 
         }
 

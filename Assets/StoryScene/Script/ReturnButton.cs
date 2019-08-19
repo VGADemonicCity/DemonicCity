@@ -36,7 +36,7 @@ namespace DemonicCity.StorySelectScene
                             if (beginObject == endObject
                             && beginObject == gameObject)
                             {
-                                sceneFader.FadeOut(SceneFader.SceneTitle.Home);
+                                sceneFader.FadeOut(SceneFader.SceneTitle.Title);
                             }
                         }
                         break;

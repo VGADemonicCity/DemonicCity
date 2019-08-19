@@ -20,7 +20,7 @@ namespace DemonicCity
         public void ToHome()
         {
             fader = SceneFader.Instance;
-            fader.FadeOut(SceneFader.SceneTitle.Home);
+            fader.FadeOut(SceneFader.SceneTitle.Title);
         }
     }
 }

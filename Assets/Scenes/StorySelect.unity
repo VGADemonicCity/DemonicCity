@@ -416,6 +416,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -594,6 +604,16 @@ Prefab:
     - target: {fileID: 1425596356560198, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
       propertyPath: m_Name
       value: SelectButton (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
@@ -796,8 +816,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\u623B \u308B"
 --- !u!222 &490707657
@@ -1274,6 +1294,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -1414,6 +1444,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -1553,6 +1593,16 @@ Prefab:
     - target: {fileID: 1425596356560198, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
       propertyPath: m_Name
       value: SelectButton (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
@@ -1922,6 +1972,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -2062,6 +2122,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -2201,6 +2271,16 @@ Prefab:
     - target: {fileID: 1425596356560198, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
       propertyPath: m_Name
       value: SelectButton (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
@@ -2492,6 +2572,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -2742,6 +2832,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -2887,6 +2987,16 @@ Prefab:
       propertyPath: m_Name
       value: SelectButton (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
   m_IsPrefabAsset: 0
@@ -2997,6 +3107,16 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
@@ -3337,6 +3457,16 @@ Prefab:
     - target: {fileID: 1425596356560198, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}
       propertyPath: m_Name
       value: SelectButton (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114788150289346988, guid: ded0785ec82e8f243a6d03b0ca78b700,
+        type: 2}
+      propertyPath: m_FontData.m_VerticalOverflow
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ded0785ec82e8f243a6d03b0ca78b700, type: 2}

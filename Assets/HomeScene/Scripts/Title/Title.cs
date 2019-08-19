@@ -103,7 +103,10 @@ namespace DemonicCity.HomeScene
                         }
                         else if (!creditOpened)/*if (hitObj == null || hitObj.tag != "Button")*/
                         {
-                            SceneTrans();
+                            //SceneTrans();
+
+                            ///ForTGS
+                            TGSSceneTrans();
                         }
                     }
 
@@ -111,7 +114,10 @@ namespace DemonicCity.HomeScene
             });
         }
 
-
+        void TGSSceneTrans()
+        {
+            sceneFader.FadeOut(SceneFader.SceneTitle.StorySelect);
+        }
         public void SceneTrans()
         {
             Progress progress = Progress.Instance;
@@ -122,7 +128,7 @@ namespace DemonicCity.HomeScene
                 sceneFader.FadeOut(SceneFader.SceneTitle.Story);
                 return;
             }
-            sceneFader.FadeOut(SceneFader.SceneTitle.Home);
+            sceneFader.FadeOut(SceneFader.SceneTitle.Title);
         }
 
         void ConfigOpen()

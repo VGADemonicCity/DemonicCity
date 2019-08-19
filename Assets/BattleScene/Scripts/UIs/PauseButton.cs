@@ -55,7 +55,7 @@ namespace DemonicCity.BattleScene
         void BackToHomeScene()
         {
             SoundManager.Instance.StopWithFade(SoundManager.SoundTag.BGM);
-            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Home, 1f);
+            SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title, 1f);
         }
 
         /// <summary>

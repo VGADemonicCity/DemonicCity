@@ -109,7 +109,7 @@ namespace DemonicCity.HomeScene
                             case Window.Summon:
                                 if (false)//一部クリアフラグ
                                 {
-                                    sceneFader.FadeOut(SceneFader.SceneTitle.Home);
+                                    sceneFader.FadeOut(SceneFader.SceneTitle.Title);
                                 }
                                 break;
                             case Window.Config:

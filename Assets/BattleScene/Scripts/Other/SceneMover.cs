@@ -18,7 +18,7 @@ namespace DemonicCity.BattleScene
 
         public void OnClick()
         {
-            m_sceneFader.FadeOut(SceneFader.SceneTitle.Home);
+            m_sceneFader.FadeOut(SceneFader.SceneTitle.Title);
         }
     }
 }
