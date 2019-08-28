@@ -23,7 +23,7 @@ namespace DemonicCity.StoryScene
         [SerializeField] UnityEvent AfterEvent;
         delegate void Process();
 
-
+        Coroutine feedCoroutine;
         private void Awake()
         {
             Reset();
@@ -58,7 +58,7 @@ namespace DemonicCity.StoryScene
         /// </summary>
         void FeedImage()
         {
-            StartCoroutine(FeedImage(feedingTime));
+            feedCoroutine = StartCoroutine(FeedImage(feedingTime));
         }
 
 
@@ -85,7 +85,6 @@ namespace DemonicCity.StoryScene
             }
             AfterProcess();
         }
-
 
 
         /// <summary>
@@ -119,6 +118,22 @@ namespace DemonicCity.StoryScene
             yield return new WaitForSecondsRealtime(time);
             process.Invoke();
         }
-
+        public void Skip()
+        {
+            if (feedCoroutine != null) StopCoroutine(feedCoroutine);
+            StartCoroutine(SkipAction());
+        }
+        IEnumerator SkipAction()
+        {
+            Color color = targetImage.color;
+            float a = 1f;
+            while (0 < a)
+            {
+                a -= Time.deltaTime * 2f;
+                targetImage.color = new Color(color.r, color.g, color.b, a);
+                yield return null;
+            }
+            AfterEvent.Invoke();
+        }
     }
 }
