@@ -9,13 +9,20 @@ namespace DemonicCity.Loading
     public class LoadingManager : MonoBehaviour
     {
         [SerializeField] LoadAnimation loadAnimation;
-        [SerializeField] Text loadingText;
+        //[SerializeField] Text loadingText;
+        [SerializeField] Image gauge;
         [SerializeField] Image back;
+        [SerializeField] Image half;
+        [SerializeField] Image full;
         float fadeTime = 0.5f;
         public static SceneName NextSceneName { get; set; } = SceneName.Title;
         // Use this for initialization
         void Start()
         {
+            half.color = Color.clear;
+            full.color = Color.clear;
+            half.gameObject.SetActive(true);
+            full.gameObject.SetActive(true);
             StartCoroutine(LoadProcess());
         }
 
@@ -60,16 +67,39 @@ namespace DemonicCity.Loading
         }
         IEnumerator Loading(SceneName nextScene)
         {
-            loadingText.text = $"0% is loaded...";
+            //loadingText.text = $"読込中";
             var asyncOperation = SceneManager.LoadSceneAsync(nextScene.ToString());
             asyncOperation.allowSceneActivation = false;
             loadAnimation.StartLoadingAnimation(ref asyncOperation);
+
+
             while (asyncOperation.progress < 0.9f)
             {
+                float p = asyncOperation.progress;
+                if (p < 0.5f)
+                {
+                    half.color = new Color(1, 1, 1, p * 2);
+                }
+                else
+                {
+                    half.color = Color.white;
+                    full.color = new Color(1, 1, 1, (p - 0.5f) * 2);
+                }
+                gauge.fillAmount = p;
                 //Debug.Log(asyncOperation.progress);
-                loadingText.text = $"{AsyncProgressToPercent(asyncOperation.progress)}% is loaded...";
+                //loadingText.text = $"{AsyncProgressToPercent(asyncOperation.progress)}% is loaded...";
                 yield return null;
             }
+            float a = asyncOperation.progress;
+            while (a < 1f)
+            {
+                gauge.fillAmount = a;
+                full.color = new Color(1, 1, 1, (a - 0.5f) * 2);
+                a += Time.deltaTime;
+                yield return null;
+            }
+            full.color = Color.white;
+            half.gameObject.SetActive(false);
             asyncOperation.allowSceneActivation = true;
 
             SceneManager.UnloadSceneAsync("Loading");

@@ -203,6 +203,8 @@ namespace DemonicCity.BattleScene
                 Debugging,
                 /// <summary>Tutorials時</summary>
                 Tutorial,
+                /// <summary>コンテニュー選択中</summary>
+                Continue,
             }
 
             /// <summary>
