@@ -13,9 +13,11 @@ namespace DemonicCity.Loading
         [SerializeField] SpriteRenderer magia;
         [SerializeField] List<Sprite> magiaAnims = new List<Sprite>();
         [SerializeField] TextActor magiaSource;
+        [SerializeField] Text loadingText;
+        [SerializeField] string incString;
         int listCount;
         float fadeTime = 0.5f;
-
+        Coroutine textCoroutine = null;
         // Use this for initialization
         void Start()
         {
@@ -33,6 +35,7 @@ namespace DemonicCity.Loading
 
         public Coroutine StartLoadingAnimation(ref AsyncOperation asyncOperation)
         {
+            textCoroutine = StartCoroutine(Period());
             return StartCoroutine(AsyncLoad(asyncOperation));
         }
 
@@ -62,6 +65,33 @@ namespace DemonicCity.Loading
             }
             magia.color = Color.clear;
             //asyncOperation.allowSceneActivation = true;
+        }
+        IEnumerator Period()
+        {
+            int i = 0;
+            while (true)
+            {
+                loadingText.text = $"読込中{GetPeriod(i++)}";
+                yield return new WaitForSecondsRealtime(0.5f);
+                if (8 <= i) i = 0;
+            }
+        }
+        string GetPeriod(int num)
+        {
+            string ret = incString;
+            for (int i = 1; i < num; i++)
+            {
+                if (i % 2 == 0) ret += incString;
+            }
+            return ret;
+        }
+        void OnDestroy()
+        {
+            Debug.Log("Destroy");
+            if (textCoroutine != null)
+            {
+                StopCoroutine(textCoroutine);
+            }
         }
     }
 }

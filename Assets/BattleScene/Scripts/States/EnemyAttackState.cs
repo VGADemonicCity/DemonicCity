@@ -135,7 +135,7 @@ namespace DemonicCity.BattleScene
                     // ==============================
                     // イベント呼び出し : StateMachine.Lose
                     // ==============================
-                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Continue);
                 }
             }
             else
@@ -152,7 +152,7 @@ namespace DemonicCity.BattleScene
                     // ==============================
                     // イベント呼び出し : StateMachine.Lose
                     // ==============================
-                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+                    m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Continue);
                 }
             }
         }
