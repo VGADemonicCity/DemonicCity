@@ -648,7 +648,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 14, y: 0}
-  m_SizeDelta: {x: 738, y: 4096}
+  m_SizeDelta: {x: 804, y: 4094}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &632647770
 MonoBehaviour:
@@ -669,7 +669,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: e5fa08040f975f648a9644059a401621, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 96665943b9930d546bc1ba201071b3ab, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetImage: {fileID: 632647770}
-  feedSprite: {fileID: 21300000, guid: e5fa08040f975f648a9644059a401621, type: 3}
+  feedSprite: {fileID: 21300000, guid: 96665943b9930d546bc1ba201071b3ab, type: 3}
   startTiming: 5
   feedingTime: 130
   afterTime: 0
