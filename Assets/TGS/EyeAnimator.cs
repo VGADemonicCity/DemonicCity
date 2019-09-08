@@ -25,7 +25,7 @@ namespace DemonicCity
         public void Init()
         {
             flasher.color = Color.clear;
-
+            Blur.enabled = false;
         }
         // Use this for initialization
         void Start()
@@ -120,11 +120,11 @@ namespace DemonicCity
             //FillTrans
             //var e = Translate(0.4f, 0.8f, 1f, FillChange);
             //while (e.MoveNext()) yield return e.Current;
-            yield return StartCoroutine(Translate(0.4f, 0.8f, 1f, FillChange));
+            yield return StartCoroutine(Translate(0.5f, 0.9f, 1f, FillChange));
 
             yield return new WaitForSecondsRealtime(0.5f);
 
-            yield return StartCoroutine(Translate(0.8f, 1f, 0.8f, FillChange));
+            yield return StartCoroutine(Translate(0.9f, 1f, 0.8f, FillChange));
             BlurSizeChange(0f);
         }
         public IEnumerator Translate(float ori, float target, float time, Action<float> action)
