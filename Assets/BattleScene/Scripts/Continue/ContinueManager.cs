@@ -11,20 +11,32 @@ namespace DemonicCity.BattleScene
         [SerializeField] EyeAnimator m_eyeAnimator;
         //[SerializeField] ContinueWindow m_window;
         [SerializeField] CanvasGroup m_group;
+        [SerializeField] CanvasGroup m_failedGroup;
+        CanvasGroup m_currentGroup;
         //[SerializeField] HitPointGauge m_magiaHPGauge;
         RewardBasedVideoAd m_rewardVideo;
-        string appId = "ca-app-pub-3940256099942544~3347511713";
-        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        //string appId = "ca-app-pub-7816817742729478~8064647539";
+        string appId = "ca-app-pub-7816817742729478~8064647539";
+
+        //string adUnitId = "ca-app-pub-7816817742729478/1987653339";
+        string adUnitId = "ca-app-pub-7816817742729478/1987653339";
         bool isAd = false;
+        bool isLoadFailed = false;
         // Use this for initialization
+        void InitCanvasGroup(CanvasGroup _group)
+        {
+            _group.alpha = 0f;
+            _group.interactable = true;
+            _group.gameObject.SetActive(false);
+        }
         void Init()
         {
-            m_group.alpha = 0f;
-            m_group.interactable = true;
-            m_group.gameObject.SetActive(false);
+            InitCanvasGroup(m_group);
+            InitCanvasGroup(m_failedGroup);
             m_eyeAnimator.Init();
             m_eyeAnimator.gameObject.SetActive(false);
         }
+        /// <summary>動画の読み込み</summary>
         void RequestRewardVideo()
         {
             AdRequest request = new AdRequest.Builder().Build();
@@ -33,12 +45,14 @@ namespace DemonicCity.BattleScene
         }
         protected override void Awake()
         {
+            AdMobCallbackEnter();
             Init();
             base.Awake();
+            //広告の読み込み
+            RequestRewardVideo();
         }
         void Start()
         {
-            AdMobCallbackEnter();
             m_battleManager.m_BehaviourByState.AddListener((state) =>
             {
                 if (state == BattleManager.StateMachine.State.Continue)
@@ -58,13 +72,20 @@ namespace DemonicCity.BattleScene
 
         public void Submit()
         {
-            m_group.interactable = false;
-            ShowRewardVideo();
-            StartCoroutine(Continue());
+            m_currentGroup.interactable = false;
+            if (isLoadFailed)
+            {
+                RequestRewardVideo();
+            }
+            else
+            {
+                ShowRewardVideo();
+                StartCoroutine(Continue());
+            }
         }
         public void Cancel()
         {
-            m_group.interactable = false;
+            m_currentGroup.interactable = false;
             //Time.timeScale = 1f;
             m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
             //SceneFader.Instance.FadeOut(SceneFader.SceneTitle.StorySelect);
@@ -78,12 +99,13 @@ namespace DemonicCity.BattleScene
             m_magiaHPGauge.Sync(m_battleManager.m_MagiaStats.HitPoint); // HPGaugeと同期
             m_group.gameObject.SetActive(true);
             StartCoroutine(m_eyeAnimator.Translate(0f, 1f, 0.5f, a => { m_group.alpha = a; }));
+            m_currentGroup = m_group;
         }
         public IEnumerator Continue()
         {
             yield return new WaitWhile(() => isAd);
             //Time.timeScale = 1f;
-            yield return StartCoroutine(m_eyeAnimator.Translate(1f, 0f, 0.5f, a => { m_group.alpha = a; }));
+            yield return StartCoroutine(m_eyeAnimator.Translate(1f, 0f, 0.5f, a => { m_currentGroup.alpha = a; }));
             yield return StartCoroutine(m_eyeAnimator.Open());
             Init();
             m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
@@ -102,9 +124,9 @@ namespace DemonicCity.BattleScene
             m_rewardVideo.OnAdClosed += HandleRewardBasedVideoClosed;
             m_rewardVideo.OnAdLeavingApplication += HandleRewardBasedVideoLeftApplication;
 
-            RequestRewardVideo();
+            //RequestRewardVideo();
         }
-
+        /// <summary>動画再生</summary>
         void ShowRewardVideo()
         {
             StartCoroutine(WaitShowRewardVideo());
@@ -119,6 +141,25 @@ namespace DemonicCity.BattleScene
             m_rewardVideo.Show();
         }
 
+        IEnumerator TryShowRewardVideo()
+        {
+            yield return new WaitWhile(() => !m_rewardVideo.IsLoaded());
+            if (isLoadFailed)
+            {
+                StartCoroutine(SwitchCanvas(m_failedGroup));
+            }
+            else
+            {
+                Submit();
+            }
+        }
+        IEnumerator SwitchCanvas(CanvasGroup nextGroup)
+        {
+            yield return StartCoroutine(m_eyeAnimator.Translate(1f, 0f, 0.5f, a => { m_currentGroup.alpha = a; }));
+            yield return StartCoroutine(m_eyeAnimator.Translate(0f, 1f, 0.5f, a => { nextGroup.alpha = a; }));
+            m_currentGroup = nextGroup;
+        }
+
         #region AdMobCallbacks
         /// <summary>
         /// ロード完了時
@@ -127,6 +168,7 @@ namespace DemonicCity.BattleScene
         /// <param name="args"></param>
         public void HandleRewardBasedVideoLoaded(object sender, EventArgs args)
         {
+            isLoadFailed = false;
             MonoBehaviour.print("HandleRewardBasedVideoLoaded event received");
         }
         /// <summary>
@@ -136,6 +178,7 @@ namespace DemonicCity.BattleScene
         /// <param name="args"></param>
         public void HandleRewardBasedVideoFailedToLoad(object sender, AdFailedToLoadEventArgs args)
         {
+            isLoadFailed = true;
             MonoBehaviour.print(
                 "HandleRewardBasedVideoFailedToLoad event received with message: "
                                  + args.Message);
@@ -165,8 +208,15 @@ namespace DemonicCity.BattleScene
         /// <param name="args"></param>
         public void HandleRewardBasedVideoClosed(object sender, EventArgs args)
         {
-            isAd = false;
+            if (isAd)
+            {
+                isAd = false;
+                RequestRewardVideo();
+            }
+            else
+            {
 
+            }
             MonoBehaviour.print("HandleRewardBasedVideoClosed event received");
         }
         /// <summary>
@@ -182,6 +232,7 @@ namespace DemonicCity.BattleScene
                 "HandleRewardBasedVideoRewarded event received for "
                             + amount.ToString() + " " + type);
             isAd = false;
+            RequestRewardVideo();
         }
         /// <summary>
         /// 
