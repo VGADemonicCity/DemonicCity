@@ -116,7 +116,7 @@ namespace DemonicCity
             return Chapters.Find(item => item.storyProgress == progress.ThisStoryProgress);
         }
 
-
+        public void ProgressReset() => progress = Progress.Instance;
 
 
 

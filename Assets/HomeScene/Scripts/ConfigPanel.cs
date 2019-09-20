@@ -33,6 +33,7 @@ namespace DemonicCity
             Debug.Log("DataReset");
             Progress.Instance.Clear();
             Magia.Instance.Clear();
+            ChapterManager.Instance.ProgressReset();
             SceneFader.Instance.FadeOut(SceneFader.SceneTitle.Title);
         }
 

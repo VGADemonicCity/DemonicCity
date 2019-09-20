@@ -207,5 +207,15 @@ namespace DemonicCity
                 return false;
             }
         }
+        public Progress()
+        {
+            storyProgress = 0;
+            thisStoryProgress = 0;
+            questProgress = 0;
+            tutorialProgress = 0;
+            tutorialInBattleScene = Subject.AllFlag;
+        }
+
+
     }
 }

@@ -22,6 +22,7 @@ namespace DemonicCity.BattleScene
         string adUnitId = "ca-app-pub-7816817742729478/1987653339";
         bool isAd = false;
         bool isLoadFailed = false;
+        bool isReward = false;
         // Use this for initialization
         void InitCanvasGroup(CanvasGroup _group)
         {
@@ -76,6 +77,7 @@ namespace DemonicCity.BattleScene
             if (isLoadFailed)
             {
                 RequestRewardVideo();
+                StartCoroutine(TryShowRewardVideo());
             }
             else
             {
@@ -104,11 +106,19 @@ namespace DemonicCity.BattleScene
         public IEnumerator Continue()
         {
             yield return new WaitWhile(() => isAd);
-            //Time.timeScale = 1f;
             yield return StartCoroutine(m_eyeAnimator.Translate(1f, 0f, 0.5f, a => { m_currentGroup.alpha = a; }));
-            yield return StartCoroutine(m_eyeAnimator.Open());
-            Init();
-            m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+            if (isReward)
+            {
+                //Time.timeScale = 1f;
+                yield return StartCoroutine(m_eyeAnimator.Open());
+                Init();
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.PlayerChoice);
+                isReward = false;
+            }
+            else
+            {
+                m_battleManager.SetStateMachine(BattleManager.StateMachine.State.Lose);
+            }
         }
         void AdMobCallbackEnter()
         {
@@ -143,7 +153,7 @@ namespace DemonicCity.BattleScene
 
         IEnumerator TryShowRewardVideo()
         {
-            yield return new WaitWhile(() => !m_rewardVideo.IsLoaded());
+            yield return new WaitWhile(() => !(m_rewardVideo.IsLoaded() || isLoadFailed));
             if (isLoadFailed)
             {
                 StartCoroutine(SwitchCanvas(m_failedGroup));
@@ -155,7 +165,11 @@ namespace DemonicCity.BattleScene
         }
         IEnumerator SwitchCanvas(CanvasGroup nextGroup)
         {
+            m_currentGroup.interactable = false;
             yield return StartCoroutine(m_eyeAnimator.Translate(1f, 0f, 0.5f, a => { m_currentGroup.alpha = a; }));
+            nextGroup.alpha = 0f;
+            nextGroup.gameObject.SetActive(true);
+            nextGroup.interactable = true;
             yield return StartCoroutine(m_eyeAnimator.Translate(0f, 1f, 0.5f, a => { nextGroup.alpha = a; }));
             m_currentGroup = nextGroup;
         }
@@ -232,6 +246,7 @@ namespace DemonicCity.BattleScene
                 "HandleRewardBasedVideoRewarded event received for "
                             + amount.ToString() + " " + type);
             isAd = false;
+            isReward = true;
             RequestRewardVideo();
         }
         /// <summary>
