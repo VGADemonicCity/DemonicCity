@@ -234,7 +234,7 @@ Prefab:
     - target: {fileID: 224490217437808430, guid: 0e3ec733186fce9459022b63d2028073,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 206.80078
+      value: 206.80054
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e3ec733186fce9459022b63d2028073, type: 2}
@@ -841,7 +841,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 29.999998, y: 47}
+    oldSize: {x: 30, y: 47}
     newSize: {x: 10.24, y: 10.24}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
