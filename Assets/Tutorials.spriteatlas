@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Tutorials
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 2
+      m_BuildTarget: DefaultTexturePlatform
+      m_MaxTextureSize: 1024
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: -1
+      m_TextureCompression: 3
+      m_CompressionQuality: 50
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 0
+      m_AndroidETC2FallbackOverride: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 1
+      enableTightPacking: 1
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: c9b57b75e4590a64497e40d8903dfa20, type: 3}
+    - {fileID: 2800000, guid: 1b34bb8122e99aa4aaf3feb6254a2757, type: 3}
+    - {fileID: 2800000, guid: 83dc5eb0faf93494785c4de96ec2d5f5, type: 3}
+    - {fileID: 2800000, guid: 441fdd86dbdd2bb4f8f15cc12b09e3e6, type: 3}
+    - {fileID: 2800000, guid: 73de967209b4d3044bd6b3304c3361fc, type: 3}
+    - {fileID: 2800000, guid: 80f828702c6422540a8ac8d6c0de24a6, type: 3}
+    - {fileID: 2800000, guid: c9d896ec7d39e4b4390a74be838f05e4, type: 3}
+    - {fileID: 2800000, guid: 5e9d668492285094e8596fbdc4a754b9, type: 3}
+    - {fileID: 2800000, guid: a5d57ab24feed224485e43fe78aef1fa, type: 3}
+    - {fileID: 2800000, guid: 1d76c432781847540b51034e4afaf291, type: 3}
+    - {fileID: 2800000, guid: 3ecaeaa63201b554d96eb72a888b7b38, type: 3}
+    - {fileID: 2800000, guid: 0c7bcd51cc04ca145a467bdb1094727f, type: 3}
+    - {fileID: 2800000, guid: ad9e30b515d2160459137383ebd54232, type: 3}
+    - {fileID: 2800000, guid: b813cde965ada944297c4dff7ebce25d, type: 3}
+    - {fileID: 2800000, guid: 8b41d28740da9e74aad05ef7655ed718, type: 3}
+    - {fileID: 2800000, guid: e024032764242c344bc0a1180a5f5dcd, type: 3}
+    - {fileID: 2800000, guid: c02d9cd492343e048b50e2e7cacedc76, type: 3}
+    - {fileID: 2800000, guid: 24daf45c4c3ddf84498649d0c0019408, type: 3}
+    - {fileID: 2800000, guid: 4ab4e6d36a68a0e42a473c525de9c644, type: 3}
+    - {fileID: 2800000, guid: 1d17eb2af94e8934abe637c0d5ee9151, type: 3}
+    - {fileID: 2800000, guid: ceef33dce919f694490e6206cb245f9e, type: 3}
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 80f828702c6422540a8ac8d6c0de24a6, type: 3}
+  - {fileID: 21300000, guid: 83dc5eb0faf93494785c4de96ec2d5f5, type: 3}
+  - {fileID: 21300000, guid: 0c7bcd51cc04ca145a467bdb1094727f, type: 3}
+  - {fileID: 21300000, guid: 1b34bb8122e99aa4aaf3feb6254a2757, type: 3}
+  - {fileID: 21300000, guid: 1d76c432781847540b51034e4afaf291, type: 3}
+  - {fileID: 21300000, guid: 73de967209b4d3044bd6b3304c3361fc, type: 3}
+  - {fileID: 21300000, guid: a5d57ab24feed224485e43fe78aef1fa, type: 3}
+  - {fileID: 21300000, guid: 4ab4e6d36a68a0e42a473c525de9c644, type: 3}
+  - {fileID: 21300000, guid: 5e9d668492285094e8596fbdc4a754b9, type: 3}
+  - {fileID: 21300000, guid: c02d9cd492343e048b50e2e7cacedc76, type: 3}
+  - {fileID: 21300000, guid: c9b57b75e4590a64497e40d8903dfa20, type: 3}
+  - {fileID: 21300000, guid: ad9e30b515d2160459137383ebd54232, type: 3}
+  - {fileID: 21300000, guid: 441fdd86dbdd2bb4f8f15cc12b09e3e6, type: 3}
+  - {fileID: 21300000, guid: 3ecaeaa63201b554d96eb72a888b7b38, type: 3}
+  - {fileID: 21300000, guid: e024032764242c344bc0a1180a5f5dcd, type: 3}
+  - {fileID: 21300000, guid: 8b41d28740da9e74aad05ef7655ed718, type: 3}
+  - {fileID: 21300000, guid: b813cde965ada944297c4dff7ebce25d, type: 3}
+  - {fileID: 21300000, guid: 1d17eb2af94e8934abe637c0d5ee9151, type: 3}
+  - {fileID: 21300000, guid: 24daf45c4c3ddf84498649d0c0019408, type: 3}
+  - {fileID: 21300000, guid: ceef33dce919f694490e6206cb245f9e, type: 3}
+  - {fileID: 21300000, guid: c9d896ec7d39e4b4390a74be838f05e4, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - Tutorial_AboutTeleportSkill
+  - Tutorial_AboutPanelFrame
+  - Tutorial_FirstPanelOpen_2
+  - Tutorial_AboutAttack
+  - Tutorial_CompletePanels
+  - Tutorial_AboutPause
+  - Tutorial_AboutUniqueSkills
+  - "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB\u7FD2\u5F97\u62802"
+  - Tutorial_AboutTeleportSkill_3
+  - "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB\u5F37\u53161"
+  - Tutoria_AboutTeleportSkill_1
+  - Tutorial_FirstPanelOpen_3
+  - Tutorial_AboutPanels
+  - Tutorial_FirstPanelOpen
+  - Tutorial_UsedUniqueSkill
+  - Tutorial_UniqueSkillAccumulated
+  - Tutorial_FirstPanelOpen_4
+  - "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB\u7FD2\u5F97\u62803"
+  - "\u30C1\u30E5\u30FC\u30C8\u30EA\u30A2\u30EB\u7FD2\u5F97\u62801"
+  - HomeTutorial
+  - Tutorial_AboutTeleportSkill_2
+  m_Tag: Tutorials
+  m_IsVariant: 0
