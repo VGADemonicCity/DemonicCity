@@ -4,7 +4,8 @@
 SpriteAtlas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Characters
   m_EditorData:
     serializedVersion: 2
@@ -20,7 +21,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 2
+    - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 2048
       m_ResizeAlgorithm: 0
@@ -31,6 +32,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -142,6 +144,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: fc00872f9bb0fdc44b29e5a759bfcedb, type: 3}
     - {fileID: 2800000, guid: 8f683046b597e664485be52940ef7326, type: 3}
     - {fileID: 2800000, guid: d4ddb5fb40ee5b346a1d571d2d56cba0, type: 3}
+    totalSpriteSurfaceArea: 10747904
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:

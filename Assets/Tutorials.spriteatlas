@@ -4,7 +4,8 @@
 SpriteAtlas:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Tutorials
   m_EditorData:
     serializedVersion: 2
@@ -20,7 +21,7 @@ SpriteAtlas:
       crunchedCompression: 0
       sRGB: 1
     platformSettings:
-    - serializedVersion: 2
+    - serializedVersion: 3
       m_BuildTarget: DefaultTexturePlatform
       m_MaxTextureSize: 1024
       m_ResizeAlgorithm: 0
@@ -31,6 +32,7 @@ SpriteAtlas:
       m_AllowsAlphaSplitting: 0
       m_Overridden: 0
       m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 1
     packingSettings:
       serializedVersion: 2
       padding: 4
@@ -61,6 +63,7 @@ SpriteAtlas:
     - {fileID: 2800000, guid: 4ab4e6d36a68a0e42a473c525de9c644, type: 3}
     - {fileID: 2800000, guid: 1d17eb2af94e8934abe637c0d5ee9151, type: 3}
     - {fileID: 2800000, guid: ceef33dce919f694490e6206cb245f9e, type: 3}
+    totalSpriteSurfaceArea: 14063616
     bindAsDefault: 1
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:

@@ -1,106 +1,300 @@
 fileFormatVersion: 2
 guid: 3743c7a14cf89ab4f98948760e273535
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: "\u51492_0"
-    21300002: "\u51492_1"
-    21300004: "\u51492_2"
-    21300006: "\u51492_3"
-    21300008: "\u51492_4"
-    21300010: "\u51492_5"
-    21300012: "\u51492_6"
-    21300014: "\u51492_7"
-    21300016: "\u51492_8"
-    21300018: "\u51492_9"
-    21300020: "\u51492_10"
-    21300022: "\u51492_11"
-    21300024: "\u51492_12"
-    21300026: "\u51492_13"
-    21300028: "\u51492_14"
-    21300030: Effefct_1_0
-    21300032: Effefct_1_1
-    21300034: Effefct_1_2
-    21300036: Effefct_1_3
-    21300038: Effefct_1_4
-    21300040: Effefct_1_5
-    21300042: Effefct_1_6
-    21300044: Effefct_1_7
-    21300046: Effefct_1_8
-    21300048: Effefct_1_9
-    21300050: Effefct_1_10
-    21300052: Effefct_1_11
-    21300054: Effefct_1_12
-    21300056: Effefct_1_13
-    21300058: Effefct_1_14
-    21300060: Effefct_1_15
-    21300062: Effefct_1_16
-    21300064: Effefct_1_17
-    21300066: Effefct_1_18
-    21300068: Effefct_1_19
-    21300070: Effefct_1_20
-    21300072: Effefct_1_21
-    21300074: Effefct_1_22
-    21300076: Effefct_1_23
-    21300078: Effefct_1_24
-    21300080: Effefct_1_25
-    21300082: Effefct_1_26
-    21300084: Effefct_1_27
-    21300086: Effefct_1_28
-    21300088: Effefct_1_29
-    21300090: Effefct_1_30
-    21300092: Effefct_1_31
-    21300094: Effefct_1_32
-    21300096: Effefct_1_33
-    21300098: Effefct_1_34
-    21300100: Effefct_1_35
-    21300102: Effefct_1_36
-    21300104: Effefct_1_37
-    21300106: Effefct_1_38
-    21300108: Effefct_1_39
-    21300110: Effefct_1_40
-    21300112: Effefct_1_41
-    21300114: Effefct_1_42
-    21300116: Effefct_1_43
-    21300118: Effefct_1_44
-    21300120: Effefct_1_45
-    21300122: Effefct_1_46
-    21300124: Effefct_1_47
-    21300126: Effefct_1_48
-    21300128: Effefct_1_49
-    21300130: Effefct_1_50
-    21300132: Effefct_1_51
-    21300134: Effefct_1_52
-    21300136: Effefct_1_53
-    21300138: Effefct_1_54
-    21300140: Effefct_1_55
-    21300142: Effefct_1_56
-    21300144: Effefct_1_57
-    21300146: Effefct_1_58
-    21300148: Effefct_1_59
-    21300150: Effefct_1_60
-    21300152: Effefct_1_61
-    21300154: Effefct_1_62
-    21300156: Effefct_1_63
-    21300158: Effefct_1_64
-    21300160: Effefct_1_65
-    21300162: Effefct_1_66
-    21300164: Effefct_1_67
-    21300166: Effefct_1_68
-    21300168: Effefct_1_69
-    21300170: Effefct_1_70
-    21300172: Effefct_1_71
-    21300174: Effefct_1_72
-    21300176: Effefct_1_73
-    21300178: Effefct_1_74
-    21300180: Effefct_1_75
-    21300182: Effefct_1_76
-    21300184: Effefct_1_77
-    21300186: Effefct_1_78
-    21300188: Effefct_1_79
-    21300190: Effefct_1_80
-    21300192: Effefct_1_81
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: "\u51492_0"
+  - first:
+      213: 21300002
+    second: "\u51492_1"
+  - first:
+      213: 21300004
+    second: "\u51492_2"
+  - first:
+      213: 21300006
+    second: "\u51492_3"
+  - first:
+      213: 21300008
+    second: "\u51492_4"
+  - first:
+      213: 21300010
+    second: "\u51492_5"
+  - first:
+      213: 21300012
+    second: "\u51492_6"
+  - first:
+      213: 21300014
+    second: "\u51492_7"
+  - first:
+      213: 21300016
+    second: "\u51492_8"
+  - first:
+      213: 21300018
+    second: "\u51492_9"
+  - first:
+      213: 21300020
+    second: "\u51492_10"
+  - first:
+      213: 21300022
+    second: "\u51492_11"
+  - first:
+      213: 21300024
+    second: "\u51492_12"
+  - first:
+      213: 21300026
+    second: "\u51492_13"
+  - first:
+      213: 21300028
+    second: "\u51492_14"
+  - first:
+      213: 21300030
+    second: Effefct_1_0
+  - first:
+      213: 21300032
+    second: Effefct_1_1
+  - first:
+      213: 21300034
+    second: Effefct_1_2
+  - first:
+      213: 21300036
+    second: Effefct_1_3
+  - first:
+      213: 21300038
+    second: Effefct_1_4
+  - first:
+      213: 21300040
+    second: Effefct_1_5
+  - first:
+      213: 21300042
+    second: Effefct_1_6
+  - first:
+      213: 21300044
+    second: Effefct_1_7
+  - first:
+      213: 21300046
+    second: Effefct_1_8
+  - first:
+      213: 21300048
+    second: Effefct_1_9
+  - first:
+      213: 21300050
+    second: Effefct_1_10
+  - first:
+      213: 21300052
+    second: Effefct_1_11
+  - first:
+      213: 21300054
+    second: Effefct_1_12
+  - first:
+      213: 21300056
+    second: Effefct_1_13
+  - first:
+      213: 21300058
+    second: Effefct_1_14
+  - first:
+      213: 21300060
+    second: Effefct_1_15
+  - first:
+      213: 21300062
+    second: Effefct_1_16
+  - first:
+      213: 21300064
+    second: Effefct_1_17
+  - first:
+      213: 21300066
+    second: Effefct_1_18
+  - first:
+      213: 21300068
+    second: Effefct_1_19
+  - first:
+      213: 21300070
+    second: Effefct_1_20
+  - first:
+      213: 21300072
+    second: Effefct_1_21
+  - first:
+      213: 21300074
+    second: Effefct_1_22
+  - first:
+      213: 21300076
+    second: Effefct_1_23
+  - first:
+      213: 21300078
+    second: Effefct_1_24
+  - first:
+      213: 21300080
+    second: Effefct_1_25
+  - first:
+      213: 21300082
+    second: Effefct_1_26
+  - first:
+      213: 21300084
+    second: Effefct_1_27
+  - first:
+      213: 21300086
+    second: Effefct_1_28
+  - first:
+      213: 21300088
+    second: Effefct_1_29
+  - first:
+      213: 21300090
+    second: Effefct_1_30
+  - first:
+      213: 21300092
+    second: Effefct_1_31
+  - first:
+      213: 21300094
+    second: Effefct_1_32
+  - first:
+      213: 21300096
+    second: Effefct_1_33
+  - first:
+      213: 21300098
+    second: Effefct_1_34
+  - first:
+      213: 21300100
+    second: Effefct_1_35
+  - first:
+      213: 21300102
+    second: Effefct_1_36
+  - first:
+      213: 21300104
+    second: Effefct_1_37
+  - first:
+      213: 21300106
+    second: Effefct_1_38
+  - first:
+      213: 21300108
+    second: Effefct_1_39
+  - first:
+      213: 21300110
+    second: Effefct_1_40
+  - first:
+      213: 21300112
+    second: Effefct_1_41
+  - first:
+      213: 21300114
+    second: Effefct_1_42
+  - first:
+      213: 21300116
+    second: Effefct_1_43
+  - first:
+      213: 21300118
+    second: Effefct_1_44
+  - first:
+      213: 21300120
+    second: Effefct_1_45
+  - first:
+      213: 21300122
+    second: Effefct_1_46
+  - first:
+      213: 21300124
+    second: Effefct_1_47
+  - first:
+      213: 21300126
+    second: Effefct_1_48
+  - first:
+      213: 21300128
+    second: Effefct_1_49
+  - first:
+      213: 21300130
+    second: Effefct_1_50
+  - first:
+      213: 21300132
+    second: Effefct_1_51
+  - first:
+      213: 21300134
+    second: Effefct_1_52
+  - first:
+      213: 21300136
+    second: Effefct_1_53
+  - first:
+      213: 21300138
+    second: Effefct_1_54
+  - first:
+      213: 21300140
+    second: Effefct_1_55
+  - first:
+      213: 21300142
+    second: Effefct_1_56
+  - first:
+      213: 21300144
+    second: Effefct_1_57
+  - first:
+      213: 21300146
+    second: Effefct_1_58
+  - first:
+      213: 21300148
+    second: Effefct_1_59
+  - first:
+      213: 21300150
+    second: Effefct_1_60
+  - first:
+      213: 21300152
+    second: Effefct_1_61
+  - first:
+      213: 21300154
+    second: Effefct_1_62
+  - first:
+      213: 21300156
+    second: Effefct_1_63
+  - first:
+      213: 21300158
+    second: Effefct_1_64
+  - first:
+      213: 21300160
+    second: Effefct_1_65
+  - first:
+      213: 21300162
+    second: Effefct_1_66
+  - first:
+      213: 21300164
+    second: Effefct_1_67
+  - first:
+      213: 21300166
+    second: Effefct_1_68
+  - first:
+      213: 21300168
+    second: Effefct_1_69
+  - first:
+      213: 21300170
+    second: Effefct_1_70
+  - first:
+      213: 21300172
+    second: Effefct_1_71
+  - first:
+      213: 21300174
+    second: Effefct_1_72
+  - first:
+      213: 21300176
+    second: Effefct_1_73
+  - first:
+      213: 21300178
+    second: Effefct_1_74
+  - first:
+      213: 21300180
+    second: Effefct_1_75
+  - first:
+      213: 21300182
+    second: Effefct_1_76
+  - first:
+      213: 21300184
+    second: Effefct_1_77
+  - first:
+      213: 21300186
+    second: Effefct_1_78
+  - first:
+      213: 21300188
+    second: Effefct_1_79
+  - first:
+      213: 21300190
+    second: Effefct_1_80
+  - first:
+      213: 21300192
+    second: Effefct_1_81
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -155,7 +349,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -166,7 +360,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -177,7 +372,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -188,6 +384,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -207,6 +404,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ca77ac102f34f0d459c7fa93f75f8514
+      internalID: 21300030
       vertices: []
       indices: 
       edges: []
@@ -227,6 +425,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2823952410537834db995e2cb09d5331
+      internalID: 21300032
       vertices: []
       indices: 
       edges: []
@@ -247,6 +446,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 469accfe15dc0524480c3dcaa286deaa
+      internalID: 21300034
       vertices: []
       indices: 
       edges: []
@@ -267,6 +467,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 4d2c9202390ff544f9b3736274751013
+      internalID: 21300036
       vertices: []
       indices: 
       edges: []
@@ -287,6 +488,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: f03468acdb8c4ac41810e7f9f9b184c3
+      internalID: 21300038
       vertices: []
       indices: 
       edges: []
@@ -307,6 +509,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: a6f75c7870d3d524a83f9a6f06d90831
+      internalID: 21300040
       vertices: []
       indices: 
       edges: []
@@ -327,6 +530,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: d912d4f6e890e9043a84dc89d20a08cc
+      internalID: 21300042
       vertices: []
       indices: 
       edges: []
@@ -347,6 +551,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: fb3029dca8e375d4284708fab3ba90f1
+      internalID: 21300044
       vertices: []
       indices: 
       edges: []
@@ -367,6 +572,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 6f308c45175397c479393171d900195c
+      internalID: 21300046
       vertices: []
       indices: 
       edges: []
@@ -387,6 +593,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 441e92c620a502c45962aa39281bdd4b
+      internalID: 21300048
       vertices: []
       indices: 
       edges: []
@@ -407,6 +614,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: c5dfb939676d8cf47813dd603701c730
+      internalID: 21300050
       vertices: []
       indices: 
       edges: []
@@ -427,6 +635,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b6e78e0b3787b3147b34388fb2fa1d2c
+      internalID: 21300052
       vertices: []
       indices: 
       edges: []
@@ -447,6 +656,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 92e9124b703fb9d41bd0d91b1b4fe4f0
+      internalID: 21300054
       vertices: []
       indices: 
       edges: []
@@ -467,6 +677,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b6d140702ade0634385a528b08f66c44
+      internalID: 21300056
       vertices: []
       indices: 
       edges: []
@@ -487,6 +698,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7acddc1fc875b4640abea0cb9c33325a
+      internalID: 21300058
       vertices: []
       indices: 
       edges: []
@@ -495,10 +707,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 3c8304f4a94d11340a3f75eb85622c0c
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

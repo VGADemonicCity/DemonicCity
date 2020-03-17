@@ -1,29 +1,69 @@
 fileFormatVersion: 2
 guid: 9a59067c67b9b1c45a3bdd13760fa6db
 TextureImporter:
-  fileIDToRecycleName:
-    21300000: Magia_DvilsInfelnoType_0
-    21300002: Magia_DvilsInfelnoType_1
-    21300004: Magia_DvilsInfelnoType_2
-    21300006: Magia_DvilsInfelnoType_3
-    21300008: Magia_DvilsInfelnoType_4
-    21300010: Magia_DvilsInfelnoType_5
-    21300012: Magia_DvilsInfelnoType_6
-    21300014: Magia_DvilsInfelnoType_7
-    21300016: Magia_DvilsInfelnoType_8
-    21300018: Magia_DvilsInfelnoType_9
-    21300020: Magia_DvilsInfelnoType_10
-    21300022: Magia_DvilsInfelnoType_11
-    21300024: Magia_DvilsInfelnoType_12
-    21300026: Magia_DvilsInfelnoType_13
-    21300028: Magia_DvilsInfelnoType_14
-    21300030: Magia_DvilsInfelnoType_15
-    21300032: Magia_DvilsInfelnoType_16
-    21300034: Magia_DvilsInfelnoType_17
-    21300036: Magia_DvilsInfelnoType_18
-    21300038: Magia_DvilsInfelnoType_19
+  internalIDToNameTable:
+  - first:
+      213: 21300000
+    second: Magia_DvilsInfelnoType_0
+  - first:
+      213: 21300002
+    second: Magia_DvilsInfelnoType_1
+  - first:
+      213: 21300004
+    second: Magia_DvilsInfelnoType_2
+  - first:
+      213: 21300006
+    second: Magia_DvilsInfelnoType_3
+  - first:
+      213: 21300008
+    second: Magia_DvilsInfelnoType_4
+  - first:
+      213: 21300010
+    second: Magia_DvilsInfelnoType_5
+  - first:
+      213: 21300012
+    second: Magia_DvilsInfelnoType_6
+  - first:
+      213: 21300014
+    second: Magia_DvilsInfelnoType_7
+  - first:
+      213: 21300016
+    second: Magia_DvilsInfelnoType_8
+  - first:
+      213: 21300018
+    second: Magia_DvilsInfelnoType_9
+  - first:
+      213: 21300020
+    second: Magia_DvilsInfelnoType_10
+  - first:
+      213: 21300022
+    second: Magia_DvilsInfelnoType_11
+  - first:
+      213: 21300024
+    second: Magia_DvilsInfelnoType_12
+  - first:
+      213: 21300026
+    second: Magia_DvilsInfelnoType_13
+  - first:
+      213: 21300028
+    second: Magia_DvilsInfelnoType_14
+  - first:
+      213: 21300030
+    second: Magia_DvilsInfelnoType_15
+  - first:
+      213: 21300032
+    second: Magia_DvilsInfelnoType_16
+  - first:
+      213: 21300034
+    second: Magia_DvilsInfelnoType_17
+  - first:
+      213: 21300036
+    second: Magia_DvilsInfelnoType_18
+  - first:
+      213: 21300038
+    second: Magia_DvilsInfelnoType_19
   externalObjects: {}
-  serializedVersion: 7
+  serializedVersion: 10
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -78,7 +118,7 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   platformSettings:
-  - serializedVersion: 2
+  - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -89,7 +129,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Standalone
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -100,7 +141,8 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
-  - serializedVersion: 2
+    forceMaximumCompressionQuality_BC6H_BC7: 1
+  - serializedVersion: 3
     buildTarget: Android
     maxTextureSize: 1024
     resizeAlgorithm: 0
@@ -111,6 +153,7 @@ TextureImporter:
     allowsAlphaSplitting: 0
     overridden: 0
     androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 1
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -130,6 +173,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 3aa40758b3d59a44caf174af4b511080
+      internalID: 21300000
       vertices: []
       indices: 
       edges: []
@@ -150,6 +194,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: f03a59440f4690b4e9047eabf2fa4b1e
+      internalID: 21300002
       vertices: []
       indices: 
       edges: []
@@ -170,6 +215,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 88535a3808b02144daf9bda85a1eb4ca
+      internalID: 21300004
       vertices: []
       indices: 
       edges: []
@@ -190,6 +236,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7ce60a91999fd1d4fbcb18a10374d829
+      internalID: 21300006
       vertices: []
       indices: 
       edges: []
@@ -210,6 +257,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 9ad074e79424f0c4eb2e8e96b575d993
+      internalID: 21300008
       vertices: []
       indices: 
       edges: []
@@ -230,6 +278,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 84298e812542bbf4e9ea8f78986b6070
+      internalID: 21300010
       vertices: []
       indices: 
       edges: []
@@ -250,6 +299,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2af4db1a59362d94e915025a12de420a
+      internalID: 21300012
       vertices: []
       indices: 
       edges: []
@@ -270,6 +320,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 0bd6c4cb72a8ab3439ec1a57e8cd3ba7
+      internalID: 21300014
       vertices: []
       indices: 
       edges: []
@@ -290,6 +341,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 8f2ad681326687d479ffa87ba5f0ad59
+      internalID: 21300016
       vertices: []
       indices: 
       edges: []
@@ -310,6 +362,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 786bf902c41b3984487897c104eead6f
+      internalID: 21300018
       vertices: []
       indices: 
       edges: []
@@ -330,6 +383,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 7d62e7364a754a541b7e5c3a480eed52
+      internalID: 21300020
       vertices: []
       indices: 
       edges: []
@@ -350,6 +404,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ab5e844a05ce6d749854f6be1f9c635b
+      internalID: 21300022
       vertices: []
       indices: 
       edges: []
@@ -370,6 +425,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ac80d6b3a3540df4685c43bd8cf2a0a3
+      internalID: 21300024
       vertices: []
       indices: 
       edges: []
@@ -390,6 +446,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: cd309d89e79a431498267ce3814758fb
+      internalID: 21300026
       vertices: []
       indices: 
       edges: []
@@ -410,6 +467,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 426e0730c0ae1ee49ad4b8e1861d8ad3
+      internalID: 21300028
       vertices: []
       indices: 
       edges: []
@@ -430,6 +488,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 89d5566dd722ca846af14ae0e15287b9
+      internalID: 21300030
       vertices: []
       indices: 
       edges: []
@@ -450,6 +509,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: 2daf6be4d5d85ad48ad0fec49be6b53e
+      internalID: 21300032
       vertices: []
       indices: 
       edges: []
@@ -470,6 +530,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: b3d18559fca50eb4ca2a4bbfda8b40f6
+      internalID: 21300034
       vertices: []
       indices: 
       edges: []
@@ -490,6 +551,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: ba11f49444b0bc9429b335c87a46cd14
+      internalID: 21300036
       vertices: []
       indices: 
       edges: []
@@ -510,6 +572,7 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: db635c4483c3f5140b617e11bcc0dfae
+      internalID: 21300038
       vertices: []
       indices: 
       edges: []
@@ -518,10 +581,12 @@ TextureImporter:
     physicsShape: []
     bones: []
     spriteID: 8530eae5c4a34c343a0db7aada3dfd91
+    internalID: 0
     vertices: []
     indices: 
     edges: []
     weights: []
+    secondaryTextures: []
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
