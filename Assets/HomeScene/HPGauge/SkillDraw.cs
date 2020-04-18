@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>スキルのたまり具合を描画する</summary>
     public class SkillDraw : MonoBehaviour

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using DemonicCity.BattleScene.Skill;
+using DemonicCity.Battle.Skill;
 using System.Linq;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>
     /// Init.
@@ -69,11 +69,6 @@ namespace DemonicCity.BattleScene
 
         }
 
-        float PlayMagiaStartVoice()
-        {
-            return 1f;
-        }
-
         /// <summary>
         /// Initialize this instance.
         /// </summary>
@@ -105,8 +100,6 @@ namespace DemonicCity.BattleScene
             m_magiaHPGauge.Initialize(m_battleManager.m_MagiaStats.HitPoint); // マギアのHP最大値を引数に初期化する
             m_enemyHPGauge.Initialize(m_battleManager.CurrentEnemy.Stats.HitPoint); // 敵のHP最大値を引数に初期化する
         }
-
-
 
         /// <summary>
         /// Waveに出現する敵群を生成する

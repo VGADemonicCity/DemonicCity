@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>
     /// Shuffle panels.

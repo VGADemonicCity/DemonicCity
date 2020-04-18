@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     [System.Serializable]
     [CreateAssetMenu(fileName = "BattleStartVoiceMaterial", menuName = "BattleScene/BattleStartVoiceMaterials")]

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DemonicCity.BattleScene;
+using DemonicCity.Battle;
 
 namespace DemonicCity
 {

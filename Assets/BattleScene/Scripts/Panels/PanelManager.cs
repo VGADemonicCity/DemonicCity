@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using DemonicCity.BattleScene.Skill;
+using DemonicCity.Battle.Skill;
 using DemonicCity.Debugger;
 using UnityEngine.EventSystems;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>
     /// Panel manager.

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class City : MonoBehaviour
     {

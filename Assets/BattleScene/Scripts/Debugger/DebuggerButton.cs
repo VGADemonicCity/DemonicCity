@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System;
 using System.Linq;
 
-namespace DemonicCity.BattleScene.Debugger
+namespace DemonicCity.Battle.Debugger
 {
     public class DebuggerButton : MonoBehaviour
     {
@@ -166,7 +166,7 @@ namespace DemonicCity.BattleScene.Debugger
         {
             PanelManager.Instance.PanelAnimTime = changedValue;
             var textBox = GameObject.Find("AnimSpeed").GetComponent<Text>();
-            textBox.text = changedValue.ToString();
+            textBox.text = $"{changedValue.ToString():0.00}";
         }
     }
 }

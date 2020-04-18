@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>
     /// Next wave state.

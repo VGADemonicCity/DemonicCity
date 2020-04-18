@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class LoseState : StatesBehaviour
     {

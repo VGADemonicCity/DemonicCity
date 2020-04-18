@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class MagiaAudioPlayer : MonoBehaviour
     {
         [SerializeField] PlayerAttackState playerAttackState;
         [SerializeField] BattleStartVoiceMaterials battleStartVoiceMaterials;
         [SerializeField]  AudioClip AfterEliminatedVoiceInIxMagina;
-
         SoundManager soundManager;
 
         private void Awake()

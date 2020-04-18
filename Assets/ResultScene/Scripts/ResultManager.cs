@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using TMPro;
-using DemonicCity.BattleScene;
+using DemonicCity.Battle;
 using DemonicCity.StrengthenScene;
 using UnityEngine.UI;
 using System.Linq;

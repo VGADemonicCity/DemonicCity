@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace DemonicCity
 {
+#if RELEASE
     public class Debug
     {
         public static void Log(object message)
@@ -22,4 +23,5 @@ namespace DemonicCity
 
         }
     }
+#endif
 }

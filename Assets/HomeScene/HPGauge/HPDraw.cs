@@ -6,7 +6,7 @@ using UnityEngine.UI;
 
 
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class HPDraw : MonoBehaviour
     {

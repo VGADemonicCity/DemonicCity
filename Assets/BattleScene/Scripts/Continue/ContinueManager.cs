@@ -4,7 +4,7 @@ using UnityEngine;
 using GoogleMobileAds.Api;
 using System;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class ContinueManager : StatesBehaviour
     {

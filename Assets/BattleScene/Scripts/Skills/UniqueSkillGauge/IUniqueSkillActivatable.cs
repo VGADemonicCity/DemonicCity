@@ -1,4 +1,4 @@
-﻿namespace DemonicCity.BattleScene
+﻿namespace DemonicCity.Battle
 {
     /// <summary>
     /// ユニークスキルを発動出来るインターフェース

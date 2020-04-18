@@ -16,6 +16,7 @@ namespace DemonicCity.Loading
         [SerializeField] Text loadingText;
         [SerializeField] string incString;
         int listCount;
+        [SerializeField]
         float fadeTime = 0.5f;
         Coroutine textCoroutine = null;
         // Use this for initialization
@@ -60,7 +61,7 @@ namespace DemonicCity.Loading
             while (0 < a)
             {
                 magia.color = new Color(1, 1, 1, a);
-                a -= Time.deltaTime / fadeTime;
+                a -= Time.deltaTime * fadeTime;
                 yield return null;
             }
             magia.color = Color.clear;

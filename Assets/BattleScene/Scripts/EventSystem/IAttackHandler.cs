@@ -1,6 +1,6 @@
 ﻿using UnityEngine.EventSystems;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public interface IAttackHandler : IEventSystemHandler
     {

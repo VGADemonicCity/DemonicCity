@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DemonicCity.BattleScene.Skill
+namespace DemonicCity.Battle.Skill
 {
     public class TeleportEffectPlayer : MonoBehaviour
     {

@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DemonicCity.BattleScene.Skill;
+using DemonicCity.Battle.Skill;
 using System.Linq;
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     /// <summary>
     /// Player attack state.
@@ -128,7 +128,7 @@ namespace DemonicCity.BattleScene
                     Debug.Log(skill.GetPassiveSkill.ToString());
                     magiaAnimator.CrossFadeInFixedTime(skill.GetPassiveSkill.ToString(), 0, 0);
                     var clipInfos = magiaAnimator.GetCurrentAnimatorClipInfo(0);
-
+                    magiaAnimator.Update(0);
                     // 対象スキルと同じクリップが取得出来る迄処理を遅延させる
                     while (clipInfos.Length == 0)
                     {

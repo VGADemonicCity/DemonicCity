@@ -155,21 +155,21 @@ namespace DemonicCity.HomeScene
         {
             Color origin = targetRenderer.color;
             //1フレーム辺りのangleの増加量
-            int add = 3;
+            float add = 360;
 
             float n = 0.5f;
 
             List<float> alphas = new List<float>();
-            int angle = 0;
+            float angle = 0;
             float alpha = 0;
 
-            while (angle <= 360)
+            while (angle < 360)
             {
                 alpha = Mathf.Sin(angle * Mathf.PI / 180) + n;
 
                 targetRenderer.color = new Color(origin.r, origin.g, origin.b, alpha);
                 alphas.Add(alpha);
-                angle += add;
+                angle += add * Time.deltaTime;
 
                 yield return null;
             }

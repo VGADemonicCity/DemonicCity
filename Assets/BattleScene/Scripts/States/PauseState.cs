@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 
-namespace DemonicCity.BattleScene
+namespace DemonicCity.Battle
 {
     public class PauseState : StatesBehaviour
     {

@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System;
 
-namespace DemonicCity.BattleScene.Debugger
+namespace DemonicCity.Battle.Debugger
 {
     public class BattleDebugger : MonoSingleton<BattleDebugger>
     {
@@ -37,7 +37,7 @@ namespace DemonicCity.BattleScene.Debugger
         /// <summary>バトル中の敵のステータス</summary>
         [SerializeField] Status currentEnemyStatus;
         /// <summary>マギアのステータスをEditorから読み込むかどうか</summary>
-        [Header("これがTrueの時はTargetMagiaLevelのレベルから適切なマギアのステータスを読み込む.\nそうでない時はセーブデータから読み込む")]
+        [Header("これがTrueの時はTargetMagiaLevelのレベルから適切なマギアのステータスを読み込む.そうでない時はセーブデータから読み込む")]
         [Space(10)]
         [SerializeField] public bool LoadStatusFromInspector;
         /// <summary>Editor上からマギアのステータスを設定する時のクラス</summary>

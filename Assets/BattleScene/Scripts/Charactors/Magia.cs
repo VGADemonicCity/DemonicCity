@@ -5,7 +5,7 @@ using System;
 using System.Security.Cryptography;
 using UnityEngine.SceneManagement;
 using System.Linq;
-using DemonicCity.BattleScene.Debugger;
+using DemonicCity.Battle.Debugger;
 
 namespace DemonicCity
 {
