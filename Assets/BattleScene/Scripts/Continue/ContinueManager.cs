@@ -15,11 +15,20 @@ namespace DemonicCity.BattleScene
         CanvasGroup m_currentGroup;
         //[SerializeField] HitPointGauge m_magiaHPGauge;
         RewardBasedVideoAd m_rewardVideo;
-        //string appId = "ca-app-pub-7816817742729478~8064647539";
+#if UNITY_IOS
+        string appId = "ca-app-pub-7816817742729478~3784203976";
+#else
         string appId = "ca-app-pub-7816817742729478~8064647539";
-
-        //string adUnitId = "ca-app-pub-7816817742729478/1987653339";
+#endif
+#if DEVELOPMENT
+        //テスト広告
+        string adUnitId = "ca-app-pub-3940256099942544/5224354917";
+#elif UNITY_IOS
+        string adUnitId = "ca-app-pub-7816817742729478/2087978928";
+#else
         string adUnitId = "ca-app-pub-7816817742729478/1987653339";
+#endif
+
         bool isAd = false;
         bool isLoadFailed = false;
         bool isReward = false;
